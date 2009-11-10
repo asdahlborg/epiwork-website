@@ -4,8 +4,6 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-import epiweb.apps.survey.urls
-
 urlpatterns = patterns('',
     # Example:
     # (r'^epiweb/', include('epiweb.foo.urls')),
