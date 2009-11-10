@@ -1,4 +1,8 @@
-<h1>Login</h1>
+{% extends "registration/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
 
 <form method="post" action="?next=/">
 <dl>
@@ -10,3 +14,4 @@
 </dl>
 </form>
 
+{% endblock %}
