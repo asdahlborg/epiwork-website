@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'epiweb',
     'registration',
+    'epiweb.apps.accounts',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
