@@ -1,6 +1,6 @@
 <h1>Login</h1>
 
-<form method="post">
+<form method="post" action="?next=/">
 <dl>
 <dt><label for="id_username">Username:</label>{% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
 <dd>{{ form.username }}</dd>
