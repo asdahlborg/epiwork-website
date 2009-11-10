@@ -1,0 +1,6 @@
+Activate your account:
+
+Key: {{ activation_key }}
+Expiration days: {{ expiration_days }}
+Site: {{ site }}
+
