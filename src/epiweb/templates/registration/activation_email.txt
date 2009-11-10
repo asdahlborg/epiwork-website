@@ -1,3 +1,4 @@
+
 Activate your account:
 
 Key: {{ activation_key }}

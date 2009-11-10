@@ -5,6 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'homepage.html'}),
     # Example:
     # (r'^epiweb/', include('epiweb.foo.urls')),
 

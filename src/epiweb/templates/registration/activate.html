@@ -1,4 +1,12 @@
-<h1>Activation</h1>
+{% extends "registration/base.html" %}
 
-<p>Key: {{ activation_key }}</p>
+{% block title %}Account Activation{% endblock %}
+
+{% block content %}
+
+<h1>Account Activation</h1>
+
+<p>Key: <a href="/accounts/activate/{{ activation_key }}">{{ activation_key }}</a></p>
+
+{% endblock %}
 
