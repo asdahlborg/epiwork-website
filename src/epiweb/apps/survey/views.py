@@ -55,3 +55,7 @@ def index(request):
     })
     return HttpResponse(t.render(c))
 
+def survey(request, survey_id, page=None):
+    html = "survey_id=%s, page=%s" % (survey_id, page)
+    return HttpResponse(html)
+
