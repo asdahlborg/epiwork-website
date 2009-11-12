@@ -144,13 +144,29 @@ section.append({
 questions.append(section)
 
 def create_field(item):
-    label = item.get('text')
-    if item['format'] == 'text':
-        length = item.get('length', None)
-        if length:
-            return forms.CharField(label=label, max_length=length)
-        else:
-            return forms.CharField(label=label)
+    if item['type'] == 'yes-no':
+        field = forms.ChoiceField(widget=forms.RadioSelect,
+                                  choices=[('yes', _('Yes')), ('no', _('No'))])
+
+    elif item['type'] == 'option-multiple':
+        field = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                          choices=zip(range(0, len(item['options'])), item['options']))
+
+    elif item['type'] == 'option-single':
+        field = forms.ChoiceField(widget=forms.RadioSelect,
+                                  choices=zip(range(0, len(item['options'])), item['options']))
+
+    elif item['type'] == 'date':
+        field = forms.DateField(input_formats='%m/%d/%y')
+
+    else:
+        field = forms.CharField()
+
+    field.label = item.get('label', None)
+    field.required = False
+
+    return field
+
     else:
         return forms.CharField(label=label)
 
