@@ -4,6 +4,9 @@
 
 <h1>Survey Form</h1>
 
-{{ form }}
+<form method="post">
+{{ form.as_p }}
+<p><input type="submit" value="Submit"/></p>
+</form>
 
 {% endblock %}
