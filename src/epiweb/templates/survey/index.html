@@ -1,12 +1,25 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="/+media/survey/style.css"/>
+{% endblock %}
+
 {% block content %}
+<div id="survey">
 
 <h1>Survey Form</h1>
 
 <form method="post">
-{{ form.as_p }}
-<p><input type="submit" value="Submit"/></p>
+    {% for field in form %}
+    <div class="question">
+        <div class="label">{{ field.label_tag }}</div>
+        <div class="answer">
+        {{ field }}
+        </div>
+    </div>
+    {% endfor %}
+    <div><input type="submit" value="Submit"/></div>
 </form>
 
+</div>
 {% endblock %}

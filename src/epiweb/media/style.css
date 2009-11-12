@@ -1,0 +1,20 @@
+body {
+    margin: 0px;
+}
+
+#header {
+    padding: 20px;
+    background: #ddd;
+}
+
+#footer {
+    padding: 5px;
+    background: #eee;
+    font-size: 12px;
+    text-align: center;
+}
+
+#content {
+    margin: 20px;
+}
+
