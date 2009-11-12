@@ -178,7 +178,11 @@ def create_form(data, values=None):
     return f
 
 def index(request):
-    form = create_form(questions[0])
+
+    if request.method == 'POST':
+        form = create_form(questions[0], request.POST)
+    else:
+        form = create_form(questions[0])
 
     t = loader.get_template('survey/index.html')
     c = Context({
