@@ -167,11 +167,12 @@ def create_field(item):
 
     return field
 
+def create_form(data, values=None):
+    if values:
+        f = forms.Form(values)
     else:
-        return forms.CharField(label=label)
+        f = forms.Form()
 
-def create_form(data):
-    f = forms.Form()
     for item in data:
         f.fields[item['id']] = create_field(item)
     return f
