@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.template import Context, loader
 from django.http import HttpResponse
