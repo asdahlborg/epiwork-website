@@ -141,7 +141,7 @@ section.append({
         _('No, meanwhile I have received a Mexican flu vaccination'),
     ]
 })
-question.append(section)
+questions.append(section)
 
 def create_field(item):
     label = item.get('text')
