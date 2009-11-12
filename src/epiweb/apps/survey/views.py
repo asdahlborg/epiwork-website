@@ -47,13 +47,13 @@ section.append({
         _('No'),
         _('Less than 37°C'),
         _('37°C'),
-        _('37° ‐ 37.5°C'),
-        _('37.5° ‐ 38°C'),
+        _('37° - 37.5°C'),
+        _('37.5° - 38°C'),
         _('38°'),
         _('38.5°C'),
-        _('38.5° ‐ 39°C'),
-        _('39° ‐ 39.5°C'),
-        _('39.5° ‐ 40°C'),
+        _('38.5° - 39°C'),
+        _('39° - 39.5°C'),
+        _('39.5° - 40°C'),
         _('More than 40°C'),
     ]
 })
@@ -85,7 +85,7 @@ section.append({
         _('Tamiflu, Relenza, or another anti viral drug'),
         _('Antibiotics'),
         _('Antipyretics'),
-        _('Anti‐inflammatory drugs'),
+        _('Anti-inflammatory drugs'),
         _('Vitamins'),
         _('Other'),
     ]
