@@ -6,11 +6,13 @@ from django.http import HttpResponse
 
 from epiweb.apps.survey import utils
 from epiweb.apps.survey.data import example
+from epiweb.apps.survey import signals
 
 def index(request):
 
     if request.method == 'POST':
         form = utils.generate_form(example.data.sections[0], request.POST)
+        signals.survey_done.send(sender="survey", user=request.user, answers="answers", request=request)
     else:
         form = utils.generate_form(example.data.sections[0])
 
