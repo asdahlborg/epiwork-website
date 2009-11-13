@@ -16,9 +16,12 @@ def index(request):
     else:
         form = utils.generate_form(example.data.sections[0])
 
+    js = utils.generate_js_helper(example.data.sections[0])
+
     t = loader.get_template('survey/index.html')
     c = Context({
-        'form': form
+        'form': form,
+        'js': js
     })
     return HttpResponse(t.render(c))
 

@@ -2,6 +2,9 @@
 
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="/+media/survey/style.css"/>
+<script type="text/javascript" src="/+media/jquery.js"></script>
+<script type="text/javascript" src="/+media/jquery.form.js"></script>
+<script type="text/javascript" src="/+media/survey/survey.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -9,9 +12,9 @@
 
 <h1>Survey Form</h1>
 
-<form method="post">
+<form method="post" id="survey">
     {% for field in form %}
-    <div class="question">
+    <div class="question" id="q_{{ field.name }}">
         <div class="label">{{ field.label_tag }}</div>
         <div class="answer">
         {{ field }}
@@ -20,6 +23,12 @@
     {% endfor %}
     <div><input type="submit" value="Submit"/></div>
 </form>
+
+<script type="text/javascript">
+{% autoescape off %}
+{{ js }}
+{% endautoescape %}
+</script>
 
 </div>
 {% endblock %}
