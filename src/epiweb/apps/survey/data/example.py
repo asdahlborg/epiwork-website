@@ -112,7 +112,7 @@ q.options = [
     _('Less than 3 weeks'),
     _('More than 3 weeks'),
 ]
-q.condition = NotEmpty(Q("q10001")) & OneOf(Q("q10008"), [1, 2])
+q.condition = NotEmpty(Q("q10001")) & OneOf(Q("q10008"), [1, 3])
 section.questions.append(q)
 
 q = Question('q10010', _('Do other people from your family/home have/had comparable symptoms?'))
