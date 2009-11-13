@@ -68,7 +68,7 @@ s.init();
         
 
 def get_intake_value(id):
-    return "[%s]" % id
+    return "true"
 
 def create_js_statement(v, obj='s'):
     if isinstance(v, Q):

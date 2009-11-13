@@ -11,6 +11,7 @@ Survey.prototype = {
     qtotal: 0,
     qcon: {}, // question condition
     set_questions: function(qids) {
+        this.qids = qids;
         var len = qids.length;
         this.qtotal = len;
         for (var i=0; i<len; i++) {
@@ -29,6 +30,7 @@ Survey.prototype = {
                 $('#'+id).hide();
             }
         }
+        this.toggle_all();
     },
     set_condition: function(qid, con) {
         var id = this.id[qid];
@@ -43,6 +45,18 @@ Survey.prototype = {
         while (ws.test(str.charAt(--i)));
         return str.slice(0, i + 1);
     },
+    toggle: function(qid) {
+        var visible = this.eval[qid]();
+        console.log(qid, visible);
+        if (visible) { $('#'+this.id[qid]).show(); }
+        else { $('#'+this.id[qid]).hide(); }
+    },
+    toggle_all: function() {
+        for (var i=0; i<this.qtotal; i++) {
+            this.toggle(this.qids[i]);
+        }
+    },
+
     Q: function(qid) {
         var id = this.id[qid];
         return $('#'+id+' *[name="'+qid+'"]').fieldValue();
