@@ -15,4 +15,5 @@ class Question:
         self.type = 'text'
         self.length = '250'
         self.options = []
+        self.condition = None
 

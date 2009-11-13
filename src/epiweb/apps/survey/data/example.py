@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from epiweb.apps.survey.data.conditions import *
 from epiweb.apps.survey.data import Survey, Section, Question
 _ = lambda x: x
 
@@ -32,6 +33,7 @@ section.questions.append(q)
 
 q = Question('q10002', _('When did these symptoms started?'))
 q.type = 'date'
+q.condition = NotEmpty(Q("q10001"))
 section.questions.append(q)
 
 q = Question('q10003', _('Did you have fever? If yes, what was the highest temperature measured? Please estimate if you had fever, but did not measure.'))
@@ -49,10 +51,12 @@ q.options = [
     _('39.5° - 40°C'),
     _('More than 40°C'),
 ]
+q.condition = NotEmpty(Q("q10001"))
 section.questions.append(q)
 
 q = Question('q10004', _('When was your temperature for the first time above 38°C?'))
 q.type = 'date'
+q.condition = NotEmpty(Q("q10001"))
 section.questions.append(q)
 
 q = Question('q10005', _('Did these symptoms develop abruptly with sudden high fever or chills?'))
@@ -62,10 +66,12 @@ q.options = [
     _('Yes'),
     _("Don't know"),
 ]
+q.condition = NotEmpty(Q("q10001"))
 section.questions.append(q)
 
 q = Question('q10006', _('Did you consult a medical doctor for these symptoms?'))
 q.type = 'yes-no'
+q.condition = NotEmpty(Q("q10001"))
 section.questions.append(q)
 
 q = Question('q10007', _('Did you take medication for these symptoms?'))
@@ -78,6 +84,7 @@ q.options = [
     _('Vitamins'),
     _('Other'),
 ]
+q.condition = NotEmpty(Q("q10001"))
 section.questions.append(q)
 
 q = Question('q10008', _('Did you change your occupations due to these symptoms?'))
@@ -88,6 +95,7 @@ q.options = [
     _('Yes, but went to work/school as usual'),
     _('I staid at home, but was able to work'),
 ]
+q.condition = NotEmpty(Q("q10001"))
 section.questions.append(q)
 
 q = Question('q10009', _('How long did you staid at home?'))
@@ -104,10 +112,12 @@ q.options = [
     _('Less than 3 weeks'),
     _('More than 3 weeks'),
 ]
+q.condition = NotEmpty(Q("q10001")) & OneOf(Q("q10008"), [1, 2])
 section.questions.append(q)
 
 q = Question('q10010', _('Do other people from your family/home have/had comparable symptoms?'))
 q.type = 'yes-no'
+q.condition = NotEmpty(Q("q10001"))
 section.questions.append(q)
 
 q = Question('q10011', _('According to our data you did not receive a seasonal flu vaccination?'))
@@ -116,6 +126,7 @@ q.options = [
     _('Yes'),
     _('No, meanwhile I have received a seasonal flu vaccination'),
 ]
+q.condition = Intake("q20005") == False
 section.questions.append(q)
 
 q = Question('q10012', _('According to our data you did not receive a Mexican flu vaccination?'))
@@ -124,6 +135,7 @@ q.options = [
     _('Yes'),
     _('No, meanwhile I have received a Mexican flu vaccination'),
 ]
+q.condition = Intake("q20006") == False
 section.questions.append(q)
 
 data.sections.append(section)
