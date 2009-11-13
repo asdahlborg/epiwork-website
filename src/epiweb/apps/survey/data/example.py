@@ -10,24 +10,24 @@ section = Section()
 q = Question('q10001', _('Did you have one or more of the following symptoms since your last visit?'))
 q.type = 'option-multiple'
 q.options = [
-    _('Runnynose'),
+    _('Runny nose'),
     _('Stuffy nose'),
     _('Hacking cough'),
     _('Dry cough'),
     _('Sneezing'),
-    _('Sorethroat'),
-    _('Musclepain'),
+    _('Sore throat'),
+    _('Muscle pain'),
     _('Headache'),
-    _('Chestpain'),
+    _('Chest pain'),
     _('Feeling exhausted'),
     _('Feeling tired'),
-    _('Lossofappetite'),
+    _('Loss of appetite'),
     _('Nausea'),
     _('Vomiting'),
     _('Diarrhoea'),
     _('Watery, bloodshot eyes'),
-    _('Chillsandfeverishfeeling'),
-    _('Colouredsputum'),
+    _('Chills and feverish feeling'),
+    _('Coloured sputum'),
 ]
 section.questions.append(q)
 
