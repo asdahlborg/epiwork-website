@@ -31,11 +31,11 @@ class Compare(Statement):
     def __or__(self, other):
         return Compare(self, other, 'or')
 
-class NotEmpty(Statement):
+class NotEmpty(Compare):
     def __init__(self, a):
         self.a = a
 
-class OneOf(Statement):
+class OneOf(Compare):
     def __init__(self, a, options):
         self.a = a
         self.options = options
