@@ -47,7 +47,10 @@ def generate_js_helper(section):
     for question in section.questions:
         ids.append(question.id)
         if question.condition is not None:
-            lines.append('%s.eval["%s"] = function() { return %s; }' % (obj, question.id, create_js_statement(question.condition)))
+            lines.append('%s.eval["%s"] = function() { return %s; }' % (obj, question.id, 
+                            create_js_statement(question.condition)))
+        else:
+            lines.append('%s.eval["%s"] = function() { return true; }' % (obj, question.id))
 
     return """
 (function() {
