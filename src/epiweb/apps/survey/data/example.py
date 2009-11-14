@@ -140,10 +140,10 @@ class Survey(d.Survey):
                 RepQ09
             ) },
             RepQ10,
-            { (d.Intake('seasonal-flu-vaccine'), 'is-not', 'Yes') : (
+            { (d.Profile('seasonal-flu-vaccine'), 'is-not', 'Yes') : (
                 RepQ11
             ) },
-            { (d.Intake('mexican-flu-vaccine'), 'is-not', 'Yes') : (
+            { (d.Profile('mexican-flu-vaccine'), 'is-not', 'Yes') : (
                 RepQ12
             ) },
         ) }
