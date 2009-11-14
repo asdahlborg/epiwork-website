@@ -7,7 +7,7 @@ from django.db import transaction
 
 from epiweb.apps.survey import utils
 from epiweb.apps.survey import models
-from epiweb.apps.survey.data import example
+from epiweb.apps.survey import example
 
 from epidb_client import EpiDBClient
 
@@ -44,17 +44,17 @@ def _save_survey(request):
 def index(request):
 
     if request.method == 'POST':
-        form = utils.generate_form(example.data.sections[0], request.POST)
+        form = utils.generate_form(example.survey, request.POST)
         _save_survey(request) # TODO
     else:
-        form = utils.generate_form(example.data.sections[0])
+        form = utils.generate_form(example.survey)
 
-    js = utils.generate_js_helper(example.data.sections[0])
+    #js = utils.generate_js_helper(example.survey
 
     t = loader.get_template('survey/index.html')
     c = Context({
         'form': form,
-        'js': js
+        #'js': js
     })
     return HttpResponse(t.render(c))
 

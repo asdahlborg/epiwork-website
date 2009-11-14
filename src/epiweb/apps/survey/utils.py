@@ -3,6 +3,8 @@ from epiweb.apps.survey.data import Survey, Section, Question
 from epiweb.apps.survey.data.conditions import *
 from epiweb.apps.survey.data.conditions import Compare
 
+from epiweb.apps.survey import definitions as d
+
 _ = lambda x: x
 
 def create_field(question):
@@ -24,18 +26,55 @@ def create_field(question):
     else:
         field = forms.CharField()
 
-    field.label = question.label
+    field.label = question.question
     field.required = False
 
     return field
 
-def generate_form(section, values=None):
+class SurveyReader:
+    def __init__(self, survey):
+        self.survey = survey
+        self.initialized = False
+
+    def read(self):
+        if not self.initialized:
+            self._analyze()
+            self.initialized = True
+
+    def _analyze(self):
+        self._index = 0
+        self.questions = []
+        self.conditions = {}
+        self.revindex = {}
+        self._iterate(self.survey.rules)
+
+    def _iterate(self, root, conditions=[]):
+        for rule in root:
+            t = type(rule).__name__
+            if t == 'classobj' and issubclass(rule, d.Question):
+                self._index += 1
+                obj = rule()
+                self.questions.append(obj)
+                self.revindex[obj] = self._index
+                self.conditions[obj] = conditions
+            elif t == 'dict':
+                cond = rule.keys()[0]
+                sub = rule.values()[0]
+                if type(sub).__name__ != 'tuple':
+                    sub = rule.values()
+                self._iterate(sub, conditions + [cond])
+
+
+def generate_form(survey, values=None):
+    sr = SurveyReader(survey)
+    sr.read()
+
     if values:
         form = forms.Form(values)
     else:
         form = forms.Form()
 
-    for question in section.questions:
+    for question in sr.questions:
         form.fields[question.id] = create_field(question)
 
     return form
