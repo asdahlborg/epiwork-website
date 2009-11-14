@@ -1,6 +1,11 @@
 
 class Question:
-    pass
+    def __init__(self):
+        # Use the class name as an id if it is not defined
+        try:
+            getattr(self, 'id')
+        except AttributeError:
+            self.id = self.__class__.__name__
 
 class Survey:
     pass
@@ -9,10 +14,10 @@ class Value:
     def get_value(self):
         raise NotImplementedError()
 
-class Empty(d.Value):
+class Empty(Value):
     pass
 
-class Profile(d.Value):
+class Profile(Value):
     def __init__(self, name):
         self.name = name
 
