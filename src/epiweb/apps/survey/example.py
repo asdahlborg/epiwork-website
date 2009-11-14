@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from epiweb.apps.survey.data.conditions import *
-from epiweb.apps.survey.data import defintion as d
+from epiweb.apps.survey import defintion as d
 _ = lambda x: x
 
 class RepQ01(d.Question):
