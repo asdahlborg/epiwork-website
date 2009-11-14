@@ -5,10 +5,10 @@ class Question:
 class Survey:
     pass
 
-class Condition:
+class Value:
     pass
 
-class Empty(d.Condition):
+class Empty(d.Value):
     pass
 
 ### Base classes
