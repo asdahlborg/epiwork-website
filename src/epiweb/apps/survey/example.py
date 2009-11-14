@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from epiweb.apps.survey import defintion as d
+from epiweb.apps.survey import definitions as d
 _ = lambda x: x
 
 class RepQ01(d.Question):
@@ -63,6 +63,7 @@ class RepQ05(d.Question):
 
 class RepQ06(d.Question):
     question = _('Did you consult a medical doctor for these symptoms?')
+    type = 'option-single'
     options = ('No', 'Yes')
 
 class RepQ07(d.Question):
@@ -135,7 +136,7 @@ class Survey(d.Survey):
             RepQ06,
             RepQ07,
             RepQ08,
-            { (RepQ08, 'is-in', [1, 3]) : (
+            { (RepQ08, 'is-in', (1, 3)) : (
                 RepQ09
             ) },
             RepQ10,
@@ -147,3 +148,6 @@ class Survey(d.Survey):
             ) },
         ) }
     )
+
+survey = Survey
+
