@@ -16,71 +16,6 @@ class Profile(d.Value):
     def __init__(self, name):
         self.name = name
 
-### Base classes
-
-class q:
-    class Question:
-        pass
-    class Survey:
-        pass
-
-
-### Definition
-
-# Questions
-
-class Sex(q.Question):
-    question = "Are you male or female?"
-    options = ("Male", "Female")
-
-class Children(q.Question):
-    question = "How many children have you had?"
-    options = range(0, 10)
-
-class Age(q.Question):
-    question = "What is your age?"
-    options = range(0, 120)
-
-class MarStat(q.Question):
-    question = "What is your marital status?"
-    options = [
-        ("NeverMar", "Never been maried"),
-        ("Married" , "Married"),
-        ("Separate", "Separated"),
-        ("Divorced", "Divorced"),
-        ("Widowed" , "Widowed")
-    ]
-
-class Spouse(q.Question):
-    question = "What is your spouse's age?"
-    options = range(0, 120)
-
-class Work(q.Question):
-    question = "Are you working for pay or profit?"
-    options = ("Yes", "No")
-
-class Radio(q.Question):
-    question = "Do you regularly listen to the radio?"
-    options = ("Yes", "No")
-
-# Survey
-
-class Survey(q.Survey):
-    rules = (
-        Sex,
-        { (Sex, "is", "Female") : ( 
-            Children
-        ) },
-        Age,
-        { (Age, ">", 16): (
-            MarStat,
-            { ((MarStat, "is", "Married"), "or", (MarStat, "is", "Separate")) : ( 
-                Spouse
-            ) },
-            Work
-        ) },
-        Radio
-    )
 
 
 ### Printer
@@ -157,15 +92,4 @@ class SurveyPrinter:
                 print "%2d. %s =>" % (self.revindex[q], q.__name__)
                 for con in cons:
                     print "    - %s" % self._repr_condition(con)
-
-if __name__ == '__main__':
-    sp = SurveyPrinter(Survey)
-    sp.init()
-    
-    print "Questions:"
-    sp.print_questions()
-    
-    print
-    print "Conditions:"
-    sp.print_conditions()
 
