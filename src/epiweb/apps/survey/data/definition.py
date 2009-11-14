@@ -12,6 +12,10 @@ class Value:
 class Empty(d.Value):
     pass
 
+class Profile(d.Value):
+    def __init__(self, name):
+        self.name = name
+
 ### Base classes
 
 class q:
