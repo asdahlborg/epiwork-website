@@ -6,7 +6,8 @@ class Survey:
     pass
 
 class Value:
-    pass
+    def get_value(self):
+        raise NotImplementedError()
 
 class Empty(d.Value):
     pass
