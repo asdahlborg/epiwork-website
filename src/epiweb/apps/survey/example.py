@@ -136,7 +136,7 @@ class Survey(d.Survey):
             RepQ06,
             RepQ07,
             RepQ08,
-            { (RepQ08, 'is-in', (1, 3)) : (
+            { (RepQ08, 'is-in', d.Items(1, 3)) : (
                 RepQ09
             ) },
             RepQ10,

@@ -44,10 +44,10 @@ def _save_survey(request):
 def index(request):
 
     if request.method == 'POST':
-        form = utils.generate_form(example.survey, request.POST)
+        form = utils.generate_form(example.survey(), request.POST)
         _save_survey(request) # TODO
     else:
-        form = utils.generate_form(example.survey)
+        form = utils.generate_form(example.survey())
 
     #js = utils.generate_js_helper(example.survey
 
