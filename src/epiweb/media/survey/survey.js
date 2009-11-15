@@ -1,10 +1,11 @@
 (function() {
 
-var Survey = function() {
+// {{{
+var Survey2 = function() {
 
 }
 
-Survey.prototype = {
+Survey2.prototype = {
     prefix: "q_",
     id: {},
     ids: [],
@@ -80,6 +81,109 @@ Survey.prototype = {
         }
         return false;
     },
+}
+
+// }}}
+
+var Survey = function(id, prefix) {
+    this.id = id;
+    this.base = $('#'+id);
+    this.prefix = prefix;
+    this.affected = {};
+    this.rule = {};
+}
+
+Survey.prototype = {
+    init: function() {
+        
+    },
+
+    trim: function(str) {
+        // from http://blog.stevenlevithan.com/archives/faster-trim-javascript
+        // License: MIT License (http://blog.stevenlevithan.com/archives/faster-trim-javascript#comment-13674)
+        var	str = str.replace(/^\s\s*/, ''),
+        	ws = /\s/,
+        	i = str.length;
+        while (ws.test(str.charAt(--i)));
+        return str.slice(0, i + 1);
+    },
+
+    _prepare: function(v) {
+        var t = typeof v;
+        if (t != 'object') {
+            if ((t == 'number') || (t == 'string')) {
+                return [v];
+            }
+        }
+        return v;
+    },
+
+    Empty: function() {
+        return [];
+    },
+    Is: function(a, b) {
+        a = this._prepare(a);
+        b = this._prepare(b);
+        var la = a.length;
+        var lb = b.length;
+
+        var ia = 0, ib = 0;
+        while (true) {
+            if (ia >= la) { break; }
+            if (ib >= lb) { break; }
+            
+            var va = a[ia];
+            var vb = b[ib];
+
+            if (va != vb) { return false; }
+            ia++; ib++;
+        }
+
+        return (la-ia) == (lb-ib);
+    },
+    IsNot: function(a, b) {
+        return !this.Is(a, b);
+    },
+    IsIn: function(a, list) {
+        a = this._prepare(a);    
+        var len = a.length;
+        var len2 = list.length;
+        if ((len == 0) || (len2 == 0)) { return false; }
+        for (var i=0; i<len; i++) {
+            var val = a[i];
+            var found = false;
+            for (var j=0; j<len2; j++) {
+                if (val == list[j]) { found = true; break; }
+            }
+            if (!found) { return false; }
+        }
+
+        return true;
+    },                           
+    Value: function(qid) {       
+        var values = this.base.find('*[name="'+qid+'"]').fieldValue();
+                             
+        // strip out empty strings
+        var len = values.length;
+        var res = [];            
+        for (var i=0; i<len; i++) {
+            var value = values[i];
+            if (typeof value == 'string') {
+                value = this.trim(value);
+                if (value != '') {
+                    res.push(value);
+                }
+            }
+            else {
+                res.push(value);
+            }
+        }
+
+        return res;
+    },
+    Profile: function(pid) {
+        return 1;
+    }
 }
 
 this.Survey = Survey;
