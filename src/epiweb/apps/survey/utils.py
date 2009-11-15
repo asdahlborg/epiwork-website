@@ -225,10 +225,11 @@ class SurveyValidator:
                         res = [int(res)]
                 elif value.type in ['option-multiple']:
                     res = map(lambda x: int(x), res)
+                elif res == None:
+                    res = []
                 else:
                     res = [res]
-                if res == None:
-                    res = []
+
                 return res
             elif isinstance(value, d.Items):
                 return value.values
