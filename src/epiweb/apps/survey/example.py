@@ -6,6 +6,7 @@ _ = lambda x: x
 class RepQ01(d.Question):
     question = _('Did you have one or more of the following symptoms since your last visit?')
     type = 'option-multiple'
+    blank = True
     options = (
         _('Runny nose'),
         _('Stuffy nose'),

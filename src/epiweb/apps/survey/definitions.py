@@ -7,6 +7,8 @@ class Question:
         except AttributeError:
             self.id = self.__class__.__name__
 
+    blank = False
+
 class Survey:
     def __init__(self):
         self._index = 0
