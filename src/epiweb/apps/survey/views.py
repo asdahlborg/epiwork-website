@@ -2,8 +2,9 @@
 
 from django import forms
 from django.template import Context, loader
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db import transaction
+from django.core.urlresolvers import reverse
 
 from epiweb.apps.survey import utils
 from epiweb.apps.survey import models
@@ -43,6 +44,9 @@ def _save_survey(request):
 
 sfh = None
 
+def thanks(request):
+    return HttpResponse('Thanks!')
+
 def index(request):
 
     global sfh
@@ -53,8 +57,12 @@ def index(request):
     if request.method == 'POST':
         form = sfh.create_form(request.POST)
         sv = utils.SurveyValidator(sfh.survey, form)
-        print "Validation:", sv.validate()
-        # _save_survey(request) # TODO
+        valid = sv.validate()
+        print "Valid:", valid
+        if valid:
+            # _save_survey(request) # TODO
+            # return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
+            return HttpResponse('Valid!')
     else:
         form = sfh.create_form()
 
