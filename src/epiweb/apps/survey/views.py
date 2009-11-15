@@ -5,6 +5,7 @@ from django.template import Context, loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import transaction
 from django.core.urlresolvers import reverse
+from django.shortcuts import render_to_response
 
 from epiweb.apps.survey import utils
 from epiweb.apps.survey import models
@@ -45,7 +46,7 @@ def _save_survey(request):
 sfh = None
 
 def thanks(request):
-    return HttpResponse('Thanks!')
+    return render_to_response('survey/thanks.html')
 
 def index(request):
 
@@ -61,8 +62,7 @@ def index(request):
         print "Valid:", valid
         if valid:
             # _save_survey(request) # TODO
-            # return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
-            return HttpResponse('Valid!')
+            return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
     else:
         form = sfh.create_form()
 
@@ -70,12 +70,10 @@ def index(request):
     jsh = utils.JavascriptHelper(example.survey())
     js = jsh.get_javascript()
 
-    t = loader.get_template('survey/index.html')
-    c = Context({
+    return render_to_response('survey/index.html', {
         'form': form,
         'js': js
     })
-    return HttpResponse(t.render(c))
 
 def survey(request, survey_id, page=None):
     html = "survey_id=%s, page=%s" % (survey_id, page)
