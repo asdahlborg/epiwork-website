@@ -16,6 +16,7 @@ class Survey:
         self.conditions = {}
         self.revindex = {}
         self.affected = {}
+        self.map = {}
         self._class_map = {}
         self._iterate(self.rules)
         self._create_affected_list()
@@ -30,6 +31,7 @@ class Survey:
                 self.questions.append(obj)
                 self.revindex[obj] = self._index
                 self.conditions[obj] = self._instantiate(conditions)
+                self.map[obj.id] = obj
             elif t == 'dict':
                 cond = rule.keys()[0]
                 sub = rule.values()[0]
