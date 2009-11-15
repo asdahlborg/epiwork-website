@@ -174,6 +174,7 @@ class SurveyValidator:
 
             if visible and (len(value) == 0) and (not question.blank):
                 self.invalids.append(question)
+                self.form.errors[question.id] = _('Please answer this question.')
 
         return form_valid and (len(self.invalids) == 0)
 
