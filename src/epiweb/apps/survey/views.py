@@ -41,13 +41,20 @@ def _save_survey(request):
         unsaved.data = data
         unsaved.save()
 
+sfh = None
+
 def index(request):
 
+    global sfh
+    if sfh is None:
+        survey = example.survey()
+        sfh = utils.SurveyFormHelper(survey)
+
     if request.method == 'POST':
-        form = utils.generate_form(example.survey(), request.POST)
-        _save_survey(request) # TODO
+        form = sfh.create_form(request.POST)
+        # _save_survey(request) # TODO
     else:
-        form = utils.generate_form(example.survey())
+        form = sfh.create_form()
 
     #js = utils.generate_js_helper(example.survey
 

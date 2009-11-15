@@ -7,42 +7,6 @@ from epiweb.apps.survey import definitions as d
 
 _ = lambda x: x
 
-def create_field(question):
-    if question.type == 'yes-no':
-        field = forms.ChoiceField(widget=forms.RadioSelect,
-                                  choices=[('yes', _('Yes')), ('no', _('No'))])
-
-    elif question.type == 'option-multiple':
-        field = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                          choices=zip(range(0, len(question.options)), question.options))
-
-    elif question.type == 'option-single':
-        field = forms.ChoiceField(widget=forms.RadioSelect,
-                                  choices=zip(range(0, len(question.options)), question.options))
-
-    elif question.type == 'date':
-        field = forms.DateField(input_formats='%m/%d/%y')
-
-    else:
-        field = forms.CharField()
-
-    field.label = question.question
-    field.required = False
-
-    return field
-
-def generate_form(survey, values=None):
-
-    if values:
-        form = forms.Form(values)
-    else:
-        form = forms.Form()
-
-    for question in survey.questions:
-        form.fields[question.id] = create_field(question)
-
-    return form
-
 def generate_js_helper(section):
     obj = 's'
     lines = []
@@ -98,4 +62,48 @@ def create_js_statement(v, obj='s'):
         else: return "false"
     else:
         return v
+
+class SurveyFormHelper:
+    def __init__(self, survey):
+        self.survey = survey
+        self.form_class = None
+
+    def create_form(self, data=None):
+        if self.form_class is None:
+            self._generate_form()
+
+        if data is None:
+            return self.form_class()
+        else:
+            return self.form_class(data)
+
+    def _generate_form(self):
+        fields = {}
+        for question in self.survey.questions:
+            fields[question.id] = self._create_field(question)
+        self.form_class = type('SurveyForm', (forms.Form, object), fields)
+
+    def _create_field(self, question):
+        if question.type == 'yes-no':
+            field = forms.ChoiceField(widget=forms.RadioSelect,
+                                      choices=[('yes', _('Yes')), ('no', _('No'))])
+    
+        elif question.type == 'option-multiple':
+            field = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                              choices=zip(range(0, len(question.options)), question.options))
+    
+        elif question.type == 'option-single':
+            field = forms.ChoiceField(widget=forms.RadioSelect,
+                                      choices=zip(range(0, len(question.options)), question.options))
+    
+        elif question.type == 'date':
+            field = forms.DateField(input_formats='%m/%d/%y')
+    
+        else:
+            field = forms.CharField()
+    
+        field.label = question.question
+        field.required = False
+    
+        return field
 
