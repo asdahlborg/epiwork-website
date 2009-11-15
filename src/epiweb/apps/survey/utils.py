@@ -164,7 +164,7 @@ class SurveyValidator:
     def validate(self):
         form_valid = self.form.is_valid()
         if not form_valid:
-            print self.form.errors
+            return False
 
         self.invalids = []
         for question in self.survey.questions:
