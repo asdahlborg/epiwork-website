@@ -18,3 +18,10 @@
 #survey .answer {
 
 }
+#survey .skip {
+    font-size: 12px;
+    text-align: center;
+    background: #eee;
+    margin-bottom: 5px;
+    padding: 2px 20px;
+}

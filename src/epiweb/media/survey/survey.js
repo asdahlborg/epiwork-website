@@ -89,28 +89,66 @@ var Survey = function(id, prefix) {
     this.id = id;
     this.base = $('#'+id);
     this.prefix = prefix;
-    this.affected = {};
-    this.rule = {};
 }
 
 Survey.prototype = {
+    affected: {},
+    rule: {},
+
+    qids: [],
+    
     init: function() {
-        
+        this.qids = [];
+        for (var qid in this.affected) {
+            this.qids.push(qid);
+        }
+
+        var self = this;
+        var len = this.qids.length;
+        for (var i=0; i<len; i++) {
+            var qid = this.qids[i];
+            this.base.find('*[name="'+qid+'"]').change(function(e) {
+                var qid = $(e.target).attr('name');
+                self.changed(qid);
+            });
+            this.update_visibility(qid);
+        }
     },
 
-    trim: function(str) {
-        // from http://blog.stevenlevithan.com/archives/faster-trim-javascript
-        // License: MIT License (http://blog.stevenlevithan.com/archives/faster-trim-javascript#comment-13674)
-        var	str = str.replace(/^\s\s*/, ''),
-        	ws = /\s/,
-        	i = str.length;
-        while (ws.test(str.charAt(--i)));
-        return str.slice(0, i + 1);
+    changed: function(qid) {
+        var list = this.affected[qid];
+        var len = list.length;
+        for (var i=0; i<len; i++) {
+            var qid = list[i];
+            this.update_visibility(qid);
+        }
+    },
+
+    update_visibility: function(qid) {
+        var ev = this.rule[qid]();
+        var target = this.base.find('#'+this.prefix+qid);
+        var curr = target.css('display');
+        if (ev && (curr == 'none')) { this.show(target); }
+        else if (!ev && (curr == 'block')) { this.hide(target); }
+    },
+
+    show: function(target) {
+        var id = target.attr('id');
+        var sid = id+'__skip';
+        var skip = this.base.find('#'+sid);
+        skip.remove();
+        target.slideDown();
+    },
+    hide: function(target) {
+        var id = target.attr('id');
+        var sid = id+'__skip';
+        target.after('<div class="skip" id="'+sid+'">skipped</div>');
+        target.slideUp();
     },
 
     _prepare: function(v) {
         var t = typeof v;
-        if (t != 'object') {
+        if (!$.isArray(t)) {
             if ((t == 'number') || (t == 'string')) {
                 return [v];
             }
@@ -169,7 +207,7 @@ Survey.prototype = {
         for (var i=0; i<len; i++) {
             var value = values[i];
             if (typeof value == 'string') {
-                value = this.trim(value);
+                value = $.trim(value);
                 if (value != '') {
                     res.push(value);
                 }
