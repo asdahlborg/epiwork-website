@@ -13,11 +13,10 @@ class Survey:
         self.questions = []
         self.conditions = {}
         self.revindex = {}
+        self.affected = {}
         self._class_map = {}
         self._iterate(self.rules)
         self._create_affected_list()
-
-        print self.conditions
 
     def _iterate(self, root, conditions=[]):
         for rule in root:
