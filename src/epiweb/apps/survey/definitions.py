@@ -101,7 +101,7 @@ class Value:
 
 class Items(Value):
     def __init__(self, *values):
-        self.values = values
+        self.values = list(values)
 
 class Empty(Value):
     pass
