@@ -163,6 +163,24 @@ Survey.prototype = {
         return v;
     },
 
+    get_invalids: function() {
+        var len = this.qids.length;
+        var res = [];
+        for (var i=0; i<len; i++) {
+            var qid = this.qids[i];
+            var empty = this.Is(this.Value(qid), this.Empty());
+            var visible = this.rule[qid]();
+            var allow_blank = this.blank[qid];
+            if (visible && empty && !allow_blank) {
+                res.push(qid);
+            }
+        }
+        return res;
+    },
+    validate: function() {
+        return this.get_invalids().length == 0;
+    },
+
     Empty: function() {
         return [];
     },
