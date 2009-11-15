@@ -206,7 +206,7 @@ class SurveyValidator:
 
     def _get_profile(self, name):
         # TODO
-        return False
+        return [1]
 
     def _get_value(self, value):
         t = type(value).__name__    
@@ -237,8 +237,10 @@ class SurveyValidator:
             name = value.__name__
             if name == 'Empty':
                 return []
+        elif t == 'list':
+            return value
         else:
-            return t
+            return [value]
 
         # TODO
         raise RuntimeError()
