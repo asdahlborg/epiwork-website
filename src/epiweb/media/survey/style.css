@@ -25,3 +25,21 @@
     margin-bottom: 5px;
     padding: 2px 20px;
 }
+
+#survey .question.error {
+    border-color: #c00;
+    background: #fff6f6;
+}
+#survey .errormsg {
+    color: red;
+    margin-bottom: 15px;
+}
+#survey p {
+    margin-top: 0px;
+}
+#survey ul {
+    margin-bottom: 0px;
+}
+#survey ul.errorlist {
+    margin-top: 0px;
+}

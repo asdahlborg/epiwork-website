@@ -14,7 +14,12 @@
 
 <form method="post" id="survey">
     {% for field in form %}
+    {% if field.errors %}
+    <div class="question error" id="q_{{ field.name }}">
+        <div class="errormsg">{{ field.errors }}</div>
+    {% else %}
     <div class="question" id="q_{{ field.name }}">
+    {% endif %}
         <div class="label">{{ field.label_tag }}</div>
         <div class="answer">
         {{ field }}
