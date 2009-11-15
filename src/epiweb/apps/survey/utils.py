@@ -45,7 +45,7 @@ class JavascriptHelper:
             rule = self._create_rule(self.survey.conditions[question])
             if rule == '':
                 rule = 'true'
-            lines.append("s.rule['%s'] = function() { return %s };" % (question.id, rule))
+            lines.append("s.rule['%s'] = function() { return %s; };" % (question.id, rule))
 
         return lines
 
