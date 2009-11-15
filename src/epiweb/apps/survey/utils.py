@@ -23,18 +23,32 @@ class JavascriptHelper:
         lines = []
         lines.append("(function(container, prefix) {")
         lines.append("var s = new Survey(container, prefix);")
+        lines += self._create_question_list()
+        lines += self._create_allow_blank_condition()
         lines += self._create_affected_list()
         lines += self._create_rules()
         lines.append("s.init();")
         lines.append("})('%s', '%s');" % (self.container, self.prefix))
         self.js = "\n".join(lines)
 
+    def _create_question_list(self):
+        return ["s.qids = [%s];" % ", ".join(map(lambda x: "'%s'" % x.id, self.survey.questions))]
+
+    def _create_allow_blank_condition(self):
+        lines = []
+        lines.append('s.blank = {};')
+        for question in self.survey.questions:
+            if question.blank:
+                lines.append("s.blank['%s'] = true;" % question.id)
+        return lines
+
     def _create_affected_list(self):
         lines = []
         lines.append("s.affected = {};")
         for question in self.survey.questions:
-            lines.append("s.affected['%s'] = new Array(%s);" % (question.id,
-                ', '.join(map(lambda x: "'%s'" % x.id, self.survey.affected[question]))))
+            if len(self.survey.affected[question]) > 0:
+                lines.append("s.affected['%s'] = new Array(%s);" % (question.id,
+                    ', '.join(map(lambda x: "'%s'" % x.id, self.survey.affected[question]))))
         return lines
         
     def _create_rules(self):

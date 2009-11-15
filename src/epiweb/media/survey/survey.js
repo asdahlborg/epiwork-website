@@ -98,20 +98,27 @@ Survey.prototype = {
     qids: [],
     
     init: function() {
-        this.qids = [];
-        for (var qid in this.affected) {
-            this.qids.push(qid);
-        }
-
         var self = this;
         var len = this.qids.length;
         for (var i=0; i<len; i++) {
             var qid = this.qids[i];
+
+            // onchange event
             this.base.find('*[name="'+qid+'"]').change(function(e) {
                 var qid = $(e.target).attr('name');
                 self.changed(qid);
             });
+
+            // default visibility
             this.update_visibility(qid);
+
+            // default values
+            if (this.blank[qid] == undefined) {
+                this.blank[qid] = false;
+            }
+            if (this.affected[qid] == undefined) {
+                this.affected[qid] = new Array();
+            }
         }
     },
 
