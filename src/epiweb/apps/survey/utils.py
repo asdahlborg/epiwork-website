@@ -86,6 +86,9 @@ class JavascriptHelper:
             # FIXME escape the value
             return '"%s"' % value
 
+        # TODO
+        raise RuntimeError()
+
     def _add_operator(self, op, a, b):
         map = {
             'is': 's.Is',
