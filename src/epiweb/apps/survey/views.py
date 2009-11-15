@@ -52,6 +52,8 @@ def index(request):
 
     if request.method == 'POST':
         form = sfh.create_form(request.POST)
+        sv = utils.SurveyValidator(sfh.survey, form)
+        print "Validation:", sv.validate()
         # _save_survey(request) # TODO
     else:
         form = sfh.create_form()

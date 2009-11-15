@@ -152,3 +152,89 @@ class SurveyFormHelper:
     
         return field
 
+class SurveyValidator:
+    def __init__(self, survey, form):
+        self.survey = survey
+        self.form = form
+        self.invalids = None
+
+    def validate(self):
+        form_valid = self.form.is_valid()
+        if not form_valid:
+            print self.form.errors
+
+        self.invalids = []
+        for question in self.survey.questions:
+            visible = self._evaluate_condition(question)
+            value = self._get_value(question)
+            print question.id, visible, value, question.blank
+
+            if visible and (len(value) == 0) and (not question.blank):
+                self.invalids.append(question)
+
+        return form_valid and (len(self.invalids) == 0)
+
+    def _evaluate_condition(self, question):
+        for cond in self.survey.conditions[question]:
+            if not self._evaluate(cond):
+                return False
+        return True
+
+    def _evaluate(self, cond):
+        a = cond[0]
+        op = cond[1]
+        b = cond[2]
+    
+        va = self._get_value(a)
+        vb = self._get_value(b)
+
+        if op == 'is':
+            return va == vb
+        elif op == 'is-not':
+            return va != vb
+        elif op == 'is-in':
+            for ia in va:
+                if ia not in vb:
+                    return False
+            return True
+
+        # TODO
+        raise RuntimeError()
+
+    def _get_profile(self, name):
+        # TODO
+        return False
+
+    def _get_value(self, value):
+        t = type(value).__name__    
+        if t == 'tuple':
+            return self._evaluate(value)
+        elif t == 'instance':
+            if isinstance(value, d.Question):
+                id = value.__class__.__name__
+                res = self.form.cleaned_data[id]
+                if value.type in ['option-single']:
+                    res = res.strip()
+                    if res == '':
+                        res = [-1]
+                    else:
+                        res = [int(res)]
+                elif value.type in ['option-multiple']:
+                    res = map(lambda x: int(x), res)
+                if res == None:
+                    res = []
+                return [res]
+            elif isinstance(value, d.Items):
+                return value.values
+            elif isinstance(value, d.Profile):
+                return self._get_profile(value.name)
+        elif t == 'classobj' and issubclass(value, d.Value):
+            name = value.__name__
+            if name == 'Empty':
+                return []
+        else:
+            return t
+
+        # TODO
+        raise RuntimeError()
+
