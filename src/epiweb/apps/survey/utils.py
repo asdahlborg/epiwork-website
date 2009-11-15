@@ -63,6 +63,92 @@ def create_js_statement(v, obj='s'):
     else:
         return v
 
+class JavascriptHelper:
+    def __init__(self, survey, container_id='survey', question_id_prefix="q_"):
+        self.survey = survey
+        self.container = container_id
+        self.prefix = question_id_prefix
+        self.js = None
+
+    def get_javascript(self):
+        if self.js is None:
+            self._generate_javascript()
+        return self.js
+
+    def _generate_javascript(self):
+        lines = []
+        lines.append("(function(container, prefix) {")
+        lines.append("var s = new Survey(container, prefix);")
+        lines += self._create_affected_list()
+        lines += self._create_rules()
+        lines.append("s.init();")
+        lines.append("})('%s', '%s');" % (self.container, self.prefix))
+        self.js = "\n".join(lines)
+
+    def _create_affected_list(self):
+        lines = []
+        lines.append("s.affected = {};")
+        for question in self.survey.questions:
+            lines.append("s.affected['%s'] = new Array(%s);" % (question.id,
+                ', '.join(map(lambda x: "'%s'" % x.id, self.survey.affected[question]))))
+        return lines
+        
+    def _create_rules(self):
+        lines = []
+        lines.append("s.rule = {};")
+
+        for question in self.survey.questions:
+            rule = self._create_rule(self.survey.conditions[question])
+            if rule == '':
+                rule = 'true'
+            lines.append("s.rule['%s'] = function() { return %s };" % (question.id, rule))
+
+        return lines
+
+    def _convert_value(self, value):
+        t = type(value).__name__
+        if t == 'tuple':
+            return "(%s)" % self._create_rule(value)
+        elif t == 'instance': 
+            if isinstance(value, d.Question):
+                return "s.Value('%s')" % value.id
+            elif isinstance(value, d.Items):
+                return "[%s]" % ', '.join(map(lambda x: self._convert_value(x),
+                                                value.values))
+            elif isinstance(value, d.Profile):
+                return "s.Profile('%s')" % value.name
+        elif t == 'classobj' and issubclass(value, d.Value):
+            name = value.__name__
+            if name == 'Empty':
+                return 's.Empty()'
+
+        elif t in ['int', 'float']:
+            return str(value)
+        elif t == 'str':
+            # FIXME escape the value
+            return '"%s"' % value
+
+    def _add_operator(self, op, a, b):
+        map = {
+            'is': 's.Is',
+            'is-not': 's.IsNot',
+            'is-in': 's.IsIn'
+        }
+        return '%s(%s, %s)' % (map.get(op, map['is']), a, b)
+
+    def _create_rule(self, conditions):
+        rules = []
+        for cond in conditions:
+            a = cond[0]
+            b = cond[2]
+
+            a = self._convert_value(a)
+            b = self._convert_value(b)
+
+            rules.append(self._add_operator(cond[1], a, b))
+
+        return " && ".join(map(lambda x: '(%s)' % x, rules))
+
 class SurveyFormHelper:
     def __init__(self, survey):
         self.survey = survey

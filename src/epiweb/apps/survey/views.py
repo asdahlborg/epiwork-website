@@ -57,11 +57,13 @@ def index(request):
         form = sfh.create_form()
 
     #js = utils.generate_js_helper(example.survey
+    jsh = utils.JavascriptHelper(example.survey())
+    js = jsh.get_javascript()
 
     t = loader.get_template('survey/index.html')
     c = Context({
         'form': form,
-        #'js': js
+        'js': js
     })
     return HttpResponse(t.render(c))
 
