@@ -67,13 +67,13 @@ class Survey:
 
         if ta == 'tuple':
             res += self._get_questions(a)
-        elif ta == 'classobj' and issubclass(a, Question):
-            res.append(self._class_map[a])
+        elif ta == 'instance' and isinstance(a, Question):
+            res.append(a)
 
         if type(b).__name__ == 'tuple':
             res += self._get_questions(b)
-        elif tb == 'classobj' and issubclass(b, Question):
-            res.append(self._class_map[b])
+        elif tb == 'instance' and isinstance(b, Question):
+            res.append(b)
 
         return res
     
