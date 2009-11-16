@@ -16,7 +16,7 @@ from epidb_client import EpiDBClient
 from django.conf import settings
 
 def _create_response_data():
-    return ""
+    return {'test': 'dong'}
 
 @transaction.commit_on_success
 def _save_survey(request):
@@ -25,13 +25,29 @@ def _save_survey(request):
     data = _create_response_data() # TODO
     res = client.response_submit(data)
 
+    try:
+        s = models.Survey.objects.all()[0]
+    except IndexError:
+        s = models.Survey()
+        s.description = 'desc'
+        s.definition = 'def'
+        s.survey_id = 'dudududu'
+        s.created = '2009-11-16 03:20'
+        s.save()
+
     hist = models.History()
     hist.user = request.user
     hist.epidb_id = res.get('id', None)
-    hist.survey = request.session['survey_id']
+    hist.survey = s # request.session['survey_id']
     hist.save()
+    print hist
+    print res.get('id', None)
 
-    profile = models.Profile.objects.get(user=request.user)
+    try:
+        profile = models.Profile.objects.get(user=request.user)
+    except models.Profile.DoesNotExist:
+        profile = models.Profile()
+        profile.user = request.user
     profile.last_survey = hist
     profile.last_survey_date = hist.date
     profile.save()
