@@ -57,10 +57,7 @@ def index(request):
 
     if request.method == 'POST':
         form = sfh.create_form(request.POST)
-        sv = utils.SurveyValidator(sfh.survey, form)
-        valid = sv.validate()
-        print "Valid:", valid
-        if valid:
+        if form.is_valid():
             # _save_survey(request) # TODO
             return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
     else:

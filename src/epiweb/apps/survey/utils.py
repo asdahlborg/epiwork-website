@@ -1,4 +1,6 @@
 from django import forms
+from django.forms.util import ErrorList
+
 from epiweb.apps.survey.data import Survey, Section, Question
 from epiweb.apps.survey.data.conditions import *
 from epiweb.apps.survey.data.conditions import Compare
@@ -110,6 +112,96 @@ class JavascriptHelper:
 
         return " && ".join(map(lambda x: '(%s)' % x, rules))
 
+class SurveyFormBase(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self._survey = kwargs['survey']
+        del kwargs['survey']
+        super(SurveyFormBase, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        valid_ids = cleaned_data.keys()
+
+        for question in self._survey.questions:
+            if question.id not in valid_ids:
+                continue
+            visible = self._evaluate_condition(question)
+            value = self._get_value(question)
+            if visible and len(value) == 0 and not question.blank:
+                msg = _(u'Please answer this question.')
+                self._errors[question.id] = ErrorList([msg])
+                del cleaned_data[question.id]
+
+        return cleaned_data
+
+    def _evaluate_condition(self, question):
+        for cond in self._survey.conditions[question]:
+            if not self._evaluate(cond):
+                return False
+        return True
+
+    def _evaluate(self, cond):
+        a = cond[0]
+        op = cond[1]
+        b = cond[2]
+    
+        va = self._get_value(a)
+        vb = self._get_value(b)
+
+        if op == 'is':
+            return va == vb
+        elif op == 'is-not':
+            return va != vb
+        elif op == 'is-in':
+            for ia in va:
+                if ia not in vb:
+                    return False
+            return True
+
+        # TODO
+        raise RuntimeError()
+
+    def _get_profile(self, name):
+        # TODO
+        return [1]
+
+    def _get_value(self, value):
+        t = type(value).__name__    
+        if t == 'tuple':
+            return self._evaluate(value)
+        elif t == 'instance':
+            if isinstance(value, d.Question):
+                res = self.cleaned_data.get(value.id, None)
+                if res == None:
+                    res = []
+                elif value.type in ['option-single']:
+                    res = res.strip()
+                    if res == '':
+                        res = []
+                    else:
+                        res = [int(res)]
+                elif value.type in ['option-multiple']:
+                    res = map(lambda x: int(x), res)
+                else:
+                    res = [res]
+
+                return res
+            elif isinstance(value, d.Items):
+                return value.values
+            elif isinstance(value, d.Profile):
+                return self._get_profile(value.name)
+        elif t == 'classobj' and issubclass(value, d.Value):
+            name = value.__name__
+            if name == 'Empty':
+                return []
+        elif t == 'list':
+            return value
+        else:
+            return [value]
+
+        # TODO
+        raise RuntimeError()
+
 class SurveyFormHelper:
     def __init__(self, survey):
         self.survey = survey
@@ -120,15 +212,15 @@ class SurveyFormHelper:
             self._generate_form()
 
         if data is None:
-            return self.form_class()
+            return self.form_class(survey=self.survey)
         else:
-            return self.form_class(data)
+            return self.form_class(data, survey=self.survey)
 
     def _generate_form(self):
         fields = {}
         for question in self.survey.questions:
             fields[question.id] = self._create_field(question)
-        self.form_class = type('SurveyForm', (forms.Form, object), fields)
+        self.form_class = type('SurveyForm', (SurveyFormBase, object), fields)
 
     def _create_field(self, question):
         if question.type == 'yes-no':
