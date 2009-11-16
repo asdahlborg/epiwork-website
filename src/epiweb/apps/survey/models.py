@@ -8,7 +8,7 @@ class Survey(models.Model):
     definition = models.TextField()
 
 class History(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.ForeignKey(User)
     date = models.DateTimeField(auto_now_add=True)
     survey = models.ForeignKey(Survey)
     epidb_id = models.CharField(max_length=36, null=True)
