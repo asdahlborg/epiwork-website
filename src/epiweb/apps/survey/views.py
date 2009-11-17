@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.db import transaction
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 
 from epiweb.apps.survey import utils
 from epiweb.apps.survey import models
@@ -61,9 +62,11 @@ def _save_survey(request):
 
 sfh = None
 
+@login_required
 def thanks(request):
     return render_to_response('survey/thanks.html')
 
+@login_required
 def index(request):
 
     global sfh

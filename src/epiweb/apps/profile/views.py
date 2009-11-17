@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.db import transaction
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 
 from epiweb.apps.profile import models
 from epiweb.apps.profile import data
@@ -35,6 +36,7 @@ def _save_profile(user, data):
 
 sfh = None
 
+@login_required
 def index(request):
     global sfh
     if sfh is None:
