@@ -7,8 +7,16 @@ from epiweb.apps.survey.data.conditions import Compare
 
 from epiweb.apps.survey import definitions as d
 from epiweb.apps.profile import utils as profile_utils
+from epiweb.apps.survey import models
 
 _ = lambda x: x
+
+def get_global_id(user):
+    try:
+        user2 = models.EpiDBUser.objects.get(user=user)
+        return user2.global_id
+    except models.User.DoesNotExist:
+        return None
 
 class JavascriptHelper:
     def __init__(self, survey, user, container_id='survey', question_id_prefix="q_"):

@@ -7,11 +7,12 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 
+from epiweb.apps.survey import utils as survey_utils
+
 from epiweb.apps.profile import models
 from epiweb.apps.profile import data
 from epiweb.apps.profile import utils
 
-from epiweb.apps.survey import utils as survey_utils
 
 sfh = None
 

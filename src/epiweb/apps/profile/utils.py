@@ -18,13 +18,15 @@ def _create_profile_data(survey, cleaned_data):
             data[id] = cleaned_data[id]
     
     return data
-            
 
 def send_profile(user, survey, cleaned_data):
     client = EpiDBClient(settings.EPIDB_API_KEY)
     client.server = settings.EPIDB_SERVER
     data = _create_profile_data(survey, cleaned_data)
-    res = client.profile_update(str(user.id), data)
+    from epiweb.apps.survey import utils as survey_utils
+    global_id = survey_utils.get_global_id(user)
+    print "Global id:", global_id
+    res = client.profile_update(global_id, data)
     return res
 
 def get_profile(user):
