@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = "epidb-website",
+    name = "epiwork-website",
     version = "1.0",
     url = 'http://www.epiwork.eu/',
     license = 'BSD',
