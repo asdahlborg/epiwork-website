@@ -5,7 +5,7 @@ _ = lambda x: x
 
 class RepQ01(d.Question):
     question = _('Did you have one or more of the following symptoms since your last visit?')
-    type = 'option-multiple'
+    type = 'options-multiple'
     blank = True
     options = (
         _('Runny nose'),
@@ -34,7 +34,7 @@ class RepQ02(d.Question):
 
 class RepQ03(d.Question):
     question = _('Did you have fever? If yes, what was the highest temperature measured? Please estimate if you had fever, but did not measure.')
-    type = 'option-single'
+    type = 'options-single'
     options = (
         _('No'),
         _('Less than 37°C'),
@@ -55,7 +55,7 @@ class RepQ04(d.Question):
 
 class RepQ05(d.Question):
     question = _('Did these symptoms develop abruptly with sudden high fever or chills?')
-    type = 'option-single'
+    type = 'options-single'
     options = (
         _('No'),
         _('Yes'),
@@ -64,12 +64,12 @@ class RepQ05(d.Question):
 
 class RepQ06(d.Question):
     question = _('Did you consult a medical doctor for these symptoms?')
-    type = 'option-single'
+    type = 'options-single'
     options = ('No', 'Yes')
 
 class RepQ07(d.Question):
     question = _('Did you take medication for these symptoms?')
-    type = 'option-single'
+    type = 'options-single'
     options = (
         _('Tamiflu, Relenza, or another anti viral drug'),
         _('Antibiotics'),
@@ -81,7 +81,7 @@ class RepQ07(d.Question):
 
 class RepQ08(d.Question):
     question = _('Did you change your occupations due to these symptoms?')
-    type = 'option-single'
+    type = 'options-single'
     options = (
         _('No'),
         _('Yes, I staid at home'),
@@ -91,7 +91,7 @@ class RepQ08(d.Question):
 
 class RepQ09(d.Question):
     question = _('How long did you staid at home?')
-    type = 'option-single'
+    type = 'options-single'
     options = (
         _('1 day'),
         _('2 days'),
@@ -107,12 +107,12 @@ class RepQ09(d.Question):
 
 class RepQ10(d.Question):
     question = _('Do other people from your family/home have/had comparable symptoms?')
-    type = 'option-single'
+    type = 'options-single'
     options = ('No', 'Yes')
 
 class RepQ11(d.Question):
     question = _('According to our data you did not receive a seasonal flu vaccination?')
-    type = 'option-single'
+    type = 'options-single'
     options = (
         _('Yes'),
         _('No, meanwhile I have received a seasonal flu vaccination'),
@@ -120,7 +120,7 @@ class RepQ11(d.Question):
 
 class RepQ12(d.Question):
     question = _('According to our data you did not receive a Mexican flu vaccination?')
-    type = 'option-single'
+    type = 'options-single'
     options = (
         _('Yes'),
         _('No, meanwhile I have received a Mexican flu vaccination'),

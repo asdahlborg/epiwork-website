@@ -174,13 +174,13 @@ class SurveyFormBase(forms.Form):
                 res = self.cleaned_data.get(value.id, None)
                 if res == None:
                     res = []
-                elif value.type in ['option-single']:
+                elif value.type in ['options-single']:
                     res = res.strip()
                     if res == '':
                         res = []
                     else:
                         res = [int(res)]
-                elif value.type in ['option-multiple']:
+                elif value.type in ['options-multiple']:
                     res = map(lambda x: int(x), res)
                 else:
                     res = [res]
@@ -227,11 +227,11 @@ class SurveyFormHelper:
             field = forms.ChoiceField(widget=forms.RadioSelect,
                                       choices=[('yes', _('Yes')), ('no', _('No'))])
     
-        elif question.type == 'option-multiple':
+        elif question.type == 'options-multiple':
             field = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
                                               choices=zip(range(0, len(question.options)), question.options))
     
-        elif question.type == 'option-single':
+        elif question.type == 'options-single':
             field = forms.ChoiceField(widget=forms.RadioSelect,
                                       choices=zip(range(0, len(question.options)), question.options))
     
