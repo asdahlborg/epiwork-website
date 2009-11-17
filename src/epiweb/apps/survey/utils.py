@@ -271,7 +271,6 @@ class SurveyFormHelper:
                                       choices=zip(range(0, len(question.options)), question.options))
     
         elif question.type == 'date':
-            print "=== date"
             field = forms.DateField(input_formats=['%Y-%m-%d', '%d/%m/%Y', '%d/%m/%y', '%d-%m-%y', '%d-%m-%Y', '%b %d %Y', '%b %d, %Y', '%d %b %Y', '%d %b, %Y', '%B %d %Y', '%B %d, %Y', '%d %B %Y', '%d %B, %Y'])
     
         else:
