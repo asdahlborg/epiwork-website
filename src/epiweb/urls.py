@@ -19,4 +19,5 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
     (r'^survey/', include('epiweb.apps.survey.urls')),
+    (r'^profile/', include('epiweb.apps.profile.urls')),
 )
