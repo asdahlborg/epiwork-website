@@ -245,7 +245,7 @@ Survey.prototype = {
         return res;
     },
     Profile: function(pid) {
-        return 1;
+        return this.profiles[pid];
     }
 }
 

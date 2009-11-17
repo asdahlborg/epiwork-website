@@ -20,7 +20,7 @@ def index(request):
     global sfh
     if sfh is None:
         survey = data.UserProfile()
-        sfh = survey_utils.SurveyFormHelper(survey)
+        sfh = survey_utils.SurveyFormHelper(survey, request.user)
 
     if request.method == 'POST':
         form = sfh.create_form(request.POST)
@@ -31,7 +31,7 @@ def index(request):
     else:
         form = sfh.create_form(utils.get_profile(request.user))
 
-    jsh = survey_utils.JavascriptHelper(data.UserProfile())
+    jsh = survey_utils.JavascriptHelper(data.UserProfile(), request.user)
     js = jsh.get_javascript()
 
     return render_to_response('profile/index.html', {

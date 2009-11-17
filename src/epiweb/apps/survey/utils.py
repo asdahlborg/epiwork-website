@@ -6,15 +6,18 @@ from epiweb.apps.survey.data.conditions import *
 from epiweb.apps.survey.data.conditions import Compare
 
 from epiweb.apps.survey import definitions as d
+from epiweb.apps.profile import utils as profile_utils
 
 _ = lambda x: x
 
 class JavascriptHelper:
-    def __init__(self, survey, container_id='survey', question_id_prefix="q_"):
+    def __init__(self, survey, user, container_id='survey', question_id_prefix="q_"):
         self.survey = survey
+        self.user = user
         self.container = container_id
         self.prefix = question_id_prefix
         self.js = None
+        self.checked_profiles = []
 
     def get_javascript(self):
         if self.js is None:
@@ -29,6 +32,7 @@ class JavascriptHelper:
         lines += self._create_allow_blank_condition()
         lines += self._create_affected_list()
         lines += self._create_rules()
+        lines += self._create_profile_data()
         lines.append("s.init();")
         lines.append("})('%s', '%s');" % (self.container, self.prefix))
         self.js = "\n".join(lines)
@@ -76,6 +80,8 @@ class JavascriptHelper:
                 return "[%s]" % ', '.join(map(lambda x: self._convert_value(x),
                                                 value.values))
             elif isinstance(value, d.Profile):
+                if value not in self.checked_profiles:
+                    self.checked_profiles.append(value)
                 return "s.Profile('%s')" % value.name
         elif t == 'classobj' and issubclass(value, d.Value):
             name = value.__name__
@@ -112,10 +118,31 @@ class JavascriptHelper:
 
         return " && ".join(map(lambda x: '(%s)' % x, rules))
 
+    def _create_profile_data(self):
+        if len(self.checked_profiles) == 0:
+            return []
+
+        lines = []
+        lines.append('s.profiles = [];')
+
+        data = profile_utils.get_profile(self.user)
+        for profile in self.checked_profiles:
+            name = profile.name
+            value = data.get(name, 'undefined')
+            tvalue = type(value).__name__
+            if tvalue == 'string':
+                value = "'%s'" % value
+            lines.append("s.profiles['%s'] = %s;" % (name, value))
+
+        return lines
+
 class SurveyFormBase(forms.Form):
     def __init__(self, *args, **kwargs):
         self._survey = kwargs['survey']
+        self._user = kwargs['user']
+        self._profile = None
         del kwargs['survey']
+        del kwargs['user']
         super(SurveyFormBase, self).__init__(*args, **kwargs)
 
     def clean(self):
@@ -162,8 +189,15 @@ class SurveyFormBase(forms.Form):
         raise RuntimeError()
 
     def _get_profile(self, name):
-        # TODO
-        return [1]
+        if self._profile is None:
+            self._profile = profile_utils.get_profile(self._user)
+
+        value = self._profile.get(name, None)
+        tvalue = type(value).__name__
+        if value is None:
+            return None
+        else:
+            return [value]
 
     def _get_value(self, value):
         t = type(value).__name__    
@@ -203,8 +237,9 @@ class SurveyFormBase(forms.Form):
         raise RuntimeError()
 
 class SurveyFormHelper:
-    def __init__(self, survey):
+    def __init__(self, survey, user):
         self.survey = survey
+        self.user = user
         self.form_class = None
 
     def create_form(self, data=None):
@@ -212,9 +247,9 @@ class SurveyFormHelper:
             self._generate_form()
 
         if data is None:
-            return self.form_class(survey=self.survey)
+            return self.form_class(survey=self.survey, user=self.user)
         else:
-            return self.form_class(data, survey=self.survey)
+            return self.form_class(data, survey=self.survey, user=self.user)
 
     def _generate_form(self):
         fields = {}

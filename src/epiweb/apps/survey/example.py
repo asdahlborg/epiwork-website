@@ -141,10 +141,10 @@ class Survey(d.Survey):
                 RepQ09
             ) },
             RepQ10,
-            { (d.Profile('seasonal-flu-vaccine'), 'is-not', 1) : (
+            { (d.Profile('RegQ5'), 'is-not', 1) : (
                 RepQ11
             ) },
-            { (d.Profile('mexican-flu-vaccine'), 'is-not', 1) : (
+            { (d.Profile('RegQ6'), 'is-not', 1) : (
                 RepQ12
             ) },
         ) }
