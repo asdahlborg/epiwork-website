@@ -13,7 +13,7 @@ class History(models.Model):
     survey = models.ForeignKey(Survey)
     epidb_id = models.CharField(max_length=36, null=True)
 
-class Profile(models.Model):
+class Info(models.Model):
     user = models.ForeignKey(User, unique=True)
     last_survey = models.ForeignKey(History)
     last_survey_date = models.DateTimeField()
