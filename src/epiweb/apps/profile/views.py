@@ -25,6 +25,7 @@ def index(request):
     if request.method == 'POST':
         form = sfh.create_form(request.POST)
         if form.is_valid():
+            utils.send_profile(request.user, form._survey, form.cleaned_data)
             utils.save_profile(request.user, form.cleaned_data)
             return HttpResponseRedirect(reverse('epiweb.apps.profile.views.index'))
             

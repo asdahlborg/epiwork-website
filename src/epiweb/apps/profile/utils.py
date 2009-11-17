@@ -1,10 +1,31 @@
 
 from epiweb.apps.profile import models
 
+from django.conf import settings
+from epidb_client import EpiDBClient
+
 try:
     import json
 except ImportError:
     import simplejson as json
+
+def _create_profile_data(survey, cleaned_data):
+    data = {}
+    for question in survey.questions:
+        id = question.id
+        private = question.private
+        if not private:
+            data[id] = cleaned_data[id]
+    
+    return data
+            
+
+def send_profile(user, survey, cleaned_data):
+    client = EpiDBClient(settings.EPIDB_API_KEY)
+    client.server = settings.EPIDB_SERVER
+    data = _create_profile_data(survey, cleaned_data)
+    res = client.profile_update(str(user.id), data)
+    return res
 
 def get_profile(user):
     try:
