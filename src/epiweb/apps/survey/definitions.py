@@ -7,6 +7,7 @@ class Question:
         except AttributeError:
             self.id = self.__class__.__name__
 
+    private = False
     blank = False
 
 class Survey:
