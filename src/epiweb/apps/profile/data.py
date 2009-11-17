@@ -1,4 +1,4 @@
-from epiweb.apps.survey import definition as d
+from epiweb.apps.survey import definitions as d
 
 _ = lambda x: x
 
@@ -85,7 +85,7 @@ class RegQ10(d.Question):
         _('No'),
         _('Vegetarian'),
         _('Veganism'),
-        _('Low‐calorie'),
+        _('Low-calorie'),
         _('Other'),
     )
 
@@ -104,7 +104,7 @@ class RegQ12(d.Question):
     options = (
         _('I live alone'),
         _('Together with one or more adults (18+)'),
-        _('Together with one or more children (18‐)'),
+        _('Together with one or more children (18-)'),
         _('Together with other adults and children'),
     )
 
@@ -114,12 +114,12 @@ class RegQ13(d.Question):
     options = (
         _('No, they stay at home'),
         _('Yes, to school'),
-        _('Yes, to day‐care'),
+        _('Yes, to day-care'),
     )
 
 class RegQ14(d.Question):
     question = _('Do you have pets at home?')
-    type = 'options-multiple')
+    type = 'options-multiple'
     options = (
         _('Yes, one or more dogs'),
         _('Yes, one or more cats'),
@@ -129,21 +129,21 @@ class RegQ14(d.Question):
 
 class UserProfile(d.Survey):
     rules = (
-        ReqQ01,
-        ReqQ02,
-        ReqQ03,
-        ReqQ04,
-        ReqQ05,
-        ReqQ06,
-        { (Reg01, 'is', 1) : (
-            ReqQ07,
+        RegQ1,
+        RegQ2,
+        RegQ3,
+        RegQ4,
+        RegQ5,
+        RegQ6,
+        { (RegQ1, 'is', 1) : (
+            RegQ7,
         ) },
-        ReqQ08,
-        ReqQ09,
-        ReqQ10,
-        ReqQ11,
-        ReqQ12,
-        ReqQ13,
-        ReqQ14,
+        RegQ8,
+        RegQ9,
+        RegQ10,
+        RegQ11,
+        RegQ12,
+        RegQ13,
+        RegQ14,
     )
 
