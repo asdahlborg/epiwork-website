@@ -11,6 +11,7 @@ class Survey(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     definition = models.TextField()
+    hash = models.CharField(max_length=40)
     active = models.BooleanField()
 
 class Participation(models.Model):
