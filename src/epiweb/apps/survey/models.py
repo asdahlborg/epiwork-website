@@ -19,8 +19,8 @@ class Participation(models.Model):
     survey = models.ForeignKey(Survey)
     date = models.DateTimeField(auto_now_add=True)
     epidb_id = models.CharField(max_length=36, null=True)
-    previous_participation = models.ForeignKey('self')
-    previous_participation_date = models.DateTimeField()
+    previous_participation = models.ForeignKey('self', null=True)
+    previous_participation_date = models.DateTimeField(null=True)
 
 class Unsaved(models.Model):
     participation = models.ForeignKey(Participation)
