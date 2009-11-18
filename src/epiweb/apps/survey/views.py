@@ -55,7 +55,7 @@ def index(request):
         if form.is_valid():
             res = utils.send_survey_response(request.user, form._survey, form.cleaned_data)
             id = res.get('id', None)
-            utils.save_survey_response(request.user, msurvey, id)
+            utils.add_survey_participation(request.user, msurvey, id)
             return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
         else:
             request.user.message_set.create(message=_('One or more questions have empty or invalid answer. Please fix it first.'))

@@ -353,7 +353,7 @@ def send_survey_response(user, survey, cleaned_data):
     res = client.response_submit(data)
     return res
 
-def save_survey_response(user, msurvey, id=None):
+def add_survey_participation(user, msurvey, id=None):
     su = models.SurveyUser.objects.get(user=user)
 
     participation = models.Participation()
