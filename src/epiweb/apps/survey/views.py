@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required
 
 from epiweb.apps.survey import utils
 from epiweb.apps.survey import models
-from epiweb.apps.survey import profile_data
 
 from epidb_client import EpiDBClient
 
@@ -73,13 +72,11 @@ def index(request):
 
 @login_required
 def profile_index(request):
-    global profile_form_helper
-    if profile_form_helper is None:
-        survey = profile_data.UserProfile()
-        profile_form_helper = utils.SurveyFormHelper(survey)
+    profile = utils.get_profile_object()
+    helper = utils.get_survey_form_helper(profile)
 
     if request.method == 'POST':
-        form = profile_form_helper.create_form(request.user, request.POST)
+        form = helper.create_form(request.user, request.POST)
         if form.is_valid():
             utils.send_profile(request.user, form._survey, form.cleaned_data)
             utils.save_profile(request.user, form.cleaned_data)
@@ -88,9 +85,9 @@ def profile_index(request):
             request.user.message_set.create(message=_('One or more questions have empty or invalid answer. Please fix it first.'))
             
     else:
-        form = profile_form_helper.create_form(request.user, utils.get_profile(request.user))
+        form = helper.create_form(request.user, utils.get_profile(request.user))
 
-    jsh = utils.JavascriptHelper(profile_data.UserProfile(), request.user)
+    jsh = utils.JavascriptHelper(profile, request.user)
     js = jsh.get_javascript()
 
     return render_to_response('survey/profile_index.html', {

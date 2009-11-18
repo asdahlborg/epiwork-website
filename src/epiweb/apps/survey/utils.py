@@ -8,6 +8,7 @@ from epiweb.apps.survey.data.conditions import Compare
 from epiweb.apps.survey import definitions as d
 from epiweb.apps.survey import models
 from epiweb.apps.survey import example
+from epiweb.apps.survey import profile_data
 
 from django.conf import settings
 from epidb_client import EpiDBClient
@@ -21,6 +22,7 @@ _ = lambda x: x
 
 _survey_form_helper = {}
 _survey_object = {}
+_profile_object = None
 
 def get_current_survey():
     # TODO: rewrite with a proper query
@@ -37,6 +39,12 @@ def get_survey_object(msurvey):
         survey = example.Survey()
         _survey_object[msurvey.hash] = survey
     return survey
+
+def get_profile_object():
+    global _profile_object
+    if _profile_object is None:
+        _profile_object = profile_data.UserProfile()
+    return _profile_object
 
 def get_survey_form_helper(survey):
     global _survey_form_helper
