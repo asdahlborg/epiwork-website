@@ -16,50 +16,6 @@ from epidb_client import EpiDBClient
 
 from django.conf import settings
 
-def _create_response_data():
-    return {'test': 'dong'}
-
-@transaction.commit_on_success
-def _save_survey(request):
-    client = EpiDBClient(settings.EPIDB_API_KEY)
-    client.server = settings.EPIDB_SERVER
-    data = _create_response_data() # TODO
-    res = client.response_submit(data)
-
-    try:
-        s = models.Survey.objects.all()[0]
-    except IndexError:
-        s = models.Survey()
-        s.description = 'desc'
-        s.definition = 'def'
-        s.survey_id = 'dudududu'
-        s.created = '2009-11-16 03:20'
-        s.save()
-
-    hist = models.History()
-    hist.user = request.user
-    hist.epidb_id = res.get('id', None)
-    hist.survey = s # request.session['survey_id']
-    hist.save()
-    print hist
-    print res.get('id', None)
-
-    try:
-        profile = models.Profile.objects.get(user=request.user)
-    except models.Profile.DoesNotExist:
-        profile = models.Profile()
-        profile.user = request.user
-    profile.last_survey = hist
-    profile.last_survey_date = hist.date
-    profile.save()
-
-    if res.get('id', None) is None:
-        unsaved = models.Unsaved()
-        unsaved.history = hist
-        unsaved.date = hist.date
-        unsaved.data = data
-        unsaved.save()
-
 sfh = None
 
 @login_required
