@@ -3,6 +3,17 @@
 {% block page %}
 	<!-- start content -->
 	<div id="content"><div id="single">
+
+{% if messages %}
+<div id="messages">
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}
+
 {% block content %}
 
 {% endblock %}
