@@ -20,9 +20,9 @@ _ = lambda x: x
 
 def get_global_id(user):
     try:
-        user2 = models.EpiDBUser.objects.get(user=user)
+        user2 = models.SurveyUser.objects.get(user=user)
         return user2.global_id
-    except models.User.DoesNotExist:
+    except models.SurveyUser.DoesNotExist:
         return None
 
 class JavascriptHelper:
