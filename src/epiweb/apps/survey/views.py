@@ -20,11 +20,25 @@ from django.conf import settings
 survey_form_helper = None
 profile_form_helper = None
 
+def profile_required(func):
+    def redirect(request, *args, **kwargs):
+        url = reverse('epiweb.apps.survey.views.profile_index')
+        return HttpResponseRedirect(url)
+    def _func(request, *args, **kwargs):
+        profile = utils.get_profile(request.user)
+        if profile is None:
+            return redirect(request)
+        else:
+            return func(request, *args, **kwargs)
+    return _func
+        
+
 @login_required
 def thanks(request):
     return render_to_response('survey/thanks.html')
 
 @login_required
+@profile_required
 def index(request):
 
     global survey_form_helper
