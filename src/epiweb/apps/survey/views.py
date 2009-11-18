@@ -17,7 +17,8 @@ from epidb_client import EpiDBClient
 
 from django.conf import settings
 
-sfh = None
+survey_form_helper = None
+profile_form_helper = None
 
 @login_required
 def thanks(request):
@@ -26,19 +27,19 @@ def thanks(request):
 @login_required
 def index(request):
 
-    global sfh
-    if sfh is None:
+    global survey_form_helper
+    if survey_form_helper is None:
         survey = example.survey()
-        sfh = utils.SurveyFormHelper(survey, request.user)
+        survey_form_helper = utils.SurveyFormHelper(survey, request.user)
 
     if request.method == 'POST':
-        form = sfh.create_form(request.POST)
+        form = survey_form_helper.create_form(request.POST)
         if form.is_valid():
             id = utils.send_survey_response(request.user, form._survey, form.cleaned_data)
             utils.save_survey_response(request.user, form._survey, id)
             return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
     else:
-        form = sfh.create_form()
+        form = survey_form_helper.create_form()
 
     #js = utils.generate_js_helper(example.survey
     jsh = utils.JavascriptHelper(example.survey(), request.user)
@@ -51,20 +52,20 @@ def index(request):
 
 @login_required
 def profile_index(request):
-    global sfh
-    if sfh is None:
+    global profile_form_helper
+    if profile_form_helper is None:
         survey = profile_data.UserProfile()
-        sfh = utils.SurveyFormHelper(survey, request.user)
+        profile_form_helper = utils.SurveyFormHelper(survey, request.user)
 
     if request.method == 'POST':
-        form = sfh.create_form(request.POST)
+        form = profile_form_helper.create_form(request.POST)
         if form.is_valid():
             utils.send_profile(request.user, form._survey, form.cleaned_data)
             utils.save_profile(request.user, form.cleaned_data)
             return HttpResponseRedirect(reverse('epiweb.apps.survey.views.profile_index'))
             
     else:
-        form = sfh.create_form(utils.get_profile(request.user))
+        form = profile_form_helper.create_form(utils.get_profile(request.user))
 
     jsh = utils.JavascriptHelper(profile_data.UserProfile(), request.user)
     js = jsh.get_javascript()
