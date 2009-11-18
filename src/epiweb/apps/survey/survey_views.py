@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from epiweb.apps.survey import utils
 from epiweb.apps.survey import models
 from epiweb.apps.survey import example
+from epiweb.apps.survey import profile_data
 
 from epidb_client import EpiDBClient
 
@@ -44,6 +45,31 @@ def index(request):
     js = jsh.get_javascript()
 
     return render_to_response('survey/index.html', {
+        'form': form,
+        'js': js
+    })
+
+@login_required
+def profile_index(request):
+    global sfh
+    if sfh is None:
+        survey = profile_data.UserProfile()
+        sfh = utils.SurveyFormHelper(survey, request.user)
+
+    if request.method == 'POST':
+        form = sfh.create_form(request.POST)
+        if form.is_valid():
+            utils.send_profile(request.user, form._survey, form.cleaned_data)
+            utils.save_profile(request.user, form.cleaned_data)
+            return HttpResponseRedirect(reverse('epiweb.apps.survey.profile_views.index'))
+            
+    else:
+        form = sfh.create_form(utils.get_profile(request.user))
+
+    jsh = utils.JavascriptHelper(profile_data.UserProfile(), request.user)
+    js = jsh.get_javascript()
+
+    return render_to_response('profile/index.html', {
         'form': form,
         'js': js
     })
