@@ -36,7 +36,7 @@ def index(request):
         if form.is_valid():
             id = utils.send_survey_response(request.user, form._survey, form.cleaned_data)
             utils.save_survey_response(request.user, form._survey, id)
-            return HttpResponseRedirect(reverse('epiweb.apps.survey.survey_views.thanks'))
+            return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
     else:
         form = sfh.create_form()
 
@@ -61,7 +61,7 @@ def profile_index(request):
         if form.is_valid():
             utils.send_profile(request.user, form._survey, form.cleaned_data)
             utils.save_profile(request.user, form.cleaned_data)
-            return HttpResponseRedirect(reverse('epiweb.apps.survey.profile_views.index'))
+            return HttpResponseRedirect(reverse('epiweb.apps.survey.views.profile_index'))
             
     else:
         form = sfh.create_form(utils.get_profile(request.user))
