@@ -29,8 +29,8 @@ class Unsaved(models.Model):
 class SurveyUser(models.Model):
     user = models.ForeignKey(User, unique=True)
     global_id = models.CharField(max_length=36)
-    last_participation = models.ForeignKey(Participation)
-    last_participation_date = models.DateTimeField()
+    last_participation = models.ForeignKey(Participation, null=True)
+    last_participation_date = models.DateTimeField(null=True)
 
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
