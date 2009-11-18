@@ -82,7 +82,6 @@ INSTALLED_APPS = (
     'registration',
     'epiweb.apps.accounts',
     'epiweb.apps.survey',
-    'epiweb.apps.profile',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

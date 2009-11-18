@@ -77,8 +77,9 @@ def index(request):
     if request.method == 'POST':
         form = sfh.create_form(request.POST)
         if form.is_valid():
-            # _save_survey(request) # TODO
-            return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
+            id = utils.send_survey_response(request.user, form._survey, form.cleaned_data)
+            utils.save_survey_response(request.user, form._survey, id)
+            return HttpResponseRedirect(reverse('epiweb.apps.survey.survey_views.thanks'))
     else:
         form = sfh.create_form()
 

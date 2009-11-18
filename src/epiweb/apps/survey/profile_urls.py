@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    (r'^$', 'epiweb.apps.profile.views.index'),
+    (r'^$', 'epiweb.apps.survey.profile_views.index'),
 )
 

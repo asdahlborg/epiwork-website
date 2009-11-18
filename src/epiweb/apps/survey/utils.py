@@ -6,8 +6,15 @@ from epiweb.apps.survey.data.conditions import *
 from epiweb.apps.survey.data.conditions import Compare
 
 from epiweb.apps.survey import definitions as d
-from epiweb.apps.profile import utils as profile_utils
 from epiweb.apps.survey import models
+
+from django.conf import settings
+from epidb_client import EpiDBClient
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 _ = lambda x: x
 
@@ -133,7 +140,7 @@ class JavascriptHelper:
         lines = []
         lines.append('s.profiles = [];')
 
-        data = profile_utils.get_profile(self.user)
+        data = get_profile(self.user)
         for profile in self.checked_profiles:
             name = profile.name
             value = data.get(name, 'undefined')
@@ -198,7 +205,7 @@ class SurveyFormBase(forms.Form):
 
     def _get_profile(self, name):
         if self._profile is None:
-            self._profile = profile_utils.get_profile(self._user)
+            self._profile = get_profile(self._user)
 
         value = self._profile.get(name, None)
         tvalue = type(value).__name__
@@ -288,4 +295,55 @@ class SurveyFormHelper:
         field.required = False
     
         return field
+
+
+def _create_profile_data(survey, cleaned_data):
+    data = {}
+    for question in survey.questions:
+        id = question.id
+        private = question.private
+        if not private:
+            data[id] = cleaned_data[id]
+    
+    return data
+
+def _create_response_data(user, survey, cleaned_data):
+    return {'test': 'dong'}
+
+def send_survey_response(user, survey, cleaned_data):
+    client = EpiDBClient(settings.EPIDB_API_KEY)
+    client.server = settings.EPIDB_SERVER
+    data = _create_response_data(user, survey, cleaned_data)
+    global_id = get_global_id(user)
+    res = client.response_submit(data)
+    return res
+
+def save_survey_response(user, survey, id):
+    # TODO
+    pass
+
+def send_profile(user, survey, cleaned_data):
+    client = EpiDBClient(settings.EPIDB_API_KEY)
+    client.server = settings.EPIDB_SERVER
+    data = _create_profile_data(survey, cleaned_data)
+    global_id = get_global_id(user)
+    res = client.profile_update(global_id, data)
+    return res
+
+def get_profile(user):
+    try:
+        profile = models.Profile.objects.get(user=user)
+        return json.loads(profile.data)
+    except models.Profile.DoesNotExist:
+        return None
+
+def save_profile(user, data):
+    try:
+        profile = models.Profile.objects.get(user=user)
+    except models.Profile.DoesNotExist:
+        profile = models.Profile()
+        profile.user = user
+
+    profile.data = json.dumps(data)
+    profile.save()
 

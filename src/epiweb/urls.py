@@ -18,6 +18,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
-    (r'^survey/', include('epiweb.apps.survey.urls')),
-    (r'^profile/', include('epiweb.apps.profile.urls')),
+    (r'^survey/', include('epiweb.apps.survey.survey_urls')),
+    (r'^profile/', include('epiweb.apps.survey.profile_urls')),
 )
