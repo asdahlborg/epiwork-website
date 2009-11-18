@@ -373,7 +373,6 @@ def add_survey_participation(user, msurvey, id=None):
     participation = models.Participation()
     participation.user = user
     participation.survey = msurvey
-    print id
     participation.epidb_id = id
     participation.previous_participation = su.last_participation
     participation.previous_participation_date = su.last_participation_date
