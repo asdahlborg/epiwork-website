@@ -355,8 +355,6 @@ def send_survey_response(user, survey, cleaned_data):
 
 def save_survey_response(user, msurvey, id=None):
     su = models.SurveyUser.objects.get(user=user)
-    print su.last_participation
-    print su.last_participation_date
 
     participation = models.Participation()
     participation.user = user
@@ -366,8 +364,6 @@ def save_survey_response(user, msurvey, id=None):
     participation.previous_participation = su.last_participation
     participation.previous_participation_date = su.last_participation_date
     participation.save()
-
-    print participation.date
 
     su.last_participation = participation
     su.last_participation_date = participation.date
