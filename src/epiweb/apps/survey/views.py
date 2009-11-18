@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required
 
 from epiweb.apps.survey import utils
 from epiweb.apps.survey import models
-from epiweb.apps.survey import example
 from epiweb.apps.survey import profile_data
 
 from epidb_client import EpiDBClient
@@ -44,14 +43,16 @@ def thanks(request):
 @login_required
 @profile_required
 def index(request):
+    
+    msurvey = request.session.get('survey_msurvey', None)
+    if msurvey is None:
+        msurvey = utils.get_current_survey()
 
-    global survey_form_helper
-    if survey_form_helper is None:
-        survey = example.Survey()
-        survey_form_helper = utils.SurveyFormHelper(survey)
+    survey = utils.get_survey_object(msurvey)
+    helper = utils.get_survey_form_helper(survey)
 
     if request.method == 'POST':
-        form = survey_form_helper.create_form(request.user, request.POST)
+        form = helper.create_form(request.user, request.POST)
         if form.is_valid():
             id = utils.send_survey_response(request.user, form._survey, form.cleaned_data)
             utils.save_survey_response(request.user, form._survey, id)
@@ -59,9 +60,9 @@ def index(request):
         else:
             request.user.message_set.create(message=_('One or more questions have empty or invalid answer. Please fix it first.'))
     else:
-        form = survey_form_helper.create_form(request.user)
+        form = helper.create_form(request.user)
 
-    jsh = utils.JavascriptHelper(example.Survey(), request.user)
+    jsh = utils.JavascriptHelper(survey, request.user)
     js = jsh.get_javascript()
 
     return render_to_response('survey/index.html', {

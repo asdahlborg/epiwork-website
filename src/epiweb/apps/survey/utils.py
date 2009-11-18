@@ -7,6 +7,7 @@ from epiweb.apps.survey.data.conditions import Compare
 
 from epiweb.apps.survey import definitions as d
 from epiweb.apps.survey import models
+from epiweb.apps.survey import example
 
 from django.conf import settings
 from epidb_client import EpiDBClient
@@ -17,6 +18,33 @@ except ImportError:
     import simplejson as json
 
 _ = lambda x: x
+
+_survey_form_helper = {}
+_survey_object = {}
+
+def get_current_survey():
+    # TODO: rewrite with a proper query
+    return models.Survey.objects.all()[0]
+
+def get_survey_object(msurvey):
+    # TODO: 
+    # - get survey definition
+    #     def = survey.definition
+    # - parse it and create the class
+    global _survey_object
+    survey = _survey_object.get(msurvey.hash, None)
+    if survey is None:
+        survey = example.Survey()
+        _survey_object[msurvey.hash] = survey
+    return survey
+
+def get_survey_form_helper(survey):
+    global _survey_form_helper
+    helper = _survey_form_helper.get(survey, None)
+    if helper is None:
+        helper = SurveyFormHelper(survey)
+        _survey_form_helper[survey] = helper
+    return helper
 
 def get_global_id(user):
     try:
