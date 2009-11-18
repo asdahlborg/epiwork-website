@@ -61,7 +61,6 @@ def index(request):
     else:
         form = survey_form_helper.create_form(request.user)
 
-    #js = utils.generate_js_helper(example.survey
     jsh = utils.JavascriptHelper(example.survey(), request.user)
     js = jsh.get_javascript()
 
