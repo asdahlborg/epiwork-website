@@ -5,44 +5,31 @@ from django.db.models.signals import post_save
 import uuid
 
 class Survey(models.Model):
-    created = models.DateTimeField()
-    survey_id = models.CharField(max_length=200, unique=True)
-    description = models.TextField()
+    survey_id = models.CharField(max_length=50, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=200)
+    description = models.TextField(null=True, blank=True)
     definition = models.TextField()
+    active = models.BooleanField()
 
-class History(models.Model):
+class Participation(models.Model):
     user = models.ForeignKey(User)
-    date = models.DateTimeField(auto_now_add=True)
     survey = models.ForeignKey(Survey)
+    date = models.DateTimeField(auto_now_add=True)
     epidb_id = models.CharField(max_length=36, null=True)
-
-class Info(models.Model):
-    user = models.ForeignKey(User, unique=True)
-    last_survey = models.ForeignKey(History)
-    last_survey_date = models.DateTimeField()
+    previous_participation = models.ForeignKey('self')
+    previous_participation_date = models.DateTimeField()
 
 class Unsaved(models.Model):
-    history = models.ForeignKey(History)
+    participation = models.ForeignKey(Participation)
     date = models.DateTimeField()
     data = models.TextField()
 
-class EpiDBUser(models.Model):
-    user = models.ForeignKey(User, unique=True)
+class SurveyUser(models.Model):
     global_id = models.CharField(max_length=36)
-
-def add_global_id(sender, **kwargs):
-    instance = kwargs.get('instance', None)
-    print repr(instance)
-    try:
-        user = EpiDBUser.objects.get(user=instance)
-    except EpiDBUser.DoesNotExist:
-        user = EpiDBUser()
-        user.user = instance
-        user.global_id = str(uuid.uuid4())
-        print "Global id:", user.global_id
-        user.save()
-        
-post_save.connect(add_global_id, sender=User)
+    last_participation = models.ForeignKey(Participation)
+    last_participation_date = models.DateTimeField()
 
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
@@ -50,3 +37,16 @@ class Profile(models.Model):
     updated = models.DateTimeField(auto_now=True)
     complete = models.BooleanField(default=False)
     data = models.TextField()
+
+def add_global_id(sender, **kwargs):
+    instance = kwargs.get('instance', None)
+    try:
+        user = SurveyUser.objects.get(user=instance)
+    except SurveyUser.DoesNotExist:
+        user = SurveyUser()
+        user.user = instance
+        user.global_id = str(uuid.uuid4())
+        user.save()
+
+post_save.connect(add_global_id, sender=User)
+
