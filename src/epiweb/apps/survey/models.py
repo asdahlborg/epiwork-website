@@ -22,7 +22,7 @@ class Participation(models.Model):
     previous_participation = models.ForeignKey('self', null=True)
     previous_participation_date = models.DateTimeField(null=True)
 
-class Unsaved(models.Model):
+class UnsentResponse(models.Model):
     participation = models.ForeignKey(Participation)
     date = models.DateTimeField()
     data = models.TextField()
