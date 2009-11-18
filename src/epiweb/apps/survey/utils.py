@@ -345,9 +345,27 @@ def send_survey_response(user, survey, cleaned_data):
     res = client.response_submit(data)
     return res
 
-def save_survey_response(user, survey, id):
-    # TODO
-    pass
+def save_survey_response(user, msurvey, id=None):
+    su = models.SurveyUser.objects.get(user=user)
+    print su.last_participation
+    print su.last_participation_date
+
+    participation = models.Participation()
+    participation.user = user
+    participation.survey = msurvey
+    print id
+    participation.epidb_id = id
+    participation.previous_participation = su.last_participation
+    participation.previous_participation_date = su.last_participation_date
+    participation.save()
+
+    print participation.date
+
+    su.last_participation = participation
+    su.last_participation_date = participation.date
+    su.save()
+
+
 
 def send_profile(user, survey, cleaned_data):
     client = EpiDBClient(settings.EPIDB_API_KEY)
