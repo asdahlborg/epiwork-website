@@ -13,6 +13,8 @@ from epiweb.apps.survey import profile_data
 from django.conf import settings
 from epidb_client import EpiDBClient
 
+from datetime import datetime
+
 try:
     import json
 except ImportError:
@@ -343,7 +345,17 @@ def _create_profile_data(survey, cleaned_data):
     return data
 
 def _create_response_data(user, survey, cleaned_data):
-    return {'test': 'dong'}
+    data = {}
+    data['user_id'] = get_global_id(user)
+    data['date'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    data['answers'] = {}
+
+    # TODO: formalize structure, data types
+    for question in survey.questions:
+        if not question.private:
+            data['answers'][question.id] = cleaned_data[question.id]
+
+    return data
 
 def send_survey_response(user, survey, cleaned_data):
     client = EpiDBClient(settings.EPIDB_API_KEY)
