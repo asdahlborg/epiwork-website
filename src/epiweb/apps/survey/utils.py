@@ -336,6 +336,8 @@ class SurveyFormHelper:
 
 def _create_profile_data(survey, cleaned_data):
     data = {}
+
+    # TODO: formalize structure, data types
     for question in survey.questions:
         id = question.id
         private = question.private
