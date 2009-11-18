@@ -47,7 +47,7 @@ def index(request):
 
     global survey_form_helper
     if survey_form_helper is None:
-        survey = example.survey()
+        survey = example.Survey()
         survey_form_helper = utils.SurveyFormHelper(survey)
 
     if request.method == 'POST':
@@ -61,7 +61,7 @@ def index(request):
     else:
         form = survey_form_helper.create_form(request.user)
 
-    jsh = utils.JavascriptHelper(example.survey(), request.user)
+    jsh = utils.JavascriptHelper(example.Survey(), request.user)
     js = jsh.get_javascript()
 
     return render_to_response('survey/index.html', {

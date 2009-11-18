@@ -150,5 +150,3 @@ class Survey(d.Survey):
         ) }
     )
 
-survey = Survey
-
