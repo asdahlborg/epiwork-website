@@ -369,7 +369,16 @@ def add_survey_participation(user, msurvey, id=None):
     su.last_participation_date = participation.date
     su.save()
 
+    return participation
 
+def save_survey_response_locally(participation, survey, cleaned_data):
+    data = _create_response_data(participation.user, survey, cleaned_data)
+
+    unsaved = models.Unsaved()
+    unsaved.participation = participation
+    unsaved.date = participation.date
+    unsaved.data = json.dumps(data)
+    unsaved.save()
 
 def send_profile(user, survey, cleaned_data):
     client = EpiDBClient(settings.EPIDB_API_KEY)
