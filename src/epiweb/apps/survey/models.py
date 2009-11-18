@@ -36,6 +36,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    valid = models.BooleanField(default=True)
     data = models.TextField()
 
 def add_global_id(sender, **kwargs):
