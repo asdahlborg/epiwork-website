@@ -48,10 +48,10 @@ def index(request):
     global survey_form_helper
     if survey_form_helper is None:
         survey = example.survey()
-        survey_form_helper = utils.SurveyFormHelper(survey, request.user)
+        survey_form_helper = utils.SurveyFormHelper(survey)
 
     if request.method == 'POST':
-        form = survey_form_helper.create_form(request.POST)
+        form = survey_form_helper.create_form(request.user, request.POST)
         if form.is_valid():
             id = utils.send_survey_response(request.user, form._survey, form.cleaned_data)
             utils.save_survey_response(request.user, form._survey, id)
@@ -59,7 +59,7 @@ def index(request):
         else:
             request.user.message_set.create(message=_('One or more questions have empty or invalid answer. Please fix it first.'))
     else:
-        form = survey_form_helper.create_form()
+        form = survey_form_helper.create_form(request.user)
 
     #js = utils.generate_js_helper(example.survey
     jsh = utils.JavascriptHelper(example.survey(), request.user)
@@ -75,10 +75,10 @@ def profile_index(request):
     global profile_form_helper
     if profile_form_helper is None:
         survey = profile_data.UserProfile()
-        profile_form_helper = utils.SurveyFormHelper(survey, request.user)
+        profile_form_helper = utils.SurveyFormHelper(survey)
 
     if request.method == 'POST':
-        form = profile_form_helper.create_form(request.POST)
+        form = profile_form_helper.create_form(request.user, request.POST)
         if form.is_valid():
             utils.send_profile(request.user, form._survey, form.cleaned_data)
             utils.save_profile(request.user, form.cleaned_data)
@@ -87,7 +87,7 @@ def profile_index(request):
             request.user.message_set.create(message=_('One or more questions have empty or invalid answer. Please fix it first.'))
             
     else:
-        form = profile_form_helper.create_form(utils.get_profile(request.user))
+        form = profile_form_helper.create_form(request.user, utils.get_profile(request.user))
 
     jsh = utils.JavascriptHelper(profile_data.UserProfile(), request.user)
     js = jsh.get_javascript()

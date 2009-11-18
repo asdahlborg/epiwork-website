@@ -252,19 +252,18 @@ class SurveyFormBase(forms.Form):
         raise RuntimeError()
 
 class SurveyFormHelper:
-    def __init__(self, survey, user):
+    def __init__(self, survey):
         self.survey = survey
-        self.user = user
         self.form_class = None
 
-    def create_form(self, data=None):
+    def create_form(self, user, data=None):
         if self.form_class is None:
             self._generate_form()
 
         if data is None:
-            return self.form_class(survey=self.survey, user=self.user)
+            return self.form_class(survey=self.survey, user=user)
         else:
-            return self.form_class(data, survey=self.survey, user=self.user)
+            return self.form_class(data, survey=self.survey, user=user)
 
     def _generate_form(self):
         fields = {}
