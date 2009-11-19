@@ -310,6 +310,7 @@ class SurveyFormHelper:
         self.form_class = type('SurveyForm', (SurveyFormBase, object), fields)
 
     def _create_field(self, question):
+        # TODO: add more data type
         if question.type == 'yes-no':
             field = forms.ChoiceField(widget=forms.RadioSelect,
                                       choices=[('yes', _('Yes')), ('no', _('No'))])
