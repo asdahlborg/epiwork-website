@@ -348,6 +348,9 @@ def _create_profile_data(survey, cleaned_data):
     return data
 
 def _format_data(type, data):
+    if data is None:
+        return data
+
     # TODO: complete this: text, options-single, options-multiple
     if type == 'date':
         data = data.strftime("%Y-%m-%d")
