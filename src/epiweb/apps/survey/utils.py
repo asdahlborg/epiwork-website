@@ -342,8 +342,14 @@ def _create_profile_data(survey, cleaned_data):
         id = question.id
         private = question.private
         if not private:
-            data[id] = cleaned_data[id]
+            data[id] = _format_data(question.type, cleaned_data[id])
     
+    return data
+
+def _format_data(type, data):
+    # TODO: complete this: text, options-single, options-multiple
+    if type == 'date':
+        data = data.strftime("%Y-%m-%d")
     return data
 
 def _create_response_data(user, survey, cleaned_data):
@@ -355,7 +361,7 @@ def _create_response_data(user, survey, cleaned_data):
     # TODO: formalize structure, data types
     for question in survey.questions:
         if not question.private:
-            data['answers'][question.id] = cleaned_data[question.id]
+            data['answers'][question.id] = _format_data(question.type, cleaned_data[question.id])
 
     return data
 
