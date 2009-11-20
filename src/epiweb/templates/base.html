@@ -1,3 +1,4 @@
+{% load cms_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 
@@ -22,16 +23,23 @@ Description: A wide two-column design suitable for blogs and small websites.
 <!-- start header -->
 <div id="header">
 	<div id="logo">
-		<h1><a href="#">{% block page_title %}EPIWork Survey{% endblock %}</a></h1>
+		<h1><a href="/">{% block page_title %}EPIWork Survey{% endblock %}</a></h1>
 	</div>
-	<div id="menu">
+    <div id="menubar">
+        <div id="submenu">
+{% if user.is_authenticated %}
+Welcome <strong>{{ user }}</strong>,
+<a href="/accounts/logout/">Logout</a>
+{% else %}
+<a href="/accounts/login/">Login</a> / 
+<a href="/accounts/register/">Register</a>
+{% endif %}
+        </div>
+	    <div id="menu">
 		<ul>
-			<li class="current_page_item"><a href="#">homepage</a></li>
-			<li><a href="#">photo gallery</a></li>
-			<li><a href="#">about us</a></li>
-			<li><a href="#">links</a></li>
-			<li><a href="#">contact</a></li>
+{% show_menu 0 0 %}
 		</ul>
+        </div>
 	</div>
 </div>
 <!-- end header -->
