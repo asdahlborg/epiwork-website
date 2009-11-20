@@ -1,0 +1,31 @@
+{% extends "cms/base.html" %}
+{% load cms_tags %}
+
+{% block page %}
+	<!-- start content -->
+
+	<div id="content">
+        <div id="latest-post">
+        {% block content %}
+            {% if messages %}
+            <div id="messages">
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            </div>
+            {% endif %}
+
+            {% placeholder "content" %}
+        {% endblock %}
+        </div>
+        <div id="recent-posts">
+        {% block sidebar %}
+            {% placeholder "sidebar" %}
+        {% endblock %}
+        </div>
+	</div>
+    <br style="clear:both"/>
+{% endblock %}
+
