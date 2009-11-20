@@ -25,7 +25,7 @@ TIME_ZONE = 'Europe/Amsterdam'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 SITE_ID = 1
 
@@ -41,7 +41,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'media')
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/+media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -62,7 +62,30 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    # 'cms.middleware.multilingual.MultilingualURLMiddleware',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.request",
+    "django.core.context_processors.media",
+    "cms.context_processors.media",
+)
+
+CMS_TEMPLATES = (
+    ('cms/base_1col.html', "1 Column"),
+    ('cms/base_2col.html', "2 Columns"),
+)
+
+LANGUAGES = (
+    ('en', 'English'),
+    #('nl', 'Dutch'),
+)
+
 
 ROOT_URLCONF = 'epiweb.urls'
 
@@ -82,6 +105,15 @@ INSTALLED_APPS = (
     'registration',
     'epiweb.apps.accounts',
     'epiweb.apps.survey',
+    'cms',
+    'cms.plugins.text',
+    'cms.plugins.picture',
+    'cms.plugins.link',
+    'cms.plugins.file',
+    'cms.plugins.snippet',
+    'cms.plugins.googlemap',
+    'mptt',
+    'publisher',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
