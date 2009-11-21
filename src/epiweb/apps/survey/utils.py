@@ -16,9 +16,9 @@ from epidb_client import EpiDBClient
 from datetime import datetime
 
 try:
-    import json
-except ImportError:
     import simplejson as json
+except ImportError:
+    import json
 
 _ = lambda x: x
 
