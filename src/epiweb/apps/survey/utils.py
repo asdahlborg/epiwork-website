@@ -26,6 +26,9 @@ _survey_form_helper = {}
 _survey_object = {}
 _profile_object = None
 
+class UsingInvalidDataError(Exception):
+    pass
+
 def get_current_survey():
     # TODO: rewrite with a proper query
     return models.Survey.objects.all()[0]
@@ -200,18 +203,25 @@ class SurveyFormBase(forms.Form):
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        valid_ids = cleaned_data.keys()
 
         for question in self._survey.questions:
-            if question.id not in valid_ids:
-                continue
-            visible = self._evaluate_condition(question)
-            value = self._get_value(question)
-            if visible and len(value) == 0 and not question.blank:
-                msg = _(u'Please answer this question.')
+            try:
+                visible = self._evaluate_condition(question)
+                if not visible:
+                    cleaned_data[question.id] = None
+                    if question.id in self._errors.keys():
+                        del self._errors[question.id]
+                elif question.id in cleaned_data.keys():
+                    value = self._get_value(question)
+                    if len(value) == 0 and not question.blank:
+                        msg = _(u'Please answer this question.')
+                        self._errors[question.id] = ErrorList([msg])
+                        del cleaned_data[question.id]
+            except UsingInvalidDataError:
+                msg = _(u'Please correct the previous answers.')
                 self._errors[question.id] = ErrorList([msg])
                 del cleaned_data[question.id]
-
+                
         return cleaned_data
 
     def _evaluate_condition(self, question):
@@ -258,6 +268,8 @@ class SurveyFormBase(forms.Form):
             return self._evaluate(value)
         elif t == 'instance':
             if isinstance(value, d.Question):
+                if value.id not in self.cleaned_data.keys():
+                    raise UsingInvalidDataError()
                 res = self.cleaned_data.get(value.id, None)
                 if res == None:
                     res = []
