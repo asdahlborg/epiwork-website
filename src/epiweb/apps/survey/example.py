@@ -127,6 +127,7 @@ class RepQ12(d.Question):
     )
 
 class Survey(d.Survey):
+    id = '#example.01'
     rules = (
         RepQ01,
         { (RepQ01, 'is-not', d.Empty) : (

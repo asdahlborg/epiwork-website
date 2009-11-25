@@ -375,6 +375,7 @@ def _create_response_data(user, survey, cleaned_data):
     data = {}
     data['user_id'] = get_global_id(user)
     data['date'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    data['survey_id'] = survey.id
     data['answers'] = {}
 
     # TODO: formalize structure, data types
