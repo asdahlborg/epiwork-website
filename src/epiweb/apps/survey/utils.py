@@ -206,13 +206,13 @@ class SurveyFormBase(forms.Form):
 
         for question in self._survey.questions:
             try:
-                visible = self._evaluate_condition(question)
+                visible = self._evaluate_question_condition(question)
                 if not visible:
                     cleaned_data[question.id] = None
                     if question.id in self._errors.keys():
                         del self._errors[question.id]
                 elif question.id in cleaned_data.keys():
-                    value = self._get_value(question)
+                    value = self._get_question_value(question)
                     if len(value) == 0 and not question.blank:
                         msg = _(u'Please answer this question.')
                         self._errors[question.id] = ErrorList([msg])
@@ -224,7 +224,7 @@ class SurveyFormBase(forms.Form):
                 
         return cleaned_data
 
-    def _evaluate_condition(self, question):
+    def _evaluate_question_condition(self, question):
         for cond in self._survey.conditions[question]:
             if not self._evaluate(cond):
                 return False
@@ -262,29 +262,32 @@ class SurveyFormBase(forms.Form):
         else:
             return [value]
 
+    def _get_question_value(self, question):
+        if question.id not in self.cleaned_data.keys():
+            raise UsingInvalidDataError()
+        res = self.cleaned_data.get(question.id, None)
+        if res == None:
+            res = []
+        elif question.type in ['options-single']:
+            res = res.strip()
+            if res == '':
+                res = []
+            else:
+                res = [int(res)]
+        elif question.type in ['options-multiple']:
+            res = map(lambda x: int(x), res)
+        else:
+            res = [res]
+
+        return res
+
     def _get_value(self, value):
         t = type(value).__name__    
         if t == 'tuple':
             return self._evaluate(value)
         elif t == 'instance':
             if isinstance(value, d.Question):
-                if value.id not in self.cleaned_data.keys():
-                    raise UsingInvalidDataError()
-                res = self.cleaned_data.get(value.id, None)
-                if res == None:
-                    res = []
-                elif value.type in ['options-single']:
-                    res = res.strip()
-                    if res == '':
-                        res = []
-                    else:
-                        res = [int(res)]
-                elif value.type in ['options-multiple']:
-                    res = map(lambda x: int(x), res)
-                else:
-                    res = [res]
-
-                return res
+                return self._get_question_value(value)
             elif isinstance(value, d.Items):
                 return value.values
             elif isinstance(value, d.Profile):
