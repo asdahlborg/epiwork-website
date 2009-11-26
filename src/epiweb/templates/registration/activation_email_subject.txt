@@ -1,1 +1,1 @@
-Key: {{ activation_key }}, Exp days: {{ expiration_days }}, Site: {{ site }}
+Activate your account! {{ site }}

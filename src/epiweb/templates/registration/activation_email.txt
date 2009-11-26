@@ -1,7 +1,9 @@
 
 Activate your account:
 
-Key: {{ activation_key }}
-Expiration days: {{ expiration_days }}
-Site: {{ site }}
+Click the following URL or copy and paste it to the browser's address bar.
+
+http://{{ site }}/accounts/activate/{{ activation_key }}/
+
+This activation URL will expire in {{ expiration_days }} days.
 
