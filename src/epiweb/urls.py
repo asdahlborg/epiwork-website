@@ -5,12 +5,6 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-from epiweb.apps.news.feeds import NewsEntryFeed
-
-feeds = {
-    'news': NewsEntryFeed,
-}
-
 urlpatterns = patterns('',
     # (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'homepage.html'}),
     (r'^\+media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
@@ -25,6 +19,5 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
     (r'^survey/', include('epiweb.apps.survey.urls')),
-    (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     url(r'^', include('cms.urls')),
 )
