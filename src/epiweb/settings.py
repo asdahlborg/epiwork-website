@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'cmsplugin_news',
     'mptt',
     'publisher',
+    'epiweb.apps.news',
 )
 
 CMS_APPLICATIONS_URLS = (
