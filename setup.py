@@ -4,7 +4,7 @@ setup(
     name = "epiwork-website",
     version = "1.0",
     url = 'http://www.epiwork.eu/',
-    license = 'BSD',
+    license = 'AGPL',
     description = 'EPIWork Database - Survey Website',
     author = 'Fajran Iman Rusadi',
     packages = find_packages('src'),
