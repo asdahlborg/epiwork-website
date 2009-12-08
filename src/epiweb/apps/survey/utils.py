@@ -1,10 +1,6 @@
 from django import forms
 from django.forms.util import ErrorList
 
-from epiweb.apps.survey.data import Survey, Section, Question
-from epiweb.apps.survey.data.conditions import *
-from epiweb.apps.survey.data.conditions import Compare
-
 from epiweb.apps.survey import definitions as d
 from epiweb.apps.survey import models
 from epiweb.apps.survey import example
