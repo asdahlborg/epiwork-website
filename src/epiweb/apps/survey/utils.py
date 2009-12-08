@@ -63,7 +63,8 @@ def get_global_id(user):
         return None
 
 class JavascriptHelper:
-    def __init__(self, survey, user, container_id='survey', question_id_prefix="q_"):
+    def __init__(self, survey, user, container_id='survey', 
+                 question_id_prefix="q_"):
         self.survey = survey
         self.user = user
         self.container = container_id
@@ -90,7 +91,8 @@ class JavascriptHelper:
         self.js = "\n".join(lines)
 
     def _create_question_list(self):
-        return ["s.qids = [%s];" % ", ".join(map(lambda x: "'%s'" % x.id, self.survey.questions))]
+        return ["s.qids = [%s];" % ", ".join(map(lambda x: "'%s'" % x.id, 
+                                                 self.survey.questions))]
 
     def _create_allow_blank_condition(self):
         lines = []
@@ -105,8 +107,9 @@ class JavascriptHelper:
         lines.append("s.affected = {};")
         for question in self.survey.questions:
             if len(self.survey.affected[question]) > 0:
-                lines.append("s.affected['%s'] = new Array(%s);" % (question.id,
-                    ', '.join(map(lambda x: "'%s'" % x.id, self.survey.affected[question]))))
+                lines.append("s.affected['%s'] = new Array(%s);" % \
+                    (question.id, ', '.join(map(lambda x: "'%s'" % x.id, 
+                                            self.survey.affected[question]))))
         return lines
         
     def _create_rules(self):
@@ -117,7 +120,8 @@ class JavascriptHelper:
             rule = self._create_rule(self.survey.conditions[question])
             if rule == '':
                 rule = 'true'
-            lines.append("s.rule['%s'] = function() { return %s; };" % (question.id, rule))
+            lines.append("s.rule['%s'] = function() { return %s; };" % \
+                         (question.id, rule))
 
         return lines
 
@@ -324,18 +328,29 @@ class SurveyFormHelper:
         # TODO: add more data type
         if question.type == 'yes-no':
             field = forms.ChoiceField(widget=forms.RadioSelect,
-                                      choices=[('yes', _('Yes')), ('no', _('No'))])
+                                      choices=[('yes', _('Yes')), 
+                                               ('no', _('No'))])
     
         elif question.type == 'options-multiple':
-            field = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                              choices=zip(range(0, len(question.options)), question.options))
+            field = forms.MultipleChoiceField(
+                        widget=forms.CheckboxSelectMultiple,
+                        choices=zip(range(0, len(question.options)), 
+                                    question.options))
     
         elif question.type == 'options-single':
             field = forms.ChoiceField(widget=forms.RadioSelect,
-                                      choices=zip(range(0, len(question.options)), question.options))
+                                      choices=zip(range(0, 
+                                                        len(question.options)),
+                                                  question.options))
     
         elif question.type == 'date':
-            field = forms.DateField(input_formats=['%Y-%m-%d', '%d/%m/%Y', '%d/%m/%y', '%d-%m-%y', '%d-%m-%Y', '%b %d %Y', '%b %d, %Y', '%d %b %Y', '%d %b, %Y', '%B %d %Y', '%B %d, %Y', '%d %B %Y', '%d %B, %Y'])
+            field = forms.DateField(input_formats=['%Y-%m-%d', '%d/%m/%Y', 
+                                                   '%d/%m/%y', '%d-%m-%y', 
+                                                   '%d-%m-%Y', '%b %d %Y',
+                                                   '%b %d, %Y', '%d %b %Y',
+                                                   '%d %b, %Y', '%B %d %Y',
+                                                   '%B %d, %Y', '%d %B %Y',
+                                                   '%d %B, %Y'])
     
         else:
             field = forms.CharField()
@@ -377,7 +392,8 @@ def _create_response_data(user, survey, cleaned_data):
     # TODO: formalize structure, data types
     for question in survey.questions:
         if not question.private:
-            data['answers'][question.id] = _format_data(question.type, cleaned_data[question.id])
+            data['answers'][question.id] = _format_data(question.type, 
+                                                    cleaned_data[question.id])
 
     return data
 

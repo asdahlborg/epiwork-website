@@ -7,7 +7,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'homepage.html'}),
-    (r'^\+media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    (r'^\+media/(?P<path>.*)$', 'django.views.static.serve', 
+        {'document_root': settings.MEDIA_ROOT}),
     # Example:
     # (r'^epiweb/', include('epiweb.foo.urls')),
 

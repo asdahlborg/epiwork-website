@@ -27,7 +27,8 @@ def profile_required(func):
     def _func(request, *args, **kwargs):
         profile = utils.get_profile(request.user)
         if profile is None:
-            request.user.message_set.create(message=_('You have to fill your profile data first.'))
+            request.user.message_set.create(
+                message=_('You have to fill your profile data first.'))
             return redirect(request)
         else:
             return func(request, *args, **kwargs)
@@ -53,14 +54,20 @@ def index(request):
     if request.method == 'POST':
         form = helper.create_form(request.user, request.POST)
         if form.is_valid():
-            res = utils.send_survey_response(request.user, form._survey, form.cleaned_data)
+            res = utils.send_survey_response(request.user, form._survey, 
+                                             form.cleaned_data)
             id = res.get('id', None)
-            participation = utils.add_survey_participation(request.user, msurvey, id)
+            participation = utils.add_survey_participation(request.user, 
+                                                           msurvey, id)
             if id is None:
-                utils.save_survey_response_locally(participation, survey, form.cleaned_data)
-            return HttpResponseRedirect(reverse('epiweb.apps.survey.views.thanks'))
+                utils.save_survey_response_locally(participation, survey, 
+                                                   form.cleaned_data)
+            return HttpResponseRedirect(reverse(
+                                          'epiweb.apps.survey.views.thanks'))
         else:
-            request.user.message_set.create(message=_('One or more questions have empty or invalid answer. Please fix it first.'))
+            request.user.message_set.create(
+                message=_('One or more questions have empty or invalid ' \
+                          'answer. Please fix it first.'))
     else:
         form = helper.create_form(request.user)
 
@@ -82,12 +89,16 @@ def profile_index(request):
         if form.is_valid():
             utils.send_profile(request.user, form._survey, form.cleaned_data)
             utils.save_profile(request.user, form.cleaned_data)
-            return HttpResponseRedirect(reverse('epiweb.apps.survey.views.profile_index'))
+            return HttpResponseRedirect(reverse(
+                                    'epiweb.apps.survey.views.profile_index'))
         else:
-            request.user.message_set.create(message=_('One or more questions have empty or invalid answer. Please fix it first.'))
+            request.user.message_set.create(
+                message=_('One or more questions have empty or invalid ' \
+                          'answer. Please fix it first.'))
             
     else:
-        form = helper.create_form(request.user, utils.get_profile(request.user))
+        form = helper.create_form(request.user, 
+                                  utils.get_profile(request.user))
 
     jsh = utils.JavascriptHelper(profile, request.user)
     js = jsh.get_javascript()
