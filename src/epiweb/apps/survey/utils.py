@@ -361,7 +361,7 @@ class SurveyFormHelper:
         return field
 
 
-def _create_profile_data(survey, cleaned_data):
+def _create_profile_answers(survey, cleaned_data):
     data = {}
 
     # TODO: formalize structure, data types
@@ -382,27 +382,26 @@ def _format_data(type, data):
         data = data.strftime("%Y-%m-%d")
     return data
 
-def _create_response_data(user, survey, cleaned_data):
+def _create_answers(survey, cleaned_data):
     data = {}
-    data['user_id'] = get_global_id(user)
-    data['date'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-    data['survey_id'] = survey.id
-    data['answers'] = {}
 
     # TODO: formalize structure, data types
     for question in survey.questions:
         if not question.private:
-            data['answers'][question.id] = _format_data(question.type, 
-                                                    cleaned_data[question.id])
+            data[question.id] = _format_data(question.type, 
+                                             cleaned_data[question.id])
 
     return data
 
 def send_survey_response(user, survey, cleaned_data):
+    user_id = get_global_id(user)
+    survey_id = survey.id
+    answers = _create_answers(survey, cleaned_data)
+
     client = EpiDBClient(settings.EPIDB_API_KEY)
     client.server = settings.EPIDB_SERVER
-    data = _create_response_data(user, survey, cleaned_data)
-    global_id = get_global_id(user)
-    res = client.response_submit(data)
+    res = client.response_submit(user_id, survey_id, answers)
+
     return res
 
 def add_survey_participation(user, msurvey, id=None):
@@ -432,11 +431,14 @@ def save_survey_response_locally(participation, survey, cleaned_data):
     ur.save()
 
 def send_profile(user, survey, cleaned_data):
+    user_id = get_global_id(user)
+    answers = _create_profile_answers(survey, cleaned_data)
+    profile_survey_id = survey.id
+
     client = EpiDBClient(settings.EPIDB_API_KEY)
     client.server = settings.EPIDB_SERVER
-    data = _create_profile_data(survey, cleaned_data)
-    global_id = get_global_id(user)
-    res = client.profile_update(global_id, data)
+    res = client.profile_update(user_id, profile_survey_id, answers)
+
     return res
 
 def get_profile(user):
