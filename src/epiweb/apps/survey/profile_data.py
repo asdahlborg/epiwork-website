@@ -128,6 +128,7 @@ class RegQ14(d.Question):
     )
 
 class UserProfile(d.Survey):
+    id = 'dev-epiweb-profile-0.0'
     rules = (
         RegQ1,
         RegQ2,
