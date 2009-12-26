@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'registration',
     'epiweb.apps.accounts',
     'epiweb.apps.survey',
+    'epiweb.apps.reminder',
     'cms',
     'cms.plugins.text',
     'cms.plugins.picture',
@@ -133,4 +134,6 @@ EPIDB_SERVER = 'http://127.0.0.1:8080/'
 
 CMSPLUGIN_NEWS_RSS_TITLE = "News"
 CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
+
+REMINDER_FROM = 'reminder-no-reply@epiwork.example'
 
