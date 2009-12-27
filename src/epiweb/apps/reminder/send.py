@@ -8,10 +8,6 @@ from django.template import Context, loader
 
 from epiweb.apps.reminder.models import Reminder
 
-# def send_mail(subject, message, from_addr, to_addr):
-#     # FIXME
-#     print "send_mail: to=%s" % to_addr
-
 def create_subject(first_name, last_name=None):
     t = loader.get_template('reminder/subject.txt')
     c = Context({'first_name': first_name,
@@ -58,7 +54,6 @@ def send_reminder():
         send_to(item)
 
 def send_to(item):
-    print 'Send reminder to:', item.user.id
     url = 'http://example.com/survey/'
     now = datetime.datetime.now()
 
@@ -69,12 +64,6 @@ def send_to(item):
         subject = create_subject(*name)
         message = create_message(url, email, *name)
         next = determine_next(now, item.wday)
-
-        print 'Email:', email
-        print 'Subject:', subject
-        print 'Next reminder', next
-        print 'Message:'
-        print message
 
         send_mail(subject, message, settings.REMINDER_FROM, (email,))
 
