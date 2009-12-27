@@ -35,6 +35,11 @@ def create_message(url, email, first_name, last_name=None):
 def determine_next(now, wday):
     year, week = map(lambda x: int(x), 
                      now.strftime('%Y %W').split())
+
+    # Input's wday uses 0 = Monday (comes from weekday())
+    # but strptime's uses 0 = Sunday
+    # so, shifting is needed
+    wday = (wday + 1) % 7
     next = datetime.datetime.strptime('%d %d %d' % (year, week+1, wday),
                                       '%Y %W %w')
     return next
