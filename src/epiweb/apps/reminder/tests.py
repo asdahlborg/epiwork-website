@@ -186,4 +186,64 @@ class InactiveReminderTestCase(Base):
 
         self.assertFalse(mock.called)
 
+class NextReminderTestCase(unittest.TestCase):
+    def _test(self, next, year, month, day):
+        self.assertEqual(next.year, year)
+        self.assertEqual(next.month, month)
+        self.assertEqual(next.day, day)
+        
+    def testSunday(self):
+        now = datetime(2009, 11, 1, 0, 0, 0)
+        next = send.determine_next(now, 6)
+        self._test(next, 2009, 11, 8)
+
+    def testMonday(self):
+        now = datetime(2009, 11, 2, 0, 0, 0)
+        next = send.determine_next(now, 0)
+        self._test(next, 2009, 11, 9)
+
+    def testTuesday(self):
+        now = datetime(2009, 11, 3, 0, 0, 0)
+        next = send.determine_next(now, 1)
+        self._test(next, 2009, 11, 10)
+
+    def testWednesday(self):
+        now = datetime(2009, 11, 4, 0, 0, 0)
+        next = send.determine_next(now, 2)
+        self._test(next, 2009, 11, 11)
+
+    def testThursday(self):
+        now = datetime(2009, 11, 5, 0, 0, 0)
+        next = send.determine_next(now, 3)
+        self._test(next, 2009, 11, 12)
+
+    def testFriday(self):
+        now = datetime(2009, 11, 6, 0, 0, 0)
+        next = send.determine_next(now, 4)
+        self._test(next, 2009, 11, 13)
+
+    def testSaturday(self):
+        now = datetime(2009, 11, 7, 0, 0, 0)
+        next = send.determine_next(now, 5)
+        self._test(next, 2009, 11, 14)
+
+    def testNextMonth(self):
+        now = datetime(2009, 11, 30, 0, 0, 0)
+        next = send.determine_next(now, 0)
+        self._test(next, 2009, 12, 7)
+
+    def testNextYear(self):
+        now = datetime(2009, 12, 30, 0, 0, 0)
+        next = send.determine_next(now, 2)
+        self._test(next, 2010, 1, 6)
+
+    def testNextWeekLeap(self):
+        now = datetime(2008, 2, 22, 0, 0, 0)
+        next = send.determine_next(now, 4)
+        self._test(next, 2008, 2, 29)
+
+    def testNextWeekNotLeap(self):
+        now = datetime(2010, 2, 22, 0, 0, 0)
+        next = send.determine_next(now, 0)
+        self._test(next, 2010, 3, 1)
 
