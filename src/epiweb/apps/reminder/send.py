@@ -50,8 +50,16 @@ def send_reminder():
 
     url = None
 
+    fail = []
+    succeed = []
     for item in items:
-        send_to(item)
+        res = send_to(item)
+        if res:
+            succeed.append(item)
+        else:
+            fail.append(item)
+
+    return len(succeed), len(fail)
 
 def send_to(item):
     url = 'http://example.com/survey/'
