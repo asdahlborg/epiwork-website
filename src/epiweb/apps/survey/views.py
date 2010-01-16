@@ -88,7 +88,8 @@ def profile_index(request):
         form = helper.create_form(request.user, request.POST)
         if form.is_valid():
             utils.send_profile(request.user, form._survey, form.cleaned_data)
-            utils.save_profile(request.user, form.cleaned_data)
+            data = utils.format_profile_data(profile, form.cleaned_data)
+            utils.save_profile(request.user, data)
             return HttpResponseRedirect(reverse(
                                     'epiweb.apps.survey.views.profile_index'))
         else:

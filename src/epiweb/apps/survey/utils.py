@@ -457,6 +457,24 @@ def get_profile(user):
     except models.Profile.DoesNotExist:
         return None
 
+def format_profile_data(profile, data):
+    res = {}
+    for question in profile.questions:
+        value = data.get(question.id, None)
+        if value is not None:
+            if question.type in ['options-single']:
+                value = value.strip()
+                if value == '':
+                    value = None
+                else:
+                    value = int(value)
+            elif question.type in ['options-multiple']:
+                value = map(lambda x: int(x), value)
+
+        res[question.id] = value
+
+    return res
+
 def save_profile(user, data):
     try:
         profile = models.Profile.objects.get(user=user)
