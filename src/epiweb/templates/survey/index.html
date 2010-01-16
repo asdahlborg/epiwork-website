@@ -24,8 +24,11 @@
     {% endif %}
         <div class="label">{{ field.label_tag }}</div>
         <div class="answer">
-        {{ field }}
+        {{ field }} 
         </div>
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text }}</p>
+        {% endif %}
     </div>
     {% endfor %}
     <div><input type="submit" value="Submit"/></div>
