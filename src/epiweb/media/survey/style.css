@@ -13,10 +13,12 @@
     margin-bottom: 10px;
 }
 #survey .label {
-
 }
-#survey .answer {
-
+#survey .answer > * {
+    margin: 10px 0;
+}
+#survey .help {
+    margin-bottom: 0px;
 }
 #survey .skip {
     font-size: 12px;
