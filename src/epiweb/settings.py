@@ -137,3 +137,9 @@ CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
 
 REMINDER_FROM = 'reminder-no-reply@epiwork.example'
 
+import socket
+_hostname = socket.gethostname()
+if _hostname in ['rawon.local']:
+    EPIDB_SERVER = 'http://192.168.100.100:8080/'
+    EMAIL_PORT = 2525
+
