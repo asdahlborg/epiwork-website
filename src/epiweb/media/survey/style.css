@@ -45,3 +45,13 @@
 #survey ul.errorlist {
     margin-top: 0px;
 }
+
+#survey .answer input.sDateField {
+    text-align: center;
+    width: 80px;
+}
+#survey .answer .datepickerbutton {
+    vertical-align: middle;
+    padding-left: 5px;
+    cursor: pointer;
+}

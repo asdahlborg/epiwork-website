@@ -253,3 +253,16 @@ this.Survey = Survey;
 
 })();
 
+$(document).ready(function() {
+    $.datepicker.setDefaults({dateFormat: 'dd/mm/yy'});
+    $('.sDateField').datepicker();
+    $('.sDateField').each(function() {
+        var dp = this;
+        var button = '<img class="datepickerbutton" src="/+media/img/calendar.png"/>';
+        $(this).after(button);
+        $(this).next().click(function() {
+            $(dp).datepicker('show');
+        });
+    });
+});
+
