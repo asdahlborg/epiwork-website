@@ -1,10 +1,12 @@
 from django import forms
 from django.forms.util import ErrorList
+from django.contrib.admin import widgets
 
 from epiweb.apps.survey import definitions as d
 from epiweb.apps.survey import models
 from epiweb.apps.survey import example
 from epiweb.apps.survey import profile_data
+from epiweb.apps.survey import widgets
 
 from django.conf import settings
 from epidb_client import EpiDBClient
@@ -344,7 +346,9 @@ class SurveyFormHelper:
                                                   question.options))
     
         elif question.type == 'date':
-            field = forms.DateField(input_formats=['%Y-%m-%d', '%d/%m/%Y', 
+            field = forms.DateField(widget=widgets.DatePickerWidget,
+                                    help_text="Date format: day/month/year",
+                                    input_formats=['%Y-%m-%d', '%d/%m/%Y', 
                                                    '%d/%m/%y', '%d-%m-%y', 
                                                    '%d-%m-%Y', '%b %d %Y',
                                                    '%b %d, %Y', '%d %b %Y',
