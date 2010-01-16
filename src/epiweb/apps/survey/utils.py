@@ -210,15 +210,20 @@ class SurveyFormBase(forms.Form):
             try:
                 visible = self._evaluate_question_condition(question)
                 if not visible:
+                    # Question is disabled, then delete the answer
                     cleaned_data[question.id] = None
                     if question.id in self._errors.keys():
                         del self._errors[question.id]
                 elif question.id in cleaned_data.keys():
+                    # Answer is present
                     value = self._get_question_value(question)
                     if len(value) == 0 and not question.blank:
+                        # Answer is blank but the question need
+                        # to be answered
                         msg = _(u'Please answer this question.')
                         self._errors[question.id] = ErrorList([msg])
                         del cleaned_data[question.id]
+                        
             except UsingInvalidDataError:
                 msg = _(u'Please correct the previous answers.')
                 self._errors[question.id] = ErrorList([msg])
