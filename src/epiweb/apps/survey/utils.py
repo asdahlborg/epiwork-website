@@ -5,7 +5,6 @@ from django.contrib.admin import widgets
 from epiweb.apps.survey import definitions as d
 from epiweb.apps.survey import models
 from epiweb.apps.survey import example
-from epiweb.apps.survey import profile_data
 from epiweb.apps.survey import widgets
 
 from django.conf import settings
@@ -39,14 +38,14 @@ def get_survey_object(msurvey):
     global _survey_object
     survey = _survey_object.get(msurvey.hash, None)
     if survey is None:
-        survey = example.Survey()
+        survey = example.survey.Survey()
         _survey_object[msurvey.hash] = survey
     return survey
 
 def get_profile_object():
     global _profile_object
     if _profile_object is None:
-        _profile_object = profile_data.UserProfile()
+        _profile_object = example.profile.UserProfile()
     return _profile_object
 
 def get_survey_form_helper(survey):
