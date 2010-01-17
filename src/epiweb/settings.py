@@ -108,6 +108,7 @@ INSTALLED_APPS = (
     'epiweb.apps.accounts',
     'epiweb.apps.survey',
     'epiweb.apps.reminder',
+    'epiweb.apps.banner',
     'cms',
     'cms.plugins.text',
     'cms.plugins.picture',
