@@ -10,3 +10,4 @@ parts
 src/*.egg-info
 epiweb.db
 *.swp
+src/epiweb/media/banner/
