@@ -22,7 +22,9 @@ profile_form_helper = None
 
 def profile_required(func):
     def redirect(request, *args, **kwargs):
-        url = reverse('epiweb.apps.survey.views.profile_index')
+        url_profile = reverse('epiweb.apps.survey.views.profile_index')
+        url_survey = reverse('epiweb.apps.survey.views.index')
+        url = '%s?next=%s' % (url_profile, url_survey)
         return HttpResponseRedirect(url)
     def _func(request, *args, **kwargs):
         profile = utils.get_profile(request.user)
@@ -90,8 +92,14 @@ def profile_index(request):
             utils.send_profile(request.user, form._survey, form.cleaned_data)
             data = utils.format_profile_data(profile, form.cleaned_data)
             utils.save_profile(request.user, data)
-            return HttpResponseRedirect(reverse(
-                                    'epiweb.apps.survey.views.profile_index'))
+
+            next = request.GET.get('next', None)
+            if next is not None:
+                url = next
+            else:
+                url = reverse('epiweb.apps.survey.views.profile_index')
+            return HttpResponseRedirect(url)
+
         else:
             request.user.message_set.create(
                 message=_('One or more questions have empty or invalid ' \
