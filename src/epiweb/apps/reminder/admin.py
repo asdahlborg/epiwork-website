@@ -15,6 +15,9 @@ class ReminderAdmin(admin.ModelAdmin):
                     'last_reminder', 'next_reminder')
     ordering = ('user__username',)
     actions = (make_active, make_inactive,)
+    list_editable = ('active',)
+    list_filter = ('wday', 'active',)
+    search_fields = ('user__username',)
 
 admin.site.register(Reminder, ReminderAdmin)
 
