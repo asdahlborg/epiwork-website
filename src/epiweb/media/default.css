@@ -372,6 +372,7 @@ img.right {
 #messages {
     border: 1px solid #aaa;
     background: #ffc;
+    margin-bottom: 20px;
 }
 
 #registration label {
