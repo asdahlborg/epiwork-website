@@ -1,3 +1,5 @@
+{% if banner %}
 <div class="banner">
-    <a href="{{ url }} "><img alt="{{ title }}" src="{{ image }}"/></a>
+    <a href="{{ banner.url }} "><img alt="{{ banner.title }}" src="{{ banner.image }}"/></a>
 </div>
+{% endif %}

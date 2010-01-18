@@ -21,17 +21,23 @@ def banner_image(names=[]):
         query = reduce(lambda a, b: a | b, query)
         objs = Image.objects.filter(query)
 
+    banner = None
+
     ids = objs.values_list('id', flat=True).distinct()
-    id = random.choice(ids)
+    if len(ids) > 0:
+        id = random.choice(ids)
 
-    image = Image.objects.get(pk=id)
+        image = Image.objects.get(pk=id)
 
-    url = image.url
-    if not url.startswith('http'):
-        url = '/%s' % url
-    path = '%s%s' % (settings.MEDIA_URL, str(image.image))
-        
-    return {'title': image.title,
-            'url': url,
-            'image': path}
+        url = image.url
+        if not url.startswith('http'):
+            url = '/%s' % url
+        path = '%s%s' % (settings.MEDIA_URL, str(image.image))
+
+        banner = {}
+        banner['title'] = image.title
+        banner['url'] = url
+        banner['image'] = path
+
+    return {'banner': banner}
 
