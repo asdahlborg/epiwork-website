@@ -264,5 +264,12 @@ $(document).ready(function() {
             $(dp).datepicker('show');
         });
     });
+    
+    // scroll to the first question with error
+    var id = $('div.question .errormsg').eq(0).parent().attr('id')
+    if (id != undefined) {
+        location.hash = '#' + id
+    }
+
 });
 
