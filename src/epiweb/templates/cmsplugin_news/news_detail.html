@@ -1,8 +1,10 @@
 {% extends "cmsplugin_news/base.html" %}
 {% block content %}
+<div id="news">
 <h1>{{ object.title }}</h1>
-
-<p><span class="date">{{ object.pub_date }}</span><br/>
-	{{ object.content|safe }}
-</p>
+<div class="info"><p>Posted on {{ object.pub_date|date:"d F" }}</p></div>
+<div class="content">
+{{ object.content|safe }}
+</div>
+</div>
 {% endblock %}

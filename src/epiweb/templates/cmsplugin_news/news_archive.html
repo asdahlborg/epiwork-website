@@ -1,8 +1,17 @@
 {% extends "cmsplugin_news/base.html" %}
 {% block content %}
+<div id="news">
 <h1>Latest news</h1>
 
 {% for object in latest %}
-	<p><strong>{{ object.title }}</strong><br/><a href="{{ object.get_absolute_url }}">Read more</a></p>
+<div class="news index">
+<h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
+<div class="info"><p>{{ object.pub_date|date:"d F" }}</p></div>
+<div class="content">
+{{ object.content|safe }}
+</div>
+</div>
 {% endfor %}
+
+</div>
 {% endblock %}

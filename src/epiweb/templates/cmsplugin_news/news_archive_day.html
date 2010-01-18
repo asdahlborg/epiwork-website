@@ -1,12 +1,21 @@
 {% extends "cmsplugin_news/base.html" %}
 {% block content %}
-<h1>News for {{ day }}</h1>
+<div id="news">
+<h1>{{ day|date:"d F Y" }} news</h1>
 
-<ul>
-	{% for object in object_list %}
-		<li><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></li>
-	{% empty %}
-		<li>No news for this day</li>
-	{% endfor %}
-</ul>
+{% if object_list %}
+{% for object in object_list %}
+<div class="news index">
+<h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
+<div class="info"><p>{{ object.pub_date|date:"d F" }}</p></div>
+<div class="content">
+{{ object.content|safe }}
+</div>
+</div>
+{% endfor %}
+{% else %}
+<p>No news for this day</p>
+{% endif %}
+
+</div>
 {% endblock %}
