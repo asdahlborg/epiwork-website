@@ -9,7 +9,11 @@
 <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
 <div class="info"><p>{{ object.pub_date|date:"d F" }}</p></div>
 <div class="content">
+{% if object.excerpt %}
+<p>{{ object.excerpt|safe }}</p>
+{% else %}
 {{ object.content|safe }}
+{% endif %}
 </div>
 </div>
 {% endfor %}
