@@ -22,10 +22,3 @@ class Image(models.Model):
     def __unicode__(self):
         return self.title
 
-# def normalize_name(sender, **kwargs):
-#     instance = kwargs.get('instance', None)
-#     if instance is not None:
-#         instance.name = instance.name.strip().lower()
-# 
-# pre_save.connect(normalize_name, sender=Category)
-
