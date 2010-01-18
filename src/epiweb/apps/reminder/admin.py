@@ -19,5 +19,11 @@ class ReminderAdmin(admin.ModelAdmin):
     list_filter = ('wday', 'active',)
     search_fields = ('user__username',)
 
+    def get_actions(self, request):
+        actions = super(ReminderAdmin, self).get_actions(request)
+        print 'Actions:', actions
+        del actions['delete_selected']
+        return actions
+
 admin.site.register(Reminder, ReminderAdmin)
 
