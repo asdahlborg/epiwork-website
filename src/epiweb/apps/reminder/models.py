@@ -34,6 +34,9 @@ class Reminder(models.Model):
                                default=MONDAY)
     active = models.BooleanField()
 
+    def __unicode__(self):
+        return self.user.username
+
 def add_reminder(sender, **kwargs):
     instance = kwargs.get('instance', None)
     try:
