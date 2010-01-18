@@ -7,6 +7,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('title', 'url', 'updated')
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'image', 'url', 'category'),
+        }),
+    )
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Image, ImageAdmin)
