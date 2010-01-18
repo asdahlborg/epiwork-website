@@ -18,6 +18,7 @@ class Image(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     category = models.ManyToManyField(Category, blank=True)
+    active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.title
