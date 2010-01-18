@@ -13,7 +13,7 @@ class Category(models.Model):
 
 class Image(models.Model):
     title = models.CharField(max_length=50)
-    url = models.CharField(max_length=250)
+    url = models.CharField(max_length=250, blank=True, null=True)
     image = models.ImageField(upload_to='banner')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

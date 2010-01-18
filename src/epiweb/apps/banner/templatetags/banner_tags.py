@@ -30,7 +30,7 @@ def banner_image(names=[]):
         image = Image.objects.get(pk=id)
 
         url = image.url
-        if not url.startswith('http'):
+        if url and not url.startswith('http'):
             url = '/%s' % url
         path = '%s%s' % (settings.MEDIA_URL, str(image.image))
 
