@@ -227,31 +227,34 @@ img.right {
 	background: #FFFFFF url(images/img02.jpg) no-repeat left top;
 }
 
-#single {
+#main {
     padding: 0px 50px 20px 50px;
-}
-
-#latest-post {
-	float: left;
-	width: 570px;
-	padding: 0px 20px 0px 50px;
 	line-height: 25px;
 	font-size: 12px;
 }
 
-#latest-post h1 {
+#main.double {
+	float: left;
+	width: 570px;
+	padding: 0px 20px 0px 50px;
+}
+
+#main h1 {
 	letter-spacing: normal;
 	border-bottom: #C7C7C7 1px dashed;
 	font-size: 20px;
 }
+#main h1:first-child {
+    margin-top: 0px;
+}
 
-#latest-post .entry {
+#main .entry {
 	margin-top: 20px;
 	padding-bottom: 5px;
 	border: none;
 }
 
-#latest-post .meta {
+#main .meta {
 	margin-top: 5px;
 	padding: 0;
 	line-height: normal;
@@ -260,11 +263,11 @@ img.right {
 	color: #B4B4B4;
 }
 
-#latest-post .meta a {
+#main .meta a {
 	color: #B4B4B4;
 }
 
-#recent-posts {
+#sidebar {
 	float: right;
 	width: 270px;
 	padding: 0px 50px 20px 20px;
@@ -272,7 +275,7 @@ img.right {
 	font-size: 12px;
 }
 
-#recent-posts h1 {
+#sidebar h1 {
 	letter-spacing: normal;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 18px;
@@ -283,18 +286,18 @@ img.right {
 	border-bottom: #C7C7C7 1px dashed;
 }
 
-#recent-posts h2 {
+#sidebar h2 {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	margin: 0;
 	padding: 0;
 }
 
-#recent-posts .entry {
+#sidebar .entry {
 	font-style: italic;
 }
 
-#recent-posts .entry a {
+#sidebar .entry a {
 	background: #333333;
 	padding: 5px 10px;
 	text-transform: uppercase;
@@ -303,7 +306,7 @@ img.right {
 	color: #CCCCCC;
 }
 
-#recent-posts .more {
+#sidebar .more {
 	padding-left: 20px;
 }
 
@@ -333,68 +336,6 @@ img.right {
 	border-bottom: #C7C7C7 1px dashed;
 	font-size: 12px;
 
-}
-
-/* Sidebar */
-
-#sidebar {
-	clear: both;
-	width: 970px;
-	margin: 0 auto;
-	background: #F2F2F2;
-	color: #CCCCCC;
-	padding: 10px 0 0 0;
-	margin-bottom: 15px;
-	border-top: 1px #E8E8E8 solid;
-	border-bottom: 1px #E8E8E8 solid;
-}
-
-#sidebar ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-#sidebar li {
-	display: block;
-	float: left;
-	width: 206px;
-	padding: 10px 5px 10px 25px;
-}
-
-#sidebar li ul {
-	line-height: 1.8em;
-}
-
-#sidebar li li {
-	display: list-item;
-	float: none;
-	width: auto;
-	padding: 5px 0;
-	line-height: 25px;
-	border-bottom: #C7C7C7 1px dashed;
-	font-size: 12px;
-	font-style: italic;
-}
-
-#sidebar h2 {
-	letter-spacing: normal;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	font-weight: normal;
-	margin: 0 0 20px 0;
-	padding: 0 0 5px 0;
-	color: #565656;
-	border-bottom: #E8E8E8 1px solid;
-}
-
-#sidebar a {
-	text-decoration: none;
-	color: #666666;
-}
-
-#sidebar a:hover {
-	text-decoration: underline;
 }
 
 /* Footer */
@@ -444,5 +385,9 @@ img.right {
     width: 70px;
     text-align: right;
     padding-right: 10px;
+}
+
+#sidebar ul {
+    padding-left: 20px;
 }
 

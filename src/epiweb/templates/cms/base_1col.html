@@ -1,24 +1,7 @@
-{% extends "cms/base.html" %}
+{% extends "base_1col.html" %}
 {% load cms_tags %}
-
-{% block page %}
-	<!-- start content -->
-	<div id="content"><div id="single">
-
-{% if messages %}
-<div id="messages">
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-</div>
-{% endif %}
 
 {% block content %}
 {% placeholder "content" %}
 {% endblock %}
 
-	</div></div>
-	<!-- end content -->
-{% endblock %}

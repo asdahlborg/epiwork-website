@@ -2,7 +2,7 @@
 
 {% block page %}
 	<!-- start content -->
-	<div id="content"><div id="single">
+	<div id="content"><div id="main">
 
 {% if messages %}
 <div id="messages">
@@ -14,9 +14,8 @@
 </div>
 {% endif %}
 
-{% block content %}
+{% block content %}{% endblock %}
 
-{% endblock %}
 	</div></div>
 	<!-- end content -->
 {% endblock %}
