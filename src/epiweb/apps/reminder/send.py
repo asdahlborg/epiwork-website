@@ -5,6 +5,8 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.conf import settings
 from django.template import Context, loader
+from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 
 from epiweb.apps.reminder.models import Reminder
 
@@ -61,8 +63,17 @@ def send_reminder():
 
     return len(succeed), len(fail)
 
+_url = None
+def get_url():
+    global _url
+    if _url is None:
+        domain = Site.objects.get_current()
+        path = reverse('epiweb.apps.survey.views.index')
+        _url = 'http://%s%s' % (domain, path)
+    return _url
+
 def send_to(item):
-    url = 'http://example.com/survey/'
+    url = get_url()
     now = datetime.datetime.now()
 
     try:
