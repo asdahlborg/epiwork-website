@@ -6,6 +6,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'updated', 'valid', 'created')
     ordering = ('user__username',)
     search_fields = ('user__username',)
+    list_filter = ('valid',)
 
 class ParticipationAdmin(admin.ModelAdmin):
     pass
