@@ -16,6 +16,9 @@ class Survey(models.Model):
     hash = models.CharField(max_length=40)
     active = models.BooleanField()
 
+    def __unicode__(self):
+        return '%s - %s' % (self.survey_id, self.title)
+
 class Participation(models.Model):
     user = models.ForeignKey(User)
     survey = models.ForeignKey(Survey)
@@ -55,6 +58,9 @@ class Profile(models.Model):
                 self.created = self.updated
 
         super(Profile, self).save()
+
+    class Meta:
+        verbose_name_plural = 'User profile'
 
 def add_global_id(sender, **kwargs):
     instance = kwargs.get('instance', None)
