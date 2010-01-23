@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -35,10 +37,18 @@ class SurveyUser(models.Model):
 
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    valid = models.BooleanField(default=True)
-    data = models.TextField()
+    created = models.DateTimeField(null=True)
+    updated = models.DateTimeField(null=True)
+    valid = models.BooleanField(default=False)
+    data = models.TextField(null=True, blank=True)
+
+    def save(self):
+        if self.valid:
+            self.updated = datetime.now()
+            if self.created is None:
+                self.created = self.updated
+
+        super(Profile, self).save()
 
 def add_global_id(sender, **kwargs):
     instance = kwargs.get('instance', None)

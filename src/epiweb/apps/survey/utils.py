@@ -452,6 +452,8 @@ def send_profile(user, survey, cleaned_data):
 def get_profile(user):
     try:
         profile = models.Profile.objects.get(user=user)
+        if not profile.valid:
+            return None
         return json.loads(profile.data)
     except models.Profile.DoesNotExist:
         return None
@@ -482,5 +484,6 @@ def save_profile(user, data):
         profile.user = user
 
     profile.data = json.dumps(data)
+    profile.valid = True
     profile.save()
 
