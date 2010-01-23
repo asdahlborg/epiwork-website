@@ -44,6 +44,9 @@ class SurveyUser(models.Model):
     last_participation = models.ForeignKey(Participation, null=True)
     last_participation_date = models.DateTimeField(null=True)
 
+    class Meta:
+        verbose_name_plural = 'User'
+
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
     created = models.DateTimeField(null=True)
