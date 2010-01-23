@@ -50,5 +50,19 @@ def add_global_id(sender, **kwargs):
         user.global_id = str(uuid.uuid4())
         user.save()
 
+def add_empty_profile(sender, **kwargs):
+    instance = kwargs.get('instance', None)
+    try:
+        profile = Profile.objects.get(user=instance)
+    except Profile.DoesNotExist:
+        profile = Profile()
+        profile.user = instance
+        profile.valid = False
+        profile.created = None
+        profile.updated = None
+        profile.data = None
+        profile.save()
+
 post_save.connect(add_global_id, sender=User)
+post_save.connect(add_empty_profile, sender=User)
 
