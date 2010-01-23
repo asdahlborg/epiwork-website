@@ -24,6 +24,12 @@ class Participation(models.Model):
     previous_participation = models.ForeignKey('self', null=True)
     previous_participation_date = models.DateTimeField(null=True)
 
+    def __unicode__(self):
+        return '%s (%s)' % (self.user.username, self.date)
+
+    class Meta:
+        verbose_name_plural = 'Survey participation log'
+
 class UnsentResponse(models.Model):
     participation = models.ForeignKey(Participation)
     date = models.DateTimeField()

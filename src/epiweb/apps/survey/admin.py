@@ -9,7 +9,8 @@ class ProfileAdmin(admin.ModelAdmin):
     list_filter = ('valid',)
 
 class ParticipationAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('user', 'date')
+    ordering = ('-date',)
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Participation, ParticipationAdmin)
