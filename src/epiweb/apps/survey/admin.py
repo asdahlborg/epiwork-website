@@ -9,7 +9,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_filter = ('valid',)
 
 class ParticipationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'date')
+    list_display = ('user', 'date', 'epidb_id')
     ordering = ('-date',)
 
 class SurveyUserAdmin(admin.ModelAdmin):
