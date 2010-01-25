@@ -21,7 +21,6 @@ class ReminderAdmin(admin.ModelAdmin):
 
     def get_actions(self, request):
         actions = super(ReminderAdmin, self).get_actions(request)
-        print 'Actions:', actions
         del actions['delete_selected']
         return actions
 
