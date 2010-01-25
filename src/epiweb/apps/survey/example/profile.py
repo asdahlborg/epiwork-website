@@ -56,6 +56,7 @@ class RegQ7(d.Question):
 class RegQ8(d.Question):
     question = _('Do you have one of the following disorders?')
     type = 'options-multiple'
+    blank = True
     options = (
         _('Asthma'),
         _('Lung disorder (COPD, emphysema, ...)'),
@@ -70,6 +71,7 @@ class RegQ8(d.Question):
 class RegQ9(d.Question):
     question = _('Do you have one of the following allergies?')
     type = 'options-multiple'
+    blank = True
     options = (
         _('Hay fever'),
         _('Food allergy (lactose intolerance, gluten, ...)'),
@@ -111,6 +113,7 @@ class RegQ12(d.Question):
 class RegQ13(d.Question):
     question = _('Are the children going to school or day-care?')
     type = 'options-multiple'
+    blank = True
     options = (
         _('No, they stay at home'),
         _('Yes, to school'),
@@ -120,6 +123,7 @@ class RegQ13(d.Question):
 class RegQ14(d.Question):
     question = _('Do you have pets at home?')
     type = 'options-multiple'
+    blank = True
     options = (
         _('Yes, one or more dogs'),
         _('Yes, one or more cats'),
