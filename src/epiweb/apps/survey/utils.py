@@ -1,3 +1,7 @@
+import urllib2
+import errno
+import socket
+
 from django import forms
 from django.forms.util import ErrorList
 from django.contrib.admin import widgets
@@ -408,7 +412,16 @@ def send_survey_response(user, survey, cleaned_data):
 
     client = EpiDBClient(settings.EPIDB_API_KEY)
     client.server = settings.EPIDB_SERVER
-    res = client.response_submit(user_id, survey_id, answers)
+
+    try:
+        res = client.response_submit(user_id, survey_id, answers)
+    except urllib2.URLError, e:
+        if isinstance(e.reason, socket.error):
+           if e.reason.errno in [errno.ETIMEDOUT, errno.ECONNREFUSED,
+                                 errno.EHOSTDOWN, errno.EHOSTUNREACH,
+                                 errno.ENETDOWN, errno.ENETUNREACH]:
+            return None
+        raise
 
     return res
 
@@ -430,7 +443,9 @@ def add_survey_participation(user, msurvey, id=None):
     return participation
 
 def save_survey_response_locally(participation, survey, cleaned_data):
-    data = _create_response_data(participation.user, survey, cleaned_data)
+    data = {'user_id': get_global_id(participation.user),
+            'survey_id': survey.id,
+            'answers': _create_answers(survey, cleaned_data)}
 
     ur = models.UnsentResponse()
     ur.participation = participation

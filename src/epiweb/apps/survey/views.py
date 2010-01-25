@@ -58,12 +58,17 @@ def index(request):
         if form.is_valid():
             res = utils.send_survey_response(request.user, form._survey, 
                                              form.cleaned_data)
-            id = res.get('id', None)
+            id = None
+            if res is not None:
+                id = res.get('id', None)
+
             participation = utils.add_survey_participation(request.user, 
                                                            msurvey, id)
-            if id is None:
+
+            if res is None:
                 utils.save_survey_response_locally(participation, survey, 
                                                    form.cleaned_data)
+
             return HttpResponseRedirect(reverse(
                                           'epiweb.apps.survey.views.thanks'))
         else:
