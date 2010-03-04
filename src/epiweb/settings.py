@@ -145,6 +145,8 @@ CMSPLUGIN_NEWS_RSS_TITLE = "News"
 CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
 
 REMINDER_FROM = 'reminder-no-reply@epiwork.example'
+REMINDER_USE_LOGINURL = True
+REMINDER_LOGINURL_EXPIRES = 7
 
 import socket
 _hostname = socket.gethostname()

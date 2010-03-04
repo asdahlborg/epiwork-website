@@ -7,6 +7,7 @@ from django.conf import settings
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+from django.conf import settings
 
 from epiweb.apps.reminder.models import Reminder
 
@@ -63,8 +64,32 @@ def send_reminder():
 
     return len(succeed), len(fail)
 
+def get_url(user):
+    url = _get_url_survey()
+    if settings.REMINDER_USE_LOGINURL:
+        return _get_url_loginurl(user, url)
+    return url
+
+_loginurl_base = None
+def _get_url_loginurl(user, next):
+    from datetime import datetime, timedelta
+    import loginurl.utils
+    expires = datetime.now() + \
+              timedelta(days=settings.REMINDER_LOGINURL_EXPIRES)
+    usage_left = 0
+    key = loginurl.utils.create(user, usage_left, expires, next)
+
+    global _loginurl_base
+    if _loginurl_base is None:
+        domain = Site.objects.get_current()
+        path = reverse('loginurl-index').strip('/')
+        _loginurl_base = 'http://%s/%s' % (domain, path)
+
+    url = '%s/%s' % (_loginurl_base, key)
+    return url
+
 _url = None
-def get_url():
+def _get_url_survey():
     global _url
     if _url is None:
         domain = Site.objects.get_current()
@@ -73,7 +98,7 @@ def get_url():
     return _url
 
 def send_to(item):
-    url = get_url()
+    url = get_url(item.user)
     now = datetime.datetime.now()
 
     try:
