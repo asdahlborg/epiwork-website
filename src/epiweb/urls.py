@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.views.generic.simple import redirect_to
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -20,6 +21,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
     (r'^survey/', include('epiweb.apps.survey.urls')),
+    (r'^login/$', redirect_to, {'url': settings.LOGIN_URL}),
     (r'^login/', include('loginurl.urls')),
     url(r'^', include('cms.urls')),
 )
