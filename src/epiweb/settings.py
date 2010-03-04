@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'epiweb',
     'registration',
+    'loginurl',
     'epiweb.apps.accounts',
     'epiweb.apps.survey',
     'epiweb.apps.reminder',
@@ -119,6 +120,11 @@ INSTALLED_APPS = (
     'cmsplugin_news',
     'mptt',
     'publisher',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'loginurl.backends.LoginUrlBackend',
 )
 
 CMS_APPLICATIONS_URLS = (

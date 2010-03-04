@@ -10,6 +10,7 @@ setup(
     packages = find_packages('src'),
     package_dir = {'': 'src'},
     install_requires = ['setuptools', 'django-registration', 'epidb-client', 
-                        'django-cms', 'cmsplugin-news', 'simplejson']
+                        'django-cms', 'cmsplugin-news', 'simplejson',
+                        'django-loginurl']
 )
 
