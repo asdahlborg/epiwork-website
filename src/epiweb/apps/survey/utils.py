@@ -17,6 +17,11 @@ from epidb_client import EpiDBClient
 from datetime import datetime
 
 try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
+
+try:
     import simplejson as json
 except ImportError:
     import json
@@ -405,26 +410,6 @@ def _create_answers(survey, cleaned_data):
 
     return data
 
-def send_survey_response(user, survey, cleaned_data):
-    user_id = get_global_id(user)
-    survey_id = survey.id
-    answers = _create_answers(survey, cleaned_data)
-
-    client = EpiDBClient(settings.EPIDB_API_KEY)
-    client.server = settings.EPIDB_SERVER
-
-    try:
-        res = client.response_submit(user_id, survey_id, answers)
-    except urllib2.URLError, e:
-        if isinstance(e.reason, socket.error):
-           if e.reason.errno in [errno.ETIMEDOUT, errno.ECONNREFUSED,
-                                 errno.EHOSTDOWN, errno.EHOSTUNREACH,
-                                 errno.ENETDOWN, errno.ENETUNREACH]:
-            return None
-        raise
-
-    return res
-
 def add_survey_participation(user, msurvey, id=None):
     su = models.SurveyUser.objects.get(user=user)
 
@@ -442,27 +427,31 @@ def add_survey_participation(user, msurvey, id=None):
 
     return participation
 
-def save_survey_response_locally(participation, survey, cleaned_data):
-    data = {'user_id': get_global_id(participation.user),
-            'survey_id': survey.id,
-            'answers': _create_answers(survey, cleaned_data)}
+def add_response_queue(participation, survey, cleaned_data):
+    user_id = get_global_id(participation.user)
+    survey_id = survey.id
+    answers = pickle.dumps(_create_answers(survey, cleaned_data))
 
-    ur = models.UnsentResponse()
-    ur.participation = participation
-    ur.date = participation.date
-    ur.data = json.dumps(data)
-    ur.save()
+    queue = models.ResponseSendQueue()
+    queue.participation = participation
+    queue.date = datetime.utcnow()
+    queue.user_id = user_id
+    queue.survey_id = survey_id
+    queue.answers = answers
+    queue.save()
 
-def send_profile(user, survey, cleaned_data):
+def add_profile_queue(user, survey, cleaned_data):
     user_id = get_global_id(user)
-    answers = _create_profile_answers(survey, cleaned_data)
     profile_survey_id = survey.id
+    answers = pickle.dumps(_create_profile_answers(survey, cleaned_data))
 
-    client = EpiDBClient(settings.EPIDB_API_KEY)
-    client.server = settings.EPIDB_SERVER
-    res = client.profile_update(user_id, profile_survey_id, answers)
-
-    return res
+    queue = models.ProfileSendQueue()
+    queue.owner = user
+    queue.date = datetime.utcnow()
+    queue.user_id = user_id
+    queue.survey_id = profile_survey_id
+    queue.answers = answers
+    queue.save()
 
 def get_profile(user):
     try:

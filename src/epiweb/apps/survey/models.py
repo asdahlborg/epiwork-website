@@ -33,10 +33,27 @@ class Participation(models.Model):
     class Meta:
         verbose_name_plural = 'Survey participation log'
 
-class UnsentResponse(models.Model):
+class ResponseSendQueue(models.Model):
     participation = models.ForeignKey(Participation)
+    date = models.DateTimeField(auto_now_add=True)
+    user_id = models.CharField(max_length=36)
+    survey_id = models.CharField(max_length=50)
+    answers = models.TextField()
+
+    def set_sent(self, epidb_id):
+        self.participation.epidb_id = epidb_id
+        self.participation.save()
+        self.delete()
+
+class ProfileSendQueue(models.Model):
+    owner = models.ForeignKey(User)
     date = models.DateTimeField()
-    data = models.TextField()
+    user_id = models.CharField(max_length=36)
+    survey_id = models.CharField(max_length=50)
+    answers = models.TextField()
+
+    def set_sent(self, epidb_id):
+        self.delete()
 
 class SurveyUser(models.Model):
     user = models.ForeignKey(User, unique=True)

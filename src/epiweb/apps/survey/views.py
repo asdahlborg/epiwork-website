@@ -56,18 +56,10 @@ def index(request):
     if request.method == 'POST':
         form = helper.create_form(request.user, request.POST)
         if form.is_valid():
-            res = utils.send_survey_response(request.user, form._survey, 
-                                             form.cleaned_data)
-            id = None
-            if res is not None:
-                id = res.get('id', None)
+            participation = utils.add_survey_participation(request.user,
+                                                           msurvey)
 
-            participation = utils.add_survey_participation(request.user, 
-                                                           msurvey, id)
-
-            if res is None:
-                utils.save_survey_response_locally(participation, survey, 
-                                                   form.cleaned_data)
+            utils.add_response_queue(participation, survey, form.cleaned_data)
 
             return HttpResponseRedirect(reverse(
                                           'epiweb.apps.survey.views.thanks'))
@@ -94,7 +86,7 @@ def profile_index(request):
     if request.method == 'POST':
         form = helper.create_form(request.user, request.POST)
         if form.is_valid():
-            utils.send_profile(request.user, form._survey, form.cleaned_data)
+            utils.add_profile_queue(request.user, form._survey, form.cleaned_data)
             data = utils.format_profile_data(profile, form.cleaned_data)
             utils.save_profile(request.user, data)
 
