@@ -337,6 +337,8 @@ class SurveyFormHelper:
         fields = {}
         for question in self.survey.questions:
             fields[question.id] = self._create_field(question)
+        fields['survey_id'] = forms.CharField(widget=forms.HiddenInput,
+                                              initial=self.survey.id)
         self.form_class = type('SurveyForm', (SurveyFormBase, object), fields)
 
     def _create_field(self, question):
