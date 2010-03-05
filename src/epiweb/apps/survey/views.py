@@ -95,6 +95,8 @@ def profile_index(request):
                 url = next
             else:
                 url = reverse('epiweb.apps.survey.views.profile_index')
+
+            request.user.message_set.create(message=_('Profile saved.'))
             return HttpResponseRedirect(url)
 
         else:
