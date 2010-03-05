@@ -15,7 +15,7 @@
 <h1>Edit Profile</h1>
 
 <form method="post" id="survey">
-    {% for field in form %}
+    {% for field in form.visible_fields %}
     {% if field.errors %}
     <div class="question error" id="q_{{ field.name }}">
         <div class="errormsg">{{ field.errors }}</div>
@@ -31,7 +31,11 @@
         {% endif %}
     </div>
     {% endfor %}
-    <div><input type="submit" value="Submit"/></div>
+    <div><input type="submit" value="Submit"/>
+    {% for field in form.hidden_fields %}
+         {{ field }}
+    {% endfor %}
+    </div>
 </form>
 
 <script type="text/javascript">
