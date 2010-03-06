@@ -373,14 +373,11 @@ class SurveyFormHelper:
         elif question.type == 'options-multiple':
             field = forms.MultipleChoiceField(
                         widget=forms.CheckboxSelectMultiple,
-                        choices=zip(range(0, len(question.options)), 
-                                    question.options))
+                        choices=question.options)
     
         elif question.type == 'options-single':
             field = forms.ChoiceField(widget=forms.RadioSelect,
-                                      choices=zip(range(0, 
-                                                        len(question.options)),
-                                                  question.options))
+                                      choices=question.options)
     
         elif question.type == 'date':
             field = forms.DateField(widget=widgets.DatePickerWidget,
