@@ -1,10 +1,9 @@
 from datetime import datetime
+import uuid
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-
-import uuid
 
 class Survey(models.Model):
     survey_id = models.CharField(max_length=50, unique=True)
@@ -12,9 +11,7 @@ class Survey(models.Model):
     updated = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
-    definition = models.TextField()
-    hash = models.CharField(max_length=40)
-    active = models.BooleanField()
+    specification = models.TextField()
 
     def __unicode__(self):
         return '%s - %s' % (self.survey_id, self.title)
@@ -70,6 +67,7 @@ class Profile(models.Model):
     updated = models.DateTimeField(null=True)
     valid = models.BooleanField(default=False)
     data = models.TextField(null=True, blank=True)
+    survey = models.ForeignKey(Survey)
 
     def save(self):
         if self.valid:

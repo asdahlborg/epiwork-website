@@ -8,8 +8,8 @@ from django.contrib.admin import widgets
 
 from epiweb.apps.survey import definitions as d
 from epiweb.apps.survey import models
-from epiweb.apps.survey import example
 from epiweb.apps.survey import widgets
+from epiweb.apps.survey import parser
 
 from django.conf import settings
 from epidb_client import EpiDBClient
@@ -35,35 +35,59 @@ _profile_object = None
 class UsingInvalidDataError(Exception):
     pass
 
-def get_current_survey():
-    # TODO: rewrite with a proper query
-    return models.Survey.objects.all()[0]
+class UnknownSurveyError(Exception):
+    def __init__(self, survey_id):
+        self.survey_id = survey_id
+        msg = 'Unknown survey id: %s' % self.survey_id
+        Exception.__init__(self, msg)
 
-def get_survey_object(msurvey):
-    # TODO: 
-    # - get survey definition
-    #     def = survey.definition
-    # - parse it and create the class
+_survey = None
+_profile = None
+_survey_object = {}
+_form = {}
+
+def get_survey():
+    global _survey
+    if _survey is None:
+        survey_id = settings.SURVEY_ID
+        _survey = _get_survey_object(survey_id)
+    return _survey
+
+def get_profile():
+    global _profile
+    if _profile is None:
+        profile_survey_id = settings.SURVEY_PROFILE_ID
+        _profile = _get_survey_object(profile_survey_id)
+    return _profile
+
+def _get_survey_object(survey_id):
     global _survey_object
-    survey = _survey_object.get(msurvey.hash, None)
-    if survey is None:
-        survey = example.survey.Survey()
-        _survey_object[msurvey.hash] = survey
-    return survey
+    object = _survey_object.get(survey_id, None)
+    if object is None:
+        try:
+            data = models.Survey.objects.get(survey_id=survey_id)
+        except models.Survey.DoesNotExist:
+            raise UnknownSurveyError(survey_id)
+        object = _parse_survey_specification(data.specification)
+        object._data = data
+        _survey_object[survey_id] = object
+    return object
 
-def get_profile_object():
-    global _profile_object
-    if _profile_object is None:
-        _profile_object = example.profile.UserProfile()
-    return _profile_object
+def _parse_survey_specification(specification):
+    return parser.parse(specification)
 
-def get_survey_form_helper(survey):
-    global _survey_form_helper
-    helper = _survey_form_helper.get(survey, None)
-    if helper is None:
-        helper = SurveyFormHelper(survey)
-        _survey_form_helper[survey] = helper
-    return helper
+def get_form_class(survey_id):
+    global _form
+    form = _form.get(survey_id, None)
+    if form is None:
+        object = _get_survey_object(survey_id)
+        form = _generate_form_class(object)
+        _form[survey_id] = form
+    return form
+
+def _generate_form_class(survey):
+    helper = SurveyFormHelper(survey)
+    return helper.create_form
 
 def get_global_id(user):
     try:
@@ -191,7 +215,7 @@ class JavascriptHelper:
         lines = []
         lines.append('s.profiles = [];')
 
-        data = get_profile(self.user)
+        data = get_user_profile(self.user)
         for profile in self.checked_profiles:
             name = profile.name
             value = data.get(name, 'undefined')
@@ -379,7 +403,6 @@ class SurveyFormHelper:
     
         return field
 
-
 def _create_profile_answers(survey, cleaned_data):
     data = {}
 
@@ -412,12 +435,12 @@ def _create_answers(survey, cleaned_data):
 
     return data
 
-def add_survey_participation(user, msurvey, id=None):
+def add_survey_participation(user, survey_data, id=None):
     su = models.SurveyUser.objects.get(user=user)
 
     participation = models.Participation()
     participation.user = user
-    participation.survey = msurvey
+    participation.survey = survey_data
     participation.epidb_id = id
     participation.previous_participation = su.last_participation
     participation.previous_participation_date = su.last_participation_date
@@ -455,12 +478,12 @@ def add_profile_queue(user, survey, cleaned_data):
     queue.answers = answers
     queue.save()
 
-def get_profile(user):
+def get_user_profile(user):
     try:
         profile = models.Profile.objects.get(user=user)
         if not profile.valid:
             return None
-        return json.loads(profile.data)
+        return pickle.loads(str(profile.data))
     except models.Profile.DoesNotExist:
         return None
 
@@ -482,14 +505,15 @@ def format_profile_data(profile, data):
 
     return res
 
-def save_profile(user, data):
+def save_profile(user, survey_data, data):
     try:
         profile = models.Profile.objects.get(user=user)
     except models.Profile.DoesNotExist:
         profile = models.Profile()
         profile.user = user
 
-    profile.data = json.dumps(data)
+    profile.data = pickle.dumps(data)
+    profile.survey = survey_data
     profile.valid = True
     profile.save()
 
