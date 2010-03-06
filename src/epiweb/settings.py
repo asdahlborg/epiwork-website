@@ -148,6 +148,9 @@ REMINDER_FROM = 'reminder-no-reply@epiwork.example'
 REMINDER_USE_LOGINURL = True
 REMINDER_LOGINURL_EXPIRES = 7
 
+SURVEY_ID = 'dev-survey-0.0'
+SURVEY_PROFILE_ID = 'dev-profile-0.0'
+
 import socket
 _hostname = socket.gethostname()
 if _hostname in ['rawon.local']:
