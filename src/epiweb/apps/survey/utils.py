@@ -401,18 +401,6 @@ class SurveyFormHelper:
     
         return field
 
-def _create_profile_answers(survey, cleaned_data):
-    data = {}
-
-    # TODO: formalize structure, data types
-    for question in survey.questions:
-        id = question.id
-        private = question.private
-        if not private:
-            data[id] = _format_data(question.type, cleaned_data[id])
-    
-    return data
-
 def _format_data(type, data):
     if data is None:
         return data
@@ -425,7 +413,6 @@ def _format_data(type, data):
 def _create_answers(survey, cleaned_data):
     data = {}
 
-    # TODO: formalize structure, data types
     for question in survey.questions:
         if not question.private:
             data[question.id] = _format_data(question.type, 
@@ -466,7 +453,7 @@ def add_response_queue(participation, survey, cleaned_data):
 def add_profile_queue(user, survey, cleaned_data):
     user_id = get_global_id(user)
     profile_survey_id = survey.id
-    answers = pickle.dumps(_create_profile_answers(survey, cleaned_data))
+    answers = pickle.dumps(_create_answers(survey, cleaned_data))
 
     queue = models.ProfileSendQueue()
     queue.owner = user
