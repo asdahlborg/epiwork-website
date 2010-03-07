@@ -67,7 +67,7 @@ class Profile(models.Model):
     updated = models.DateTimeField(null=True)
     valid = models.BooleanField(default=False)
     data = models.TextField(null=True, blank=True)
-    survey = models.ForeignKey(Survey)
+    survey = models.ForeignKey(Survey, null=True)
 
     def save(self):
         if self.valid:
