@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page %}
+<div class="col3b">
+<div id="left">
+{% block left %}{% endblock %}
+</div>
+<div id="content">
+{% block content %}{% endblock %}
+</div>
+<div id="right">
+{% block right %}{% endblock %}
+</div>
+<br class="clear"/>
+</div>
+{% endblock %}

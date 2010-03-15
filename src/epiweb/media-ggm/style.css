@@ -1,0 +1,266 @@
+body {
+    background: #C1C1C1;
+    margin: 5px 10px;
+    font-family: verdana, sans-serif;
+    font-size: 8pt;
+}
+
+#c {
+    width: 980px;
+    background: white;
+    margin: 0 auto;
+    border: 1px solid #868686;
+}
+
+br.clear {
+    clear: both;
+}
+
+a {
+    color: #393;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/*= InfluenzaNet Bar =*/
+
+#inetbar {
+    background: #4C4C4C url(/+media-ggm/inetbar/influenzanet_top_gradient_black.jpg) top left repeat-x;
+    padding: 10px;
+}
+#inetbar p {
+    margin: 0px;
+    color: white;
+    font-size: 8pt;
+    text-align: right;
+}
+#inetbar p span.logo {
+    float: left;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+/*= Header =*/
+
+#header {
+    margin: 10px;
+}
+#header #logo {
+    float: left;
+}
+#header div.banner {
+    float: left;
+}
+#header #account {
+    float: right;
+}
+#header #account ul {
+    list-style: none;
+    margin: 0px;
+    width: 150px;
+    padding-left: 0px;
+}
+#header #account ul li {
+    text-align: center;
+    margin-bottom: 2px;
+    padding: 2px;
+    font-size: 8pt;
+}
+#header #account ul li:first-child,
+#header #account ul li:first-child + li {
+    font-weight: bold;
+    border: 1px solid black;
+    background: yellow url(/+media-ggm/yellow_gradient_high.jpg) bottom left repeat-x;
+}
+#header #account ul li a {
+    text-decoration: none;
+    color: black;
+}
+#header #account ul li a:hover {
+    text-decoration: underline;
+}
+
+/*= Search Bar =*/
+
+#searchbar {
+    text-align: right;
+    margin: 0 10px;
+}
+#searchbar input[name="q"] {
+    width: 150px;
+}
+
+/*= Menu Bar =*/
+
+#menubar {
+    background: url(/+media-ggm/menu_bg.jpg) bottom left repeat-x;
+    padding: 0 10px 2px 10px;
+    border-bottom: 1px solid #ccc;
+}
+#menubar ul {
+    list-style: none;
+    padding-left: 0px;
+    margin: 0px;
+}
+#menubar li {
+    display: inline;
+}
+#menubar li a {
+    border: 1px solid #ccc;
+    background: white;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 8pt;
+    padding: 2px 5px;
+}
+#menubar li a:hover {
+    color: #393;
+}
+#menubar li a.active {
+    background: #393;
+    color: white;
+}
+
+/*= Footer =*/
+
+#footer {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+#footer p {
+    margin: 0px;
+}
+
+/*= Page =*/
+
+#page {
+    margin: 10px;
+}
+
+/*= 3 Columns Layout =*/
+
+#page .col3 #left {
+    float: left;
+    width: 300px;
+    padding-right: 10px;
+}
+
+#page .col3 #content {
+    float: left;
+    width: 460px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-width: 0 1px;
+}
+
+#page .col3 #right {
+    float: right;
+    width: 155px;
+    padding-left: 10px;
+}
+
+#page .col3 #left .block {
+    border: 1px solid #888;
+    background: #EAEAEA;
+}
+#page .col3 #left .block h2 {
+    background: #3a3 url(/+media-ggm/menu_header_green_gradient.jpg) bottom left repeat-x;
+    color: white;
+    margin: 0px;
+    padding: 3px 3px 5px 3px;
+    font-size: 12pt;
+}
+#page .col3 #left .news .entry {
+    margin: 0 5px;
+    border-bottom: 1px solid #ccc;
+}
+#page .col3 #left .news .title {
+    font-weight: bold;
+}
+#page .col3 #left .news .title a {
+    color: black;
+    font-size: 9pt;
+}
+#page .col3 #left .news .excerpt {
+    
+}
+
+/*= 3 Columns Layout Style 2 =*/
+
+#page .col3b #left {
+    float: left;
+    width: 155px;
+    padding-right: 10px;
+}
+
+#page .col3b #content {
+    float: left;
+    width: 460px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-width: 0 1px;
+}
+
+#page .col3b #right {
+    float: right;
+    width: 300px;
+    padding-left: 10px;
+}
+
+/*= News Page =*/
+
+#news h2 {
+    color: #393;
+}
+#news div.excerpt {
+    font-weight: bold;
+}
+
+#news-archive .entries p.title {
+    font-weight: bold;
+}
+#news-archive .entries p {
+    margin: 0px;
+}
+#news-archive .entries .entry {
+    margin-bottom: 10px;
+}
+
+/*= Side bar's Blocks =*/
+
+.block {
+    margin-bottom: 10px;
+}
+
+.block.sponsors {
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.block.sponsors h2 {
+    color: #888;
+    font-size: 9pt;
+    font-weight: normal;
+}
+.block.sponsors img {
+    max-width: 135px;
+}
+
+.block.partijen {
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.block.partijen h2 {
+    color: #888;
+    font-size: 9pt;
+    font-weight: normal;
+}
+.block.partijen img {
+    max-width: 135px;
+}
+
+

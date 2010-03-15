@@ -81,6 +81,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 CMS_TEMPLATES = (
     ('cms/base_1col.html', "1 Column"),
     ('cms/base_2col.html', "2 Columns"),
+    ('cms/base_3col2.html', "3 Columns"),
+    ('cms/base_3col.html', "3 Columns (Main Page)"),
 )
 
 LANGUAGES = (

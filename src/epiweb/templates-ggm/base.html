@@ -1,0 +1,47 @@
+{% load cms_tags %}
+<html><head>
+<title>deGroteGriepMeting</title>
+<link rel="stylesheet" type="text/css" href="/+media-ggm/style.css"/>
+<script type="text/javascript" src="/+media/jquery.js"></script>
+<script type="text/javascript" src="/+media-ggm/ggm.js"></script>
+{% block extrahead %}{% endblock %}
+</head><body><div id="c">
+
+<div id="inetbar">
+<p><span class="logo"><img src="/+media-ggm/inetbar/influenzanet_top_logo.gif"/></span>
+   <span class="label">Influenzanet is a system to monitor the activity of
+   influenza-like-illness (ILI) with the aid of volunteers via the
+   internet</span>
+</p>
+</div>
+<div id="header">
+    <div id="logo"><a href="/"><img src="/+media-ggm/GGM_logo_top.jpg"/></a></div>
+    <div class="banner"></div>
+    <div id="account">
+        <ul>
+        <li><a href="/accounts/login/">Login</a></li>
+        <li><a href="/accounts/register/">Meld je aan</a></li>
+        <li><a href="/accounts/password/reset/">Wachtwoord kwijt?</a></li>
+        </ul>
+    </div>
+    <br class="clear"/>
+</div>
+<div id="searchbar">
+    <form method="post">
+    <p><input type="text" name="q"/></p>
+    </form>
+</div>
+<div id="menubar">
+<ul>
+{% show_menu 0 0 %}
+</ul>
+</div>
+<div id="page">
+{% block page %}{% endblock %}
+</div>
+<div id="footer">
+<p>De Grote Griepmeting opereert volstrekt onafhankelijk van welke sponsor of adverteerder dan ook: organisatorisch, inhoudelijk, wetenschappelijk of anderszins. Ook het bijbehorende lesmateriaal is door deskundigen samengesteld zonder enige beïnvloeding van sponsors of adverteerders.</p>
+<p><a href="/">&copy;deGroteGriepMeting.nl</a></p>
+</div>
+
+</div></body></html>

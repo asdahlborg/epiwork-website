@@ -1,0 +1,12 @@
+<div class="block news">
+<h2>{{ title }}</h2>
+{% for news in latest %}
+<div class="entry">
+<p class="title"><a href="{{ base_path }}/{{ news.get_relative_url }}">{{ news.title }}</a></p>
+{% if news.excerpt %}
+<p class="excerpt">{{ news.excerpt }}</p>
+{% endif %}
+</div>
+{% endfor %}
+</ul>
+</div>
