@@ -292,7 +292,7 @@ class SurveyFormBase(forms.Form):
 
     def _get_profile(self, name):
         if self._profile is None:
-            self._profile = get_profile(self._user)
+            self._profile = get_user_profile(self._user)
 
         value = self._profile.get(name, None)
         tvalue = type(value).__name__
