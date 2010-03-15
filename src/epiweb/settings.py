@@ -117,7 +117,7 @@ INSTALLED_APPS = (
     'cms.plugins.file',
     'cms.plugins.snippet',
     'cms.plugins.googlemap',
-    'cmsplugin_news',
+    'journal',
     'mptt',
     'publisher',
 )
@@ -125,13 +125,6 @@ INSTALLED_APPS = (
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'loginurl.backends.LoginUrlBackend',
-)
-
-CMS_APPLICATIONS_URLS = (
-    ('cmsplugin_news.urls', 'News'),
-)
-CMS_NAVIGATION_EXTENDERS = (
-    ('cmsplugin_news.navigation.get_nodes','News navigation'),
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
