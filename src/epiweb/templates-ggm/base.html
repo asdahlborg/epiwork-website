@@ -4,16 +4,14 @@
 <link rel="stylesheet" type="text/css" href="/+media-ggm/style.css"/>
 <script type="text/javascript" src="/+media/jquery.js"></script>
 <script type="text/javascript" src="/+media-ggm/ggm.js"></script>
+<script type="text/javascript" src="/+media-ggm/influenzanetbar.js"></script>
 {% block extrahead %}{% endblock %}
 </head><body><div id="c">
 
-<div id="inetbar">
-<p><span class="logo"><img src="/+media-ggm/inetbar/influenzanet_top_logo.gif"/></span>
-   <span class="label">Influenzanet is a system to monitor the activity of
-   influenza-like-illness (ILI) with the aid of volunteers via the
-   internet</span>
-</p>
-</div>
+<div id="inetbarcontainer"></div>
+<script type="text/javascript">
+(function() { var bar = new InfluenzaNetBar('inetbarcontainer'); bar.init(); })();
+</script>
 <div id="header">
     <div id="logo"><a href="/"><img src="/+media-ggm/GGM_logo_top.jpg"/></a></div>
     <div class="banner"></div>

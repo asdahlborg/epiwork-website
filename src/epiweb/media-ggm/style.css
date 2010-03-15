@@ -26,20 +26,66 @@ a:hover {
 
 /*= InfluenzaNet Bar =*/
 
-#inetbar {
+#inetbarheader {
     background: #4C4C4C url(/+media-ggm/inetbar/influenzanet_top_gradient_black.jpg) top left repeat-x;
-    padding: 10px;
+    max-height: 25px;
+    min-height: 25px;
+    height: 25px;
+    padding: 10px 5px 0px 5px;
 }
-#inetbar p {
-    margin: 0px;
+#inetbarheader p {
+    margin: 2px 0 0 0;
     color: white;
     font-size: 8pt;
     text-align: right;
 }
-#inetbar p span.logo {
+#inetbarheader p span.logo {
     float: left;
     margin-top: -10px;
     cursor: pointer;
+}
+#inetbarcontent {
+    clear: both;
+    padding: 10px;
+    background: #262626;
+    color: white;
+}
+#inetbarleft {
+    background: white;
+    color: black;
+    float: left;
+    width: 220px;
+    padding: 10px;
+}
+#inetbarleft p {
+    margin: 0px;
+}
+#inetbarmain {
+    margin-left: 255px;
+    margin-right: 170px;
+}
+#inetbarmain p {
+    margin-top: 0px;
+}
+#inetbarright {
+    float: right;
+    width: 135px;
+    background: #444;
+    padding: 5px 7px;
+}
+#inetbarright p {
+    margin-top: 0px;
+}
+#inetbarright ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0px;
+}
+#inetbarright ul li {
+    margin-bottom: 2px;
+}
+#inetbarright ul li img {
+    vertical-align: middle;
 }
 
 /*= Header =*/

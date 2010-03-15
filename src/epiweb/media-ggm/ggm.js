@@ -1,13 +1,3 @@
-function inetbar_toggle() {
-    alert('inetbar toggle');
-}
-
-function inetbar_init() {
-    $('#inetbar .logo img').click(function() {
-        inetbar_toggle();
-    });
-}
-
 function searchbar_init() {
     var obj = $('#searchbar input[name="q"]');
     obj[0].value = "< zoekwoord + enter >"
@@ -22,7 +12,6 @@ function searchbar_init() {
 }
 
 $(document).ready(function() {
-    inetbar_init();
     searchbar_init();
 });
 
