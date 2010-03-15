@@ -101,6 +101,10 @@ a:hover {
 }
 #header #account {
     float: right;
+    text-align: center;
+}
+#header #account p {
+    margin: 0 0 5px 0;
 }
 #header #account ul {
     list-style: none;
@@ -114,15 +118,23 @@ a:hover {
     padding: 2px;
     font-size: 8pt;
 }
-#header #account ul li:first-child,
-#header #account ul li:first-child + li {
+#header #account ul.anonymous li {
     font-weight: bold;
     border: 1px solid black;
     background: yellow url(/+media-ggm/yellow_gradient_high.jpg) bottom left repeat-x;
 }
-#header #account ul li a {
+#header #account ul.member li {
+    font-weight: bold;
+    border: 1px solid black;
+    background: #3a3 url(/+media-ggm/green_gradient_high.jpg) bottom left repeat-x;
+}
+#header #account ul.anonymous li a {
     text-decoration: none;
     color: black;
+}
+#header #account ul.member li a {
+    text-decoration: none;
+    color: white;
 }
 #header #account ul li a:hover {
     text-decoration: underline;

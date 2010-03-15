@@ -16,11 +16,19 @@
     <div id="logo"><a href="/"><img src="/+media-ggm/GGM_logo_top.jpg"/></a></div>
     <div class="banner"></div>
     <div id="account">
-        <ul>
+{% if user.is_authenticated %}
+        <p>ingelogd als {{ user }}</p>
+        <ul class="member">
+        <li><a href="/survey/profile/">Mijn gegevens</a></li>
+        <li><a href="/accounts/logout/">Log uit</a></li>
+        </ul>
+{% else %}
+        <ul class="anonymous">
         <li><a href="/accounts/login/">Login</a></li>
         <li><a href="/accounts/register/">Meld je aan</a></li>
-        <li><a href="/accounts/password/reset/">Wachtwoord kwijt?</a></li>
         </ul>
+        <p><a href="/accounts/password/reset/">Wachtwoord kwijt?</a></p>
+{% endif %}
     </div>
     <br class="clear"/>
 </div>
