@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     # (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'homepage.html'}),
     (r'^\+media/(?P<path>.*)$', 'django.views.static.serve', 
         {'document_root': settings.MEDIA_ROOT}),
+    (r'^\+media-ggm/(?P<path>.*)$', 'django.views.static.serve', 
+        {'document_root': settings.MEDIA_ROOT_GGM}),
     # Example:
     # (r'^epiweb/', include('epiweb.foo.urls')),
 

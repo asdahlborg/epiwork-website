@@ -38,6 +38,7 @@ USE_I18N = True
 import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+MEDIA_ROOT_GGM = os.path.join(PROJECT_PATH, 'media-ggm')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -91,6 +92,7 @@ LANGUAGES = (
 ROOT_URLCONF = 'epiweb.urls'
 
 TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, 'templates-ggm'),
     os.path.join(PROJECT_PATH, 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
