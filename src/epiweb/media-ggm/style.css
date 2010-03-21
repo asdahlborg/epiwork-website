@@ -270,6 +270,32 @@ a:hover {
     padding-left: 10px;
 }
 
+#page .col3b #right img.inset {
+    float: left;
+    width: 100px;
+    border: 1px solid black;
+    margin: 0 10px 10px 0;
+}
+
+#page .col3b #right div.block {
+    clear: both;
+    border-bottom: 1px solid #aaa;
+}
+
+#page .col3b #content h1 {
+    color: #393;
+    font-size: 16pt;
+    margin-top: 0px;
+}
+
+#page .col3b #content h2 {
+    font-size: 12pt;   
+}
+
+#page .col3b #right h2 {
+    font-size: 10pt;   
+}
+
 /*= News Page =*/
 
 #news h2 {
@@ -319,6 +345,27 @@ a:hover {
 }
 .block.partijen img {
     max-width: 135px;
+}
+
+/*= Medewerkers Page =*/
+
+#medewerkers p {
+    clear: both;
+    margin-bottom: 10px;
+}
+#medewerkers p img.face {
+    float: left;
+    vertical-align: bottom;
+    margin: 0 10px 10px 0;
+}
+#medewerkers p span.name {
+    font-weight: bold;
+}
+
+/*= FAQ Page =*/
+
+#faq ul {
+    padding-left: 20px;
 }
 
 
