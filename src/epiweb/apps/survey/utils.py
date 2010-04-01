@@ -10,6 +10,7 @@ from epiweb.apps.survey import definitions as d
 from epiweb.apps.survey import models
 from epiweb.apps.survey import widgets
 from epiweb.apps.survey import parser
+from epiweb.apps.survey import signals
 
 from django.conf import settings
 from epidb_client import EpiDBClient
@@ -447,6 +448,13 @@ def add_response_queue(participation, survey, cleaned_data):
     queue.answers = answers
     queue.save()
 
+    signals.response_submit.send(sender=queue,
+                                 user=participation.user,
+                                 date=queue.date,
+                                 user_id=user_id,
+                                 survey_id=survey_id,
+                                 answers=answers)
+
 def add_profile_queue(user, survey, cleaned_data):
     user_id = get_global_id(user)
     profile_survey_id = survey.id
@@ -459,6 +467,13 @@ def add_profile_queue(user, survey, cleaned_data):
     queue.survey_id = profile_survey_id
     queue.answers = answers
     queue.save()
+
+    signals.profile_update.send(sender=queue,
+                                user=user,
+                                date=queue.date,
+                                user_id=user_id,
+                                survey_id=profile_survey_id,
+                                answers=answers)
 
 def get_user_profile(user):
     try:
