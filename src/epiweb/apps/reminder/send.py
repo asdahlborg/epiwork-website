@@ -85,7 +85,7 @@ def _get_url_loginurl(user, next):
         path = reverse('loginurl-index').strip('/')
         _loginurl_base = 'http://%s/%s' % (domain, path)
 
-    url = '%s/%s' % (_loginurl_base, key)
+    url = '%s/%s' % (_loginurl_base, key.key)
     return url
 
 _url = None
