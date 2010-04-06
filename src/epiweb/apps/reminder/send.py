@@ -2,7 +2,7 @@ import datetime
 import smtplib
 
 from django.db.models import Q
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
@@ -109,7 +109,10 @@ def send_to(item):
         message = create_message(url, email, *name)
         next = determine_next(now, item.wday)
 
-        send_mail(subject, message, settings.REMINDER_FROM, (email,))
+        mail = EmailMessage(subject, message, settings.REMINDER_FROM, (email,))
+        if hasattr(settings, 'REMINDER_HTML') and settings.REMINDER_HTML:
+            mail.content_subtype = 'html'
+        mail.send()
 
         item.last_reminder = datetime.datetime.now()
         item.next_reminder = next

@@ -140,6 +140,7 @@ CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
 REMINDER_FROM = 'reminder-no-reply@epiwork.example'
 REMINDER_USE_LOGINURL = True
 REMINDER_LOGINURL_EXPIRES = 7
+REMINDER_HTML = False
 
 SURVEY_ID = 'dev-survey-0.0'
 SURVEY_PROFILE_ID = 'dev-profile-0.0'
