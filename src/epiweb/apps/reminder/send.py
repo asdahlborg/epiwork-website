@@ -11,10 +11,9 @@ from django.conf import settings
 
 from epiweb.apps.reminder.models import Reminder
 
-def create_subject(first_name, last_name=None):
+def create_subject(user):
     t = loader.get_template('reminder/subject.txt')
-    c = Context({'first_name': first_name,
-                 'last_name': last_name})
+    c = Context({'user': user})
 
     text = t.render(c)
     text = " ".join(text.split("\n"))
@@ -22,12 +21,10 @@ def create_subject(first_name, last_name=None):
 
     return text
 
-def create_message(url, email, first_name, last_name=None):
+def create_message(url, user):
     t = loader.get_template('reminder/message.txt')
     c = Context({'url': url,
-                 'first_name': first_name,
-                 'last_name': last_name,
-                 'email': email})
+                 'user': user})
 
     return t.render(c)
 
@@ -105,8 +102,8 @@ def send_to(item):
         name = item.user.first_name, item.user.last_name
 
         email = item.user.email
-        subject = create_subject(*name)
-        message = create_message(url, email, *name)
+        subject = create_subject(item.user)
+        message = create_message(url, item.user)
         next = determine_next(now, item.wday)
 
         mail = EmailMessage(subject, message, settings.REMINDER_FROM, (email,))
