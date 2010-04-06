@@ -19,7 +19,8 @@ class Command(NoArgsCommand):
                                  InvalidResponseError
         
         client = EpiDBClient(settings.EPIDB_API_KEY)
-        client.server = settings.EPIDB_SERVER
+        if hasattr(settings, 'EPIDB_SERVER') and settings.EPIDB_SERVER is not None:
+            client.server = settings.EPIDB_SERVER
 
         total = 0
         total_sent = 0
@@ -57,7 +58,8 @@ class Command(NoArgsCommand):
                                  InvalidResponseError
         
         client = EpiDBClient(settings.EPIDB_API_KEY)
-        client.server = settings.EPIDB_SERVER
+        if hasattr(settings, 'EPIDB_SERVER') and settings.EPIDB_SERVER is not None:
+            client.server = settings.EPIDB_SERVER
 
         total = 0
         total_sent = 0
