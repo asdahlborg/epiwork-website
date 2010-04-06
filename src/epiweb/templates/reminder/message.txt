@@ -1,4 +1,12 @@
-{{ first_name }}
-{{ last_name }}
+Dear {{ user.username }},
 
-{{ url }}
+Thank you for participating in a flu survey. Now it is the time to
+fill a new one for the last period.
+
+Please open the following link:
+
+    {{ url }}
+
+
+Best regards,
+
