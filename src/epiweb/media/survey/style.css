@@ -8,11 +8,17 @@
 
 #survey .question {
     border: 1px solid #ccc;
-    border-left-width: 3px;
-    padding: 20px;
+    /* border-left-width: 3px; */
+    padding: 10px;
     margin-bottom: 10px;
+    
 }
 #survey .label {
+	color:#ffffff;
+	font-weight:bold;
+	background-color:green;
+	padding:10px;
+	background: #3a3 url(/+media-ggm/green_gradient_high.jpg) bottom left repeat-x;
 }
 #survey .answer > * {
     margin: 10px 0;

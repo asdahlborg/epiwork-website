@@ -8,12 +8,13 @@
 {% block extrahead %}{% endblock %}
 </head><body><div id="c">
 
+
 <div id="inetbarcontainer"></div>
 <script type="text/javascript">
 (function() { var bar = new InfluenzaNetBar('inetbarcontainer'); bar.init(); })();
 </script>
 <div id="header">
-    <div id="logo"><a href="/"><img src="/+media-ggm/GGM_logo_top.jpg"/></a></div>
+    <div id="logo"><a href="/"><img border="0" src="/+media-ggm/GGM_logo_top.jpg"/></a></div>
     <div class="banner"></div>
     <div id="account">
 {% if user.is_authenticated %}
@@ -50,4 +51,7 @@
 <p><a href="/">&copy;deGroteGriepMeting.nl</a></p>
 </div>
 
-</div></body></html>
+</div>
+
+
+</body></html>

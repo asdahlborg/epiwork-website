@@ -1,0 +1,18 @@
+{% extends "registration/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<h1>Registratie formulier</h1>
+
+<form method="post" id="registration">
+
+{{ form.as_p }}
+
+<input type='submit' value="Register"/>
+
+</form>
+
+{% endblock %}
+

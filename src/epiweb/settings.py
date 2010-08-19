@@ -10,7 +10,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'epiweb.db'             # Or path to database file if using sqlite3.
+DATABASE_NAME = 'ggm.db'             # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -87,7 +87,7 @@ CMS_TEMPLATES = (
 
 LANGUAGES = (
     ('en', 'English'),
-    #('nl', 'Dutch'),
+    # ('nl', 'Dutch'),
 )
 
 
@@ -146,7 +146,7 @@ REMINDER_USE_LOGINURL = True
 REMINDER_LOGINURL_EXPIRES = 7
 REMINDER_HTML = False
 
-SURVEY_ID = 'dev-survey-0.0'
+SURVEY_ID = 'dev-survey-nl-0.0'
 SURVEY_PROFILE_ID = 'dev-profile-0.0'
 
 import socket
