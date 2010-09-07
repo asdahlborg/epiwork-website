@@ -1,5 +1,10 @@
 {% load cms_tags %}
-<html><head>
+{% load banner_tags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>deGroteGriepMeting</title>
 <link rel="stylesheet" type="text/css" href="/+media-ggm/style.css"/>
 <script type="text/javascript" src="/+media/jquery.js"></script>
@@ -15,7 +20,7 @@
 </script>
 <div id="header">
     <div id="logo"><a href="/"><img border="0" src="/+media-ggm/GGM_logo_top.jpg"/></a></div>
-    <div class="banner"></div>
+    {% banner_image "top-banners" %}
     <div id="account">
 {% if user.is_authenticated %}
         <p>ingelogd als {{ user }}</p>
@@ -38,11 +43,19 @@
     <p><input type="text" name="q"/></p>
     </form>
 </div>
+
+
+
 <div id="menubar">
+
 <ul>
 {% show_menu 0 0 %}
 </ul>
+
 </div>
+
+
+
 <div id="page">
 {% block page %}{% endblock %}
 </div>

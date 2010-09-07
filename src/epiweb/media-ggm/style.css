@@ -92,14 +92,20 @@ a:hover {
 /*= Header =*/
 
 #header {
+	position:relative;
     margin: 10px;
 }
 #header #logo {
     float: left;
 }
 #header div.banner {
+	position:relative;
     float: left;
+    left:17px;
+ 	border: 1px solid #000000;   
 }
+
+
 #header #account {
 	float:right;
 	line-height:13px;
@@ -145,8 +151,12 @@ a:hover {
 /*= Search Bar =*/
 
 #searchbar {
-    text-align: right;
-    margin: 0 10px;
+	float:right;
+	margin:0 10px;
+	position:relative;
+	text-align:right;
+	width:200px;
+	z-index:10;
 }
 #searchbar input[name="q"] {
     width: 150px;
@@ -155,45 +165,82 @@ a:hover {
 /*= Menu Bar =*/
 
 #menubar {
-    background: url(/+media-ggm/menu_bg.jpg) bottom left repeat-x;
-    padding: 0 10px 0px 10px;
-    border-bottom: 0px solid #ccc;
+	position:relative;
+  	background: url("/+media-ggm/menu_bg.jpg"); 
+    background-position:left bottom;
+	background-repeat:repeat-x;
+	padding:20px 10px 0; 
+	height:22px;
 }
+
 #menubar ul {
+	position:absolute;
     list-style: none;
     padding-left: 0px;
-    margin: 0px;
+    margin: 0px;   
+    line-height:12px;
+    bottom:0px;
+
 }
 #menubar li {
-    display: inline;
+
+	bottom:0px;
+   float:left;
+    border: 1px solid #cccccc;   
+    padding:2px 0px;
+	margin-right:3px;
+    background: #ffffff;
+    line-height:16px;
+    
 }
 #menubar li a {
-    border: 1px solid #ccc;
-    background: white;
     text-decoration: none;
     color: black;
     font-weight: bold;
     font-size: 8pt;
-    padding: 3px 5px;
+    padding:4px 10px;
+    text-align:center;
+	margin:0px;
+	line-height:16px;
 }
+
 #menubar li a:hover {
-    color: #393;
-    border-bottom: 1px solid #ffffff;    
+    color: #393;       
 }
+
+#menubar li:hover {
+    color: #393;    
+    border-bottom: 1px solid #eeeeee;
+}
+
 
 #menubar li a.active {
     background: #393;
     color: white;
 }
 
-
-#menubar li.selected a {
+#menubar li.selected {
     background: #393;
-    color: white;	
     background-image:url("/+media-ggm/menu_header_green_gradient.jpg");
 	background-position:left bottom;
-	border-bottom: 1px solid #216a33;
+	border-bottom: 1px solid #1f6832;
+	line-height:16px;
 }
+
+#menubar li.selected:hover {
+    background: #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+
+#menubar li.selected a {
+    color: white;	
+}
+
+#menubar li.selected a:hover {
+    color: #393;	
+    
+}
+
 
 
 /*= Footer =*/
@@ -223,7 +270,7 @@ a:hover {
 #page .col3 #left {
     float: left;
     width: 300px;
-    padding-right: 10px;
+    margin-right: 10px;
 }
 
 #page .col3 #content {
@@ -257,13 +304,15 @@ a:hover {
 }
 #page .col3 #left .news .title {
     font-weight: bold;
+    margin:0;
 }
 #page .col3 #left .news .title a {
     color: black;
     font-size: 9pt;
 }
 #page .col3 #left .news .excerpt {
-    font-size: 8pt;   
+    font-size: 8pt; 
+    margin:0;
 }
 
 /*= 3 Columns Layout Style 2 =*/
