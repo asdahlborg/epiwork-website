@@ -1,0 +1,16 @@
+{% extends "base_3col2.html" %}
+{% load cms_tags %}
+{% load cms_extra %}
+
+{% block content %}
+{% placeholder "content" %}
+{% endblock %}
+
+{% block left %}
+{% page_subfolders %}
+{% endblock %}
+
+{% block right %}
+{% page_children %}
+{% endblock %}
+

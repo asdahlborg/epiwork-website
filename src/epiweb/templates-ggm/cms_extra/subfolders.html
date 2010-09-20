@@ -1,0 +1,10 @@
+{% if subfolders %}
+
+<ul>
+{% for item in subfolders %}
+<li><a href="{{ item.get_absolute_url }}">{{ item.get_title }}</a></li>
+{% endfor %}
+</ul>
+
+{% endif %}
+

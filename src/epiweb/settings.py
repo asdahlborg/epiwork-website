@@ -83,6 +83,7 @@ CMS_TEMPLATES = (
     ('cms/base_2col.html', "2 Columns"),
     ('cms/base_3col2.html', "3 Columns"),
     ('cms/base_3col.html', "3 Columns (Main Page)"),
+    ('cms/base_folder.html', "Folder"),
 )
 
 LANGUAGES = (
