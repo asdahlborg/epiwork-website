@@ -1,11 +1,11 @@
-from django import template
+from django.template import Library
 from django.contrib.sites.models import Site
 from django.utils.safestring import mark_safe
 
 from cms.utils import get_language_from_request
 from cms.utils.moderator import get_page_queryset
 
-register = template.Library()
+register = Library()
 
 @register.inclusion_tag('cms/dummy.html', takes_context=True)
 def page_children(context, template="cms_extra/children.html"):
