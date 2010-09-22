@@ -62,10 +62,17 @@ def page_subfolders(context):
     return context
 
 @register.filter
-def first_plugin(page):
+def first_plugin(page, placeholder=None):
     try:
-        plugin = page.cmsplugin_set.all().order_by('position')[0]
-        return mark_safe(plugin.render_plugin())
+        if placeholder is None:
+            plugins = page.cmsplugin_set.all().order_by('position')
+        else:
+            plugins = page.cmsplugin_set.filter(placeholder=placeholder)\
+                                        .order_by('position')
+        if len(plugins) > 0:
+            return mark_safe(plugins[0].render_plugin())
+        else:
+            return ''
     except IndexError:
         return ''
 
