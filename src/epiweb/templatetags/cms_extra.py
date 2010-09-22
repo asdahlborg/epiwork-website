@@ -12,6 +12,8 @@ def page_children(context):
     site = Site.objects.get_current()
     request = context['request']
     current = request.current_page
+    if current == 'dummy':
+        return context
 
     page_queryset = get_page_queryset(request)
 
@@ -36,6 +38,8 @@ def page_subfolders(context):
     site = Site.objects.get_current()
     request = context['request']
     current = request.current_page
+    if current == 'dummy':
+        return context
 
     page_queryset = get_page_queryset(request)
 
