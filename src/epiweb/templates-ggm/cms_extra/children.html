@@ -4,7 +4,7 @@
 
 {% for item in children %}
 <h3><a href="{{ item.get_absolute_url }}">{{ item.get_title }}</a></h3>
-{{ item|first_plugin }}
+{{ item|first_plugin:"content" }}
 {% endfor %}
 
 {% endif %}
