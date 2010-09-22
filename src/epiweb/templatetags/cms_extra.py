@@ -7,8 +7,10 @@ from cms.utils.moderator import get_page_queryset
 
 register = template.Library()
 
-@register.inclusion_tag('cms_extra/children.html', takes_context=True)
-def page_children(context):
+@register.inclusion_tag('cms/dummy.html', takes_context=True)
+def page_children(context, template="cms_extra/children.html"):
+    context.update({'template': template})
+
     site = Site.objects.get_current()
     request = context['request']
     current = request.current_page
@@ -34,8 +36,10 @@ def page_children(context):
     context.update({'children': children})
     return context
 
-@register.inclusion_tag('cms_extra/subfolders.html', takes_context=True)
-def page_subfolders(context):
+@register.inclusion_tag('cms/dummy.html', takes_context=True)
+def page_subfolders(context, template='cms_extra/subfolders.html'):
+    context.update({'template': template})
+
     site = Site.objects.get_current()
     request = context['request']
     current = request.current_page
