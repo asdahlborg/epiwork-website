@@ -31,7 +31,8 @@ def page_children(context):
     descendant = list(page_queryset.published().filter(**filters))
     children = [item for item in descendant if item.id not in parent_ids]
 
-    return {'children': children}
+    context.update({'children': children})
+    return context
 
 @register.inclusion_tag('cms_extra/subfolders.html', takes_context=True)
 def page_subfolders(context):
@@ -57,7 +58,8 @@ def page_subfolders(context):
     descendant = list(page_queryset.published().filter(**filters))
     subfolders = [item for item in descendant if item.id in parent_ids]
 
-    return {'subfolders': subfolders}
+    context.update({'subfolders': subfolders})
+    return context
 
 @register.filter
 def first_plugin(page):
