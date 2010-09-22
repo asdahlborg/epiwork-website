@@ -42,24 +42,36 @@ class UnknownSurveyError(Exception):
         msg = 'Unknown survey id: %s' % self.survey_id
         Exception.__init__(self, msg)
 
-_survey = None
-_profile = None
+_survey = {}
+_profile = {}
 _survey_object = {}
 _form = {}
 
-def get_survey():
-    global _survey
-    if _survey is None:
+def get_survey(survey_id=None):
+    if survey_id is None:
         survey_id = settings.SURVEY_ID
-        _survey = _get_survey_object(survey_id)
-    return _survey
 
-def get_profile():
-    global _profile
-    if _profile is None:
+    survey = _survey.get(survey_id, None)
+    if survey is None:
+        survey = _get_survey_object(survey_id)
+
+        global _survey
+        _survey[survey_id] = survey
+
+    return survey
+
+def get_profile(profile_survey_id=None):
+    if profile_survey_id is None:
         profile_survey_id = settings.SURVEY_PROFILE_ID
-        _profile = _get_survey_object(profile_survey_id)
-    return _profile
+
+    profile = _profile.get(profile_survey_id, None)
+    if profile is None:
+        profile = _get_survey_object(profile_survey_id)
+
+        global _profile
+        _profile[profile_survey_id] = profile
+
+    return profile
 
 def _get_survey_object(survey_id):
     global _survey_object
