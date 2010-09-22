@@ -1,9 +1,14 @@
 {% extends "base_3col2.html" %}
 {% load cms_tags %}
+{% load cms_extra %}
 
 {% block left %}{% placeholder "left" %}
-{% include "submenu.html" %}
+
 {% endblock %}
 {% block content %}{% placeholder "content" %}{% endblock %}
-{% block right %}{% placeholder "right" %}{% endblock %}
+{% block right %}
+
+{% placeholder "right" %}
+
+{% endblock %}
 

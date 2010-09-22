@@ -1,10 +1,11 @@
 {% if subfolders %}
+<ul class="subfolders">
 
-<ul>
+<!-- <li><a href="{{ item.get_absolute_url }}">&lt;&lt; Het Project</a></li> -->
+
 {% for item in subfolders %}
 <li><a href="{{ item.get_absolute_url }}">{{ item.get_title }}</a></li>
 {% endfor %}
 </ul>
-
 {% endif %}
 
