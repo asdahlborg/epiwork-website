@@ -26,8 +26,8 @@ def page_children(context):
 
     filters = {'parent': current,
                'in_navigation': True}
-    ancestor = list(page_queryset.published().filter(**filters))
-    children = [item for item in ancestor if item.id not in parent_ids]
+    descendant = list(page_queryset.published().filter(**filters))
+    children = [item for item in descendant if item.id not in parent_ids]
 
     return {'children': children}
 
@@ -50,8 +50,8 @@ def page_subfolders(context):
 
     filters = {'parent': current,
                'in_navigation': True}
-    ancestor = list(page_queryset.published().filter(**filters))
-    subfolders = [item for item in ancestor if item.id in parent_ids]
+    descendant = list(page_queryset.published().filter(**filters))
+    subfolders = [item for item in descendant if item.id in parent_ids]
 
     return {'subfolders': subfolders}
 
