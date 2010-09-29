@@ -13,7 +13,7 @@ from epiweb.apps.survey import parser
 from epiweb.apps.survey import signals
 
 from django.conf import settings
-from epidb_client import EpiDBClient
+from epidb_client import EpiDBClient, ResponseError, InvalidResponseError
 
 from datetime import datetime
 
@@ -531,4 +531,64 @@ def save_profile(survey_user, survey_data, data):
     profile.survey = survey_data
     profile.valid = True
     profile.save()
+
+def flush_response_queue():
+    client = EpiDBClient(settings.EPIDB_API_KEY)
+    if hasattr(settings, 'EPIDB_SERVER') and settings.EPIDB_SERVER is not None:
+        client.server = settings.EPIDB_SERVER
+
+    total = 0
+    total_sent = 0
+    total_error = 0
+
+    surveys = ResponseSendQueue.objects.order_by('date')
+    for survey in surveys:
+        date = survey.date
+        survey_id = survey.survey_id
+        user_id = survey.user_id
+        answers = pickle.loads(str(survey.answers))
+
+        try:
+            res = client.response_submit(user_id, survey_id,
+                                         answers, date)
+            survey.set_sent(res['id'])
+            total_sent += 1
+        except InvalidResponseError, e:
+            total_error += 1
+        except ResponseError, e:
+            total_error += 1
+
+        total += 1
+
+    return total_sent, total_error
+
+def flush_profile_queue():
+    client = EpiDBClient(settings.EPIDB_API_KEY)
+    if hasattr(settings, 'EPIDB_SERVER') and settings.EPIDB_SERVER is not None:
+        client.server = settings.EPIDB_SERVER
+
+    total = 0
+    total_sent = 0
+    total_error = 0
+
+    surveys = models.ProfileSendQueue.objects.order_by('date')
+    for survey in surveys:
+        date = survey.date
+        profile_survey_id = survey.survey_id
+        user_id = survey.user_id
+        answers = pickle.loads(str(survey.answers))
+
+        try:
+            res = client.profile_update(user_id, profile_survey_id,
+                                        answers, date)
+            survey.set_sent(res['id'])
+            total_sent += 1
+        except InvalidResponseError, e:
+            total_error += 1
+        except ResponseError, e:
+            total_error += 1
+
+        total += 1
+
+    return total_sent, total_error
 
