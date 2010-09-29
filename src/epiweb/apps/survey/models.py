@@ -99,10 +99,6 @@ def add_empty_profile(sender, **kwargs):
     except Profile.DoesNotExist:
         profile = Profile()
         profile.user = instance
-        profile.valid = False
-        profile.created = None
-        profile.updated = None
-        profile.data = None
         profile.save()
 
 post_save.connect(add_global_id, sender=User)
