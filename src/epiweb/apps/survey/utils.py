@@ -102,13 +102,6 @@ def _generate_form_class(survey):
     helper = SurveyFormHelper(survey)
     return helper.create_form
 
-def get_global_id(user):
-    try:
-        user2 = models.SurveyUser.objects.get(user=user)
-        return user2.global_id
-    except models.SurveyUser.DoesNotExist:
-        return None
-
 class JavascriptHelper:
     def __init__(self, survey, survey_user, container_id='survey',
                  question_id_prefix="q_"):
