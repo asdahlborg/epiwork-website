@@ -110,10 +110,10 @@ def get_global_id(user):
         return None
 
 class JavascriptHelper:
-    def __init__(self, survey, user, container_id='survey', 
+    def __init__(self, survey, survey_user, container_id='survey',
                  question_id_prefix="q_"):
         self.survey = survey
-        self.user = user
+        self.survey_user = survey_user
         self.container = container_id
         self.prefix = question_id_prefix
         self.js = None
@@ -228,7 +228,7 @@ class JavascriptHelper:
         lines = []
         lines.append('s.profiles = [];')
 
-        data = get_user_profile(self.user)
+        data = get_user_profile(self.survey_user)
         for profile in self.checked_profiles:
             name = profile.name
             value = data.get(name, 'undefined')
@@ -361,14 +361,14 @@ class SurveyFormHelper:
         self.survey = survey
         self.form_class = None
 
-    def create_form(self, user, data=None):
+    def create_form(self, survey_user, data=None):
         if self.form_class is None:
             self._generate_form()
 
         if data is None:
-            return self.form_class(survey=self.survey, user=user)
+            return self.form_class(survey=self.survey, user=survey_user)
         else:
-            return self.form_class(data, survey=self.survey, user=user)
+            return self.form_class(data, survey=self.survey, user=survey_user)
 
     def _generate_form(self):
         fields = {}
@@ -430,25 +430,23 @@ def _create_answers(survey, cleaned_data):
 
     return data
 
-def add_survey_participation(user, survey_data, id=None):
-    su = models.SurveyUser.objects.get(user=user)
-
+def add_survey_participation(survey_user, survey_data, id=None):
     participation = models.Participation()
-    participation.user = user
+    participation.user = survey_user
     participation.survey = survey_data
     participation.epidb_id = id
-    participation.previous_participation = su.last_participation
-    participation.previous_participation_date = su.last_participation_date
+    participation.previous_participation = survey_user.last_participation
+    participation.previous_participation_date = survey_user.last_participation_date
     participation.save()
 
-    su.last_participation = participation
-    su.last_participation_date = participation.date
-    su.save()
+    survey_user.last_participation = participation
+    survey_user.last_participation_date = participation.date
+    survey_user.save()
 
     return participation
 
 def add_response_queue(participation, survey, cleaned_data):
-    user_id = get_global_id(participation.user)
+    user_id = participation.user.global_id
     survey_id = survey.id
     answers = pickle.dumps(_create_answers(survey, cleaned_data))
 
@@ -467,13 +465,13 @@ def add_response_queue(participation, survey, cleaned_data):
                                  survey_id=survey_id,
                                  answers=answers)
 
-def add_profile_queue(user, survey, cleaned_data):
-    user_id = get_global_id(user)
+def add_profile_queue(survey_user, survey, cleaned_data):
+    user_id = survey_user.global_id
     profile_survey_id = survey.id
     answers = pickle.dumps(_create_answers(survey, cleaned_data))
 
     queue = models.ProfileSendQueue()
-    queue.owner = user
+    queue.owner = survey_user
     queue.date = datetime.utcnow()
     queue.user_id = user_id
     queue.survey_id = profile_survey_id
@@ -481,15 +479,15 @@ def add_profile_queue(user, survey, cleaned_data):
     queue.save()
 
     signals.profile_update.send(sender=queue,
-                                user=user,
+                                user=survey_user,
                                 date=queue.date,
                                 user_id=user_id,
                                 survey_id=profile_survey_id,
                                 answers=answers)
 
-def get_user_profile(user):
+def get_user_profile(survey_user):
     try:
-        profile = models.Profile.objects.get(user=user)
+        profile = models.Profile.objects.get(user=survey_user)
         if not profile.valid:
             return None
         return pickle.loads(str(profile.data))
@@ -514,12 +512,12 @@ def format_profile_data(profile, data):
 
     return res
 
-def save_profile(user, survey_data, data):
+def save_profile(survey_user, survey_data, data):
     try:
-        profile = models.Profile.objects.get(user=user)
+        profile = models.Profile.objects.get(user=survey_user)
     except models.Profile.DoesNotExist:
         profile = models.Profile()
-        profile.user = user
+        profile.user = survey_user
 
     profile.data = pickle.dumps(data)
     profile.survey = survey_data
