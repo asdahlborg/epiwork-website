@@ -111,3 +111,7 @@ class Profile(Value):
     def __init__(self, name):
         self.name = name
 
+class Previous(Value):
+    def __init__(self, name):
+        self.name = name
+
