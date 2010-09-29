@@ -102,5 +102,5 @@ def add_empty_profile(sender, **kwargs):
         profile.save()
 
 post_save.connect(add_global_id, sender=User)
-post_save.connect(add_empty_profile, sender=User)
+post_save.connect(add_empty_profile, sender=SurveyUser)
 
