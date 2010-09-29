@@ -106,6 +106,16 @@ def add_empty_profile(sender, **kwargs):
         profile.user = instance
         profile.save()
 
+def add_empty_last_response(sender, **kwargs):
+    instance = kwargs.get('instance', None)
+    try:
+        response = LastResponse.objects.get(user=instance)
+    except LastResponse.DoesNotExist:
+        response = LastResponse()
+        response.user = instance
+        response.save()
+
 post_save.connect(add_global_id, sender=User)
 post_save.connect(add_empty_profile, sender=SurveyUser)
+post_save.connect(add_empty_last_response, sender=SurveyUser)
 
