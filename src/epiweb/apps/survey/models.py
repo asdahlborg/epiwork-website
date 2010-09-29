@@ -56,7 +56,7 @@ class ProfileSendQueue(models.Model):
         self.delete()
 
 class SurveyUser(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.ForeignKey(User)
     global_id = models.CharField(max_length=36, unique=True,
                                  default=create_global_id)
     last_participation = models.ForeignKey(Participation, null=True)
