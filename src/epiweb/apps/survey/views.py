@@ -61,6 +61,8 @@ def index(request):
                                                            survey._data)
 
             utils.add_response_queue(participation, survey, form.cleaned_data)
+            data = utils.format_response_data(survey, form.cleaned_data)
+            utils.save_last_response(survey_user, participation, data)
 
             return HttpResponseRedirect(reverse(
                                           'epiweb.apps.survey.views.thanks'))

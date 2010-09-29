@@ -520,6 +520,10 @@ def format_profile_data(profile, data):
 
     return res
 
+def format_response_data(survey, data):
+    # FIXME
+    return format_profile_data(survey, data)
+
 def save_profile(survey_user, survey_data, data):
     try:
         profile = models.Profile.objects.get(user=survey_user)
@@ -531,6 +535,17 @@ def save_profile(survey_user, survey_data, data):
     profile.survey = survey_data
     profile.valid = True
     profile.save()
+
+def save_last_response(survey_user, participation, data):
+    try:
+        response = models.LastResponse.objects.get(user=survey_user)
+    except models.LastResponse.DoesNotExist:
+        response = models.LastResponse()
+        response.user = survey_user
+
+    response.participation = participation
+    response.data = pickle.dumps(data)
+    response.save()
 
 def flush_response_queue():
     client = EpiDBClient(settings.EPIDB_API_KEY)
