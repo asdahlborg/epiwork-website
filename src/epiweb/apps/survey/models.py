@@ -20,7 +20,7 @@ class Survey(models.Model):
         return '%s - %s' % (self.survey_id, self.title)
 
 class Participation(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(SurveyUser)
     survey = models.ForeignKey(Survey)
     date = models.DateTimeField(auto_now_add=True)
     epidb_id = models.CharField(max_length=36, null=True)
@@ -46,7 +46,7 @@ class ResponseSendQueue(models.Model):
         self.delete()
 
 class ProfileSendQueue(models.Model):
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey(SurveyUser)
     date = models.DateTimeField()
     user_id = models.CharField(max_length=36)
     survey_id = models.CharField(max_length=50)
@@ -65,7 +65,7 @@ class SurveyUser(models.Model):
         verbose_name_plural = 'User'
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.ForeignKey(SurveyUser, unique=True)
     created = models.DateTimeField(null=True)
     updated = models.DateTimeField(null=True)
     valid = models.BooleanField(default=False)
