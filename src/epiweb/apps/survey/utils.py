@@ -483,10 +483,12 @@ def add_profile_queue(survey_user, survey, cleaned_data):
 def get_user_profile(survey_user):
     try:
         profile = models.Profile.objects.get(user=survey_user)
-        if not profile.valid:
+        if not profile.valid or not profile.data:
             return None
         return pickle.loads(str(profile.data))
-    except (models.Profile.DoesNotExist, ValueError):
+    except models.Profile.DoesNotExist:
+        return None
+    except StandardError:
         return None
 
 def format_profile_data(profile, data):
