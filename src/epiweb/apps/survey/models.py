@@ -83,6 +83,11 @@ class Profile(models.Model):
     class Meta:
         verbose_name_plural = 'User profile'
 
+class LastResponse(models.Model):
+    user = models.ForeignKey(SurveyUser, unique=True)
+    participation = models.ForeignKey(Participation, null=True, default=None)
+    data = models.TextField(null=True, blank=True, default=None)
+
 def add_global_id(sender, **kwargs):
     instance = kwargs.get('instance', None)
     try:
