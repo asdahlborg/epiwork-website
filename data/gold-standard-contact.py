@@ -1,36 +1,38 @@
 # Contact questionnaire 
 
-class ContactQ1(d.Question):
-  question = 'How many people did you have conversational contact with' +\
-             ' yesterday?'
+# Table functionality required
 
-0-4 years
-5-18 years
-19-44 years
-45-64 years
-65+ years
-
-Home
-
-Work
-
-Other
-
-
-class ContactQ2(d.Question):
-  question = 'How many people did you have physical contact with yesterday?'
-
-0-4 years
-5-18 years
-19-44 years
-45-64 years
-65+ years
-
-Home
-
-Work
-
-Other
+# class ContactQ1(d.Question):
+#   question = 'How many people did you have conversational contact with' +\
+#              ' yesterday?'
+# 
+# 0-4 years
+# 5-18 years
+# 19-44 years
+# 45-64 years
+# 65+ years
+# 
+# Home
+# 
+# Work
+# 
+# Other
+# 
+# 
+# class ContactQ2(d.Question):
+#   question = 'How many people did you have physical contact with yesterday?'
+# 
+# 0-4 years
+# 5-18 years
+# 19-44 years
+# 45-64 years
+# 65+ years
+# 
+# Home
+# 
+# Work
+# 
+# Other
 
 
 
@@ -62,9 +64,8 @@ class ContactQ4(d.Question):
 
 class GoldStandardContact(d.Survey):
     id = 'gold-standard-contact-0.1.0'
-    rules = (
-        ContactQ1,
-        ContactQ2,
-        ContactQ3,
-        ContactQ4,
+    rules = (# ContactQ1,
+             #  ContactQ2,
+             ContactQ3,
+             ContactQ4,
     )
