@@ -66,11 +66,11 @@ class SurveyUser(models.Model):
 
 class Profile(models.Model):
     user = models.ForeignKey(SurveyUser, unique=True)
-    created = models.DateTimeField(null=True)
-    updated = models.DateTimeField(null=True)
+    created = models.DateTimeField(null=True, default=None)
+    updated = models.DateTimeField(null=True, default=None)
     valid = models.BooleanField(default=False)
-    data = models.TextField(null=True, blank=True)
-    survey = models.ForeignKey(Survey, null=True)
+    data = models.TextField(null=True, blank=True, default=None)
+    survey = models.ForeignKey(Survey, null=True, default=None)
 
     def save(self):
         if self.valid:
