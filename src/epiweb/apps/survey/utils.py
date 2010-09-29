@@ -111,6 +111,7 @@ class JavascriptHelper:
         self.prefix = question_id_prefix
         self.js = None
         self.checked_profiles = []
+        self.checked_responses = []
 
     def get_javascript(self):
         if self.js is None:
@@ -126,6 +127,7 @@ class JavascriptHelper:
         lines += self._create_affected_list()
         lines += self._create_rules()
         lines += self._create_profile_data()
+        lines += self._create_last_response_data()
         lines.append("s.init();")
         lines.append("})('%s', '%s');" % (self.container, self.prefix))
         self.js = "\n".join(lines)
@@ -179,6 +181,10 @@ class JavascriptHelper:
                 if value not in self.checked_profiles:
                     self.checked_profiles.append(value)
                 return "s.Profile('%s')" % value.name
+            elif isinstance(value, d.Previous):
+                if value not in self.checked_responses:
+                    self.checked_responses.append(value)
+                return "s.Previous('%s')" % value.name
         elif t == 'classobj' and issubclass(value, d.Value):
             name = value.__name__
             if name == 'Empty':
@@ -231,6 +237,25 @@ class JavascriptHelper:
             lines.append("s.profiles['%s'] = %s;" % (name, value))
 
         return lines
+
+    def _create_last_response_data(self):
+        if len(self.checked_responses) == 0:
+            return []
+
+        lines = []
+        lines.append('s.previous = [];')
+
+        data = get_user_profile(self.survey_user)
+        for profile in self.checked_responses:
+            name = profile.name
+            value = data.get(name, 'undefined')
+            tvalue = type(value).__name__
+            if tvalue == 'string':
+                value = "'%s'" % value
+            lines.append("s.previous['%s'] = %s;" % (name, value))
+
+        return lines
+
 
 class SurveyFormBase(forms.Form):
     def __init__(self, *args, **kwargs):

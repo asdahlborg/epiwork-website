@@ -246,7 +246,10 @@ Survey.prototype = {
     },
     Profile: function(pid) {
         return this.profiles[pid];
-    }
+    },
+    Previous: function(pid) {
+        return this.previous[pid];
+    },
 }
 
 this.Survey = Survey;
