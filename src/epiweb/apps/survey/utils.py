@@ -543,6 +543,17 @@ def get_last_response(survey_user):
     except StandardError:
         return None
 
+def get_last_response(survey_user):
+    try:
+        response = models.LastResponse.objects.get(user=survey_user)
+        if not response.data:
+            return None
+        return pickle.loads(str(profile.data))
+    except models.LastResponse.DoesNotExist:
+        return None
+    except StandardError:
+        return None
+
 def format_profile_data(profile, data):
     res = {}
     for question in profile.questions:
