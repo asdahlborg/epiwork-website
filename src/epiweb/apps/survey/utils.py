@@ -309,6 +309,19 @@ class SurveyFormBase(forms.Form):
         else:
             return [value]
 
+    def _get_previous(self, name):
+        if self._previous is None:
+            self._previous = get_last_response(self._user)
+        if self._previous is None:
+            return None
+
+        value = self._previous.get(name, None)
+        tvalue = type(value).__name__
+        if value is None:
+            return None
+        else:
+            return [value]
+
     def _get_question_value(self, question):
         if question.id not in self.cleaned_data.keys():
             raise UsingInvalidDataError()
@@ -339,6 +352,8 @@ class SurveyFormBase(forms.Form):
                 return value.values
             elif isinstance(value, d.Profile):
                 return self._get_profile(value.name)
+            elif isinstance(value, d.Previous):
+                return self._get_previous(value.name)
         elif t == 'classobj' and issubclass(value, d.Value):
             name = value.__name__
             if name == 'Empty':
