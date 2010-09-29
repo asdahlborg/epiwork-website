@@ -5,6 +5,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
+def create_global_id():
+    return str(uuid.uuid4())
+
 class Survey(models.Model):
     survey_id = models.CharField(max_length=50, unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,7 +57,7 @@ class ProfileSendQueue(models.Model):
 
 class SurveyUser(models.Model):
     user = models.ForeignKey(User, unique=True)
-    global_id = models.CharField(max_length=36)
+    global_id = models.CharField(max_length=36, default=create_global_id)
     last_participation = models.ForeignKey(Participation, null=True)
     last_participation_date = models.DateTimeField(null=True)
 
@@ -87,7 +90,6 @@ def add_global_id(sender, **kwargs):
     except SurveyUser.DoesNotExist:
         user = SurveyUser()
         user.user = instance
-        user.global_id = str(uuid.uuid4())
         user.save()
 
 def add_empty_profile(sender, **kwargs):
