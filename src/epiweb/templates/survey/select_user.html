@@ -1,0 +1,12 @@
+{% extends "survey/base.html" %}
+
+{% block content %}
+<h1>Select User</h1>
+
+<ul>
+{% for user in users %}
+<li><a href="{{ next }}?gid={{ user.global_id }}">{{ user }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
+
