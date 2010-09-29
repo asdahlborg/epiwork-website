@@ -299,6 +299,8 @@ class SurveyFormBase(forms.Form):
     def _get_profile(self, name):
         if self._profile is None:
             self._profile = get_user_profile(self._user)
+        if self._profile is None:
+            return None
 
         value = self._profile.get(name, None)
         tvalue = type(value).__name__
@@ -484,7 +486,7 @@ def get_user_profile(survey_user):
         if not profile.valid:
             return None
         return pickle.loads(str(profile.data))
-    except models.Profile.DoesNotExist:
+    except (models.Profile.DoesNotExist, ValueError):
         return None
 
 def format_profile_data(profile, data):
