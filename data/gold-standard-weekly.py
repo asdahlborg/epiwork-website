@@ -26,11 +26,11 @@ class WeeklyQ1(d.Question):
 # N.B. There is no WeeklyQ2.  Instead there is a db check.
 
 # Check database: was the participant STILL ILL at the time of their last visit
-# (i.e. they said “I am still ill” in response to Q5 below last time?)
+# (i.e. they said "I am still ill" in response to Q5 below last time?)
 
 # Yes: If the participant reported symptoms during the last visit, continue
 # with Q3
-# No: Then this could potentially be the start of a “new” illness, continue
+# No: Then this could potentially be the start of a "new" illness, continue
 # with Q4
 
 # If the participant was STILL ILL on their last visit and has reported
@@ -44,7 +44,7 @@ class WeeklyQ3(d.Question):
   options = ((0, 'Yes'),
              (1, 'No'),
              )
-# If NO: This means that the current symptoms are the start of a “new” illness,
+# If NO: This means that the current symptoms are the start of a "new" illness,
 # continue with Q4
 
 # if YES: This means that the current symptoms are the continuation of the same
@@ -53,10 +53,10 @@ class WeeklyQ3(d.Question):
 # seeking medical attention, treatment, time off work/school) can be pre-filled
 # with their previous answers:
 
-# “To save you time, we have filled in the information you gave us previously
+# "To save you time, we have filled in the information you gave us previously
 # about your illness. Please check that it is still correct, and make any
-# changes – for instance, if you have visited a doctor since you last completed
-# the survey.”
+# changes -- for instance, if you have visited a doctor since you last completed
+# the survey."
 
 class WeeklyQ4(d.Question):
   question = 'When did the first symptoms appear?'
@@ -78,11 +78,11 @@ class WeeklyQ6(d.Question):
 class WeeklyQ6b(d.Question):
   question = 'If you had a fever, what was the highest temperature measured? '
   type = 'options-single'
-  options = ((0, '37° - 37.5°C'),
-             (1, '37.5° - 38°C'),
-             (2, '38° – 39°C'),
-             (3, '39° - 40°C'),
-             (4, 'More than 40°C'),
+  options = ((0, '37C - 37.5C'),
+             (1, '37.5C - 38C'),
+             (2, '38C - 39C'),
+             (3, '39C - 40C'),
+             (4, 'More than 40C'),
              (5, 'I did not measure it with a thermometer'),
              )
 
@@ -100,7 +100,7 @@ class WeeklyQ8(d.Question):
              'visiting (seeing face to face) any of the following (tick all ' \
              'that apply)?'
   type = 'options-multiple'
-  options = ((0, 'General practitioner (GP) or GP’s practice nurse'),
+  options = ((0, "General practitioner (GP) or GP's practice nurse"),
              (1, 'Hospital admission'),
              (2, 'Hospital accident & emergency department/out of hours service'),
              (3, 'Other'),
@@ -124,8 +124,8 @@ class WeeklyQ8c(d.Question):
   question = 'Because of your symptoms, did you seek medical attention by ' \
              'telephone with any of the following (tick all that apply)?'
   type = 'options-multiple'
-  options = ((0, 'GP – spoke to receptionist only'),
-             (1, 'GP – spoke to GP/practice nurse'),
+  options = ((0, 'GP - spoke to receptionist only'),
+             (1, 'GP - spoke to GP/practice nurse'),
              (2, 'NHS direct or NHS24'),
              (3, 'NPFS'),
              (4, 'Other'),
@@ -209,11 +209,11 @@ class WeeklyQ11(d.Question):
 class WeeklyQ12(d.Question):
   question = 'According to our data you did not receive a seasonal flu ' \
              'vaccination?'
-    type = 'options-single'
-    options = (
-      (0, 'Yes, I did not receive a seasonal flu vaccination'),
-      (1, 'No, meanwhile I have received a seasonal flu vaccination'),
-      )
+  type = 'options-single'
+  options = (
+    (0, 'Yes, I did not receive a seasonal flu vaccination'),
+    (1, 'No, meanwhile I have received a seasonal flu vaccination'),
+    )
 
 class GoldStandardWeekly(d.Survey):
     id = 'gold-standard-weekly-0.1.0'
@@ -221,20 +221,20 @@ class GoldStandardWeekly(d.Survey):
       WeeklyQ1,
       # { if-still-ill: WeeklyQ3 },
       # { (WeeklyQ3 'is' 0) : 'Notify user that answers are prefilled' },
-      { (WeeklyQ1 'is-not' 0):( WeeklyQ4,
-                                WeeklyQ5,
-                                WeeklyQ6,
-                                { ( WeeklyQ6 'is' 1 ) : ( WeeklyQ6b ) },
-                                WeeklyQ7,
-                                WeeklyQ8,
-                                WeeklyQ8b, #  table dependent of WeeklyQ8
-                                WeeklyQ8c,
-                                WeeklyQ9,
-                                { (3, 'is-in', WeeklyQ9) : ( WeeklyQ9b, ) },
-                                WeeklyQ10,
-                                { (WeeklyQ10, 'is', 2) : ( WeeklyQ10b,
-                                                           WeeklyQ10c ) },
-                                ) },
+      { (WeeklyQ1, 'is-not', 0):( WeeklyQ4,
+                                  WeeklyQ5,
+                                  WeeklyQ6,
+                                  { ( WeeklyQ6, 'is', 1 ) : ( WeeklyQ6b ) },
+                                  WeeklyQ7,
+                                  WeeklyQ8,
+                                  WeeklyQ8b, #  table dependent of WeeklyQ8
+                                  WeeklyQ8c,
+                                  WeeklyQ9,
+                                  { (3, 'is-in', WeeklyQ9) : ( WeeklyQ9b, ) },
+                                  WeeklyQ10,
+                                  { (WeeklyQ10, 'is', 2) : ( WeeklyQ10b,
+                                                             WeeklyQ10c ) },
+                                  ) },
       WeeklyQ11,
       # WeeklyQ12, # dependent on report of seasonal flu vaccination in intake
       )
