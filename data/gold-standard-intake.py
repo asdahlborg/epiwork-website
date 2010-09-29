@@ -245,7 +245,7 @@ class IntakeQ17(d.Question):
              (4, 'Yes, one ore more other animals'),
              )
 
-class GoldStandardIntake(d.Survey):
+class Survey(d.Survey):
     id = 'gold-standard-intake-0.1.0'
     rules = ( IntakeQ1,
               IntakeQ2,

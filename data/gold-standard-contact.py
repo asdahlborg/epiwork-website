@@ -62,7 +62,7 @@ class ContactQ4(d.Question):
     )
   
 
-class GoldStandardContact(d.Survey):
+class Survey(d.Survey):
     id = 'gold-standard-contact-0.1.0'
     rules = (# ContactQ1,
              #  ContactQ2,

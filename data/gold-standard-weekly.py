@@ -215,7 +215,7 @@ class WeeklyQ12(d.Question):
     (1, 'No, meanwhile I have received a seasonal flu vaccination'),
     )
 
-class GoldStandardWeekly(d.Survey):
+class Survey(d.Survey):
     id = 'gold-standard-weekly-0.1.0'
     rules = (
       WeeklyQ1,
