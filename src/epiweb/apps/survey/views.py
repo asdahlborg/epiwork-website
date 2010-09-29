@@ -17,12 +17,15 @@ survey_form_helper = None
 profile_form_helper = None
 
 def get_active_survey_user(request):
-    # FIXME one (Django) user can maintain more than one survey user
-    #       so, there should be an identifier somewhere that points
-    #       to the survey user that is filling the survey
-    #       for now, just assume the (Django) user is one-to-one mapped
-    #       to a survey user
-    return request.user.surveyuser_set.get()
+    gid = request.GET.get('gid', None)
+    if gid is None:
+        return None
+    else:
+        try:
+            return models.SurveyUser.objects.get(global_id=gid,
+                                                 user=request.user)
+        except models.SurveyUser.DoesNotExist:
+            raise ValueError()
 
 def profile_required(func):
     def redirect(request, *args, **kwargs):
