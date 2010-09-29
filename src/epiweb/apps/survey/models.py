@@ -57,7 +57,8 @@ class ProfileSendQueue(models.Model):
 
 class SurveyUser(models.Model):
     user = models.ForeignKey(User, unique=True)
-    global_id = models.CharField(max_length=36, default=create_global_id)
+    global_id = models.CharField(max_length=36, unique=True,
+                                 default=create_global_id)
     last_participation = models.ForeignKey(Participation, null=True)
     last_participation_date = models.DateTimeField(null=True)
 
