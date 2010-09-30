@@ -4,6 +4,7 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.core.urlresolvers import reverse
 
 def create_global_id():
     return str(uuid.uuid4())
@@ -19,6 +20,18 @@ class SurveyUser(models.Model):
 
     class Meta:
         verbose_name_plural = 'User'
+
+    def get_edit_url(self):
+        from . import views
+        return '%s?gid=%s' % (reverse(views.people_edit), self.global_id)
+
+    def get_profile_url(self):
+        from . import views
+        return '%s?gid=%s' % (reverse(views.profile_index), self.global_id)
+
+    def get_survey_url(self):
+        from . import views
+        return '%s?gid=%s' % (reverse(views.index), self.global_id)
 
 class Survey(models.Model):
     survey_id = models.CharField(max_length=50, unique=True)

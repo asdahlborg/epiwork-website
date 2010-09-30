@@ -9,7 +9,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
-from epiweb.apps.survey import utils, models
+from epiweb.apps.survey import utils, models, forms
 
 _ = lambda x: x
 
@@ -135,4 +135,32 @@ def profile_index(request):
         'form': form,
         'js': js
     }, context_instance=RequestContext(request))
+
+
+@login_required
+def people_add(request):
+    if request.method == 'POST':
+        form = forms.AddPeople(request.POST)
+        if form.is_valid():
+            survey_user = models.SurveyUser()
+            survey_user.name = form.cleaned_data['name']
+            survey_user.user = request.user
+            survey_user.save()
+
+            request.user.message_set.create(
+                message=_('A new person has been added.'))
+
+            return HttpResponseRedirect(reverse(people))
+
+    else:
+        form = forms.AddPeople()
+
+    return render_to_response('survey/people_add.html', {'form': form},
+                              context_instance=RequestContext(request))
+
+@login_required
+def people(request):
+    users = models.SurveyUser.objects.filter(user=request.user)
+    return render_to_response('survey/people.html', {'people': users},
+                              context_instance=RequestContext(request))
 
