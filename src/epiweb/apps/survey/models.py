@@ -21,6 +21,9 @@ class SurveyUser(models.Model):
     class Meta:
         verbose_name_plural = 'User'
 
+    def __unicode__(self):
+        return self.name
+
     def get_edit_url(self):
         from . import views
         return '%s?gid=%s' % (reverse(views.people_edit), self.global_id)
