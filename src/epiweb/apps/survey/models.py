@@ -8,6 +8,18 @@ from django.db.models.signals import post_save
 def create_global_id():
     return str(uuid.uuid4())
 
+class SurveyUser(models.Model):
+    user = models.ForeignKey(User)
+    global_id = models.CharField(max_length=36, unique=True,
+                                 default=create_global_id)
+    last_participation = models.ForeignKey('Participation', null=True)
+    last_participation_date = models.DateTimeField(null=True)
+
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = 'User'
+
 class Survey(models.Model):
     survey_id = models.CharField(max_length=50, unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,18 +66,6 @@ class ProfileSendQueue(models.Model):
 
     def set_sent(self, epidb_id):
         self.delete()
-
-class SurveyUser(models.Model):
-    user = models.ForeignKey(User)
-    global_id = models.CharField(max_length=36, unique=True,
-                                 default=create_global_id)
-    last_participation = models.ForeignKey(Participation, null=True)
-    last_participation_date = models.DateTimeField(null=True)
-
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        verbose_name_plural = 'User'
 
 class Profile(models.Model):
     user = models.ForeignKey(SurveyUser, unique=True)
