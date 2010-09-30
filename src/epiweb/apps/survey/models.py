@@ -62,6 +62,8 @@ class SurveyUser(models.Model):
     last_participation = models.ForeignKey(Participation, null=True)
     last_participation_date = models.DateTimeField(null=True)
 
+    name = models.CharField(max_length=100)
+
     class Meta:
         verbose_name_plural = 'User'
 
