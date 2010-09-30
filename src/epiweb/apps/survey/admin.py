@@ -13,9 +13,9 @@ class ParticipationAdmin(admin.ModelAdmin):
     ordering = ('-date',)
 
 class SurveyUserAdmin(admin.ModelAdmin):
-    list_display = ('user', 'last_participation_date', 'global_id')
-    ordering = ('user__username',)
-    search_fields = ('user__username',)
+    list_display = ('user', 'name', 'last_participation_date', 'global_id')
+    ordering = ('name',)
+    search_fields = ('name',)
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Participation, ParticipationAdmin)
