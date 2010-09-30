@@ -138,6 +138,29 @@ def profile_index(request):
 
 
 @login_required
+def people_edit(request):
+    try:
+        survey_user = get_active_survey_user(request)
+    except ValueError:
+        raise Http404()
+    if survey_user is None:
+        return show_select_user(request, reverse(people_edit))
+
+    if request.method == 'POST':
+        form = forms.AddPeople(request.POST)
+        if form.is_valid():
+            survey_user.name = form.cleaned_data['name']
+            survey_user.save()
+
+            return HttpResponseRedirect(reverse(people))
+
+    else:
+        form = forms.AddPeople(initial={'name': survey_user.name})
+
+    return render_to_response('survey/people_edit.html', {'form': form},
+                              context_instance=RequestContext(request))
+
+@login_required
 def people_add(request):
     if request.method == 'POST':
         form = forms.AddPeople(request.POST)
