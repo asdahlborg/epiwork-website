@@ -28,7 +28,7 @@ class Participation(models.Model):
     previous_participation_date = models.DateTimeField(null=True)
 
     def __unicode__(self):
-        return '%s (%s)' % (self.user.username, self.date)
+        return '%s (%s)' % (self.user.name, self.date)
 
     class Meta:
         verbose_name_plural = 'Survey participation log'
