@@ -4,8 +4,8 @@ from epiweb.apps.survey.models import SurveyUser, Profile, Participation
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'updated', 'valid', 'created')
-    ordering = ('user__username',)
-    search_fields = ('user__username',)
+    ordering = ('user__name',)
+    search_fields = ('user__name',)
     list_filter = ('valid',)
 
 class ParticipationAdmin(admin.ModelAdmin):
