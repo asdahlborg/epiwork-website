@@ -1,4 +1,4 @@
-from django.template import Library
+from django.template import Library, Node, TemplateSyntaxError
 from django.contrib.sites.models import Site
 from django.utils.safestring import mark_safe
 
@@ -79,4 +79,23 @@ def first_plugin(page, placeholder=None):
             return ''
     except IndexError:
         return ''
+
+class HiddenPlaceholderNode(Node):
+    def __init__(self, name):
+        self.name = "".join(name.lower().split('"'))
+
+    def render(self, context):
+        if context.get('display_placeholder_names_only'):
+            return '<!-- PlaceholderNode: %s -->' % self.name
+        return ''
+
+def do_hidden_placeholder(parser, token):
+    error_string = '%r tag requires 1 argument'
+    try:
+        bits = token.split_contents()
+    except ValueError:
+        raise TemplateSyntaxError(error_string)
+    return HiddenPlaceholderNode(bits[1])
+
+register.tag('hidden_placeholder', do_hidden_placeholder)
 
