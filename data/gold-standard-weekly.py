@@ -53,11 +53,13 @@ class WeeklyQ3(d.Question):
 # seeking medical attention, treatment, time off work/school) can be pre-filled
 # with their previous answers:
 
-# "To save you time, we have filled in the information you gave us previously
-# about your illness. Please check that it is still correct, and make any
-# changes -- for instance, if you have visited a doctor since you last completed
-# the survey."
-
+class Message1(d.Question):
+  question = 'To save you time, we have filled in the information you gave us' \
+             'previously  your illness. Please check that it is still correct,'\
+             'and make any changes -- for instance, if you have visited a ' \
+             'doctor since you last completed the survey.'
+  type = 'advice'
+  
 class WeeklyQ4(d.Question):
   question = 'When did the first symptoms appear?'
   type = 'date'
@@ -195,7 +197,7 @@ class WeeklyQ11(d.Question):
   question = 'How many people in your household have had flu-like symptoms ' \
              'in the past week?'
   type = 'options-single'
-  options = ((0, '0')
+  options = ((0, '0'),
              (1, '1'),       
              (2, '2'),       
              (3, '3 '),      
@@ -238,3 +240,4 @@ class Survey(d.Survey):
       WeeklyQ11,
       # WeeklyQ12, # dependent on report of seasonal flu vaccination in intake
       )
+    prefill_conditions = { (WeeklyQ3 'is' 0) : [WeeklyQ4, WeeklyQ5] },
