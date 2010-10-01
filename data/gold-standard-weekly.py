@@ -240,4 +240,4 @@ class Survey(d.Survey):
       WeeklyQ11,
       # WeeklyQ12, # dependent on report of seasonal flu vaccination in intake
       )
-    prefill_conditions = { (WeeklyQ3 'is' 0) : [WeeklyQ4, WeeklyQ5] },
+    # prefill_conditions = { (WeeklyQ3 'is' 0) : [WeeklyQ4, WeeklyQ5] },
