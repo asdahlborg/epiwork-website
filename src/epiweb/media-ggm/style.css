@@ -263,6 +263,7 @@ a:hover {
 
 #page {
     margin: 10px;
+    min-height:300px;
 }
 
 /*= 3 Columns Layout =*/
@@ -521,3 +522,40 @@ a:hover {
 	
 	
 }
+
+
+
+/*= User stuff =*/
+
+
+#userformblock {
+	border: 1px solid #cccccc;
+	width:400px;
+	padding:15px;
+}
+
+.user_instruction {
+	font-weight:bold;
+	font-size:16px;
+	background-color:green;
+	padding:5px;
+	color:white;
+	
+}
+
+form.userform label { position: absolute; text-align:right; width:130px; }
+form.userform input, form.userform textarea { margin-left: 140px; }
+form.userform label.check, form.userform label.radio { position:relative; text-align:left; }
+
+
+form.userform .submit input
+{
+
+
+
+background:url("/+media-ggm/yellow_gradient_high.jpg") repeat-x scroll left bottom yellow;
+border: 2px outset #d7b9c9
+font-weight:bold;
+
+
+} 

@@ -6,13 +6,15 @@
 
 <h1>Login</h1>
 
-<p>Vul je gebruikersnaam en wachtwoord in.
-<a href="{% url django.contrib.auth.views.password_reset %}">Wachtwoord vergeten?</a>
+<div id="userformblock">
+<div class="user_instruction">Vul je gebruikersnaam en wachtwoord in.</div><br />
+<p><a href="{% url django.contrib.auth.views.password_reset %}">Wachtwoord vergeten?</a>
 </p>
 
-<form method="post" action="?next=/" id="login">
+<form method="post" action="?next=/" id="login" class="userform">
 {{ form.as_p }}
-<p><input type="submit" value="Log in" /></p>
+<p class="submit"><input type="submit" value="Log in" /></p>
 </form>
+</div>
 
 {% endblock %}
