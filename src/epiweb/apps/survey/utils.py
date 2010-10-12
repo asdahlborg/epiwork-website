@@ -245,9 +245,9 @@ class JavascriptHelper:
         lines = []
         lines.append('s.previous = [];')
 
-        data = get_user_profile(self.survey_user)
-        for profile in self.checked_responses:
-            name = profile.name
+        data = get_last_response(self.survey_user)
+        for response in self.checked_responses:
+            name = response.name
             value = data.get(name, 'undefined')
             tvalue = type(value).__name__
             if tvalue == 'string':
