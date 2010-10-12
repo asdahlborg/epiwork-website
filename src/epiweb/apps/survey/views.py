@@ -32,9 +32,18 @@ def thanks(request):
     return render_to_response('survey/thanks.html',
         context_instance=RequestContext(request))
 
-def show_select_user(request, next, template='survey/select_user.html'):
+@login_required
+def select_user(request, template='survey/select_user.html'):
+    next = request.GET.get('next', None)
+    if next is None:
+        next = reverse(index)
+
     users = models.SurveyUser.objects.filter(user=request.user)
-    if len(users) == 1:
+    total = len(users)
+    if total == 0:
+        url = '%s?next=%s' % (reverse(people_add), next)
+        return HttpResponseRedirect(url)
+    elif total == 1:
         survey_user = users[0]
         url = '%s?gid=%s' % (next, survey_user.global_id)
         return HttpResponseRedirect(url)
@@ -53,7 +62,8 @@ def index(request):
     except ValueError:
         raise Http404()
     if survey_user is None:
-        return show_select_user(request, reverse(index))
+        url = '%s?next=%s' % (reverse(select_user), reverse(index))
+        return HttpResponseRedirect(url)
 
     # Check if the user has filled user profile
     if utils.get_user_profile(survey_user) is None:
@@ -173,7 +183,12 @@ def people_add(request):
             request.user.message_set.create(
                 message=_('A new person has been added.'))
 
-            return HttpResponseRedirect(reverse(people))
+            next = request.GET.get('next', None)
+            if next is None:
+                url = reverse(people)
+            else:
+                url = '%s?gid=%s' % (next, survey_user.global_id)
+            return HttpResponseRedirect(url)
 
     else:
         form = forms.AddPeople()
