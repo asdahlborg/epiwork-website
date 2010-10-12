@@ -119,20 +119,14 @@ def add_first_survey_user(sender, **kwargs):
         user.name = name
         user.save()
 
-def add_empty_profile(sender, **kwargs):
-    instance = kwargs.get('instance', None)
-    try:
-        profile = Profile.objects.get(user=instance)
-    except Profile.DoesNotExist:
+def add_empty_profile(sender, instance, created, **kwargs):
+    if created:
         profile = Profile()
         profile.user = instance
         profile.save()
 
-def add_empty_last_response(sender, **kwargs):
-    instance = kwargs.get('instance', None)
-    try:
-        response = LastResponse.objects.get(user=instance)
-    except LastResponse.DoesNotExist:
+def add_empty_last_response(sender, instance, created, **kwargs):
+    if created:
         response = LastResponse()
         response.user = instance
         response.save()
