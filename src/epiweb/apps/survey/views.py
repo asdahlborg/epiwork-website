@@ -177,8 +177,8 @@ def people_add(request):
         if form.is_valid():
             survey_user = models.SurveyUser()
             survey_user.name = form.cleaned_data['name']
-            survey_user.user = request.user
             survey_user.save()
+            survey_user.user.add(request.user)
 
             request.user.message_set.create(
                 message=_('A new person has been added.'))

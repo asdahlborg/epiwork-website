@@ -10,7 +10,7 @@ def create_global_id():
     return str(uuid.uuid4())
 
 class SurveyUser(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ManyToManyField(User)
     global_id = models.CharField(max_length=36, unique=True,
                                  default=create_global_id)
     last_participation = models.ForeignKey('Participation', null=True)
