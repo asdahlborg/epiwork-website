@@ -65,6 +65,31 @@ def page_subfolders(context, template='cms_extra/subfolders.html'):
     context.update({'subfolders': subfolders})
     return context
 
+@register.inclusion_tag('cms/dummy.html', takes_context=True)
+def page_parents(context, template="cms_extra/parents.html"):
+    context.update({'template': template})
+
+    site = Site.objects.get_current()
+    request = context['request']
+    current = request.current_page
+    if current == 'dummy':
+        return context
+
+    page_queryset = get_page_queryset(request)
+    filters = {'tree_id': current.tree_id,
+               'level__lt': current.level}
+    gc = page_queryset.published().filter(**filters)
+    all_parents = dict([(p.id, p) for p in gc])
+
+    parents = []
+    while current.level > 0:
+        current = all_parents[current.parent_id]
+        parents.append(current)
+    parents = list(reversed(parents))
+
+    context.update({'parents': parents})
+    return context
+
 @register.filter
 def first_plugin(page, placeholder=None):
     try:
