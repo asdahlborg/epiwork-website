@@ -107,18 +107,6 @@ class LastResponse(models.Model):
     participation = models.ForeignKey(Participation, null=True, default=None)
     data = models.TextField(null=True, blank=True, default=None)
 
-def add_first_survey_user(sender, **kwargs):
-    instance = kwargs.get('instance', None)
-    users = SurveyUser.objects.filter(user=instance)
-    if len(users) == 0:
-        name = '%s %s' % (instance.first_name, instance.last_name)
-        name = name.strip()
-
-        user = SurveyUser()
-        user.user = instance
-        user.name = name
-        user.save()
-
 def add_empty_profile(sender, instance, created, **kwargs):
     if created:
         profile = Profile()
@@ -131,7 +119,6 @@ def add_empty_last_response(sender, instance, created, **kwargs):
         response.user = instance
         response.save()
 
-post_save.connect(add_first_survey_user, sender=User)
 post_save.connect(add_empty_profile, sender=SurveyUser)
 post_save.connect(add_empty_last_response, sender=SurveyUser)
 
