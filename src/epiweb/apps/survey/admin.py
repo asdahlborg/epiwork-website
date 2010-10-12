@@ -13,7 +13,7 @@ class ParticipationAdmin(admin.ModelAdmin):
     ordering = ('-date',)
 
 class SurveyUserAdmin(admin.ModelAdmin):
-    list_display = ('user', 'name', 'last_participation_date', 'global_id')
+    list_display = ('name', 'last_participation_date', 'global_id')
     ordering = ('name',)
     search_fields = ('name',)
 
