@@ -262,6 +262,7 @@ class SurveyFormBase(forms.Form):
         self._survey = kwargs['survey']
         self._user = kwargs['user']
         self._profile = None
+        self._previous = None
         del kwargs['survey']
         del kwargs['user']
         super(SurveyFormBase, self).__init__(*args, **kwargs)
