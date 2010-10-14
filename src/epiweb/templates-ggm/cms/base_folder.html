@@ -4,10 +4,15 @@
 
 
 {% block content %}
+{% hidden_placeholder "image" %}
+{% hidden_placeholder "substract" %}
 {% placeholder "content" %}
 {% endblock %}
 
 {% block left %}
+
+{% page_parents %}
+
 {% page_subfolders %}
 {% include "block_sponsors_partijen.html" %}
 &#160;

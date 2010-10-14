@@ -1,10 +1,21 @@
+{% load cms_extra %}
+
 {% if subfolders %}
+
+
+
+
 <ul class="subfolders">
 
-<!-- <li><a href="{{ item.get_absolute_url }}">&lt;&lt; Het Project</a></li> -->
-
 {% for item in subfolders %}
-<li><a href="{{ item.get_absolute_url }}">{{ item.get_title }}</a></li>
+<li>
+<div class="subfolderitem" 
+onmouseover="this.className='subfolderitem sl_active'" ;="" 
+onmouseout="this.className='subfolderitem'" onclick="document.location='{{ item.get_absolute_url }}'">
+<div class="subfoldertitle">{{ item.get_title }}</div>
+{{ item|first_plugin:"image" }}
+{{ item|first_plugin:"substract" }}</div>
+</li>
 {% endfor %}
 </ul>
 {% endif %}

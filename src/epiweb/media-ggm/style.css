@@ -25,6 +25,9 @@ a:hover {
     text-decoration: underline;
 }
 
+
+
+
 /*= InfluenzaNet Bar =*/
 
 #inetbarheader {
@@ -503,25 +506,110 @@ a:hover {
 .subfolders {
 	padding:0px;
 	margin:0px;
-
 }
 
+
+.subfolders p {
+	margin:2px 4px;
+	font-size:9px;
+	line-height:14px;
+}
 
 .subfolders li {
-
-
-	border: 1px solid #339933;
-
-	color:#333333;
-	font-size:11px;
-	font-weight:bolder;
-	line-height:14px;
 	list-style:none outside none;
-	margin-bottom:5px;
-	padding:5px;	
-	
+}
+
+
+.subfoldertitle {
+background-color:#FFFFFF;
+color:#333333;
+font-size:11px;
+font-weight:bolder;
+line-height:14px;
+list-style:none outside none;
+margin-bottom:0;
+padding:5px;
 	
 }
+
+.subfolderitem {
+	border:1px solid #339933;
+	margin-bottom:4px;
+}
+
+.subfolderitem img {
+	width:100%;
+}
+.subfolderitem.sl_active  {
+cursor:pointer;
+}
+
+.subfolderitem.sl_active .subfoldertitle {
+background-color:#339933;
+background-position:left bottom;
+background-repeat:repeat-x;
+color:#FFFFFF;
+cursor:pointer;
+}
+
+
+.parent {
+	border:1px solid #eeeeee;
+}
+
+
+
+.sisterarticles {
+	border-bottom: 1px solid #aaaaaa;
+	margin-bottom:5px;	
+	padding-bottom:5px;
+}
+
+.sisterarticles p {
+	margin:2px 0px;
+	font-size:10px;
+	line-height:14px;
+}
+
+
+.sisterarticletitle {
+	color: #339933; 
+	font-size: 14px;
+	line-height:20px;
+	margin-bottom:0px;
+	font-size: 12px;
+	font-weight:bolder;
+}
+
+
+.sisterarticletitle.active {
+	color: #000000; 
+}
+.sisterarticles img {
+	float:left;
+	margin-top:8px;
+	border-style:solid;
+	border-width:1px;
+	border-color:#000000;
+	margin:0px;
+	margin-left:0px;
+	margin-right:10px;
+	margin-top:4px;
+	margin-bottom:2px;
+	width:120px;
+}
+
+.sisterarticleintro {
+	font-size: 11px;
+	line-height:16px;
+}
+
+.sis_active {
+    color:#339933;	
+    cursor: pointer;
+	cursor: hand;
+}
+
 
 
 
@@ -550,12 +638,57 @@ form.userform label.check, form.userform label.radio { position:relative; text-a
 
 form.userform .submit input
 {
-
-
-
 background:url("/+media-ggm/yellow_gradient_high.jpg") repeat-x scroll left bottom yellow;
 border: 2px outset #d7b9c9
 font-weight:bold;
-
-
 } 
+
+div.clearer {
+	clear:both;
+	height:0;
+	line-height:0;
+}
+
+
+
+.blockheader {
+background-color:#33AA33;
+background-image:url("/+media-ggm/menu_header_green_gradient.jpg");
+background-position:left bottom;
+background-repeat:repeat-x;
+color:#FFFFFF;
+font-size:14px;
+font-weight:bolder;
+padding:5px;
+height:16px;
+padding:2px 6px 8px;
+}
+
+
+.blockitem {
+border-bottom:1px solid #CCCCCC;
+font-size:11px;
+line-height:20px;
+margin-top:2px;
+padding-bottom:5px;
+}
+
+.blockitem.active {
+    cursor: pointer;
+	cursor: hand;
+}
+
+.blockitemtitle, .blockitemtitle a {
+color:#000000;
+font-size:12px;
+font-weight:bolder;
+line-height:20px;
+margin-bottom:5px;
+}
+#newsfront, #rssnews {
+background-color:#F0F0F0;
+border:1px solid #000000;
+margin-bottom:5px;
+padding:5px;
+}
+
