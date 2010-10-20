@@ -110,7 +110,8 @@ def profile_index(request):
     except ValueError:
         raise Http404()
     if survey_user is None:
-        return show_select_user(request, reverse(profile_index))
+        url = '%s?next=%s' % (reverse(select_user), reverse(profile_index))
+        return HttpResponseRedirect(url)
 
     if request.method == 'POST':
         form = form_class(survey_user, request.POST)
@@ -154,7 +155,8 @@ def people_edit(request):
     except ValueError:
         raise Http404()
     if survey_user is None:
-        return show_select_user(request, reverse(people_edit))
+        url = '%s?next=%s' % (reverse(select_user), reverse(people_edit))
+        return HttpResponseRedirect(url)
 
     if request.method == 'POST':
         form = forms.AddPeople(request.POST)
