@@ -148,9 +148,9 @@ class Survey(d.Survey):
         RegQ4,
         RegQ5,
         RegQ6,
-        { (RegQ1, 'is', 1) : (
+        d.If(d.Equal(RegQ1, 1)) (
             RegQ7,
-        ) },
+        ),
         RegQ8,
         RegQ9,
         RegQ10,

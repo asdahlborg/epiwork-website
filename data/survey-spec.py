@@ -130,7 +130,7 @@ class Survey(d.Survey):
     id = 'dev-survey-0.0'
     rules = (
         RepQ01,
-        { (RepQ01, 'is-not', d.Empty) : (
+        d.If(~d.Empty(RepQ1)) (
             RepQ02,
             RepQ03,
             RepQ04,
@@ -138,16 +138,16 @@ class Survey(d.Survey):
             RepQ06,
             RepQ07,
             RepQ08,
-            { (RepQ08, 'is-in', d.Items(1, 3)) : (
+            d.If(d.In(RepQ08, [1,3])) (
                 RepQ09
-            ) },
+            ),
             RepQ10,
-            { (d.Profile('RegQ5'), 'is-not', 1) : (
+            d.If(~d.Equal(d.Profile('RegQ5'), 1)) (
                 RepQ11
-            ) },
-            { (d.Profile('RegQ6'), 'is-not', 1) : (
+            ),
+            d.If(~d.Equal(d.Profile('RegQ6'), 1)) (
                 RepQ12
-            ) },
-        ) }
+            ),
+        )
     )
 
