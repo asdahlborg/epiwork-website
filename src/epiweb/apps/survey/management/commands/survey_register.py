@@ -17,7 +17,7 @@ class Command(BaseCommand):
             raise CommandError('Please enter survey_specification_file.')
 
         import codecs
-        from epiweb.apps.survey import models, parser
+        from epiweb.apps.survey import models, utils, spec
 
         verbosity = int(options.get('verbosity', 1))
         replace = options.get('replace', False)
@@ -28,7 +28,8 @@ class Command(BaseCommand):
             raise CommandError('Error while reading %s: %s' % (fname, e))
 
         try:
-            survey = parser.parse(content)
+            survey = utils.parse_specification(content)
+            spec.validate_rules(survey.rules)
         except Exception, e:
             raise CommandError('Error while reading survey specification: %s' % e)
 
