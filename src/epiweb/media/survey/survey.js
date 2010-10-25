@@ -1,193 +1,305 @@
 (function() {
-
-var Survey = function(id, prefix) {
-    this.id = id;
-    this.base = $('#'+id);
-    this.prefix = prefix;
-}
-
+var Survey = function(target, data) {
+    this.target = target;
+    this.modifier = data.modifier;
+    this.modified = data.modified;
+    this.profiles = data.profiles;
+    this.responses = data.responses;
+    this.conditions = data.conditions;
+    this.questions = data.questions;
+    this.prefills = data.prefills;
+};
 Survey.prototype = {
-    affected: {},
-    rule: {},
-
-    qids: [],
-    
     init: function() {
         var self = this;
-        var len = this.qids.length;
+        var len = this.questions.length;
+        this.fields = {};
         for (var i=0; i<len; i++) {
-            var qid = this.qids[i];
-
-            // onchange event
-            this.base.find('*[name="'+qid+'"]').change(function(e) {
-                var qid = $(e.target).attr('name');
-                self.changed(qid);
+            var id = this.questions[i];
+            var field = this.target.find('*[name="'+id+'"]');
+            this.fields[id] = field;
+            field.data('modified', false);
+            field.change(function() {
+                self.on_change($(this));
             });
-
-            // default visibility
-            this.update_visibility(qid);
-
-            // default values
-            if (this.blank[qid] == undefined) {
-                this.blank[qid] = false;
-            }
-            if (this.affected[qid] == undefined) {
-                this.affected[qid] = new Array();
-            }
         }
-    },
-
-    changed: function(qid) {
-        var list = this.affected[qid];
-        var len = list.length;
         for (var i=0; i<len; i++) {
-            var qid = list[i];
-            this.update_visibility(qid);
+            var id = this.questions[i];
+            this.update_visibility(id);
         }
     },
-
-    update_visibility: function(qid) {
-        var ev = this.rule[qid]();
-        var target = this.base.find('#'+this.prefix+qid);
-        var curr = target.css('display');
-        if (ev && (curr == 'none')) { this.show(target); }
-        else if (!ev && (curr == 'block')) { this.hide(target); }
-    },
-
-    show: function(target) {
-        var id = target.attr('id');
-        var sid = id+'__skip';
-        var skip = this.base.find('#'+sid);
-        skip.remove();
-        target.slideDown();
-    },
-    hide: function(target) {
-        var id = target.attr('id');
-        var sid = id+'__skip';
-        target.after('<div class="skip" id="'+sid+'">skipped</div>');
-        target.slideUp();
-    },
-
-    _prepare: function(v) {
-        var t = typeof v;
-        if (!$.isArray(t)) {
-            if ((t == 'number') || (t == 'string')) {
-                return [v];
-            }
-        }
-        return v;
-    },
-
-    get_invalids: function() {
-        var len = this.qids.length;
-        var res = [];
+    on_change: function(target) {
+        var id = target.attr('name');
+        target.data('modified', true);
+        console.log('changed:', target, id);
+        var modified = this.modified[id];
+        if (modified == undefined) { return; };
+        var len = modified.length;
         for (var i=0; i<len; i++) {
-            var qid = this.qids[i];
-            var empty = this.Is(this.Value(qid), this.Empty());
-            var visible = this.rule[qid]();
-            var allow_blank = this.blank[qid];
-            if (visible && empty && !allow_blank) {
-                res.push(qid);
+            var mid = modified[i];
+            this.update_visibility(mid);
+        }
+        this.update_prefill();
+    },
+    update_visibility: function(id) {
+        var cond = this.conditions[id];
+        var sid = id + '__skip';
+        if (cond == undefined) { return; }
+        if (cond.evaluate(this)) {
+            this.target.find('#'+sid).remove();
+            $('#q_'+id).slideDown();
+        }
+        else {
+            if (this.target.find('#'+sid).length == 0) {
+                var sid = id + '__skip';
+                var skip = $('<div class="skip" id="'+sid+'">skipped</div>');
+                $('#q_'+id).after(skip);
             }
+            $('#q_'+id).slideUp();
         }
-        return res;
     },
-    validate: function() {
-        return this.get_invalids().length == 0;
-    },
-
-    Empty: function() {
-        return [];
-    },
-    Is: function(a, b) {
-        a = this._prepare(a);
-        b = this._prepare(b);
-        var la = a.length;
-        var lb = b.length;
-
-        var ia = 0, ib = 0;
-        while (true) {
-            if (ia >= la) { break; }
-            if (ib >= lb) { break; }
-            
-            var va = a[ia];
-            var vb = b[ib];
-
-            if (va != vb) { return false; }
-            ia++; ib++;
-        }
-
-        return (la-ia) == (lb-ib);
-    },
-    IsNot: function(a, b) {
-        return !this.Is(a, b);
-    },
-    IsIn: function(a, list) {
-        a = this._prepare(a);    
-        var len = a.length;
-        var len2 = list.length;
-        if ((len == 0) || (len2 == 0)) { return false; }
-        for (var i=0; i<len; i++) {
-            var val = a[i];
-            var found = false;
-            for (var j=0; j<len2; j++) {
-                if (val == list[j]) { found = true; break; }
-            }
-            if (!found) { return false; }
-        }
-
-        return true;
-    },                           
-    Value: function(qid) {       
-        var values = this.base.find('*[name="'+qid+'"]').fieldValue();
-                             
-        // strip out empty strings
-        var len = values.length;
-        var res = [];            
-        for (var i=0; i<len; i++) {
-            var value = values[i];
-            if (typeof value == 'string') {
-                value = $.trim(value);
-                if (value != '') {
-                    res.push(value);
+    update_prefill: function() {
+        for (var id in this.prefills) {
+            var field = this.fields[id];
+            var current = field.fieldValue();
+            if (!field.data('modified')) {
+                var cond = this.prefills[id];
+                if (cond.evaluate(this)) {
+                    // form value setting is not supported by jquery.form :(
+                    this.set_value(field, this.get_response(id));
+                }
+                else {
+                    this.set_value(field, []);
                 }
             }
-            else {
-                res.push(value);
+        }
+    },
+    set_value: function(fields, values) {
+        console.log('set value', values, fields);
+        var len = fields.length;
+        var first = fields[0];
+        var tag = first.tagName.toLowerCase();
+        if (tag == 'input') {
+            var type = $(first).attr('type');
+            if ((type == 'checkbox') || (type == 'radio')) {
+                for (var i=0; i<len; i++) {
+                    if ($.inArray(fields[i].value, values) >= 0) {
+                        fields[i].checked = true;
+                    }
+                    else {
+                        fields[i].checked = false;
+                    }
+                }
+            }
+            else if (type == 'text') {
+                $(first).val(values[0]);
             }
         }
-
-        return res;
+        else if (tag == 'select') {
+            if (tag.attr('multiple')) {
+                $(first).val(values);
+            }
+            else {
+                $(first).val(values[0]);
+            }
+        }
+        else {
+            // unknown
+        }
     },
-    Profile: function(pid) {
-        return this.profiles[pid];
+    get_profile: function(id) {
+        var value = this.profiles[id];
+        if (!(value instanceof Array)) {
+            value = [value];
+        }
+        value.sort();
+        return value;
     },
-    Previous: function(pid) {
-        return this.previous[pid];
+    get_response: function(id) {
+        var value = this.responses[id];
+        if (!(value instanceof Array)) {
+            value = [value];
+        }
+        value.sort();
+        return value;
     },
+    get_question: function(id) {
+        var field = this.fields[id];
+        var value = field.fieldValue();
+        value.sort();
+        return value;
+    }
 }
 
 this.Survey = Survey;
 
-})();
-
-$(document).ready(function() {
-    $.datepicker.setDefaults({dateFormat: 'dd/mm/yy'});
-    $('.sDateField').datepicker();
-    $('.sDateField').each(function() {
-        var dp = this;
-        var button = '<img class="datepickerbutton" src="/+media/img/calendar.png"/>';
-        $(this).after(button);
-        $(this).next().click(function() {
-            $(dp).datepicker('show');
-        });
-    });
-    
-    // scroll to the first question with error
-    var id = $('div.question .errormsg').eq(0).parent().attr('id')
-    if (id != undefined) {
-        location.hash = '#' + id
+var SurveyDefinition = {
+    Profile: function(id) {
+        var self = this;
+        this.id = id;
+        this.value = function(context) {
+            return context.get_profile(self.id);
+        }
+    },
+    Response: function(id) {
+        var self = this;
+        this.id = id;
+        this.value = function(context) {
+            return context.get_response(self.id);
+        }
+    },
+    Question: function(id) {
+        var self = this;
+        this.id = id;
+        this.value = function(context) {
+            return context.get_question(self.id);
+        }
+    },
+    Equal: function(a, b) {
+        var self = this;
+        this.a = a;
+        this.b = b;
+        this.evaluate = function(context) {
+            var a = self.a.value(context);
+            var b = self.b;
+            if (typeof(b) == "object") {
+                b = b.value(context);
+            }
+            return (""+a) == (""+b);
+        }
+    },
+    Empty: function(a) {
+        var self = this;
+        this.a = a;
+        this.evaluate = function(context) {
+            var a = self.a.value(context);
+            return (a == null) || (a == undefined) || (a.length == 0);
+        }
+    },
+    In: function(a, b) {
+        var self = this;
+        this.a = a;
+        this.b = b;
+        this.evaluate = function(context) {
+            var a = self.a.value(context);
+            if (a.length == 0) {
+                a = undefined;
+            }
+            else {
+                a = a[0];
+            }
+            var b = [];
+            for (var i=0; i<self.b.length; i++) {
+                b.push(""+self.b[i]);
+            }
+            return $.inArray(a, b) >= 0;
+        }
+    },
+    Contains: function(a, b) {
+        var self = this;
+        this.a = a;
+        this.b = b;
+        this.evaluate = function(context) {
+            var a = self.a.value(context);
+            if (!(a instanceof Array)) {
+                a = [a];
+            }
+            var len = a.length;
+            for (var i=0; i<len; i++) {
+                if ($.inArray(a[i], self.b) >= 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    },
+    And: function(args) {
+        var self = this;
+        this.args = args;
+        this.evaluate = function(context) {
+            var len = self.args.length;
+            for (var i=0; i<len; i++) {
+                var arg = self.args[i];
+                if ((typeof(arg) == "boolean") && !arg) {
+                    return false;
+                }
+                else if (!arg.evaluate(context)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    },
+    Or: function(args) {
+        var self = this;
+        this.args = args;
+        this.evaluate = function(context) {
+            var len = self.args.length;
+            for (var i=0; i<len; i++) {
+                var arg = self.args[i];
+                if ((typeof(arg) == boolean) && arg) {
+                    return true;
+                }
+                else if (arg.evaluate(context)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    },
+    Not: function(a) {
+        var self = this;
+        this.a = a;
+        this.evaluate = function(context) {
+            return !self.a.evaluate(context);
+        }
+    },
+    BooleanTrue: function() {
+        this.evaluate = function() {
+            return true;
+        }
     }
+};
+this.SurveyDefinition = SurveyDefinition;
 
-});
+var sd = SurveyDefinition;
+
+var SurveyDefinitionGlue = {
+    Profile: function(id) {
+        return new sd.Profile(id);
+    },
+    Response: function(id) {
+        return new sd.Response(id);
+    },
+    Question: function(id) {
+        return new sd.Question(id);
+    },
+    Equal: function(a, b) {
+        return new sd.Equal(a, b);
+    },
+    Empty: function(a) {
+        return new sd.Empty(a);
+    },
+    In: function(a, b) {
+        return new sd.In(a, b);
+    },
+    Contains: function(a, b) {
+        return new sd.Contains(a, b);
+    },
+    And: function() {
+        return new sd.And(arguments);
+    },
+    Or: function() {
+        return new sd.Or(arguments);
+    },
+    Not: function(a) {
+        return new sd.Not(a);
+    },
+    BooleanTrue: function() {
+        return new sd.BooleanTrue(arguments);
+    }
+}
+this.SurveyDefinitionGlue = SurveyDefinitionGlue;
+
+})();
 

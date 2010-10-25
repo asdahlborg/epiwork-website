@@ -8,8 +8,10 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.utils.safestring import mark_safe
 
 from epiweb.apps.survey import utils, models, forms
+from .survey import Specification, FormBuilder, JavascriptBuilder, get_survey_context
 
 _ = lambda x: x
 
@@ -55,8 +57,6 @@ def select_user(request, template='survey/select_user.html'):
 
 @login_required
 def index(request):
-    survey = utils.get_survey()
-    form_class = utils.get_form_class(survey.id)
     try:
         survey_user = get_active_survey_user(request)
     except ValueError:
@@ -74,27 +74,29 @@ def index(request):
         url = '%s?gid=%s&next=%s' % (url, survey_user.global_id, url_next)
         return HttpResponseRedirect(url)
 
-    if request.method == 'POST':
-        form = form_class(survey_user, request.POST)
-        if form.is_valid():
-            participation = utils.add_survey_participation(survey_user,
-                                                           survey._data)
+    spec = utils.load_specification(settings.SURVEY_ID)
+    context = get_survey_context(survey_user)
+    builder = FormBuilder(spec)
 
-            utils.add_response_queue(participation, survey, form.cleaned_data)
-            data = utils.format_response_data(survey, form.cleaned_data)
+    if request.method == 'POST':
+        form = builder.get_form(context, request.POST)
+        if form.is_valid():
+            participation = utils.add_survey_participation(survey_user, spec.survey.id)
+
+            utils.add_response_queue(participation, spec, form.cleaned_data)
+            data = utils.format_response_data(spec, form.cleaned_data)
             utils.save_last_response(survey_user, participation, data)
 
-            return HttpResponseRedirect(reverse(
-                                          'epiweb.apps.survey.views.thanks'))
+            return HttpResponseRedirect(reverse(thanks))
         else:
             request.user.message_set.create(
                 message=_('One or more questions have empty or invalid ' \
                           'answer. Please fix it first.'))
     else:
-        form = form_class(survey_user)
+        form = builder.get_form(context)
 
-    jsh = utils.JavascriptHelper(survey, survey_user)
-    js = jsh.get_javascript()
+    js_builder = JavascriptBuilder(spec)
+    js = mark_safe(js_builder.get_javascript(context))
 
     return render_to_response('survey/index.html', {
         'form': form,
@@ -103,8 +105,6 @@ def index(request):
 
 @login_required
 def profile_index(request):
-    survey = utils.get_profile()
-    form_class = utils.get_form_class(survey.id)
     try:
         survey_user = get_active_survey_user(request)
     except ValueError:
@@ -113,12 +113,16 @@ def profile_index(request):
         url = '%s?next=%s' % (reverse(select_user), reverse(profile_index))
         return HttpResponseRedirect(url)
 
+    spec = utils.load_specification(settings.SURVEY_PROFILE_ID)
+    context = get_survey_context(survey_user)
+    builder = FormBuilder(spec)
+
     if request.method == 'POST':
-        form = form_class(survey_user, request.POST)
+        form = builder.get_form(context, request.POST)
         if form.is_valid():
-            utils.add_profile_queue(survey_user, form._survey, form.cleaned_data)
-            data = utils.format_profile_data(survey, form.cleaned_data)
-            utils.save_profile(survey_user, survey._data, data)
+            utils.add_profile_queue(survey_user, spec, form.cleaned_data)
+            data = utils.format_profile_data(spec, form.cleaned_data)
+            utils.save_profile(survey_user, spec.survey.id, data)
 
             next = request.GET.get('next', None)
             if next is not None:
@@ -134,13 +138,13 @@ def profile_index(request):
             request.user.message_set.create(
                 message=_('One or more questions have empty or invalid ' \
                           'answer. Please fix it first.'))
-            
-    else:
-        form = form_class(survey_user,
-                          utils.get_user_profile(survey_user))
 
-    jsh = utils.JavascriptHelper(survey, survey_user)
-    js = jsh.get_javascript()
+    else:
+        initial = utils.get_user_profile(survey_user)
+        form = builder.get_form(context, initial)
+
+    js_builder = JavascriptBuilder(spec)
+    js = mark_safe(js_builder.get_javascript(context))
 
     return render_to_response('survey/profile_index.html', {
         'form': form,
