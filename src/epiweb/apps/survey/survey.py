@@ -198,7 +198,7 @@ class ProfileContext(object):
         initial = self.profile
         if initial is None:
             initial = {}
-        res = defaultdict(None)
+        res = defaultdict(lambda: None)
         res.update(initial)
         return res
 
@@ -220,7 +220,7 @@ class ResponseContext(object):
         initial = self.response
         if initial is None:
             initial = {}
-        res = defaultdict(None)
+        res = defaultdict(lambda: None)
         res.update(initial)
         return res
     values = property(get_values)

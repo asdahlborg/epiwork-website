@@ -141,18 +141,7 @@ def get_last_response(survey_user):
         if not response.data:
             return None
         return pickle.loads(str(response.data))
-    except models.LastResponse.DoesNotExist:
-        return None
-    except StandardError:
-        return None
-
-def get_last_response(survey_user):
-    try:
-        response = models.LastResponse.objects.get(user=survey_user)
-        if not response.data:
-            return None
-        return pickle.loads(str(profile.data))
-    except models.LastResponse.DoesNotExist:
+    except models.LastResponse.DoesNotExist, e:
         return None
     except StandardError:
         return None
