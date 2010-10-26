@@ -30,14 +30,18 @@ Survey.prototype = {
     },
     on_change: function(target) {
         var id = target.attr('name');
-        target.data('modified', true);
+
+        // update visibility of other questions
         var modified = this.modified[id];
-        if (modified == undefined) { return; };
-        var len = modified.length;
-        for (var i=0; i<len; i++) {
-            var mid = modified[i];
-            this.update_visibility(mid);
+        if (modified != undefined) {
+            var len = modified.length;
+            for (var i=0; i<len; i++) {
+                var mid = modified[i];
+                this.update_visibility(mid);
+            }
         }
+
+        // update prefill
         this.update_prefill();
     },
     update_visibility: function(id) {
