@@ -31,6 +31,9 @@ Survey.prototype = {
     on_change: function(target) {
         var id = target.attr('name');
 
+        // set as modified
+        target.data('modified', true);
+
         // update visibility of other questions
         var modified = this.modified[id];
         if (modified != undefined) {
