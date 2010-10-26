@@ -312,6 +312,13 @@ class FormBuilder(object):
         field.required = False
         return field
 
+class SurveyAnswerEncoder(json.JSONEncoder):
+    def default(self, obj):
+        import datetime
+        if isinstance(obj, datetime.date):
+            return obj.strftime('%d/%m/%Y')
+        return super(JSONSurveyEncoder, self).default(obj)
+
 class JavascriptBuilder(object):
     def __init__(self, spec):
         self.spec = spec
@@ -348,8 +355,8 @@ class JavascriptBuilder(object):
         param = {
             'modifier': json.dumps(self.spec.get_modifier()),
             'modified': json.dumps(self.spec.get_modified()),
-            'profiles': json.dumps(profiles),
-            'responses': json.dumps(responses),
+            'profiles': json.dumps(profiles, cls=SurveyAnswerEncoder),
+            'responses': json.dumps(responses, cls=SurveyAnswerEncoder),
             'prefills': prefills,
             'conditions': conditions,
             'questions': json.dumps(questions)
