@@ -74,6 +74,7 @@ Survey.prototype = {
         }
     },
     set_value: function(fields, values) {
+        if (values == null) { return; }
         var len = fields.length;
         var first = fields[0];
         var tag = first.tagName.toLowerCase();
@@ -115,6 +116,7 @@ Survey.prototype = {
     },
     get_response: function(id) {
         var value = this.responses[id];
+        if (value == null) { return null; }
         if (!(value instanceof Array)) {
             value = [value];
         }
