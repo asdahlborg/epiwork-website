@@ -130,7 +130,7 @@ class Survey(d.Survey):
     id = 'dev-survey-0.0'
     rules = (
         RepQ01,
-        d.If(~d.Empty(RepQ1)) (
+        d.If(~d.Empty(RepQ01)) (
             RepQ02,
             RepQ03,
             RepQ04,
