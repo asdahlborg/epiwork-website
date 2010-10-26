@@ -31,7 +31,6 @@ Survey.prototype = {
     on_change: function(target) {
         var id = target.attr('name');
         target.data('modified', true);
-        console.log('changed:', target, id);
         var modified = this.modified[id];
         if (modified == undefined) { return; };
         var len = modified.length;
@@ -75,7 +74,6 @@ Survey.prototype = {
         }
     },
     set_value: function(fields, values) {
-        console.log('set value', values, fields);
         var len = fields.length;
         var first = fields[0];
         var tag = first.tagName.toLowerCase();
