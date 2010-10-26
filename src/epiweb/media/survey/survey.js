@@ -303,3 +303,25 @@ this.SurveyDefinitionGlue = SurveyDefinitionGlue;
 
 })();
 
+$(document).ready(function() {
+    $.datepicker.setDefaults({dateFormat: 'dd/mm/yy'});
+    $('.sDateField').datepicker();
+    $('.sDateField').each(function() {
+        var dp = this;
+        var button = '<img class="datepickerbutton" src="/+media/img/calendar.png"/>';
+        $(this).after(button);
+        $(this).next().click(function() {
+            $(dp).datepicker('show');
+        });
+    });
+
+    // scroll to the first question with error
+    var err = $('div.question .errormsg').eq(0).parent();
+    console.log(err);
+    if (err.length > 0) {
+        var top = err.position().top;
+        console.log(top);
+        window.scrollTo(0, top);
+    }
+});
+
