@@ -317,10 +317,8 @@ $(document).ready(function() {
 
     // scroll to the first question with error
     var err = $('div.question .errormsg').eq(0).parent();
-    console.log(err);
     if (err.length > 0) {
         var top = err.position().top;
-        console.log(top);
         window.scrollTo(0, top);
     }
 });
