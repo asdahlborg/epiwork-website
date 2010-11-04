@@ -233,9 +233,10 @@ class Survey(d.Survey):
       d.If(
 #           PREVIOUS_RESPONSE_EXISTS variable goes here
 #           and
-           d.Equal(d.Response('WeeklyQ5'), "I am still ill")
-           and d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,14,
-                                    15,19,16])) # Symptoms are present
+#           d.Equal(d.Response('WeeklyQ5'), "I am still ill")
+#           and
+            d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,14,
+                                  15,19,16])) # Symptoms are present
       ( WeeklyQ3,
         WeeklyQ4,
         WeeklyQ5,
