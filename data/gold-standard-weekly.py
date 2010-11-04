@@ -63,11 +63,12 @@ class WeeklyQ3(d.Question):
   options = ((0, 'Yes'),
              (1, 'No'), )
   
-class Message1(d.Advice):
+class Message1(d.Question):
   question = """To save you time, we have filled in the information you gave us
   previously about your illness. Please check that it is still correct, and
   make any changes -- for instance, if you have visited a doctor since you last
   completed the survey."""
+  type = 'advice'
   
 class WeeklyQ4(d.Question):
   question = 'When did the first symptoms appear?'
@@ -139,11 +140,12 @@ class WeeklyQ7b(d.Question):
 
 class WeeklyQ8(d.Question):
   question = "Did you change your daily routine because of your illness?"
+  type = 'options-single'
   options = ((0, "No"),
              (1, "Yes, but I did not take time off work/school"),
              (2, "Yes, I took time off work/school"), )
 
-class WeeklyQ8b:(d.Question):
+class WeeklyQ8b(d.Question):
   question = "Are you still off work/school?"
   type = 'options-single'
   options = ((0, 'Yes'),
@@ -213,40 +215,44 @@ class Survey(d.Survey):
     id = 'gold-standard-weekly-0.1.0'
     rules = (
       WeeklyQ1,
-      d.If(~d.Contains(WeeklyQ1, [0]) ||
-           d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,
-                                 12,7,2,13,14,15,19,16])) # Symptoms are present
+      d.If(~d.Contains(WeeklyQ1, [0])
+           or d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,
+                                    14,15,19,16])) # Symptoms are present
       ( WeeklyQ1b ),
       WeeklyQ2,
-      d.If((~d.Contains(WeeklyQ1, [0]) ||
-            d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,
-                                  12,7,2,13,14,15,19,16])) # Symptoms are present
-           && d.Equal(WeeklyQ2, 1)) # Took temp
+      d.If((~d.Contains(WeeklyQ1, [0])
+            or d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,
+                                     14,15,19,16])) # Symptoms are present
+           and
+           d.Equal(WeeklyQ2, 1)) # Took temp
       ( WeeklyQ2b ),
-      d.If(d.Contains(WeeklyQ1, [1]),           # Fever among symptoms
-           || d.Contains(WeeklyQ2b, [2,3,4,5])) # Temp > 37.5
+      d.If(d.Contains(WeeklyQ1, [1])            # Fever among symptoms
+           or d.Contains(WeeklyQ2b, [2,3,4,5])) # Temp > 37.5
       ( WeeklyQ2c),
 
-      d.If(PREVIOUS_RESPONSE_EXISTS
-           && d.Equal(d.Response('WeeklyQ5'), "I am still ill")
-           && d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,14,
+      d.If(
+#           PREVIOUS_RESPONSE_EXISTS variable goes here
+#           and
+           d.Equal(d.Response('WeeklyQ5'), "I am still ill")
+           and d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,14,
                                     15,19,16])) # Symptoms are present
       ( WeeklyQ3,
         WeeklyQ4,
         WeeklyQ5,
         WeeklyQ6,
-        { ( WeeklyQ6, 'is', 1 ) : ( WeeklyQ6b ) },
+        d.If(d.Equal(WeeklyQ6, 1)) ( WeeklyQ6b ),
         WeeklyQ7,
         d.If(d.Contains(WeeklyQ7, [3])) ( WeeklyQ7b ),
         WeeklyQ8,
-        d.If(d.Equal(WeeklyQ8, 2)) ( WeeklyQ8b, WeeklyQ8c,),)
+        d.If(d.Equal(WeeklyQ8, 2)) ( WeeklyQ8b, WeeklyQ8c,)),
       
       WeeklyQ9a,
       WeeklyQ9b,
 
-      d.If(~d.Equal(IntakeQ9, 0)) # reported no seasonal flu jab
-      ( WeeklyQ10 ),
-      # Possibly update IntakeQ9 here?
+#      d.If(~d.Equal(IntakeQ9, 0)) # reported no seasonal flu jab
+#      ( WeeklyQ10 ),
+#      # Possibly update IntakeQ9 here?
+
       WeeklyQ11,
       )
     
