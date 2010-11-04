@@ -224,7 +224,7 @@ class Survey(d.Survey):
             or d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,
                                      14,15,19,16])) # Symptoms are present
            and
-           d.Equal(WeeklyQ2, 1)) # Took temp
+           d.Equal(WeeklyQ2, 0)) # Took temp
       ( WeeklyQ2b ),
       d.If(d.Contains(WeeklyQ1, [1])            # Fever among symptoms
            or d.Contains(WeeklyQ2b, [2,3,4,5])) # Temp > 37.5
