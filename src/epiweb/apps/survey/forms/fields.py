@@ -49,7 +49,7 @@ class PostCodeField(forms.RegexField):
 
     def __init__(self, *args, **kwargs):
         self.country = kwargs.pop('country', settings.COUNTRY)
-        super(PostCodeField, self).__init__(*args, **kwargs)
+        super(PostCodeField, self).__init__(self.country, *args, **kwargs)
 
     def clean(self, value):
         klass = self.country_fields.get(self.country, None)
