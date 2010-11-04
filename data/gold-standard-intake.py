@@ -177,8 +177,7 @@ class IntakeQ13(d.Question):
              (2, "I don't know"), )
 
 class IntakeQ13b(d.Question):
-  question = """If you are currently pregnant, in which trimester of the
-  pregnancy are you?"""
+  question = "In which trimester of the pregnancy are you?"
   type = 'options-single'
   options = ((0, 'First trimester (week 1-12)'),
              (1, 'Second trimester (week 13-28)'),
@@ -239,8 +238,8 @@ class Survey(d.Survey):
               IntakeQ3,
               IntakeQ4,
               IntakeQ5,
-              IntakeQ6,
-              d.If(~d.Equal(IntakeQ6[0], 0)) ( IntakeQ6b ), # category 0 not 0
+#              IntakeQ6,
+#              d.If(~d.Equal(IntakeQ6[0], 0)) ( IntakeQ6b ), # category 0 not 0
               IntakeQ7,
               IntakeQ7b,
               IntakeQ8,
