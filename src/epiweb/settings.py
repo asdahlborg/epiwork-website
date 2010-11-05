@@ -137,6 +137,14 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 EMAIL_HOST='127.0.0.1'
 
+# Default e-mail address to use for various automated correspondence from
+# the site managers.
+DEFAULT_FROM_EMAIL = 'webmaster@influenzanet.com'
+
+# Subject-line prefix for email messages send with django.core.mail.mail_admins
+# or ...mail_managers.  Make sure to include the trailing space.
+EMAIL_SUBJECT_PREFIX = '[Influenzanet] '
+
 EPIDB_API_KEY = '0000000000000000000000000000000000000000'
 EPIDB_SERVER = 'http://127.0.0.1:8080/'
 
