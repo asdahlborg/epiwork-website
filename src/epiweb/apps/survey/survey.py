@@ -29,6 +29,8 @@ class Specification(object):
         self._prefills = None
         self._conditions = None
 
+        d.validate_rules(survey.rules)
+
     def get_questions(self, root=None, id_mapping={}):
         if self._questions is not None and root is None:
             return self._questions
