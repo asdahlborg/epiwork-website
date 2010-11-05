@@ -316,7 +316,8 @@ class Equal(Evaluator):
         else:
             raise SpecSyntaxError()
     def eval(self, values):
-        return self.a.value(values) == self.b.value(values)
+        return self.a.value(values) == self.b.value(values) or \
+               str(self.a.value(values)) == str(self.b.value(values)) # FIXME XXX
 
     def __str__(self):
         return '<Equal [%s] [%s]>' % (self.a, self.b)
@@ -348,7 +349,15 @@ class In(Evaluator):
             raise SpecSyntaxError()
         self.b = Primitive(list(b))
     def eval(self, values):
-        return self.a.value(values) in self.b.value(values)
+        # FIXME XXX
+        res = self.a.value(values) in self.b.value(values)
+        try:
+            a = int(self.a.value(values))
+            b = self.b.value(values)
+            res = a in b
+        except ValueError:
+            pass
+        return res
 
     def __str__(self):
         return '<In [%s] [%s]>' % (self.a, self.b)
@@ -379,8 +388,16 @@ class Contains(Evaluator):
             raise SpecSyntaxError()
         self.b = Primitive(list(b))
     def eval(self, values):
+        # FIXME XXX
         a = self.a.value(values)
-        return any([val in a for val in self.b.value(values)])
+        res = any([val in a for val in self.b.value(values)])
+        try:
+            b = self.b.value(values)
+            a = map(int, a)
+            res = any([val in a for val in b])
+        except ValueError:
+            pass
+        return res
 
     def __str__(self):
         return '<Contains [%s] [%s]>' % (self.a, self.b)
