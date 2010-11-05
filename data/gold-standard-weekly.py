@@ -169,7 +169,7 @@ class WeeklyQ9a(d.Question):
   question = """How many people did you meet inside or outside your household
   that had flu-like symptoms in the past week?
 
-  Inside your household:"""  # Emphasise the word 'Inside' 
+  <em>Inside</em> your household:"""  # Emphasise the word 'Inside' 
   type = 'options-single'
   options = ((0, "0"),
              (1, "1"),
@@ -184,7 +184,7 @@ class WeeklyQ9b(d.Question):
   question = """How many people did you meet inside or outside your household
   that had flu-like symptoms in the past week?
 
-  Outside your household:"""  # Emphasise the word 'Outside' 
+  <em>Outside</em> your household:"""  # Emphasise the word 'Outside' 
   type = 'options-single'
   options = ((0, "0"),
              (1, "1"),
@@ -215,15 +215,15 @@ class Survey(d.Survey):
     id = 'gold-standard-weekly-0.1.0'
     rules = (
       WeeklyQ1,
-      d.If(~d.Contains(WeeklyQ1, [0])
-           or d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,
+      d.If( ~d.Contains(WeeklyQ1, [0])
+            or d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,
                                     14,15,19,16])) # Symptoms are present
       ( WeeklyQ1b ),
       WeeklyQ2,
       d.If((~d.Contains(WeeklyQ1, [0])
             or d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,
                                      14,15,19,16])) # Symptoms are present
-           and
+           &
            d.Equal(WeeklyQ2, 0)) # Took temp
       ( WeeklyQ2b ),
       d.If(d.Contains(WeeklyQ1, [1])            # Fever among symptoms
@@ -232,11 +232,12 @@ class Survey(d.Survey):
 
       d.If(
 #           PREVIOUS_RESPONSE_EXISTS variable goes here
-#           and
+#           &
 #           d.Equal(d.Response('WeeklyQ5'), "I am still ill")
-#           and
-            d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,14,
-                                  15,19,16])) # Symptoms are present
+#           &
+            ~d.Contains(WeeklyQ1, [0])
+            or d.Contains(WeeklyQ1, [1,17,3,4,5,6,18,8,9,10,11,12,7,2,13,14,
+                                     15,19,16])) # Symptoms are present
       ( WeeklyQ3,
         WeeklyQ4,
         WeeklyQ5,
