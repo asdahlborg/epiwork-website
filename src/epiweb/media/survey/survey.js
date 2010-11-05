@@ -212,8 +212,12 @@ var SurveyDefinition = {
                 a = [a];
             }
             var len = a.length;
+            var b = [];
+            for (var i=0; i<self.b.length; i++) {
+                b.push(""+self.b[i]);
+            }
             for (var i=0; i<len; i++) {
-                if ($.inArray(a[i], self.b) >= 0) {
+                if ($.inArray(a[i], b) >= 0) {
                     return true;
                 }
             }
@@ -244,7 +248,7 @@ var SurveyDefinition = {
             var len = self.args.length;
             for (var i=0; i<len; i++) {
                 var arg = self.args[i];
-                if ((typeof(arg) == boolean) && arg) {
+                if ((typeof(arg) == "boolean") && arg) {
                     return true;
                 }
                 else if (arg.evaluate(context)) {
