@@ -471,7 +471,7 @@ class Or(Boolean):
     OR operator
     '''
     def __init__(self, a, *conditions):
-        conditions = [a] + conditions
+        conditions = [a] + list(conditions)
         if not all([isinstance(condition, Boolean) for condition in conditions]):
             raise SpecSyntaxError()
         self.conditions = conditions
