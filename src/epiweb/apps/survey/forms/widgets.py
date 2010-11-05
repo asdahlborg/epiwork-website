@@ -39,18 +39,15 @@ class MonthYearWidget(Widget):
             self.years = range(this_year, this_year-100, -1)
 
     def render(self, name, value, attrs=None):
-        print '>>> render: value:', value
         try:
-            year_val, month_val = value.split('-')
-            year_val = int(year_val)
-            month_val = int(month_val)
+            year_val = value.year
+            month_val = value.month
         except (AttributeError, ValueError):
             year_val = month_val = None
             if isinstance(value, basestring):
                 match = RE_YEAR_MONTH.match(value)
                 if match:
                     year_val, month_val = [int(v) for v in match.groups()]
-        print '>>> val:', repr(year_val), repr(month_val)
 
         output = []
 

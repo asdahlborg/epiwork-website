@@ -36,7 +36,7 @@ class MonthYearField(forms.Field):
             year, month = value.split('-')
             year = int(year)
             month = int(month)
-            return datetime.datetime(year, month, 1)
+            return datetime.datetime(year, month, 1).date()
         except ValueError:
             pass
         raise forms.ValidationError(self.error_messages['invalid'])
