@@ -85,11 +85,15 @@ Survey.prototype = {
         var len = fields.length;
         var first = fields[0];
         var tag = first.tagName.toLowerCase();
+        var str_values = [];
+        for (var i=0; i<values.length; i++) {
+            str_values.push(""+values[i]);
+        }
         if (tag == 'input') {
             var type = $(first).attr('type');
             if ((type == 'checkbox') || (type == 'radio')) {
                 for (var i=0; i<len; i++) {
-                    if ($.inArray(fields[i].value, values) >= 0) {
+                    if ($.inArray(fields[i].value, str_values) >= 0) {
                         fields[i].checked = true;
                     }
                     else {
