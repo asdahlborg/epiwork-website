@@ -12,3 +12,4 @@ epiweb.db
 *.swp
 src/epiweb/media/banner/
 .DS_Store
+src/epiweb/TAGS
