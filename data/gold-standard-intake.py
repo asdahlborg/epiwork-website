@@ -23,6 +23,7 @@ class IntakeQ5(d.Question):
   question = """In your daily life, do you come into frequent contact with any 
   of the following? (Tick all that apply)"""
   type = 'options-multiple'
+  blank = True
   options = ((0, 'Groups of children or teenagers'),
              (1, 'Groups of the elderly (>65 years of age)'),
              (2, 'Patients'),
@@ -90,7 +91,7 @@ class IntakeQ8c(d.Question):
 
 class IntakeQ9(d.Question):
   question = """Did you receive seasonal flu vaccine last autumn/winter
-  (i.e. 2009-2010)?"""
+  ({{ LAST_SEASON }})?"""
   type = 'options-single'
   options = ((0, 'Yes'),
              (1, 'No'),
@@ -149,7 +150,7 @@ class IntakeQ10d(d.Question):
 
 class IntakeQ11(d.Question):
   question = """Did you get an invitation from your doctor to receive flu
-  vaccine this fall/winter season?"""
+  vaccine this fall/winter season ({{ SEASON }})?"""
   type = 'options-single'
   options = ((0, 'Yes'),
              (1, 'No'),
@@ -159,6 +160,7 @@ class IntakeQ12(d.Question):
   question = """Do you take medication for any of the following medical
   conditions?  (Tick all that apply)"""
   type = 'options-multiple'
+  blank = True
   options = ((0, 'Yes, I am taking medication because of Asthma'),
              (1, 'Yes, I am taking medication because of Diabetes'),
              (2, """Yes, I am taking medication because of Lung disorder (COPD,
@@ -197,6 +199,7 @@ class IntakeQ15(d.Question):
   question = """Do you have one of the following allergies that can cause
   respiratory symptoms? (Multiple answers possible)"""
   type = 'options-multiple'
+  blank = True
   options = ((0, 'Pollen (hay fever)'),
              (1, 'House dust mite'),
              (2, 'Domestic animals/pets'),
@@ -252,7 +255,8 @@ class Survey(d.Survey):
 
               IntakeQ11,
               IntakeQ12,
-              IntakeQ13,
+              # Only ask females if they are pregnant
+              d.If(d.Equal(IntakeQ1, 1)) (IntakeQ13 ), 
               d.If(d.Equal(IntakeQ13, 0)) ( IntakeQ13b ),
               IntakeQ14,
               IntakeQ15,
