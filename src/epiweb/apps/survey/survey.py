@@ -129,7 +129,8 @@ class Specification(object):
 
 def get_template_context(spec, context):
     """Get and return a context containing the date and responses to the last
-    completed survey.
+    completed survey, as well a other contextual information required by the
+    questionnaires.
     """
     try:
         from utils import get_last_response
@@ -140,7 +141,21 @@ def get_template_context(spec, context):
         lsd['DATE'] = last_response.participation.date
     except LastResponse.DoesNotExist:
         lsd = {}
-    return {'LAST_SURVEY': lsd}
+
+    def season(delta=0):
+        from datetime import datetime
+        now = datetime.now()
+        year = now.year + delta
+        if now.month > 6:
+            return '%d-%d' % (year, year+1)
+        else:
+            return '%d-%d' % (year-1, year)
+
+    d = { 'LAST_SURVEY': lsd,
+          'SEASON': season(),
+          'LAST_SEASON': season(-1) }
+
+    return d 
 
 class SurveyFormBase(forms.Form):
     def clean(self):
