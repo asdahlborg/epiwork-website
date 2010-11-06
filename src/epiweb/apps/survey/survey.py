@@ -128,18 +128,19 @@ class Specification(object):
         return self._prefills
 
 def get_template_context(spec, context):
-    #from .models import LastResponse
-    #try:
-    #    last_response = LastResponse.objects.get(user=context.user).select_related()
-    #    last_response = last_response.participation.date
-    #except LastResponse.DoesNotExist:
-    #    # FIXME
-    #    last_response = ''
+    """Get and return a context containing the date and responses to the last
+    completed survey.
+    """
+    try:
+        from utils import get_last_response
+        lsd = get_last_response(context.user)
 
-    from datetime import datetime
-    last_response = datetime.now()
-
-    return {'LAST_SURVEY': last_response}
+        from models import LastResponse
+        last_response = LastResponse.objects.get(user=context.user)
+        lsd['DATE'] = last_response.participation.date
+    except LastResponse.DoesNotExist:
+        lsd = {}
+    return {'LAST_SURVEY': lsd}
 
 class SurveyFormBase(forms.Form):
     def clean(self):
