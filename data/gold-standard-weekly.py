@@ -81,6 +81,11 @@ class WeeklyQ5(d.Question):
   type = 'date'
 # We also need the option of "I am still ill"
 
+#class WeeklyQ5(d.Question):
+#  question = 'When did your symptoms end?'
+#  type = 'date-or-text'
+#  text = 'I am still ill'
+
 class WeeklyQ6(d.Question):
   question = """Because of your symptoms, did you seek medical attention by
   visiting (seeing face to face) any of the following (tick all that apply)?"""
@@ -202,27 +207,38 @@ class WeeklyQ11(d.Question):
              (3, "Gastroenteritis/gastric flu"),
              (4, "I don’t have an idea"), )
 
+# WeeklyQ11 requires an answer so if its value is empty in the previous
+# response then the previous response must not exist.
+previous_response_exists = ~ d.Empty(d.Response('WeeklyQ11'))
+
+
 class Survey(d.Survey):
   id = 'gold-standard-weekly-0.1.0'
+
+  # Local propositions
+  symptoms_present             = ~ d.Empty(WeeklyQ1)
+  took_temp                    = d.Equal(WeeklyQ2, 0)
+  fever_among_symptoms         = d.Contains(WeeklyQ1, [1])
+  temp_over_37half             = d.In(WeeklyQ2b, [2,3,4,5])
+  took_antivirals              = d.Contains(WeeklyQ7, [3])
+  reported_no_seasonal_flu_jab = ~ d.Equal(d.Profile('IntakeQ9'), 0)
+  # TODO still_ill                    = d.Equal(WeeklyQ3, 0)
+  # Tautology:
+  still_ill                    = d.Empty(WeeklyQ1) | ~ d.Empty(WeeklyQ1)
+  
   rules = (
-    WeeklyQ11,
-    d.If( ~ d.Empty(WeeklyQ1)) # Symptoms are present
+    WeeklyQ1,
+    d.If( symptoms_present )
     ( WeeklyQ1b ),
     WeeklyQ2,
-    d.If(~ d.Empty(WeeklyQ1) # Symptoms are present
-         &
-         d.Equal(WeeklyQ2, 0)) # Took temp
+    d.If( symptoms_present & took_temp)
     ( WeeklyQ2b ),
-    d.If(d.Contains(WeeklyQ1, [1])      # Fever among symptoms
-         | d.In(WeeklyQ2b, [2,3,4,5]))  # Temp > 37.5
+    d.If( fever_among_symptoms | temp_over_37half )
     ( WeeklyQ2c),
 
-    d.If(
-#         PREVIOUS_RESPONSE_EXISTS variable goes here
-#         &
-#         d.Equal(d.Response('WeeklyQ5'), "I am still ill")
-#         &
-          ~ d.Empty(WeeklyQ1) # Symptoms are present
+    d.If( previous_response_exists
+          & still_ill
+          & ~ d.Empty(WeeklyQ1) # Symptoms are present
           )
     ( WeeklyQ3,
       d.If(d.Equal(WeeklyQ3, 0)) ( Message1, WeeklyQ4 ),
@@ -230,31 +246,30 @@ class Survey(d.Survey):
       WeeklyQ6,
       d.If(d.Equal(WeeklyQ6, 1)) ( WeeklyQ6b ),
       WeeklyQ7,
-      d.If(d.Contains(WeeklyQ7, [3])) ( WeeklyQ7b ),
+      d.If( took_antivirals ) ( WeeklyQ7b ),
       WeeklyQ8,
       d.If(d.Equal(WeeklyQ8, 2)) ( WeeklyQ8b, WeeklyQ8c,)),
     
     WeeklyQ9a,
     WeeklyQ9b,
 
-#    d.If(~ d.Equal(d.Profile(IntakeQ9), 0)) # reported no seasonal flu jab
-#    ( WeeklyQ10 ),
-#    # Possibly update IntakeQ9 here?
+    d.If( reported_no_seasonal_flu_jab ) ( WeeklyQ10 ),
+    # TODO Possibly update IntakeQ9 here?
 
     WeeklyQ11,
     )
 
   # TODO tidy up this syntax: see survey.py lines 100-125
-  prefill = { WeeklyQ4:  d.Equal(WeeklyQ3, 0),
-              WeeklyQ5:  d.Equal(WeeklyQ3, 0),
-              WeeklyQ6:  d.Equal(WeeklyQ3, 0),
-              WeeklyQ6b: d.Equal(WeeklyQ3, 0),
-              WeeklyQ7:  d.Equal(WeeklyQ3, 0),
-              WeeklyQ7b: d.Equal(WeeklyQ3, 0),
-              WeeklyQ8:  d.Equal(WeeklyQ3, 0),
-              WeeklyQ8b: d.Equal(WeeklyQ3, 0),
-              WeeklyQ8c: d.Equal(WeeklyQ3, 0),
-              WeeklyQ9a: d.Equal(WeeklyQ3, 0),
-              WeeklyQ9b: d.Equal(WeeklyQ3, 0),
+  prefill = { WeeklyQ4:  still_ill,
+              WeeklyQ5:  still_ill,
+              WeeklyQ6:  still_ill,
+              WeeklyQ6b: still_ill,
+              WeeklyQ7:  still_ill,
+              WeeklyQ7b: still_ill,
+              WeeklyQ8:  still_ill,
+              WeeklyQ8b: still_ill,
+              WeeklyQ8c: still_ill,
+              WeeklyQ9a: still_ill,
+              WeeklyQ9b: still_ill,
               }
 
