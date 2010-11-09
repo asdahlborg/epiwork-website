@@ -1,5 +1,5 @@
 from pprint import pprint
-import json
+import simplejson as json
 from collections import defaultdict
 
 from django import forms
@@ -311,6 +311,20 @@ class FormBuilder(object):
                                                    '%d %b, %Y', '%B %d %Y',
                                                    '%B %d, %Y', '%d %B %Y',
                                                    '%d %B, %Y'])
+
+        elif type == 'date-or-text':
+            field = forms.ComboField(fields=[
+                forms.DateField( widget=DatePickerWidget,
+                                 help_text="Date format: day/month/year",
+                                 input_formats=['%Y-%m-%d', '%d/%m/%Y',
+                                               '%d/%m/%y', '%d-%m-%y',
+                                               '%d-%m-%Y', '%b %d %Y',
+                                               '%b %d, %Y', '%d %b %Y',
+                                               '%d %b, %Y', '%B %d %Y',
+                                               '%B %d, %Y', '%d %B %Y',
+                                               '%d %B, %Y']),
+                forms.ChoiceField(widget=forms.RadioSelect,
+                                  choices=[question.text])])
 
         elif type == 'advise':
             field = AdviseField()

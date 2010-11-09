@@ -19,10 +19,7 @@ try:
 except ImportError:
     import pickle
 
-try:
-    import simplejson as json
-except ImportError:
-    import json
+import simplejson as json
 
 _specifications = {}
 
