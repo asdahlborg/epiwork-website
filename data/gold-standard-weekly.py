@@ -76,15 +76,15 @@ class WeeklyQ4(d.Question):
   question = 'When did the first symptoms appear?'
   type = 'date'
 
-class WeeklyQ5(d.Question):
-  question = 'When did your symptoms end?'
-  type = 'date'
-# We also need the option of "I am still ill"
-
 #class WeeklyQ5(d.Question):
 #  question = 'When did your symptoms end?'
-#  type = 'date-or-text'
-#  text = 'I am still ill'
+#  type = 'date'
+## We also need the option of "I am still ill"
+
+class WeeklyQ5(d.Question):
+  question = 'When did your symptoms end?'
+  type = 'date-or-text'
+  text = 'I am still ill'
 
 class WeeklyQ6(d.Question):
   question = """Because of your symptoms, did you seek medical attention by
@@ -110,6 +110,16 @@ class WeeklyQ6b(d.Question):
              (4, '4 days'),
              (5, '5-7 days'),
              (6, '>7 days'), )
+
+class WeeklyQ6c(d.Question):
+  question = """Because of your symptoms, did you seek medical attention by
+  telephone with any of the following (tick all that apply)?"""
+  type = 'options-multiple'
+  options = ((0, 'Yes: GP -- spoke to receptionist only'),
+             (1, 'Yes: GP -- spoke to GP/practice nurse'),
+             (2, 'Yes: NHS Direct or NHS24'),
+             (3, 'Yes: NPFS'),
+             (4, 'Yes: Other'),)
 
 class WeeklyQ7(d.Question):
   question = "Did you take medication for these symptoms?"
@@ -210,7 +220,10 @@ class WeeklyQ11(d.Question):
 # WeeklyQ11 requires an answer so if its value is empty in the previous
 # response then the previous response must not exist.
 previous_response_exists = ~ d.Empty(d.Response('WeeklyQ11'))
-
+# TODO add functionality for:
+# previously_still_ill = d.Equal(d.Response('WeeklyQ5'), 0)
+# Tautology:
+previously_still_ill = d.Empty(WeeklyQ1) | ~ d.Empty(WeeklyQ1)
 
 class Survey(d.Survey):
   id = 'gold-standard-weekly-0.1.0'
@@ -222,40 +235,30 @@ class Survey(d.Survey):
   temp_over_37half             = d.In(WeeklyQ2b, [2,3,4,5])
   took_antivirals              = d.Contains(WeeklyQ7, [3])
   reported_no_seasonal_flu_jab = ~ d.Equal(d.Profile('IntakeQ9'), 0)
-  # TODO still_ill                    = d.Equal(WeeklyQ3, 0)
-  # Tautology:
-  still_ill                    = d.Empty(WeeklyQ1) | ~ d.Empty(WeeklyQ1)
+  still_ill                    = d.Equal(WeeklyQ3, 0)
   
   rules = (
     WeeklyQ1,
-    d.If( symptoms_present )
-    ( WeeklyQ1b ),
+    d.If( symptoms_present ) ( WeeklyQ1b ),
     WeeklyQ2,
-    d.If( symptoms_present & took_temp)
-    ( WeeklyQ2b ),
-    d.If( fever_among_symptoms | temp_over_37half )
-    ( WeeklyQ2c),
-
-    d.If( previous_response_exists
-          & still_ill
-          & ~ d.Empty(WeeklyQ1) # Symptoms are present
-          )
-    ( WeeklyQ3,
-      d.If(d.Equal(WeeklyQ3, 0)) ( Message1, WeeklyQ4 ),
+    d.If( symptoms_present & took_temp) ( WeeklyQ2b ),
+    d.If( fever_among_symptoms | temp_over_37half ) ( WeeklyQ2c),
+    d.If( previously_still_ill & symptoms_present ) ( WeeklyQ3 ),
+    d.If( still_ill ) ( Message1 ),
+    d.If( symptoms_present )
+    ( WeeklyQ4,
       WeeklyQ5,
       WeeklyQ6,
       d.If(d.Equal(WeeklyQ6, 1)) ( WeeklyQ6b ),
+      WeeklyQ6c,
       WeeklyQ7,
       d.If( took_antivirals ) ( WeeklyQ7b ),
       WeeklyQ8,
       d.If(d.Equal(WeeklyQ8, 2)) ( WeeklyQ8b, WeeklyQ8c,)),
-    
     WeeklyQ9a,
     WeeklyQ9b,
-
     d.If( reported_no_seasonal_flu_jab ) ( WeeklyQ10 ),
     # TODO Possibly update IntakeQ9 here?
-
     WeeklyQ11,
     )
 
@@ -264,6 +267,7 @@ class Survey(d.Survey):
               WeeklyQ5:  still_ill,
               WeeklyQ6:  still_ill,
               WeeklyQ6b: still_ill,
+              WeeklyQ6c: still_ill,
               WeeklyQ7:  still_ill,
               WeeklyQ7b: still_ill,
               WeeklyQ8:  still_ill,
