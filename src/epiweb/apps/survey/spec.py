@@ -61,7 +61,7 @@ class Question(object):
         return condition
 
     def get_usage(self, name):
-        print '> get usage:', name
+        # print '> get usage:', name
         items = []
         parent = self.parent
         while parent is not None:
@@ -210,7 +210,7 @@ class QuestionValue(Value):
 
 class ProfileValue(Value):
     def __init__(self, id):
-        print '@@@', id
+        # print '@@@', id
         self.id = id
     def value(self, values):
         return values['+p'][self.id]
@@ -223,7 +223,7 @@ class ProfileValue(Value):
         return 'd.Profile(%s)' % json.dumps(self.id)
 
     def get_usage(self, name):
-        print '@@@ >>>>>>>>', name
+        # print '@@@ >>>>>>>>', name
         if name == 'profile':
             return [self.id]
         return []
@@ -324,7 +324,7 @@ class Equal(Evaluator):
         return 'd.Equal(%s, %s)' % (self.a.js, self.b.js)
 
     def get_usage(self, name):
-        print 'Equal: get_usage:', name, repr(self.a), repr(self.b)
+        # print 'Equal: get_usage:', name, repr(self.a), repr(self.b)
         return self.a.get_usage(name) + self.b.get_usage(name)
 E = Equal
 
@@ -524,7 +524,7 @@ class Not(Boolean):
         return 'd.Not(%s)' % self.condition.js
 
     def get_usage(self, name):
-        print 'not get usage:', name
+        # print 'not get usage:', name
         return self.condition.get_usage(name)
 
 #
