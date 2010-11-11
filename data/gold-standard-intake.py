@@ -134,7 +134,7 @@ class IntakeQ10d(d.Question):
   ({{ SEASON }})? (Tick all that apply)"""
   type= 'options-multiple'
   options = ((0, 'I am still (planning to) get a vaccine'),
-             (1, 'Because I don’t belong to a risk group'),
+             (1, "Because I don't belong to a risk group"),
              (2, """Because it is better to build your own natural immunity
              against the flu"""),
              (3, 'Because I doubt that the influenza vaccine is effective'),
@@ -235,8 +235,15 @@ class IntakeQ17(d.Question):
              (4, 'Yes, one ore more other animals'), )
 
 class Survey(d.Survey):
-    id = 'gold-standard-intake-0.1.0'
-    rules = ( IntakeQ1,
+  id = 'gold-standard-intake-0.1.0'
+
+  # Local propositions
+  female = d.Equal(IntakeQ1, 1)
+  pregnant = female & d.Equal(IntakeQ13, 0)
+  had_seasonal_flu_vaccine = d.Equal(IntakeQ10, 0)
+  had_swine_flu_vaccine_last_winter = d.Equal(IntakeQ8, 0)
+  
+  rules = ( IntakeQ1,
               IntakeQ2,
               IntakeQ3,
               IntakeQ4,
@@ -246,18 +253,15 @@ class Survey(d.Survey):
               IntakeQ7,
               IntakeQ7b,
               IntakeQ8,
-              d.If(d.Equal(IntakeQ8, 0)) ( IntakeQ8b, IntakeQ8c ),
+              d.If(had_swine_flu_vaccine_last_winter) (IntakeQ8b, IntakeQ8c),
               IntakeQ9,
               IntakeQ10,
-
-              d.If(d.Equal(IntakeQ10, 0)) ( IntakeQ10b, IntakeQ10c ),
-              d.Else( IntakeQ10d ),
-
+              d.If(had_seasonal_flu_vaccine) (IntakeQ10b, IntakeQ10c),
+              d.Else(IntakeQ10d),
               IntakeQ11,
               IntakeQ12,
-              # Only ask females if they are pregnant
-              d.If(d.Equal(IntakeQ1, 1)) (IntakeQ13 ), 
-              d.If(d.Equal(IntakeQ13, 0)) ( IntakeQ13b ),
+              d.If(female) (IntakeQ13), 
+              d.If(pregnant) (IntakeQ13b),
               IntakeQ14,
               IntakeQ15,
               IntakeQ18, # decided in telco 26-10-2010.

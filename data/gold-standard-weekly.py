@@ -44,17 +44,17 @@ class WeeklyQ2b(d.Question):
   question = """When you measured your temperature, what was the highest
   temperature measured?"""
   type = 'options-single'
-  options = ((0, 'Below 37°C'),
-             (1, '37° - 37.4°C'),
-             (2, '37.5° - 37.9°C'),
-             (3, '38° – 38.9°C'),
-             (4, '39° - 39.9°C'),
-             (5, '40°C or more'), )
+  options = ((0, 'Below 37C'),
+             (1, '37 - 37.4C'),
+             (2, '37.5 - 37.9C'),
+             (3, '38 - 38.9C'),
+             (4, '39 - 39.9C'),
+             (5, '40C or more'), )
 
 class WeeklyQ2c(d.Question):
   question = 'When did the fever start?' 
   type = 'date'
-  # or "I don’t remember"
+  # or "I don't remember"
 
 class WeeklyQ3(d.Question):
   question = """On {{ LAST_SURVEY.DATE|date:'l F jS' }} you reported that you
@@ -83,14 +83,14 @@ class WeeklyQ4(d.Question):
 
 class WeeklyQ5(d.Question):
   question = 'When did your symptoms end?'
-  type = 'date-or-text'
+  type = 'date-or-option'
   text = 'I am still ill'
 
 class WeeklyQ6(d.Question):
   question = """Because of your symptoms, did you seek medical attention by
   visiting (seeing face to face) any of the following (tick all that apply)?"""
   type = 'options-single'
-  options = ((0, 'Yes: general practitioner (GP) or GP’s practice nurse'),
+  options = ((0, "Yes: family doctor or family doctor's practice nurse"),
              (1, 'Yes: Hospital admission'),
              (2, """Yes: Hospital accident & emergency department/out of hours
              service"""),
@@ -115,10 +115,10 @@ class WeeklyQ6c(d.Question):
   question = """Because of your symptoms, did you seek medical attention by
   telephone with any of the following (tick all that apply)?"""
   type = 'options-multiple'
-  options = ((0, 'Yes: GP -- spoke to receptionist only'),
-             (1, 'Yes: GP -- spoke to GP/practice nurse'),
-             (2, 'Yes: NHS Direct or NHS24'),
-             (3, 'Yes: NPFS'),
+  options = ((0, 'Yes: Family doctor - spoke to receptionist only'),
+             (1, 'Yes: Family doctor - spoke to doctor or nurse'),
+             (2, 'Yes: National health advice service'),
+             (3, 'Yes: National pandemic flu service'),
              (4, 'Yes: Other'),)
 
 class WeeklyQ7(d.Question):
@@ -184,7 +184,7 @@ class WeeklyQ9a(d.Question):
              (4, "4"),
              (5, "5"),
              (6, ">5"),
-             (7, "Don’t know"), )
+             (7, "Don't know"), )
 
 class WeeklyQ9b(d.Question):
   question = """How many people did you meet inside or outside your household
@@ -199,7 +199,7 @@ class WeeklyQ9b(d.Question):
              (4, "4"),
              (5, "5"),
              (6, ">5"),
-             (7, "Don’t know"), )
+             (7, "Don't know"), )
 
 class WeeklyQ10(d.Question):
   question = """According to our data you did not receive a seasonal flu
@@ -215,7 +215,7 @@ class WeeklyQ11(d.Question):
              (1, "Common cold"),
              (2, "Allergy/hay fever"),
              (3, "Gastroenteritis/gastric flu"),
-             (4, "I don’t have an idea"), )
+             (4, "I don't have an idea"), )
 
 # WeeklyQ11 requires an answer so if its value is empty in the previous
 # response then the previous response must not exist.
@@ -236,31 +236,31 @@ class Survey(d.Survey):
   took_antivirals              = d.Contains(WeeklyQ7, [3])
   reported_no_seasonal_flu_jab = ~ d.Equal(d.Profile('IntakeQ9'), 0)
   still_ill                    = d.Equal(WeeklyQ3, 0)
+  sought_medical_attention     = d.In(WeeklyQ6, [0,1,2,3])
   
-  rules = (
-    WeeklyQ1,
-    d.If( symptoms_present ) ( WeeklyQ1b ),
-    WeeklyQ2,
-    d.If( symptoms_present & took_temp) ( WeeklyQ2b ),
-    d.If( fever_among_symptoms | temp_over_37half ) ( WeeklyQ2c),
-    d.If( previously_still_ill & symptoms_present ) ( WeeklyQ3 ),
-    d.If( still_ill ) ( Message1 ),
-    d.If( symptoms_present )
-    ( WeeklyQ4,
-      WeeklyQ5,
-      WeeklyQ6,
-      d.If(d.Equal(WeeklyQ6, 1)) ( WeeklyQ6b ),
-      WeeklyQ6c,
-      WeeklyQ7,
-      d.If( took_antivirals ) ( WeeklyQ7b ),
-      WeeklyQ8,
-      d.If(d.Equal(WeeklyQ8, 2)) ( WeeklyQ8b, WeeklyQ8c,)),
-    WeeklyQ9a,
-    WeeklyQ9b,
-    d.If( reported_no_seasonal_flu_jab ) ( WeeklyQ10 ),
-    # TODO Possibly update IntakeQ9 here?
-    WeeklyQ11,
-    )
+  rules = ( WeeklyQ1,
+            d.If(symptoms_present) (WeeklyQ1b),
+            WeeklyQ2,
+            d.If(symptoms_present & took_temp) (WeeklyQ2b),
+            d.If(fever_among_symptoms | temp_over_37half) (WeeklyQ2c),
+            d.If(previously_still_ill & symptoms_present) (WeeklyQ3),
+            d.If(still_ill) (Message1),
+            d.If(symptoms_present)
+            ( WeeklyQ4,
+              WeeklyQ5,
+              WeeklyQ6,
+              d.If(sought_medical_attention) (WeeklyQ6b),
+              WeeklyQ6c,
+              WeeklyQ7,
+              d.If(took_antivirals) (WeeklyQ7b),
+              WeeklyQ8,
+              d.If(d.Equal(WeeklyQ8, 2)) (WeeklyQ8b, WeeklyQ8c,)),
+            WeeklyQ9a,
+            WeeklyQ9b,
+            d.If(reported_no_seasonal_flu_jab) (WeeklyQ10),
+            # TODO Possibly update IntakeQ9 here?
+            WeeklyQ11,
+            )
 
   # TODO tidy up this syntax: see survey.py lines 100-125
   prefill = { WeeklyQ4:  still_ill,
