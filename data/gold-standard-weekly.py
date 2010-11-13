@@ -242,7 +242,8 @@ class Survey(d.Survey):
             d.If(symptoms_present) (WeeklyQ1b),
             WeeklyQ2,
             d.If(symptoms_present & took_temp) (WeeklyQ2b),
-            d.If(fever_among_symptoms | temp_over_37half) (WeeklyQ2c),
+            d.If(fever_among_symptoms | (took_temp & temp_over_37half))
+            (WeeklyQ2c),
             d.If(previously_still_ill & symptoms_present) (WeeklyQ3),
             d.If(still_ill) (Message1),
             d.If(symptoms_present)
