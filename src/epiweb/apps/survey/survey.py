@@ -134,11 +134,12 @@ def get_template_context(spec, context):
     """
     try:
         from utils import get_last_response
-        lsd = get_last_response(context.user)
+        lsd = get_last_response(context.user) or {}
 
         from models import LastResponse
         last_response = LastResponse.objects.get(user=context.user)
-        lsd['DATE'] = last_response.participation.date
+        if last_response.participation and date in last_response.participation:
+            lsd['DATE'] = last_response.participation.date
     except LastResponse.DoesNotExist:
         lsd = {}
 
