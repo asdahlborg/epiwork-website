@@ -23,7 +23,7 @@ class WeeklyQ1(d.Question):
              (15, 'Diarrhoea'),
              (19, 'Stomach ache'),
              (16, 'Other'),
-             # (0, 'No symptoms'), # Removed to use d.Empty
+             (0, 'No symptoms'),
              )
 
 class WeeklyQ1b(d.Question):
@@ -229,7 +229,9 @@ class Survey(d.Survey):
   id = 'gold-standard-weekly-0.1.0'
 
   # Local propositions
-  symptoms_present             = ~ d.Empty(WeeklyQ1)
+  symptoms_present             = ~ d.Contains(WeeklyQ1, [0]) | \
+                                 d.Contains(WeeklyQ1, [1,2,3,4,5,6,7,8,9,10,11,
+                                                       12,13,14,15,16,17,18,19])
   took_temp                    = d.Equal(WeeklyQ2, 0)
   fever_among_symptoms         = d.Contains(WeeklyQ1, [1])
   temp_over_37half             = d.In(WeeklyQ2b, [2,3,4,5])
