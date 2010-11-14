@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 import uuid
 
 from django.db import models
@@ -113,10 +113,18 @@ def add_empty_profile(sender, instance, created, **kwargs):
         profile.user = instance
         profile.save()
 
+def epoch():
+    """Use the Unix epoch for a date so far in the past at which no
+    participation could have taken place. A participition with this date stamp
+    indicates that there was no such participation.
+    """
+    return date(1970, 1, 1)
+
 def add_empty_last_response(sender, instance, created, **kwargs):
     if created:
         response = LastResponse()
         response.user = instance
+        response.participation.date = epoch()
         response.save()
 
 post_save.connect(add_empty_profile, sender=SurveyUser)

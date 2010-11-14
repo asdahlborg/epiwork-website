@@ -132,16 +132,13 @@ def get_template_context(spec, context):
     completed survey, as well a other contextual information required by the
     questionnaires.
     """
-    try:
-        from utils import get_last_response
-        lsd = get_last_response(context.user) or {}
+    from utils import get_last_response
+    lrdir = get_last_response(context.user) or {}
 
-        from models import LastResponse
-        last_response = LastResponse.objects.get(user=context.user)
-        if last_response.participation and date in last_response.participation:
-            lsd['DATE'] = last_response.participation.date
-    except LastResponse.DoesNotExist:
-        lsd = {}
+    from models import LastResponse, epoch
+    lrp_date = LastResponse.objects.get(user=context.user).participation.date
+    if not lrp_date == epoch():
+        lrdir['DATE'] = lrp_date
 
     def season(delta=0):
         from datetime import datetime
@@ -152,7 +149,7 @@ def get_template_context(spec, context):
         else:
             return '%d-%d' % (year-1, year)
 
-    d = { 'LAST_SURVEY': lsd,
+    d = { 'LAST_SURVEY': lrdir,
           'SEASON': season(),
           'LAST_SEASON': season(-1) }
 
