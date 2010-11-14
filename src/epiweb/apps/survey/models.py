@@ -121,10 +121,11 @@ def epoch():
     return date(1970, 1, 1)
 
 def add_empty_last_response(sender, instance, created, **kwargs):
+    print 'ZZZ'
     if created:
         response = LastResponse()
         response.user = instance
-        response.participation.date = epoch()
+        response.participation = Participation(date=epoch())
         response.save()
 
 post_save.connect(add_empty_profile, sender=SurveyUser)

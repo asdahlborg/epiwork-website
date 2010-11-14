@@ -136,9 +136,11 @@ def get_template_context(spec, context):
     lrdir = get_last_response(context.user) or {}
 
     from models import LastResponse, epoch
-    lrp_date = LastResponse.objects.get(user=context.user).participation.date
-    if not lrp_date == epoch():
-        lrdir['DATE'] = lrp_date
+    lr = LastResponse.objects.get(user=context.user)
+    if ( lr.participation
+         and lr.participation.date
+         and not lr.participation.date == epoch() ):
+       lrdir['DATE'] = lrp_date
 
     def season(delta=0):
         from datetime import datetime
