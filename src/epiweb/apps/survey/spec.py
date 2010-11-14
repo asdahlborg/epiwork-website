@@ -32,7 +32,7 @@ class Question(object):
 
             # under Else
             elif isinstance(parent, Else):
-                print '>>> Else: prev:', parent.prev
+                # print '>>> Else: prev:', parent.prev
                 pass
 
             # the direct If/ElseIf parent should evaluate to True
@@ -242,7 +242,7 @@ class ResponseValue(Value):
         return 'd.Response(%s)' % json.dumps(self.id)
 
     def get_usage(self, name):
-        print '@@@ >>>>>>>>', name
+        # print '@@@ >>>>>>>>', name
         if name == 'response':
             return [self.id]
         return []
@@ -600,7 +600,7 @@ def validate_rules(rules, parent=None):
     res = []
     prev = None
     for rule in rules:
-        print '>', rule
+        # print '>', rule
         if issubclass(rule.__class__, Branch):
             # branch object
             klass = rule.__class__

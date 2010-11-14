@@ -167,20 +167,20 @@ class SurveyFormBase(forms.Form):
         values.update({'+p': self.context.profile.values})
         values.update({'+r': self.context.response.values})
 
-        from pprint import pprint
-        pprint(self.spec.get_modifier())
-        pprint(self.spec.get_modified())
-        pprint(values)
-        pprint(self._errors)
+        # from pprint import pprint
+        # pprint(self.spec.get_modifier())
+        # pprint(self.spec.get_modified())
+        # pprint(values)
+        # pprint(self._errors)
 
         for question in self.spec.questions:
-            print 'Cond [%s]: %s' % (question.id, question.get_condition())
-            print '- js:', question.get_condition().js
-            print '- modifier:', question.get_modifier()
-            print '- visible:', question.visible(values)
+            # print 'Cond [%s]: %s' % (question.id, question.get_condition())
+            # print '- js:', question.get_condition().js
+            # print '- modifier:', question.get_modifier()
+            # print '- visible:', question.visible(values)
             if not question.visible(values):
                 data[question.id] = None
-                print 'DELETE', question.id
+                # print 'DELETE', question.id
                 if question.id in self._errors.keys():
                     del self._errors[question.id]
             elif not data.has_key(question.id):
