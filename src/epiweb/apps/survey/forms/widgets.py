@@ -21,7 +21,7 @@ class DateOrOptionPickerWidget(forms.MultiWidget):
         attrs = kwargs.pop('attrs', {})
         choices = kwargs.pop('choices', [])
         widget = ( DatePickerWidget(),
-                   forms.RadioSelect(choices=choices), )
+                   forms.CheckboxSelectMultiple(choices=choices), )
         super(DateOrOptionPickerWidget, self).__init__(widget, attrs=attrs)
 
     def decompress(self,value):
