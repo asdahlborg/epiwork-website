@@ -6,9 +6,10 @@ from django.conf import settings
 from django.contrib.localflavor.nl.forms import NLZipCodeField
 from django.contrib.localflavor.it.forms import ITZipCodeField
 
-from .widgets import AdviseWidget, MonthYearWidget
+from .widgets import ( AdviseWidget, MonthYearWidget,
+                       DatePickerWidget, DateOrOptionPickerWidget, )
 
-__all__ = ['AdviseField', 'MonthYearField', 'PostCodeField']
+__all__ = ['AdviseField', 'MonthYearField', 'PostCodeField', 'DateOrOptionField']
 
 class AdviseField(forms.Field):
     widget = AdviseWidget
@@ -59,3 +60,14 @@ class PostCodeField(forms.RegexField):
         field = klass()
         return field.clean(value)
 
+class DateOrOptionField(forms.MultiValueField):
+    def __init__(self, *args, **kwargs):
+        self.option = kwargs.pop('option', '')
+        self.widget=DateOrOptionPickerWidget(choices=[(0, self.option)])
+        self.fields=[ forms.DateField(), forms.ChoiceField()]
+        super(DateOrOptionField, self).__init__(fields=self.fields,
+                                                widget=self.widget,
+                                                *args, **kwargs)
+
+    def compress(self, v):
+        return v

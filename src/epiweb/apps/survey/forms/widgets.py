@@ -16,6 +16,18 @@ class DatePickerWidget(forms.TextInput):
     def __init__(self, attrs={}):
         forms.TextInput.__init__(self, attrs={'class': 'sDateField'})
     
+class DateOrOptionPickerWidget(forms.MultiWidget):
+    def __init__(self, *args, **kwargs):
+        attrs = kwargs.pop('attrs', {})
+        choices = kwargs.pop('choices', [])
+        widget = ( DatePickerWidget(),
+                   forms.RadioSelect(choices=choices), )
+        super(DateOrOptionPickerWidget, self).__init__(widget, attrs=attrs)
+
+    def decompress(self,value):
+        return value or [None, None]
+
+
 RE_YEAR_MONTH = re.compile(r'(\d{4})-(\d\d?)$')
 
 class MonthYearWidget(Widget):
