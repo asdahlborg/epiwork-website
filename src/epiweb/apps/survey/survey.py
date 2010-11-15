@@ -140,7 +140,7 @@ def get_template_context(spec, context):
     if ( lr.participation
          and lr.participation.date
          and not lr.participation.date == epoch() ):
-       lrdir['DATE'] = lrp_date
+       lrdir['DATE'] = lr.participation.date
 
     def season(delta=0):
         from datetime import datetime
