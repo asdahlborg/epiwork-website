@@ -287,22 +287,22 @@ class FormBuilder(object):
         self.klass = klass
 
     def build_field(self, question):
-        type = question.type
-        if type == 'yes-no':
+        qtype = question.type
+        if qtype == 'yes-no':
             field = forms.ChoiceField(widget=forms.RadioSelect,
                                       choices=[('yes', 'Yes'),
                                                ('no', 'No')])
 
-        elif type == 'options-multiple':
+        elif qtype == 'options-multiple':
             field = forms.MultipleChoiceField(
                             widget=forms.CheckboxSelectMultiple,
                             choices=question.options)
 
-        elif type == 'options-single':
+        elif qtype == 'options-single':
             field = forms.ChoiceField(widget=forms.RadioSelect,
                                       choices=question.options)
 
-        elif type == 'date':
+        elif qtype == 'date':
             field = forms.DateField(widget=DatePickerWidget,
                                     help_text="Date format: day/month/year",
                                     input_formats=['%Y-%m-%d', '%d/%m/%Y',
@@ -313,19 +313,19 @@ class FormBuilder(object):
                                                    '%B %d, %Y', '%d %B %Y',
                                                    '%d %B, %Y'])
 
-        elif type == 'date-or-option':
+        elif qtype == 'date-or-option':
             field = DateOrOptionField(option=question.text)
 
-        elif type == 'advise':
+        elif qtype == 'advise':
             field = AdviseField()
 
-        elif type == 'month-year':
+        elif qtype == 'month-year':
             field = MonthYearField()
 
-        elif type == 'postcode':
+        elif qtype == 'postcode':
             field = PostCodeField()
-        elif type.startswith('postcode-'):
-            postcode, country = type.split('-')
+        elif qtype.startswith('postcode-'):
+            postcode, country = qtype.split('-')
             field = PostCodeField(country=country)
 
         else:
