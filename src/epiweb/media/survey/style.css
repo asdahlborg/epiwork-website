@@ -65,3 +65,23 @@
 #survey {
     line-height: 14px;
 }
+
+#survey table.table-options-single {
+    border-collapse: collapse;
+    border: 1px solid #aaa;
+}
+#survey table.table-options-single th {
+    background: #ccc;
+    border: 1px solid #aaa;
+}
+#survey table.table-options-single td {
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    vertical-align: middle;
+}
+#survey table.table-options-single td:first-child {
+    text-align: left;
+    padding: 5px;
+}
+

@@ -7,9 +7,11 @@ from django.contrib.localflavor.nl.forms import NLZipCodeField
 from django.contrib.localflavor.it.forms import ITZipCodeField
 
 from .widgets import ( AdviseWidget, MonthYearWidget,
-                       DatePickerWidget, DateOrOptionPickerWidget, )
+                       DatePickerWidget, DateOrOptionPickerWidget,
+                       TableOptionsSingleWidget )
 
-__all__ = ['AdviseField', 'MonthYearField', 'PostCodeField', 'DateOrOptionField']
+__all__ = ['AdviseField', 'MonthYearField', 'PostCodeField', 'DateOrOptionField',
+           'TableOptionsSingleField']
 
 class AdviseField(forms.Field):
     widget = AdviseWidget
@@ -71,3 +73,25 @@ class DateOrOptionField(forms.MultiValueField):
 
     def compress(self, v):
         return v
+
+class TableOptionsSingleField(forms.MultiValueField):
+    def __init__(self, options, rows, *args, **kwargs):
+        self.options = options
+        self.rows = rows
+        if not 'widget' in kwargs:
+            widget = TableOptionsSingleWidget(options=self.options,
+                                              rows=self.rows)
+            kwargs['widget'] = widget
+        if not 'fields' in kwargs:
+            fields = []
+            for key, label in self.rows:
+                field = forms.ChoiceField(label=label,
+                                          required=False,
+                                          choices=list(self.options))
+                fields.append(field)
+            kwargs['fields'] = fields
+        super(TableOptionsSingleField, self).__init__(**kwargs)
+
+    def compress(self, value):
+        return value
+

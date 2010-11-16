@@ -2,11 +2,13 @@ import datetime
 import re
 
 from django import forms
-from django.forms.widgets import Widget, Select
+from django.forms.widgets import Widget, Select, RadioInput
 from django.utils.dates import MONTHS
 from django.utils.safestring import mark_safe
+from django.utils.encoding import StrAndUnicode, force_unicode
 
-__all__ = ['AdviseWidget', 'DatePickerWidget', 'MonthYearWidget']
+__all__ = ['AdviseWidget', 'DatePickerWidget', 'MonthYearWidget',
+           'TableOptionsSingleWidget']
 
 class AdviseWidget(forms.Widget):
     def render(self, name, value, attrs=None):
@@ -15,7 +17,7 @@ class AdviseWidget(forms.Widget):
 class DatePickerWidget(forms.TextInput):
     def __init__(self, attrs={}):
         forms.TextInput.__init__(self, attrs={'class': 'sDateField'})
-    
+
 class DateOrOptionPickerWidget(forms.MultiWidget):
     def __init__(self, *args, **kwargs):
         attrs = kwargs.pop('attrs', {})
@@ -27,6 +29,84 @@ class DateOrOptionPickerWidget(forms.MultiWidget):
     def decompress(self,value):
         return value or [None, None]
 
+class RadioInputNoLabel(RadioInput):
+    """
+    An object used by RadioFieldRenderer that represents a single
+    <input type='radio'>.
+    """
+
+    def __unicode__(self):
+        return mark_safe(u'%s' % self.tag())
+
+class TableOptionsSingleRowRenderer(StrAndUnicode):
+    """
+    An object used by RadioSelect to enable customization of radio widgets.
+    """
+
+    def __init__(self, name, value, attrs, choices):
+        self.name, self.value, self.attrs = name, value, attrs
+        self.choices = choices
+
+    def __iter__(self):
+        for i, choice in enumerate(self.choices):
+            yield RadioInputNoLabel(self.name, self.value, self.attrs.copy(), choice, i)
+
+    def __getitem__(self, idx):
+        choice = self.choices[idx] # Let the IndexError propogate
+        return RadioInputNoLabel(self.name, self.value, self.attrs.copy(), choice, idx)
+
+    def __unicode__(self):
+        return self.render()
+
+    def render(self):
+        """Outputs a <ul> for this set of radio fields."""
+        return mark_safe(u''.join([u'<td>%s</td>'
+                % force_unicode(w) for w in self]))
+    
+class TableOptionsSingleWidget(forms.MultiWidget):
+    def __init__(self, options, rows, attrs=None):
+        self.options = options
+        self.rows = rows
+
+        widgets = []
+        for key, label in rows:
+            widget = forms.RadioSelect(choices=list(options),
+                                       renderer=TableOptionsSingleRowRenderer)
+            widget.label = label
+            widgets.append(widget)
+        super(TableOptionsSingleWidget, self).__init__(widgets, attrs)
+
+    def decompress(self, value):
+        if value:
+            return value
+        else:
+            return [None] * len(self.rows)
+
+    def render(self, name, value, attrs=None):
+        # value is a list of values, each corresponding to a widget
+        # in self.widgets.
+        if not isinstance(value, list):
+            value = self.decompress(value)
+        output = []
+        final_attrs = self.build_attrs(attrs)
+        id_ = final_attrs.get('id', None)
+        output.append('<table class="table-options-single">')
+        output.append('<tr><th></th>')
+        for key, value in self.options:
+            output.append('<th>%s</th>' % value)
+        output.append('</tr>')
+        for i, widget in enumerate(self.widgets):
+            try:
+                widget_value = value[i]
+            except IndexError:
+                widget_value = None
+            if id_:
+                final_attrs = dict(final_attrs, id='%s_%s' % (id_, i))
+            output.append('<tr><td>%s</td>' % widget.label)
+            output.append(widget.render(name + '_%s' % i, widget_value, final_attrs))
+            output.append('</tr>')
+        output.append('</table>')
+        return mark_safe(self.format_output(output))
 
 RE_YEAR_MONTH = re.compile(r'(\d{4})-(\d\d?)$')
 
