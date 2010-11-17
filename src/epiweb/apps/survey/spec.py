@@ -371,46 +371,6 @@ class In(Evaluator):
     def get_usage(self, name):
         return self.a.get_usage(name) + self.b.get_usage(name)
 
-class Contains(Evaluator):
-    """Check if one or more elements in the second operand
-    is part of the first operand"""
-    def __init__(self, a, b):
-        """a is Profile object, Response object, Question class or question id
-           b is primitive of list of primitives"""
-        if isinstance(a, Profile):
-            self.a = ProfileValue(a.id)
-        elif isinstance(a, Response):
-            self.a = ResponseValue(a.id)
-        else:
-            self.a = QuestionValue(a)
-
-        if not type(b) in [list, set, tuple]:
-            b = [b]
-        if not all([type(val) in [str, int, float] for val in b]):
-            raise SpecSyntaxError()
-        self.b = Primitive(list(b))
-    def eval(self, values):
-        # FIXME XXX
-        a = self.a.value(values)
-        res = any([val in a for val in self.b.value(values)])
-        try:
-            b = self.b.value(values)
-            a = map(int, a)
-            res = any([val in a for val in b])
-        except ValueError:
-            pass
-        return res
-
-    def __str__(self):
-        return '<Contains [%s] [%s]>' % (self.a, self.b)
-
-    @property
-    def js(self):
-        return 'd.Contains(%s, %s)' % (self.a.js, self.b.js)
-
-    def get_usage(self, name):
-        return self.a.get_usage(name) + self.b.get_usage(name)
-
 class Compare(Evaluator):
     def __init__(self, **comparisons):
         """key is Question class name
