@@ -352,8 +352,23 @@ class FormBuilder(object):
                 keys = args[1]
                 rows = [(key, value) for key, value in q.options
                                      if key in keys]
+            def checker(rows, qid):
+                '''A closure that holds rows and question id of this field.'''
+                def _checker(data):
+                    values = data[qid]
+                    values = map(int, values) # FIXME XXX
+                    required = []
+                    for index, pair in enumerate(rows):
+                        k, v = pair
+                        if k in values:
+                            required.append(index)
+                    return required
+                return _checker
+            qq = q()
+            required_rows = checker(rows, qq.id)
             field = TableOptionsSingleField(options=question.options,
-                                            rows=rows)
+                                            rows=rows,
+                                            required_rows=required_rows)
 
         else:
             field = forms.CharField()
