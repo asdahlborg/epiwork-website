@@ -66,13 +66,28 @@ class DateOrOptionField(forms.MultiValueField):
     def __init__(self, *args, **kwargs):
         self.option = kwargs.pop('option', '')
         self.widget=DateOrOptionPickerWidget(choices=[(0, self.option)])
-        self.fields=[ forms.DateField(), forms.ChoiceField()]
+        datefield = forms.DateField(help_text="Date format: day/month/year",
+                                    input_formats=['%Y-%m-%d', '%d/%m/%Y',
+                                                   '%d/%m/%y', '%d-%m-%y',
+                                                   '%d-%m-%Y', '%b %d %Y',
+                                                   '%b %d, %Y', '%d %b %Y',
+                                                   '%d %b, %Y', '%B %d %Y',
+                                                   '%B %d, %Y', '%d %B %Y',
+                                                   '%d %B, %Y'])
+        self.datefield = datefield
+        self.fields=[datefield,
+                     forms.ChoiceField(required=False)]
         super(DateOrOptionField, self).__init__(fields=self.fields,
                                                 widget=self.widget,
                                                 *args, **kwargs)
 
     def compress(self, v):
         return v
+    def clean(self, value):
+        date, choice = value
+        if len(choice) > 0:
+            return True
+        return self.datefield.clean(date)
 
 class TableOptionsSingleField(forms.MultiValueField):
     def __init__(self, options, rows, *args, **kwargs):
