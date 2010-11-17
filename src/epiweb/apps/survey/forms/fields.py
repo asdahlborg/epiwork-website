@@ -90,9 +90,10 @@ class DateOrOptionField(forms.MultiValueField):
         return self.datefield.clean(date)
 
 class TableOptionsSingleField(forms.MultiValueField):
-    def __init__(self, options, rows, *args, **kwargs):
+    def __init__(self, options, rows, required_rows=None, *args, **kwargs):
         self.options = options
         self.rows = rows
+        self.required_rows = required_rows
         if not 'widget' in kwargs:
             widget = TableOptionsSingleWidget(options=self.options,
                                               rows=self.rows)
@@ -109,4 +110,20 @@ class TableOptionsSingleField(forms.MultiValueField):
 
     def compress(self, value):
         return value
+    def clean(self, value):
+        return value
+    def clean_all(self, field, values):
+        required = self.required_rows
+        if required is None:
+            required = range(0, len(self.rows))
+        elif callable(required):
+            required = required(values)
+        filled = []
+        for index, value in enumerate(values[field]):
+            if value is not None:
+                filled.append(index)
+        for index in required:
+            if not index in filled:
+                raise forms.ValidationError('Incomplete answer')
+        return values[field]
 
