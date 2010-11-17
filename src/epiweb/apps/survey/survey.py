@@ -188,6 +188,16 @@ class SurveyFormBase(forms.Form):
             elif self._is_empty(data, question) and not question.blank:
                 self._errors[question.id] = ErrorList(['Please answer this question.'])
                 del data[question.id]
+
+            if data.has_key(question.id):
+                field = self.fields[question.id]
+                if hasattr(field, 'clean_all'):
+                    try:
+                        value = field.clean_all(question.id, data)
+                        data[question.id] = value
+                    except forms.ValidationError:
+                        self._errors[question.id] = ErrorList(['Please correct the answers.'])
+                        del data[question.id]
         cond = self.spec.questions[0].get_condition()
 
         return data
