@@ -16,7 +16,7 @@ Survey.prototype = {
         this.fields = {};
         for (var i=0; i<len; i++) {
             var id = this.questions[i];
-            var field = this.target.find('*[name="'+id+'"]');
+            var field = this.get_fields(id);
             this.fields[id] = field;
             field.data('modified', false);
             field.change(function() {
@@ -27,6 +27,23 @@ Survey.prototype = {
             var id = this.questions[i];
             this.update_visibility(id);
         }
+    },
+    get_fields: function(id) {
+        var fields = this.target.find('*[name="'+id+'"]');
+        if (fields.length == 0) {
+            var question = this.target.find('#q_'+id);
+            var items = question.find('*[name]');
+            var len = items.length;
+            fields = [];
+            for (var i=0; i<len; i++) {
+                var item = $(items[i]);
+                if (item.attr('name').match('^'+id+'_') != null) {
+                    fields.push(item[0]);
+                }
+            }
+            fields = $(fields);
+        }
+        return fields;
     },
     on_change: function(target) {
         var id = target.attr('name');
