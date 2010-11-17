@@ -6,7 +6,7 @@ from django import forms
 from django.forms.util import ErrorList
 from . import spec as d
 from .forms import ( AdviseField, DatePickerWidget, MonthYearField,
-                     PostCodeField, DateOrOptionField, )
+                     PostCodeField, DateOrOptionField, TableOptionsSingleField )
 
 def parse_specification(spec, survey_class='Survey'):
     vars = {'d': d}
@@ -327,6 +327,17 @@ class FormBuilder(object):
         elif qtype.startswith('postcode-'):
             postcode, country = qtype.split('-')
             field = PostCodeField(country=country)
+
+        elif qtype == 'table-of-options-single':
+            args = question.type_args + [None]
+            q = args[0]
+            rows = q.options
+            if args[1] is not None:
+                keys = args[1]
+                rows = [(key, value) for key, value in q.options
+                                     if key in keys]
+            field = TableOptionsSingleField(options=question.options,
+                                            rows=rows)
 
         else:
             field = forms.CharField()

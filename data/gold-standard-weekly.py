@@ -98,6 +98,7 @@ class WeeklyQ6b(d.Question):
   question = """How soon after your symptoms appeared did you seek medical
   attention?"""
   type = 'table-of-options-single'
+  type_args = [WeeklyQ6, [0,1,2,3]]
   options = ((0, '<12 hours'),
              (1, '12-24 hours (1 day)'),
              (2, '2 days'),
