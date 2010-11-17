@@ -193,7 +193,13 @@ class SurveyFormBase(forms.Form):
         return data
 
     def _is_empty(self, data, question):
-        return data[question.id] in [None, '', []]
+        value = data[question.id]
+        if type(value) in [list, set, tuple]:
+            if len(value) == 0:
+                return True
+        else:
+            value = [value]
+        return all([val in [None, ''] for val in value])
 
 class SurveyContext(object):
     def __init__(self, user, profile, response):
