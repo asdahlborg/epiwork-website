@@ -346,12 +346,17 @@ class In(Evaluator):
             raise SpecSyntaxError()
         self.b = Primitive(list(b))
     def eval(self, values):
-        # FIXME XXX
-        res = self.a.value(values) in self.b.value(values)
+        # Force the value of the first argument into a list
+        a = self.a.value(values)
+        if not type(a) in [list, set, tuple]:
+            a = [a]
+        res = any([val in a for val in self.b.value(values)])
+
+        # FIXME XXX the value of might be a string instead of integer
         try:
-            a = int(self.a.value(values))
             b = self.b.value(values)
-            res = a in b
+            a = map(int, a)
+            res = any([val in a for val in b])
         except ValueError:
             pass
         return res
