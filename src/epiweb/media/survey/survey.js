@@ -8,6 +8,7 @@ var Survey = function(target, data) {
     this.conditions = data.conditions;
     this.questions = data.questions;
     this.prefills = data.prefills;
+    this.prefill_target = {};
 };
 Survey.prototype = {
     init: function() {
@@ -16,17 +17,53 @@ Survey.prototype = {
         this.fields = {};
         for (var i=0; i<len; i++) {
             var id = this.questions[i];
-            var field = this.target.find('*[name="'+id+'"]');
+            var field = this.get_fields(id);
             this.fields[id] = field;
             field.data('modified', false);
             field.change(function() {
-                self.on_change($(this));
+                return self.on_change($(this));
             });
         }
         for (var i=0; i<len; i++) {
             var id = this.questions[i];
             this.update_visibility(id);
         }
+
+        // mapping which question triggers prefill what question
+        {
+            var map = {};
+            for (var id in this.prefills) {
+                var cond = this.prefills[id];
+                var items = this.get_affecting_questions(cond);
+                for (var i=0; i<items.length; i++) {
+                    var qid = items[i];
+                    if (qid in map) {
+                        map[qid].push(id);
+                    }
+                    else {
+                        map[qid] = [id];
+                    }
+                }
+            }
+            this.prefill_target = map;
+        }
+    },
+    get_fields: function(id) {
+        var fields = this.target.find('*[name="'+id+'"]');
+        if (fields.length == 0) {
+            var question = this.target.find('#q_'+id);
+            var items = question.find('*[name]');
+            var len = items.length;
+            fields = [];
+            for (var i=0; i<len; i++) {
+                var item = $(items[i]);
+                if (item.attr('name').match('^'+id+'_') != null) {
+                    fields.push(item[0]);
+                }
+            }
+            fields = $(fields);
+        }
+        return fields;
     },
     on_change: function(target) {
         var id = target.attr('name');
@@ -45,7 +82,14 @@ Survey.prototype = {
         }
 
         // update prefill
-        this.update_prefill();
+        var ids = this.prefill_target[id];
+        if (ids != undefined) {
+            for (var i=0; i<ids.length; i++) {
+                this.update_prefill(ids[i]);
+            }
+        }
+
+        return true;
     },
     update_visibility: function(id) {
         var cond = this.conditions[id];
@@ -64,19 +108,17 @@ Survey.prototype = {
             $('#q_'+id).slideUp();
         }
     },
-    update_prefill: function() {
-        for (var id in this.prefills) {
-            var field = this.fields[id];
-            var current = field.fieldValue();
-            if (!field.data('modified')) {
-                var cond = this.prefills[id];
-                if (cond.evaluate(this)) {
-                    // form value setting is not supported by jquery.form :(
-                    this.set_value(field, this.get_response(id));
-                }
-                else {
-                    this.set_value(field, []);
-                }
+    update_prefill: function(id) {
+        var field = this.fields[id];
+        var current = field.fieldValue();
+        if (!field.data('modified')) {
+            var cond = this.prefills[id];
+            if (cond.evaluate(this)) {
+                // form value setting is not supported by jquery.form :(
+                this.set_value(field, this.get_response(id));
+            }
+            else {
+                this.set_value(field, []);
             }
         }
     },
@@ -139,7 +181,30 @@ Survey.prototype = {
         var value = field.fieldValue();
         value.sort();
         return value;
-    }
+    },
+    get_affecting_questions: function(condition) {
+        var res = [];
+        var stack = [];
+        stack.push(condition);
+        while (stack.length > 0) {
+            var cond = stack.pop();
+            if (!(typeof(cond) == "object")) {
+                continue;
+            }
+            if ('args' in cond) {
+                // another condition
+                for (var i=0; i<cond.args.length; i++) {
+                    stack.push(cond.args[i]);
+                }
+            }
+            else if ('id' in cond) {
+                // question, profile, or response
+                res.push(cond.id);
+            }
+        }
+        res = $.unique(res);
+        return res;
+    },
 }
 
 this.Survey = Survey;
@@ -170,6 +235,7 @@ var SurveyDefinition = {
         var self = this;
         this.a = a;
         this.b = b;
+        this.args = [a, b];
         this.evaluate = function(context) {
             var a = self.a.value(context);
             var b = self.b;
@@ -182,6 +248,7 @@ var SurveyDefinition = {
     Empty: function(a) {
         var self = this;
         this.a = a;
+        this.args = [a];
         this.evaluate = function(context) {
             var a = self.a.value(context);
             return (a == null) || (a == undefined) || (a.length == 0);
@@ -191,6 +258,7 @@ var SurveyDefinition = {
         var self = this;
         this.a = a;
         this.b = b;
+        this.args = [a, b];
         this.evaluate = function(context) {
             var a = self.a.value(context);
             if (!(a instanceof Array)) {
@@ -246,6 +314,7 @@ var SurveyDefinition = {
     Not: function(a) {
         var self = this;
         this.a = a;
+        this.args = [a];
         this.evaluate = function(context) {
             return !self.a.evaluate(context);
         }

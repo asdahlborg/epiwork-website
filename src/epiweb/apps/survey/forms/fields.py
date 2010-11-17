@@ -66,18 +66,34 @@ class DateOrOptionField(forms.MultiValueField):
     def __init__(self, *args, **kwargs):
         self.option = kwargs.pop('option', '')
         self.widget=DateOrOptionPickerWidget(choices=[(0, self.option)])
-        self.fields=[ forms.DateField(), forms.ChoiceField()]
+        datefield = forms.DateField(help_text="Date format: day/month/year",
+                                    input_formats=['%Y-%m-%d', '%d/%m/%Y',
+                                                   '%d/%m/%y', '%d-%m-%y',
+                                                   '%d-%m-%Y', '%b %d %Y',
+                                                   '%b %d, %Y', '%d %b %Y',
+                                                   '%d %b, %Y', '%B %d %Y',
+                                                   '%B %d, %Y', '%d %B %Y',
+                                                   '%d %B, %Y'])
+        self.datefield = datefield
+        self.fields=[datefield,
+                     forms.ChoiceField(required=False)]
         super(DateOrOptionField, self).__init__(fields=self.fields,
                                                 widget=self.widget,
                                                 *args, **kwargs)
 
     def compress(self, v):
         return v
+    def clean(self, value):
+        date, choice = value
+        if len(choice) > 0:
+            return True
+        return self.datefield.clean(date)
 
 class TableOptionsSingleField(forms.MultiValueField):
-    def __init__(self, options, rows, *args, **kwargs):
+    def __init__(self, options, rows, required_rows=None, *args, **kwargs):
         self.options = options
         self.rows = rows
+        self.required_rows = required_rows
         if not 'widget' in kwargs:
             widget = TableOptionsSingleWidget(options=self.options,
                                               rows=self.rows)
@@ -94,4 +110,20 @@ class TableOptionsSingleField(forms.MultiValueField):
 
     def compress(self, value):
         return value
+    def clean(self, value):
+        return value
+    def clean_all(self, field, values):
+        required = self.required_rows
+        if required is None:
+            required = range(0, len(self.rows))
+        elif callable(required):
+            required = required(values)
+        filled = []
+        for index, value in enumerate(values[field]):
+            if value is not None:
+                filled.append(index)
+        for index in required:
+            if not index in filled:
+                raise forms.ValidationError('Incomplete answer')
+        return values[field]
 

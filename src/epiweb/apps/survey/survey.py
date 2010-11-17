@@ -188,12 +188,28 @@ class SurveyFormBase(forms.Form):
             elif self._is_empty(data, question) and not question.blank:
                 self._errors[question.id] = ErrorList(['Please answer this question.'])
                 del data[question.id]
+
+            if data.has_key(question.id):
+                field = self.fields[question.id]
+                if hasattr(field, 'clean_all'):
+                    try:
+                        value = field.clean_all(question.id, data)
+                        data[question.id] = value
+                    except forms.ValidationError:
+                        self._errors[question.id] = ErrorList(['Please correct the answers.'])
+                        del data[question.id]
         cond = self.spec.questions[0].get_condition()
 
         return data
 
     def _is_empty(self, data, question):
-        return data[question.id] in [None, '', []]
+        value = data[question.id]
+        if type(value) in [list, set, tuple]:
+            if len(value) == 0:
+                return True
+        else:
+            value = [value]
+        return all([val in [None, ''] for val in value])
 
 class SurveyContext(object):
     def __init__(self, user, profile, response):
@@ -336,8 +352,23 @@ class FormBuilder(object):
                 keys = args[1]
                 rows = [(key, value) for key, value in q.options
                                      if key in keys]
+            def checker(rows, qid):
+                '''A closure that holds rows and question id of this field.'''
+                def _checker(data):
+                    values = data[qid]
+                    values = map(int, values) # FIXME XXX
+                    required = []
+                    for index, pair in enumerate(rows):
+                        k, v = pair
+                        if k in values:
+                            required.append(index)
+                    return required
+                return _checker
+            qq = q()
+            required_rows = checker(rows, qq.id)
             field = TableOptionsSingleField(options=question.options,
-                                            rows=rows)
+                                            rows=rows,
+                                            required_rows=required_rows)
 
         else:
             field = forms.CharField()

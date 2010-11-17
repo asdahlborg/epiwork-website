@@ -92,8 +92,8 @@ class TableOptionsSingleWidget(forms.MultiWidget):
         id_ = final_attrs.get('id', None)
         output.append('<table class="table-options-single">')
         output.append('<tr><th></th>')
-        for key, value in self.options:
-            output.append('<th>%s</th>' % value)
+        for key, val in self.options:
+            output.append('<th>%s</th>' % val)
         output.append('</tr>')
         for i, widget in enumerate(self.widgets):
             try:
