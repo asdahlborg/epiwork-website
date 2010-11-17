@@ -76,11 +76,6 @@ class WeeklyQ4(d.Question):
   question = 'When did the first symptoms appear?'
   type = 'date'
 
-#class WeeklyQ5(d.Question):
-#  question = 'When did your symptoms end?'
-#  type = 'date'
-## We also need the option of "I am still ill"
-
 class WeeklyQ5(d.Question):
   question = 'When did your symptoms end?'
   type = 'date-or-option'
@@ -229,13 +224,13 @@ class Survey(d.Survey):
   id = 'gold-standard-weekly-0.1.0'
 
   # Local propositions
-  symptoms_present             = ~ d.Contains(WeeklyQ1, [0]) | \
-                                 d.Contains(WeeklyQ1, [1,2,3,4,5,6,7,8,9,10,11,
-                                                       12,13,14,15,16,17,18,19])
+  symptoms_present             = ~ d.In(WeeklyQ1, [0]) | \
+                                 d.In(WeeklyQ1, [1,2,3,4,5,6,7,8,9,10,11,
+                                                 12,13,14,15,16,17,18,19])
   took_temp                    = d.Equal(WeeklyQ2, 0)
-  fever_among_symptoms         = d.Contains(WeeklyQ1, [1])
+  fever_among_symptoms         = d.In(WeeklyQ1, [1])
   temp_over_37half             = d.In(WeeklyQ2b, [2,3,4,5])
-  took_antivirals              = d.Contains(WeeklyQ7, [3])
+  took_antivirals              = d.In(WeeklyQ7, [3])
   reported_no_seasonal_flu_jab = ~ d.Equal(d.Profile('IntakeQ9'), 0)
   still_ill                    = d.Equal(WeeklyQ3, 0)
   sought_medical_attention     = d.In(WeeklyQ6, [0,1,2,3])
