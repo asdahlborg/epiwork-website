@@ -89,7 +89,7 @@ class WeeklyQ5(d.Question):
 class WeeklyQ6(d.Question):
   question = """Because of your symptoms, did you seek medical attention by
   visiting (seeing face to face) any of the following (tick all that apply)?"""
-  type = 'options-single'
+  type = 'options-multiple'
   options = ((0, "Yes: family doctor or family doctor's practice nurse"),
              (1, 'Yes: Hospital admission'),
              (2, """Yes: Hospital accident & emergency department/out of hours

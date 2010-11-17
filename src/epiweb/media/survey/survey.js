@@ -193,25 +193,6 @@ var SurveyDefinition = {
         this.b = b;
         this.evaluate = function(context) {
             var a = self.a.value(context);
-            if (a.length == 0) {
-                a = undefined;
-            }
-            else {
-                a = a[0];
-            }
-            var b = [];
-            for (var i=0; i<self.b.length; i++) {
-                b.push(""+self.b[i]);
-            }
-            return $.inArray(a, b) >= 0;
-        }
-    },
-    Contains: function(a, b) {
-        var self = this;
-        this.a = a;
-        this.b = b;
-        this.evaluate = function(context) {
-            var a = self.a.value(context);
             if (!(a instanceof Array)) {
                 a = [a];
             }

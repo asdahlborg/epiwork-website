@@ -167,4 +167,7 @@ _hostname = socket.gethostname()
 if _hostname in ['rawon.local']:
     EPIDB_SERVER = 'http://192.168.100.100:8080/'
     EMAIL_PORT = 2525
-
+elif _hostname in ['rekenwolk.nl']:
+    EPIDB_SERVER = 'http://178.18.82.138:8080/'
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 25
