@@ -225,7 +225,7 @@ class Survey(d.Survey):
   id = 'gold-standard-weekly-0.1.0'
 
   # Local propositions
-  symptoms_present             = ~ d.In(WeeklyQ1, [0]) | \
+  symptoms_present             = ~ d.In(WeeklyQ1, [0]) & \
                                  d.In(WeeklyQ1, [1,2,3,4,5,6,7,8,9,10,11,
                                                  12,13,14,15,16,17,18,19])
   took_temp                    = d.Equal(WeeklyQ2, 0)
