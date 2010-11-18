@@ -3,8 +3,12 @@ import datetime
 from django import forms
 from django.utils.safestring import mark_safe
 from django.conf import settings
-from django.contrib.localflavor.nl.forms import NLZipCodeField
+from django.contrib.localflavor.be.forms import BEPostalCodeField
 from django.contrib.localflavor.it.forms import ITZipCodeField
+from django.contrib.localflavor.nl.forms import NLZipCodeField
+from django.contrib.localflavor.pt.forms import PTZipCodeField
+from django.contrib.localflavor.se.forms import SEPostalCodeField
+from django.contrib.localflavor.uk.forms import UKPostcodeField
 
 from .widgets import ( AdviseWidget, MonthYearWidget,
                        DatePickerWidget, DateOrOptionPickerWidget,
@@ -46,8 +50,12 @@ class MonthYearField(forms.Field):
 
 class PostCodeField(forms.RegexField):
     country_fields = {
-        'nl': NLZipCodeField,
+        'be': BEPostalCodeField,
         'it': ITZipCodeField,
+        'nl': NLZipCodeField,
+        'pt': PTZipCodeField.
+        'se': SEPostalCodeField,
+        'uk': UKPostcodeField,
     }
 
     def __init__(self, *args, **kwargs):

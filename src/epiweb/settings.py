@@ -149,7 +149,12 @@ EPIDB_API_KEY = '0000000000000000000000000000000000000000'
 EPIDB_SERVER = 'http://127.0.0.1:8080/'
 
 USE_L10N = True
-COUNTRY = 'en'
+
+# For checking postcodes etc.
+# Use ISO3166 two-letter country code
+# See http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
+# Avaliable: be, it, nl, pt, se, uk
+COUNTRY = 'nl'
 
 CMSPLUGIN_NEWS_RSS_TITLE = "News"
 CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
