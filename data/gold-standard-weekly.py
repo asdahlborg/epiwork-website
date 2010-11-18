@@ -131,7 +131,7 @@ class WeeklyQ7(d.Question):
 class WeeklyQ7b(d.Question):
   question = """How long after the beginning of your symptoms did you start
   taking antiviral medication?"""
-  type = 'options-multiple'
+  type = 'options-single'
   options = ((0, "Same day (within 24 hours)"),
              (1, "1 day later"),
              (2, "2 days later"),
@@ -237,8 +237,7 @@ class Survey(d.Survey):
   sought_medical_attention     = d.In(WeeklyQ6, [0,1,2,3])
   
   rules = ( WeeklyQ1,
-            d.If(symptoms_present) (WeeklyQ1b),
-            WeeklyQ2,
+            d.If(symptoms_present) (WeeklyQ1b, WeeklyQ2),
             d.If(symptoms_present & took_temp) (WeeklyQ2b),
             d.If(fever_among_symptoms | (took_temp & temp_over_37half))
             (WeeklyQ2c),
@@ -258,7 +257,7 @@ class Survey(d.Survey):
             WeeklyQ9b,
             d.If(reported_no_seasonal_flu_jab) (WeeklyQ10),
             # TODO Possibly update IntakeQ9 here?
-            WeeklyQ11,
+            d.If(symptoms_present) (WeeklyQ11),
             )
 
   # TODO tidy up this syntax: see survey.py lines 100-125
