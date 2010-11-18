@@ -16,6 +16,8 @@ DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
+SITE_ID = 1
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -28,11 +30,21 @@ TIME_ZONE = 'Europe/Amsterdam'
 LANGUAGE_CODE = 'nl'
 # LANGUAGE_CODE = 'en'
 
-SITE_ID = 1
+# For checking postcodes etc.
+# Use ISO3166 two-letter country code
+# See http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
+# Avaliable: it, nl, uk
+COUNTRY = 'nl'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+USE_L10N = True
+
+LANGUAGES = (
+   ('en', 'English'),
+   ('nl', 'Dutch'),
+)
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -86,12 +98,6 @@ CMS_TEMPLATES = (
     ('cms/base_3col.html', "3 Columns (Main Page)"),
     ('cms/base_folder.html', "Folder"),
 )
-
-LANGUAGES = (
-   ('en', 'English'),
-   ('nl', 'Dutch'),
-)
-
 
 ROOT_URLCONF = 'epiweb.urls'
 
@@ -147,14 +153,6 @@ EMAIL_SUBJECT_PREFIX = '[Influenzanet] '
 
 EPIDB_API_KEY = '0000000000000000000000000000000000000000'
 EPIDB_SERVER = 'http://127.0.0.1:8080/'
-
-USE_L10N = True
-
-# For checking postcodes etc.
-# Use ISO3166 two-letter country code
-# See http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
-# Avaliable: be, it, nl, pt, se, uk
-COUNTRY = 'nl'
 
 CMSPLUGIN_NEWS_RSS_TITLE = "News"
 CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
