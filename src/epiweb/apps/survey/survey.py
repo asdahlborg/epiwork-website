@@ -356,6 +356,8 @@ class FormBuilder(object):
                 '''A closure that holds rows and question id of this field.'''
                 def _checker(data):
                     values = data[qid]
+                    if values is None:
+                        return []
                     values = map(int, values) # FIXME XXX
                     required = []
                     for index, pair in enumerate(rows):

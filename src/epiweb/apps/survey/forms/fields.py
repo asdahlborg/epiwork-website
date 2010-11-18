@@ -119,7 +119,7 @@ class TableOptionsSingleField(forms.MultiValueField):
         elif callable(required):
             required = required(values)
         filled = []
-        if values[field]:
+        if values[field] is not None:
             for index, value in enumerate(values[field]):
                 if value is not None:
                     filled.append(index)
