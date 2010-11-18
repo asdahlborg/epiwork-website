@@ -119,9 +119,10 @@ class TableOptionsSingleField(forms.MultiValueField):
         elif callable(required):
             required = required(values)
         filled = []
-        for index, value in enumerate(values[field]):
-            if value is not None:
-                filled.append(index)
+        if values[field]:
+            for index, value in enumerate(values[field]):
+                if value is not None:
+                    filled.append(index)
         for index in required:
             if not index in filled:
                 raise forms.ValidationError('Incomplete answer')
