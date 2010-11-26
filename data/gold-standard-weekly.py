@@ -1,4 +1,4 @@
-# Weekly evaluation of disease symptoms
+# Weekly evaluation of disease symptoms including contact questions.
 
 class WeeklyQ1(d.Question):
   question = """Did you have one or more of the following symptoms since your
@@ -213,18 +213,59 @@ class WeeklyQ11(d.Question):
              (3, "Gastroenteritis/gastric flu"),
              (4, "I don't have an idea"), )
 
-# WeeklyQ11 requires an answer so if its value is empty in the previous
-# response then the previous response must not exist.
-previous_response_exists = ~ d.Empty(d.Response('WeeklyQ11'))
-# TODO add functionality for:
-# previously_still_ill = d.Equal(d.Response('WeeklyQ5'), 0)
-# Tautology:
-previously_still_ill = d.Empty(WeeklyQ1) | ~ d.Empty(WeeklyQ1)
+class ContactQ1(d.Question):
+  question = """How many people did you have conversational contact with
+             yesterday?"""
+  type = 'table-of-selects'
+  rows = ['Home', 'Work', 'Other']
+  options = ((0, '0-4 years'),
+             (1, '5-18 years'),
+             (2, '19-44 years'),
+             (3, '45-64 years'),
+             (4, '65+ years'),)
 
+class ContactQ2(d.Question):
+  question = 'How many people did you have physical contact with yesterday?'
+  type = 'table-of-selects'
+  rows = ['Home', 'Work', 'Other']
+  options = ((0, '0-4 years'),
+             (1, '5-18 years'),
+             (2, '19-44 years'),
+             (3, '45-64 years'),
+             (4, '65+ years'),)
+
+class ContactQ3(d.Question):
+  question = """On a normal day, how much time do you spend on public
+  transport (bus, train, undergound)?"""
+  type = 'options-single'
+  options = ((0, 'No time at all'),
+             (1, '0-30 minutes'),
+             (2, '30 minutes – 1,5 hours'),
+             (3, '1,5 hours – 4 hours'),
+             (4, '>4 hours'), )
+
+class ContactQ4(d.Question):
+  question = """Not including public transport, how long did you spend in an
+  enclosed indoor space (e.g. office, classroom, bar, cinema) with more than 10
+  other people yesterday ?"""
+  type = 'options-single'
+  options = ((0, 'No time at all'),
+             (1, '0-30 minutes'),
+             (2, '30 minutes – 1,5 hours'),
+             (3, '1,5 hours – 4 hours'),
+             (4, '>4 hours'),)
+  
 class Survey(d.Survey):
-  id = 'gold-standard-weekly-0.1.0'
+  id = 'gold-standard-weekly-1.0.0'
 
-  # Local propositions
+  # Propositions depending on the previous response.
+  
+  # WeeklyQ11 requires an answer so if its value is empty in the previous
+  # response then the previous response must not exist.
+  previous_response_exists = ~ d.Empty(d.Response('WeeklyQ11'))
+  previously_still_ill = d.Equal(d.Response('WeeklyQ5'), 0)
+
+  # Propositions depending on (previous) answers in this response.
   symptoms_present             = ~ d.In(WeeklyQ1, [0]) & \
                                  d.In(WeeklyQ1, [1,2,3,4,5,6,7,8,9,10,11,
                                                  12,13,14,15,16,17,18,19])
@@ -258,6 +299,11 @@ class Survey(d.Survey):
             d.If(reported_no_seasonal_flu_jab) (WeeklyQ10),
             # TODO Possibly update IntakeQ9 here?
             d.If(symptoms_present) (WeeklyQ11),
+
+            ContactQ1,
+            ContactQ2,
+            ContactQ3,
+            ContactQ4,
             )
 
   # TODO tidy up this syntax: see survey.py lines 100-125
