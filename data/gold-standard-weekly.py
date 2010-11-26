@@ -151,8 +151,7 @@ class WeeklyQ8b(d.Question):
   question = "Are you still off work/school?"
   type = 'options-single'
   options = ((0, 'Yes'),
-             (1, 'No'),
-             (2, "I don't know"), )
+             (1, 'No'), )
 
 class WeeklyQ8c(d.Question):
   question = "How long were you off work/school?"
@@ -256,7 +255,7 @@ class ContactQ4(d.Question):
              (4, '>4 hours'),)
   
 class Survey(d.Survey):
-  id = 'gold-standard-weekly-1.0.0'
+  id = 'gold-standard-weekly-1.0.1'
 
   # Propositions depending on the previous response.
   
