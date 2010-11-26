@@ -49,11 +49,13 @@ class TableOptionsSingleRowRenderer(StrAndUnicode):
 
     def __iter__(self):
         for i, choice in enumerate(self.choices):
-            yield RadioInputNoLabel(self.name, self.value, self.attrs.copy(), choice, i)
+            yield RadioInputNoLabel(self.name, self.value,
+                                    self.attrs.copy(), choice, i)
 
     def __getitem__(self, idx):
         choice = self.choices[idx] # Let the IndexError propogate
-        return RadioInputNoLabel(self.name, self.value, self.attrs.copy(), choice, idx)
+        return RadioInputNoLabel(self.name, self.value, self.attrs.copy(),
+                                 choice, idx)
 
     def __unicode__(self):
         return self.render()
@@ -179,4 +181,59 @@ class MonthYearWidget(Widget):
         if y and m:
             return '%s-%s' % (y, m)
         return data.get(name, None)
+
+class TableOfSelectsWidget(forms.MultiWidget):
+
+    def __init__(self, rows, columns, attrs=None):
+        max_choice = 13
+        choice_list = list(xrange(max_choice))
+        choice_list.insert(0, '-')
+        choice_list.append('>%d' % (max_choice-1))
+        self.choices =  zip(xrange(max_choice+2), choice_list)
+
+        self.columns = columns
+        self.rows = rows
+
+        widgets = [forms.Select(choices=self.choices)
+                   for r in rows
+                   for c in columns]
+        super(TableOfSelectsWidget, self).__init__(widgets, attrs)
+
+    def decompress(self, value):
+        return value or [None] * len(self.rows)
+
+    def render(self, name, value, attrs=None):
+        # value is a list of values, each corresponding to a widget
+        # in self.widgets.
+        if not isinstance(value, list):
+            value = self.decompress(value)
+        final_attrs = self.build_attrs(attrs)
+        id_ = final_attrs.get('id', None)
+
+        output = []
+        def a(s):
+            output.append(s)
+
+        a('<table border="1" class="table-of-selects">')
+        a('<tr align=middle><th>')
+        for key, column in self.columns:
+            a('<th>' + column)
+        for i, row in enumerate(self.rows):
+            a('<tr align=right><th>' + row)
+            for j, kc in enumerate(self.columns):
+                key, column = kc
+                index = len(self.rows) * i + j
+                widget_name = name + '_%d' % index
+                try:
+                    widget_value = value[index]
+                except IndexError:
+                    widget_value = None
+                if id_:
+                    final_attrs = dict(final_attrs, id='%s_%d' % (id_, index))
+                widget = self.widgets[index]
+                wr = widget.render(widget_name, widget_value, final_attrs)
+                a('<td>' + wr)
+        a('</table>')
+
+        return mark_safe(self.format_output(output))
 

@@ -1,12 +1,14 @@
 from pprint import pprint
 import simplejson as json
 from collections import defaultdict
+from inspect import isclass
 
 from django import forms
 from django.forms.util import ErrorList
 from . import spec as d
 from .forms import ( AdviseField, DatePickerWidget, MonthYearField,
-                     PostCodeField, DateOrOptionField, TableOptionsSingleField )
+                     PostCodeField, DateOrOptionField,
+                     TableOptionsSingleField, TableOfSelectsField)
 
 def parse_specification(spec, survey_class='Survey'):
     vars = {'d': d}
@@ -291,7 +293,6 @@ class FormBuilder(object):
 
         for question in self.spec.questions:
             form.fields[question.id].label = TextTemplate(form, question)
-
         return form
 
     def build(self):
@@ -344,30 +345,46 @@ class FormBuilder(object):
             postcode, country = qtype.split('-')
             field = PostCodeField(country=country)
 
+        elif qtype == 'table-of-selects':
+            field = TableOfSelectsField(rows=question.rows,
+                                        options=question.options,
+                                        required=False)
+
         elif qtype == 'table-of-options-single':
-            args = question.type_args + [None]
-            q = args[0]
-            rows = q.options
-            if args[1] is not None:
-                keys = args[1]
-                rows = [(key, value) for key, value in q.options
-                                     if key in keys]
-            def checker(rows, qid):
-                '''A closure that holds rows and question id of this field.'''
-                def _checker(data):
-                    values = data[qid]
-                    if values is None:
-                        return []
-                    values = map(int, values) # FIXME XXX
-                    required = []
-                    for index, pair in enumerate(rows):
-                        k, v = pair
-                        if k in values:
-                            required.append(index)
-                    return required
-                return _checker
-            qq = q()
-            required_rows = checker(rows, qq.id)
+            qta = question.type_args
+            if (qta and isclass(qta[0]) and issubclass(qta[0], d.Question)):
+                # We're dealing args derived from another question.
+                args = qta + [None]
+                q = args[0]
+                rows = q.options
+                if args[1] is not None:
+                    keys = args[1]
+                    rows = [(key, value) for key, value in q.options
+                            if key in keys]
+
+                def checker(rows, qid):
+                    '''A closure that holds rows and question id of the field.'''
+                    def _checker(data):
+                        values = data[qid]
+                        if values is None:
+                            return []
+                        values = map(int, values) # FIXME XXX
+                        required = []
+                        for index, pair in enumerate(rows):
+                            k, v = pair
+                            if k in values:
+                                required.append(index)
+                        return required
+                    return _checker
+
+                required_rows = checker(rows, q().id)
+            elif (qta and isinstance(qta[0], str)):
+                # We're dealing with literal args
+                rows = zip(xrange(len(qta)), qta)
+                required_rows = None
+            else:
+                raise NotImplementedError('Question type_args unrecognised.')
+
             field = TableOptionsSingleField(options=question.options,
                                             rows=rows,
                                             required_rows=required_rows)

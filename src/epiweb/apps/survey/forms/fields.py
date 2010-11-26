@@ -12,10 +12,10 @@ from django.contrib.localflavor.uk.forms import UKPostcodeField
 
 from .widgets import ( AdviseWidget, MonthYearWidget,
                        DatePickerWidget, DateOrOptionPickerWidget,
-                       TableOptionsSingleWidget )
+                       TableOptionsSingleWidget, TableOfSelectsWidget, )
 
 __all__ = ['AdviseField', 'MonthYearField', 'PostCodeField', 'DateOrOptionField',
-           'TableOptionsSingleField']
+           'TableOptionsSingleField', 'TableOfSelectsField', ]
 
 class AdviseField(forms.Field):
     widget = AdviseWidget
@@ -102,6 +102,21 @@ class DateOrOptionField(forms.MultiValueField):
                 raise forms.ValidationError(self.error_messages['required'])
             return None
         return date
+
+class TableOfSelectsField(forms.MultiValueField):
+
+    def __init__(self, rows, options, *args, **kwargs):
+        fields = [forms.ChoiceField(label=row, choices=options, required=False)
+                  for row in rows
+                  for option in options]
+        kwargs['widget'] = TableOfSelectsWidget(rows, options)
+        super(TableOfSelectsField, self).__init__(fields, *args, **kwargs)
+
+    def compress(self, v):
+        return v
+
+    def clean(self, value):
+        return value
 
 class TableOptionsSingleField(forms.MultiValueField):
     def __init__(self, options, rows, required_rows=None, *args, **kwargs):
