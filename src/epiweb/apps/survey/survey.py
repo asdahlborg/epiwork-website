@@ -365,8 +365,8 @@ class FormBuilder(object):
                 def checker(rows, qid):
                     '''A closure that holds rows and question id of the field.'''
                     def _checker(data):
-                        values = data[qid]
-                        if values is None:
+                        values = qid in data and data[qid]
+                        if not values:
                             return []
                         values = map(int, values) # FIXME XXX
                         required = []

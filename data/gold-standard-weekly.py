@@ -115,7 +115,8 @@ class WeeklyQ6c(d.Question):
              (1, 'Yes: Family doctor - spoke to doctor or nurse'),
              (2, 'Yes: National health advice service'),
              (3, 'Yes: National pandemic flu service'),
-             (4, 'Yes: Other'),)
+             (4, 'Yes: Other'),
+             (5, 'No'),)
 
 class WeeklyQ7(d.Question):
   question = "Did you take medication for these symptoms?"
@@ -255,7 +256,7 @@ class ContactQ4(d.Question):
              (4, '>4 hours'),)
   
 class Survey(d.Survey):
-  id = 'gold-standard-weekly-1.0.1'
+  id = 'gold-standard-weekly-1.0.2'
 
   # Propositions depending on the previous response.
   

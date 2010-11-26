@@ -235,7 +235,7 @@ class IntakeQ17(d.Question):
              (4, 'Yes, one ore more other animals'), )
 
 class Survey(d.Survey):
-  id = 'gold-standard-intake-0.1.0'
+  id = 'gold-standard-intake-1.0.0'
 
   # Local propositions
   female = d.Equal(IntakeQ1, 1)
