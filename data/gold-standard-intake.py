@@ -33,7 +33,8 @@ class IntakeQ5(d.Question):
 class IntakeQ6(d.Question):
   question = """Not counting you, how many people in each of the following age
   groups live in your household?"""
-  type = 'multiple-number'
+  type = 'table-of-selects'
+  rows = ['Number']
   categories = ((0, '0-4 years'),
                 (1, '5-18 years'),
                 (2, '19-44 years'),
@@ -235,7 +236,7 @@ class IntakeQ17(d.Question):
              (4, 'Yes, one ore more other animals'), )
 
 class Survey(d.Survey):
-  id = 'gold-standard-intake-1.0.0'
+  id = 'gold-standard-intake-1.1'
 
   # Local propositions
   female = d.Equal(IntakeQ1, 1)
@@ -248,8 +249,8 @@ class Survey(d.Survey):
               IntakeQ3,
               IntakeQ4,
               IntakeQ5,
-#              IntakeQ6,
-#              d.If(~d.Equal(IntakeQ6[0], 0)) ( IntakeQ6b ), # category 0 not 0
+              IntakeQ6,
+              d.If(~d.Equal(IntakeQ6[0], 0)) ( IntakeQ6b ), # category 0 not 0
               IntakeQ7,
               IntakeQ7b,
               IntakeQ8,

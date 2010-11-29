@@ -256,7 +256,7 @@ class ContactQ4(d.Question):
              (4, '>4 hours'),)
   
 class Survey(d.Survey):
-  id = 'gold-standard-weekly-1.2'
+  id = 'gold-standard-weekly-with-contact-1.2'
 
   # Propositions depending on the previous response.
   
@@ -300,10 +300,10 @@ class Survey(d.Survey):
             # TODO Possibly update IntakeQ9 here?
             d.If(symptoms_present) (WeeklyQ11),
 
-#            ContactQ1,
-#            ContactQ2,
-#            ContactQ3,
-#            ContactQ4,
+            ContactQ1,
+            ContactQ2,
+            ContactQ3,
+            ContactQ4,
             )
 
   # TODO tidy up this syntax: see survey.py lines 100-125
