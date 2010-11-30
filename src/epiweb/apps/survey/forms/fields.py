@@ -124,11 +124,11 @@ class DateOrOptionField(forms.MultiValueField):
 
 class TableOfSelectsField(forms.MultiValueField):
 
-    def __init__(self, rows, options, *args, **kwargs):
-        fields = [forms.ChoiceField(label=row, choices=options, required=False)
+    def __init__(self, rows, columns, choices, *args, **kwargs):
+        fields = [forms.ChoiceField(label=row, choices=choices, required=False)
                   for row in rows
-                  for option in options]
-        kwargs['widget'] = TableOfSelectsWidget(rows, options)
+                  for column in columns]
+        kwargs['widget'] = TableOfSelectsWidget(rows, columns, choices)
         super(TableOfSelectsField, self).__init__(fields, *args, **kwargs)
 
     def compress(self, v):

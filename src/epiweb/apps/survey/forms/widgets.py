@@ -184,15 +184,10 @@ class MonthYearWidget(Widget):
 
 class TableOfSelectsWidget(forms.MultiWidget):
 
-    def __init__(self, rows, columns, attrs=None):
-        max_choice = 13
-        choice_list = list(xrange(max_choice))
-        choice_list.insert(0, '-')
-        choice_list.append('>%d' % (max_choice-1))
-        self.choices =  zip(xrange(max_choice+2), choice_list)
-
-        self.columns = columns
+    def __init__(self, rows, columns, choices, attrs=None):
         self.rows = rows
+        self.columns = columns
+        self.choices = choices
 
         widgets = [forms.Select(choices=self.choices)
                    for r in rows
@@ -216,12 +211,12 @@ class TableOfSelectsWidget(forms.MultiWidget):
 
         a('<table border="1" class="table-of-selects">')
         a('<tr align=middle><th>')
-        for key, column in self.columns:
+        for column in self.columns:
+            print 'column', column, type(column)
             a('<th>' + column)
         for i, row in enumerate(self.rows):
             a('<tr align=right><th>' + row)
-            for j, kc in enumerate(self.columns):
-                key, column = kc
+            for j, column in enumerate(self.columns):
                 index = len(self.rows) * i + j
                 widget_name = name + '_%d' % index
                 try:

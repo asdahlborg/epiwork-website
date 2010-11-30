@@ -218,21 +218,45 @@ class ContactQ1(d.Question):
              yesterday?"""
   type = 'table-of-selects'
   rows = ['Home', 'Work', 'Other']
-  options = ((0, '0-4 years'),
-             (1, '5-18 years'),
-             (2, '19-44 years'),
-             (3, '45-64 years'),
-             (4, '65+ years'),)
+  columns = ['0-4 years',
+             '5-18 years',
+             '19-44 years',
+             '45-64 years',
+             '65+ years',]
+  choices = ((99, '-'),
+             ( 0,  '0'),
+             ( 1,  '1'),
+             ( 2,  '2'),
+             ( 3,  '3'),
+             ( 4,  '4'),
+             ( 5,  '5'),
+             ( 6,  '6'),
+             ( 7,  '7'),
+             ( 8,  '8'),
+             ( 9,  '9'),
+             (10, '>9'),)
 
 class ContactQ2(d.Question):
   question = 'How many people did you have physical contact with yesterday?'
   type = 'table-of-selects'
   rows = ['Home', 'Work', 'Other']
-  options = ((0, '0-4 years'),
-             (1, '5-18 years'),
-             (2, '19-44 years'),
-             (3, '45-64 years'),
-             (4, '65+ years'),)
+  columns = ['0-4 years',
+             '5-18 years',
+             '19-44 years',
+             '45-64 years',
+             '65+ years',]
+  choices = ((99, '-'),
+             ( 0,  '0'),
+             ( 1,  '1'),
+             ( 2,  '2'),
+             ( 3,  '3'),
+             ( 4,  '4'),
+             ( 5,  '5'),
+             ( 6,  '6'),
+             ( 7,  '7'),
+             ( 8,  '8'),
+             ( 9,  '9'),
+             (10, '>9'),)
 
 class ContactQ3(d.Question):
   question = """On a normal day, how much time do you spend on public
@@ -256,7 +280,7 @@ class ContactQ4(d.Question):
              (4, '>4 hours'),)
   
 class Survey(d.Survey):
-  id = 'gold-standard-weekly-1.2'
+  id = 'gold-standard-weekly-1.3'
 
   # Propositions depending on the previous response.
   

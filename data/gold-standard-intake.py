@@ -34,12 +34,24 @@ class IntakeQ6(d.Question):
   question = """Not counting you, how many people in each of the following age
   groups live in your household?"""
   type = 'table-of-selects'
-  rows = ['Number']
-  categories = ((0, '0-4 years'),
-                (1, '5-18 years'),
-                (2, '19-44 years'),
-                (3, '45-64 years'),
-                (4, '65+ years'), )
+  rows = ['']
+  columns = ['0-4 years',
+             '5-18 years',
+             '19-44 years',
+             '45-64 years',
+             '65+ years']
+  choices = ((99, '-'),
+             ( 0,  '0'),
+             ( 1,  '1'),
+             ( 2,  '2'),
+             ( 3,  '3'),
+             ( 4,  '4'),
+             ( 5,  '5'),
+             ( 6,  '6'),
+             ( 7,  '7'),
+             ( 8,  '8'),
+             ( 9,  '9'),
+             (10, '>9'),)
 
 class IntakeQ6b(d.Question):
   question = """How many of the children aged 0-4 in your household go to
@@ -236,7 +248,7 @@ class IntakeQ17(d.Question):
              (4, 'Yes, one ore more other animals'), )
 
 class Survey(d.Survey):
-  id = 'gold-standard-intake-1.1'
+  id = 'gold-standard-intake-1.3'
 
   # Local propositions
   children_under_4 = ~d.EqualIndex(IntakeQ6, 0, 0)
@@ -262,7 +274,7 @@ class Survey(d.Survey):
               d.Else(IntakeQ10d),
               IntakeQ11,
               IntakeQ12,
-              d.If(female) (IntakeQ13), 
+              d.If(female) (IntakeQ13),
               d.If(pregnant) (IntakeQ13b),
               IntakeQ14,
               IntakeQ15,

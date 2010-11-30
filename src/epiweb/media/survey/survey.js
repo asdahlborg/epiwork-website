@@ -245,6 +245,21 @@ var SurveyDefinition = {
             return (""+a) == (""+b);
         }
     },
+    EqualIndex: function(a, index, b) {
+        var self = this;
+        this.a = a;
+        this.index = index;
+        this.b = b;
+        this.args = [a, b];
+        this.evaluate = function(context) {
+            var a = self.a.value(context)[self.index];
+            var b = self.b;
+            if (typeof(b) == "object") {
+                b = b.value(context);
+            }
+            return (""+a) == (""+b);
+        }
+    },
     Empty: function(a) {
         var self = this;
         this.a = a;
@@ -341,6 +356,9 @@ var SurveyDefinitionGlue = {
     },
     Equal: function(a, b) {
         return new sd.Equal(a, b);
+    },
+    EqualIndex: function(a, i, b) {
+        return new sd.EqualIndex(a, i, b);
     },
     Empty: function(a) {
         return new sd.Empty(a);

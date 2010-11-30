@@ -3,7 +3,7 @@ import simplejson as json
 __all__ = ['Survey', 'Question', 'Profile', 'Response',
            'Advise',
            'If', 'ElseIf', 'Else',
-           'Empty', 'Equal', 'In',
+           'Empty', 'Equal', 'EqualIndex', 'In',
            'And', 'Or', 'Not']
 
 class Question(object):
@@ -327,6 +327,21 @@ class Equal(Evaluator):
         # print 'Equal: get_usage:', name, repr(self.a), repr(self.b)
         return self.a.get_usage(name) + self.b.get_usage(name)
 E = Equal
+
+class EqualIndex(Equal):
+    def __init__(self, a, index, b):
+        super(EqualIndex, self).__init__(a, b)
+        self.index = index
+
+    def eval(self, values):
+        a = int(self.a.value(values)[self.index])
+        b = self.b.value(values)
+        return a == b
+
+    @property
+    def js(self):
+        return 'd.EqualIndex(%s, %s, %s)' % (self.a.js, self.index, self.b.js)
+
 
 class In(Evaluator):
     """Check if the first value is one of the second values"""

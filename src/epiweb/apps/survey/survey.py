@@ -347,7 +347,8 @@ class FormBuilder(object):
 
         elif qtype == 'table-of-selects':
             field = TableOfSelectsField(rows=question.rows,
-                                        options=question.options,
+                                        columns=question.columns,
+                                        choices=question.choices,
                                         required=False)
 
         elif qtype == 'table-of-options-single':

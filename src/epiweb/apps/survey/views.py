@@ -141,7 +141,7 @@ def profile_index(request):
 
     else:
         initial = utils.get_user_profile(survey_user)
-        form = builder.get_form(context, initial)
+        form = builder.get_form(context, initial=initial)
 
     js_builder = JavascriptBuilder(spec)
     js = mark_safe(js_builder.get_javascript(context))
