@@ -42,7 +42,7 @@ class IntakeQ6(d.Question):
                 (4, '65+ years'), )
 
 class IntakeQ6b(d.Question):
-  question = """How many of ther children aged 0-4 in your household go to
+  question = """How many of the children aged 0-4 in your household go to
   school or day-care?"""
   type = 'options-single'
   options = ((1, '1'),
@@ -239,6 +239,7 @@ class Survey(d.Survey):
   id = 'gold-standard-intake-1.1'
 
   # Local propositions
+  children_under_4 = ~d.EqualIndex(IntakeQ6, 0, 0)
   female = d.Equal(IntakeQ1, 1)
   pregnant = female & d.Equal(IntakeQ13, 0)
   had_seasonal_flu_vaccine = d.Equal(IntakeQ10, 0)
@@ -250,7 +251,7 @@ class Survey(d.Survey):
               IntakeQ4,
               IntakeQ5,
               IntakeQ6,
-              d.If(~d.Equal(IntakeQ6[0], 0)) ( IntakeQ6b ), # category 0 not 0
+              d.If(children_under_4) (IntakeQ6b),
               IntakeQ7,
               IntakeQ7b,
               IntakeQ8,
