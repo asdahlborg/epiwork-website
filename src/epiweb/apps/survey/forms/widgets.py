@@ -212,7 +212,6 @@ class TableOfSelectsWidget(forms.MultiWidget):
         a('<table border="1" class="table-of-selects">')
         a('<tr align=middle><th>')
         for column in self.columns:
-            print 'column', column, type(column)
             a('<th>' + column)
         for i, row in enumerate(self.rows):
             a('<tr align=right><th>' + row)

@@ -113,14 +113,15 @@ class DateOrOptionField(forms.MultiValueField):
         return v
     def clean(self, value):
         date, choice = value
-        if len(choice) > 0:
-            return True
-        date = self.datefield.clean(date)
-        if date is None:
-            if self.required:
-                raise forms.ValidationError(self.error_messages['required'])
-            return None
-        return date
+        if len(choice) > 0:    # option was chosen
+            return choice[0]
+        else:                  # use the date
+            date = self.datefield.clean(date)
+            if date is None:
+                if self.required:
+                    raise forms.ValidationError(self.error_messages['required'])
+                return None
+            return date
 
 class TableOfSelectsField(forms.MultiValueField):
 

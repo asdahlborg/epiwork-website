@@ -280,14 +280,15 @@ class ContactQ4(d.Question):
              (4, '>4 hours'),)
   
 class Survey(d.Survey):
-  id = 'gold-standard-weekly-with-contact-1.3'
+  id = 'gold-standard-weekly-with-contact-1.4'
 
   # Propositions depending on the previous response.
   
   # WeeklyQ11 requires an answer so if its value is empty in the previous
   # response then the previous response must not exist.
   previous_response_exists = ~ d.Empty(d.Response('WeeklyQ11'))
-  previously_still_ill = d.Equal(d.Response('WeeklyQ5'), 0)
+  previously_still_ill = previous_response_exists & \
+                         d.Equal(d.Response('WeeklyQ5'), 0)
 
   # Propositions depending on (previous) answers in this response.
   symptoms_present             = ~ d.In(WeeklyQ1, [0]) & \
