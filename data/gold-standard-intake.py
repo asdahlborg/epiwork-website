@@ -57,7 +57,8 @@ class IntakeQ6b(d.Question):
   question = """How many of the children aged 0-4 in your household go to
   school or day-care?"""
   type = 'options-single'
-  options = ((1, '1'),
+  options = ((0, 'None'),
+             (1, '1'),
              (2, '2'),
              (3, '3'),
              (4, '4'),
@@ -248,7 +249,7 @@ class IntakeQ17(d.Question):
              (4, 'Yes, one ore more other animals'), )
 
 class Survey(d.Survey):
-  id = 'gold-standard-intake-1.3'
+  id = 'gold-standard-intake-1.4'
 
   # Local propositions
   children_under_4 = ~d.EqualIndex(IntakeQ6, 0, 0)

@@ -163,7 +163,7 @@ REMINDER_LOGINURL_EXPIRES = 7
 REMINDER_HTML = False
 
 SURVEY_ID = 'gold-standard-weekly-with-contact-1.3'
-SURVEY_PROFILE_ID = 'gold-standard-intake-1.3'
+SURVEY_PROFILE_ID = 'gold-standard-intake-1.4'
 
 import socket
 _hostname = socket.gethostname()
