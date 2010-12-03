@@ -9,8 +9,11 @@ def xmlify_spec(spec):
   def a(s):
     return str(s)
 
-  def t(tag, s):
-    return a('<%s>\n' % tag) + a(s) + a('</%s>\n' % tag)
+  def t(tag, s, attrs=[]):
+    attrstr = ''
+    for (n,v) in attrs:
+      attrstr += ' %s="%s"' % (n, v)
+    return a('<%s%s>\n' % (tag, attrstr)) + a(s) + a('\n</%s>' % tag)
 
   def xo(options):
     return reduce(lambda s,o: s+t('option', t('code', o[0]) + t('text', o[1])) ,
@@ -37,6 +40,6 @@ def xmlify_spec(spec):
     else:
       t('unknown', type(f))
 
-  xml = t('survey', xs(p.rules))
+  xml = '<?xml version="1.0"?>\n' + t('survey', xs(p.rules))
   return xml
 

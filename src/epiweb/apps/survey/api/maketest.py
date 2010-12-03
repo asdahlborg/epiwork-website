@@ -24,16 +24,27 @@ header = """<html>
 <h1>%s</h1>
 """ % (title, base, title)
 
-res = [ #'surveyuser',
-        'GetUserProfile',
+res = [ 'GetUserProfile',
+        'GetUserProfile/bogus_uid',
         'GetUserProfile/be4e5f36-714c-482a-a754-30a200874f75',
-        #'GetUserProfile/schema',
-        #'GetUserProfile/?user__global_id=193807d8-4a30-4601-9bc5-bc59db1696cd',
 
         'GetReportSurvey',
         'GetReportSurvey/1',
-        #'GetReportSurvey/schema',
-        #'GetReportSurvey',
+
+        'GetImage',
+        'GetImage/bogus_type/bogus_uid',
+
+        'Report',
+        'Report/bogus_uid/bogus_reports',
+
+        'GetLanguage',
+        'GetLanguage/bogus_arg',
+
+        'GetStatsHeaders',
+        'GetStatsHeaders/bogus_language',
+
+        'GetStatistic',
+        'GetStatistic/bogus_uid/bogus_id/bogus_lang',
         ]
 
 w(header)
@@ -52,3 +63,25 @@ fd.close()
 
 # Curl script goes here...
 
+bash_file = 'test.sh'
+fd = open(bash_file, 'w')
+
+header = """#!/bin/bash
+base='%s'
+#header='-H "Accept: application/json"'
+#include='-i'
+silent='-s'
+ 
+e () {
+  echo '>>>' $*
+  eval $*
+  echo 
+}
+""" % base
+
+w(header)
+
+for r in res:
+  w('e curl $silent $include $header ${base}' + r)
+
+fd.close()

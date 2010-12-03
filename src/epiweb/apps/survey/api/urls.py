@@ -36,10 +36,9 @@ def stringify(c):
   "Returns string name for class."
   m = match("<.*\.([^>]+)'>", str(c))
   if m:
-    print 'cm', c, m.group(1)
     return m.group(1)
   else:
-    return 'wibble'
+    return ''
 
 q = [url(r'^%s' % stringify(s[0]) + 
          reduce(lambda acc,i: r'/(?P<%s>[^/]+)' % str(i) + acc, s[1:], ''),
