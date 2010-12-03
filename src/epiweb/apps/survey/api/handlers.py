@@ -8,12 +8,10 @@ class GetUserProfile(BaseHandler):
   Returns name, a_uids, code, report_ts
   """
   allowed_methods = ('GET',)         
-  model = Profile
   
   def read(self, request, uid=None):
-    print 'uid', uid, request.GET
-    if 'uid' in request.GET:
-      uid = request.GET['uid']
+    print request.GET, uid
+    if 'uid':
       sus = SurveyUser.objects.filter(global_id=uid)
       if sus:
         su = sus[0]
@@ -25,7 +23,7 @@ class GetUserProfile(BaseHandler):
 
       # 5-digit code is generated from global_id:
       # divide by 1e5 and pad left with zeros
-      code =  '%05d' % (int(sub('-', '', su.global_id), 16) % 1e5)
+      code = '%05d' % (int(sub('-', '', su.global_id), 16) % 1e5)
 
       pd = su.last_participation_date
       if pd:
@@ -40,5 +38,11 @@ class GetUserProfile(BaseHandler):
     else:
       return {'error': 'uid required'}
 
+class GetReportSurvey(BaseHandler):
+  """Takes language int
+  Returns survey in XML format
+  """
+  allowed_methods = ('GET',)         
 
-
+  def read(self, request, uid=None):
+    pass
