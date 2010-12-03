@@ -2,15 +2,17 @@ from piston.handler import BaseHandler
 from epiweb.apps.survey.models import ( Profile, SurveyUser, Survey, User, epoch)
 from datetime import datetime
 from re import sub
+from utils import xmlify_spec
 
-class GetUserProfile(BaseHandler):
+class EpiwebHandler(BaseHandler):
+  allowed_methods = ('GET',)         
+
+class GetUserProfile(EpiwebHandler):
   """Takes global_id
   Returns name, a_uids, code, report_ts
   """
-  allowed_methods = ('GET',)         
   
   def read(self, request, uid=None):
-    print request.GET, uid
     if 'uid':
       sus = SurveyUser.objects.filter(global_id=uid)
       if sus:
@@ -38,11 +40,48 @@ class GetUserProfile(BaseHandler):
     else:
       return {'error': 'uid required'}
 
-class GetReportSurvey(BaseHandler):
+class GetReportSurvey(EpiwebHandler):
   """Takes language int
   Returns survey in XML format
   """
-  allowed_methods = ('GET',)         
 
-  def read(self, request, uid=None):
-    pass
+  def read(self, request, language=None):
+    # Ignore language for now
+    ss = Survey.objects.all()
+    most_recently_added_survey = ss[len(ss)-1]
+    print most_recently_added_survey.survey_id
+    xml = xmlify_spec(most_recently_added_survey.specification)
+    # print xml
+    return {'survey': xml}
+
+class GetImage(EpiwebHandler):
+  """Takes type:int and uid:string
+  Returns image:string of png encoded base64
+  """
+  def read(self, request, type=None, uid=None):
+    return 42
+
+class Report(EpiwebHandler):
+  """
+  """
+  def read(self, request, uid=None, reports=None):
+    return 42
+
+class GetLanguage(EpiwebHandler):
+  """
+  """
+  def read(self, request):
+    return 42
+
+class GetStatsHeaders(EpiwebHandler):
+  """
+  """
+  def read(self, request, language=None):
+    return 42
+
+class GetStatistic(EpiwebHandler):
+  """
+  """
+  def read(self, request, uid=None, id=None, lang=None):
+    return 42
+

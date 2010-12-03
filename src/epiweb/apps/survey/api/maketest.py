@@ -9,7 +9,7 @@ fd = open(html_file, 'w')
 def w(s):
   fd.write(s + '\n')
 
-base = 'http://localhost:8000/ema/v1/'
+base = 'http://localhost:8000/ema/'
 # base = 'http://178.18.82.138:8000/ema/v1/' 
 
 fj = '?format=json'
@@ -24,22 +24,25 @@ header = """<html>
 <h1>%s</h1>
 """ % (title, base, title)
 
-res = [ 'surveyuser',
+res = [ #'surveyuser',
         'GetUserProfile',
-        'GetUserProfile/schema',
-        'GetUserProfile/?user__global_id=193807d8-4a30-4601-9bc5-bc59db1696cd',
+        'GetUserProfile/be4e5f36-714c-482a-a754-30a200874f75',
+        #'GetUserProfile/schema',
+        #'GetUserProfile/?user__global_id=193807d8-4a30-4601-9bc5-bc59db1696cd',
 
         'GetReportSurvey',
-        'GetReportSurvey/schema',
-        'GetReportSurvey',
+        'GetReportSurvey/1',
+        #'GetReportSurvey/schema',
+        #'GetReportSurvey',
         ]
 
 w(header)
 w('<ul>')
 for r in res:
-  url = re.sub('\?', fj + '&', r)
-  if url == r:
-    url = r + '/' + fj
+  url = r
+#  url = re.sub('\?', fj + '&', r)
+#  if url == r:
+#    url = r + '/' + fj
   w('<li><a href="' + url + '">' + r + '</a>')
 w('<ul>')
 w('</body>')
