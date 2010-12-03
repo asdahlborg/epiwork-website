@@ -118,7 +118,7 @@ def epoch():
     participation could have taken place. A participition with this date stamp
     indicates that there was no such participation.
     """
-    return date(1970, 1, 1)
+    return datetime(1970, 1, 1)
 
 def add_empty_last_response(sender, instance, created, **kwargs):
     if created:

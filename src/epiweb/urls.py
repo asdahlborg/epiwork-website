@@ -28,5 +28,6 @@ urlpatterns = patterns('',
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
                      name='loginurl-index'),
     (r'^login/', include('loginurl.urls')),
+    (r'^ema/', include('epiweb.apps.survey.api.urls')),
     url(r'^', include('cms.urls')),
 )
