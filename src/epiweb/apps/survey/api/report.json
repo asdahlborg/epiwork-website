@@ -1,0 +1,15 @@
+{
+  "prot_v"      : "1.0",
+  "serv"        : 99,
+  "uid"         : "request generator's uid",
+  "reports" [{ "uid"           : "be4e5f36-714c-482a-a754-30a200874f75",
+               "surv_v"        : "gold-standard-weekly-with-contact-1.4",
+               "ts"            : 1262304000000,
+               "data"  [{ "id"        : "WeeklyQ1",
+                          "value"     : [17] }
+		       { "id"        : "WeeklyQ1b",
+                          "value"     : 0 }
+		       ]
+            }]
+
+}

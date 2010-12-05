@@ -139,6 +139,9 @@ AUTHENTICATION_BACKENDS = (
     'loginurl.backends.LoginUrlBackend',
 )
 
+CMSPLUGIN_NEWS_RSS_TITLE = "News"
+CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
+
 ACCOUNT_ACTIVATION_DAYS = 7
 
 EMAIL_HOST='127.0.0.1'
@@ -151,19 +154,18 @@ DEFAULT_FROM_EMAIL = 'webmaster@influenzanet.com'
 # or ...mail_managers.  Make sure to include the trailing space.
 EMAIL_SUBJECT_PREFIX = '[Influenzanet] '
 
-EPIDB_API_KEY = '0000000000000000000000000000000000000000'
-EPIDB_SERVER = 'http://127.0.0.1:8080/'
-
-CMSPLUGIN_NEWS_RSS_TITLE = "News"
-CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
-
 REMINDER_FROM = 'reminder-no-reply@epiwork.example'
 REMINDER_USE_LOGINURL = True
 REMINDER_LOGINURL_EXPIRES = 7
 REMINDER_HTML = False
 
+EPIDB_API_KEY = '0000000000000000000000000000000000000000'
+EPIDB_SERVER = 'http://127.0.0.1:8080/'
+
 SURVEY_ID = 'gold-standard-weekly-with-contact-1.4'
 SURVEY_PROFILE_ID = 'gold-standard-intake-1.4'
+
+MOBILE_INTERFACE_ACTIVE = False
 
 import socket
 _hostname = socket.gethostname()

@@ -1,0 +1,52 @@
+1. Pull the latest version of the framework code from the git repository.
+
+    $ git pull
+
+2. Set the `MOBILE_INTERFACE_ACTIVE` variable in the `settings.py` file.
+
+    MOBILE_INTERFACE_ACTIVE = True
+    
+3. See the [http://egg.science.uva.nl/redmine/wiki/epidb/WebsiteQuickStart](Quickstart
+Guide) on the Redmine server for how to set up the website framework.  Follow
+the instructions until you have a running local server.
+
+    $ ./bin/django runserver
+    
+4. In a browser to the admin server
+
+    http://localhost:8000/admin/auth/user/
+    
+5. Add two users.  One with username `ema` and password `emapass`.  This will
+be the user who is authorised to access the Epiwork Mobile Application API.
+Also add another user with a username, name and password of your choice.
+
+6. Find the `global_id` for the username you added:
+
+    $ ./bin/django shell
+
+    In [1]: from epiweb.apps.survey.models import SurveyUser
+
+    In [2]: sus = SurveyUser.objects.all()
+
+    In [3]: sus[len(sus)-1].global_id
+
+    Out [3]: u'be4e5f36-714c-482a-a754-30a200874f75'
+
+    In [4]: quit()
+
+7. Edit the file `src/epiweb/apps/survey/api/maketest.py` to give the
+`global_id` variable the value you found in the previous step. IN the above
+case, the 'global_id` you require is `'be4e5f36-714c-482a-a754-30a200874f75'`
+
+8. Use the `maketest.py` script to generate two test files `test.sh` and
+`test.html`
+
+    $ cd src/epiweb/apps/survey/api
+
+    $ python maketest.py
+
+9. From the command line you can run the fine `test.sh`
+
+    $ bash test.sh
+   
+10. Open your browser at the file `test.html` and click on the links there.

@@ -27,7 +27,11 @@ urlpatterns = patterns('',
                                             'template_name': 'news'}),
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
                      name='loginurl-index'),
-    (r'^login/', include('loginurl.urls')),
-    (r'^ema/', include('epiweb.apps.survey.api.urls')),
-    url(r'^', include('cms.urls')),
-)
+    (r'^login/', include('loginurl.urls')),)
+
+if settings.MOBILE_INTERFACE_ACTIVE:
+  urlpatterns += patterns('', (r'^ema/', include('epiweb.apps.survey.api.urls')))
+
+# Catchall
+urlpatterns += patterns('', url(r'^', include('cms.urls')))
+

@@ -1,4 +1,5 @@
 from piston.resource import Resource
+from piston.authentication import HttpBasicAuthentication
 from django.conf.urls.defaults import *
 from epiweb.apps.survey.api.handlers import ( GetUserProfile,
                                               GetReportSurvey,
@@ -9,6 +10,11 @@ from epiweb.apps.survey.api.handlers import ( GetUserProfile,
                                               GetStatistic,
                                               )
 from re import match
+
+# htttp basic authentication
+
+auth = HttpBasicAuthentication(realm="EIP")
+ad = { 'authentication': auth }
 
 # Perform some introspection on the handlers in order to build the urlpatterns.
 
@@ -42,12 +48,16 @@ def stringify(c):
 
 q = [url(r'^%s' % stringify(s[0]) + 
          reduce(lambda acc,i: r'/(?P<%s>[^/]+)' % str(i) + acc, s[1:], ''),
-         Resource(s[0]), {'emitter_format': 'json'})
+         Resource(handler=s[0], **ad)
+         #, {'emitter_format': 'json'}
+         )
      for s in revrest(resources)]
-r = [url(r'^%s' % stringify(s[0]), Resource(s[0]), {'emitter_format': 'json'})
+r = [url(r'^%s' % stringify(s[0]), Resource(handler=s[0], **ad)
+         #, {'emitter_format': 'json'}
+         )
      for s in revrest(resources)]
 
 p = q + r
 p.insert(0, '')
-urlpatterns = patterns(*p)
 
+urlpatterns = patterns(*p)
