@@ -165,7 +165,7 @@ EPIDB_SERVER = 'http://127.0.0.1:8080/'
 SURVEY_ID = 'gold-standard-weekly-with-contact-1.4'
 SURVEY_PROFILE_ID = 'gold-standard-intake-1.4'
 
-MOBILE_INTERFACE_ACTIVE = False
+MOBILE_INTERFACE_ACTIVE = True
 
 import socket
 _hostname = socket.gethostname()

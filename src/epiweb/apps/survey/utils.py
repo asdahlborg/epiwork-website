@@ -10,7 +10,7 @@ from epiweb.apps.survey import signals
 from django.conf import settings
 from epidb_client import EpiDBClient, ResponseError, InvalidResponseError
 
-from datetime import datetime
+import datetime
 
 from .survey import Specification, parse_specification
 
@@ -249,4 +249,3 @@ def flush_profile_queue():
         total += 1
 
     return total_sent, total_error
-

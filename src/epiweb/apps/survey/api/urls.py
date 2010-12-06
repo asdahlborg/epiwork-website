@@ -52,6 +52,7 @@ q = [url(r'^%s' % stringify(s[0]) +
          #, {'emitter_format': 'json'}
          )
      for s in revrest(resources)]
+
 r = [url(r'^%s' % stringify(s[0]), Resource(handler=s[0], **ad)
          #, {'emitter_format': 'json'}
          )

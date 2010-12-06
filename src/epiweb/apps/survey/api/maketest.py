@@ -3,30 +3,33 @@
 
 import re
 
-global_id = 'be4e5f36-714c-482a-a754-30a200874f75'
+global_id = 'b9e8353b-e113-4b03-856f-c118e0b70666'
 
-res = [ 'GetUserProfile',
-        'GetUserProfile/bogus_uid',
-        'GetUserProfile/%s' % global_id,
+gets = [ 'GetUserProfile',
+         'GetUserProfile/bogus_uid',
+         'GetUserProfile/%s' % global_id,
+ 
+         'GetReportSurvey',
+         'GetReportSurvey/1',
+ 
+         'GetImage',
+         'GetImage/bogus_type/bogus_uid',
+         'GetImage/123/%s' % global_id,
+ 
+         'GetLanguage',
+         'GetLanguage/bogus_arg',
+ 
+         'GetStatsHeaders',
+         'GetStatsHeaders/bogus_language',
+ 
+         'GetStatistic',
+         'GetStatistic/bogus_uid/bogus_id/bogus_lang',
+         ]
 
-        'GetReportSurvey',
-        'GetReportSurvey/1',
+puts = [ 'Report',
+         'Report/bogus_uid/bogus_reports',
+  ]
 
-        'GetImage',
-        'GetImage/bogus_type/bogus_uid',
-
-        'Report',
-        'Report/bogus_uid/bogus_reports',
-
-        'GetLanguage',
-        'GetLanguage/bogus_arg',
-
-        'GetStatsHeaders',
-        'GetStatsHeaders/bogus_language',
-
-        'GetStatistic',
-        'GetStatistic/bogus_uid/bogus_id/bogus_lang',
-        ]
 
 html_file = 'test.html'
 bash_file = 'test.sh'
@@ -65,9 +68,8 @@ header = """<html>
 
 w(header)
 w('<ul>')
-for r in res:
-  url = r
-  w('<li><a href="' + url + format + '">' + r + '</a>')
+for resource in gets:
+  w('<li><a href="' + resource + format + '">' + resource + '</a>')
 w('<ul>')
 w('</body>')
 
@@ -79,20 +81,35 @@ fd = open(bash_file, 'w')
 
 header = """#!/bin/bash
 base='%s'
-#header='-H "Accept: application/json"'
-#include='-i'
 silent='-s'
+#include='-i'
+#json='-H "Accept: application/json"'
+post='-X POST -H "Content-type: application/json"'
+opts=$silent $include $json
+data=$(cat report.json)
 
 e () {
   echo '>>>' $*
-  eval $*
+  $*
   echo
 }
 """ % base
 
 w(header)
 
-for r in res:
-  w('e curl $silent $include $header ${base}' + r + format)
+# Gets
+
+w('# GETs')
+for resource in gets:
+  w('e curl $opts ${base}' + resource + format)
+
+# Puts
+
+def ww(s):
+  w("echo '>>>' " + s)
+  w(s)
+
+w('# PUTs')
+ww('e curl $post $opts --data \"$data\" ${base}Report')
 
 fd.close()

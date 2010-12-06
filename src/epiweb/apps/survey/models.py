@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.core.urlresolvers import reverse
+from times import epoch
 
 def create_global_id():
     return str(uuid.uuid4())
@@ -112,13 +113,6 @@ def add_empty_profile(sender, instance, created, **kwargs):
         profile = Profile()
         profile.user = instance
         profile.save()
-
-def epoch():
-    """Use the Unix epoch for a date so far in the past at which no
-    participation could have taken place. A participition with this date stamp
-    indicates that there was no such participation.
-    """
-    return datetime(1970, 1, 1)
 
 def add_empty_last_response(sender, instance, created, **kwargs):
     if created:

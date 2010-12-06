@@ -1,8 +1,10 @@
 from piston.handler import BaseHandler
 from epiweb.apps.survey.models import ( Profile, SurveyUser, Survey, User, epoch)
+from epiweb.apps.survey.times import timedate_to_epochal
+from utils import xmlify_spec, report_survey
 from datetime import datetime
 from re import sub
-from utils import xmlify_spec
+from base64 import b64encode
 
 class EpiwebHandler(BaseHandler):
   allowed_methods = ('GET',)
@@ -11,7 +13,7 @@ class EpiwebHandler(BaseHandler):
                 'status': 0,     # Default status
                 }
 
-  # Add code to restrict access to the api to certain users.
+  # TODO Add code to restrict access to the api to certain users.
   # request.user must be in authorized_EIP_users
   authorized_EIP_users = ['ema']
 
@@ -40,9 +42,8 @@ class GetUserProfile(EpiwebHandler):
 
         pd = su.last_participation_date
         if pd:
-          # Report as time in milliseconds since 1970-01-01
-          delta = pd - epoch()
-          report_ts = (delta.days * 24 * 60 * 60 + delta.seconds) * 1000
+          # Report timestamp as in milliseconds since 1970-01-01
+          report_ts = timedate_to_epochal(pd)
         else:
           report_ts = 0
         returnable.update({'name': name, 'a_uids': a_uids,
@@ -62,81 +63,53 @@ class GetReportSurvey(EpiwebHandler):
 
   def read(self, request, language=None):
     returnable = self.returnable.copy()
-    # Ignore language for now
+    # TODO Ignore language for now
     ss = Survey.objects.all()
     most_recently_added_survey = ss[len(ss)-1]
     xml = xmlify_spec(most_recently_added_survey.specification)
-    print xml
     returnable.update({'survey': xml})
     return returnable
 
 class GetImage(EpiwebHandler):
-  """Takes type:int and uid:string
-  Returns image:string of png encoded base64
+  """Takes type:int and uid:string. Returns image:string of png encoded base64
   """
   def read(self, request, type=None, uid=None):
     returnable = self.returnable.copy()
-    returnable.update({'dummy': 42})
+    print 'tu', type, uid
+    if type:
+      returnable.update({'type': type})
+      if uid:
+        sus = SurveyUser.objects.filter(global_id=uid)
+        if sus:
+          # TODO Put a real pic here!
+          fd = open('src/epiweb/apps/survey/api/homer.png', 'r')
+          raw = fd.read()
+          enc = b64encode(raw)
+          returnable.update({'image': enc})
+        else:
+          returnable.update({'status': 2,
+                             'error_message': "uid '%s' not found" % uid})
+      else:
+        returnable.update({'status': 1,
+                           'error_message': 'uid required'})
+    else:
+      returnable.update({'status': 3,
+                         'error_message': 'type required'})
     return returnable
 
 class Report(EpiwebHandler):
+  """Post a report of completed surveys.
   """
-  {
-  "prot_v"      : <<string>>,
-  "serv"        : <<int>>,
-  "uid"         : <<string>>,
-  "reports" [{ "uid"           : <<string>>,
-               "surv_v"        : <<string>>,
-               "ts"            : <<long>>,
-               "data"  [{ "id"        : <<int>>,
-                          "value"     : [<<<string>>]
-                       }]
-            }]
-       }
-"""
   allowed_methods = ('POST',)
-  fields =('prot_v', 'serv', 'uid',
-           'reports', ('uid', 'surv_v', 'ts', 'data', ('id', 'value')))
 
   def create(self, request):
-    print 'POSTting'
-    print 1, request.POST
-    print 2, request.content_type
-    print 3, dir(request)
-    print 4, dir(request.POST)
-    print 5, request.POST.keys(), len(request.POST.keys())
-    print 'rpd', request.raw_post_data
-    # print request.POST.data
-    # print help(request.parse_file_upload)
-
-    if request.content_type:
-      data = request.data
-      print data
-#        print 'dsm', data, self.model
-
-#        em = self.model(title=data['title'], content=data['content'])
-#        em.save()
-#
-#        for comment in data['comments']:
-#            Comment(parent=em, content=comment['content']).save()
-
-      returnable = self.returnable.copy()
-      returnable.update({'dummy': 'No statistics currently available'})
-      return returnable
-    else:
-        super(GetStatistic, self).create(request)
-
-    if request.content_type == 'application/json':
-      print 'got json, json parse this', request.raw_post_data
-    elif not request.content_type:
-      print 'got parameter list, parse from request.POST', request.POST
-    print 'done'
-
-    # self.check_args()
     returnable = self.returnable.copy()
-    returnable.update({'dummy': 'No statistics currently available'})
+    if request.content_type:
+      returnable.update(report_survey(request.data))
+    else:
+        returnable.update({'dummy': 'No statistics currently available'})
+        # super(Report, self).create(request)
     return returnable
-
 
 class GetLanguage(EpiwebHandler):
   """list of languages supported by the national IMS Server.
@@ -149,7 +122,7 @@ class GetLanguage(EpiwebHandler):
             'French': 6,
             'Spanish': 7,
             'Swedish': 8 }
-  # Hard code the langs for the time being.
+  # TODO Hard code the langs for the time being.
   supported_langs = ['Italian', 'Dutch']
   supported_lang_codes = [langs[c] for c in supported_langs]
 
