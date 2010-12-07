@@ -10,7 +10,7 @@ from epiweb.apps.survey import signals
 from django.conf import settings
 from epidb_client import EpiDBClient, ResponseError, InvalidResponseError
 
-import datetime
+from datetime import datetime
 
 from .survey import Specification, parse_specification
 
