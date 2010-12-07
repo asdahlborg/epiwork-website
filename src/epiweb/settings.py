@@ -33,7 +33,7 @@ LANGUAGE_CODE = 'nl'
 # For checking postcodes etc.
 # Use ISO3166 two-letter country code
 # See http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
-# Avaliable: it, nl, uk
+# Avaliable: be, it, nl, uk, pt, se
 COUNTRY = 'nl'
 
 # If you set this to False, Django will make some optimizations so as not
@@ -44,6 +44,9 @@ USE_L10N = True
 LANGUAGES = (
    ('en', 'English'),
    ('nl', 'Dutch'),
+   ('it', 'Italian'),
+   ('se', 'Swedish'),
+   ('pt', 'Portuguese'),
 )
 
 # Absolute path to the directory that holds media.

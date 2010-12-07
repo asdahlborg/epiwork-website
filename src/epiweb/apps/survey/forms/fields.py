@@ -4,13 +4,15 @@ import re
 from django import forms
 from django.utils.safestring import mark_safe
 from django.conf import settings
-# from django.contrib.localflavor.be.forms import BEPostalCodeField
 from django.contrib.localflavor.it.forms import ITZipCodeField
 from django.contrib.localflavor.nl.forms import NLZipCodeField
-# from django.contrib.localflavor.pt.forms import PTZipCodeField
-# from django.contrib.localflavor.se.forms import SEPostalCodeField
 from django.contrib.localflavor.uk.forms \
      import UKPostcodeField as fullUKPostcodeField
+
+# Backported from Django version 1.2.2
+from epiweb.apps.survey.forms.localflavor.be.forms import BEPostalCodeField
+from epiweb.apps.survey.forms.localflavor.pt.forms import PTZipCodeField
+from epiweb.apps.survey.forms.localflavor.se.forms import SEPostalCodeField
 
 from .widgets import ( AdviseWidget, MonthYearWidget,
                        DatePickerWidget, DateOrOptionPickerWidget,
@@ -69,11 +71,11 @@ class UKPostcodeField(fullUKPostcodeField):
 
 class PostCodeField(forms.RegexField):
     country_fields = {
-#        'be': BEPostalCodeField,
+        'be': BEPostalCodeField,
         'it': ITZipCodeField,
         'nl': NLZipCodeField,
-#        'pt': PTZipCodeField,
-#        'se': SEPostalCodeField,
+        'pt': PTZipCodeField,
+        'se': SEPostalCodeField,
         'uk': UKPostcodeField,
     }
 
