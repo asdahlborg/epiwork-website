@@ -1,9 +1,8 @@
 from piston.handler import BaseHandler
 from epiweb.apps.survey.models import ( Profile, SurveyUser, Survey, User, epoch)
 from epiweb.apps.survey.times import timedate_to_epochal
-from utils import xmlify_spec, report_survey
+from utils import xmlify_spec, report_survey, code_hash
 from datetime import datetime
-from re import sub
 from base64 import b64encode
 
 class EpiwebHandler(BaseHandler):
@@ -35,11 +34,7 @@ class GetUserProfile(EpiwebHandler):
         u = su.user.all()[0]
         name = u.get_full_name()
         a_uids = [su.global_id for s in SurveyUser.objects.filter(user=u)]
-
-        # 5-digit code is generated from global_id:
-        # divide by 1e5 and pad left with zeros
-        code = '%05d' % (int(sub('-', '', su.global_id), 16) % 1e5)
-
+        code = code_hash(su.global_id)
         pd = su.last_participation_date
         if pd:
           # Report timestamp as in milliseconds since 1970-01-01

@@ -4,6 +4,7 @@ from epiweb.apps.survey.survey import parse_specification
 from epiweb.apps.survey.spec import Question, Branch, Else
 from epiweb.apps.survey.times import epochal_to_timedate
 from inspect import isclass
+from re import sub
 
 def xmlify_spec(spec):
   """Take a survey specificatin and return it as XML."""
@@ -136,3 +137,12 @@ def report_survey(jdata):
           'reporting_user': reporting_user.name,
           'report_items': report_items,
           }
+
+def code_hash(gid, code_length=12):
+  """Take a global_id (a UUID string containing '-' symbols).
+  Hash it to a string of digits of length code_length.
+  """
+  # divide by 10**code_length and pad left with zeros
+  code_format = ('%%0%dd' % code_length)
+  gid_int = int(sub('-', '', gid), 16)
+  return code_format % (gid_int % 10**code_length)
