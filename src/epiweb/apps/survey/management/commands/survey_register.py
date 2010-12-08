@@ -5,9 +5,12 @@ class Command(BaseCommand):
     help = 'Register a survey specification.'
     args = '<survey_specification_file>'
     option_list = BaseCommand.option_list + (
-        make_option('--replace', action='store_true',
+        make_option('-r', '--replace', action='store_true',
                     dest='replace', default=False,
                     help='Replace existing survey.'),
+        make_option('-e', '--encoding', action='store', type='string',
+                    dest='encoding', default='utf-8',
+                    help='Use encoding to read survey file.'),
     )
 
     def handle(self, *args, **options):
@@ -21,9 +24,10 @@ class Command(BaseCommand):
 
         verbosity = int(options.get('verbosity', 1))
         replace = options.get('replace', False)
+        encoding = options.get('encoding', 'utf-8')
 
         try:
-            content = codecs.open(fname, 'r', 'utf-8').read()
+            content = codecs.open(fname, 'r', encoding).read()
         except IOError, e:
             raise CommandError('Error while reading %s: %s' % (fname, e))
 
