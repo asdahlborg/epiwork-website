@@ -5,7 +5,7 @@ Swedish specific Form helpers
 import re
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.localflavor.se.utils import (id_number_checksum,
+from epiweb.apps.survey.forms.localflavor.se.utils import (id_number_checksum,
     validate_id_birthday, format_personal_id_number, valid_organisation,
     format_organisation_number)
 
