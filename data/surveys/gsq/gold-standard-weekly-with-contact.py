@@ -1,8 +1,9 @@
 # Weekly evaluation of disease symptoms including contact questions.
 
 class WeeklyQ1(d.Question):
-  question = """Did you have one or more of the following symptoms since your
-  last visit? (Tick all that apply)"""
+  question = """Did you have one or more of the following symptoms
+  {% if LAST_SURVEY %}since your last visit{% else %}during the last
+  week{% endif %}? (Tick all that apply)"""
   type = 'options-multiple'
   options = ((1, 'Fever'),
              (17, 'Chills'),
@@ -278,7 +279,7 @@ class ContactQ4(d.Question):
              (4, '>4 hours'),)
   
 class Survey(d.Survey):
-  id = 'gold-standard-weekly-with-contact-1.5'
+  id = 'gold-standard-weekly-with-contact-1.6'
 
   # Propositions depending on the previous response.
   

@@ -165,10 +165,13 @@ REMINDER_HTML = False
 EPIDB_API_KEY = '0000000000000000000000000000000000000000'
 EPIDB_SERVER = 'http://127.0.0.1:8080/'
 
-SURVEY_ID = 'gold-standard-weekly-with-contact-1.4'
+SURVEY_ID = 'gold-standard-weekly-with-contact-1.6'
 SURVEY_PROFILE_ID = 'gold-standard-intake-1.4'
+EXTRA_SURVEY = False
 
-MOBILE_INTERFACE_ACTIVE = True
+MOBILE_INTERFACE_ACTIVE = False
+
+STORE_RESPONSES_LOCALLY = False
 
 import socket
 _hostname = socket.gethostname()
@@ -179,3 +182,6 @@ elif _hostname in ['rekenwolk.nl']:
     EPIDB_SERVER = 'http://178.18.82.138:8080/'
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 25
+    MOBILE_INTERFACE_ACTIVE = True
+    STORE_RESPONSES_LOCALLY = True
+    EXTRA_SURVEY = 'contact-survey-1.0'
