@@ -16,6 +16,8 @@ Survey.prototype = {
         var len = this.questions.length;
         this.fields = {};
         this.changed = {};
+        this.parent_field = {};
+        this.children_field = {};
         for (var i=0; i<len; i++) {
             var id = this.questions[i];
             var field = this.get_fields(id);
@@ -58,8 +60,14 @@ Survey.prototype = {
             fields = [];
             for (var i=0; i<len; i++) {
                 var item = $(items[i]);
-                if (item.attr('name').match('^'+id+'_') != null) {
+                var name = item.attr('name');
+                if (name.match('^'+id+'_') != null) {
                     fields.push(item[0]);
+                    this.parent_field[name] = id;
+                    if (!(id in this.children_field)) {
+                        this.children_field[id] = [];
+                    }
+                    this.children_field[id].push(item);
                 }
             }
             fields = $(fields);
@@ -67,7 +75,11 @@ Survey.prototype = {
         return fields;
     },
     on_change: function(target) {
-        var id = target.attr('name');
+        var name = target.attr('name');
+        var id = this.parent_field[name];
+        if (id == undefined) {
+            id = name;
+        }
 
         // set as changed
         this.changed[id] = true;
