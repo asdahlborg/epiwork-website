@@ -210,11 +210,12 @@ class TableOfSelectsWidget(forms.MultiWidget):
             output.append(s)
 
         a('<table border="1" class="table-of-selects">')
-        a('<tr align=middle><th>')
+        a('<tr>')
         for column in self.columns:
-            a('<th>' + column)
+            a('<th>%s</th>' % column)
+        a('</tr>')
         for i, row in enumerate(self.rows):
-            a('<tr align=right><th>' + row)
+            a('<tr style="text-align:right"><th>%s</th>' % row)
             for j, column in enumerate(self.columns):
                 index = len(self.rows) * i + j
                 widget_name = name + '_%d' % index
@@ -226,7 +227,8 @@ class TableOfSelectsWidget(forms.MultiWidget):
                     final_attrs = dict(final_attrs, id='%s_%d' % (id_, index))
                 widget = self.widgets[index]
                 wr = widget.render(widget_name, widget_value, final_attrs)
-                a('<td>' + wr)
+                a('<td>%s</td>' % wr)
+            a('</tr>')
         a('</table>')
 
         return mark_safe(self.format_output(output))
