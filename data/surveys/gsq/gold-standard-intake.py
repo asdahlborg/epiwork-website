@@ -121,7 +121,8 @@ class IntakeQ10(d.Question):
 class IntakeQ10b(d.Question):
   question = """When did you receive a flu vaccine this season ({{ SEASON }})?
   Date of the seasonal flu vaccination?"""
-  type = 'date'
+  type = 'date-or-option'
+  text = "I don't know/don't remember"
 
 class IntakeQ10c(d.Question):
   question = """What were your reasons for getting a seasonal influenza
@@ -250,7 +251,7 @@ class IntakeQ17(d.Question):
              (4, 'Yes, one ore more other animals'), )
 
 class Survey(d.Survey):
-  id = 'gold-standard-intake-1.4'
+  id = 'gold-standard-intake-1.5'
 
   # Local propositions
   children_under_4 = ~d.EqualIndex(IntakeQ6, 0, 0)
@@ -271,7 +272,6 @@ class Survey(d.Survey):
               IntakeQ7,
               IntakeQ7b,
               IntakeQ8,
-              d.If(had_swine_flu_vaccine_last_winter) (IntakeQ8b, IntakeQ8c),
               IntakeQ9,
               IntakeQ10,
               d.If(had_seasonal_flu_vaccine) (IntakeQ10b, IntakeQ10c),

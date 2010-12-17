@@ -166,7 +166,7 @@ EPIDB_API_KEY = '0000000000000000000000000000000000000000'
 EPIDB_SERVER = 'http://127.0.0.1:8080/'
 
 SURVEY_ID = 'gold-standard-weekly-with-contact-1.6'
-SURVEY_PROFILE_ID = 'gold-standard-intake-1.4'
+SURVEY_PROFILE_ID = 'gold-standard-intake-1.5'
 EXTRA_SURVEY = False
 
 MOBILE_INTERFACE_ACTIVE = False
