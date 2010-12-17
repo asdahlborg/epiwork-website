@@ -175,13 +175,14 @@ class IntakeQ12(d.Question):
   conditions?  (Tick all that apply)"""
   type = 'options-multiple'
   blank = True
-  options = ((0, 'Yes, I am taking medication because of Asthma'),
-             (1, 'Yes, I am taking medication because of Diabetes'),
-             (2, """Yes, I am taking medication because of Lung disorder (COPD,
+  options = ((0, 'No'),
+             (1, 'Yes, I am taking medication because of Asthma'),
+             (2, 'Yes, I am taking medication because of Diabetes'),
+             (3, """Yes, I am taking medication because of Lung disorder (COPD,
              emphysema, ...)"""),
-             (3, 'Yes, I am taking medication because of a Heart disorder'),
-             (4, 'Yes, I am taking medication because of a Kidney disorder'),
-             (5, """Yes, I am taking medication because of an immunocompromised
+             (4, 'Yes, I am taking medication because of a Heart disorder'),
+             (5, 'Yes, I am taking medication because of a Kidney disorder'),
+             (6, """Yes, I am taking medication because of an immunocompromised
              condition (e.g. splenectomy, organ transplant, aquired immune
              deficiency, cancer treatment)"""), )
   
@@ -190,7 +191,7 @@ class IntakeQ13(d.Question):
   type = 'options-single'
   options = ((0, 'Yes'),
              (1, 'No'),
-             (2, "I don't know"), )
+             (2, "I don't know/I prefer not to answer"), )
 
 class IntakeQ13b(d.Question):
   question = "In which trimester of the pregnancy are you?"
@@ -207,18 +208,19 @@ class IntakeQ14(d.Question):
              (1, 'Yes, less than 10 cigarettes a day'),
              (2, 'Yes, 10 cigarettes or more a day'),
              (3, 'Yes, but exclusively pipe or cigars'),
-             (4, "I don't know"), )
+             (4, "I don't know/I prefer not to answer"), )
   
 class IntakeQ15(d.Question):
   question = """Do you have one of the following allergies that can cause
   respiratory symptoms? (Multiple answers possible)"""
   type = 'options-multiple'
   blank = True
-  options = ((0, 'Pollen (hay fever)'),
-             (1, 'House dust mite'),
-             (2, 'Domestic animals/pets'),
-             (3, """Other allergies that cause respiratory symptoms (e.g.
-             sneezing, runny eyes)"""), )
+  options = ((1, 'Pollen (hay fever)'),
+             (2, 'House dust mite'),
+             (3, 'Domestic animals/pets'),
+             (4, """Other allergies that cause respiratory symptoms (e.g.
+             sneezing, runny eyes)"""),
+             (0, 'None of the above'),)
 
 class IntakeQ18(d.Question):
   question = """On average over the past 5 years, how many times per year did
