@@ -229,7 +229,7 @@ Survey.prototype = {
         }
         res = $.unique(res);
         return res;
-    },
+    }
 }
 
 this.Survey = Survey;

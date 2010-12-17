@@ -420,11 +420,10 @@ class JavascriptBuilder(object):
         for id in ids:
             profiles[id] = values[id]
 
-        conditions = ['''{''']
+        conditions = []
         for key, condition in self.spec.get_conditions().items():
-            conditions.append('''"%s": %s,''' % (key, condition.js))
-        conditions.append('''}''')
-        conditions = ''.join(conditions)
+            conditions.append('''"%s": %s''' % (key, condition.js))
+        conditions = '{ %s }' % ', '.join(conditions)
 
         questions = []
         for question in self.spec.questions:
