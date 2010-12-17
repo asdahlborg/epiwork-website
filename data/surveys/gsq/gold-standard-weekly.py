@@ -224,8 +224,7 @@ class ContactQ1(d.Question):
              '19-44 years',
              '45-64 years',
              '65+ years',]
-  choices = ((99, '-'),
-             ( 0,  '0'),
+  choices = (( 0,  '0'),
              ( 1,  '1'),
              ( 2,  '2'),
              ( 3,  '3'),
@@ -246,8 +245,7 @@ class ContactQ2(d.Question):
              '19-44 years',
              '45-64 years',
              '65+ years',]
-  choices = ((99, '-'),
-             ( 0,  '0'),
+  choices = (( 0,  '0'),
              ( 1,  '1'),
              ( 2,  '2'),
              ( 3,  '3'),
@@ -281,7 +279,7 @@ class ContactQ4(d.Question):
              (4, '>4 hours'),)
   
 class Survey(d.Survey):
-  id = 'gold-standard-weekly-1.5'
+  id = 'gold-standard-weekly-1.6'
 
   # Propositions depending on the previous response.
   
