@@ -15,11 +15,12 @@ Survey.prototype = {
         var self = this;
         var len = this.questions.length;
         this.fields = {};
+        this.changed = {};
         for (var i=0; i<len; i++) {
             var id = this.questions[i];
             var field = this.get_fields(id);
             this.fields[id] = field;
-            field.data('modified', false);
+            this.changed[id] = false;
             field.change(function() {
                 return self.on_change($(this));
             });
@@ -68,8 +69,8 @@ Survey.prototype = {
     on_change: function(target) {
         var id = target.attr('name');
 
-        // set as modified
-        target.data('modified', true);
+        // set as changed
+        this.changed[id] = true;
 
         // update visibility of other questions
         var modified = this.modified[id];
@@ -111,7 +112,7 @@ Survey.prototype = {
     update_prefill: function(id) {
         var field = this.fields[id];
         var current = field.fieldValue();
-        if (!field.data('modified')) {
+        if (!this.changed[id]) {
             var cond = this.prefills[id];
             if (cond.evaluate(this)) {
                 // form value setting is not supported by jquery.form :(
