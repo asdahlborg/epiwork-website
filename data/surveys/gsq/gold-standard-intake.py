@@ -40,8 +40,7 @@ class IntakeQ6(d.Question):
              '19-44 years',
              '45-64 years',
              '65+ years']
-  choices = ((99, '-'),
-             ( 0,  '0'),
+  choices = (( 0,  '0'),
              ( 1,  '1'),
              ( 2,  '2'),
              ( 3,  '3'),
