@@ -191,8 +191,20 @@ Survey.prototype = {
     },
     get_question: function(id) {
         var field = this.fields[id];
-        var value = field.fieldValue();
-        value.sort();
+
+        if (id in this.children_field) {
+            var value = [];
+            var fields = this.children_field[id];
+            for (var i=0; i<fields.length; i++) {
+                var f = $(fields[i]);
+                var v = f.fieldValue();
+                value.push(v);
+            }
+        }
+        else {
+            var value = field.fieldValue();
+        }
+
         return value;
     },
     get_affecting_questions: function(condition) {
