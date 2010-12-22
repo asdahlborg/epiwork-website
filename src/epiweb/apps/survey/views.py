@@ -81,11 +81,16 @@ def index(request):
     if request.method == 'POST':
         form = builder.get_form(context, request.POST)
         if form.is_valid():
-            participation = utils.add_survey_participation(survey_user, spec.survey.id)
+            participation = utils.add_survey_participation(survey_user,
+                                                           spec.survey.id)
 
             utils.add_response_queue(participation, spec, form.cleaned_data)
             data = utils.format_response_data(spec, form.cleaned_data)
             utils.save_last_response(survey_user, participation, data)
+            utils.save_response_locally(survey_user.name,
+                                        spec.survey.id,
+                                        data,
+                                        participation.date)
 
             return HttpResponseRedirect(reverse(thanks))
         else:
@@ -123,6 +128,10 @@ def profile_index(request):
             utils.add_profile_queue(survey_user, spec, form.cleaned_data)
             data = utils.format_profile_data(spec, form.cleaned_data)
             utils.save_profile(survey_user, spec.survey.id, data)
+            utils.save_response_locally(survey_user.name,
+                                        spec.survey.id,
+                                        data,
+                                        None)
 
             next = request.GET.get('next', None)
             if next is not None:

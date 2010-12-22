@@ -10,7 +10,7 @@ from epiweb.apps.survey import signals
 from django.conf import settings
 from epidb_client import EpiDBClient, ResponseError, InvalidResponseError
 
-from datetime import datetime
+from datetime import datetime, date
 
 from .survey import Specification, parse_specification
 
@@ -19,7 +19,7 @@ try:
 except ImportError:
     import pickle
 
-import simplejson as json
+import json
 
 _specifications = {}
 
@@ -189,6 +189,29 @@ def save_last_response(survey_user, participation, data):
     response.participation = participation
     response.data = pickle.dumps(data)
     response.save()
+
+class DateEncoder(json.JSONEncoder):
+    """Encode dates and datetimes as lists."""
+    def default(self, o):
+        if isinstance(o, datetime):
+            return [o.year, o.month, o.day, o.minute, o.second, o.microsecond]
+        elif isinstance(o, date):
+            return [o.year, o.month, o.day]
+        return json.JSONEncoder.default(self, o)
+
+def save_response_locally(user_id, survey_id, answers, date):
+    """Save the response to the LocalResponse table."""
+    if settings.STORE_RESPONSES_LOCALLY:
+        if not date:
+            from datetime import datetime
+            date = datetime.now()
+        lr = models.LocalResponse(date = date,
+                                  user_id = user_id,
+                                  survey_id = survey_id,
+                                  answers = json.dumps(answers, cls=DateEncoder))
+        lr.save()
+    else:
+      pass
 
 def flush_response_queue():
     client = EpiDBClient(settings.EPIDB_API_KEY)

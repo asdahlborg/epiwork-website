@@ -84,6 +84,12 @@ class ProfileSendQueue(models.Model):
     def set_sent(self, epidb_id):
         self.delete()
 
+class LocalResponse(models.Model):
+    date = models.DateTimeField()
+    user_id = models.CharField(max_length=36)
+    survey_id = models.CharField(max_length=50)
+    answers = models.TextField()
+
 class Profile(models.Model):
     user = models.ForeignKey(SurveyUser, unique=True)
     created = models.DateTimeField(null=True, default=None)
