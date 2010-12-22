@@ -3,7 +3,7 @@
 
 import re
 
-global_id = 'b9e8353b-e113-4b03-856f-c118e0b70666'
+global_id = u'5d553c8f-8621-413f-89a1-9f6887f9747d'
 
 gets = [ 'GetUserProfile',
          'GetUserProfile/bogus_uid',
@@ -19,11 +19,11 @@ gets = [ 'GetUserProfile',
          'GetLanguage',
          'GetLanguage/bogus_arg',
  
-         'GetStatsHeaders',
-         'GetStatsHeaders/bogus_language',
+         # 'GetStatsHeaders',
+         # 'GetStatsHeaders/bogus_language',
  
-         'GetStatistic',
-         'GetStatistic/bogus_uid/bogus_id/bogus_lang',
+         # 'GetStatistic',
+         # 'GetStatistic/bogus_uid/bogus_id/bogus_lang',
          ]
 
 puts = [ 'Report',
@@ -38,7 +38,7 @@ ema_user = 'ema'
 ema_password = 'emapass'
 
 base = 'http://localhost:8000/ema/'
-# base = 'http://178.18.82.138:8000/ema/v1/'
+base = 'http://178.18.82.138:8000/ema/'
 
 base = re.sub('//', '//%s:%s@' % (ema_user, ema_password), base)
 
