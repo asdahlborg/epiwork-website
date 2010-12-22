@@ -185,3 +185,5 @@ elif _hostname in ['rekenwolk.nl']:
     MOBILE_INTERFACE_ACTIVE = True
     STORE_RESPONSES_LOCALLY = True
     EXTRA_SURVEY = 'contact-survey-1.0'
+elif _hostname in ['via']:
+    MOBILE_INTERFACE_ACTIVE = True
