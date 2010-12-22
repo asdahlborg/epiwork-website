@@ -256,7 +256,7 @@ class Survey(d.Survey):
   # Local propositions
   children_under_4 = ~d.EqualIndex(IntakeQ6, 0, 0)
   female = d.Equal(IntakeQ1, 1)
-  aged_15_to_50 = True
+  aged_15_to_50 = female | ~ female # True
   # aged_15_to_50 = 15 < (year.now - IntakeQ2.year) < 50
   pregnant = female & d.Equal(IntakeQ13, 0)
   had_seasonal_flu_vaccine = d.Equal(IntakeQ10, 0)
