@@ -1,4 +1,4 @@
-<form method="post" id="survey">
+<form method="post">
     {% for field in form.visible_fields %}
     {% if field.errors %}
     <div class="question error" id="q_{{ field.name }}">
