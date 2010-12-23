@@ -1,4 +1,5 @@
 from piston.handler import BaseHandler
+from piston.utils import rc
 from epiweb.apps.survey.models import ( Profile, SurveyUser, Survey, User, epoch)
 from epiweb.apps.survey.times import timedate_to_epochal
 from utils import xmlify_spec, report_survey, code_hash
@@ -89,7 +90,7 @@ class GetImage(EpiwebHandler):
                            'error_message': 'uid required'})
     else:
       returnable.update({'status': 3,
-                         'error_message': 'type required'})
+                         'error_message': 'image type required'})
     return returnable
 
 class Report(EpiwebHandler):
@@ -100,11 +101,14 @@ class Report(EpiwebHandler):
   def create(self, request):
     returnable = self.returnable.copy()
     if request.content_type:
-      returnable.update(report_survey(request.data))
+      reported = report_survey(request.data)
+      if reported['status'] == 0:
+        r = rc.CREATED
+        r.write(reported)
+        return r
     else:
-        returnable.update({'dummy': 'No statistics currently available'})
-        # super(Report, self).create(request)
-    return returnable
+      returnable.update({'status': 5, 'error_message': 'incorrect content_type'})
+      return returnable
 
 class GetLanguage(EpiwebHandler):
   """list of languages supported by the national IMS Server.

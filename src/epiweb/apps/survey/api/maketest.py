@@ -3,7 +3,7 @@
 
 import re
 
-global_id = u'5d553c8f-8621-413f-89a1-9f6887f9747d'
+global_id = u'fd5b3479-97da-43b5-87b1-d06b457e87f4'
 
 gets = [ 'GetUserProfile',
          'GetUserProfile/bogus_uid',
@@ -110,6 +110,6 @@ def ww(s):
   w(s)
 
 w('# PUTs')
-ww('e curl $post $opts --data \"$data\" ${base}Report')
+ww('curl $post $opts --data \"$data\" ${base}Report')
 
 fd.close()

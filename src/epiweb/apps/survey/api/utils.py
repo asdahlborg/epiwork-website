@@ -4,6 +4,7 @@ from epiweb.apps.survey.survey import parse_specification
 from epiweb.apps.survey.spec import Question, Branch, Else
 from epiweb.apps.survey.times import epochal_to_timedate
 from inspect import isclass
+from epiweb.apps.survey import utils
 from re import sub
 
 def xmlify_spec(spec):
@@ -46,41 +47,51 @@ def xmlify_spec(spec):
   xml = '<?xml version="1.0"?>\n' + t('survey', xs(p.rules))
   return xml
 
+class JSONKeyTypeError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
 def check_keys(dir, key_types):
   """key_types is a list of pairs of keys and types. Each key should exist in
   dir and its value shoud be of the corresponding type.
   """
   for key, key_type in key_types:
-    if not (key in dir and isinstance(dir[key], key_type)):
-      return {'status': 1,
-              'error': 'key %s should be of type %s' % (key, key_type)}
+    if not (key in dir and (key_type == 'any' or isinstance(dir[key], key_type))):
+      raise JSONKeyTypeError({'status': 1,
+                              'error': "key '%s' is %s,should be %s" % \
+                              (key, type(dir[key]), repr(key_type))})
 
 def report_data(report):
   """Extract the data corresponding to the fields of report needed to write the
   report to the database.
   """
+
   # Receive timestamp as in milliseconds since 1970-01-01
   time_stamp = epochal_to_timedate(report['ts'])
 
-  uid = report['uid']
-  survey_user = SurveyUser.objects.get(global_id=uid)
-  if not survey_user:
+  data = report['data']
+
+  try:
+    uid = report['uid']
+    survey_user = SurveyUser.objects.get(global_id=uid)
+  except:
     return  {'status': 2, 'error': 'user with global_id %s not known' % uid}
 
-  surv_v = report['surv_v']
-  survey_id = Survey.objects.get(survey_id=surv_v)
-  if not survey_id:
+  try:
+    surv_v = report['surv_v']
+    survey = Survey.objects.get(survey_id=surv_v)
+    spec = load_specification(surv_v)
+  except:
     return  {'status': 3, 'error': 'survey with id %s not known' % surv_v}
-  spec = load_specification(surv_v)
   
-  # Build form.cleaned_data
-  
-  # survey_id.specification now contains the source text of the survey file.
+  participation = utils.add_survey_participation(survey_user, surv_v)
+  utils.add_response_queue(participation, spec, data)
+  utils.save_last_response(survey_user, participation, data)
+  utils.save_response_locally(survey_user.name, surv_v, data, time_stamp)
 
-  return { 'survey_user': survey_user.name,
-           'time_stamp': time_stamp,
-           'survey_id': survey_id.survey_id,
-           'spec': spec.questions, }
+  return { 'status': 0, 'prot_v': 0, 'serv' : 0}
 
 def report_survey(jdata):
   """
@@ -91,49 +102,48 @@ def report_survey(jdata):
   "reports" [{ "uid"           : <<string>>,
                "surv_v"        : <<string>>,
                "ts"            : <<long>>,
-               "data"  [{ "id"        : <<int>>,
-                          "value"     : [<<<string>>]
+               "data"  [{ "id"        : <<string>>,
+                          "value"     : depends on question type
                        }]
             }]
        }
   """
-  
-  # Check presence and types of top-level keys
-  check_keys(jdata, [ ('prot_v', str), ('serv', int),
-                      ('uid', str), ('reports', list) ])
 
-  # Check presence and types of reports' keys
-  for report in jdata['reports']:
-    check_keys(report, [ ('uid', str), ('surv_v', str),
-                         ('ts', long), ('data', list) ])
+  try:
+    # Check presence and types of top-level keys
+    check_keys(jdata, [ ('prot_v', str), ('serv', int),
+                        ('uid', str), ('reports', list) ])
 
-    for iv_data in report['data']:
-      check_keys(iv_data, [ ('id', int), ('value', list) ])
+    # Check presence and types of reports' keys
+    for report in jdata['reports']:
+      check_keys(report, [ ('uid', str), ('surv_v', str),
+                           ('ts', long), ('data', list) ])
+      for iv_data in report['data']:
+        check_keys(iv_data, [ ('id', str), ('value', 'any') ])
 
-  # Check the types of all question replies.
-  for id_value in report['data']:
-    id = id_value['id']
-    value = id_value['value']
-    # TODO Check id is a question in survey
-    # TODO Check value is a valid reply to question
+    # Check the types of all question replies.
+    for id_value in report['data']:
+      id = id_value['id']
+      value = id_value['value']
+      # TODO Check id is a question in survey
+      # TODO Check value is a valid reply to question
+  except JSONKeyTypeError as e:
+    return e.value
 
   # Check reporting uid exists
   uid = jdata['uid']
-  reporting_user = SurveyUser.objects.get(global_id=uid)
-  if not reporting_user:
+  try:
+    reporting_user = SurveyUser.objects.get(global_id=uid)
+  except DoesNotExist:
     return  {'status': 2, 'error': 'user with global_id %s not known' % uid}
-
 
   # Make field entries
   report_items = [ report_data(report) for report in jdata['reports']]
 
-#  participation = utils.add_survey_participation(survey_user, spec.survey.id)
-#
-#  utils.add_response_queue(participation, spec, form.cleaned_data)
-#  data = utils.format_response_data(spec, form.cleaned_data)
-#  utils.save_last_response(survey_user, participation, data)
+  agg_stat = reduce(lambda agg_stat, report: agg_stat + report['status'],
+                    report_items, 0)
 
-  return {'status': 'completed',
+  return {'status': agg_stat,
           'reporting_user': reporting_user.name,
           'report_items': report_items,
           }

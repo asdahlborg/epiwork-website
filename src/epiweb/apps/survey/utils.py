@@ -60,14 +60,14 @@ def _create_answers(spec, cleaned_data):
 
     for question in spec.questions:
         if not question.private:
-            data[question.id] = _format_data(question.type, 
-                                             cleaned_data[question.id])
+            if question.id in data and question.id in cleaned_data:
+                data[question.id] = _format_data(question.type,
+                                                 cleaned_data[question.id])
 
     return data
 
 def add_survey_participation(survey_user, survey_id, id=None):
     survey = models.Survey.objects.get(survey_id=survey_id)
-
     participation = models.Participation()
     participation.user = survey_user
     participation.survey = survey

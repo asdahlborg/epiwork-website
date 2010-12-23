@@ -27,7 +27,7 @@ resources = [ [GetUserProfile, 'uid'],
               [GetStatistic, 'uid', 'id', 'lang'],
               ]
 
-def revrest(l):
+def reverse_rest(l):
   "Take a list of list and reverse the 'rest' (cdr) of each list"
   def rev(l):
     l.reverse()
@@ -51,12 +51,12 @@ q = [url(r'^%s' % stringify(s[0]) +
          Resource(handler=s[0], **ad)
          #, {'emitter_format': 'json'}
          )
-     for s in revrest(resources)]
+     for s in reverse_rest(resources)]
 
 r = [url(r'^%s' % stringify(s[0]), Resource(handler=s[0], **ad)
          #, {'emitter_format': 'json'}
          )
-     for s in revrest(resources)]
+     for s in reverse_rest(resources)]
 
 p = q + r
 p.insert(0, '')
