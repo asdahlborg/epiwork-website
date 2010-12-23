@@ -38,7 +38,7 @@ ema_user = 'ema'
 ema_password = 'emapass'
 
 base = 'http://localhost:8000/ema/'
-base = 'http://178.18.82.138:8000/ema/'
+#base = 'http://178.18.82.138:8000/ema/'
 
 base = re.sub('//', '//%s:%s@' % (ema_user, ema_password), base)
 

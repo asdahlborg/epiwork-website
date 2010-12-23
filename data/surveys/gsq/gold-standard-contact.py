@@ -64,7 +64,8 @@ class ContactQ4(d.Question):
   
 class Survey(d.Survey):
   id = 'contact-survey-1.0'
-
+  title = 'Contact survey'
+  
   rules = ( ContactQ1,
             ContactQ2,
             ContactQ3,

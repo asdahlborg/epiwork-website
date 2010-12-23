@@ -2,6 +2,7 @@ import urllib2
 import errno
 from django import forms
 from django.forms.util import ErrorList
+from django.contrib.auth.models import User
 
 from epiweb.apps.survey import definitions as d
 from epiweb.apps.survey import models
@@ -78,6 +79,19 @@ def add_survey_participation(survey_user, survey_id, id=None):
     survey_user.last_participation = participation
     survey_user.last_participation_date = participation.date
     survey_user.save()
+
+    return participation
+
+def add_extra_survey_participation(survey_user, survey_id, id=None):
+    survey = models.Survey.objects.get(survey_id=survey_id)
+
+    participation = models.Participation()
+    participation.user = survey_user
+    participation.survey = survey
+    participation.epidb_id = id
+    participation.previous_participation = None
+    participation.previous_participation_date = None
+    participation.save()
 
     return participation
 
@@ -186,6 +200,14 @@ def save_last_response(survey_user, participation, data):
         response = models.LastResponse()
         response.user = survey_user
 
+    response.participation = participation
+    response.data = pickle.dumps(data)
+    response.save()
+
+def save_extra_response(survey_user, participation, data):
+    response = models.ExtraResponse()
+    response.user_id = survey_user.user.all()[0].id
+    response.user = survey_user
     response.participation = participation
     response.data = pickle.dumps(data)
     response.save()

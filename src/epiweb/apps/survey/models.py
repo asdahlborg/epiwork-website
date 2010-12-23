@@ -39,6 +39,7 @@ class SurveyUser(models.Model):
 
 class Survey(models.Model):
     survey_id = models.CharField(max_length=50, unique=True)
+    title = models.TextField('')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=200)
@@ -111,6 +112,11 @@ class Profile(models.Model):
 
 class LastResponse(models.Model):
     user = models.ForeignKey(SurveyUser, unique=True)
+    participation = models.ForeignKey(Participation, null=True, default=None)
+    data = models.TextField(null=True, blank=True, default=None)
+
+class ExtraResponse(models.Model):
+    user = models.ForeignKey(SurveyUser)
     participation = models.ForeignKey(Participation, null=True, default=None)
     data = models.TextField(null=True, blank=True, default=None)
 

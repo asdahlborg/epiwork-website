@@ -50,6 +50,8 @@ class Command(BaseCommand):
             data = models.Survey()
 
         data.survey_id = survey.id
+        if hasattr(survey, 'title'):
+            data.title = survey.title
         data.specification = content
         data.save()
 

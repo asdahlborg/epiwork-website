@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
+    (r'^extra-survey/', include('epiweb.apps.survey.extra-urls')),
     (r'^survey/', include('epiweb.apps.survey.urls')),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),
                                             'template_name': 'news'}),
