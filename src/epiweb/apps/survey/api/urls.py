@@ -1,7 +1,8 @@
 from piston.resource import Resource
 from piston.authentication import HttpBasicAuthentication
 from django.conf.urls.defaults import *
-from epiweb.apps.survey.api.handlers import ( GetUserProfile,
+from epiweb.apps.survey.api.handlers import ( GetGlobalIDbyActivationCode,
+                                              GetUserProfile,
                                               GetReportSurvey,
                                               GetImage,
                                               Report,
@@ -18,7 +19,8 @@ ad = { 'authentication': auth }
 
 # Perform some introspection on the handlers in order to build the urlpatterns.
 
-resources = [ [GetUserProfile, 'uid'],
+resources = [ [GetGlobalIDbyActivationCode, 'activation_code'],
+              [GetUserProfile, 'uid'],
               [GetReportSurvey, 'language'],
               [GetImage, 'type', 'uid'],
               [Report, 'uid', 'reports'],

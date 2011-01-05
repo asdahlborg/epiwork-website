@@ -3,9 +3,14 @@
 
 import re
 
-global_id = u'fd5b3479-97da-43b5-87b1-d06b457e87f4'
+global_id = u'cd81f47b-779d-42fe-8dbf-332401e0b9a4'
+activation_code = '306290657700'
 
-gets = [ 'GetUserProfile',
+gets = [ 'GetGlobalIDbyActivationCode',
+         'GetGlobalIDbyActivationCode/%s' % '888888888888',
+         'GetGlobalIDbyActivationCode/%s' % activation_code,
+
+         'GetUserProfile',
          'GetUserProfile/bogus_uid',
          'GetUserProfile/%s' % global_id,
  

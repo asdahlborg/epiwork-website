@@ -21,6 +21,34 @@ class EpiwebHandler(BaseHandler):
     "Each read should have a *args. Check against argslist."
     pass
 
+class GetGlobalIDbyActivationCode(EpiwebHandler):
+  """Takes an activation code.
+  Returns the corresponding global user ID
+  """
+  def read(self, request, activation_code=None):
+    returnable = self.returnable.copy()
+    if activation_code:
+      matches = [su.global_id for su in SurveyUser.objects.all()
+                              if code_hash(su.global_id) == activation_code]
+      l = len(matches)
+      if l == 0:
+        returnable.update({'status': 2,
+                           'error_message':
+                           "no user with activation_code '%s' exists"
+                           % activation_code})
+      elif l > 1:
+        returnable.update({'status': 3,
+                           'error_message':
+                           "more than one user with activation_code '%s' exists"
+                           % activation_code})
+      else:
+        returnable.update({'activation_code': activation_code,
+                           'global_id': matches[0]})
+    else:
+      returnable.update({'status': 1,
+                         'error_message': 'activation_code required'})
+    return returnable
+
 class GetUserProfile(EpiwebHandler):
   """Takes global_id
   Returns name, a_uids, code, report_ts
