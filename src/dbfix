@@ -1,0 +1,16 @@
+#!/bin/bash
+# Reinitialise the ggm.db survey_ tables.
+
+for table in `echo "SELECT name FROM sqlite_master 
+  WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%'
+  UNION ALL 
+  SELECT name FROM sqlite_temp_master 
+  WHERE type IN ('table','view') 
+  ORDER BY 1;" | sqlite3 ggm.db | grep "survey_"`; 
+do
+  echo "drop table $table;" | sqlite3 ggm.db;
+done
+
+./bin/django syncdb
+./bin/django survey_register data/surveys/gsq/gold-standard-weekly.py 
+./bin/django survey_register data/surveys/gsq/gold-standard-intake.py 
