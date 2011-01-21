@@ -211,7 +211,7 @@ class TableOfSelectsWidget(forms.MultiWidget):
 
         a('<table border="1" class="table-of-selects">')
         a('<tr>')
-        for column in self.columns:
+        for column in ['']+self.columns:
             a('<th>%s</th>' % column)
         a('</tr>')
         for i, row in enumerate(self.rows):
