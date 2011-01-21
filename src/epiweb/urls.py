@@ -22,7 +22,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
-    (r'^extra-survey/', include('epiweb.apps.survey.extra-urls')),
     (r'^survey/', include('epiweb.apps.survey.urls')),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),
                                             'template_name': 'news'}),
@@ -32,6 +31,10 @@ urlpatterns = patterns('',
 
 if settings.MOBILE_INTERFACE_ACTIVE:
   urlpatterns += patterns('', (r'^ema/', include('epiweb.apps.survey.api.urls')))
+
+if settings.EXTRA_SURVEY:
+  urlpatterns += patterns('', (r'^extra-survey/',
+                               include('epiweb.apps.survey.extra-urls')))
 
 # Catchall
 urlpatterns += patterns('', url(r'^', include('cms.urls')))
