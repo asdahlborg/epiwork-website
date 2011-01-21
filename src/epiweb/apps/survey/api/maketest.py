@@ -88,8 +88,8 @@ header = """#!/bin/bash
 base='%s'
 silent='-s'
 #include='-i'
-#json='-H "Accept: application/json"'
-post='-X POST -H "Content-type: application/json"'
+#json='-H "Accept:application/json"'
+post='-X POST -H Content-type:application/json'
 opts=$silent $include $json
 data=$(cat report.json)
 
@@ -116,5 +116,6 @@ def ww(s):
 
 w('# PUTs')
 ww('curl $post $opts --data \"$data\" ${base}Report')
+w('echo')
 
 fd.close()

@@ -134,9 +134,11 @@ class Report(EpiwebHandler):
         r = rc.CREATED
         r.write(reported)
         return r
+      else:
+        returnable.update(reported)
     else:
       returnable.update({'status': 5, 'error_message': 'incorrect content_type'})
-      return returnable
+    return returnable
 
 class GetLanguage(EpiwebHandler):
   """list of languages supported by the national IMS Server.

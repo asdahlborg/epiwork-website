@@ -1,3 +1,5 @@
+#!/bin/bash
+set -x
 # PUT example for registering a survey response.
 
 curl -v -X POST -i -H "Content-type: application/json" -s --data '{

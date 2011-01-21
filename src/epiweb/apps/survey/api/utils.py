@@ -117,7 +117,7 @@ def report_survey(jdata):
     # Check presence and types of reports' keys
     for report in jdata['reports']:
       check_keys(report, [ ('uid', str), ('surv_v', str),
-                           ('ts', long), ('data', list) ])
+                           ('ts', int), ('data', list) ])
       for iv_data in report['data']:
         check_keys(iv_data, [ ('id', str), ('value', 'any') ])
 
@@ -139,7 +139,6 @@ def report_survey(jdata):
 
   # Make field entries
   report_items = [ report_data(report) for report in jdata['reports']]
-
   agg_stat = reduce(lambda agg_stat, report: agg_stat + report['status'],
                     report_items, 0)
 
