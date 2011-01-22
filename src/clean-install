@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Run this from the root directory of epiwork-website to generate an install
+# without any content.
+
+rm ggm.db
+./bin/django syncdb
+./bin/django loaddata data/initial.json 
+./bin/django survey_register data/surveys/gsq/gold-standard-weekly.py 
+./bin/django survey_register data/surveys/gsq/gold-standard-intake.py 
+./bin/django survey_register data/surveys/gsq/gold-standard-contact.py
+echo ".read src/extra-survey.sql" | sqlite3 ggm.db
+./bin/django runserver
