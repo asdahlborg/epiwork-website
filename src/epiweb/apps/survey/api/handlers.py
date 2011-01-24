@@ -49,6 +49,12 @@ class GetGlobalIDbyActivationCode(EpiwebHandler):
                          'error_message': 'activation_code required'})
     return returnable
 
+class GUPError(Exception):
+  def __init__(self, value):
+    self.value = value
+  def __str__(self):
+    return repr(self.value)
+
 class GetUserProfile(EpiwebHandler):
   """Takes global_id
   Returns name, a_uids, code, report_ts
@@ -56,29 +62,40 @@ class GetUserProfile(EpiwebHandler):
 
   def read(self, request, uid=None):
     returnable = self.returnable.copy()
-    if uid:
+    try:
+      if not uid:
+        raise GUPError({'status': 1, 'error_message': 'uid required'})
       sus = SurveyUser.objects.filter(global_id=uid)
-      if sus:
-        su = sus[0]
-        u = su.user.all()[0]
-        name = u.get_full_name()
-        a_uids = [su.global_id for s in SurveyUser.objects.filter(user=u)]
-        code = code_hash(su.global_id)
-        pd = su.last_participation_date
-        if pd:
-          # Report timestamp as in milliseconds since 1970-01-01
-          report_ts = timedate_to_epochal(pd)
-        else:
-          report_ts = 0
-        returnable.update({'name': name, 'a_uids': a_uids,
-                           'code': code, 'report_ts': report_ts})
+      if len(sus) == 0:
+        raise GUPError({'status': 2,
+                        'error_message': "uid '%s' not found" % uid})
+      if len(sus) > 1:
+        raise GUPError({'status': 4,
+                        'error_message': "uid '%s' ambiguous" % uid})
+      su = sus[0]
+      sua = su.user.all()
+      if len(sua) == 0:
+        raise GUPError({'status': 2,
+                        'error_message': "uid '%s' not found" % uid})
+      if len(sua) > 1:
+        raise GUPError({'status': 4,
+                        'error_message': "uid '%s' ambiguous" % uid})
+      u = sua[0]
+      name = u.get_full_name()
+      a_uids = [su.global_id for s in SurveyUser.objects.filter(user=u)]
+      code = code_hash(su.global_id)
+      pd = su.last_participation_date
+      if pd:
+        # Report timestamp as in milliseconds since 1970-01-01
+        report_ts = timedate_to_epochal(pd)
       else:
-        returnable.update({'status': 2,
-                           'error_message': "uid '%s' not found" % uid})
-    else:
-      returnable.update({'status': 1,
-                         'error_message': 'uid required'})
-    return returnable
+        report_ts = 0
+      returnable.update({'name': name, 'a_uids': a_uids,
+                         'code': code, 'report_ts': report_ts})
+    except GUPError as inst:
+      returnable.update(inst.value)
+    finally:
+      return returnable
 
 class GetReportSurvey(EpiwebHandler):
   """Takes language int
@@ -99,7 +116,6 @@ class GetImage(EpiwebHandler):
   """
   def read(self, request, type=None, uid=None):
     returnable = self.returnable.copy()
-    print 'tu', type, uid
     if type:
       returnable.update({'type': type})
       if uid:
