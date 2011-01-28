@@ -30,13 +30,19 @@ Also add another user with a username, name and password of your choice.
 
     In [3]: sus[len(sus)-1].global_id
 
-    Out [3]: u'be4e5f36-714c-482a-a754-30a200874f75'
+    Out [3]: u'b9e8353b-e113-4b03-856f-c118e0b70666'
+    
+    In [4]: from epiweb.apps.survey.api.utils import code_hash
 
-    In [4]: quit()
+    In [5]: code_hash(u'b9e8353b-e113-4b03-856f-c118e0b70666')
+
+    Out [5]: '427621639782'
+
+    In [6]: quit()
 
 7. Edit the file `src/epiweb/apps/survey/api/maketest.py` to give the
-`global_id` variable the value you found in the previous step. IN the above
-case, the 'global_id` you require is `'be4e5f36-714c-482a-a754-30a200874f75'`
+`activation_code` variable the value you found in the previous step. In the
+above case, the activation_code` you require is `'427621639782'`
 
 8. Use the `maketest.py` script to generate two test files `test.sh` and
 `test.html`

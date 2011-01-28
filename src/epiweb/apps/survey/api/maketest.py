@@ -3,23 +3,19 @@
 
 import re
 
-global_id = u'cd81f47b-779d-42fe-8dbf-332401e0b9a4'
-activation_code = '306290657700'
+global_id = u'b9e8353b-e113-4b03-856f-c118e0b70666'
+activation_code = '427621639782'
 
-gets = [ 'GetGlobalIDbyActivationCode',
-         'GetGlobalIDbyActivationCode/%s' % '888888888888',
-         'GetGlobalIDbyActivationCode/%s' % activation_code,
-
-         'GetUserProfile',
+gets = [ 'GetUserProfile',
          'GetUserProfile/bogus_uid',
-         'GetUserProfile/%s' % global_id,
+         'GetUserProfile/%s' % activation_code,
  
          'GetReportSurvey',
          'GetReportSurvey/1',
  
          'GetImage',
          'GetImage/bogus_type/bogus_uid',
-         'GetImage/123/%s' % global_id,
+         'GetImage/123/%s' % activation_code,
  
          'GetLanguage',
          'GetLanguage/bogus_arg',

@@ -1,8 +1,10 @@
 from piston.handler import BaseHandler
 from piston.utils import rc
-from epiweb.apps.survey.models import ( Profile, SurveyUser, Survey, User, epoch)
+from epiweb.apps.survey.models import Profile, SurveyUser, Survey, User
 from epiweb.apps.survey.times import timedate_to_epochal
-from utils import xmlify_spec, report_survey, code_hash
+from utils import ( xmlify_spec, report_survey,
+                    code_hash, code_unhash,
+                    GetError, )
 from datetime import datetime
 from base64 import b64encode
 
@@ -21,79 +23,44 @@ class EpiwebHandler(BaseHandler):
     "Each read should have a *args. Check against argslist."
     pass
 
-class GetGlobalIDbyActivationCode(EpiwebHandler):
-  """Takes an activation code.
-  Returns the corresponding global user ID
-  """
-  def read(self, request, activation_code=None):
-    returnable = self.returnable.copy()
-    if activation_code:
-      matches = [su.global_id for su in SurveyUser.objects.all()
-                              if code_hash(su.global_id) == activation_code]
-      l = len(matches)
-      if l == 0:
-        returnable.update({'status': 2,
-                           'error_message':
-                           "no user with activation_code '%s' exists"
-                           % activation_code})
-      elif l > 1:
-        returnable.update({'status': 3,
-                           'error_message':
-                           "more than one user with activation_code '%s' exists"
-                           % activation_code})
-      else:
-        returnable.update({'activation_code': activation_code,
-                           'global_id': matches[0]})
-    else:
-      returnable.update({'status': 1,
-                         'error_message': 'activation_code required'})
-    return returnable
-
-class GUPError(Exception):
-  def __init__(self, value):
-    self.value = value
-  def __str__(self):
-    return repr(self.value)
-
 class GetUserProfile(EpiwebHandler):
-  """Takes global_id
-  Returns name, a_uids, code, report_ts
+  """Takes uid (which is an activation code)
+  Returns name, activation_codes, code, report_ts
+
+  The EIP client refers to a 'uid'.  We call it an activation code or 'acode'.
   """
 
   def read(self, request, uid=None):
     returnable = self.returnable.copy()
+    acode = uid
     try:
-      if not uid:
-        raise GUPError({'status': 1, 'error_message': 'uid required'})
-      sus = SurveyUser.objects.filter(global_id=uid)
+      if not acode:
+        raise GetError(1, 'activation_code required')
+      sus = SurveyUser.objects.filter(global_id=code_unhash(acode))
       if len(sus) == 0:
-        raise GUPError({'status': 2,
-                        'error_message': "uid '%s' not found" % uid})
+        raise GetError(2, "activation code '%s' not found" % acode)
       if len(sus) > 1:
-        raise GUPError({'status': 4,
-                        'error_message': "uid '%s' ambiguous" % uid})
+        raise GetError(4, "activation code '%s' ambiguous" % acode)
       su = sus[0]
       sua = su.user.all()
       if len(sua) == 0:
-        raise GUPError({'status': 2,
-                        'error_message': "uid '%s' not found" % uid})
+        raise GetError(2, "activation code '%s' not found" % acode)
       if len(sua) > 1:
-        raise GUPError({'status': 4,
-                        'error_message': "uid '%s' ambiguous" % uid})
+        raise GetError(4, "activation code '%s' ambiguous" % acode)
       u = sua[0]
       name = u.get_full_name()
-      a_uids = [su.global_id for s in SurveyUser.objects.filter(user=u)]
-      code = code_hash(su.global_id)
+      acodes = [code_hash(s.global_id)
+                for s in SurveyUser.objects.filter(user=u)]
       pd = su.last_participation_date
       if pd:
-        # Report timestamp as in milliseconds since 1970-01-01
+        # Timestamp as in milliseconds since 1970-01-01
         report_ts = timedate_to_epochal(pd)
       else:
         report_ts = 0
-      returnable.update({'name': name, 'a_uids': a_uids,
-                         'code': code, 'report_ts': report_ts})
-    except GUPError as inst:
-      returnable.update(inst.value)
+      returnable.update({'name': name, 'a_uids': acodes,
+                         'uid': acode, 'report_ts': report_ts})
+    except GetError as inst:
+      returnable.update(inst.dict)
     finally:
       return returnable
 
@@ -112,30 +79,32 @@ class GetReportSurvey(EpiwebHandler):
     return returnable
 
 class GetImage(EpiwebHandler):
-  """Takes type:int and uid:string. Returns image:string of png encoded base64
+  """Takes image type and activation code.
+  Returns image as a string of png encoded base64.
   """
-  def read(self, request, type=None, uid=None):
+  def read(self, request, image_type=None, uid=None):
     returnable = self.returnable.copy()
-    if type:
-      returnable.update({'type': type})
-      if uid:
-        sus = SurveyUser.objects.filter(global_id=uid)
-        if sus:
-          # TODO Put a real pic here!
-          fd = open('src/epiweb/apps/survey/api/homer.png', 'r')
-          raw = fd.read()
-          enc = b64encode(raw)
-          returnable.update({'image': enc})
-        else:
-          returnable.update({'status': 2,
-                             'error_message': "uid '%s' not found" % uid})
-      else:
-        returnable.update({'status': 1,
-                           'error_message': 'uid required'})
-    else:
-      returnable.update({'status': 3,
-                         'error_message': 'image type required'})
-    return returnable
+    acode = uid
+    try:
+      if not image_type:
+        raise GetError(3, 'image type required')
+      returnable.update({'type': image_type})
+      if not acode:
+        raise GetError(1, 'activation code required')
+      sus = SurveyUser.objects.filter(global_id=code_unhash(acode))
+      if len(sus) == 0:
+        raise GetError(2, "activation code '%s' not found" % acode)
+      if len(sus) > 1:
+        raise GetError(4, "activation code '%s' ambiguous" % acode)
+      # TODO Put a real pic here!
+      fd = open('src/epiweb/apps/survey/api/homer.png', 'r')
+      raw = fd.read()
+      enc = b64encode(raw)
+      returnable.update({'image': enc})
+    except GetError as inst:
+      returnable.update(inst.dict)
+    finally:
+      return returnable
 
 class Report(EpiwebHandler):
   """Post a report of completed surveys.
@@ -153,7 +122,8 @@ class Report(EpiwebHandler):
       else:
         returnable.update(reported)
     else:
-      returnable.update({'status': 5, 'error_message': 'incorrect content_type'})
+      returnable.update({'status': 5,
+                         'error_message': 'incorrect content_type'})
     return returnable
 
 class GetLanguage(EpiwebHandler):

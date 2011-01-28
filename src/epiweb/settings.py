@@ -184,11 +184,9 @@ elif _hostname in ['rekenwolk.nl']:
     EMAIL_PORT = 25
     MOBILE_INTERFACE_ACTIVE = True
     STORE_RESPONSES_LOCALLY = True
-    MOBILE_INTERFACE_ACTIVE = True
     EXTRA_SURVEY = 'contact-survey-1.0'
 elif _hostname in ['via']:
     MOBILE_INTERFACE_ACTIVE = True
     STORE_RESPONSES_LOCALLY = True
-    MOBILE_INTERFACE_ACTIVE = True
     EXTRA_SURVEY = 'contact-survey-1.0'
 

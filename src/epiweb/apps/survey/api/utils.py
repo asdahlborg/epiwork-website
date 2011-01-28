@@ -75,9 +75,9 @@ def report_data(report):
 
   try:
     uid = report['uid']
-    survey_user = SurveyUser.objects.get(global_id=uid)
+    survey_user = SurveyUser.objects.get(global_id=code_unhash(uid))
   except:
-    return  {'status': 2, 'error': 'user with global_id %s not known' % uid}
+    return  {'status': 2, 'error': 'user with activation code not known' % uid}
 
   try:
     surv_v = report['surv_v']
@@ -131,11 +131,12 @@ def report_survey(jdata):
     return e.value
 
   # Check reporting uid exists
-  uid = jdata['uid']
+  acode = jdata['uid']
   try:
-    reporting_user = SurveyUser.objects.get(global_id=uid)
+    reporting_user = SurveyUser.objects.get(global_id=code_unhash(acode))
   except DoesNotExist:
-    return  {'status': 2, 'error': 'user with global_id %s not known' % uid}
+    return  {'status': 2,
+             'error': 'user with activation code %s not known' % acode}
 
   # Make field entries
   report_items = [ report_data(report) for report in jdata['reports']]
@@ -155,3 +156,28 @@ def code_hash(gid, code_length=12):
   code_format = ('%%0%dd' % code_length)
   gid_int = int(sub('-', '', gid), 16)
   return code_format % (gid_int % 10**code_length)
+
+class GetError(Exception):
+  def __init__(self, status, message):
+    self.status = status
+    self.message = message
+    self.dict = {'status': self.status, 'error_message': self.message}
+  def __str__(self):
+    return repr(dict)
+
+def code_unhash(activation_code):
+  """Takes an activation code.
+  Returns the corresponding global user ID.
+  Flags nonexistent codes and code collisions.
+  """
+  matches = [su.global_id for su in SurveyUser.objects.all()
+             if code_hash(su.global_id) == activation_code]
+  l = len(matches)
+  if l == 0:
+    raise GetError(2, 'user with activation code %s not found' % activation_code)
+  elif l > 1:
+    raise GetError(3, 'multiple users with activation code %s found' %
+                   activation_code)
+  else:
+    return matches[0]
+
