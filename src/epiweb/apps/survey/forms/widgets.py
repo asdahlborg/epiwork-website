@@ -27,7 +27,13 @@ class DateOrOptionPickerWidget(forms.MultiWidget):
         super(DateOrOptionPickerWidget, self).__init__(widget, attrs=attrs)
 
     def decompress(self,value):
-        return value or [None, None]
+        if value is None:
+            return [None, None]
+        else:
+            if isinstance(value, datetime.date):
+                return [str(value), None]
+            else:
+                return [None, value]
 
 class RadioInputNoLabel(RadioInput):
     """
