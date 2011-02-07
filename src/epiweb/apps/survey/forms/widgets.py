@@ -1,5 +1,6 @@
 import datetime
 import re
+import codecs
 
 from django import forms
 from django.forms.widgets import Widget, Select, RadioInput
@@ -237,5 +238,6 @@ class TableOfSelectsWidget(forms.MultiWidget):
             a('</tr>')
         a('</table>')
 
+        output = map(lambda x: codecs.decode(x, 'utf-8'), output)
         return mark_safe(self.format_output(output))
 
