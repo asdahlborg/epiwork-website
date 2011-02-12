@@ -58,7 +58,11 @@ def check_keys(dir, key_types):
   dir and its value shoud be of the corresponding type.
   """
   for key, key_type in key_types:
-    if not (key in dir and (key_type == 'any' or isinstance(dir[key], key_type))):
+    if not (key in dir
+            and ( key_type == 'any'
+                  or isinstance(dir[key], key_type)
+                  or ( key_type == str
+                       and isinstance(dir[key], unicode)))):
       raise JSONKeyTypeError({'status': 1,
                               'error': "key '%s' is %s,should be %s" % \
                               (key, type(dir[key]), repr(key_type))})
