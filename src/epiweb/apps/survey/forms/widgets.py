@@ -115,6 +115,7 @@ class TableOptionsSingleWidget(forms.MultiWidget):
             output.append(widget.render(name + '_%s' % i, widget_value, final_attrs))
             output.append('</tr>')
         output.append('</table>')
+        output = map(lambda x: codecs.decode(x, 'utf-8'), output)
         return mark_safe(self.format_output(output))
 
 RE_YEAR_MONTH = re.compile(r'(\d{4})-(\d\d?)$')
