@@ -116,9 +116,7 @@ class Report(EpiwebHandler):
     if request.content_type:
       reported = report_survey(request.data)
       if reported['status'] == 0:
-        r = rc.CREATED
-        r.write(reported)
-        return r
+        return returnable
       else:
         returnable.update(reported)
     else:
