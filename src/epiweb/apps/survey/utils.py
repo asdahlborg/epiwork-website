@@ -60,7 +60,7 @@ def _create_answers(spec, cleaned_data):
 
     for question in spec.questions:
         if not question.private:
-            if question.id in data and question.id in cleaned_data:
+            if question.id in cleaned_data:
                 data[question.id] = _format_data(question.type,
                                                  cleaned_data[question.id])
 
