@@ -225,7 +225,7 @@ class TableOfSelectsWidget(forms.MultiWidget):
         for i, row in enumerate(self.rows):
             a('<tr style="text-align:right"><th>%s</th>' % row)
             for j, column in enumerate(self.columns):
-                index = len(self.rows) * i + j
+                index = len(self.columns) * i + j
                 widget_name = name + '_%d' % index
                 try:
                     widget_value = value[index]
