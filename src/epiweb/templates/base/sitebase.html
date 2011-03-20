@@ -1,0 +1,119 @@
+{% load cms_tags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl" dir="ltr">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="/+media/base/img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/+media/base/img/local_ggm/apple-touch-icon.png" />      
+
+        <title>{% block title %}De Grote Griep Meting{% endblock title %}</title>
+		{% block add_head %}{% endblock add_head %}
+        <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/generic.css" />
+        <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/local_ggm.css" />
+        {% block add_css %}{% endblock add_css %}
+        <script type="text/javascript" src="/+media/base/js/jquery.js"></script>
+        <script type="text/javascript" src="/+media/base/js/influenzanetbar.js"></script>
+        {% block add_js %}{% endblock add_js %}
+    </head>
+
+    <body{% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
+    <div id="page">
+	
+        <div id="influenzabar">
+            <p class="_toggle influenzanet">Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet</p>
+            <div class="_toggle influenzacontent">
+                <div id="epiwork">
+                    <img src="/+media/base/img/influbar/epiwork.gif" alt="Epiwork Logo" title="Epiwork" /><br />
+                    Developing the framework for an epidemic forecast infrastructure.<br />
+                    <a href="http://www.epiwork.eu/" title="Epiwork website">http://www.epiwork.eu/</a><br /><br />
+                    The Seventh Framework Programme (FP7) bundles all research-related EU initiatives.<br /><br />
+                    <img src="/+media/base/img/influbar/7thframework.gif" alt="7th Framework Logo" title="7th Framework" /></div>
+                <div id="participants">
+                    Participating countries and volunteers:<br /><br />
+                    <a href="http://www.degrotegriepmeting.nl/"><img src="/+media/base/img/influbar/nl.png" title="The Netherlands" alt="The Netherlands" /></a> 20.947<br />
+                    <a href="http://www.degrotegriepmeting.be/"><img src="/+media/base/img/influbar/be.png" title="Belgium" alt="Belgium" /></a> 5.843<br />
+                    <a href="http://www.gripenet.pt/"><img src="/+media/base/img/influbar/pt.png" title="Portugal" alt="Portugal" /></a> 2.227<br />
+                    <a href="http://www.influweb.it/"><img src="/+media/base/img/influbar/it.png" title="Italy" alt="Italy" /></a> 3.116<br />
+                    <a href="http://reporta.c3.org.mx/"><img src="/+media/base/img/influbar/mx.png" title="Mexico" alt="Mexico" /></a> 3.950<br />
+                    <a href="http://www.gripenet.com.br/"><img src="/+media/base/img/influbar/br.png" title="Brazil" alt="Brazil" /></a> 370<br />
+                    <a href="http://www.flusurvey.org.uk/"><img src="/+media/base/img/influbar/gb.png" title="Great Britain" alt="Great Britain" /></a> 5.555<br />
+                    <a href="http://www.flutracking.net/"><img src="/+media/base/img/influbar/au.png" title="Australia" alt="Australia" /></a> 7.776<br />
+                </div>
+                <div id="influenzatext">
+                    InfluenzaNet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet. It has been operational in The Netherlands and Belgium (since 2003), Portugal (since 2005) and Italy (since 2008), and the current objective is to implement InfluenzaNet in more European countries.<br /><br />
+                    In contrast with the traditional system of sentinel networks of mainly primary care physicians coordinated by the European Influenza Surveillance Scheme (EISS), InfluenzaNet obtains its data directly from the population. This creates a fast and flexible monitoring system whose uniformity allows for direct comparison of ILI rates between countries.<br /><br />
+                    Any resident of a country where InfluenzaNet is implemented can participate by completing an online application form, which contains various medical, geographic and behavioural questions. Participants are reminded weekly to report any symptoms they have experienced since their last visit. The incidence of ILI is determined on the basis of a uniform case definition. <a href="#toggle" class="jsclose" title="Close">Hide this information</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="header">
+            <div id="headerlogo"><a href="/" title="Grote Griep Meting"><img src="/+media/base/img/local_ggm/logo-ggm.gif" alt="Aktiv Gegen Grippe" /></a></div>
+            <div id="account">{% if user.is_authenticated %}
+                <p><a href="/survey/profile/">Ingelogd als {{ user }}</a></p>
+                <ul class="member">
+                    <li><a href="/survey/profile/">Mijn gegevens</a></li>
+                    <li><a href="/accounts/logout/">Uitloggen</a></li>
+                </ul>{% else %}
+                <ul class="anonymous">
+                    <li><a href="/accounts/login/">Inloggen</a></li>
+                    <li><a href="/accounts/register/">Aanmelden</a></li>
+                </ul>
+                <p><a href="/accounts/password/reset/">Wachtwoord vergeten?</a></p>{% endif %}
+            </div>
+            <div id="navigation">
+                <div id="menubar">
+                    {% spaceless %}<ul>{% show_menu 0 0 %}</ul>{% endspaceless %}
+                </div>
+                <div id="searchbar">
+                    <form method="post">
+                    <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Zoeken" /></p>
+                    </form>
+                </div>
+            </div>          
+        </div> 
+        <div id="colmask">
+            <div id="colmid">
+                <div id="colright"> 
+                    <div id="col1wrap"> 
+                        <div id="col1pad"> 
+                            <div id="col1"> 
+                                <h1>Griep in Nederland en België</h1>
+                                <a href="#placeholder" title="Ausführlichere Informationen über die Grippe in Deutschland"><img src="/+media/base/img/local_ggm/content/center-map.gif" alt="Griep in Nederland en België" /></a>
+                                <p><strong>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat.</strong></p><p><img src="/+media/base/img/local_ggm/content/center-graph.gif" alt="Grippenentwicklung" class="imgleft" />Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat.</p>
+                            </div> 
+                        </div> 
+                    </div> 
+                    <div id="col2"> 
+                        <p class="title">Laatste nieuws</p>
+                        <p><img src="/+media/base/img/local_ggm/content/left-cold.jpg" alt="Influenza strikes again" class="imgleft" /></p><h2>Cras tristique varius tristique.</h2>
+                        <p><strong>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat.</strong></p><p>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. <a href="#placeholder" title="Lees verder">LEES VERDER</a></p>
+                        <hr />
+                        <h2>Cras tristique varius tristique.</h2>
+                        <p><strong>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat.</strong></p><p>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. <img src="/+media/base/img/local_ggm/content/left-virus.jpg" alt="Influenza close up" class="imgright" /> Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. <a href="#placeholder" title="Lees verder">LEES VERDER</a></p>
+                        <hr />
+                        <h2>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis.</h2>
+                        <p><strong>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. <a href="#placeholder" title="Lees verder">LEES VERDER</a></strong></p>
+                    </div> 
+                    <div id="col3"> 
+                        {% block rightcol %}<a href="http://www.epiwork.eu" title="Epiwork: Developing the framework for an epidemic forecast infrastructure" rel="external"><img src="/+media/base/img/local_ggm/content/right-epibanner.jpg" alt="Epiwork" /></a>
+                        <p><img src="/+media/base/img/local_ggm/content/right-petridishes.jpg" alt="Virus cultivation" /></p>{% endblock rightcol %}
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+        <div id="footer">
+            <div id="footercontent">
+                <strong>Aktiv gegen Grippe</strong> wird völlig unabhängig betrieben, ohne Einfluss von Sponsoren oder kommerzielle Organisationen. Die Inhalte der Internetseite http://www.aktivgegengrippe.de sind weder organisatorisch, inhaltlich,wissenschaftlich oder auf andere Art und Weise parteilich verfasst. Auch alle Unterrichtmaterialen sind von unabhängige Experten zusammengestellt.
+            </div>
+            <div id="footerclose">
+                &copy; Aktiv gegen Grippe &nbsp;|&nbsp; <a href="#placeholder" title="Impressum">Impressum</a>
+            </div>
+        </div>
+    </div>
+    </body>
+
+</html>

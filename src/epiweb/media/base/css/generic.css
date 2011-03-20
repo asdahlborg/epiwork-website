@@ -1,0 +1,574 @@
+/*
+Template Name: Epiwork Main
+Description: CSS for deployment on the Epiwork platform 
+Author: Antwan Wiersma (http://www.prime-creation.nl/)
+Version: 1.0
+*/
+
+/* Main */
+
+html {
+ font-family: Verdana, Geneva, sans-serif;
+ line-height: 1.2em;
+ font-size: 1em;
+ color: #595959;
+ background: #d5d5d5;
+}
+
+body, p {
+ margin:0;
+ padding: 0;
+}
+
+ul, li {
+ list-style: none;
+ margin: 0;
+ padding: 0;
+ border: 0;
+ outline: 0;
+}
+
+img {
+ border: 0;
+}
+
+#page {
+ width: 974px;
+ margin: 0 auto;
+ padding: 0;
+ text-align: left;
+}
+
+.disable {
+ display: none;
+}
+
+/* Influenzanet bar */
+
+#influenzabar {
+ width: 974px;
+ margin: 10px auto 0 auto;
+ background: #ffffff url(../img/influbar/influbar.gif) top center no-repeat;
+}
+
+p.influenzanet {
+ height: 22px;
+ padding: 11px 26px 0 240px;
+ text-align: right;
+ color: #c8c8c8;
+ font-size: 11px;
+ overflow: hidden;
+}
+
+.influenzacontent {
+ display: none;
+}
+
+.show {
+ display: block;
+}
+
+p.toggle {
+ background: url(../img/influbar/influbar-closed.gif) top left no-repeat;
+ cursor: pointer;
+}
+
+p.expanded {
+ background: url(../img/influbar/influbar-opened.gif) top left no-repeat;
+ cursor: pointer;
+}
+
+p.toggle a:focus,
+a.close:focus {
+ background: #000000;
+}
+
+p.toggle a {
+ color: #c8c8c8;
+ text-decoration: none;
+}
+
+div.influenzacontent{
+ display: none;
+ width: 926px;
+ overflow: auto;
+ padding: 0 12px 24px 12px;
+ text-align: left;
+ color: #ffffff;
+ font-size: 0.75em;
+ line-height: 1.3em;
+ background: #444444;
+ border-left: 12px solid #ffffff;
+ border-right: 12px solid #ffffff; 
+}
+
+a.jsclose {
+ display: none;
+}
+
+a.close {
+ color: #b2b2b2;
+}
+
+#epiwork {
+ float: left;
+ width: 266px;
+ margin: 14px 0 0 0;
+ padding: 12px;
+ color: #000000;
+ background: #ffffff;	
+}
+
+#epiwork a {
+ color: #484848;
+ font-weight: bold;
+}
+
+#participants {
+ float: right;
+ width: 146px;
+ margin: 14px 0 0 0;
+ padding: 12px;
+ background: #222222;
+}
+
+#participants img {
+ vertical-align: middle;
+}
+
+#participants a {
+ margin: 0 4px 0 0;
+}
+
+#influenzatext {
+ padding: 14px 194px 0 302px;
+ font-size: 0.9em;
+}
+
+
+/* Header */
+
+#header {
+ float: left;
+ width: 950px;
+ padding: 0 12px 18px 12px;
+ background: #ffffff;
+}
+
+#headerlogo {
+ float: left;
+ width: 756px;
+ padding: 0;
+ margin: 12px 0 12px 0;
+}
+
+#account {
+ float: right;
+ margin: 12px 0 12px 0;
+ text-align: center;
+ font-size: 0.75em;
+}
+
+#account p {
+ margin: 0 0 4px 0;
+ font-size: 0.95em;
+}
+
+#account a {
+ color: #999999;
+ text-decoration: none;
+}
+
+#account a:hover {
+ text-decoration: underline;
+}
+
+#account ul {
+ width: 183px;
+}
+
+#account ul li {
+ text-align: center;
+ margin-bottom: 2px;
+ padding: 2px 2px 3px 2px;
+ font-size: 0.95em;
+}
+
+#account ul.member li a,
+#account ul.anonymous li a {
+ text-decoration: none;
+ color: #f8f8f8;
+}
+
+#account ul.anonymous li:hover,
+#account ul.member li:hover {
+ cursor: pointer;
+}
+
+#navigation {
+ width: 950px;
+ clear: both;
+}
+
+#menubar {
+ float: left;
+ max-width: 720px;
+ overflow: hidden;
+ border-bottom: 1px solid #cccccc;
+}
+
+#menubar li {
+ float: left;
+ margin: 0 0 0 8px;
+ background: #ffffff;
+ border-left: 1px solid #cccccc;   
+ border-top: 1px solid #cccccc;   
+ border-right: 1px solid #cccccc;
+}
+
+#menubar li:first-child {
+ margin: 0;   
+}
+
+#menubar li a {
+ display: block;
+ height: 2em;
+ padding: 0 6px 0 6px; 
+ text-decoration: none;
+ color: #999999;
+ font-size: 0.7em;
+ line-height: 2em;
+ text-align: center;
+ vertical-align: middle;
+}
+
+#menubar li a:hover {
+ background: #939393;
+ color: #ffffff;
+}
+
+#menubar li.selected a {
+ padding: 0 8px 0 8px; 
+ background: #515151;
+ font-weight: bold;
+ color: #ffffff;
+}
+
+#searchbar {
+ float: right;
+}
+
+#searchbar input {
+ margin: 0;
+ vertical-align: middle;
+}
+
+#searchbar input#searchfield {
+ float: left;
+ height: 2em;
+ width: 111px;
+ padding: 0 4px 0 4px;
+ font-size: 0.7em;
+ line-height: 2em;
+ background-color: #ffffff;
+ border: 1px solid #cccccc;
+}
+
+#searchbar input#searchfield:focus {
+ background-color: #f0f0f0;
+ border: 1px solid #000000;
+}
+
+#searchbar input#searchsubmit {
+ height: 2.2em;
+ width: 54px;
+ margin: 0 0 0 8px;
+ padding: 0;
+ font-size: 0.7em;
+ line-height: 2.2em;
+ border: 0;
+ color: #f8f8f8;
+ text-align: center;
+ cursor: pointer;
+}
+
+#searchbar input#searchsubmit:hover {
+ cursor: pointer;
+}
+
+
+/* Forms */
+
+input {
+ margin: 0;
+ vertical-align: middle;
+}
+
+input#name,
+input#email,
+textarea#message {
+ height: 2em;
+ width: 300px;
+ margin: 0 0 10px 0;
+ padding: 0 4px 0 4px;
+ font-size: 1em;
+ line-height: 2em;
+ background-color: #ffffff;
+ border: 1px solid #cccccc;
+}
+
+textarea#message {
+ width: 400px;
+ height: 200px;
+}
+
+input#name:focus,
+input#email:focus,
+textarea#message:focus {
+ background-color: #f0f0f0;
+ border: 1px solid #000000;
+}
+
+input#commentsubmit {
+ height: 2.2em;
+ width: 54px;
+ margin: 0;
+ padding: 0;
+ font-size: 1em;
+ line-height: 2.2em;
+ border: 0;
+ color: #f8f8f8;
+ text-align: center;
+ cursor: pointer;
+}
+
+input#commentsubmit:hover {
+ cursor: pointer;
+}
+
+
+/* Columns */
+
+#colmask {
+ position: relative;
+ clear: both;
+ float: left;
+ width: 100%;
+ overflow: hidden;
+ background: #ffffff;
+}
+
+#colmid {
+ float: left;
+ width: 200%;
+ position: relative;
+ left: 314px;
+ background: #ffffff;
+ border-left: 1px solid #e2e2e2;
+}
+
+#colright {
+ float: left;
+ width: 100%;
+ position: relative;
+ left: 50%;
+ margin-left: -510px;
+ background: #ffffff;
+ border-left: 1px solid #e2e2e2;
+}
+
+#col1wrap {
+ float: right;
+ width: 50%;
+ position: relative;
+ right: 100%;
+}
+
+#col1pad {
+ margin: 0 13px 0 521px;
+ overflow: hidden;
+}
+
+#col1 {
+ width: 100%;
+ overflow: hidden;
+}
+
+#col2 {
+ float: left;
+ width: 290px;
+ position: relative;
+ margin-left: -50%;
+ left: 206px;
+ overflow: hidden;
+}
+
+#col3 {
+ float: left;
+ width: 170px;
+ position: relative;
+ left: 12px;
+ overflow: hidden;
+}
+
+
+/* 2 Columns */
+
+#colleft {
+ float: left;
+ width: 200%;
+ position: relative;
+ left: 314px;
+ background: #ffffff;
+ border: 0px solid #e2e2e2;
+}
+
+#colleftpad {
+ margin: 0 13px 0 206px;
+ overflow: hidden;
+}
+
+
+/* Footer */
+
+#footer {
+ clear: both;
+ float: left;
+ width: 100%;
+ padding: 30px 0 0 0;
+ background: #ffffff;
+}
+
+#footercontent {
+ width: 946px;
+ overflow: auto;
+ padding: 20px 14px 18px 14px;
+ background: #575757 url(../img/main/footerbar.gif) bottom center repeat-x;
+ border-top: 2px solid #909090;
+ color: #f8f8f8;
+ font-size: 0.75em;
+}
+
+#footercol1, #footercol2, #footercol3 {
+ float: left;
+ padding: 0 30px 16px 0;
+}
+
+#footercol1 {
+ width: 340px;
+ padding: 0 60px 16px 50px; 
+}
+
+#footer img {
+ display: block;
+ margin: 0 0 14px -53px;
+}
+
+#footercol2 {
+ width: 230px;
+}
+
+#footercol3 {
+ width: 200px;
+}
+
+#footer h2 {
+ margin: 12px 0 21px 0;
+ padding: 0; 
+}
+
+#footerclose {
+ width: 946px;
+ padding: 8px 14px 10px 14px;
+ background: #000000;
+ border-top: 2px solid #222222;
+ border-bottom: 10px solid #d5d5d5;
+ color: #f8f8f8;
+ font-weight: bold;
+ font-size: 0.75em;
+}
+
+#footer a, #footerclose a {
+ color: #f8f8f8;
+ text-decoration: none;
+ font-weight: bold;
+}
+
+#footer a:hover, #footerclose a:hover {
+ color: #f8f8f8;
+ text-decoration: underline;
+}
+
+
+/* Content */
+
+hr {
+ border-color: #e2e2e2;
+ border-style: solid;
+ border-width: 1px 0 0;
+ clear: both;
+ margin: 14px 0 14px 0;
+ height: 0;
+}
+
+#col1 p,
+#col2 p,
+#col3 p {
+ margin: 1em 0 1em 0;
+ font-size: 0.7em;
+ line-height: 1.5em;
+}
+
+#col1 a,
+#col2 a,
+#col3 a {
+ text-decoration: none;
+ font-weight: bold;
+}
+
+#col1 a:hover,
+#col2 a:hover,
+#col3 a:hover {
+ text-decoration: underline;
+}
+
+.imgleft {
+ float: left;
+ margin: 4px 10px 4px 0;
+}
+
+.imgright {
+ float: right;
+ margin: 4px 0 4px 10px;
+}
+
+#col1 h1 {
+ margin: 6px 0 12px 0;
+ padding: 0;
+ color: #0a0a0a;
+ font-size: 1.2em;
+}
+
+#col2 p.title {
+ margin: 4px 0 0 0;
+ padding: 2px 8px 2px 8px;
+ color: #fefefe;
+ font-weight: bold;
+ font-size: 0.75em;
+}
+
+#col2 h2 {
+ margin: 8px 0 12px 0;
+ padding: 0;
+ color: #0a0a0a;
+ font-size: 1em;
+}
+
+.specialitem {
+ margin: 10px 0 10px 0;
+ padding: 20px;
+ text-align: center;
+ background-color: #e0dbd8;
+ border: 1px solid #cccccc;
+}
+
