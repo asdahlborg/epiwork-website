@@ -1,9 +1,11 @@
 /*
-Template Name: Epiwork Main
+Template Name: Influenzanet
 Description: Javascript for deployment on the Epiwork platform 
 Author: Antwan Wiersma (http://www.prime-creation.nl/)
 Version: 1.0
 */
+
+/* Toggle Influenzanet bar */
 
 var add_link = function() {
 	$(this).next('div.toggle').attr('name', name);
@@ -46,3 +48,17 @@ $(function() {
 		return false;
 	});
 });
+
+/* Open rel="external" links in a new window */
+
+function externalLinks() {
+ if (!document.getElementsByTagName) return;
+ var anchors = document.getElementsByTagName("a");
+ for (var i=0; i<anchors.length; i++) {
+   var anchor = anchors[i];
+   if (anchor.getAttribute("href") &&
+       anchor.getAttribute("rel") == "external")
+     anchor.target = "_blank";
+ }
+}
+window.onload = externalLinks;

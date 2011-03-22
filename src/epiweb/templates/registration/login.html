@@ -1,4 +1,4 @@
-{% extends "registration/base.html" %}
+{% extends "base/sitebase.html" %}
 
 {% block title %}Login{% endblock %}
 
@@ -6,9 +6,7 @@
 
 <h1>Login</h1>
 
-<p>Enter your username and password to log in.
-<a href="{% url django.contrib.auth.views.password_reset %}">Forgot your password?</a>
-</p>
+<p>Vul uw gebruikersnaam en wachtwoord in om in te loggen. <a href="{% url django.contrib.auth.views.password_reset %}">Of bent u uw wachtwoord vergeten?</a></p>
 
 <form method="post" action="?next=/" id="login">
 {{ form.as_p }}

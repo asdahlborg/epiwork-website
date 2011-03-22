@@ -1,6 +1,6 @@
 /*
-Template Name: Epiwork Main
-Description: CSS for deployment on the Epiwork platform 
+Template Name: Influenzanet
+Description: Default CSS for deployment on the Influenzanet platform 
 Author: Antwan Wiersma (http://www.prime-creation.nl/)
 Version: 1.0
 */
@@ -254,6 +254,10 @@ a.close {
  color: #ffffff;
 }
 
+#menubar li.error a {
+ background: #bc0000;
+}
+
 #searchbar {
  float: right;
 }
@@ -442,46 +446,18 @@ input#commentsubmit:hover {
 #footercontent {
  width: 946px;
  overflow: auto;
- padding: 20px 14px 18px 14px;
- background: #575757 url(../img/main/footerbar.gif) bottom center repeat-x;
+ padding: 14px 14px 18px 14px;
+ background: #727272 url(../img/main/footerbar.gif) bottom center repeat-x;
  border-top: 2px solid #909090;
  color: #f8f8f8;
  font-size: 0.75em;
-}
-
-#footercol1, #footercol2, #footercol3 {
- float: left;
- padding: 0 30px 16px 0;
-}
-
-#footercol1 {
- width: 340px;
- padding: 0 60px 16px 50px; 
-}
-
-#footer img {
- display: block;
- margin: 0 0 14px -53px;
-}
-
-#footercol2 {
- width: 230px;
-}
-
-#footercol3 {
- width: 200px;
-}
-
-#footer h2 {
- margin: 12px 0 21px 0;
- padding: 0; 
 }
 
 #footerclose {
  width: 946px;
  padding: 8px 14px 10px 14px;
  background: #000000;
- border-top: 2px solid #222222;
+ border-top: 2px solid #606060;
  border-bottom: 10px solid #d5d5d5;
  color: #f8f8f8;
  font-weight: bold;

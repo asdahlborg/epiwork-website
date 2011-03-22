@@ -10,18 +10,18 @@
         <link rel="apple-touch-icon" href="/+media/base/img/local_ggm/apple-touch-icon.png" />      
 
         <title>{% block title %}De Grote Griep Meting{% endblock title %}</title>
-		{% block add_head %}{% endblock add_head %}
-        <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/generic.css" />
+        {% block add_head %}{% endblock add_head %}
+        <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/default.css" />
         <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/local_ggm.css" />
         {% block add_css %}{% endblock add_css %}
         <script type="text/javascript" src="/+media/base/js/jquery.js"></script>
-        <script type="text/javascript" src="/+media/base/js/influenzanetbar.js"></script>
+        <script type="text/javascript" src="/+media/base/js/generic.js"></script>
         {% block add_js %}{% endblock add_js %}
     </head>
 
     <body{% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
     <div id="page">
-	
+    
         <div id="influenzabar">
             <p class="_toggle influenzanet">Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet</p>
             <div class="_toggle influenzacontent">
@@ -51,8 +51,9 @@
         </div>
 
         <div id="header">
-            <div id="headerlogo"><a href="/" title="Grote Griep Meting"><img src="/+media/base/img/local_ggm/logo-ggm.gif" alt="Aktiv Gegen Grippe" /></a></div>
-            <div id="account">{% if user.is_authenticated %}
+	
+            <div id="headerlogo"><a href="/" title="Grote Griep Meting"><img src="/+media/base/img/local_ggm/logo-ggm.gif" alt="De Grote Griep Meting" /></a></div>
+            {% block authentication %}<div id="account">{% if user.is_authenticated %}
                 <p><a href="/survey/profile/">Ingelogd als {{ user }}</a></p>
                 <ul class="member">
                     <li><a href="/survey/profile/">Mijn gegevens</a></li>
@@ -63,56 +64,30 @@
                     <li><a href="/accounts/register/">Aanmelden</a></li>
                 </ul>
                 <p><a href="/accounts/password/reset/">Wachtwoord vergeten?</a></p>{% endif %}
-            </div>
+            </div>{% endblock authentication %}
             <div id="navigation">
                 <div id="menubar">
-                    {% spaceless %}<ul>{% show_menu 0 0 %}</ul>{% endspaceless %}
+                    {% block menubar %}{% spaceless %}<ul>{% show_menu 0 0 %}</ul>{% endspaceless %}{% endblock menubar %}
                 </div>
                 <div id="searchbar">
                     <form method="post">
-                    <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Zoeken" /></p>
+                        <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Zoeken" /></p>
                     </form>
                 </div>
-            </div>          
+            </div>        
+  
         </div> 
-        <div id="colmask">
-            <div id="colmid">
-                <div id="colright"> 
-                    <div id="col1wrap"> 
-                        <div id="col1pad"> 
-                            <div id="col1"> 
-                                <h1>Griep in Nederland en België</h1>
-                                <a href="#placeholder" title="Ausführlichere Informationen über die Grippe in Deutschland"><img src="/+media/base/img/local_ggm/content/center-map.gif" alt="Griep in Nederland en België" /></a>
-                                <p><strong>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat.</strong></p><p><img src="/+media/base/img/local_ggm/content/center-graph.gif" alt="Grippenentwicklung" class="imgleft" />Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat.</p>
-                            </div> 
-                        </div> 
-                    </div> 
-                    <div id="col2"> 
-                        <p class="title">Laatste nieuws</p>
-                        <p><img src="/+media/base/img/local_ggm/content/left-cold.jpg" alt="Influenza strikes again" class="imgleft" /></p><h2>Cras tristique varius tristique.</h2>
-                        <p><strong>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat.</strong></p><p>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. <a href="#placeholder" title="Lees verder">LEES VERDER</a></p>
-                        <hr />
-                        <h2>Cras tristique varius tristique.</h2>
-                        <p><strong>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat.</strong></p><p>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. <img src="/+media/base/img/local_ggm/content/left-virus.jpg" alt="Influenza close up" class="imgright" /> Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. <a href="#placeholder" title="Lees verder">LEES VERDER</a></p>
-                        <hr />
-                        <h2>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis.</h2>
-                        <p><strong>Cras tristique varius tristique. Mauris lobortis varius neque eget facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pellentesque mauris massa, vulputate mollis sapien. Cras nec mi sed felis porttitor placerat. <a href="#placeholder" title="Lees verder">LEES VERDER</a></strong></p>
-                    </div> 
-                    <div id="col3"> 
-                        {% block rightcol %}<a href="http://www.epiwork.eu" title="Epiwork: Developing the framework for an epidemic forecast infrastructure" rel="external"><img src="/+media/base/img/local_ggm/content/right-epibanner.jpg" alt="Epiwork" /></a>
-                        <p><img src="/+media/base/img/local_ggm/content/right-petridishes.jpg" alt="Virus cultivation" /></p>{% endblock rightcol %}
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
-        <div id="footer">
+		{% block content %}{% endblock content %}
+		
+        <div id="footer">{% block footercontent %}
             <div id="footercontent">
-                <strong>Aktiv gegen Grippe</strong> wird völlig unabhängig betrieben, ohne Einfluss von Sponsoren oder kommerzielle Organisationen. Die Inhalte der Internetseite http://www.aktivgegengrippe.de sind weder organisatorisch, inhaltlich,wissenschaftlich oder auf andere Art und Weise parteilich verfasst. Auch alle Unterrichtmaterialen sind von unabhängige Experten zusammengestellt.
-            </div>
+                <strong>De Grote Griep Meting</strong> opereert volstrekt onafhankelijk van welke sponsor of adverteerder dan ook: organisatorisch, inhoudelijk, wetenschappelijk of anderszins. Ook het bijbehorende lesmateriaal is door deskundigen samengesteld zonder enige beïnvloeding van sponsors of adverteerders.
+            </div>{% endblock footercontent %}
             <div id="footerclose">
-                &copy; Aktiv gegen Grippe &nbsp;|&nbsp; <a href="#placeholder" title="Impressum">Impressum</a>
+                &copy; {% now "Y" %} De Grote Griep Meting &nbsp;|&nbsp; <a href="../contact" title="Neem contact met ons op">Contact</a>
             </div>
         </div>
+
     </div>
     </body>
 
