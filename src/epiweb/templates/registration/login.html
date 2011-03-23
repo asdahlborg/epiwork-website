@@ -1,16 +1,9 @@
-{% extends "base/sitebase.html" %}
+{% extends "blankbase.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{{ block.super }}: Login{% endblock %}
 
 {% block content %}
-
-<h1>Login</h1>
-
-<p>Vul uw gebruikersnaam en wachtwoord in om in te loggen. <a href="{% url django.contrib.auth.views.password_reset %}">Of bent u uw wachtwoord vergeten?</a></p>
-
-<form method="post" action="?next=/" id="login">
-{{ form.as_p }}
-<p><input type="submit" value="Log in" /></p>
-</form>
-
-{% endblock %}
+        <h1>Login</h1>
+        <p>Vul uw gebruikersnaam en wachtwoord in om in te loggen. Of bent u uw <a href="{% url django.contrib.auth.views.password_reset %}">wachtwoord vergeten</a>?</p>
+        {% spaceless %}<form method="post" action="?next=/" id="login">{{ form.as_p }}<p><input type="submit" id="boxsubmit" value="Log in" /></p></form>{% endspaceless %}
+{% endblock content %}

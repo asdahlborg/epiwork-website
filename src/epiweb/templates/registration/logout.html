@@ -1,11 +1,8 @@
-{% extends "base/sitebase.html" %}
+{% extends "blankbase.html" %}
 
-{% block title %}Uitgelogd{% endblock %}
+{% block title %}{{ block.super }}: Uitgelogd{% endblock %}
 
 {% block content %}
-
-<h1>U bent uitgelogd.</h1>
-
-<p><a href="/">Terug naar de startpagina</a></p>
-
-{% endblock %}
+        <h1>U bent uitgelogd.</h1>
+        <p><a href="/">Terug naar de startpagina</a></p>
+{% endblock content %}

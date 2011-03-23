@@ -98,7 +98,6 @@ CMS_TEMPLATES = (
 ROOT_URLCONF = 'epiweb.urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'templates'),
     os.path.join(PROJECT_PATH, 'templates/base'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
