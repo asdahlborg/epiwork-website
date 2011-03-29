@@ -68,7 +68,7 @@
             </div>{% endblock authentication %}
             <div id="navigation">
                 <div id="menubar">
-                    {% block menubar %}{% spaceless %}<ul>{% show_menu 0 0 %}</ul>{% endspaceless %}{% endblock menubar %}
+                    {% spaceless %}<ul>{% block menubar %}{% show_menu 0 0 %}{% endblock menubar %}</ul>{% endspaceless %}
                 </div>
                 <div id="searchbar">
                     <form method="post">

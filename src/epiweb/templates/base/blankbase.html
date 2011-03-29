@@ -14,15 +14,16 @@
         <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/default.css" />
         <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/local_ggm.css" />
         {% block add_css %}{% endblock add_css %}
+        <script type="text/javascript" src="/+media/base/js/fancyclose.js"></script>
         {% block add_js %}{% endblock add_js %}
     </head>
 
-    <body{% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
-    	<div id="boxwrapper">
-    		<div id="box">
-        		{% block content %}{% endblock content %}        <noscript><img src="/+media/base/img/local_ggm/logo-ggm_noscript.gif" alt="De Grote Griep Meting" /></noscript>
-    		</div>
-		</div>
+    <body {% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
+        <div id="boxwrapper">
+            <div id="box">
+                {% block content %}{% endblock content %}        <noscript><img src="/+media/base/img/local_ggm/logo-ggm_noscript.gif" alt="De Grote Griep Meting" /></noscript>
+            </div>
+        </div>
     </body>
 
 </html>

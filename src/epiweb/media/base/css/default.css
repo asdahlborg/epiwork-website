@@ -50,6 +50,12 @@ img {
  display: none;
 }
 
+.red {
+ color: red;
+ font-weight: bold;	
+}
+
+
 /* Influenzanet bar */
 
 #influenzabar {
@@ -440,7 +446,8 @@ input#commentsubmit:hover {
  cursor: pointer;
 }
 
-#box input#boxsubmit:hover {
+#box input#boxsubmit:hover,
+#box input#boxsubmit:focus {
  background: #115c11;
 }
 
