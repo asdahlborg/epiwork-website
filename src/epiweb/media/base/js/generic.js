@@ -61,24 +61,51 @@ function externalLinks() {
      anchor.target = "_blank";
  }
 }
+
 window.onload = externalLinks;
+
+/* Close any Fancybox that is currently open */
+ 
+window.onload = closeFancybox;
+
+function closeFancybox(){
+  parent.$.fancybox.close();
+}
 
 /* Fancybox */
 
 $(document).ready(function() {
 
- $(".fancybox").fancybox({
+ $(".fancybox1").fancybox({
   'overlayColor'		: '#d5d5d5',
   'overlayOpacity'		: 0.8,
   'width'				: 500,
-  'height'				: 500,
+  'height'				: 490,
   'autoScale'			: false,
+  'scrolling'			: 'no',
   'transitionIn'		: 'fade',
   'speedIn'				: 500,
-  'transitionOut'		: 'elastic',
+  'transitionOut'		: 'none',
+  'speedOut'			: 10,
   'type'				: 'iframe',
   'onClosed'            : function() { parent.location.reload(true); }
  });
+
+ $(".fancybox2").fancybox({
+  'overlayColor'		: '#d5d5d5',
+  'overlayOpacity'		: 0.8,
+  'width'				: 500,
+  'height'				: 600,
+  'autoScale'			: false,
+  'scrolling'			: 'no',
+  'transitionIn'		: 'fade',
+  'speedIn'				: 500,
+  'transitionOut'		: 'none',
+  'speedOut'			: 10,
+  'type'				: 'iframe',
+  'onClosed'            : function() { parent.location.reload(true); }
+ });
+
 });
 
 /* Include jquery.easing-1.3.pack.js */

@@ -10,10 +10,6 @@ Version: 1.0
 
 /* Main */
 
-html, body {
- height: 100%;	
-}
-
 html {
  font-family: Verdana, Geneva, sans-serif;
  line-height: 1.2em;
@@ -23,6 +19,7 @@ html {
 }
 
 body, p {
+ height: 100%;
  margin:0;
  padding: 0;
 }
@@ -371,7 +368,7 @@ input#commentsubmit:hover {
  height: 50%;
  width: 50%;
  left: 25%;
- top: 15%;	
+ top: 10%;
 }
 
 #box {
@@ -427,7 +424,7 @@ input#commentsubmit:hover {
 
 #box label {
  display: inline-block;
- width: 100px;
+ width: 180px;
  margin: 10px 30px 2px 0;
  color: #aaaaaa;
 }

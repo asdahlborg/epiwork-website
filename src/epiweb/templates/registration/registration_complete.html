@@ -1,15 +1,7 @@
-{% extends "registration/base.html" %}
+{% extends "registration/boxbase.html" %}
 
-{% block title %}Registration complete{% endblock %}
+{% block title %}{{ block.super }}: Registratie voltooid{% endblock %}
 
-{% block content %}
-
-<p>Registration is complete.</p>
-
-<p>An e-mail containing information about how to activate your account has been
-sent to your e-mail address.</p>
-
-<p><a href="/">Back to the home page</a>.</p>
-
-{% endblock %}
-
+{% block content %}<h1>Registratie voltooid</h1>
+                <p>Er is een e-mail naar u verstuurd waarmee u uw toegang kunt activeren.</p>
+                <p>Terug naar de <a href="/">beginpagina</a>.</p>{% endblock content %}
