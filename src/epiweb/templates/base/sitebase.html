@@ -9,14 +9,16 @@
         <link rel="shortcut icon" href="/+media/base/img/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/+media/base/img/local_ggm/apple-touch-icon.png" />      
 
-        <title>{% block title %}De Grote Griep Meting{% endblock title %}</title>
+        <title>{% block title %}De Grote Griep Meting: {% page_attribute page_title %}{% endblock title %}</title>
+        <meta name="description" content="{% page_attribute meta_description %}"/>
+        <meta name="keywords" content="{% page_attribute meta_keywords %}"/>
         {% block add_head %}{% endblock add_head %}
         <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/default.css" />
         <link type="text/css" rel="stylesheet" media="all" href="/+media/base/css/local_ggm.css" />
         {% block add_css %}{% endblock add_css %}
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
         <script type="text/javascript" src="/+media/base/js/generic.js"></script>
-		<script type="text/javascript" src="/+media/base/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+        <script type="text/javascript" src="/+media/base/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         {% block add_js %}{% endblock add_js %}
     </head>
 
@@ -68,7 +70,7 @@
             </div>{% endblock authentication %}
             <div id="navigation">
                 <div id="menubar">
-                    {% spaceless %}<ul>{% block menubar %}{% show_menu 0 0 %}{% endblock menubar %}</ul>{% endspaceless %}
+                    {% spaceless %}<ul>{% block menubar %}{% show_menu 0 2 %}{% endblock menubar %}</ul>{% endspaceless %}
                 </div>
                 <div id="searchbar">
                     <form method="post">
