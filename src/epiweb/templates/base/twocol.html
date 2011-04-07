@@ -1,4 +1,5 @@
 {% extends "sitebase.html" %}
+{% load cms_tags %}
 
 {% block content %}
         <div id="colmask">
@@ -7,14 +8,14 @@
                     <div id="col1wrap"> 
                          <div id="colleftpad"> 
                              <div id="col1"> 
-                                 {% block col1 %}{% endblock col1 %}
+                                 {% block col1 %}{% placeholder "hoofdpagina" %}{% endblock col1 %}
                              </div> 
                          </div> 
                     </div> 
                     <div id="col2" class="disable"> 
                     </div> 
                     <div id="col3"> 
-                        {% block col3 %}<a href="http://www.epiwork.eu/" rel="external" title="Epiwork: Developing the framework for an epidemic forecast infrastructure"><img src="/+media/base/img/local_ggm/content/epibanner.jpg" alt="Epiwork" /></a>{% endblock col3 %}
+                        {% block col3 %}{% placeholder "balk rechts" %}<a href="http://www.epiwork.eu/" rel="external" title="Epiwork: Developing the framework for an epidemic forecast infrastructure"><img src="/+media/base/img/local_ggm/content/epibanner.jpg" alt="Epiwork" /></a>{% endblock col3 %}
                     </div> 
                 </div> 
             </div> 
