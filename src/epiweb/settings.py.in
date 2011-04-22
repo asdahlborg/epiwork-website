@@ -9,12 +9,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'ggm.db'             # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASE_ENGINE = '@DB_ENGINE@'        # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_NAME = '@DB_NAME@'        # Or path to database file if using sqlite3.
+DATABASE_USER = '@DB_USERNAME@'        # Not used with sqlite3.
+DATABASE_PASSWORD = '@DB_PASSWORD@'        # Not used with sqlite3.
+DATABASE_HOST = '@DB_HOST@'        # Set to empty string for localhost. Not used with sqlite3.
+DATABASE_PORT = '@DB_PORT@'        # Set to empty string for default. Not used with sqlite3.
 
 SITE_ID = 1
 
@@ -23,18 +23,17 @@ SITE_ID = 1
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'Europe/Amsterdam'
+TIME_ZONE = '@TIMEZONE@'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'nl'
-# LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = '@LANGUAGE@'
 
 # For checking postcodes etc.
 # Use ISO3166 two-letter country code
 # See http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
 # Avaliable: be, it, nl, uk, pt, se
-COUNTRY = 'nl'
+COUNTRY = '@COUNTRY@'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
