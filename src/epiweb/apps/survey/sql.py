@@ -1,3 +1,4 @@
+from datetime import datetime, date
 from inspect import isclass
 
 from epiweb.apps.survey.models import Survey
@@ -25,28 +26,39 @@ class OptionsSingleMapper(Mapper):
 class OptionsMultipleMapper(Mapper):
     def __init__(self, options):
         self.options = options
-        
-        target = range(len(options))
-        source = [item[0] for item in options]
-        self.mapping = dict(zip(source, target))
+        self.values = [item[0] for item in options]
 
     def serialize(self):
         return {'type': 'options-multiple',
-                'mapping': self.mapping}
+                'values': self.values}
 
-class YesNoMapper(Mapper):
+class TypeMapper(Mapper):
+    type = None
+    def __init__(self, type=None):
+        if type is not None:
+            self.type = type
+
     def serialize(self):
-        return {'type': 'yes-no'}
+        if self.type is None:
+            raise ValueError('Invalid mapper type')
+        return {'type': self.type}
 
-class DateMapper(Mapper):
-    def serialize(self):
-        return {'type': 'date'}
+class YesNoMapper(TypeMapper):
+    type = 'yes-no'
 
-class DateOrOptionMapper(Mapper):
-    def serialize(self):
-        return {'type': 'date-or-option'}
+class DateMapper(TypeMapper):
+    type = 'date'
 
-class TableOfSelectMapper(Mapper):
+class DateOrOptionMapper(TypeMapper):
+    type = 'date-or-option'
+
+class MonthYearMapper(TypeMapper):
+    type = 'month-year'
+
+class PostCodeMapper(TypeMapper):
+    type = 'postcode'
+
+class TableOfSelectsMapper(Mapper):
     def __init__(self, choices, rows, cols):
         self.choices = choices
         self.rows = rows
@@ -57,10 +69,23 @@ class TableOfSelectMapper(Mapper):
         self.ncols = len(cols)
 
     def serialize(self):
-        return {'type': 'date-or-options',
+        return {'type': 'table-of-selects',
                 'values': self.values,
                 'rows': self.nrows,
                 'cols': self.ncols}
+
+class TableOfOptionsSingleMapper(Mapper):
+    def __init__(self, options, rows):
+        self.options = options
+        self.rows = rows
+
+        self.values = [item[0] for item in options]
+        self.nrows = len(rows)
+
+    def serialize(self):
+        return {'type': 'table-of-options-single',
+                'values': self.values,
+                'rows': self.nrows}
 
 def _get_options_datatype(options):
     values = [value for value, label in options]
@@ -76,7 +101,7 @@ def _get_options_datatype(options):
 
 def get_question_field(question):
     qtype = question.type
-    
+
     if qtype == 'yes-no':
         return [(question.id, 'BIT(1)', question.id)], YesNoMapper()
 
@@ -113,8 +138,8 @@ def get_question_field(question):
                             '%s: %s - %s' % (question.id, row, col)))
                 index += 1
 
-        return res, TableOfSelectMapper(question.choices, question.rows,
-                                        question.columns)
+        return res, TableOfSelectsMapper(question.choices, question.rows,
+                                         question.columns)
 
     elif qtype == 'table-of-options-single':
         datatype = _get_options_datatype(question.options)
@@ -133,23 +158,34 @@ def get_question_field(question):
         elif qta and isinstance(qta[0], str):
             rows = [(index, label) for index, label in enumerate(qta)]
 
+        else:
+            raise ValueError('Invalid question: %s' % question.id)
+
         res = []
         for row, label in rows:
             res.append(('%s_%s' % (question.id, row), datatype,
                         '%s: %s' % (question.id, label)))
-        return res
+        return res, TableOfOptionsSingleMapper(question.options, rows)
 
-    return None
+    elif qtype == 'month-year':
+        return [(question.id, 'DATE', question.id)], MonthYearMapper()
+
+    elif qtype == 'postcode':
+        return [(question.id, 'VARCHAR(25)', question.id)], PostCodeMapper()
+
+    return None, None
 
 def get_fields(questions):
     res = []
+    mappers = {}
     for question in questions:
-        fields = get_question_field(question)
+        fields, mapper = get_question_field(question)
         if fields is not None:
             res += fields
-    return res
+            mappers[question.id] = mapper
+    return res, mappers
 
-def _create_table_name(name):
+def create_table_name(name):
     name = name.replace('-', '_')
     name = name.replace('.', '_')
     return name
@@ -162,13 +198,17 @@ def create_ddl(survey):
     spec = Specification(data)
 
     sql = []
-    sql.append('CREATE TABLE %s' % _create_table_name(data.id))
+    sql.append('CREATE TABLE %s' % create_table_name(data.id))
 
-    fields = [('id', 'INTEGER auto_increment', 'ID'),
-              ('uid', 'CHAR(36)', 'User ID'),
-              ('date', 'DATETIME', 'Submission date')]
+    fields, mappers = get_fields(spec.questions)
 
-    fields += get_fields(spec.questions)
+    fields[0:0] = [('id', 'INTEGER auto_increment PRIMARY KEY', 'ID'),
+                   ('_id', 'CHAR(36)', 'User ID'),
+                   ('uid', 'CHAR(36)', 'User ID'),
+                   ('date', 'DATETIME', 'Submission date')]
+    mappers['_id'] = TypeMapper('id')
+    mappers['#uid'] = TypeMapper('uid')
+    mappers['#date'] = TypeMapper('submission-date')
 
     # Field and data type
     max_len = max([len(item[0]) for item in fields])
@@ -192,5 +232,160 @@ def create_ddl(survey):
 
     sql = ' '.join(sql)
 
-    return sql
+    # Mapper
+    mapper_data = dict([(key, mapper.serialize())
+                        for key, mapper in mappers.items()])
+    mapper_info = {'survey_id': data.id,
+                   'mapping': mapper_data}
+
+    return sql, mapper_info
+
+def create_insert_sql_fields(mappers, data):
+    fields = {}
+
+    for key, value in data.items():
+        if key in mappers:
+            fields.update(mappers[key](value))
+
+    return fields
+
+def create_insert_sql(table, mappers, data):
+    pairs = create_insert_sql_fields(mappers, data)
+    if len(pairs) == 0:
+        return '', ()
+
+    fields, values = zip(*pairs.items())
+
+    sql = 'INSERT INTO %s (%s) VALUES (%s)' % \
+          (table, ', '.join(fields), ', '.join(['?'] * len(fields)))
+
+    return sql, values
+
+def get_mapper(field, data):
+    mtype = data['type']
+
+    if mtype == 'options-single':
+        values = set(data['values'])
+        def func(value):
+            if value not in values:
+                raise ValueError
+            return {field: value}
+        return func
+
+    elif mtype == 'options-multiple':
+        def func(values):
+            if not type(values) in [list, tuple, set]:
+                values = [values]
+
+            mapping = dict(zip(data['values'], range(len(data['values']))))
+
+            res = {}
+            for value in values:
+                if not value in mapping:
+                    raise ValueError
+
+                column = '%s_%s' % (field, mapping[value])
+                res[column] = 1
+
+            return res
+        return func
+
+    elif mtype == 'yes-no':
+        def func(value):
+            '''Convert True/1/yes to 1 and the rest to 0'''
+            res = 0
+            if value is True or str(value).lower() in ['yes', '1']:
+                res = 1
+            return {field: res}
+        return func
+
+    elif mtype == 'date':
+        def func(value):
+            return {field: value}
+        return func
+
+    elif mtype == 'date-or-option':
+        def func(value):
+            if isinstance(value, datetime) or isinstance(value, date):
+                return {'%s_date' % field: value}
+            return {'%s_option' % field: 1}
+        return func
+
+    elif mtype == 'table-of-selects':
+        def func(values):
+            if not type(values) in [list, set, tuple]:
+                raise ValueError, 'Invalid data'
+            if len(values) != data['rows'] * data['cols']:
+                raise ValueError, 'Invalid number of data'
+
+            res = {}
+            for index, value in enumerate(values):
+                if not value in data['values']:
+                    raise ValueError, 'Invalid value'
+                res['%s_%s' % (field, index)] = value
+            return res
+        return func
+
+    elif mtype == 'table-of-options-single':
+        def func(values):
+            if not type(values) in [list, set, tuple]:
+                raise ValueError, 'Invalid data'
+            if len(values) != data['rows']:
+                raise ValueError, 'Invalid number of data'
+
+            res = {}
+            for index, value in enumerate(values):
+                if not value in data['values']:
+                    raise ValueError, 'Invalid value'
+                res['%s_%s' % (field, index)] = value
+
+            return res
+
+        return func
+
+    elif mtype == 'month-year':
+        def func(values):
+            return {field: values}
+        return func
+
+    elif mtype == 'postcode':
+        def func(values):
+            return {field: values}
+        return func
+
+def create_mappers(mapper_data):
+    mappers = {}
+
+    for field, data in mapper_data.items():
+        mappers[field] = get_mapper(field, data)
+
+    return mappers
+
+def test():
+    mapper_data = {
+        'Q01': { 'type': 'yes-no'},
+        'Q02': { 'type': 'options-multiple', 'values': [0,3,4,5,2,1]},
+        'Q03': { 'type': 'options-single', 'values': [0,1,2,3]},
+        'Q04': { 'type': 'date'},
+        'Q05': { 'type': 'date-or-option'},
+        'Q06': { 'type': 'month-year'},
+        'Q07': { 'type': 'postcode'},
+        'Q08': { 'type': 'table-of-selects', 'rows': 2, 'cols': 4, 'values': [0,1,2]},
+        'Q09': { 'type': 'table-of-options-single', 'rows': 3, 'values': [0,1,2,3,4,5]},
+    }
+    mappers = create_mappers(mapper_data)
+
+    data = {
+        'Q01': 'Yes',
+        'Q02': [2,1,3],
+        'Q03': 3,
+        'Q04': date(2011, 10, 2),
+        'Q05': 0,
+        'Q06': date(2000, 10, 2),
+        'Q07': '1234AB',
+        'Q08': [0,1, 2,0, 1,2, 0,1],
+        'Q09': [0,1,2],
+    }
+    sql = create_insert_sql('TargetTable', mappers, data)
+    print sql
 
