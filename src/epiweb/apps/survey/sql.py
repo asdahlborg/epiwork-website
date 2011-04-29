@@ -193,7 +193,7 @@ def create_table_name(name):
 def _clean_label(label):
     return ' '.join(map(lambda x: x.strip(), label.splitlines()))
 
-def create_ddl(survey):
+def create_sql_create(survey):
     data = parse_specification(survey.specification)
     spec = Specification(data)
 

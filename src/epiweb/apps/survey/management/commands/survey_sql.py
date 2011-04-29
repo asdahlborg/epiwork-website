@@ -17,7 +17,7 @@ class Command(BaseCommand):
             raise CommandError('Please enter a survey_id')
 
         from epiweb.apps.survey.models import Survey
-        from epiweb.apps.survey.sql import create_ddl, create_table_name
+        from epiweb.apps.survey.sql import create_sql_create, create_table_name
 
         try:
             survey = Survey.objects.get(survey_id=survey_id)
@@ -26,7 +26,7 @@ class Command(BaseCommand):
 
         name = create_table_name(survey_id)
 
-        ddl, mapper_data = create_ddl(survey)
+        ddl, mapper_data = create_sql_create(survey)
 
         f = open('%s.sql' % name, 'w')
         f.write(ddl)
