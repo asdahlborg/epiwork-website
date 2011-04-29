@@ -4,6 +4,64 @@ from epiweb.apps.survey.models import Survey
 from epiweb.apps.survey.survey import parse_specification, Specification
 from epiweb.apps.survey.spec import Question
 
+#
+# Survey/MongoDB to SQL value mapper
+#
+
+class Mapper(object):
+    '''Survey/MongoDB to SQL value mapper'''
+    def serialize(self):
+        raise NotImplementedError()
+
+class OptionsSingleMapper(Mapper):
+    def __init__(self, options):
+        self.options = options
+        self.values = [item[0] for item in options]
+
+    def serialize(self):
+        return {'type': 'options-single',
+                'values': self.values}
+
+class OptionsMultipleMapper(Mapper):
+    def __init__(self, options):
+        self.options = options
+        
+        target = range(len(options))
+        source = [item[0] for item in options]
+        self.mapping = dict(zip(source, target))
+
+    def serialize(self):
+        return {'type': 'options-multiple',
+                'mapping': self.mapping}
+
+class YesNoMapper(Mapper):
+    def serialize(self):
+        return {'type': 'yes-no'}
+
+class DateMapper(Mapper):
+    def serialize(self):
+        return {'type': 'date'}
+
+class DateOrOptionMapper(Mapper):
+    def serialize(self):
+        return {'type': 'date-or-option'}
+
+class TableOfSelectMapper(Mapper):
+    def __init__(self, choices, rows, cols):
+        self.choices = choices
+        self.rows = rows
+        self.cols = cols
+
+        self.values = [item[0] for item in choices]
+        self.nrows = len(rows)
+        self.ncols = len(cols)
+
+    def serialize(self):
+        return {'type': 'date-or-options',
+                'values': self.values,
+                'rows': self.nrows,
+                'cols': self.ncols}
+
 def _get_options_datatype(options):
     values = [value for value, label in options]
     if all([isinstance(value, int) for value in values]):
@@ -20,7 +78,7 @@ def get_question_field(question):
     qtype = question.type
     
     if qtype == 'yes-no':
-        return [(question.id, 'BIT(1)', question.id)]
+        return [(question.id, 'BIT(1)', question.id)], YesNoMapper()
 
     elif qtype == 'options-multiple':
         res = []
@@ -28,32 +86,35 @@ def get_question_field(question):
             value, label = data
             res.append(['%s_%s' % (question.id, index), 'BIT(1)',
                         '%s: %s' % (question.id, label)])
-        return res
+        return res, OptionsMultipleMapper(question.options)
 
     elif qtype == 'options-single':
         datatype = _get_options_datatype(question.options)
-        return [(question.id, datatype, question.id)]
+        return [(question.id, datatype, question.id)], OptionsSingleMapper(question.options)
 
     elif qtype == 'date':
-        return [(question.id, 'DATETIME', question.id)]
+        return [(question.id, 'DATE', question.id)], DateMapper()
 
     elif qtype == 'date-or-option':
         # Either a date widget or a checkbox (boolean value)
-        return [('%s_date' % question.id, 'DATETIME',
+        return [('%s_date' % question.id, 'DATE',
                  '%s: Date' % question.id),
                 ('%s_option' % question.id, 'BIT(1)',
-                 '%s: Option' % question.id)]
+                 '%s: Option' % question.id)], DateOrOptionMapper()
 
     elif qtype == 'table-of-selects':
         datatype = _get_options_datatype(question.choices)
 
         res = []
-        for row in range(len(question.rows)):
-            for col in range(len(question.columns)):
-                res.append(('%s_%s_%s' % (question.id, row, col), datatype,
-                            '%s: %s - %s' % (question.id, question.rows[row],
-                                             question.columns[col])))
-        return res
+        index = 0
+        for row in question.rows:
+            for col in question.columns:
+                res.append(('%s_%s' % (question.id, index), datatype,
+                            '%s: %s - %s' % (question.id, row, col)))
+                index += 1
+
+        return res, TableOfSelectMapper(question.choices, question.rows,
+                                        question.columns)
 
     elif qtype == 'table-of-options-single':
         datatype = _get_options_datatype(question.options)
