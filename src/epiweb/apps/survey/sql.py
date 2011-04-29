@@ -257,7 +257,7 @@ def create_insert_sql(table, mappers, data):
     fields, values = zip(*pairs.items())
 
     sql = 'INSERT INTO %s (%s) VALUES (%s)' % \
-          (table, ', '.join(fields), ', '.join(['?'] * len(fields)))
+          (table, ', '.join(fields), ', '.join(['%s'] * len(fields)))
 
     return sql, values
 
