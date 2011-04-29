@@ -1,3 +1,4 @@
+import os
 try:
     import simplejson as json
 except ImportError:
@@ -12,21 +13,23 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            survey_id = args[0]
-        except ValueError:
-            raise CommandError('Please enter a survey_id')
+            fname = args[0]
+        except IndexError:
+            raise CommandError('Please enter specify a survey specification file')
 
-        from epiweb.apps.survey.models import Survey
+        if not os.path.exists(fname):
+            raise CommandError('File not found')
+
         from epiweb.apps.survey.sql import create_sql_create, create_table_name
+        from epiweb.apps.survey.survey import parse_specification, Specification
 
-        try:
-            survey = Survey.objects.get(survey_id=survey_id)
-        except Survey.DoesNotExist:
-            raise CommandError('Invalid survey_id: %s' % survey_id)
+        content = open(fname).read()
+        data = parse_specification(content)
+        spec = Specification(data)
 
-        name = create_table_name(survey_id)
+        ddl, mapper_data = create_sql_create(spec)
 
-        ddl, mapper_data = create_sql_create(survey)
+        name = create_table_name(spec.survey.id)
 
         f = open('%s.sql' % name, 'w')
         f.write(ddl)

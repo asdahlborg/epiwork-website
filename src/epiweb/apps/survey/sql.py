@@ -1,8 +1,6 @@
 from datetime import datetime, date
 from inspect import isclass
 
-from epiweb.apps.survey.models import Survey
-from epiweb.apps.survey.survey import parse_specification, Specification
 from epiweb.apps.survey.spec import Question
 
 #
@@ -193,12 +191,9 @@ def create_table_name(name):
 def _clean_label(label):
     return ' '.join(map(lambda x: x.strip(), label.splitlines()))
 
-def create_sql_create(survey):
-    data = parse_specification(survey.specification)
-    spec = Specification(data)
-
+def create_sql_create(spec):
     sql = []
-    sql.append('CREATE TABLE %s' % create_table_name(data.id))
+    sql.append('CREATE TABLE %s' % create_table_name(spec.survey.id))
 
     fields, mappers = get_fields(spec.questions)
 
@@ -235,7 +230,7 @@ def create_sql_create(survey):
     # Mapper
     mapper_data = dict([(key, mapper.serialize())
                         for key, mapper in mappers.items()])
-    mapper_info = {'survey_id': data.id,
+    mapper_info = {'survey_id': spec.survey.id,
                    'mapping': mapper_data}
 
     return sql, mapper_info
