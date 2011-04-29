@@ -353,6 +353,21 @@ def get_mapper(field, data):
             return {field: values}
         return func
 
+    elif mtype == 'id':
+        def func(values):
+            return {field: values}
+        return func
+
+    elif mtype == 'uid':
+        def func(values):
+            return {'uid': values}
+        return func
+
+    elif mtype == 'submission-date':
+        def func(values):
+            return {'date': values}
+        return func
+
 def create_mappers(mapper_data):
     mappers = {}
 
