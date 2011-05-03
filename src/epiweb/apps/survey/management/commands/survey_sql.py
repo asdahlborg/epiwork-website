@@ -9,7 +9,7 @@ from django.core.management.base import CommandError, BaseCommand
 
 class Command(BaseCommand):
     help = 'Prints the CREATE TABLE SQL statements for the given survey id'
-    args = '<survey_id>'
+    args = '<survey-spec.py>'
 
     def handle(self, *args, **options):
         try:
