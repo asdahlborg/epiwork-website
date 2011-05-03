@@ -396,6 +396,6 @@ def test():
         'Q08': [0,1, 2,0, 1,2, 0,1],
         'Q09': [0,1,2],
     }
-    sql = create_insert_sql('TargetTable', mappers, data)
-    print sql
+    sql, values = create_insert_sql('TargetTable', mappers, data)
+    return sql, values
 
