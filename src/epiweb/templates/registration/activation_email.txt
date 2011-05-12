@@ -1,9 +1,8 @@
 
-Activate your account:
+Activeer uw toegang.
 
-Click the following URL or copy and paste it to the browser's address bar.
-
+Klik op de onderstaande link of kopieer hem naar uw internet-browser:
 http://{{ site }}/accounts/activate/{{ activation_key }}/
 
-This activation URL will expire in {{ expiration_days }} days.
+Deze link is {{ expiration_days }} dagen geldig.
 

@@ -1,0 +1,9 @@
+{% extends "sitebase.html" %}
+
+{% block title%}{{ block.super }}: Foutmelding{% endblock title%}
+
+{% block authentication %}{% endblock authentication %}
+
+{% block menubar %}<li class="selected error"><a href="/">Onze excuses, er is een systeemfout opgetreden. Ga naar de <u>startpagina</u> of gebruik de zoekfunctie:</a></li>{% endblock menubar %}
+
+{% block footercontent %}{% endblock footercontent %}

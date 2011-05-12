@@ -1,0 +1,32 @@
+/*
+Template Name: GGM
+Description: Localised CSS for the Influenzanet website http://www.grotegriepmeting.nl  
+Author: Antwan Wiersma (http://www.prime-creation.nl/)
+Version: 1.0
+*/
+
+/* Customisable styles */
+
+#account ul.anonymous li,
+#account ul.member li,
+#searchbar input#searchsubmit,
+input#commentsubmit {
+ background: #72aa72;
+}
+
+#account ul.anonymous li:hover,
+#account ul.member li:hover,
+#searchbar input#searchsubmit:hover,
+input#commentsubmit:hover {
+ background: #115c11;
+}
+
+#col2 p.title {
+ background: #72aa72;
+}
+
+#col1 a,
+#col2 a,
+#col3 a {
+ color: #117411;
+}
