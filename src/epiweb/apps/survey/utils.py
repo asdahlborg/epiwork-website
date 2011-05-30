@@ -213,7 +213,13 @@ def save_extra_response(survey_user, participation, data):
     response.save()
 
 class DateEncoder(json.JSONEncoder):
-    """Encode dates and datetimes as lists."""
+    """Encode dates and datetimes as lists.
+
+    Klaas says:
+    Note that yet another date format is chosen here: lists
+    I'm note comfortable to change it yet for reasons of backwards compatability. 
+    (this encoder is used to store results locally)
+    """
     def default(self, o):
         if isinstance(o, datetime):
             return [o.year, o.month, o.day, o.minute, o.second, o.microsecond]
