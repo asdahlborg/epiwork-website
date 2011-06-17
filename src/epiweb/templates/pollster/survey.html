@@ -1,0 +1,65 @@
+{% extends "pollster/base.html" %}
+
+{% block pollster-canvas %}
+<div class="survey" id="survey-{{ survey.id }}">
+    {% for question in survey.question_set.all %}
+    <div class="question-wrapper clearfix">
+        <div class="question {{ question.type }}" id="question-{{ question.id }} {{ question.type }} {% if question.starts_hidden %} starts-hidden {% endif %}"
+             data-question-type="{{ question.type }}" data-data-type="{{ question.data_type }}" data-shortname="{{ question.data_name }}">
+            <p>
+                <span class="number"></span>
+                <span class="title">{{ question.title }}</span>
+                {{ question.description }}
+            </p>
+            {% if question.is_text %}
+            <form>
+                <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field" />
+                <ul class="derived-values">
+                    {% for option in question.option_set.all %}
+                    <li id="option-{{ option.id }}"
+                        data-type="{{ option.virtual_type }}" data-value="{{ option.value }}"
+                        data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
+                        <div class="info">{{ option.value }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </form>
+            {% endif %}
+            {% if question.is_single_choice %}
+            <form>
+                <ul class="choices">
+                    {% for option in question.option_set.all %}
+                    <li id="option-{{ option.id }}">
+                       <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
+                       <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                       <div class="info">{{ option.value }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </form>
+            {% endif %}
+            {% if question.is_multiple_choice %}
+            <form>
+                <ul class="choices">
+                    {% for option in question.option_set.all %}
+                    <li id="option-{{ option.id }}">
+                       <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
+                       <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                       <div class="info">{{ option.value }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </form>
+            {% endif %}
+            <div class="info">{{ question.data_name }}</div>
+        </div>
+        <div class="rules">
+            {% for rule in question.rules %}
+            <div class="rule" id="rule-{{ rule.id }}"
+                 data-type="{{ rule.rule_type }}" data-trigger="option-{{ rule.subject_option }}" data-rule="rule-{{ rule.object_question }}" data-options="" />
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

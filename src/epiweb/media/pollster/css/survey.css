@@ -1,0 +1,9 @@
+.question { border: 1px solid #CCC; -webkit-border-radius: 5px; padding: 5px; background: #fff; }
+.question ul { list-style: none; margin-bottom: 10px; }
+.question li { margin-left: 20px; }
+.question input[type=text] { margin: 0 0 10px 20px; }
+.question .title { font-weight: bold; margin-right: 5px; }
+.question .number { font-weight: bold; margin-right: 3px; }
+.question .info { display: none; }
+
+.rules, .derived-values { display: none; }

@@ -21,7 +21,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
-    (r'^tools/surveys-editor', include('epiweb.apps.pollster.urls')),
+    (r'^tools/surveys-editor/', include('epiweb.apps.pollster.urls')),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
     (r'^survey/', include('epiweb.apps.survey.urls')),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),

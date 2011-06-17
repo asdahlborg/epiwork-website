@@ -23,7 +23,7 @@ class Command(BaseCommand):
         question_data_type_title = options.get('question_data_type_title')
         question_data_type = models.QuestionDataType.objects.get(title = question_data_type_title)
 
-        data = models.VirtualOptionDataType()
+        data = models.VirtualOptionType()
         data.question_data_type = question_data_type
         data.title = options.get('title')
         data.python_class = options.get('pyclass', None)

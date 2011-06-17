@@ -1,0 +1,15 @@
+{% extends "pollster/base.html" %}
+
+{% block content %}
+<div id="survey-list">
+    <h1>Surveys</h1>
+    <ul>
+        {% for survey in surveys %}
+        <li>
+            {{ survey.title }} (<a href="{% url pollster_survey_test survey.id %}">test</a> | <a href="{% url pollster_survey_edit survey.id %}">edit</a>)
+        </li>
+        {% endfor %}
+        <li><a href="{% url pollster_survey_add %}">new survey</a></li>
+    </ul>
+</div>
+{% endblock %}
