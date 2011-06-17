@@ -1,7 +1,7 @@
 from django.db import models
 
 class Survey(models.Model):
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=255, unique=True)
     path = models.CharField(max_length=4096)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -10,25 +10,25 @@ class Survey(models.Model):
         return self.title
 
 class RuleType(models.Model):
-    title = models.CharField(max_length=256)
-    js_class = models.CharField(max_length=256)
-    python_class = models.CharField(max_length=256)
+    title = models.CharField(max_length=255, unique=True)
+    js_class = models.CharField(max_length=255)
+    python_class = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.title
 
 class QuestionDataType(models.Model):
-    title = models.CharField(max_length=256)
-    db_type = models.CharField(max_length=256)
-    python_class = models.CharField(max_length=256)
+    title = models.CharField(max_length=255, unique=True)
+    db_type = models.CharField(max_length=255)
+    python_class = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.title
 
 class VirtualOptionDataType(models.Model):
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=255)
     question_data_type = models.ForeignKey(QuestionDataType)
-    python_class = models.CharField(max_length=256)
+    python_class = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.title
@@ -37,12 +37,12 @@ class Question(models.Model):
     survey = models.ForeignKey(Survey, db_index=True)
     starts_hidden = models.BooleanField()
     ordinal = models.IntegerField()
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=255)
     description = models.TextField()
-    type = models.CharField(max_length=256)
+    type = models.CharField(max_length=255)
     data_type = models.ForeignKey(QuestionDataType)
-    data_name = models.CharField(max_length=256)
-    visual = models.CharField(max_length=256, blank=True)
+    data_name = models.CharField(max_length=255)
+    visual = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):
         return self.title
@@ -55,15 +55,15 @@ class Option(models.Model):
     is_virtual = models.BooleanField()
     starts_hidden = models.BooleanField()
     ordinal = models.IntegerField()
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=255)
     text = models.TextField()
-    group = models.CharField(max_length=256)
-    value = models.CharField(max_length=256)
+    group = models.CharField(max_length=255)
+    value = models.CharField(max_length=255)
 
     virtual_type = models.ForeignKey(VirtualOptionDataType, blank=True)
-    virtual_inf = models.CharField(max_length=256, blank=True)
-    virtual_sup = models.CharField(max_length=256, blank=True)
-    virtual_regex = models.CharField(max_length=256, blank=True)
+    virtual_inf = models.CharField(max_length=255, blank=True)
+    virtual_sup = models.CharField(max_length=255, blank=True)
+    virtual_regex = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):
         return self.name

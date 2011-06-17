@@ -187,6 +187,18 @@ echo ""
 ./bin/django survey_register data/surveys/gsq/gold-standard-weekly.py 
 ./bin/django survey_register data/surveys/gsq/gold-standard-intake.py 
 ./bin/django survey_register data/surveys/gsq/gold-standard-contact.py
+./bin/django rule_type_register --title 'Show Question' --jsclass 'wok.pollster.rules.ShowQuestion' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Hide Question' --jsclass 'wok.pollster.rules.HideQuestion' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Show Option' --jsclass 'wok.pollster.rules.ShowOption' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Hide Option' --jsclass 'wok.pollster.rules.HideOption' --pyclass 'FIXME'
+./bin/django question_data_type_register --title 'Text' --dbtype 'text' --pyclass 'string'
+./bin/django question_data_type_register --title 'Numeric' --dbtype 'integer' --pyclass 'int'
+./bin/django question_data_type_register --title 'Date' --dbtype 'date' --pyclass 'datetime.date'
+./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Text' --pyclass 'FIXME'
+./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Numeric' --pyclass 'FIXME'
+./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Date' --pyclass 'FIXME'
+./bin/django virtual_option_type_register --title 'Relative date (years)' --question-data-type-title 'Date' --pyclass 'FIXME'
+./bin/django virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --pyclass 'FIXME'
 
 if [ "$DB_ENGINE" = "sqlite3" ] ; then
     echo ".read src/extra-survey.sqlite3.sql" | sqlite3 ggm.db
