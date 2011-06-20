@@ -35,8 +35,27 @@ def get_active_survey_user(request):
 
 @login_required
 def thanks(request):
-    return render_to_response('survey/thanks.html',
-        context_instance=RequestContext(request))
+    persons = models.SurveyUser.objects.filter(user=request.user)
+    for person in persons:
+        responses = list(models.LastResponse.objects.filter(user=person))
+        if responses[0].data:
+            response_dict = pickle.loads(str(responses[0].data))
+            wq1 = set(response_dict['WeeklyQ1'])
+            wq1b = response_dict['WeeklyQ1b']
+            if wq1==set([0]):
+                person.diag = 'Nessun sintomo'
+            elif (wq1b == 0) and wq1.intersection([1,17,11,8,9]) and wq1.intersection([6,5,18]):
+                person.diag = 'Sintomi influenzali'
+            elif wq1.intersection([2,3,4,5,6]):
+               person.diag = 'Raffreddore / allergia'
+            elif len(wq1.intersection([15,19,14,12,13]))>1:
+               person.diag = 'Sintomi gastro-intestinali'
+            else:
+               person.diag = 'Altri sintomi non influenzali'
+        else: 
+           person.diag = 'Nessuno status'
+    return render_to_response('survey/thanks.html', {'persons': persons}, 
+                              context_instance=RequestContext(request))
 
 @login_required
 def select_user(request, template='survey/select_user.html'):
