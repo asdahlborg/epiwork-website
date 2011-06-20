@@ -73,7 +73,7 @@
                     {% spaceless %}<ul>{% block menubar %}{% show_menu 0 2 %}{% endblock menubar %}</ul>{% endspaceless %}
                 </div>
                 <div id="searchbar">
-                    <form method="post">
+                    <form method="post">{% csrf_token %}
                         <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Zoeken" /></p>
                     </form>
                 </div>
