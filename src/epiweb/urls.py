@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
                      name='loginurl-index'),
     (r'^login/', include('loginurl.urls')),)
+    (r'^count/', include('epiweb.apps.count.urls')),)
 
 if settings.MOBILE_INTERFACE_ACTIVE:
   urlpatterns += patterns('', (r'^ema/', include('epiweb.apps.survey.api.urls')))
