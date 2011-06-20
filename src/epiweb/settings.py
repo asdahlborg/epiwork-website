@@ -1,4 +1,5 @@
 # Django settings for epiweb project.
+# -*- coding: iso-8859-15 -*-
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -43,8 +44,13 @@ USE_L10N = True
 
 LANGUAGES = (
    ('nl', 'Nederlands'),
-   ('fr', 'Francais'),
+   ('fr', 'Français'),
 )
+
+#CMS_LANGUAGES = (
+#  ('nl', gettext('Nederlands')),
+#  ('fr', gettext('Francais')),
+#)
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -69,17 +75,17 @@ SECRET_KEY = 'swgm*3%po62mg76m4iq!k8h3j+_)x=8b--7skjc_0wiak^wksr'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
+#    'django.template.loaders.eggs.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+#	'cms.middleware.multilingual.MultilingualURLMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
-    # 'cms.middleware.multilingual.MultilingualURLMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -118,6 +124,7 @@ INSTALLED_APPS = (
     'epiweb.apps.reminder',
     'epiweb.apps.banner',
     'cms',
+#    'menu',
     'cms.plugins.text',
     'cms.plugins.picture',
 #    'cms.plugins.link',
