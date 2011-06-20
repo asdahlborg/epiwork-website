@@ -91,6 +91,8 @@ def index(request):
             utils.add_response_queue(participation, spec, form.cleaned_data)
             data = utils.format_response_data(spec, form.cleaned_data)
             utils.save_last_response(survey_user, participation, data)
+            utils.save_local_flu_survey(survey_user, spec.survey.id, data)
+            utils.update_local_profile(survey_user)
             utils.save_response_locally(survey_user.name,
                                         spec.survey.id,
                                         data,
@@ -132,6 +134,7 @@ def profile_index(request):
             utils.add_profile_queue(survey_user, spec, form.cleaned_data)
             data = utils.format_profile_data(spec, form.cleaned_data)
             utils.save_profile(survey_user, spec.survey.id, data)
+            utils.save_local_profile(survey_user, data)
             utils.save_response_locally(survey_user.name,
                                         spec.survey.id,
                                         data,
