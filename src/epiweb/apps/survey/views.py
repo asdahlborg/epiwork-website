@@ -58,6 +58,11 @@ def thanks(request):
                               context_instance=RequestContext(request))
 
 @login_required
+def thanks_profile(request):
+    return render_to_response('survey/thanks_profile.html',
+        context_instance=RequestContext(request))
+
+@login_required
 def select_user(request, template='survey/select_user.html'):
     next = request.GET.get('next', None)
     if next is None:
@@ -167,7 +172,7 @@ def profile_index(request):
             url = '%s?gid=%s' % (url, survey_user.global_id)
 
             request.user.message_set.create(message=_('Profile saved.'))
-            return HttpResponseRedirect(url)
+            return HttpResponseRedirect(reverse(thanks_profile))
 
         else:
             request.user.message_set.create(
