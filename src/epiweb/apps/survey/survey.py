@@ -397,6 +397,11 @@ class FormBuilder(object):
         return field
 
 class SurveyAnswerEncoder(json.JSONEncoder):
+    """Klaas says:
+    Note that yet another date format is chosen here: 01/01/2011.
+    I'm note comfortable to change it yet for reasons of backwards compatability. 
+    (this encoder is used to generate JavaScript)
+    """
     def default(self, obj):
         import datetime
         if isinstance(obj, datetime.date):

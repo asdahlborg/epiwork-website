@@ -10,12 +10,17 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'ggm.db'             # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'ggm.db',             # Or path to database file if using sqlite3.
+        'USER': '',             # Not used with sqlite3.
+        'PASSWORD': '',         # Not used with sqlite3.
+        'HOST': '',             # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',             # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
 
 SITE_ID = 1
 
@@ -81,11 +86,13 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-#	'cms.middleware.multilingual.MultilingualURLMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.media.PlaceholderMediaMiddleware',
+    # 'cms.middleware.multilingual.MultilingualURLMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -111,6 +118,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'south',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -124,13 +132,13 @@ INSTALLED_APPS = (
     'epiweb.apps.reminder',
     'epiweb.apps.banner',
     'cms',
-#    'menu',
     'cms.plugins.text',
     'cms.plugins.picture',
 #    'cms.plugins.link',
 #    'cms.plugins.file',
     'cms.plugins.snippet',
 #    'cms.plugins.googlemap',
+    'menus',
     'journal',
     'mptt',
     'publisher',
