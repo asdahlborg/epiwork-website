@@ -133,7 +133,7 @@ INSTALLED_APPS = (
     'cms.plugins.snippet',
 #    'cms.plugins.googlemap',
     'menus',
-    #'journal',
+    'journal',
     'mptt',
     'publisher',
 )
