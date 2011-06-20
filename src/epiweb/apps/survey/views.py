@@ -16,6 +16,8 @@ from .survey import ( Specification,
                       JavascriptBuilder,
                       get_survey_context, )
 import extra
+import pickle
+
 
 _ = lambda x: x
 
@@ -68,7 +70,7 @@ def select_user(request, template='survey/select_user.html'):
     if next is None:
         next = reverse(index)
 
-    users = models.SurveyUser.objects.filter(user=request.user)
+    users = models.SurveyUser.objects.filter(user=request.user deleted=False)
     total = len(users)
     if total == 0:
         url = '%s?next=%s' % (reverse(people_add), next)
@@ -164,12 +166,12 @@ def profile_index(request):
                                         data,
                                         None)
 
-            next = request.GET.get('next', None)
-            if next is not None:
-                url = next
-            else:
-                url = reverse('epiweb.apps.survey.views.profile_index')
-            url = '%s?gid=%s' % (url, survey_user.global_id)
+#            next = request.GET.get('next', None)
+#            if next is not None:
+#                url = next
+#            else:
+#                url = reverse('epiweb.apps.survey.views.profile_index')
+#            url = '%s?gid=%s' % (url, survey_user.global_id)
 
             request.user.message_set.create(message=_('Profile saved.'))
             return HttpResponseRedirect(reverse(thanks_profile))
@@ -255,6 +257,8 @@ def people_edit(request):
     if survey_user is None:
         url = '%s?next=%s' % (reverse(select_user), reverse(people_edit))
         return HttpResponseRedirect(url)
+    elif survey_user.deleted == True:
+        raise Http404()
 
     if request.method == 'POST':
         form = forms.AddPeople(request.POST)
@@ -268,6 +272,32 @@ def people_edit(request):
         form = forms.AddPeople(initial={'name': survey_user.name})
 
     return render_to_response('survey/people_edit.html', {'form': form},
+                              context_instance=RequestContext(request))
+
+@login_required
+def people_remove(request):
+    try:
+        survey_user = get_active_survey_user(request)
+    except ValueError:
+        raise Http404()
+
+    if survey_user is None:
+        url = reverse(people)
+        return HttpResponseRedirect(url)
+    elif survey_user.deleted == True:
+        raise Http404()
+
+    confirmed = request.POST.get('confirmed', None)
+
+    if confirmed == 'T':
+        survey_user.deleted = True
+        survey_user.save()
+        
+        url = reverse(people)
+        return HttpResponseRedirect(url)
+
+    else:
+        return render_to_response('survey/people_remove.html', {'person': survey_user},
                               context_instance=RequestContext(request))
 
 @login_required
@@ -298,7 +328,7 @@ def people_add(request):
 
 @login_required
 def people(request):
-    users = models.SurveyUser.objects.filter(user=request.user)
+    users = models.SurveyUser.objects.filter(user=request.user, deleted=False)
     return render_to_response('survey/people.html', {'people': users},
                               context_instance=RequestContext(request))
 

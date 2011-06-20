@@ -1,0 +1,19 @@
+{% extends "survey/base.html" %}
+
+{% block content %}
+<h1>Conferma rimozione</h1>
+
+<p>Conferma la rimozione della persona:</p>
+
+<p>&gt; {{ person.name }} </p>
+
+<form method="post">
+<p><input type="submit" value="Rimuovi !"/></p>
+<input type="hidden" id="id_confirmed" name="confirmed" value="T"/>
+</form>
+
+<p>Oppure seleziona il link a destra per tornare all'elenco delle persone.</p>
+
+{% endblock %}
+
+
