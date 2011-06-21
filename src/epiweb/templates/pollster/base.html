@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wok="http://initd.org/ns/tesseract-1.0">
+<!DOCTYPE html[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="description" content="Survey Designer"/>
@@ -7,6 +7,7 @@
     <title>{% block title %}EPIWork Survey{% endblock %}</title>
 
     <link rel="stylesheet" type="text/css" href="/+media/pollster/wok/css/reset.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/+media/pollster/css/skin.css" media="all" />
     <link rel="stylesheet" type="text/css" href="/+media/pollster/css/survey.css" media="all" />
 
     <script type="text/javascript" src="/+media/pollster/jquery/js/jquery-1.5.2.min.js"></script>
@@ -17,29 +18,25 @@
     <script type="text/javascript" src="/+media/pollster/wok/js/innerxhtml.js"></script>
     <script type="text/javascript" src="/+media/pollster/wok/js/wok.jquery.js"></script>
     <script type="text/javascript" src="/+media/pollster/wok/js/wok.properties.js"></script>
+    <script type="text/javascript" src="{% url pollster_urls %}"></script>
     <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.js"></script>
     <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.providers.js"></script>
-
-    <script type="text/javascript">$(function() { wok.pollster.createPollsterDesigner(null, {mode:"design"}); })</script>
 
     {% block extrahead %}{% endblock %}
 </head>
 <body>
     <div id="wok-body">
         <div id="wok-header">
-            <img class="influenzanet" src="/skins/epiweb/css/im/influenzanet.gif" alt="Influenzanet Logo"/>
-            <img class="epiwork" src="/skins/epiweb/css/im/logo-epiwork.jpg" alt="Epiwork Logo"/>
+            <img class="influenzanet" src="/+media/pollster/css/im/influenzanet.gif" alt="Influenzanet Logo"/>
+            <img class="epiwork" src="/+media/pollster/css/im/logo-epiwork.jpg" alt="Epiwork Logo"/>
+        </div>
+        <div id="wok-navigation">
+            <ul>
+                <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
+            </ul>
         </div>
         <div id="wok-main-panel">
-            <div id="pollster-properties">
-                {% block pollster-properties %}{% endblock %}
-            </div>
-            <div id="pollster-canvas">
-                {% block pollster-canvas %}{% endblock %}
-            </div>
-            <div id="pollster-tools">
-                {% block pollster-tools %}{% endblock %}
-            </div>
+            {% block content %}{% endblock %}
         </div>
         <div id="wok-footer">
         </div>

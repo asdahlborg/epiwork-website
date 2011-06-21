@@ -3,8 +3,8 @@
 {% block title %}EPIWork Survey Designer{% endblock %}
 
 {% block extrahead %}
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans"/>
     <link rel="stylesheet" type="text/css" href="/+media/pollster/wok/css/wok.pollster.css" media="all" />
+    <script type="text/javascript">$(function() { wok.pollster.createPollsterDesigner(null, {mode:"design"}); })</script>
 {% endblock %}
 
 {% block pollster-properties %}
@@ -13,8 +13,8 @@
         <div class="tool">
             <label>Survey</label>
             <button type="button" class="action-save">Save</button>
-            <input class="short" name="survey-title" value="{{ survey.title }}" />
-            <input type="hidden" name="survey-id" value="{{ survey.id }}" />
+            <input class="short" name="survey-title" value="{{ survey.title|default:'' }}" />
+            <input type="hidden" name="survey-id" value="{{ survey.id|default:'' }}" />
         </div>
         <div class="tool">
             <label>New Question</label>

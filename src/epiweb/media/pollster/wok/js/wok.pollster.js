@@ -7,8 +7,6 @@
     };
     window.wok.pollster = {
         options: {
-            // API options.
-            url: "/pollster/",
             // UI part selectors.
             canvasSelector: "#pollster-canvas",
             propertiesSelector: "#pollster-properties",
@@ -61,6 +59,8 @@
         var $properties = $(options.propertiesSelector, context);
         var $selection = null, $question = null;
 
+        if (!urls)
+            return window.wok.error("can't find urls mapper");
         if ($canvas.length === 0)
             return window.wok.error("can't find canvas element: " + options.canvasSelector);
         if ($canvas.children('.'+options.templateClass).length === 0)
@@ -93,14 +93,11 @@
         });
 
         function getPropertyProviders($target, level) {
-            console.log("providers", providers);
             if ($target && $target.length > 0) {
                 if ($target.is("li") && $target.parent().is(".choices") && level === 0) {
-                    console.log("builtin-choice");
                     return [providers["builtin-choice"]];
                 }
                 else if ($target.is("li") && $target.parent().is(".derived-values") && level === 0) {
-                    console.log("derived");
                     return [providers["builtin-derived-value"]];
                 }
                 else if ($target.is(".rule") && level === 0) {
@@ -123,7 +120,6 @@
 
         function setupProperties($target) {
             var providers = getPropertyProviders($target, 0);
-            console.log($target, providers);
             if (providers.length > 0) {
                 for (var i=0 ; i < providers.length ; i++) {
                     if (providers[i].setup)
@@ -224,14 +220,14 @@
 
             getSurveyUrl: function(surveyId) {
                 if (surveyId)
-                    return options.url + surveyId;
+                    return urls.url('pollster_survey_edit', {id: surveyId});
             },
 
             getPostUrl: function(surveyId) {
                 if (surveyId)
-                    return options.url + surveyId + "?_action=PUT";
+                    return urls.url('pollster_survey_edit', {id: surveyId});
                 else
-                    return options.url;
+                    return urls.url('pollster_survey_add');
             },
 
             validate: function() {
