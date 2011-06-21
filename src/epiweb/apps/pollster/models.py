@@ -48,10 +48,10 @@ class Survey(models.Model):
         # Extract question ID and load corresponding question; if it does not exists
         # insert and empty question to generate it. In both cases we have a question
         # to fill with options and rules.
-        hidden = False
         data_type = root.get('data-data-type')
         data_name = [e.text for e in root.findall('div') if 'info' in e.get('class')][0]
         title = [e.text for e in root.findall('p/span') if 'title' in e.get('class')][0]
+        hidden = 'starts-hidden' in (root.get('class') or '')
         description = ''
         xdescription = root.find('p')
         if xdescription != None:
@@ -95,8 +95,7 @@ class Survey(models.Model):
         temp_id = root.get('id') or ''
         match = re.match('^option-(\d+)$', temp_id)
         xinput = root.find('input')
-        print "xinput %s" % (xinput,)
-        hidden = False
+        hidden = 'starts-hidden' in (root.get('class') or '')
         if xinput != None:
             text = root.find('label').text
             value = xinput.get('value')

@@ -33,7 +33,7 @@
                     <form>
                         <ul class="choices">
                             {% for option in question.option_set.all %}
-                            <li id="option-{{ option.id }}">
+                            <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
                                <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
                                <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                                <div class="info">{{ option.value }}</div>
@@ -46,7 +46,7 @@
                     <form>
                         <ul class="choices">
                             {% for option in question.option_set.all %}
-                            <li id="option-{{ option.id }}">
+                            <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
                                <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
                                <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                                <div class="info">{{ option.value }}</div>

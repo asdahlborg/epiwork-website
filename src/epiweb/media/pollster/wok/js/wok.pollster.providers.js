@@ -14,6 +14,14 @@
         return $element.attr("data-data-type") || "1";
     }
 
+    function getQuestionStartsHidden($element) {
+        return $element.is(".starts-hidden") ? 'true' : 'false';
+    }
+
+    function getChoiceStartsHidden($element) {
+        return $element.is(".starts-hidden") ? 'true' : 'false';
+    }
+
     function getText($element, toRemove) {
         var text = $element.contents().filter(function(){ return this.nodeType === 3; }).text();
         if (toRemove)
@@ -105,6 +113,15 @@
             return false;
         });
 
+        $properties.find("[name=field_question_starts_hidden]").change(function(evt) {
+            if (self.$element === null) return true;
+            if ($(this).val() == 'true')
+                self.$element.addClass("starts-hidden");
+            else
+                self.$element.removeClass("starts-hidden");
+            return false;
+        });
+
         // Public methods.
 
         $.extend(this, {
@@ -119,6 +136,7 @@
                     .find("[name=field_question_title]").val($.trim($e.find(".title").text())).end()
                     .find("[name=field_question_text]").val(getText($e.find("p"))).end()
                     .find("[name=field_question_shortname]").val(designer.getQuestionShortname($e)).end()
+                    .find("[name=field_question_starts_hidden]").val(getQuestionStartsHidden($e)).end()
                     .show();
 
                 // We display visual options depending on the question type.
@@ -176,6 +194,15 @@
             return false;
         });
 
+        $properties.find("[name=field_choice_starts_hidden]").change(function(evt) {
+            if (self.$element === null) return true;
+            if ($(this).val() == 'true')
+                self.$element.addClass("starts-hidden");
+            else
+                self.$element.removeClass("starts-hidden");
+            return false;
+        });
+
         // Public methods.
 
         $.extend(this, {
@@ -186,6 +213,7 @@
                 $properties
                     .find("[name=field_choice_text]").val($e.find("label").text()).end()
                     .find("[name=field_choice_value]").val($e.find("input").val()).end()
+                    .find("[name=field_choice_starts_hidden]").val(getChoiceStartsHidden($e)).end()
                     .show();
             },
             detach: function() {
