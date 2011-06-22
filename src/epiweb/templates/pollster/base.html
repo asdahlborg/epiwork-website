@@ -7,8 +7,8 @@
     <title>{% block title %}EPIWork Survey{% endblock %}</title>
 
     <link rel="stylesheet" type="text/css" href="/+media/pollster/wok/css/reset.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="/+media/pollster/css/skin.css" media="all" />
     <link rel="stylesheet" type="text/css" href="/+media/pollster/css/survey.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/+media/pollster/css/skin.css" media="all" />
 
     <script type="text/javascript" src="/+media/pollster/jquery/js/jquery-1.5.2.min.js"></script>
     <script type="text/javascript" src="/+media/pollster/jquery/js/jquery-ui-1.8.12.custom.min.js"></script>
@@ -19,8 +19,6 @@
     <script type="text/javascript" src="/+media/pollster/wok/js/wok.jquery.js"></script>
     <script type="text/javascript" src="/+media/pollster/wok/js/wok.properties.js"></script>
     <script type="text/javascript" src="{% url pollster_urls %}"></script>
-    <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.js"></script>
-    <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.providers.js"></script>
 
     {% block extrahead %}{% endblock %}
 </head>
@@ -32,7 +30,7 @@
         </div>
         <div id="wok-navigation">
             <ul>
-                <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
+                {% block navigation %}{% endblock %}
             </ul>
         </div>
         <div id="wok-main-panel">

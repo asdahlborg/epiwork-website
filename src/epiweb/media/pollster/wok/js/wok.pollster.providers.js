@@ -88,7 +88,7 @@
             if (self.$element === null) return true;
             var v = $(this).val();
             self.$element.attr("data-shortname", v);
-            self.$element.find(".info").text(v);
+            self.$element.children(".info").text(v);
             return false;
         });
 

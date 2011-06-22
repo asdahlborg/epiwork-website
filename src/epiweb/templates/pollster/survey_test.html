@@ -1,0 +1,18 @@
+{% extends "pollster/base.html" %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.js"></script>
+    <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.rules.js"></script>
+    <script type="text/javascript">$(function() { wok.pollster.createPollsterRuntime(null, {}); })</script>
+{% endblock %}
+
+{% block navigation %}
+    <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
+    <li><a href="{% url pollster_survey_edit survey.id %}">Edit Survey</a></li>
+{% endblock %}
+
+{% block content %}
+<div id="wok-main-panel-content">
+    {% include "pollster/survey.html" %}
+</div>
+{% endblock %}

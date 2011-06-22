@@ -1,74 +1,73 @@
-{% extends "pollster/base.html" %}
-
-{% block content %}
-    <div id="pollster-properties">
-        {% block pollster-properties %}{% endblock %}
-    </div>
-    <div id="pollster-canvas">
-        <div class="survey" id="survey-{{ survey.id }}">
-            {% for question in survey.question_set.all %}
-            <div class="question-wrapper clearfix">
-                <div id="question-{{ question.id }}" class="question {{ question.type }} {% if question.starts_hidden %} starts-hidden {% endif %}"
-                     data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}">
-                    <p>
-                        <span class="number"></span>
-                        <span class="title">{{ question.title }}</span>
-                        {{ question.description }}
-                    </p>
-                    {% if question.is_text %}
-                    <form>
-                        <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field" />
-                        <ul class="derived-values">
-                            {% for option in question.option_set.all %}
-                            <li id="option-{{ option.id }}"
-                                data-type="{{ option.virtual_type.id }}" data-value="{{ option.value }}"
-                                data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
-                                <div class="info">{{ option.value }}</div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </form>
-                    {% endif %}
-                    {% if question.is_single_choice %}
-                    <form>
-                        <ul class="choices">
-                            {% for option in question.option_set.all %}
-                            <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
-                               <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
-                               <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                               <div class="info">{{ option.value }}</div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </form>
-                    {% endif %}
-                    {% if question.is_multiple_choice %}
-                    <form>
-                        <ul class="choices">
-                            {% for option in question.option_set.all %}
-                            <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
-                               <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
-                               <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                               <div class="info">{{ option.value }}</div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </form>
-                    {% endif %}
-                    <div class="info">{{ question.data_name }}</div>
-                </div>
-                <div class="rules">
-                    {% for rule in question.subject_of_rules.all %}
-                    <div class="rule" id="rule-{{ rule.id }}"
-                         data-type="{{ rule.rule_type.id }}" data-trigger="option-{{ rule.subject_option.id }}" data-question="question-{{ rule.object_question.id }}" data-options="">
-                    </div>
+<div class="survey" id="survey-{{ survey.id }}">
+    {% for question in survey.question_set.all %}
+    <div class="question-wrapper clearfix">
+        <div id="question-{{ question.id }}" class="question {{ question.type }} {% if question.starts_hidden %} starts-hidden {% endif %}"
+             data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}">
+            <p>
+                <span class="number"></span>
+                <span class="title">{{ question.title }}</span>
+                {{ question.description }}
+            </p>
+            {% if question.is_text %}
+            <form>
+                <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field" />
+                <ul class="derived-values">
+                    {% for option in question.option_set.all %}
+                    <li id="option-{{ option.id }}"
+                        data-type="{{ option.virtual_type.id }}" data-value="{{ option.value }}"
+                        data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
+                        <div class="info">{{ option.value }}</div>
+                    </li>
                     {% endfor %}
-                </div>
+                </ul>
+            </form>
+            {% endif %}
+            {% if question.is_single_choice %}
+            <form>
+                <ul class="choices">
+                    {% for option in question.option_set.all %}
+                    <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                       <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                       <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                       <div class="info">{{ option.value }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </form>
+            {% endif %}
+            {% if question.is_multiple_choice %}
+            <form>
+                <ul class="choices">
+                    {% for option in question.option_set.all %}
+                    <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                       <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                       <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                       <div class="info">{{ option.value }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </form>
+            {% endif %}
+            <div class="info">{{ question.data_name }}</div>
+        </div>
+        <div class="rules">
+            {% for rule in question.subject_of_rules.all %}
+            <div class="rule" id="rule-{{ rule.id }}"
+                 data-type="{{ rule.rule_type.id }}" data-trigger="option-{{ rule.subject_option.id }}" data-question="question-{{ rule.object_question.id }}" data-options="">
             </div>
             {% endfor %}
         </div>
     </div>
-    <div id="pollster-tools">
-        {% block pollster-tools %}{% endblock %}
-    </div>
-{% endblock %}
+    {% endfor %}
+    <script type="text/javascript" class="pollster-rules">
+        function pollster_fill_rules(d) {
+            var t;
+            {% for question in survey.question_set.all %}
+            t = d[{{question.id}}] = [];
+            {% for rule in question.subject_of_rules.all %}
+            t.push(new {{rule.js_class}}({{rule.subject_option.id}},{{rule.object_question.id}},{{rule.js_object_option.id|default:'null'}}));
+            {% endfor %}
+            {% endfor %}
+        }
+    </script>
+</div>

@@ -28,7 +28,7 @@
 /* DESIGNER-SPECIFIC QUESTION & RULES LAYOUT */
 
 .question-wrapper { position: relative; width: 670px; }
-.question { position: relative; float: left; width: 400px; min-height: 30px; margin-bottom: 10px; }
+.question { position: relative; float: left; width: 400px; min-height: 30px; }
 .question:hover { -webkit-box-shadow: 0 0 5px 1px #ff0; -moz-box-shadow: 0 0 5px 1px #ff0; box-shadow: 0 0 5px 1px #ff0; }
 .active .question { -webkit-box-shadow: 0 0 5px 1px #0f0; -moz-box-shadow: 0 0 5px 1px #0f0; box-shadow: 0 0 5px 1px #0f0; }
 .question li { position: relative; }
@@ -40,3 +40,5 @@
 .rules { display: block; float: left; width: 242px; margin-left: 10px; font-size: 10px; }
 .rule { margin-bottom: 5px; padding: 1px 5px; font-size: 10px; border: 1px solid #ccc; background: #eee; }
 .rule.selected { border: 1px solid #0f0; }
+
+.starts-hidden { display: block; opacity: 0.5; }

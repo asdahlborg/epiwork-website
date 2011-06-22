@@ -54,7 +54,7 @@ def survey_edit(request, id):
 @login_required
 def survey_test(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
-    return render_to_response('pollster/survey.html', {
+    return render_to_response('pollster/survey_test.html', {
         "survey": survey
     })
 
