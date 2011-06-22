@@ -351,30 +351,37 @@
             var trigger = $properties.find("[name=field_rule_trigger] :selected").text();
             var type = $properties.find("[name=field_rule_type] :selected").text();
             var question = $properties.find("[name=field_rule_question] :selected").text();
+            var field_rule_option = $properties.find("[name=field_rule_option] :selected");
+            if (field_rule_option.val())
+                $element.text(trigger + " => " + type + " " + field_rule_option.text() + " of " + question);
+            else
+                $element.text(trigger + " => " + type + " " + question);
+        }
 
-            $element.text(trigger + " => " + type + " " + question);
+        function fillOptions($question, $dest) {
+            $question.closest(".question-wrapper").find(".question li").each(function(i) {
+                var $o = $(this);
+                var v = $o.find("input").val() || $o.attr("data-value") || "NO VALUE";
+                $dest.append($('<option></option>')
+                    .text("Option " + (i+1) + " [" + v + "]")
+                    .attr("value", $o.attr("id"))
+                );
+            });
         }
 
         // Dynamic UI generation and properties dependencies.
 
-        function updateUI1($element, updateType) {
-            var type = $element.attr("data-type") || $properties.find("[name=field_rule_type] :first").val();
-            if (updateType)
-                $element.attr("data-type", type);
+        function updateUI($element) {
+            var $type = $properties.find("[name=field_rule_type]");
+            $type.val($element.attr("data-type")).change();
 
             var $trigger = $properties.find("[name=field_rule_trigger]").empty();
             var $question = $properties.find("[name=field_rule_question]").empty();
 
             // FIXME: Propagate options.
-            $element.closest(".question-wrapper").find(".question li").each(function(i) {
-                var $o = $(this);
-                var v = $o.find("input").val() || $o.attr("data-value") || "NO VALUE";
-                $trigger.append($('<option></option>')
-                    .text("Option " + (i+1) + " [" + v + "]")
-                    .attr("value", $o.attr("id"))
-                );
-            });
-            $trigger.prepend($('<option> --- </option>'));
+            $trigger.empty();
+            fillOptions($element, $trigger);
+            $trigger.val($element.attr("data-trigger")).change();
 
             // FIXME: Propagate options.
             $(".question-wrapper > .question").each(function() {
@@ -385,20 +392,17 @@
                 );
             });
 
-        }
-
-        function updateUI2($element) {
-            var $trigger = $properties.find("[name=field_rule_options]").empty();
-
+            $question.val($element.attr('data-question')).change();
         }
 
         // Events.
 
         $properties.find("[name=field_rule_type]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-type", $(this).val());
-            // TODO: don't hard-code "3" here.
-            $properties.find("[name=field_rule_options]").closest(".property").toggle($(this).val() === "3");
+            var val = $(this).val();
+            self.$element.attr("data-type", val);
+            // TODO: don't hard-code "3" and "4" here.
+            $properties.find("[name=field_rule_option]").closest(".property").toggle(val === "3" || val === "4");
             formatText(self.$element);
             return false;
         });
@@ -412,14 +416,19 @@
 
         $properties.find("[name=field_rule_question]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-question", $(this).val());
+            var val = $(this).val();
+            self.$element.attr("data-question", val);
+            var $question = self.$element.closest('.survey').find('#'+val);
+            var $options = $properties.find('[name=field_rule_option]').empty().append($('<option value=""> --- </option>'));
+            fillOptions($question, $options);
+            $options.val(self.$element.attr("data-option")).change();
             formatText(self.$element);
             return false;
         });
 
-        $properties.find("[name=field_rule_options]").change(function(evt) {
+        $properties.find("[name=field_rule_option]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-options", $(this).val());
+            self.$element.attr("data-option", $(this).val());
             formatText(self.$element);
             return false;
         });
@@ -428,20 +437,24 @@
 
         $.extend(this, {
             setup: function($e) {
+                var old = self.$element;
+                self.$element = $e;
+                updateUI($e);
                 formatText($e);
+                self.$element = old;
             },
             attach: function($e) {
                 if (self.$element !== null)
                     self.detach();
                 self.$element = $e;
-                updateUI1($e, !$e.attr("data-type"));
+                updateUI($e);
                 $properties
                     .find("[name=field_rule_type]").val($e.attr("data-type")).end()
                     .find("[name=field_rule_trigger]").val($e.attr("data-trigger")).end()
                     .find("[name=field_rule_question]").val($e.attr("data-question")).end()
-                    .find("[name=field_rule_options]").val($e.attr("data-options")).end()
+                    .find("[name=field_rule_option]").val($e.attr("data-option")).end()
                     .show();
-                formatText(self.$element);
+                formatText($e);
             },
             detach: function() {
                 self.$element = null;

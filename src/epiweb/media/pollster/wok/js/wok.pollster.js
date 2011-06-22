@@ -27,18 +27,12 @@
 
         var rules_by_question = {}, derived_values = {};
 
-        console.log('PollsterRuntime', context, options, self, $survey, questionSelector);
-
         pollster_fill_rules(rules_by_question);
         //pollster_fill_derived_values(derived_values);
 
         // Event handlers.
 
-        console.log('rules_by_question', rules_by_question);
-
         $survey.find("input").change(function(evt) {
-            console.log(evt.target, evt.target.nodeName);
-
             if (evt.target.nodeName !== "INPUT")
                 return;
 
@@ -60,8 +54,6 @@
             else {
                 checked = $input.val() !== "";
             }
-
-            console.log(qid, oid, checked);
 
             // Invoke all rules for the rule/option combination.
 

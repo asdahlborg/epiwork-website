@@ -1,6 +1,6 @@
 from django.db import models
 from xml.etree import ElementTree
-import re
+import re, warnings
 
 class Survey(models.Model):
     title = models.CharField(max_length=255, default='')
@@ -152,20 +152,26 @@ class Survey(models.Model):
         type_id = root.get('data-type')
         subject_option_id = root.get('data-trigger')
         object_question_id = root.get('data-question')
+        object_option_id = root.get('data-option')
         if type_id and subject_option_id and object_question_id:
             if match:
                 rule = Rule.objects.get(id = int(match.group(1)))
                 rule.rule_type = RuleType.objects.get(id = int(type_id))
                 rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
                 rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
+                if object_option_id:
+                    rule.object_option = Option.objects.get(id = Survey.get_option_id(idmap, object_option_id))
             else:
                 rule = Rule()
                 rule.rule_type = RuleType.objects.get(id = int(type_id))
                 rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
                 rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
+                if object_option_id:
+                    rule.object_option = Option.objects.get(id = Survey.get_option_id(idmap, object_option_id))
             rule.save()
             return rule
-        raise RuntimeError('unable to create rule for question %s' % (question.id))
+        warnings.warn('unable to create rule in question %s (trigger %s, question %s, option %s)' % (question.id, subject_option_id, object_question_id, object_option_id))
+        return None
 
     @staticmethod
     def get_question_id(idmap, idstr):
@@ -273,11 +279,6 @@ class Rule(models.Model):
     subject_option = models.ForeignKey(Option, related_name='subject_of_rules', db_index=True, blank=True, null=True)
     object_question = models.ForeignKey(Question, related_name='object_of_rules', blank=True, null=True)
     object_option = models.ForeignKey(Option, related_name='object_of_rules', blank=True, null=True)
-
-    def js_object_option_id(self):
-        if self.object_option:
-            return self.object_option.id
-        return 'null'
 
     def js_class(self):
         return self.rule_type.js_class
