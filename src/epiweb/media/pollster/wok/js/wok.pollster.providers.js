@@ -348,14 +348,19 @@
         // Derived value formatting.
 
         function formatText($element) {
-            var trigger = $properties.find("[name=field_rule_trigger] :selected").text();
             var type = $properties.find("[name=field_rule_type] :selected").text();
-            var question = $properties.find("[name=field_rule_question] :selected").text();
-            var field_rule_option = $properties.find("[name=field_rule_option] :selected");
-            if (field_rule_option.val())
-                $element.text(trigger + " => " + type + " " + field_rule_option.text() + " of " + question);
-            else
-                $element.text(trigger + " => " + type + " " + question);
+            var subject_option = $properties.find("[name=field_rule_subject_option] :selected");
+            var object_question = $properties.find("[name=field_rule_object_question] :selected");
+            var object_option = $properties.find("[name=field_rule_object_option] :selected");
+
+            var subject = '';
+            if (subject_option.val())
+                subject = subject_option.text();
+            var object = object_question.text();
+            if (object_option.val())
+                object = object_option.text() + " of " + object_question.text();
+
+            $element.text(subject + " => " + type + " " + object);
         }
 
         function fillOptions($question, $dest) {
@@ -375,24 +380,24 @@
             var $type = $properties.find("[name=field_rule_type]");
             $type.val($element.attr("data-type")).change();
 
-            var $trigger = $properties.find("[name=field_rule_trigger]").empty();
-            var $question = $properties.find("[name=field_rule_question]").empty();
+            var $subject_option = $properties.find("[name=field_rule_subject_option]").empty();
+            var $object_question = $properties.find("[name=field_rule_object_question]").empty();
 
             // FIXME: Propagate options.
-            $trigger.empty();
-            fillOptions($element, $trigger);
-            $trigger.val($element.attr("data-trigger")).change();
+            $subject_option.empty();
+            fillOptions($element, $subject_option);
+            $subject_option.val($element.attr("data-subject-option")).change();
 
             // FIXME: Propagate options.
             $(".question-wrapper > .question").each(function() {
                 var $q = $(this);
-                $question.append($('<option></option>')
+                $object_question.append($('<option></option>')
                     .text($q.find(".number").text()+" "+$q.find(".title").text() + " [" + $q.children(".info").text() + "]")
                     .attr("value", $q.attr("id"))
                 );
             });
 
-            $question.val($element.attr('data-question')).change();
+            $object_question.val($element.attr('data-object-question')).change();
         }
 
         // Events.
@@ -407,28 +412,28 @@
             return false;
         });
 
-        $properties.find("[name=field_rule_trigger]").change(function(evt) {
+        $properties.find("[name=field_rule_subject_option]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-trigger", $(this).val());
+            self.$element.attr("data-subject-option", $(this).val());
             formatText(self.$element);
             return false;
         });
 
-        $properties.find("[name=field_rule_question]").change(function(evt) {
+        $properties.find("[name=field_rule_object_question]").change(function(evt) {
             if (self.$element === null) return true;
             var val = $(this).val();
-            self.$element.attr("data-question", val);
+            self.$element.attr("data-object-question", val);
             var $question = self.$element.closest('.survey').find('#'+val);
-            var $options = $properties.find('[name=field_rule_option]').empty().append($('<option value=""> --- </option>'));
+            var $options = $properties.find('[name=field_rule_object_option]').empty().append($('<option value=""> --- </option>'));
             fillOptions($question, $options);
-            $options.val(self.$element.attr("data-option")).change();
+            $options.val(self.$element.attr("data-object-option")).change();
             formatText(self.$element);
             return false;
         });
 
-        $properties.find("[name=field_rule_option]").change(function(evt) {
+        $properties.find("[name=field_rule_object_option]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-option", $(this).val());
+            self.$element.attr("data-object-option", $(this).val());
             formatText(self.$element);
             return false;
         });

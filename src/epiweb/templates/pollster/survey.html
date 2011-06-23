@@ -54,10 +54,12 @@
             {% for rule in question.subject_of_rules.all %}
             <div id="rule-{{ rule.id }}"
                  data-type="{{ rule.rule_type.id }}"
-                 data-trigger="option-{{ rule.subject_option.id }}"
-                 data-question="question-{{ rule.object_question.id }}"
+                 {% if rule.subject_option.id %}
+                 data-subject-option="option-{{ rule.subject_option.id }}"
+                 {% endif %}
+                 data-object-question="question-{{ rule.object_question.id }}"
                  {% if rule.object_option.id %}
-                 data-option="option-{{ rule.object_option.id }}"
+                 data-object-option="option-{{ rule.object_option.id }}"
                  {% endif %}
                  class="rule">
             </div>

@@ -20,25 +20,26 @@ class Survey(models.Model):
 
         idmap = {}
         question_ordinal = 1
+        question_xrules = {}
         for wrapper in root.findall('div'):
             if 'question-wrapper' not in wrapper.get('class'):
                 continue
-            option_ordinal = 1
             xquestion = [i for i in wrapper if 'question' in i.get('class')][0]
             question = self.update_question_from_xml(idmap, xquestion, question_ordinal)
             question_ordinal += 1
 
+            option_ordinal = 1
             for xoption in xquestion.findall('form/ul/li'):
                 self.update_option_from_xml(idmap, question, xoption, option_ordinal)
                 option_ordinal += 1
 
+            xrules = [i for i in wrapper if 'rules' in i.get('class')][0]
+            question_xrules[question] = xrules
+
         # After generating correct IDs for all questions and options we process
         # the rules by iterating again the XML tree.
 
-        for wrapper in root.findall('div'):
-            if 'question-wrapper' not in wrapper.get('class'):
-                continue
-            xrules = [i for i in wrapper if 'rules' in i.get('class')][0]
+        for question, xrules in question_xrules.items():
             for xrule in xrules:
                 self.update_rule_from_xml(idmap, question, xrule)
 
@@ -150,13 +151,14 @@ class Survey(models.Model):
         temp_id = root.get('id') or ''
         match = re.match('^rule-(\d+)$', temp_id)
         type_id = root.get('data-type')
-        subject_option_id = root.get('data-trigger')
-        object_question_id = root.get('data-question')
-        object_option_id = root.get('data-option')
+        subject_option_id = root.get('data-subject-option')
+        object_question_id = root.get('data-object-question')
+        object_option_id = root.get('data-object-option')
         if type_id and subject_option_id and object_question_id:
             if match:
                 rule = Rule.objects.get(id = int(match.group(1)))
                 rule.rule_type = RuleType.objects.get(id = int(type_id))
+                rule.subject_question = question
                 rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
                 rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
                 if object_option_id:
@@ -164,6 +166,7 @@ class Survey(models.Model):
             else:
                 rule = Rule()
                 rule.rule_type = RuleType.objects.get(id = int(type_id))
+                rule.subject_question = question
                 rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
                 rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
                 if object_option_id:
@@ -243,10 +246,6 @@ class Question(models.Model):
     def is_multiple_choice(self):
         return self.type == 'multiple-choice'
 
-    @property
-    def subject_of_rules(self):
-        return Rule.objects.filter(subject_option__question=self)
-
     def __unicode__(self):
         return self.title
 
@@ -276,6 +275,7 @@ class Option(models.Model):
 
 class Rule(models.Model):
     rule_type = models.ForeignKey(RuleType)
+    subject_question = models.ForeignKey(Question, related_name='subject_of_rules')
     subject_option = models.ForeignKey(Option, related_name='subject_of_rules', db_index=True, blank=True, null=True)
     object_question = models.ForeignKey(Question, related_name='object_of_rules', blank=True, null=True)
     object_option = models.ForeignKey(Option, related_name='object_of_rules', blank=True, null=True)
