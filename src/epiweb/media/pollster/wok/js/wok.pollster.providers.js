@@ -351,14 +351,14 @@
             var type = $properties.find("[name=field_rule_type] :selected").text();
             var subject_option = $properties.find("[name=field_rule_subject_option] :selected");
             var object_question = $properties.find("[name=field_rule_object_question] :selected");
-            var object_option = $properties.find("[name=field_rule_object_option] :selected");
+            var object_options = $properties.find("[name=field_rule_object_options] :selected");
 
             var subject = '';
             if (subject_option.val())
                 subject = subject_option.text();
             var object = object_question.text();
-            if (object_option.val())
-                object = object_option.text() + " of " + object_question.text();
+            if (object_options.length > 0)
+                object = object_options.length + " Options from " + object_question.text();
 
             $element.text(subject + " => " + type + " " + object);
         }
@@ -407,7 +407,7 @@
             var val = $(this).val();
             self.$element.attr("data-type", val);
             // TODO: don't hard-code "3" and "4" here.
-            $properties.find("[name=field_rule_option]").closest(".property").toggle(val === "3" || val === "4");
+            $properties.find("[name=field_rule_object_options]").closest(".property").toggle(val === "3" || val === "4");
             formatText(self.$element);
             return false;
         });
@@ -424,16 +424,21 @@
             var val = $(this).val();
             self.$element.attr("data-object-question", val);
             var $question = self.$element.closest('.survey').find('#'+val);
-            var $options = $properties.find('[name=field_rule_object_option]').empty().append($('<option value=""> --- </option>'));
+            var $options = $properties.find('[name=field_rule_object_options]').empty();
             fillOptions($question, $options);
-            $options.val(self.$element.attr("data-object-option")).change();
+            var selected = self.$element.attr("data-object-options").trim().split(/\s+/);
+            $options.val(selected).change();
             formatText(self.$element);
             return false;
         });
 
-        $properties.find("[name=field_rule_object_option]").change(function(evt) {
+        $properties.find("[name=field_rule_object_options]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-object-option", $(this).val());
+            var val = $(this).val();
+            if (val)
+                self.$element.attr("data-object-options", val.join(" "));
+            else
+                self.$element.attr("data-object-options", '');
             formatText(self.$element);
             return false;
         });

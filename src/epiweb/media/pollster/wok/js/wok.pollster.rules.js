@@ -39,7 +39,7 @@
         });
     }
 
-    function ShowOptionRule(subjectOption, objectQuestion, objectOption) {
+    function ShowOptionRule(subjectOption, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -48,16 +48,17 @@
             target: subjectOption,
 
             apply: function($survey, checked) {
-                var $t = $survey.find("#option-"+objectOption);
-                if ($t.length === 1 && $t.is(":hidden") && checked)
+                var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
+                var $t = $survey.find(selectors);
+                if (checked)
                     $t.slideDown();
-                if ($t.length === 1 && $t.is(":visible") && !checked)
+                else
                     $t.slideUp();
             }
         });
     }
 
-    function HideOptionRule(subjectOption, objectQuestion, objectOption) {
+    function HideOptionRule(subjectOption, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -66,10 +67,11 @@
             target: subjectOption,
             
             apply: function($survey, checked) {
-                var $t = $survey.find("#option-"+objectOption);
-                if ($t.length === 1 && $t.is(":visible") && checked)
+                var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
+                var $t = $survey.find(selectors);
+                if (checked)
                     $t.slideUp();
-                if ($t.length === 1 && $t.is(":hidden") && !checked)
+                else
                     $t.slideDown();
             }
         });

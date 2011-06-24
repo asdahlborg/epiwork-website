@@ -153,7 +153,7 @@ class Survey(models.Model):
         type_id = root.get('data-type')
         subject_option_id = root.get('data-subject-option')
         object_question_id = root.get('data-object-question')
-        object_option_id = root.get('data-object-option')
+        object_option_ids = (root.get('data-object-options') or '').split()
         if type_id and subject_option_id and object_question_id:
             if match:
                 rule = Rule.objects.get(id = int(match.group(1)))
@@ -161,19 +161,23 @@ class Survey(models.Model):
                 rule.subject_question = question
                 rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
                 rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
-                if object_option_id:
-                    rule.object_option = Option.objects.get(id = Survey.get_option_id(idmap, object_option_id))
+                rule.save()
+                rule.object_options.clear()
+                for object_option_id in object_option_ids:
+                    rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
             else:
                 rule = Rule()
                 rule.rule_type = RuleType.objects.get(id = int(type_id))
                 rule.subject_question = question
                 rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
                 rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
-                if object_option_id:
-                    rule.object_option = Option.objects.get(id = Survey.get_option_id(idmap, object_option_id))
+                rule.save()
+                rule.object_options.clear()
+                for object_option_id in object_option_ids:
+                    rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
             rule.save()
             return rule
-        warnings.warn('unable to create rule in question %s (trigger %s, question %s, option %s)' % (question.id, subject_option_id, object_question_id, object_option_id))
+        warnings.warn('unable to create rule in question %s (trigger %s, question %s, option %s)' % (question.id, subject_option_id, object_question_id, object_option_ids))
         return None
 
     @staticmethod
@@ -275,14 +279,14 @@ class Option(models.Model):
 
 class Rule(models.Model):
     rule_type = models.ForeignKey(RuleType)
-    subject_question = models.ForeignKey(Question, related_name='subject_of_rules')
-    subject_option = models.ForeignKey(Option, related_name='subject_of_rules', db_index=True, blank=True, null=True)
+    subject_question = models.ForeignKey(Question, related_name='subject_of_rules', db_index=True)
+    subject_option = models.ForeignKey(Option, related_name='subject_of_rules', limit_choices_to = {'question': subject_question}, blank=True, null=True)
     object_question = models.ForeignKey(Question, related_name='object_of_rules', blank=True, null=True)
-    object_option = models.ForeignKey(Option, related_name='object_of_rules', blank=True, null=True)
+    object_options = models.ManyToManyField(Option, related_name='object_of_rules', limit_choices_to = {'question': object_question})
 
     def js_class(self):
         return self.rule_type.js_class
 
     def __unicode__(self):
-        return '%s on option %s' % (self.rule_type)
+        return '%s on question %s' % (self.rule_type, self.subject_question.id)
 

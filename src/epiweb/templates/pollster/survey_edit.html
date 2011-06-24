@@ -13,7 +13,9 @@
 
 {% block navigation %}
     <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
+    {% if survey.id %}
     <li><a href="{% url pollster_survey_test survey.id %}">Test Survey</a></li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -164,8 +166,8 @@
                     </select>
                 </div>
                 <div class="property clearfix">
-                    <label>Option</label>
-                    <select name="field_rule_object_option"></select>
+                    <label>Options</label>
+                    <select name="field_rule_object_options" multiple="multiple" size="5"></select>
                 </div>
             </div>
             <div class="wok-templates">

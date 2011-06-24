@@ -58,9 +58,7 @@
                  data-subject-option="option-{{ rule.subject_option.id }}"
                  {% endif %}
                  data-object-question="question-{{ rule.object_question.id }}"
-                 {% if rule.object_option.id %}
-                 data-object-option="option-{{ rule.object_option.id }}"
-                 {% endif %}
+                 data-object-options="{% for option in rule.object_options.all %} option-{{ option.id }} {% endfor %}"
                  class="rule">
             </div>
             {% endfor %}
@@ -73,7 +71,11 @@
             {% for question in survey.question_set.all %}
             t = d[{{question.id}}] = [];
             {% for rule in question.subject_of_rules.all %}
-            t.push(new {{rule.js_class}}({{rule.subject_option.id}},{{rule.object_question.id}},{{rule.object_option.id|default:'null'}}));
+            t.push(new {{rule.js_class}}({{rule.subject_option.id}},
+                                         {{rule.object_question.id}},
+                                         [ {% for option in rule.object_options.all %}
+                                            {{ option.id }}{% if not forloop.last %},{% endif%}
+                                         {% endfor %} ]));
             {% endfor %}
             {% endfor %}
         }
