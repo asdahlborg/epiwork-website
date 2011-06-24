@@ -38,14 +38,14 @@
 
             var $input = $(evt.target);
             var $question = $(evt.target).closest(questionSelector);
-            var isRadio = $input.is("[type=radio]");
+            var isRadio = $input.is(":radio");
             var qid = parseInt($question.attr("id").replace("question-",""));
             var oid = parseInt($input.closest("li").attr("id").replace("option-",""));
             var checked = false;
 
             // If the <input> is a checkbox or radio button determine its checked state.
 
-            if ($input.is("[type=radio],[type=checkbox]")) {
+            if ($input.is(":radio,:checkbox")) {
                 checked = $input.is(":checked");
             }
 

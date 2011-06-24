@@ -20,7 +20,7 @@ class Survey(models.Model):
 
         idmap = {}
         question_ordinal = 1
-        question_xrules = {}
+        question_xrules = []
         for wrapper in root.findall('div'):
             if 'question-wrapper' not in wrapper.get('class'):
                 continue
@@ -34,12 +34,12 @@ class Survey(models.Model):
                 option_ordinal += 1
 
             xrules = [i for i in wrapper if 'rules' in i.get('class')][0]
-            question_xrules[question] = xrules
+            question_xrules.append((question, xrules))
 
         # After generating correct IDs for all questions and options we process
         # the rules by iterating again the XML tree.
 
-        for question, xrules in question_xrules.items():
+        for question, xrules in question_xrules:
             for xrule in xrules:
                 self.update_rule_from_xml(idmap, question, xrule)
 
@@ -53,14 +53,19 @@ class Survey(models.Model):
         data_name = [e.text for e in root.findall('div') if 'info' in e.get('class')][0]
         title = [e.text for e in root.findall('p/span') if 'title' in e.get('class')][0]
         hidden = 'starts-hidden' in (root.get('class') or '')
+        deleted = 'deleted' in (root.get('class') or '')
         description = ''
         xdescription = root.find('p')
-        if xdescription != None:
+        if xdescription is not None:
             description = (xdescription[-1].tail or '').strip()
 
         temp_id = root.get('id') or ''
         match = re.match('^question-(\d+)$', temp_id)
-        if match:
+
+        if deleted:
+            Question.objects.filter(id = int(match.group(1))).delete()
+            question = None
+        elif match:
             question = Question.objects.get(id = int(match.group(1)))
             question.data_name = data_name or ''
             question.title = title or ''
@@ -85,7 +90,7 @@ class Survey(models.Model):
             else:
                 question.data_type = QuestionDataType.objects.get(id = 1)
             question.save()
-            idmap[temp_id] = question.id
+        idmap[temp_id] = question and question.id
         return question
 
     def update_option_from_xml(self, idmap, question, root, ordinal):
@@ -97,7 +102,11 @@ class Survey(models.Model):
         match = re.match('^option-(\d+)$', temp_id)
         xinput = root.find('input')
         hidden = 'starts-hidden' in (root.get('class') or '')
-        if xinput != None:
+        deleted = 'deleted' in (root.get('class') or '')
+        if deleted or question is None:
+            Option.objects.filter(id = int(match.group(1))).delete()
+            option = None
+        elif xinput is not None:
             text = root.find('label').text
             value = xinput.get('value')
             if match:
@@ -106,6 +115,8 @@ class Survey(models.Model):
                 option.text = text or ''
                 option.value = value or ''
                 option.ordinal = ordinal
+                option.name = "%s_%s" % (question.data_name, option.id)
+                option.save()
             else:
                 option = Option()
                 option.question = question
@@ -114,8 +125,10 @@ class Survey(models.Model):
                 option.text = text or ''
                 option.value = value or ''
                 option.ordinal = ordinal
-                idmap[temp_id] = question.id
-            option.save()
+                option.save()
+                # to update the name we need the generated option id.
+                option.name = "%s_%s" % (question.data_name, option.id)
+                option.save()
         else:
             type_id = root.get('data-type')
             value = root.get('data-value')
@@ -131,6 +144,8 @@ class Survey(models.Model):
                 option.value = value or ''
                 option.starts_hidden = hidden
                 option.ordinal = ordinal
+                option.name = "%s_%s" % (question.data_name, option.id)
+                option.save()
             else:
                 option = Option()
                 option.question = question
@@ -141,10 +156,11 @@ class Survey(models.Model):
                 option.value = value or ''
                 option.starts_hidden = hidden
                 option.ordinal = ordinal
-                idmap[temp_id] = question.id
-            option.save()
-        # to update the name we need the generated option id.
-        option.name = "%s_%s" % (question.data_name, option.id)
+                option.save()
+                # to update the name we need the generated option id.
+                option.name = "%s_%s" % (question.data_name, option.id)
+                option.save()
+        idmap[temp_id] = option and option.id
         return option
 
     def update_rule_from_xml(self, idmap, question, root):
@@ -154,47 +170,46 @@ class Survey(models.Model):
         subject_option_id = root.get('data-subject-option')
         object_question_id = root.get('data-object-question')
         object_option_ids = (root.get('data-object-options') or '').split()
-        if type_id and subject_option_id and object_question_id:
-            if match:
-                rule = Rule.objects.get(id = int(match.group(1)))
-                rule.rule_type = RuleType.objects.get(id = int(type_id))
-                rule.subject_question = question
-                rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
-                rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
-                rule.save()
-                rule.object_options.clear()
-                for object_option_id in object_option_ids:
-                    rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
-            else:
-                rule = Rule()
-                rule.rule_type = RuleType.objects.get(id = int(type_id))
-                rule.subject_question = question
-                rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
-                rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
-                rule.save()
-                rule.object_options.clear()
-                for object_option_id in object_option_ids:
-                    rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
+        deleted = 'deleted' in (root.get('class') or '')
+
+        if not deleted and not (type_id and subject_option_id and object_question_id):
+            warnings.warn('unable to create rule in question %s (trigger %s, question %s)' % (question.id, subject_option_id, object_question_id))
+            return None
+
+        if deleted or question is None or Survey.get_option_id(idmap, subject_option_id) is None or Survey.get_question_id(idmap, object_question_id) is None:
+            Rule.objects.filter(id = int(match.group(1))).delete()
+            rule = None
+        elif match:
+            rule = Rule.objects.get(id = int(match.group(1)))
+            rule.rule_type = RuleType.objects.get(id = int(type_id))
+            rule.subject_question = question
+            rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
+            rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
             rule.save()
-            return rule
-        warnings.warn('unable to create rule in question %s (trigger %s, question %s, option %s)' % (question.id, subject_option_id, object_question_id, object_option_ids))
-        return None
+            rule.object_options.clear()
+            for object_option_id in object_option_ids:
+                rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
+            rule.save()
+        else:
+            rule = Rule()
+            rule.rule_type = RuleType.objects.get(id = int(type_id))
+            rule.subject_question = question
+            rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
+            rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
+            rule.save()
+            rule.object_options.clear()
+            for object_option_id in object_option_ids:
+                rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
+            rule.save()
+        return rule
 
     @staticmethod
     def get_question_id(idmap, idstr):
-        match = re.match('^question-(\d+)$', idstr)
-        if match:
-            return int(match.group(1))
-        else:
-            return idmap[idstr]
+        return idmap[idstr]
 
     @staticmethod
     def get_option_id(idmap, idstr):
-        match = re.match('^option-(\d+)$', idstr)
-        if match:
-            return int(match.group(1))
-        else:
-            return idmap[idstr]
+        return idmap[idstr]
 
     @models.permalink
     def get_absolute_url(self):

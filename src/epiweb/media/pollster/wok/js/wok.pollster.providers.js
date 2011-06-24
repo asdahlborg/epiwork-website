@@ -22,12 +22,27 @@
         return $element.is(".starts-hidden") ? 'true' : 'false';
     }
 
+    function getRulesBySubjectQuestion($canvas, question) {
+        return $canvas.find(".rule[data-subject-question='"+question+"']");
+    }
+
+    function getRulesByOption($canvas, option) {
+        return $canvas.find('.rule')
+            .filter("[data-object-option='"+option+"'], [data-subject-option='"+option+"']");
+    }
+
     function getText($element, toRemove) {
         var text = $element.contents().filter(function(){ return this.nodeType === 3; }).text();
         if (toRemove)
             return $.trim(text.replace(toRemove, ""));
         else
             return $.trim(text);
+    }
+
+    function isIdTemporary(id) {
+        if (id.match(/^.+-\d+$/))
+            return false;
+        return true;
     }
 
     // BUILTIN PROPERTY PROVIDERS
@@ -83,6 +98,23 @@
         });
 
         // Events.
+
+        $properties.find(".action-delete").click(function(evt) {
+            if (self.$element === null) return true;
+
+            var $survey = self.$element.closest('.survey');
+            if (isIdTemporary(self.$element.attr('id'))) {
+                self.$element.closest('.question-wrapper').remove();
+                getRulesBySubjectQuestion($survey, self.$element.attr('id')).remove();
+            }
+            else {
+                self.$element.addClass('deleted');
+                self.$element.closest('.question-wrapper').addClass('deleted');
+                getRulesBySubjectQuestion($survey, self.$element.attr('id')).addClass('deleted');
+            }
+            self.detach();
+            $(this).closest('.property-group').nextAll('.property-group').andSelf().hide();
+        });
 
         $properties.find("[name=field_question_shortname]").keyup(function(evt) {
             if (self.$element === null) return true;
@@ -180,6 +212,22 @@
         self.$element = null;
 
         // Events.
+
+        $properties.find(".action-delete").click(function(evt) {
+            if (self.$element === null) return true;
+
+            var $survey = self.$element.closest('.survey');
+            if (isIdTemporary(self.$element.attr('id'))) {
+                self.$element.remove();
+                getRulesByOption($survey, self.$element.attr('id')).remove();
+            }
+            else {
+                self.$element.addClass('deleted');
+                getRulesByOption($survey, self.$element.attr('id')).addClass('deleted');
+            }
+            self.detach();
+            $(this).closest('.property-group').nextAll('.property-group').andSelf().hide();
+        });
 
         $properties.find("[name=field_choice_text]").keyup(function(evt) {
             if (self.$element === null) return true;
@@ -288,6 +336,22 @@
         });
 
         // Events.
+
+        $properties.find(".action-delete").click(function(evt) {
+            if (self.$element === null) return true;
+
+            var $survey = self.$element.closest('.survey');
+            if (isIdTemporary(self.$element.attr('id'))) {
+                self.$element.remove();
+                getRulesByOption($survey, self.$element.attr('id')).remove();
+            }
+            else {
+                self.$element.addClass('deleted');
+                getRulesByOption($survey, self.$element.attr('id')).addClass('deleted');
+            }
+            self.detach();
+            $(this).closest('.property-group').nextAll('.property-group').andSelf().hide();
+        });
 
         $properties.find("[name=field_derived_value_inf],[name=field_derived_value_sup],"
                         +"[name=field_derived_value_regex]").keyup(function(evt) {
@@ -404,6 +468,17 @@
         }
 
         // Events.
+
+        $properties.find(".action-delete").click(function(evt) {
+            if (self.$element === null) return true;
+
+            if (isIdTemporary(self.$element.attr('id')))
+                self.$element.remove();
+            else
+                self.$element.addClass('deleted');
+            self.detach();
+            $(this).closest('.property-group').nextAll('.property-group').andSelf().hide();
+        });
 
         $properties.find("[name=field_rule_type]").change(function(evt) {
             if (self.$element === null) return true;
