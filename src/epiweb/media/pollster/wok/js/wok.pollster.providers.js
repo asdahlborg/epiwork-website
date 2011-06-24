@@ -248,7 +248,7 @@
 
         function updateUI($element, updateType) {
             if (!_lock) {
-                lock = true;
+                _lock = true;
 
                 // FIXME: Propagate options.
                 var type = getQuestionDataType($element.closest(".question"));
@@ -256,19 +256,15 @@
                 // Note that we should make sure to also select the first valid option and
                 // to set the current virtual option type to the selected value.
                 var found = false;
-                $properties.find("[name=field_derived_value_type] option").each(function() {
+                var $derived_value_types = $properties.find("[name=field_derived_value_type]");
+                $derived_value_types.find("option").each(function() {
                     var $o = $(this);
-                    if ($o.attr("data-linked-data-type") === type) {
+                    if ($o.attr("data-linked-data-type") === type)
                         $o.show();
-                        if (!found && updateType) {
-                            $properties.find("[name=field_derived_value_type]").val($o.attr("value")).change();
-                            found = true;
-                        }
-                    }
-                    else {
+                    else
                         $o.hide();
-                    }
                 });
+                $derived_value_types.val($element.attr('data-type')).change();
 
                 // TODO: Find a way to not hard-code "5" here.
 
@@ -320,6 +316,13 @@
         // Public methods.
 
         $.extend(this, {
+            setup: function($e) {
+                var old = self.$element;
+                self.$element = $e;
+                updateUI($e);
+                formatText($e);
+                self.$element = old;
+            },
             attach: function($e) {
                 if (self.$element !== null)
                     self.detach();
@@ -426,7 +429,7 @@
             var $question = self.$element.closest('.survey').find('#'+val);
             var $options = $properties.find('[name=field_rule_object_options]').empty();
             fillOptions($question, $options);
-            var selected = self.$element.attr("data-object-options").trim().split(/\s+/);
+            var selected = (self.$element.attr("data-object-options") || '').trim().split(/\s+/);
             $options.val(selected).change();
             formatText(self.$element);
             return false;
