@@ -39,7 +39,7 @@
         });
     }
 
-    function ShowOptionRule(subjectOption, objectQuestion, objectOptions) {
+    function ShowOptionsRule(subjectOption, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -58,14 +58,14 @@
         });
     }
 
-    function HideOptionRule(subjectOption, objectQuestion, objectOptions) {
+    function HideOptionsRule(subjectOption, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
             target: subjectOption,
-            
+
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
@@ -73,6 +73,56 @@
                     $t.slideUp();
                 else
                     $t.slideDown();
+            }
+        });
+    }
+
+    function CheckOptionsRule(subjectOption, objectQuestion, objectOptions) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            target: subjectOption,
+
+            apply: function($survey, checked) {
+                var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
+                var $t = $survey.find(selectors);
+                if (checked)
+                    $t.attr('checked', true).change();
+            }
+        });
+    }
+
+    function UncheckOptionsRule(subjectOption, objectQuestion, objectOptions) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            target: subjectOption,
+
+            apply: function($survey, checked) {
+                var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
+                var $t = $survey.find(selectors);
+                if (checked)
+                    $t.attr('checked', false).change();
+            }
+        });
+    }
+
+    function ExclusiveRule(subjectOption, objectQuestion, objectOptions) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            target: subjectOption,
+
+            apply: function($survey, checked) {
+                var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
+                var $t = $survey.find(selectors);
+                // TODO
             }
         });
     }
@@ -82,8 +132,11 @@
     window.wok.pollster.rules = {
         "ShowQuestion": ShowQuestionRule,
         "HideQuestion": HideQuestionRule,
-        "ShowOption": ShowOptionRule,
-        "HideOption": HideOptionRule
+        "ShowOptions": ShowOptionsRule,
+        "HideOptions": HideOptionsRule,
+        "CheckOptions": CheckOptionsRule,
+        "UncheckOptions": UncheckOptionsRule,
+        "ExclusiveRule": ExclusiveRule
     };
 
 })(jQuery);

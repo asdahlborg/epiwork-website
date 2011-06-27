@@ -485,7 +485,8 @@
             var val = $(this).val();
             self.$element.attr("data-type", val);
             // TODO: don't hard-code "3" and "4" here.
-            $properties.find("[name=field_rule_object_options]").closest(".property").toggle(val === "3" || val === "4");
+            var showoptions = "3 4 5 6".indexOf(val) > 0;
+            $properties.find("[name=field_rule_object_options]").closest(".property").toggle(showoptions);
             formatText(self.$element);
             return false;
         });

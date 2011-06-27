@@ -189,8 +189,11 @@ echo ""
 ./bin/django survey_register data/surveys/gsq/gold-standard-contact.py
 ./bin/django rule_type_register --title 'Show Question' --jsclass 'wok.pollster.rules.ShowQuestion' --pyclass 'FIXME'
 ./bin/django rule_type_register --title 'Hide Question' --jsclass 'wok.pollster.rules.HideQuestion' --pyclass 'FIXME'
-./bin/django rule_type_register --title 'Show Option' --jsclass 'wok.pollster.rules.ShowOption' --pyclass 'FIXME'
-./bin/django rule_type_register --title 'Hide Option' --jsclass 'wok.pollster.rules.HideOption' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Show Options' --jsclass 'wok.pollster.rules.ShowOptions' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Hide Options' --jsclass 'wok.pollster.rules.HideOptions' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Check Options' --jsclass 'wok.pollster.rules.CheckOptions' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Uncheck Options' --jsclass 'wok.pollster.rules.UncheckOptions' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Exclusive' --jsclass 'wok.pollster.rules.Exclusive' --pyclass 'FIXME'
 ./bin/django question_data_type_register --title 'Text' --dbtype 'text' --pyclass 'string'
 ./bin/django question_data_type_register --title 'Numeric' --dbtype 'integer' --pyclass 'int'
 ./bin/django question_data_type_register --title 'Date' --dbtype 'date' --pyclass 'datetime.date'
