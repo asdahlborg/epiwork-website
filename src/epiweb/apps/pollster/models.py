@@ -271,8 +271,21 @@ class Question(models.Model):
     class Meta:
         ordering = ['survey', 'ordinal']
 
+class QuestionRow(models.Model):
+    question = models.ForeignKey(Question, db_index=True)
+    ordinal = models.IntegerField()
+    title = models.CharField(max_length=255, default='')
+
+class QuestionColumn(models.Model):
+    question = models.ForeignKey(Question, db_index=True)
+    ordinal = models.IntegerField()
+    title = models.CharField(max_length=255, default='')
+
 class Option(models.Model):
     question = models.ForeignKey(Question, db_index=True)
+    clone = models.ForeignKey('self', db_index=True, blank=True, null=True)
+    row = models.ForeignKey(QuestionRow, blank=True, null=True)
+    column = models.ForeignKey(QuestionColumn, blank=True, null=True)
     is_virtual = models.BooleanField(default=False)
     starts_hidden = models.BooleanField(default=False)
     ordinal = models.IntegerField()
