@@ -7,16 +7,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'homepage.html'}),
-    (r'^\+media/(?P<path>.*)$', 'django.views.static.serve', 
-        {'document_root': settings.MEDIA_ROOT}),
-    # Example:
-    # (r'^epiweb/', include('epiweb.foo.urls')),
-
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-    # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
@@ -26,6 +16,11 @@ urlpatterns = patterns('',
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
                      name='loginurl-index'),
     (r'^login/', include('loginurl.urls')),)
+
+if settings.DEBUG:
+    urlpatterns = patterns('',
+        (r'^' + settings.MEDIA_URL.lstrip('/'), include('appmedia.urls'), {'show_indexes': True}),
+    ) + urlpatterns
 
 if settings.MOBILE_INTERFACE_ACTIVE:
   urlpatterns += patterns('', (r'^ema/', include('epiweb.apps.survey.api.urls')))
