@@ -313,14 +313,19 @@ a.close {
 
 /* Forms */
 
+form.contact_form label {
+    float: left;
+    clear: left;
+}
+
 input {
  margin: 0;
  vertical-align: middle;
 }
 
-input#name,
-input#email,
-textarea#message {
+input#id_name,
+input#id_email,
+textarea#id_body {
  height: 2em;
  width: 300px;
  margin: 0 0 10px 0;
@@ -329,16 +334,18 @@ textarea#message {
  line-height: 2em;
  background-color: #ffffff;
  border: 1px solid #cccccc;
+ clear: left;
+ float: left;
 }
 
-textarea#message {
+textarea#id_body {
  width: 400px;
  height: 200px;
 }
 
-input#name:focus,
-input#email:focus,
-textarea#message:focus {
+input#id_name:focus,
+input#id_email:focus,
+textarea#id_message:focus {
  background-color: #f0f0f0;
  border: 1px solid #000000;
 }
@@ -354,6 +361,8 @@ input#commentsubmit {
  color: #f8f8f8;
  text-align: center;
  cursor: pointer;
+ float: left;
+ clear: left;
 }
 
 input#commentsubmit:hover {

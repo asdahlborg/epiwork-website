@@ -1,18 +1,12 @@
 {% extends "contact_form/base.html" %}
+{% load i18n %}
 
 {% block col1 %}
-    <h1>Leave a comment</h1> 
-    <form method="post" action="">{% csrf_token %}
-        <p>
-            Name:<br/>
-            <input type="text" id="name" name="name"/><br />
-            
-            Email:<br/>
-            <input type="text" id="email" name="email"/><br />
+    <h1>{% trans "Leave a comment" %}</h1> 
+    <form method="post" action="" class="contact_form">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" id="commentsubmit" value="Send" />
 
-            Message:<br/><textarea id="message" name="body"/></textarea><br />
-            <input type="submit" id="commentsubmit" value="Send" />
-        </p> 
     </form> 
 
 {% endblock %}
