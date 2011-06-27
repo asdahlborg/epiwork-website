@@ -13,10 +13,14 @@
 
             apply: function($survey, checked) {
                 var $t = $survey.find("#question-"+objectQuestion);
-                if ($t.length === 1 && $t.is(":hidden") && checked)
-                    $t.slideDown();
-                if ($t.length === 1 && $t.is(":visible") && !checked)
-                    $t.slideUp();
+                if ($t.length === 1 && $t.is(":hidden") && checked) {
+                    $t.slideDown(
+                        function() { $(this).find(':input:visible').attr('disabled', false); }
+                    );
+                }
+                if ($t.length === 1 && $t.is(":visible") && !checked) {
+                    $t.slideUp().find(':input').attr('disabled', true);
+                }
             }
         });
     }
@@ -31,10 +35,14 @@
 
             apply: function($survey, checked) {
                 var $t = $survey.find("#question-"+objectQuestion);
-                if ($t.length === 1 && $t.is(":visible") && checked)
-                    $t.slideUp();
-                if ($t.length === 1 && $t.is(":hidden") && !checked)
-                    $t.slideDown();
+                if ($t.length === 1 && $t.is(":visible") && checked) {
+                    $t.slideUp().find(':input').attr('disabled', true);
+                }
+                if ($t.length === 1 && $t.is(":hidden") && !checked) {
+                    $t.slideDown(
+                        function() { $(this).find(':input:visible').attr('disabled', false); }
+                    );
+                }
             }
         });
     }
@@ -51,9 +59,9 @@
                 var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
                 if (checked)
-                    $t.slideDown();
+                    $t.slideDown().find(':input').attr('disabled', false);
                 else
-                    $t.slideUp();
+                    $t.slideUp().find(':input').attr('disabled', true);
             }
         });
     }
@@ -70,9 +78,9 @@
                 var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
                 if (checked)
-                    $t.slideUp();
+                    $t.slideUp().find(':input').attr('disabled', true);
                 else
-                    $t.slideDown();
+                    $t.slideDown().find(':input').attr('disabled', false);
             }
         });
     }
