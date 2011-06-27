@@ -15,7 +15,9 @@ urlpatterns = patterns('',
                                             'template_name': 'news'}),
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
                      name='loginurl-index'),
-    (r'^login/', include('loginurl.urls')),)
+    (r'^login/', include('loginurl.urls')),
+    (r'^contact/', include('contact_form.urls')),
+)
 
 if settings.DEBUG:
     urlpatterns = patterns('',

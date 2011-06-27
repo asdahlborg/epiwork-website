@@ -1,0 +1,18 @@
+{% extends "contact_form/base.html" %}
+
+{% block col1 %}
+    <h1>Leave a comment</h1> 
+    <form method="post" action="">{% csrf_token %}
+        <p>
+            Name:<br/>
+            <input type="text" id="name" name="name"/><br />
+            
+            Email:<br/>
+            <input type="text" id="email" name="email"/><br />
+
+            Message:<br/><textarea id="message" name="body"/></textarea><br />
+            <input type="submit" id="commentsubmit" value="Send" />
+        </p> 
+    </form> 
+
+{% endblock %}

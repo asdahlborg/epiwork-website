@@ -4,6 +4,7 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -132,6 +133,7 @@ INSTALLED_APPS = (
     'epiweb.apps.survey',
     'epiweb.apps.reminder',
     'epiweb.apps.banner',
+    'contact_form',
     'cms',
     'cms.plugins.text',
     'cms.plugins.picture',
