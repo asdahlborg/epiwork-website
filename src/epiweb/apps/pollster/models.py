@@ -187,8 +187,9 @@ class Survey(models.Model):
             rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
             rule.save()
             rule.object_options.clear()
-            for object_option_id in object_option_ids:
-                rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
+            for id in [Survey.get_option_id(idmap, object_option_id) for object_option_id in object_option_ids]:
+                if id is not None:
+                    rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
             rule.save()
         else:
             rule = Rule()
