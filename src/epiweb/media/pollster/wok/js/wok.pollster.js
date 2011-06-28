@@ -57,14 +57,25 @@
 
             // Invoke all rules for the rule/option combination.
 
-            var rules = rules_by_question[qid];
-            if (rules && rules.length > 0) {
-                for (var i=0 ; i < rules.length ; i++) {
-                    if (rules[i].target === oid)
-                        rules[i].apply($survey, checked);
-                    else if (isRadio)
-                        rules[i].apply($survey, false);
-                }
+            var exclusives = [];
+            var rules = rules_by_question[qid] || [];
+            for (var i=0 ; i < rules.length ; i++) {
+                var rule = rules[i];
+                if (rule.subject === oid)
+                    rule.apply($survey, checked);
+                else if (isRadio)
+                    rule.apply($survey, false);
+                if (rule.isExclusive)
+                    exclusives.push('#option-'+rule.subject);
+            }
+
+            if (checked && $.inArray('#option-'+oid, exclusives) >= 0) {
+                // uncheck all other options when checking an exclusive one
+                $question.find(':radio,:checkbox').not($input).filter(':checked').attr('checked', false).change();
+            }
+            else if (checked && exclusives) {
+                // uncheck all exclusives when checking a non-exclusive option
+                $question.find(exclusives.join(',')).find(':radio,:checkbox').attr('checked', false).change();
             }
         });
     }

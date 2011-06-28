@@ -9,7 +9,8 @@
         // Public methods.
 
         $.extend(this, {
-            target: subjectOption,
+            subject: subjectOption,
+            isExclusive: false,
 
             apply: function($survey, checked) {
                 var $t = $survey.find("#question-"+objectQuestion);
@@ -31,7 +32,8 @@
         // Public methods.
 
         $.extend(this, {
-            target: subjectOption,
+            subject: subjectOption,
+            isExclusive: false,
 
             apply: function($survey, checked) {
                 var $t = $survey.find("#question-"+objectQuestion);
@@ -53,7 +55,8 @@
         // Public methods.
 
         $.extend(this, {
-            target: subjectOption,
+            subject: subjectOption,
+            isExclusive: false,
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
@@ -72,7 +75,8 @@
         // Public methods.
 
         $.extend(this, {
-            target: subjectOption,
+            subject: subjectOption,
+            isExclusive: false,
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
@@ -91,7 +95,8 @@
         // Public methods.
 
         $.extend(this, {
-            target: subjectOption,
+            subject: subjectOption,
+            isExclusive: false,
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
@@ -108,7 +113,8 @@
         // Public methods.
 
         $.extend(this, {
-            target: subjectOption,
+            subject: subjectOption,
+            isExclusive: false,
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
@@ -125,7 +131,8 @@
         // Public methods.
 
         $.extend(this, {
-            target: subjectOption,
+            subject: subjectOption,
+            isExclusive: true,
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
@@ -144,7 +151,7 @@
         "HideOptions": HideOptionsRule,
         "CheckOptions": CheckOptionsRule,
         "UncheckOptions": UncheckOptionsRule,
-        "ExclusiveRule": ExclusiveRule
+        "Exclusive": ExclusiveRule
     };
 
 })(jQuery);

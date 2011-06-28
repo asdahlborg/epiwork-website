@@ -415,18 +415,23 @@
         // Derived value formatting.
 
         function formatText($element) {
+            var val = $properties.find("[name=field_rule_type]").val();
             var type = $properties.find("[name=field_rule_type] :selected").text();
             var subject_option = $properties.find("[name=field_rule_subject_option] :selected");
             var object_question = $properties.find("[name=field_rule_object_question] :selected");
             var object_options = $properties.find("[name=field_rule_object_options] :selected");
 
+            var showquestion = "1 2 3 4 5 6".indexOf(val) >= 0;
+            var showoptions = "3 4 5 6".indexOf(val) >= 0;
+
             var subject = '';
             if (subject_option.val())
                 subject = subject_option.text();
-            var object = object_question.text();
-            if (object_options.length > 0)
-                object = object_options.length + " Options from " + object_question.text();
-
+            var object = '';
+            if (showquestion)
+                object = object_question.text();
+            if (showoptions)
+                object = "(" + object_options.length + ") from " + object_question.text();
             $element.text(subject + " => " + type + " " + object);
         }
 
@@ -484,8 +489,10 @@
             if (self.$element === null) return true;
             var val = $(this).val();
             self.$element.attr("data-type", val);
-            // TODO: don't hard-code "3" and "4" here.
-            var showoptions = "3 4 5 6".indexOf(val) > 0;
+            // TODO: don't hard-code values here.
+            var showquestion = "1 2 3 4 5 6".indexOf(val) >= 0;
+            $properties.find("[name=field_rule_object_question]").closest(".property").toggle(showquestion);
+            var showoptions = "3 4 5 6".indexOf(val) >= 0;
             $properties.find("[name=field_rule_object_options]").closest(".property").toggle(showoptions);
             formatText(self.$element);
             return false;

@@ -1,5 +1,4 @@
-<div class="survey" id="survey-{{ survey.id }}">
-    <form>
+<form class="survey" id="survey-{{ survey.id }}">
     {% for question in survey.question_set.all %}
     <div class="question-wrapper clearfix">
         <div id="question-{{ question.id }}" class="question {{ question.type }} {% if question.starts_hidden %} starts-hidden {% endif %}"
@@ -81,5 +80,4 @@
             {% endfor %}
         }
     </script>
-    </form>
-</div>
+</form>
