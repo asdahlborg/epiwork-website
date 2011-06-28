@@ -29,7 +29,7 @@ class Survey(models.Model):
             question_ordinal += 1
 
             option_ordinal = 1
-            for xoption in xquestion.findall('form/ul/li'):
+            for xoption in xquestion.findall('ul/li'):
                 self.update_option_from_xml(idmap, question, xoption, option_ordinal)
                 option_ordinal += 1
 
