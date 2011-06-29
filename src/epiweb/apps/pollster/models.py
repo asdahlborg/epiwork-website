@@ -230,6 +230,8 @@ class RuleType(models.Model):
 class QuestionDataType(models.Model):
     title = models.CharField(max_length=255, unique=True)
     db_type = models.CharField(max_length=255)
+    css_class = models.CharField(max_length=255)
+    js_class = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.title

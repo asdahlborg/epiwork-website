@@ -25,10 +25,17 @@
         var $survey = $('.'+options.templateClass, context);
         var questionSelector = '.'+options.questionClass;
 
-        var rules_by_question = {}, derived_values = {};
+        var data_types = {}, rules_by_question = {}, derived_values = {};
 
+        pollster_fill_data_types(data_types);
         pollster_fill_rules(rules_by_question);
-        pollster_fill_derived_values(derived_values)
+        pollster_fill_derived_values(derived_values);
+
+        // Bind data types to question elements
+
+        $.each(data_types, function(question, data_type) {
+            data_type.bind($('#question-'+question));
+        });
 
         // Event handlers.
 

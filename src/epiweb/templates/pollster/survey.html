@@ -1,7 +1,7 @@
 <form class="survey" id="survey-{{ survey.id }}">
     {% for question in survey.question_set.all %}
     <div class="question-wrapper clearfix">
-        <div id="question-{{ question.id }}" class="question {{ question.type }} {% if question.starts_hidden %} starts-hidden {% endif %}"
+        <div id="question-{{ question.id }}" class="question {{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %}"
              data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}">
             <p>
                 <span class="number"></span>
@@ -66,6 +66,12 @@
         <button type="submit">Submit</button>
     </div>
     <script type="text/javascript" class="pollster-rules">
+        function pollster_fill_data_types(d) {
+            var t;
+            {% for question in survey.question_set.all %}
+            d[{{question.id}}] = new {{question.data_type.js_class}}();
+            {% endfor %}
+        }
         function pollster_fill_derived_values(d) {
             var t;
             {% for question in survey.question_set.all %}
@@ -74,9 +80,9 @@
             {% for option in question.option_set.all %}
             {% if option.virtual_type.js_class %}
             t.push(new {{option.virtual_type.js_class}}({{ option.id }},
-                                                        {{ option.virtual_inf|default:'0'|addslashes }},
-                                                        {{ option.virtual_sup|default:'0'|addslashes }},
-                                                        '{{ option.virtual_regex|default:'null'|addslashes }}'));
+                                                        '{{ option.virtual_inf|default:''|addslashes }}',
+                                                        '{{ option.virtual_sup|default:''|addslashes }}',
+                                                        '{{ option.virtual_regex|default:''|addslashes }}'));
             {% endif %}
             {% endfor %}
             {% endif %}

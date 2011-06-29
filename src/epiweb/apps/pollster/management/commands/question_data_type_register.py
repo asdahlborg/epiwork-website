@@ -9,7 +9,13 @@ class Command(BaseCommand):
                     help='Data type title.'),
         make_option('-d', '--dbtype', action='store', type="string",
                     dest='dbtype',
+                    help='Database type.'),
+        make_option('-j', '--jssclass', action='store', type="string",
+                    dest='jsclass',
                     help='JavaScript class.'),
+        make_option('-c', '--cssclass', action='store', type="string",
+                    dest='cssclass',
+                    help='CSS class.'),
     )
 
     def handle(self, *args, **options):
@@ -20,6 +26,8 @@ class Command(BaseCommand):
         data = models.QuestionDataType()
         data.title = options.get('title')
         data.db_type = options.get('dbtype', None)
+        data.js_class = options.get('jsclass', None)
+        data.css_class = options.get('cssclass', None)
         data.save()
 
         if verbosity > 0:
