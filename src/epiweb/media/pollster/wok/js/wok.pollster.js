@@ -28,7 +28,7 @@
         var rules_by_question = {}, derived_values = {};
 
         pollster_fill_rules(rules_by_question);
-        //pollster_fill_derived_values(derived_values);
+        pollster_fill_derived_values(derived_values)
 
         // Event handlers.
 
@@ -40,7 +40,7 @@
             var $question = $(evt.target).closest(questionSelector);
             var isRadio = $input.is(":radio");
             var qid = parseInt($question.attr("id").replace("question-",""));
-            var oid = parseInt($input.closest("li").attr("id").replace("option-",""));
+            var oid = parseInt(($input.closest("li").attr("id") || '').replace("option-",""));
             var checked = false;
 
             // If the <input> is a checkbox or radio button determine its checked state.
@@ -76,6 +76,21 @@
             else if (checked && exclusives) {
                 // uncheck all exclusives when checking a non-exclusive option
                 $question.find(exclusives.join(',')).find(':radio,:checkbox').attr('checked', false).change();
+            }
+
+            // Propagate changes to derived options
+
+            if ($input.is(':not(.derived)')) {
+                var val = $input.val();
+                var derived = derived_values[qid] || [];
+                for (var i=0 ; i < derived.length ; i++) {
+                    var $derived_input = $question.find('#option-'+derived[i].option).find(':input');
+                    var match = Boolean(derived[i].match(val));
+                    var checked = $derived_input.is(':checked');
+                    if (match != checked) {
+                        $derived_input.attr('checked', match).change();
+                    }
+                }
             }
         });
     }

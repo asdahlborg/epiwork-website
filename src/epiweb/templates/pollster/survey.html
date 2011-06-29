@@ -14,9 +14,9 @@
             <ul class="derived-values">
                 {% for option in question.option_set.all %}
                 <li id="option-{{ option.id }}"
-                    data-type="{{ option.virtual_type.id }}" data-value="{{ option.value }}"
+                    data-type="{{ option.virtual_type.id }}"
                     data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
-                    <div class="info">{{ option.value }}</div>
+                    <div class="info"><input class="derived" type="checkbox" disabled="disabled"/></div>
                 </li>
                 {% endfor %}
             </ul>
@@ -66,6 +66,22 @@
         <button type="submit">Submit</button>
     </div>
     <script type="text/javascript" class="pollster-rules">
+        function pollster_fill_derived_values(d) {
+            var t;
+            {% for question in survey.question_set.all %}
+            {% if question.is_text %}
+            t = d[{{question.id}}] = [];
+            {% for option in question.option_set.all %}
+            {% if option.virtual_type.js_class %}
+            t.push(new {{option.virtual_type.js_class}}({{ option.id }},
+                                                        {{ option.virtual_inf|default:'0'|addslashes }},
+                                                        {{ option.virtual_sup|default:'0'|addslashes }},
+                                                        '{{ option.virtual_regex|default:'null'|addslashes }}'));
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+        }
         function pollster_fill_rules(d) {
             var t;
             {% for question in survey.question_set.all %}

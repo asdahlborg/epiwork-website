@@ -189,7 +189,7 @@ class Survey(models.Model):
             rule.object_options.clear()
             for id in [Survey.get_option_id(idmap, object_option_id) for object_option_id in object_option_ids]:
                 if id is not None:
-                    rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
+                    rule.object_options.add(Option.objects.get(id = id))
             rule.save()
         else:
             rule = Rule()
@@ -199,8 +199,9 @@ class Survey(models.Model):
             rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
             rule.save()
             rule.object_options.clear()
-            for object_option_id in object_option_ids:
-                rule.object_options.add(Option.objects.get(id = Survey.get_option_id(idmap, object_option_id)))
+            for id in [Survey.get_option_id(idmap, object_option_id) for object_option_id in object_option_ids]:
+                if id is not None:
+                    rule.object_options.add(Option.objects.get(id = id))
             rule.save()
         return rule
 
@@ -222,7 +223,6 @@ class Survey(models.Model):
 class RuleType(models.Model):
     title = models.CharField(max_length=255, unique=True)
     js_class = models.CharField(max_length=255)
-    python_class = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.title
@@ -230,7 +230,6 @@ class RuleType(models.Model):
 class QuestionDataType(models.Model):
     title = models.CharField(max_length=255, unique=True)
     db_type = models.CharField(max_length=255)
-    python_class = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.title
@@ -238,7 +237,7 @@ class QuestionDataType(models.Model):
 class VirtualOptionType(models.Model):
     title = models.CharField(max_length=255)
     question_data_type = models.ForeignKey(QuestionDataType)
-    python_class = models.CharField(max_length=255)
+    js_class = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.title

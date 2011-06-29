@@ -362,13 +362,6 @@
             return false;
         });
 
-        $properties.find("[name=field_derived_value_value]").keyup(function(evt) {
-            if (self.$element === null) return true;
-            self.$element.attr("data-value", $(this).val());
-            self.$element.find(".info").text($(this).val());
-            return false;
-        });
-
         $properties.find("[name=field_derived_value_type]").change(function(evt) {
             if (self.$element === null) return true;
             self.$element.attr("data-type", $(this).val());
@@ -396,7 +389,6 @@
                     .find("[name=field_derived_value_regex]").val($e.attr("data-regex")).end()
                     .find("[name=field_derived_value_inf]").val($e.attr("data-inf")).end()
                     .find("[name=field_derived_value_sup]").val($e.attr("data-sup")).end()
-                    .find("[name=field_derived_value_value]").val($e.attr("data-value")).end()
                     .show();
                 updateUI($e, !$e.attr("data-type"));
                 formatText(self.$element);
@@ -411,8 +403,6 @@
         var self = this, _lock = false;
 
         self.$element = null;
-
-        // Derived value formatting.
 
         function formatText($element) {
             var val = $properties.find("[name=field_rule_type]").val();

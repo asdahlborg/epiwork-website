@@ -10,9 +10,6 @@ class Command(BaseCommand):
         make_option('-j', '--jsclass', action='store', type="string",
                     dest='jsclass',
                     help='JavaScript class.'),
-        make_option('-p', '--pyclass', action='store', type="string",
-                    dest='pyclass',
-                    help='Python class.'),
     )
 
     def handle(self, *args, **options):
@@ -23,7 +20,6 @@ class Command(BaseCommand):
         rule = models.RuleType()
         rule.title = options.get('title')
         rule.js_class = options.get('jsclass', None)
-        rule.python_class = options.get('pyclass', None)
         rule.save()
 
         if verbosity > 0:

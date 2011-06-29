@@ -197,11 +197,11 @@ echo ""
 ./bin/django question_data_type_register --title 'Text' --dbtype 'text' --pyclass 'string'
 ./bin/django question_data_type_register --title 'Numeric' --dbtype 'integer' --pyclass 'int'
 ./bin/django question_data_type_register --title 'Date' --dbtype 'date' --pyclass 'datetime.date'
-./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Text' --pyclass 'FIXME'
-./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Numeric' --pyclass 'FIXME'
-./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Date' --pyclass 'FIXME'
-./bin/django virtual_option_type_register --title 'Relative date (years)' --question-data-type-title 'Date' --pyclass 'FIXME'
-./bin/django virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --pyclass 'FIXME'
+./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.TextRange'
+./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Numeric' --jsclass 'wok.pollster.virtualoptions.NumericRange'
+./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateRange'
+./bin/django virtual_option_type_register --title 'Years ago' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateYearsAgo'
+./bin/django virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
 if [ "$DB_ENGINE" = "sqlite3" ] ; then
     echo ".read src/extra-survey.sqlite3.sql" | sqlite3 ggm.db

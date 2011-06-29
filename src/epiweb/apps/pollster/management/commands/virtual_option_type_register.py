@@ -10,9 +10,9 @@ class Command(BaseCommand):
         make_option('-q', '--question-data-type-title', action='store', type="string",
                     dest='question_data_type_title',
                     help='Question data type title'),
-        make_option('-p', '--pyclass', action='store', type="string",
-                    dest='pyclass',
-                    help='Python class.'),
+        make_option('-j', '--jsclass', action='store', type="string",
+                    dest='jsclass',
+                    help='JavaScript class.'),
     )
 
     def handle(self, *args, **options):
@@ -26,9 +26,10 @@ class Command(BaseCommand):
         data = models.VirtualOptionType()
         data.question_data_type = question_data_type
         data.title = options.get('title')
-        data.python_class = options.get('pyclass', None)
+        data.js_class = options.get('jsclass', None)
         data.save()
 
         if verbosity > 0:
             print 'Rule type "%s" registered' % (data,)
 
+    )

@@ -10,9 +10,6 @@ class Command(BaseCommand):
         make_option('-d', '--dbtype', action='store', type="string",
                     dest='dbtype',
                     help='JavaScript class.'),
-        make_option('-p', '--pyclass', action='store', type="string",
-                    dest='pyclass',
-                    help='Python class.'),
     )
 
     def handle(self, *args, **options):
@@ -23,7 +20,6 @@ class Command(BaseCommand):
         data = models.QuestionDataType()
         data.title = options.get('title')
         data.db_type = options.get('dbtype', None)
-        data.python_class = options.get('pyclass', None)
         data.save()
 
         if verbosity > 0:
