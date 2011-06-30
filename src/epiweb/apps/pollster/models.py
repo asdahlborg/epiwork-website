@@ -12,6 +12,8 @@ class Survey(models.Model):
         self.update_from_xml(xmlstring)
 
     def update_from_xml(self, xmlstring):
+        # ElementTree does not like being passed unicode objects
+        xmlstring = '<?xml version="1.0" encoding="UTF-8"?>'+xmlstring.encode('utf-8')
         root = ElementTree.XML(xmlstring)
 
         self.title = root.find('h1').text or ''

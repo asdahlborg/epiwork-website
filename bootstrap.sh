@@ -197,10 +197,12 @@ echo ""
 ./bin/django question_data_type_register --title 'Text' --dbtype 'text' --cssclass 'text-type' --jsclass 'wok.pollster.datatypes.Text'
 ./bin/django question_data_type_register --title 'Numeric' --dbtype 'numeric' --cssclass 'numeric-type' --jsclass 'wok.pollster.datatypes.Numeric'
 ./bin/django question_data_type_register --title 'Date' --dbtype 'date' --cssclass 'date-type' --jsclass 'wok.pollster.datatypes.Date'
+./bin/django question_data_type_register --title 'MonthYear' --dbtype 'date' --cssclass 'monthyear-type' --jsclass 'wok.pollster.datatypes.MonthYear'
 ./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.TextRange'
 ./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Numeric' --jsclass 'wok.pollster.virtualoptions.NumericRange'
 ./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateRange'
 ./bin/django virtual_option_type_register --title 'Years ago' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateYearsAgo'
+./bin/django virtual_option_type_register --title 'Years ago' --question-data-type-title 'MonthYear' --jsclass 'wok.pollster.virtualoptions.MonthYearYearsAgo'
 ./bin/django virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
 if [ "$DB_ENGINE" = "sqlite3" ] ; then

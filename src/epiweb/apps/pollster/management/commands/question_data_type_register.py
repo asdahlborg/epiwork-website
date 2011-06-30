@@ -10,7 +10,7 @@ class Command(BaseCommand):
         make_option('-d', '--dbtype', action='store', type="string",
                     dest='dbtype',
                     help='Database type.'),
-        make_option('-j', '--jssclass', action='store', type="string",
+        make_option('-j', '--jsclass', action='store', type="string",
                     dest='jsclass',
                     help='JavaScript class.'),
         make_option('-c', '--cssclass', action='store', type="string",

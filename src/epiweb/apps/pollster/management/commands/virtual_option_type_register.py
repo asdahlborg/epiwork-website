@@ -31,5 +31,3 @@ class Command(BaseCommand):
 
         if verbosity > 0:
             print 'Rule type "%s" registered' % (data,)
-
-    )

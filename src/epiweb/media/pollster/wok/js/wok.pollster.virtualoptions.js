@@ -91,6 +91,29 @@
         });
     }
 
+    function MonthYearYearsAgoType(option, inf, sup, regex) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            option: option,
+            match: function(val) {
+                val = Date.parse('1/'+val);
+                inf = parseInt(inf);
+                sup = parseInt(sup);
+                if (!inf && !sup)
+                    return false;
+                else if (!inf)
+                    return val <= new Date().addYears(-sup);
+                else if (!sup)
+                    return new Date().addYears(-inf) <= val;
+                else
+                    return new Date().addYears(-inf) <= val && val <= new Date().addYears(-sup);
+            }
+        });
+    }
+
     function RegularExpressionType(option, inf, sup, regex) {
         var self = this;
 
@@ -111,7 +134,8 @@
         "NumericRange": NumericRangeType,
         "DateRange": DateRangeType,
         "RegularExpression": RegularExpressionType,
-        "DateYearsAgo": DateYearsAgoType
+        "DateYearsAgo": DateYearsAgoType,
+        "MonthYearYearsAgo": MonthYearYearsAgoType
     };
 
 })(jQuery);
