@@ -9,8 +9,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    (r'^search/', include('haystack.urls')),
     (r'^accounts/', include('epiweb.apps.accounts.urls')),
     (r'^survey/', include('epiweb.apps.survey.urls')),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),
