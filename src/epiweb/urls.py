@@ -25,6 +25,8 @@ urlpatterns = patterns('',
 
 if settings.DEBUG:
     urlpatterns = patterns('',
+        (r'^404/$', 'django.views.defaults.page_not_found'),
+        (r'^500/$', 'epiweb.views.server_error'),
         (r'^' + settings.MEDIA_URL.lstrip('/'), include('appmedia.urls'), {'show_indexes': True}),
     ) + urlpatterns
 
@@ -38,3 +40,4 @@ if settings.EXTRA_SURVEY:
 # Catchall
 urlpatterns += patterns('', url(r'^', include('cms.urls')))
 
+handler500 = 'epiweb.views.server_error'
