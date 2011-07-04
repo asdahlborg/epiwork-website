@@ -13,3 +13,4 @@ epiweb.db
 src/epiweb/media/banner/
 .DS_Store
 src/epiweb/TAGS
+virtualenv
