@@ -146,8 +146,13 @@ INSTALLED_APPS = (
 )
 
 HAYSTACK_SITECONF = 'epiweb.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'xapian'
-HAYSTACK_XAPIAN_PATH = '/tmp/xapian'
+
+try:
+    import xapian
+    HAYSTACK_SEARCH_ENGINE = 'xapian'
+    HAYSTACK_XAPIAN_PATH = '/tmp/xapian'
+except:
+    HAYSTACK_SEARCH_ENGINE = 'simple'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

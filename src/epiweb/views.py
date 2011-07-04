@@ -1,6 +1,8 @@
 from django.conf import settings
 from django import http
-from django.template import Context, loader
+from django.template import Context, loader, RequestContext
+from django.shortcuts import render_to_response
+from django import forms
 
 def server_error(request, template_name='500.html'):
     """
@@ -17,3 +19,22 @@ def server_error(request, template_name='500.html'):
     return http.HttpResponseServerError(t.render(Context({
         'MEDIA_URL': settings.MEDIA_URL
     })))
+
+def test_search(request):
+    class SearchForm(forms.Form):
+        q = forms.CharField(label="Search")
+
+    query = True
+    page = {
+        'object_list': [
+            {'object': "Resultaat nr. 1"},
+            {'object': "Resultaat nr. 2"},
+            {'object': "Resultaat nr. 3"},
+        ],
+        'previous_page_number': 1,
+        'next_page_number': 3,
+        'has_next': True,
+        'has_previous': True,
+    }
+    form = SearchForm()
+    return render_to_response('search/search.html', locals(), context_instance=RequestContext(request))
