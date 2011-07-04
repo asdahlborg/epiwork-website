@@ -4,6 +4,7 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -127,6 +128,8 @@ INSTALLED_APPS = (
     'epiweb.apps.survey',
     'epiweb.apps.reminder',
     'epiweb.apps.banner',
+    'epiweb.apps.search',
+    'contact_form',
     'cms',
     'cms.plugins.text',
     'cms.plugins.picture',
@@ -139,7 +142,12 @@ INSTALLED_APPS = (
     'mptt',
     'appmedia',
     'publisher',
+    'haystack',
 )
+
+HAYSTACK_SITECONF = 'epiweb.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'xapian'
+HAYSTACK_XAPIAN_PATH = '/tmp/xapian'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

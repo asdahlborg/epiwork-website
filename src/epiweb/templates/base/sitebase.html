@@ -1,4 +1,5 @@
 {% load cms_tags menu_tags %}
+{% load i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
@@ -34,9 +35,9 @@
 					{% spaceless %}<ul>{% block menubar %}{% show_menu 0 2 %}{% endblock menubar %}</ul>{% endspaceless %}
 				</div>
 				<div id="searchbar">
-				    <form method="post" action="#placeholder">
-				    <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Search" /></p>
-				    </form>
+                    <form method="get" action="/search/">
+                        <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="{% trans "Search" %}" /></p>
+                    </form>
 				</div>
 			</div>			
 		</div> 
@@ -62,10 +63,9 @@
 				</div>
 			</div>{% endblock footercontent %}
 			<div id="footerclose">
-				&copy; {% now "Y" %} Influenzanet &nbsp;|&nbsp; <a href="contact.html" title="Contact">Contact</a>
+                &copy; {% now "Y" %} De Grote Griep Meting &nbsp;|&nbsp; <a href="{% url contact_form %}" title="Neem contact met ons op">Contact</a>
 			</div>
 		</div>
 	</div>
 	</body>
-
 </html>
