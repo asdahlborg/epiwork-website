@@ -1,8 +1,0 @@
-
-Activeer uw toegang.
-
-Klik op de onderstaande link of kopieer hem naar uw internet-browser:
-http://{{ site }}/accounts/activate/{{ activation_key }}/
-
-Deze link is {{ expiration_days }} dagen geldig.
-

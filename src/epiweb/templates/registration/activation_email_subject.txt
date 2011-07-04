@@ -1,1 +1,0 @@
-Activeer uw toegang: {{ site }}
