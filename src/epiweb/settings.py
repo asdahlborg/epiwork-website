@@ -33,29 +33,23 @@ TIME_ZONE = 'Europe/Amsterdam'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'nl'
+LANGUAGE_CODE = 'en'
 # LANGUAGE_CODE = 'en'
 
 # For checking postcodes etc.
 # Use ISO3166 two-letter country code
 # See http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
 # Avaliable: be, it, nl, uk, pt, se
-COUNTRY = 'nl'
+COUNTRY = 'en'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
-USE_L10N = True
+USE_I18N = False
+USE_L10N = False
 
 LANGUAGES = (
-   ('nl', 'Nederlands'),
-   ('fr', 'Français'),
+   ('en', 'English'),
 )
-
-#CMS_LANGUAGES = (
-#  ('nl', gettext('Nederlands')),
-#  ('fr', gettext('Francais')),
-#)
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -107,6 +101,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 CMS_TEMPLATES = (
     ('base/threecol.html', "3 Columns"),
     ('base/twocol.html', "2 Columns"),
+    ('base/home.html', "Home"),
 )
 
 ROOT_URLCONF = 'epiweb.urls'

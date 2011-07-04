@@ -1,97 +1,71 @@
 {% load cms_tags menu_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl" dir="ltr">
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 
-    <head>
-
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=0.75, user-scalable=yes" />
+		<meta name="robots" content="index, follow" />
         <link rel="shortcut icon" href="{{ MEDIA_URL }}base/img/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="{{ MEDIA_URL }}base/img/local_ggm/apple-touch-icon.png" />      
+        <link rel="apple-touch-icon" href="{{ MEDIA_URL }}base/img/apple-touch-icon.png" />      
 
-        <title>{% block title %}De Grote Griep Meting: {% page_attribute page_title %}{% endblock title %}</title>
-        <meta name="description" content="{% page_attribute meta_description %}"/>
+		<title>{% block title %}Influenzanet: {% page_attribute page_title %}{% endblock title %}</title>
+		<meta name="description" content="{% page_attribute meta_description %}"/>
         <meta name="keywords" content="{% page_attribute meta_keywords %}"/>
         {% block add_head %}{% endblock add_head %}
+
         <link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}base/css/default.css" />
-        <link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}base/css/local_ggm.css" />
         {% block add_css %}{% endblock add_css %}
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-        <script type="text/javascript" src="{{ MEDIA_URL }}base/js/generic.js"></script>
-        <script type="text/javascript" src="{{ MEDIA_URL }}base/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         {% block add_js %}{% endblock add_js %}
-    </head>
+		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/influenzanet.js"></script>
+	</head>
 
-    <body{% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
-    <div id="page">
-    
-        <div id="influenzabar">
-            <p class="_toggle influenzanet">Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet</p>
-            <div class="_toggle influenzacontent">
-                <div id="epiwork">
-                    <img src="{{ MEDIA_URL }}base/img/influbar/epiwork.gif" alt="Epiwork Logo" title="Epiwork" /><br />
-                    Developing the framework for an epidemic forecast infrastructure.<br />
-                    <a href="http://www.epiwork.eu/" title="Epiwork website">http://www.epiwork.eu/</a><br /><br />
-                    The Seventh Framework Programme (FP7) bundles all research-related EU initiatives.<br /><br />
-                    <img src="{{ MEDIA_URL }}base/img/influbar/7thframework.gif" alt="7th Framework Logo" title="7th Framework" /></div>
-                <div id="participants">
-                    Participating countries and volunteers:<br /><br />
-                    <a href="http://www.degrotegriepmeting.nl/"><img src="{{ MEDIA_URL }}base/img/influbar/nl.png" title="The Netherlands" alt="The Netherlands" /></a> 20.947<br />
-                    <a href="http://www.degrotegriepmeting.be/"><img src="{{ MEDIA_URL }}base/img/influbar/be.png" title="Belgium" alt="Belgium" /></a> 5.843<br />
-                    <a href="http://www.gripenet.pt/"><img src="{{ MEDIA_URL }}base/img/influbar/pt.png" title="Portugal" alt="Portugal" /></a> 2.227<br />
-                    <a href="http://www.influweb.it/"><img src="{{ MEDIA_URL }}base/img/influbar/it.png" title="Italy" alt="Italy" /></a> 3.116<br />
-                    <a href="http://reporta.c3.org.mx/"><img src="{{ MEDIA_URL }}base/img/influbar/mx.png" title="Mexico" alt="Mexico" /></a> 3.950<br />
-                    <a href="http://www.gripenet.com.br/"><img src="{{ MEDIA_URL }}base/img/influbar/br.png" title="Brazil" alt="Brazil" /></a> 370<br />
-                    <a href="http://www.flusurvey.org.uk/"><img src="{{ MEDIA_URL }}base/img/influbar/gb.png" title="Great Britain" alt="Great Britain" /></a> 5.555<br />
-                    <a href="http://www.flutracking.net/"><img src="{{ MEDIA_URL }}base/img/influbar/au.png" title="Australia" alt="Australia" /></a> 7.776<br />
-                </div>
-                <div id="influenzatext">
-                    InfluenzaNet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet. It has been operational in The Netherlands and Belgium (since 2003), Portugal (since 2005) and Italy (since 2008), and the current objective is to implement InfluenzaNet in more European countries.<br /><br />
-                    In contrast with the traditional system of sentinel networks of mainly primary care physicians coordinated by the European Influenza Surveillance Scheme (EISS), InfluenzaNet obtains its data directly from the population. This creates a fast and flexible monitoring system whose uniformity allows for direct comparison of ILI rates between countries.<br /><br />
-                    Any resident of a country where InfluenzaNet is implemented can participate by completing an online application form, which contains various medical, geographic and behavioural questions. Participants are reminded weekly to report any symptoms they have experienced since their last visit. The incidence of ILI is determined on the basis of a uniform case definition. <a href="#toggle" class="jsclose" title="Close">Hide this information</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="header">
-	
-            <div id="headerlogo"><a href="/" title="Grote Griep Meting"><img src="{{ MEDIA_URL }}base/img/local_ggm/logo-ggm.gif" alt="De Grote Griep Meting" /></a></div>
-            {% block authentication %}<div id="account">{% if user.is_authenticated %}
-                <p><a href="/survey/profile/">Ingelogd als {{ user }}</a></p>
-                <ul class="member">
-                    <li><a href="/survey/profile/">Mijn gegevens</a></li>
-                    <li><a href="/accounts/logout/">Uitloggen</a></li>
-                </ul>{% else %}
-                <ul class="anonymous">
-                    <li><a href="/accounts/login/" class="fancybox1">Inloggen</a></li>
-                    <li><a href="/accounts/register/" class="fancybox2">Aanmelden</a></li>
-                </ul>
-                <p><a href="/accounts/password/reset/">Wachtwoord vergeten?</a></p>{% endif %}
-            </div>{% endblock authentication %}
-            <div id="navigation">
-                <div id="menubar">
-                    {% spaceless %}<ul>{% block menubar %}{% show_menu 0 2 %}{% endblock menubar %}</ul>{% endspaceless %}
-                </div>
-                <div id="searchbar">
-                    <form method="post">{% csrf_token %}
-                        <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Zoeken" /></p>
-                    </form>
-                </div>
-            </div>        
-  
-        </div> 
+	<body{% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
+	<div id="page">
+		
+		<div id="influenzabar">
+			{% block masthead %}<p class="influenzanet">Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet</p>{% endblock masthead %}
+		</div>
+		
+		<div id="header">
+			<div id="navigation">
+				<div id="menubar">
+					{% spaceless %}<ul>{% block menubar %}{% show_menu 0 2 %}{% endblock menubar %}</ul>{% endspaceless %}
+				</div>
+				<div id="searchbar">
+				    <form method="post" action="#placeholder">
+				    <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Search" /></p>
+				    </form>
+				</div>
+			</div>			
+		</div> 
+		
 		{% block content %}{% endblock content %}
 		
-        <div id="footer">{% block footercontent %}
-            <div id="footercontent">
-                <strong>De Grote Griep Meting</strong> opereert volstrekt onafhankelijk van welke sponsor of adverteerder dan ook: organisatorisch, inhoudelijk, wetenschappelijk of anderszins. Ook het bijbehorende lesmateriaal is door deskundigen samengesteld zonder enige beïnvloeding van sponsors of adverteerders.
-            </div>{% endblock footercontent %}
-            <div id="footerclose">
-                &copy; {% now "Y" %} De Grote Griep Meting &nbsp;|&nbsp; <a href="../contact" title="Neem contact met ons op">Contact</a>
-            </div>
-        </div>
-
-    </div>
-    </body>
+		<div id="footer">{% block footercontent %}
+			<div id="footercontent">
+				<div id="footercol1"><img src="{{ MEDIA_URL }}base/img/main/influenzanetlogo.png" alt="Influenzanet logo" /><p>Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet with the aid of volunteers.<br />We have tried to ensure that all information we provide through this website is correct at the time we include it.</p></div>
+				<div id="footercol2"><h2>Partners</h2>
+						<a href="http://preview.aktivgegengrippe.de/" rel="external" title="Aktiv gegen Grippe Deutschland">Aktiv gegen Grippe Deutschland</a><br />
+						<a href="http://preview.aktivgegengrippe.at/" rel="external" title="Aktiv gegen Grippe Österreich">Aktiv gegen Grippe Österreich</a><br />
+						<a href="http://preview.aktivgegengrippe.ch/" rel="external" title="Aktiv gegen Grippe Schweiz">Aktiv gegen Grippe Schweiz</a><br />
+						<a href="http://www.degrotegriepmeting.nl/" rel="external" title="De Grote Griepmeting Nederland">De Grote Griepmeting Nederland</a><br />
+						<a href="http://www.degrotegriepmeting.be/" rel="external" title="De Grote Griepmeting België">De Grote Griepmeting België</a><br />
+					</div>
+					<div id="footercol3"><h2>&nbsp;</h2>
+						<a href="http://www.flusurvey.org.uk/" rel="external" title="Flusurvey United Kingdom">Flusurvey United Kingdom</a><br />
+						<a href="http://www.gripenet.pt/" rel="external" title="Gripenet Portugal">Gripenet Portugal</a><br />
+						<a href="http://www.influensakoll.se/" rel="external" title="Influensakoll Sverige">Influensakoll Sverige</a><br />
+						<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italia</a><br />				
+						<a href="#top" title="Mesure de la grippe France">Mesure de la grippe France</a><br />
+				</div>
+			</div>{% endblock footercontent %}
+			<div id="footerclose">
+				&copy; {% now "Y" %} Influenzanet &nbsp;|&nbsp; <a href="contact.html" title="Contact">Contact</a>
+			</div>
+		</div>
+	</div>
+	</body>
 
 </html>
