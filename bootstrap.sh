@@ -187,13 +187,13 @@ echo ""
 ./bin/django survey_register data/surveys/gsq/gold-standard-weekly.py 
 ./bin/django survey_register data/surveys/gsq/gold-standard-intake.py 
 ./bin/django survey_register data/surveys/gsq/gold-standard-contact.py
-./bin/django rule_type_register --title 'Show Question' --jsclass 'wok.pollster.rules.ShowQuestion' --pyclass 'FIXME'
-./bin/django rule_type_register --title 'Hide Question' --jsclass 'wok.pollster.rules.HideQuestion' --pyclass 'FIXME'
-./bin/django rule_type_register --title 'Show Options' --jsclass 'wok.pollster.rules.ShowOptions' --pyclass 'FIXME'
-./bin/django rule_type_register --title 'Hide Options' --jsclass 'wok.pollster.rules.HideOptions' --pyclass 'FIXME'
-./bin/django rule_type_register --title 'Check Options' --jsclass 'wok.pollster.rules.CheckOptions' --pyclass 'FIXME'
-./bin/django rule_type_register --title 'Uncheck Options' --jsclass 'wok.pollster.rules.UncheckOptions' --pyclass 'FIXME'
-./bin/django rule_type_register --title 'Exclusive' --jsclass 'wok.pollster.rules.Exclusive' --pyclass 'FIXME'
+./bin/django rule_type_register --title 'Show Question' --jsclass 'wok.pollster.rules.ShowQuestion'
+./bin/django rule_type_register --title 'Hide Question' --jsclass 'wok.pollster.rules.HideQuestion'
+./bin/django rule_type_register --title 'Show Options' --jsclass 'wok.pollster.rules.ShowOptions'
+./bin/django rule_type_register --title 'Hide Options' --jsclass 'wok.pollster.rules.HideOptions'
+./bin/django rule_type_register --title 'Check Options' --jsclass 'wok.pollster.rules.CheckOptions'
+./bin/django rule_type_register --title 'Uncheck Options' --jsclass 'wok.pollster.rules.UncheckOptions'
+./bin/django rule_type_register --title 'Exclusive' --jsclass 'wok.pollster.rules.Exclusive'
 ./bin/django question_data_type_register --title 'Text' --dbtype 'text' --cssclass 'text-type' --jsclass 'wok.pollster.datatypes.Text'
 ./bin/django question_data_type_register --title 'Numeric' --dbtype 'numeric' --cssclass 'numeric-type' --jsclass 'wok.pollster.datatypes.Numeric'
 ./bin/django question_data_type_register --title 'Date' --dbtype 'date' --cssclass 'date-type' --jsclass 'wok.pollster.datatypes.Date'
