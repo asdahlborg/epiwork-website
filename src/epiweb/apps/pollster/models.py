@@ -52,6 +52,7 @@ class Survey(models.Model):
         # insert and empty question to generate it. In both cases we have a question
         # to fill with options and rules.
         data_type = root.get('data-data-type')
+        tag = root.get('data-tag')
         data_name = [e.text for e in root.findall('div') if 'info' in e.get('class')][0]
         title = [e.text for e in root.findall('p/span') if 'title' in e.get('class')][0]
         hidden = 'starts-hidden' in (root.get('class') or '')
@@ -72,6 +73,7 @@ class Survey(models.Model):
             question.data_name = data_name or ''
             question.title = title or ''
             question.description = description or ''
+            question.tag = tag or ''
             question.starts_hidden = hidden
             question.ordinal = ordinal
             if data_type:
@@ -85,6 +87,7 @@ class Survey(models.Model):
             question.data_name = data_name or ''
             question.title = title or ''
             question.description = description or ''
+            question.tag = tag or ''
             question.starts_hidden = hidden
             question.ordinal = ordinal
             if data_type:
@@ -256,6 +259,7 @@ class Question(models.Model):
     data_type = models.ForeignKey(QuestionDataType)
     data_name = models.CharField(max_length=255)
     visual = models.CharField(max_length=255, blank=True, default='')
+    tag = models.CharField(max_length=255, blank=True, default='')
 
     @property
     def is_text(self):

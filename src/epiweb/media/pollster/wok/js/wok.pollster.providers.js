@@ -139,6 +139,12 @@
             return false;
         });
 
+        $properties.find("[name=field_question_tag]").change(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.attr("data-tag", $(this).val());
+            return false;
+        });
+
         $properties.find("[name=field_question_data_type]").change(function(evt) {
             if (self.$element === null) return true;
             self.$element.attr("data-data-type", $(this).val());
@@ -165,6 +171,7 @@
                 $properties
                     .find("[name=field_question_type]").val(type).end()
                     .find("[name=field_question_data_type]").val($e.attr("data-data-type")).end()
+                    .find("[name=field_question_tag]").val($e.attr("data-tag")).end()
                     .find("[name=field_question_title]").val($.trim($e.find(".title").text())).end()
                     .find("[name=field_question_text]").val(getText($e.find("p"))).end()
                     .find("[name=field_question_shortname]").val(designer.getQuestionShortname($e)).end()

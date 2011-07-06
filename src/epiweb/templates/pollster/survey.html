@@ -2,7 +2,7 @@
     {% for question in survey.question_set.all %}
     <div class="question-wrapper clearfix">
         <div id="question-{{ question.id }}" class="question {{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %}"
-             data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}">
+             data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tag="{{ question.tag }}">
             <p>
                 <span class="number"></span>
                 <span class="title">{{ question.title }}</span>
