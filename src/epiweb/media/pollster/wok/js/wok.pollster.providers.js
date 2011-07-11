@@ -45,6 +45,46 @@
         return true;
     }
 
+    function remakeIdTemporary(designer, id) {
+        var t = designer.getNextTemporaryId();
+        if (id.match(/^question-/))
+            return 'question-N'+t;
+        if (id.match(/^option-/))
+            return 'option-N'+t;
+        if (id.match(/^rule-/))
+            return 'rule-N'+t;
+        return id;
+    }
+
+    function resetIds(designer, $element) {
+        var idmap = {}
+        $element.find('.question, [id^="option-"], [id^="rule-"]').each(function(){
+            var newId = remakeIdTemporary(designer, this.id);
+            $(this).find('#'+this.id+'-field').each(function(){ this.id = newId+'-field'; });
+            idmap[this.id] = newId;
+            this.id = newId;
+        });
+        $element.find('[data-subject-option]').each(function(){
+            var id = $(this).attr('data-subject-option');
+            if (jQuery.contains(idmap, id))
+                $(this).attr('data-subject-option', idmap[id]);
+        });
+        $element.find('[data-object-question]').each(function(){
+            var id = $(this).attr('data-object-question');
+            if (jQuery.contains(idmap, id))
+                $(this).attr('data-object-question', idmap[id]);
+        });
+        $element.find('[data-object-options]').each(function(){
+            var ids = $(this).attr('data-object-options');
+            ids = jQuery.map(ids, function(id) {
+                if (jQuery.contains(idmap, id))
+                    return idmap[id];
+                return id;
+            });
+            $(this).attr('data-object-options', ids.join(' '));
+        });
+    }
+
     // BUILTIN PROPERTY PROVIDERS
 
     function QuestionPropertyProvider(designer, $properties) {
@@ -98,6 +138,16 @@
         });
 
         // Events.
+
+        $properties.find(".action-copy").click(function(evt) {
+            if (self.$element === null) return true;
+
+            var $wrapper = self.$element.closest('.question-wrapper');
+            var $clone = $wrapper.clone();
+            resetIds(designer, $clone);
+            console.log($clone);
+            $wrapper.after($clone);
+        });
 
         $properties.find(".action-delete").click(function(evt) {
             if (self.$element === null) return true;
