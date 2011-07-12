@@ -79,14 +79,6 @@ p.influenzanet {
  overflow: hidden;
 }
 
-.influenzacontent {
- display: none;
-}
-
-.show {
- display: block;
-}
-
 p.toggle {
  background: url(../img/influbar/influbar-closed.gif) top left no-repeat;
  cursor: pointer;
@@ -105,6 +97,71 @@ a.close:focus {
 p.toggle a {
  color: #c8c8c8;
  text-decoration: none;
+}
+
+.influenzabarcontent,
+.influenzamapcontent {
+ display: none;
+}
+
+div.influenzabarcontent{
+ width: 926px;
+ overflow: auto;
+ padding: 0 12px 24px 12px;
+ text-align: left;
+ color: #ffffff;
+ font-size: 0.75em;
+ line-height: 1.3em;
+ background: #444444;
+ border-left: 12px solid #ffffff;
+ border-right: 12px solid #ffffff; 
+}
+
+a.jsclose {
+ display: none;
+}
+
+a.close {
+ color: #b2b2b2;
+}
+
+.show {
+ display: block;
+}
+
+#epiwork {
+ float: left;
+ width: 266px;
+ margin: 14px 0 0 0;
+ padding: 12px;
+ color: #000000;
+ background: #ffffff;	
+}
+
+#epiwork a {
+ color: #484848;
+ font-weight: bold;
+}
+
+#participants {
+ float: right;
+ width: 146px;
+ margin: 14px 0 0 0;
+ padding: 12px;
+ background: #222222;
+}
+
+#participants img {
+ vertical-align: middle;
+}
+
+#participants a {
+ margin: 0 4px 0 0;
+}
+
+#influenzatext {
+ padding: 14px 194px 0 302px;
+ font-size: 0.9em;
 }
 
 .europe_map {
@@ -432,7 +489,10 @@ textarea#id_body {
 
 textarea#id_body {
  width: 400px;
- height: 200px;
+ height: 114px;
+ font-size: 1.4em;
+ line-height: 1.2em;
+ padding: 4px;
 }
 
 input#id_name:focus,
@@ -447,7 +507,7 @@ input#commentsubmit {
  width: 54px;
  margin: 0;
  padding: 0;
- font-size: 1em;
+ font-size: 0.7em;
  line-height: 2.2em;
  border: 0;
  color: #f8f8f8;
@@ -748,6 +808,10 @@ ul.bullets li {
  margin: 10px 0 10px 0;
 }
 
+.facebook {
+ margin: 8px 0 0 -6px;
+}
+
 
 /* Jquery UI */
 
@@ -776,15 +840,11 @@ ul.bullets li {
 
 /* Customisable styles */
 
-#account ul.anonymous li,
-#account ul.member li,
 #searchbar input#searchsubmit,
 input#commentsubmit {
  background: #ce2626;
 }
 
-#account ul.anonymous li:hover,
-#account ul.member li:hover,
 #searchbar input#searchsubmit:hover,
 input#commentsubmit:hover {
  background: #880000;

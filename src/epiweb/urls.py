@@ -12,8 +12,6 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^search/', include('haystack.urls')),
     (r'^test-search/$', 'epiweb.views.test_search'),
-    (r'^accounts/', include('epiweb.apps.accounts.urls')),
-    (r'^survey/', include('epiweb.apps.survey.urls')),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),
                                             'template_name': 'news'}),
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
@@ -30,13 +28,6 @@ if settings.DEBUG:
         (r'^500/$', 'epiweb.views.server_error'),
         (r'^' + settings.MEDIA_URL.lstrip('/'), include('appmedia.urls'), {'show_indexes': True}),
     ) + urlpatterns
-
-if settings.MOBILE_INTERFACE_ACTIVE:
-  urlpatterns += patterns('', (r'^ema/', include('epiweb.apps.survey.api.urls')))
-
-if settings.EXTRA_SURVEY:
-  urlpatterns += patterns('', (r'^extra-survey/',
-                               include('epiweb.apps.survey.extra-urls')))
 
 # Catchall
 urlpatterns += patterns('', url(r'^', include('cms.urls')))

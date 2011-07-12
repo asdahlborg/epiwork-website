@@ -1,7 +1,13 @@
 {% extends "base/threecol.html" %}
-{% load i18n %}
 {% load cms_tags %}
 
-{% block col2 %}
-    {% show_placeholder "Left bar" "contact" %}
-{% endblock %}
+{% block col1 %}
+
+{% placeholder "Main content" %}
+
+<form method="post" action="" class="contact_form">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" id="commentsubmit" value="Send" />
+</form>
+
+{% endblock col1 %}

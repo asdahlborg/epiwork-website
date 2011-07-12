@@ -1,12 +1,2 @@
 {% extends "contact_form/base.html" %}
-{% load i18n %}
 
-{% block col1 %}
-    <h1>{% trans "Leave a comment" %}</h1> 
-    <form method="post" action="" class="contact_form">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" id="commentsubmit" value="Send" />
-
-    </form> 
-
-{% endblock %}
