@@ -2,6 +2,9 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.simple import redirect_to
 
+from haystack.views import SearchView, search_view_factory
+from haystack.forms import SearchForm
+
 from epiweb.apps.ew_contact_form.forms import ContactForm
 
 # Uncomment the next two lines to enable the admin:
@@ -10,7 +13,12 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
-    (r'^search/', include('haystack.urls')),
+
+    url(r'^search/$', search_view_factory(
+        view_class=SearchView,
+        form_class=SearchForm
+    ), name='haystack_search'),
+
     (r'^test-search/$', 'epiweb.views.test_search'),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),
                                             'template_name': 'news'}),
