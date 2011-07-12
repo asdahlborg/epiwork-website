@@ -170,6 +170,9 @@ EMAIL_HOST='127.0.0.1'
 # the site managers.
 DEFAULT_FROM_EMAIL = 'webmaster@influenzanet.com'
 
+if DEBUG:
+	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Subject-line prefix for email messages send with django.core.mail.mail_admins
 # or ...mail_managers.  Make sure to include the trailing space.
 EMAIL_SUBJECT_PREFIX = '[Influenzanet] '
