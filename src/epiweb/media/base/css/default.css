@@ -410,7 +410,8 @@ ul.map_buttons li {
  color: #ffffff;
 }
 
-#menubar li.selected {
+#menubar li.selected,
+#menubar li.ancestor {
  padding: 0 8px 0 8px; 
  background: #2e2e31;
  font-weight: bold;

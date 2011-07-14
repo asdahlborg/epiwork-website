@@ -1,2 +1,13 @@
 {% extends "contact_form/base.html" %}
+{% load cms_tags %}
 
+{% block col1 %}
+
+{% placeholder "Main content" %}
+
+<form method="post" action="" class="contact_form">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" id="commentsubmit" value="Send" />
+</form>
+
+{% endblock col1 %}
