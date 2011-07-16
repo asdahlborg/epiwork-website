@@ -2,6 +2,7 @@
 *.pyo
 .installed.cfg
 bin
+src
 include
 lib
 build
