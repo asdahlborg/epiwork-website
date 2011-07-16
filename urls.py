@@ -5,7 +5,7 @@ from django.views.generic.simple import redirect_to
 from haystack.views import SearchView, search_view_factory
 from haystack.forms import SearchForm
 
-from epiweb.apps.ew_contact_form.forms import ContactForm
+from apps.ew_contact_form.forms import ContactForm
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -19,7 +19,7 @@ urlpatterns = patterns('',
         form_class=SearchForm
     ), name='haystack_search'),
 
-    (r'^test-search/$', 'epiweb.views.test_search'),
+    (r'^test-search/$', 'views.test_search'),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),
                                             'template_name': 'news'}),
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
@@ -33,11 +33,11 @@ urlpatterns = patterns('',
 if settings.DEBUG:
     urlpatterns = patterns('',
         (r'^404/$', 'django.views.defaults.page_not_found'),
-        (r'^500/$', 'epiweb.views.server_error'),
+        (r'^500/$', 'views.server_error'),
         (r'^' + settings.MEDIA_URL.lstrip('/'), include('appmedia.urls'), {'show_indexes': True}),
     ) + urlpatterns
 
 # Catchall
 urlpatterns += patterns('', url(r'^', include('cms.urls')))
 
-handler500 = 'epiweb.views.server_error'
+handler500 = 'views.server_error'

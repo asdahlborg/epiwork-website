@@ -105,10 +105,10 @@ CMS_TEMPLATES = (
     ('base/home.html', "Home"),
 )
 
-ROOT_URLCONF = 'epiweb.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'templates/base'),
+    os.path.join(PROJECT_PATH, 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -121,16 +121,15 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-    'epiweb',
 #    'registration',
 #    'loginurl',
-#    'epiweb.apps.accounts',
-#    'epiweb.apps.survey',
-#    'epiweb.apps.reminder',
-#    'epiweb.apps.banner',
-    'epiweb.apps.search',
+#    'apps.accounts',
+#    'apps.survey',
+#    'apps.reminder',
+#    'apps.banner',
+    'apps.search',
     'contact_form',
-    'epiweb.apps.ew_contact_form',
+    'apps.ew_contact_form',
     'cms',
     'cms.plugins.text',
     'cms.plugins.picture',
@@ -146,7 +145,7 @@ INSTALLED_APPS = (
     'haystack',
 )
 
-HAYSTACK_SITECONF = 'epiweb.search_sites'
+HAYSTACK_SITECONF = 'search_sites'
 
 try:
     import xapian

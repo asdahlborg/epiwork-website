@@ -11,3 +11,5 @@ PIL
 wsgiref==0.1.2
 -e git://github.com/vanschelven/epidb-client-python.git#egg=epidb-client
 -e git://github.com/vanschelven/cmsplugin-journal.git#egg=cmsplugin-journal
+simplejson
+django-loginurl
