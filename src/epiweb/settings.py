@@ -130,6 +130,7 @@ INSTALLED_APPS = (
 #    'epiweb.apps.banner',
     'epiweb.apps.search',
     'contact_form',
+    'epiweb.apps.ew_contact_form',
     'cms',
     'cms.plugins.text',
     'cms.plugins.picture',
