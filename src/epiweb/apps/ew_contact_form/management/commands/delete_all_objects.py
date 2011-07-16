@@ -5,6 +5,19 @@ class Command(BaseCommand):
     help = 'Deletes all objects'
 
     def handle(self, *args, **options):
-        for model in get_models():
-            model.objects.all().delete()
+        failed_somewhere = False
+        max_tries = 100
 
+        while failed_somewhere and max_tries > 0:
+            # some deletions may trigger other deletions and fail; we'll just try many times
+
+            max_tries -= 1
+
+            for model in get_models():
+                try:
+                    model.objects.all().delete()
+                except:
+                    failed_somewhere = True
+
+        if max_tries == 0:
+            raise Exception("Giving up after 100 tries")
