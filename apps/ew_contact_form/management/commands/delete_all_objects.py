@@ -8,7 +8,7 @@ class Command(BaseCommand):
         failed_somewhere = False
         max_tries = 100
 
-        while failed_somewhere and max_tries > 0:
+        while not failed_somewhere and max_tries > 0:
             # some deletions may trigger other deletions and fail; we'll just try many times
 
             max_tries -= 1
