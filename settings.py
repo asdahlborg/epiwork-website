@@ -7,6 +7,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Antwan Wiersma', 'webdev@grotegriepmeting.nl'),
+    ('Klaas van Schelven', 'klaasvanschelven@gmail.com'), # please leave this setting for a minimal amount of spam-checking
 )
 
 MANAGERS = ADMINS
