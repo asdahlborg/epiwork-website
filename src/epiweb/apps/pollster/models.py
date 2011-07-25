@@ -235,7 +235,7 @@ class Survey(models.Model):
         return ('pollster_survey_edit', [str(self.id)])
 
     def __unicode__(self):
-        return self.title
+        return "#%d %s" % (self.id, self.title)
 
 class RuleType(models.Model):
     title = models.CharField(max_length=255, unique=True)

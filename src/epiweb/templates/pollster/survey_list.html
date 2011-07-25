@@ -7,7 +7,10 @@
         <ul>
             {% for survey in surveys %}
             <li>
-                {{ survey.title }} (<a href="{% url pollster_survey_test survey.id %}">test</a> | <a href="{% url pollster_survey_edit survey.id %}">edit</a>)
+                {{ survey.title }}
+                (<a href="{% url pollster_survey_test survey.id %}">test</a>
+                | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
+                | <a href="{% url pollster_survey_export survey.id %}">export</a>)
             </li>
             {% endfor %}
             <li><a href="{% url pollster_survey_add %}">new survey</a></li>

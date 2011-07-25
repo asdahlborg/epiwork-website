@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.core.urlresolvers import get_resolver
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.utils import simplejson
 from . import models, forms
 import re
 
@@ -57,6 +59,13 @@ def survey_test(request, id):
     return render_to_response('pollster/survey_test.html', {
         "survey": survey
     })
+
+@login_required
+def survey_export(request, id):
+    survey = get_object_or_404(models.Survey, pk=id)
+    return render_to_response('pollster/survey_export.json', {
+        "survey": survey
+    }, mimetype='application/json')
 
 # based on http://djangosnippets.org/snippets/2059/
 def urls(request, prefix=''):
