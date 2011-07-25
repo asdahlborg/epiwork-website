@@ -297,18 +297,19 @@ a.close {
 }
 
 .imgCaption {
- bottom: 0;
- left: 0;
- color: #fff;
- opacity: .7;
- background: #333;
- padding: 7px 7px 0 10px;
- width: 940px;
- text-align: left;
- font-size: 14px;
- text-shadow: 1px 1px 0 #111;
- font-weight: bold;
- border-top: 1px solid #cccccc;
+ bottom:0;
+ left:0;
+ color:#fff;
+ opacity:.7;
+// -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=70)";
+// filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+ background:#333;
+ padding:7px 7px 0 10px;
+ width:940px;
+ text-align:left;
+ font-size:14px;
+ text-shadow:1px 1px 0 #111;
+ font-weight:bold;
 }
 
 #mapbuttons {
@@ -341,7 +342,6 @@ ul.map_buttons li {
 #buttonbar a {
  color: #bebebe;
  display: block;
- float: right;
  font-size: 11px;
  line-height: 20px;
  margin-right: 4px;
@@ -725,6 +725,13 @@ hr {
 #col1 h2 {
  margin: 18px 0 12px 0;
  padding: 0;
+ color: #000000;
+ font-size: 1em;
+}
+
+#col1 h3 {
+ margin: 18px 0 12px 0;
+ padding: 0;
  color: #767676;
  font-size: 1em;
 }
@@ -743,11 +750,6 @@ hr {
  padding: 0;
  color: #0a0a0a;
  font-size: 1em;
-}
-
-#col3 ul, #col3 li {
- list-style: disc inside none;
- font-size: 0.85em;
 }
 
 ul.bullets {
