@@ -18,6 +18,10 @@
         return $element.is(".starts-hidden") ? 'true' : 'false';
     }
 
+    function getQuestionIsMandatory($element) {
+        return $element.is(".mandatory") ? 'true' : 'false';
+    }
+
     function getChoiceStartsHidden($element) {
         return $element.is(".starts-hidden") ? 'true' : 'false';
     }
@@ -189,9 +193,9 @@
             return false;
         });
 
-        $properties.find("[name=field_question_tag]").change(function(evt) {
+        $properties.find("[name=field_question_tags]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-tag", $(this).val());
+            self.$element.attr("data-tags", $(this).val());
             return false;
         });
 
@@ -203,10 +207,25 @@
 
         $properties.find("[name=field_question_starts_hidden]").change(function(evt) {
             if (self.$element === null) return true;
-            if ($(this).val() == 'true')
-                self.$element.addClass("starts-hidden");
-            else
-                self.$element.removeClass("starts-hidden");
+            self.$element.toggleClass('starts-hidden', $(this).val() == 'true');
+            return false;
+        });
+
+        $properties.find("[name=field_question_is_mandatory]").change(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.toggleClass('mandatory', $(this).val() == 'true');
+            return false;
+        });
+
+        $properties.find("[name=field_question_regex]").change(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.attr("data-regex", $(this).val());
+            return false;
+        });
+
+        $properties.find("[name=field_question_error_message]").change(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.attr("data-error-message", $(this).val());
             return false;
         });
 
@@ -221,11 +240,14 @@
                 $properties
                     .find("[name=field_question_type]").val(type).end()
                     .find("[name=field_question_data_type]").val($e.attr("data-data-type")).end()
-                    .find("[name=field_question_tag]").val($e.attr("data-tag")).end()
+                    .find("[name=field_question_tags]").val($e.attr("data-tags")).end()
                     .find("[name=field_question_title]").val($.trim($e.find(".title").text())).end()
                     .find("[name=field_question_text]").val(getText($e.find("p"))).end()
                     .find("[name=field_question_shortname]").val(designer.getQuestionShortname($e)).end()
                     .find("[name=field_question_starts_hidden]").val(getQuestionStartsHidden($e)).end()
+                    .find("[name=field_question_is_mandatory]").val(getQuestionIsMandatory($e)).end()
+                    .find("[name=field_question_regex]").val($e.attr("data-regex")).end()
+                    .find("[name=field_question_error_message]").val($e.attr("data-error-message")).end()
                     .show();
 
                 // We display visual options depending on the question type.

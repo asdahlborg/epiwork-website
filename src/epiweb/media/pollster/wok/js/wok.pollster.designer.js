@@ -22,7 +22,7 @@
         var isnew = !sd.id;
         var survey = $('<div></div>')
             .attr("id", "survey-" + sd.id)
-            .append($("<h1></h1>").text(sd.title))
+            .append($("<h1></h1>").text(sd.title).attr('data-shortname', sd.shortname).attr('data-version', sd.version))
             .append(designer.getTemplate().find(".question-wrapper").clone());
         var xml = innerXHTML($('<div></div>').append(survey)[0]);
         $.post(designer.getPostUrl(sd.id), {surveyxml: xml}, function(responseText) {
@@ -187,7 +187,9 @@
             getSurveyData: function() {
                 return {
                     id: $properties.find("[name='survey-id']").val(),
-                    title: $properties.find("[name='survey-title']").val()
+                    title: $properties.find("[name='survey-title']").val(),
+                    shortname: $properties.find("[name='survey-shortname']").val(),
+                    version: $properties.find("[name='survey-version']").val()
                 };
             },
 

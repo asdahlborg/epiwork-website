@@ -41,6 +41,7 @@
 .rule { margin-bottom: 5px; padding: 1px 5px; font-size: 10px; border: 1px solid #ccc; background: #eee; }
 .rule.selected { border: 1px solid #0f0; }
 
+.mandatory .number { color: #C00; }
 .starts-hidden { display: block; opacity: 0.5; }
 .deleted { display: none; }
 .actions { display: none; }

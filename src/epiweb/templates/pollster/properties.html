@@ -1,11 +1,20 @@
 <div class="property-groups">
     <div class="tool-group">
         <div class="tool">
-            <label>Survey</label>
-            <button type="button" class="action-save">Save</button>
-            <input class="short" name="survey-title" value="{{ survey.title|default:'' }}" />
             <input type="hidden" name="survey-id" value="{{ survey.id|default:'' }}" />
+            <label>Survey</label>
+            <input name="survey-title" value="{{ survey.title|default:'' }}" />
         </div>
+        <div class="tool">
+            <label>Shortname</label>
+            <input name="survey-shortname" value="{{ survey.shortname|default:'' }}" />
+        </div>
+        <div class="tool">
+            <label>Version</label>
+            <button type="button" class="action-save">Save</button>
+            <input class="short" name="survey-version" value="{{ survey.version|default:'' }}" />
+        </div>
+        <hr/>
         <div class="tool">
             <label>New Question</label>
             <button type="button" class="action-create-question">Create</button>
@@ -47,6 +56,13 @@
             </select>
         </div>
         <div class="property">
+            <label>Mandatory</label>
+            <select name="field_question_is_mandatory">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
+        </div>
+        <div class="property">
             <label>Start</label>
             <select name="field_question_starts_hidden">
                 <option value="false">Visible</option>
@@ -62,8 +78,16 @@
             <textarea name="field_question_text"></textarea>
         </div>
         <div class="property">
-            <label>Tag</label>
-            <input name="field_question_tag"/>
+            <label>Tags</label>
+            <input name="field_question_tags"/>
+        </div>
+        <div class="property">
+            <label>Regular Expression</label>
+            <input name="field_question_regex"/>
+        </div>
+        <div class="property clearfix">
+            <label>Error Message</label>
+            <textarea name="field_question_error_message"></textarea>
         </div>
         <hr/>
         <div class="tool">

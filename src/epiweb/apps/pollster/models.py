@@ -3,8 +3,10 @@ from xml.etree import ElementTree
 import re, warnings
 
 class Survey(models.Model):
+    parent = models.ForeignKey('self', db_index=True, blank=True, null=True)
     title = models.CharField(max_length=255, default='')
-    path = models.CharField(max_length=4096)
+    shortname = models.SlugField(max_length=255, default='')
+    version = models.SlugField(max_length=255, default='')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -17,7 +19,8 @@ class Survey(models.Model):
         root = ElementTree.XML(xmlstring)
 
         self.title = root.find('h1').text or ''
-        self.path = 'FIXME'
+        self.shortname = root.find('h1').get('data-shortname') or ''
+        self.version = root.find('h1').get('data-version') or ''
         self.save()
 
         idmap = {}
@@ -52,10 +55,13 @@ class Survey(models.Model):
         # insert and empty question to generate it. In both cases we have a question
         # to fill with options and rules.
         data_type = root.get('data-data-type')
-        tag = root.get('data-tag')
+        tags = root.get('data-tags')
+        regex = root.get('data-regex')
+        error_message = root.get('data-error-message')
         data_name = [e.text for e in root.findall('div') if 'info' in e.get('class')][0]
         title = [e.text for e in root.findall('p/span') if 'title' in e.get('class')][0]
         hidden = 'starts-hidden' in (root.get('class') or '')
+        mandatory = 'mandatory' in (root.get('class') or '')
         deleted = 'deleted' in (root.get('class') or '')
         description = ''
         xdescription = root.find('p')
@@ -73,8 +79,11 @@ class Survey(models.Model):
             question.data_name = data_name or ''
             question.title = title or ''
             question.description = description or ''
-            question.tag = tag or ''
+            question.tags = tags or ''
+            question.regex = regex or ''
+            question.error_message = error_message or ''
             question.starts_hidden = hidden
+            question.is_mandatory = mandatory
             question.ordinal = ordinal
             if data_type:
                 question.data_type = QuestionDataType.objects.get(id = data_type)
@@ -87,8 +96,11 @@ class Survey(models.Model):
             question.data_name = data_name or ''
             question.title = title or ''
             question.description = description or ''
-            question.tag = tag or ''
+            question.tags = tags or ''
+            question.regex = regex or ''
+            question.error_message = error_message or ''
             question.starts_hidden = hidden
+            question.is_mandatory = mandatory
             question.ordinal = ordinal
             if data_type:
                 question.data_type = QuestionDataType.objects.get(id = data_type)
@@ -252,6 +264,7 @@ class VirtualOptionType(models.Model):
 class Question(models.Model):
     survey = models.ForeignKey(Survey, db_index=True)
     starts_hidden = models.BooleanField(default=False)
+    is_mandatory = models.BooleanField(default=False)
     ordinal = models.IntegerField()
     title = models.CharField(max_length=255, default='')
     description = models.TextField(blank=True, default='')
@@ -259,7 +272,9 @@ class Question(models.Model):
     data_type = models.ForeignKey(QuestionDataType)
     data_name = models.CharField(max_length=255)
     visual = models.CharField(max_length=255, blank=True, default='')
-    tag = models.CharField(max_length=255, blank=True, default='')
+    tags = models.CharField(max_length=255, blank=True, default='')
+    regex = models.CharField(max_length=1023, blank=True, default='')
+    error_message = models.TextField(blank=True, default='')
 
     @property
     def is_text(self):
