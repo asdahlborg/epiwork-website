@@ -71,28 +71,40 @@
             </ul>
             {% endif %}
             {% if question.is_matrix_select %}
-            <div>Columns</div>
-            <ul class="columns">
-                {% for column in question.column_set.all %}
-                <li id="column-{{ column.id }}">{{ column.title }}</li>
-                {% endfor %}
-            </ul>
-            <div>Rows</div>
-            <ul class="rows">
+            <table class="matrix">
+            <thead>
+                <tr>
+                    <th class="empty"/>
+                    {% for column in question.column_set.all %}
+                    {% if column.title %}
+                    <th>{{ column.title }}</th>
+                    {% else %}
+                    <th class="empty"/>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
                 {% for row in question.row_set.all %}
-                <li id="row-{{ row.id }}">{{ row.title }}</li>
+                <tr>
+                    {% if row.title %}
+                    <th>{{ row.title }}</th>
+                    {% else %}
+                    <th class="empty"/>
+                    {% endif %}
+                    {% for column in question.column_set.all %}
+                    <td>
+                        <select name="question.data_name_c{{ column.ordinal}}_r{{ row.ordinal }}">
+                            {% for option in question.option_set.all %}
+                            <option value="{{ option.value }}">{{ option.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </ul>
-            <div>Options</div>
-            <ul class="choices">
-                {% for option in question.option_set.all %}
-                <li id="option-{{ option.id }}">
-                    <input type="radio" value="{{ option.value }}" id="option-{{ option.id }}-field"/>
-                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <div class="info">{{ option.value }}</div>
-                </li>
-                {% endfor %}
-            </ul>
+            </tbody>
+            </table>
             {% endif %}
             <div class="info">{{ question.data_name }}</div>
         </div>
@@ -114,7 +126,7 @@
     <div class="actions">
         <button type="submit">Submit</button>
     </div>
-    <script type="text/javascript" class="pollster-rules">
+    <script type="text/javascript" class="pollster-fill">
         function pollster_fill_data_types(d) {
             var t;
             {% for question in survey.question_set.all %}

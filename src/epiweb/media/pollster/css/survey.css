@@ -5,6 +5,10 @@
 .question .title { font-weight: bold; margin-right: 5px; }
 .question .number { font-weight: bold; margin-right: 3px; }
 .question .info { display: none; }
+.question .matrix th, .question .matrix td { vertical-align: middle; padding: 1px 3px; }
+.question .matrix th { background: #EEE; border: 1px solid white; padding: 3px; }
+.question .matrix th.empty { background: none; border: none; padding: 0; }
+.question .matrix select { width: 100%; }
 
 .rules, .derived-values { display: none; }
 

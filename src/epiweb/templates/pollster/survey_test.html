@@ -1,5 +1,7 @@
 {% extends "pollster/base.html" %}
 
+{% block title %}{{ survey.title }} - EPIWork Survey Designer{% endblock %}
+
 {% block extrahead %}
     <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.js"></script>
     <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.datatypes.js"></script>
@@ -15,6 +17,6 @@
 
 {% block content %}
 <div id="wok-main-panel-content">
-    {% include "pollster/survey.html" %}
+    {% include "pollster/questions_test.html" %}
 </div>
 {% endblock %}

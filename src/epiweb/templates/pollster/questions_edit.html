@@ -1,0 +1,118 @@
+<form class="survey" id="survey-{{ survey.id }}">
+    {% for question in survey.question_set.all %}
+    <div class="question-wrapper clearfix">
+        <div id="question-{{ question.id }}" class="question {{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %} {% if question.is_mandatory %} mandatory {% endif %}"
+             data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
+             data-regex="{{ question.regex|default:'' }}" data-error-message="{{ question.error_message|default:'' }}">
+            <p>
+                <span class="number"></span>
+                <span class="title">{{ question.title }}</span>
+                {{ question.description }}
+            </p>
+            {% if question.is_text %}
+            <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
+                pattern="{{ question.regex|default:'' }}" />
+            <p class="error-message">{{ question.error_message|default:'' }}</p>
+            <ul class="derived-values">
+                {% for option in question.option_set.all %}
+                <li id="option-{{ option.id }}"
+                    data-type="{{ option.virtual_type.id }}"
+                    data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
+                    <div class="info"><input class="derived" type="checkbox" disabled="disabled"/></div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if question.is_single_choice %}
+            <ul class="choices">
+                {% for option in question.option_set.all %}
+                {% if option.is_open %}
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                    <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ question.open_option_data_type.css_class }}" />
+                    <div class="info">{{ option.value }}</div>
+                </li>
+                {% else %}
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                    <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <div class="info">{{ option.value }}</div>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if question.is_multiple_choice %}
+            <ul class="choices">
+                {% for option in question.option_set.all %}
+                {% if option.is_open %}
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                    <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ question.open_option_data_type.css_class }}" />
+                    <div class="info">{{ option.value }}</div>
+                </li>
+                {% else %}
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                    <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <div class="info">{{ option.value }}</div>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if question.is_matrix_select %}
+            <div>Columns</div>
+            <ul class="columns">
+                {% for column in question.column_set.all %}
+                <li id="column-{{ column.id }}">{{ column.title }}</li>
+                {% endfor %}
+            </ul>
+            <div>Rows</div>
+            <ul class="rows">
+                {% for row in question.row_set.all %}
+                <li id="row-{{ row.id }}">{{ row.title }}</li>
+                {% endfor %}
+            </ul>
+            <div>Options</div>
+            <ul class="choices">
+                {% for option in question.option_set.all %}
+                <li id="option-{{ option.id }}">
+                    <input type="radio" value="{{ option.value }}" id="option-{{ option.id }}-field"/>
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <div class="info">{{ option.value }}</div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="info">{{ question.data_name }}</div>
+        </div>
+        <div class="rules">
+            {% for rule in question.subject_of_rules.all %}
+            <div id="rule-{{ rule.id }}"
+                 data-type="{{ rule.rule_type.id }}"
+                 {% if rule.subject_option.id %}
+                 data-subject-option="option-{{ rule.subject_option.id }}"
+                 {% endif %}
+                 data-object-question="question-{{ rule.object_question.id }}"
+                 data-object-options="{% for option in rule.object_options.all %} option-{{ option.id }} {% endfor %}"
+                 class="rule">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="actions">
+        <button type="submit">Submit</button>
+    </div>
+    <script type="text/javascript" class="pollster-fill">
+        function pollster_fill_data_types(d) {
+        }
+        function pollster_fill_derived_values(d) {
+        }
+        function pollster_fill_rules(d) {
+        }
+    </script>
+</form>
