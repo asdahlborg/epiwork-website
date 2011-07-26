@@ -61,6 +61,14 @@
                 $option.find('.open_option_data').attr('disabled', !checked);
             }
 
+            // Else check regular expressions for text entries
+
+            else if ($input.attr('pattern')) {
+                var pattern = new RegExp($input.attr('pattern'));
+                checked = pattern.test($input.val());
+                $question.toggleClass("error", !checked);
+            }
+
             // Else use a derived value or just the string inside the text entry.
 
             else {

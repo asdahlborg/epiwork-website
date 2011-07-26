@@ -9,3 +9,5 @@
 .rules, .derived-values { display: none; }
 
 .starts-hidden { display: none; }
+.error-message { display: none; margin: 0 0 10px 20px; color: #C00; }
+.error .error-message { display: block; }

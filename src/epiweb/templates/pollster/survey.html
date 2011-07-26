@@ -11,7 +11,9 @@
             </p>
             {% if question.is_text %}
             <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
-                {% if question.starts_hidden %}disabled="disabled"{% endif %} />
+                {% if question.starts_hidden %}disabled="disabled"{% endif %}
+                pattern="{{ question.regex|default:'' }}" />
+            <p class="error-message">{{ question.error_message|default:'' }}</p>
             <ul class="derived-values">
                 {% for option in question.option_set.all %}
                 <li id="option-{{ option.id }}"

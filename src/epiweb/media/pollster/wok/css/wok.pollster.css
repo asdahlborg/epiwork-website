@@ -45,3 +45,4 @@
 .starts-hidden { display: block; opacity: 0.5; }
 .deleted { display: none; }
 .actions { display: none; }
+.error-message { display: block; }

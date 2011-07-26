@@ -17,6 +17,14 @@
                         dateFormat: 'dd/mm/yy',
                         changeMonth: true,
                         changeYear: true 
+                    })
+                    .change(function(evt){
+                        var $this = $(this);
+                        var date = Date.parse($this.val());
+                        if (date)
+                            $this.val(date.toString('dd/MM/yyyy'));
+                        else
+                            $this.val('');
                     });
             }
         });
@@ -88,6 +96,20 @@
                         onClose: function(dateText, inst) { 
                             inst.dpDiv.removeClass('month-year-only');
                             $('head #hide-month-year-only-calendar').remove();
+                        }
+                    })
+                    .change(function(evt){
+                        var $this = $(this);
+                        var value = $this.val();
+                        if (!value.match(/\//)) {
+                            $this.val('');
+                        }
+                        else {
+                            var date = Date.parse("01/"+value);
+                            if (date)
+                                $this.val(date.toString('MM/yyyy'));
+                            else
+                                $this.val('');
                         }
                     });
             }

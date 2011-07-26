@@ -57,8 +57,10 @@ class Survey(models.Model):
         data_type = root.get('data-data-type')
         open_option_data_type = root.get('data-open-option-data-type')
         tags = root.get('data-tags')
-        regex = root.get('data-regex')
-        error_message = root.get('data-error-message')
+        regex = None
+        if root.find('input') is not None:
+            regex = root.find('input').get('pattern')
+        error_message = ([e.text for e in root.findall('p') if 'error-message' in e.get('class', '')] + [None]) [0]
         data_name = [e.text for e in root.findall('div') if 'info' in e.get('class')][0]
         title = [e.text for e in root.findall('p/span') if 'title' in e.get('class')][0]
         hidden = 'starts-hidden' in (root.get('class') or '')

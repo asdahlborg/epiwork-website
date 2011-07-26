@@ -190,7 +190,7 @@
 
         $properties.find("[name=field_question_text]").keyup(function(evt) {
             if (self.$element === null) return true;
-            var $p = self.$element.find("p");
+            var $p = self.$element.find("p").first();
             var $t = $p.children("span").remove();
             $p.text($(this).val());
             $p.prepend($t);
@@ -229,13 +229,14 @@
 
         $properties.find("[name=field_question_regex]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-regex", $(this).val());
+            self.$element.find('input').attr("pattern", $(this).val());
             return false;
         });
 
-        $properties.find("[name=field_question_error_message]").change(function(evt) {
+        $properties.find("[name=field_question_error_message]").keyup(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-error-message", $(this).val());
+            console.log(self.$element.find('.error-message'));
+            self.$element.find('.error-message').text($(this).val());
             return false;
         });
 
@@ -253,12 +254,12 @@
                     .find("[name=field_question_open_option_data_type]").val($e.attr("data-open-option-data-type")).end()
                     .find("[name=field_question_tags]").val($e.attr("data-tags")).end()
                     .find("[name=field_question_title]").val($.trim($e.find(".title").text())).end()
-                    .find("[name=field_question_text]").val(getText($e.find("p"))).end()
+                    .find("[name=field_question_text]").val(getText($e.find("p").first())).end()
                     .find("[name=field_question_shortname]").val(designer.getQuestionShortname($e)).end()
                     .find("[name=field_question_starts_hidden]").val(getQuestionStartsHidden($e)).end()
                     .find("[name=field_question_is_mandatory]").val(getQuestionIsMandatory($e)).end()
-                    .find("[name=field_question_regex]").val($e.attr("data-regex")).end()
-                    .find("[name=field_question_error_message]").val($e.attr("data-error-message")).end()
+                    .find("[name=field_question_regex]").val($e.find('input').attr("pattern")).end()
+                    .find("[name=field_question_error_message]").val($e.find('.error-message').text()).end()
                     .show();
 
                 // We display visual options depending on the question type.
