@@ -19,10 +19,11 @@
             <label>New Question</label>
             <button type="button" class="action-create-question">Create</button>
             <select class="short" name="tool_question_type">
-                <option value="text">Open answer</option>
+                <option value="text">Open Answer</option>
                 <option value="single-choice">Single Choice</option>
                 <option value="multiple-choice">Multiple Choice</option>
                 <option value="matrix-select">Matrix Select</option>
+                <option value="matrix-entry">Matrix Entries</option>
             </select>
         </div>
     </div>
@@ -252,6 +253,20 @@
                 <ul class="choices">
                     <li><input type="radio" value="" name="$$"/><label></label><div class="info"></div></li>
                 </ul>
+            </div>
+        </div>
+        <div class="template-question-matrix-entry">
+            <div class="question matrix-entry">
+                <p><span class="number"></span><span class="title"></span></p>
+                <div>Columns</div>
+                <ul class="columns">
+                    <li></li>
+                </ul>
+                <div>Rows</div>
+                <ul class="rows">
+                    <li></li>
+                </ul>
+                <input type="text" value="" name="$$"/><label></label><div class="info"></div>
             </div>
         </div>
     </div>

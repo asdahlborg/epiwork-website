@@ -3,7 +3,7 @@
     // COMMON UTILITIES
 
     function getQuestionType($element) {
-        var m = /(text|single-choice|multiple-choice|matrix-select)/.exec($element.attr("class"));
+        var m = /(text|single-choice|multiple-choice|matrix-select|matrix-entry)/.exec($element.attr("class"));
         if (m)
             return m[1];
         else
@@ -306,6 +306,11 @@
                 }
                 else if (type === "matrix-select") {
                     $properties.find("[name=tool_choice_type]").closest(".tool").show();
+                    $properties.find("[name=tool_rule_type]").closest(".tool").hide()
+                    $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
+                }
+                else if (type === "matrix-entry") {
+                    $properties.find("[name=tool_choice_type]").closest(".tool").hide();
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                 }

@@ -87,6 +87,21 @@
                 {% endfor %}
             </ul>
             {% endif %}
+            {% if question.is_matrix_entry %}
+            <div>Columns</div>
+            <ul class="columns">
+                {% for column in question.column_set.all %}
+                <li id="column-{{ column.id }}">{{ column.title }}</li>
+                {% endfor %}
+            </ul>
+            <div>Rows</div>
+            <ul class="rows">
+                {% for row in question.row_set.all %}
+                <li id="row-{{ row.id }}">{{ row.title }}</li>
+                {% endfor %}
+            </ul>
+            <input type="text"/>
+            {% endif %}
             <div class="info">{{ question.data_name }}</div>
         </div>
         <div class="rules">

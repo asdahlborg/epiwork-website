@@ -362,6 +362,10 @@ class Question(models.Model):
     def is_matrix_select(self):
         return self.type == 'matrix-select'
 
+    @property
+    def is_matrix_entry(self):
+        return self.type == 'matrix-entry'
+
     def __unicode__(self):
         return self.title
 

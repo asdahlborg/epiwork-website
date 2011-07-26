@@ -94,11 +94,43 @@
                     {% endif %}
                     {% for column in question.column_set.all %}
                     <td>
-                        <select name="question.data_name_c{{ column.ordinal}}_r{{ row.ordinal }}">
+                        <select name="{{ question.data_name }}_c{{ column.ordinal}}_r{{ row.ordinal }}">
                             {% for option in question.option_set.all %}
                             <option value="{{ option.value }}">{{ option.text }}</option>
                             {% endfor %}
                         </select>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+            {% endif %}
+            {% if question.is_matrix_entry %}
+            <table class="matrix">
+            <thead>
+                <tr>
+                    <th class="empty"/>
+                    {% for column in question.column_set.all %}
+                    {% if column.title %}
+                    <th>{{ column.title }}</th>
+                    {% else %}
+                    <th class="empty"/>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in question.row_set.all %}
+                <tr>
+                    {% if row.title %}
+                    <th>{{ row.title }}</th>
+                    {% else %}
+                    <th class="empty"/>
+                    {% endif %}
+                    {% for column in question.column_set.all %}
+                    <td>
+                        <input type="text" name="{{ question.data_name }}_c{{ column.ordinal}}_r{{ row.ordinal }}" />
                     </td>
                     {% endfor %}
                 </tr>
