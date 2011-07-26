@@ -1,0 +1,49 @@
+@media all {
+    #content {
+    }
+}
+
+div.figure {
+    float: left;
+    text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 0em;
+    margin-bottom: 1.5em;
+}
+div.figure_right {
+    float: right;
+    text-align: center;
+    margin: 1em 0.5em 2em 0.5em;
+    /*
+    margin-left: 2em;
+    margin-right: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    */
+}
+div.figure p {
+    margin-top: 0em;
+    margin-bottom: 0.2em;
+    text-align: center;
+}
+
+body {
+#     font-family: arial, sans-serif;
+    font-size: 18px;
+#     height: 100%;
+    background-color: #333333;
+    color: #ffffff;
+}
+
+a {
+    color: #ffffff;
+}
+
+html {
+    height: 100%;
+}
+
+img {
+    border-style: none
+} 
