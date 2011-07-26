@@ -46,6 +46,15 @@
                 {% endfor %}
             </select>
         </div>
+        <div class="property">
+            <label>Open Option Type</label>
+            <select name="field_question_open_option_data_type">
+                <option value="">None</option>
+                {% for question_data_type in question_data_types %}
+                <option value="{{ question_data_type.id }}">{{ question_data_type.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <div class="property" style="display:none">
             <label>Visual</label>
             <select name="field_question_visual">
@@ -121,6 +130,13 @@
             <select name="field_choice_starts_hidden">
                 <option value="false">Visible</option>
                 <option value="true">Hidden</option>
+            </select>
+        </div>
+        <div class="property">
+            <label>Open answer</label>
+            <select name="field_choice_is_open">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
             </select>
         </div>
     </div>

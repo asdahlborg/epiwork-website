@@ -55,6 +55,7 @@ class Survey(models.Model):
         # insert and empty question to generate it. In both cases we have a question
         # to fill with options and rules.
         data_type = root.get('data-data-type')
+        open_option_data_type = root.get('data-open-option-data-type')
         tags = root.get('data-tags')
         regex = root.get('data-regex')
         error_message = root.get('data-error-message')
@@ -87,6 +88,8 @@ class Survey(models.Model):
             question.ordinal = ordinal
             if data_type:
                 question.data_type = QuestionDataType.objects.get(id = data_type)
+            if open_option_data_type:
+                question.open_option_data_type = QuestionDataType.objects.get(id = open_option_data_type)
             question.save()
         else:
             question_type = root.get('data-question-type')
@@ -106,6 +109,8 @@ class Survey(models.Model):
                 question.data_type = QuestionDataType.objects.get(id = data_type)
             else:
                 question.data_type = QuestionDataType.objects.get(id = 1)
+            if open_option_data_type:
+                question.open_option_data_type = QuestionDataType.objects.get(id = open_option_data_type)
             question.save()
         idmap[temp_id] = question and question.id
         return question
@@ -119,6 +124,7 @@ class Survey(models.Model):
         match = re.match('^option-(\d+)$', temp_id)
         xinput = root.find('input')
         hidden = 'starts-hidden' in (root.get('class') or '')
+        is_open = 'open' in (root.get('class') or '')
         deleted = 'deleted' in (root.get('class') or '')
         if deleted or question is None:
             Option.objects.filter(id = int(match.group(1))).delete()
@@ -129,6 +135,7 @@ class Survey(models.Model):
             if match:
                 option = Option.objects.get(id = int(match.group(1)))
                 option.starts_hidden = hidden
+                option.is_open = is_open
                 option.text = text or ''
                 option.value = value or ''
                 option.ordinal = ordinal
@@ -139,6 +146,7 @@ class Survey(models.Model):
                 option.question = question
                 option.is_virtual = False
                 option.starts_hidden = hidden
+                option.is_open = is_open
                 option.text = text or ''
                 option.value = value or ''
                 option.ordinal = ordinal
@@ -270,6 +278,7 @@ class Question(models.Model):
     description = models.TextField(blank=True, default='')
     type = models.CharField(max_length=255)
     data_type = models.ForeignKey(QuestionDataType)
+    open_option_data_type = models.ForeignKey(QuestionDataType, related_name="questions_with_open_option", null=True, blank=True)
     data_name = models.CharField(max_length=255)
     visual = models.CharField(max_length=255, blank=True, default='')
     tags = models.CharField(max_length=255, blank=True, default='')
@@ -310,6 +319,7 @@ class Option(models.Model):
     row = models.ForeignKey(QuestionRow, blank=True, null=True)
     column = models.ForeignKey(QuestionColumn, blank=True, null=True)
     is_virtual = models.BooleanField(default=False)
+    is_open = models.BooleanField(default=False)
     starts_hidden = models.BooleanField(default=False)
     ordinal = models.IntegerField()
     name = models.CharField(max_length=255, default='')

@@ -31,6 +31,8 @@
         pollster_fill_rules(rules_by_question);
         pollster_fill_derived_values(derived_values);
 
+        $survey.find('.open_option_data').attr('disabled', true);
+
         // Bind data types to question elements
 
         $.each(data_types, function(question, data_type) {
@@ -45,15 +47,18 @@
 
             var $input = $(evt.target);
             var $question = $(evt.target).closest(questionSelector);
+            var $option = $input.closest("li");
             var isRadio = $input.is(":radio");
             var qid = parseInt($question.attr("id").replace("question-",""));
-            var oid = parseInt(($input.closest("li").attr("id") || '').replace("option-",""));
+            var oid = parseInt(($option.attr("id") || '').replace("option-",""));
             var checked = false;
 
             // If the <input> is a checkbox or radio button determine its checked state.
 
             if ($input.is(":radio,:checkbox")) {
                 checked = $input.is(":checked");
+                $question.find('.open_option_data').attr('disabled', true);
+                $option.find('.open_option_data').attr('disabled', !checked);
             }
 
             // Else use a derived value or just the string inside the text entry.

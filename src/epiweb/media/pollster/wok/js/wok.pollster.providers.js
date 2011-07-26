@@ -26,6 +26,10 @@
         return $element.is(".starts-hidden") ? 'true' : 'false';
     }
 
+    function getChoiceIsOpen($element) {
+        return $element.is(".open") ? 'true' : 'false';
+    }
+
     function getRulesBySubjectQuestion($canvas, question) {
         return $canvas.find(".rule[data-subject-question='"+question+"']");
     }
@@ -205,6 +209,12 @@
             return false;
         });
 
+        $properties.find("[name=field_question_open_option_data_type]").change(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.attr("data-open-option-data-type", $(this).val());
+            return false;
+        });
+
         $properties.find("[name=field_question_starts_hidden]").change(function(evt) {
             if (self.$element === null) return true;
             self.$element.toggleClass('starts-hidden', $(this).val() == 'true');
@@ -240,6 +250,7 @@
                 $properties
                     .find("[name=field_question_type]").val(type).end()
                     .find("[name=field_question_data_type]").val($e.attr("data-data-type")).end()
+                    .find("[name=field_question_open_option_data_type]").val($e.attr("data-open-option-data-type")).end()
                     .find("[name=field_question_tags]").val($e.attr("data-tags")).end()
                     .find("[name=field_question_title]").val($.trim($e.find(".title").text())).end()
                     .find("[name=field_question_text]").val(getText($e.find("p"))).end()
@@ -323,10 +334,20 @@
 
         $properties.find("[name=field_choice_starts_hidden]").change(function(evt) {
             if (self.$element === null) return true;
-            if ($(this).val() == 'true')
-                self.$element.addClass("starts-hidden");
-            else
-                self.$element.removeClass("starts-hidden");
+            self.$element.toggleClass("starts-hidden", $(this).val() == 'true');
+            return false;
+        });
+
+        $properties.find("[name=field_choice_is_open]").change(function(evt) {
+            if (self.$element === null) return true;
+            if ($(this).val() == 'true') {
+                self.$element.addClass("open");
+                self.$element.find('label').after('<input type="text"/>');
+            }
+            else {
+                self.$element.removeClass("open");
+                self.$element.find('label + input').remove();
+            }
             return false;
         });
 
@@ -341,6 +362,7 @@
                     .find("[name=field_choice_text]").val($e.find("label").text()).end()
                     .find("[name=field_choice_value]").val($e.find("input").val()).end()
                     .find("[name=field_choice_starts_hidden]").val(getChoiceStartsHidden($e)).end()
+                    .find("[name=field_choice_is_open]").val(getChoiceIsOpen($e)).end()
                     .show();
             },
             detach: function() {
