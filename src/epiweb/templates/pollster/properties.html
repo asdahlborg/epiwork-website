@@ -22,6 +22,7 @@
                 <option value="text">Open answer</option>
                 <option value="single-choice">Single Choice</option>
                 <option value="multiple-choice">Multiple Choice</option>
+                <option value="matrix-select">Matrix Select</option>
             </select>
         </div>
     </div>
@@ -113,6 +114,28 @@
                 <option value="rule">Rule</option>
                 <option value="derived-value">Derived value</option>
             </select>
+        </div>
+        <div class="tool">
+            <label>Add column: </label>
+            <button type="button" class="action-add-column">Add</button>
+        </div>
+        <div class="tool">
+            <label>Add row: </label>
+            <button type="button" class="action-add-column">Add</button>
+        </div>
+    </div>
+    <div class="property-group builtin-column">
+        <h2>Column <button type="button" class="action-delete">Delete</button></h2>
+        <div class="property">
+            <label>Title</label>
+            <input name="field_column_title"/>
+        </div>
+    </div>
+    <div class="property-group builtin-row">
+        <h2>Row <button type="button" class="action-delete">Delete</button></h2>
+        <div class="property">
+            <label>Title</label>
+            <input name="field_row_title"/>
         </div>
     </div>
     <div class="property-group builtin-choice">
@@ -211,6 +234,23 @@
                 <p><span class="number"></span><span class="title"></span></p>
                 <ul class="choices">
                     <li><input type="checkbox" value="" name="$$"/><label></label><div class="info"></div></li>
+                </ul>
+            </div>
+        </div>
+        <div class="template-question-matrix-select">
+            <div class="question matrix-select" data-visual="select">
+                <p><span class="number"></span><span class="title"></span></p>
+                <div>Columns</div>
+                <ul class="columns">
+                    <li></li>
+                </ul>
+                <div>Rows</div>
+                <ul class="rows">
+                    <li></li>
+                </ul>
+                <div>Options</div>
+                <ul class="choices">
+                    <li><input type="radio" value="" name="$$"/><label></label><div class="info"></div></li>
                 </ul>
             </div>
         </div>

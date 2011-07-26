@@ -80,10 +80,16 @@
 
         function getPropertyProviders($target, level) {
             if ($target && $target.length > 0) {
-                if ($target.is("li") && $target.parent().is(".choices") && level === 0) {
+                if ($target.is(".choices > li") && level === 0) {
                     return [providers["builtin-choice"]];
                 }
-                else if ($target.is("li") && $target.parent().is(".derived-values") && level === 0) {
+                else if ($target.is(".columns > li") && level === 0) {
+                    return [providers["builtin-column"]];
+                }
+                else if ($target.is(".rows > li") && level === 0) {
+                    return [providers["builtin-row"]];
+                }
+                else if ($target.is(".derived-values > li") && level === 0) {
                     return [providers["builtin-derived-value"]];
                 }
                 else if ($target.is(".rule") && level === 0) {

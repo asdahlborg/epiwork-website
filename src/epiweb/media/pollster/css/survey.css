@@ -1,5 +1,5 @@
 .question { border: 1px solid #CCC; -webkit-border-radius: 5px; padding: 5px; background: #fff; margin-bottom: 10px; }
-.question ul { list-style: none; margin-bottom: 10px; }
+.question ul.choices, .question ul.derived-values { list-style: none; margin-bottom: 10px; }
 .question li { margin-left: 20px; }
 .question input[type=text] { margin: 0 0 10px 20px; }
 .question .title { font-weight: bold; margin-right: 5px; }

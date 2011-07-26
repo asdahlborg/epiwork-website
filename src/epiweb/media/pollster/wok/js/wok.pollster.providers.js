@@ -3,7 +3,7 @@
     // COMMON UTILITIES
 
     function getQuestionType($element) {
-        var m = /(text|single-choice|multiple-choice)/.exec($element.attr("class"));
+        var m = /(text|single-choice|multiple-choice|matrix-select)/.exec($element.attr("class"));
         if (m)
             return m[1];
         else
@@ -118,7 +118,7 @@
             if (self.$element === null) return true;
             var type = getQuestionType(self.$element);
             var $item;
-            if (type == "single-choice") {
+            if (type == "single-choice" || type == "matrix-select") {
                 $item = $('<li><input type="radio" value=""/><label></label><div class="info"></div></li>');
             }
             else if (type == "multiple-choice") {
@@ -145,6 +145,16 @@
             }
         });
 
+        $properties.find(".action-add-column").click(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.find(".columns").append($('<li/>'));
+        });
+
+        $properties.find(".action-add-row").click(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.find(".rows").append($('<li/>'));
+        });
+
         // Events.
 
         $properties.find(".action-copy").click(function(evt) {
@@ -153,7 +163,6 @@
             var $wrapper = self.$element.closest('.question-wrapper');
             var $clone = $wrapper.clone();
             resetIds(designer, $clone);
-            console.log($clone);
             $wrapper.after($clone);
         });
 
@@ -235,7 +244,6 @@
 
         $properties.find("[name=field_question_error_message]").keyup(function(evt) {
             if (self.$element === null) return true;
-            console.log(self.$element.find('.error-message'));
             self.$element.find('.error-message').text($(this).val());
             return false;
         });
@@ -280,15 +288,26 @@
 
                 if (type === "text") {
                     $properties.find("[name=tool_choice_type]").closest(".tool").hide();
+                    $properties.find("[name=tool_rule_type]").closest(".tool").show()
                     $properties.find("[name=tool_rule_type] [value='derived-value']").show();
+                    $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                 }
                 else if (type === "single-choice") {
                     $properties.find("[name=tool_choice_type]").closest(".tool").show();
+                    $properties.find("[name=tool_rule_type]").closest(".tool").show()
                     $properties.find("[name=tool_rule_type] [value='derived-value']").hide().parent().val("rule");
+                    $properties.find("[name=field_question_open_option_data_type]").closest('.property').show();
                 }
                 else if (type === "multiple-choice") {
                     $properties.find("[name=tool_choice_type]").closest(".tool").show();
+                    $properties.find("[name=tool_rule_type]").closest(".tool").show()
                     $properties.find("[name=tool_rule_type] [value='derived-value']").hide().parent().val("rule");
+                    $properties.find("[name=field_question_open_option_data_type]").closest('.property').show();
+                }
+                else if (type === "matrix-select") {
+                    $properties.find("[name=tool_choice_type]").closest(".tool").show();
+                    $properties.find("[name=tool_rule_type]").closest(".tool").hide()
+                    $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                 }
             },
             detach: function() {
@@ -364,6 +383,90 @@
                     .find("[name=field_choice_value]").val($e.find("input").val()).end()
                     .find("[name=field_choice_starts_hidden]").val(getChoiceStartsHidden($e)).end()
                     .find("[name=field_choice_is_open]").val(getChoiceIsOpen($e)).end()
+                    .show();
+            },
+            detach: function() {
+                self.$element = null;
+            }
+        });
+    }
+
+    function ColumnPropertyProvider(designer, $properties) {
+        var self = this, _lock = false;
+
+        self.$element = null;
+
+        // Events.
+
+        $properties.find(".action-delete").click(function(evt) {
+            if (self.$element === null) return true;
+            if (!self.$element.siblings().length) return true; // leave at least one column
+
+            if (isIdTemporary(self.$element.attr('id')))
+                self.$element.remove();
+            else
+                self.$element.addClass('deleted');
+            self.detach();
+            $(this).closest('.property-group').nextAll('.property-group').andSelf().hide();
+        });
+
+        $properties.find("[name=field_column_title]").keyup(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.text($(this).val());
+            return false;
+        });
+
+        // Public methods.
+
+        $.extend(this, {
+            attach: function($e) {
+                if (self.$element !== null)
+                    self.detach();
+                self.$element = $e;
+                $properties
+                    .find("[name=field_column_title]").val($e.text()).end()
+                    .show();
+            },
+            detach: function() {
+                self.$element = null;
+            }
+        });
+    }
+
+    function RowPropertyProvider(designer, $properties) {
+        var self = this, _lock = false;
+
+        self.$element = null;
+
+        // Events.
+
+        $properties.find(".action-delete").click(function(evt) {
+            if (self.$element === null) return true;
+            if (!self.$element.siblings().length) return true; // leave at least one row
+
+            if (isIdTemporary(self.$element.attr('id')))
+                self.$element.remove();
+            else
+                self.$element.addClass('deleted');
+            self.detach();
+            $(this).closest('.property-group').nextAll('.property-group').andSelf().hide();
+        });
+
+        $properties.find("[name=field_row_title]").keyup(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.text($(this).val());
+            return false;
+        });
+
+        // Public methods.
+
+        $.extend(this, {
+            attach: function($e) {
+                if (self.$element !== null)
+                    self.detach();
+                self.$element = $e;
+                $properties
+                    .find("[name=field_row_title]").val($e.text()).end()
                     .show();
             },
             detach: function() {
@@ -655,6 +758,8 @@
     window.wok.pollster.propertyProviders = {
         "builtin-question": QuestionPropertyProvider,
         "builtin-choice": ChoicePropertyProvider,
+        "builtin-column": ColumnPropertyProvider,
+        "builtin-row": RowPropertyProvider,
         "builtin-derived-value": DerivedValuePropertyProvider,
         "builtin-rule": RulePropertyProvider
     };

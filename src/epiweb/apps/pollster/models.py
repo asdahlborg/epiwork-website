@@ -33,8 +33,21 @@ class Survey(models.Model):
             question = self.update_question_from_xml(idmap, xquestion, question_ordinal)
             question_ordinal += 1
 
+            column_ordinal = 1
+            xcolumns = [ul for ul in xquestion.findall('ul') if 'columns' in ul.get('class')] or [[]]
+            for xcolumn in xcolumns[0]:
+                self.update_column_from_xml(idmap, question, xcolumn, column_ordinal)
+                column_ordinal += 1
+
+            row_ordinal = 1
+            xrows = [ul for ul in xquestion.findall('ul') if 'rows' in ul.get('class')] or [[]]
+            for xrow in xrows[0]:
+                self.update_row_from_xml(idmap, question, xrow, row_ordinal)
+                row_ordinal += 1
+
             option_ordinal = 1
-            for xoption in xquestion.findall('ul/li'):
+            xoptions = [ul for ul in xquestion.findall('ul') if 'choices' in ul.get('class')] or [[]]
+            for xoption in xoptions[0]:
                 self.update_option_from_xml(idmap, question, xoption, option_ordinal)
                 option_ordinal += 1
 
@@ -61,8 +74,8 @@ class Survey(models.Model):
         if root.find('input') is not None:
             regex = root.find('input').get('pattern')
         error_message = ([e.text for e in root.findall('p') if 'error-message' in e.get('class', '')] + [None]) [0]
-        data_name = [e.text for e in root.findall('div') if 'info' in e.get('class')][0]
-        title = [e.text for e in root.findall('p/span') if 'title' in e.get('class')][0]
+        data_name = [e.text for e in root.findall('div') if 'info' in e.get('class', '')][0]
+        title = [e.text for e in root.findall('p/span') if 'title' in e.get('class', '')][0]
         hidden = 'starts-hidden' in (root.get('class') or '')
         mandatory = 'mandatory' in (root.get('class') or '')
         deleted = 'deleted' in (root.get('class') or '')
@@ -116,6 +129,52 @@ class Survey(models.Model):
             question.save()
         idmap[temp_id] = question and question.id
         return question
+
+    def update_column_from_xml(self, idmap, question, root, ordinal):
+        temp_id = root.get('id') or ''
+        match = re.match('^column-(\d+)$', temp_id)
+        deleted = 'deleted' in (root.get('class') or '')
+        if deleted or question is None:
+            QuestionColumn.objects.filter(id = int(match.group(1))).delete()
+            column = None
+        else:
+            title = root.text
+            if match:
+                column = QuestionColumn.objects.get(id = int(match.group(1)))
+                column.title = title or ''
+                column.ordinal = ordinal
+                column.save()
+            else:
+                column = QuestionColumn()
+                column.question = question
+                column.title = title or ''
+                column.ordinal = ordinal
+                column.save()
+        idmap[temp_id] = column and column.id
+        return column
+
+    def update_row_from_xml(self, idmap, question, root, ordinal):
+        temp_id = root.get('id') or ''
+        match = re.match('^row-(\d+)$', temp_id)
+        deleted = 'deleted' in (root.get('class') or '')
+        if deleted or question is None:
+            QuestionRow.objects.filter(id = int(match.group(1))).delete()
+            row = None
+        else:
+            title = root.text
+            if match:
+                row = QuestionRow.objects.get(id = int(match.group(1)))
+                row.title = title or ''
+                row.ordinal = ordinal
+                row.save()
+            else:
+                row = QuestionRow()
+                row.question = question
+                row.title = title or ''
+                row.ordinal = ordinal
+                row.save()
+        idmap[temp_id] = row and row.id
+        return row
 
     def update_option_from_xml(self, idmap, question, root, ordinal):
         # If we have an <input> tag, then this is a real option, else it is
@@ -299,6 +358,10 @@ class Question(models.Model):
     def is_multiple_choice(self):
         return self.type == 'multiple-choice'
 
+    @property
+    def is_matrix_select(self):
+        return self.type == 'matrix-select'
+
     def __unicode__(self):
         return self.title
 
@@ -306,12 +369,12 @@ class Question(models.Model):
         ordering = ['survey', 'ordinal']
 
 class QuestionRow(models.Model):
-    question = models.ForeignKey(Question, db_index=True)
+    question = models.ForeignKey(Question, related_name="row_set", db_index=True)
     ordinal = models.IntegerField()
     title = models.CharField(max_length=255, default='')
 
 class QuestionColumn(models.Model):
-    question = models.ForeignKey(Question, db_index=True)
+    question = models.ForeignKey(Question, related_name="column_set", db_index=True)
     ordinal = models.IntegerField()
     title = models.CharField(max_length=255, default='')
 

@@ -70,6 +70,30 @@
                 {% endfor %}
             </ul>
             {% endif %}
+            {% if question.is_matrix_select %}
+            <div>Columns</div>
+            <ul class="columns">
+                {% for column in question.column_set.all %}
+                <li id="column-{{ column.id }}">{{ column.title }}</li>
+                {% endfor %}
+            </ul>
+            <div>Rows</div>
+            <ul class="rows">
+                {% for row in question.row_set.all %}
+                <li id="row-{{ row.id }}">{{ row.title }}</li>
+                {% endfor %}
+            </ul>
+            <div>Options</div>
+            <ul class="choices">
+                {% for option in question.option_set.all %}
+                <li id="option-{{ option.id }}">
+                    <input type="radio" value="{{ option.value }}" id="option-{{ option.id }}-field"/>
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <div class="info">{{ option.value }}</div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
             <div class="info">{{ question.data_name }}</div>
         </div>
         <div class="rules">
