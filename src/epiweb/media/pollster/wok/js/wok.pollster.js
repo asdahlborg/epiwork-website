@@ -81,12 +81,12 @@
             var rules = rules_by_question[qid] || [];
             for (var i=0 ; i < rules.length ; i++) {
                 var rule = rules[i];
-                if (rule.subject === oid)
+                if (jQuery.inArray(oid, rule.subject) >= 0)
                     rule.apply($survey, checked);
                 else if (isRadio)
                     rule.apply($survey, false);
                 if (rule.isExclusive)
-                    exclusives.push('#option-'+rule.subject);
+                    exclusives.push('#option-'+oid);
             }
 
             if (checked && $.inArray('#option-'+oid, exclusives) >= 0) {

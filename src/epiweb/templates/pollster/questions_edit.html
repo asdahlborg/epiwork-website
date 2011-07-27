@@ -108,9 +108,7 @@
             {% for rule in question.subject_of_rules.all %}
             <div id="rule-{{ rule.id }}"
                  data-type="{{ rule.rule_type.id }}"
-                 {% if rule.subject_option.id %}
-                 data-subject-option="option-{{ rule.subject_option.id }}"
-                 {% endif %}
+                 data-subject-options="{% for option in rule.subject_options.all %} option-{{ option.id }} {% endfor %}"
                  data-object-question="question-{{ rule.object_question.id }}"
                  data-object-options="{% for option in rule.object_options.all %} option-{{ option.id }} {% endfor %}"
                  class="rule">

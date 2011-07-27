@@ -3,13 +3,13 @@
 
     // BUILTIN RULES
 
-    function ShowQuestionRule(subjectOption, objectQuestion, objectOption) {
+    function ShowQuestionRule(subjectOptions, objectQuestion, objectOption) {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOption,
+            subject: subjectOptions,
             isExclusive: false,
 
             apply: function($survey, checked) {
@@ -26,13 +26,13 @@
         });
     }
 
-    function HideQuestionRule(subjectOption, objectQuestion, objectOption) {
+    function HideQuestionRule(subjectOptions, objectQuestion, objectOption) {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOption,
+            subject: subjectOptions,
             isExclusive: false,
 
             apply: function($survey, checked) {
@@ -49,13 +49,13 @@
         });
     }
 
-    function ShowOptionsRule(subjectOption, objectQuestion, objectOptions) {
+    function ShowOptionsRule(subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOption,
+            subject: subjectOptions,
             isExclusive: false,
 
             apply: function($survey, checked) {
@@ -69,13 +69,13 @@
         });
     }
 
-    function HideOptionsRule(subjectOption, objectQuestion, objectOptions) {
+    function HideOptionsRule(subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOption,
+            subject: subjectOptions,
             isExclusive: false,
 
             apply: function($survey, checked) {
@@ -89,13 +89,13 @@
         });
     }
 
-    function CheckOptionsRule(subjectOption, objectQuestion, objectOptions) {
+    function CheckOptionsRule(subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOption,
+            subject: subjectOptions,
             isExclusive: false,
 
             apply: function($survey, checked) {
@@ -107,13 +107,13 @@
         });
     }
 
-    function UncheckOptionsRule(subjectOption, objectQuestion, objectOptions) {
+    function UncheckOptionsRule(subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOption,
+            subject: subjectOptions,
             isExclusive: false,
 
             apply: function($survey, checked) {
@@ -125,13 +125,13 @@
         });
     }
 
-    function ExclusiveRule(subjectOption, objectQuestion, objectOptions) {
+    function ExclusiveRule(subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOption,
+            subject: subjectOptions,
             isExclusive: true,
 
             apply: function($survey, checked) {

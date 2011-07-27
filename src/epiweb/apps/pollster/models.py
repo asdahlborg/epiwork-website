@@ -253,41 +253,46 @@ class Survey(models.Model):
         temp_id = root.get('id') or ''
         match = re.match('^rule-(\d+)$', temp_id)
         type_id = root.get('data-type')
-        subject_option_id = root.get('data-subject-option')
-        object_question_id = root.get('data-object-question')
-        object_option_ids = (root.get('data-object-options') or '').split()
         deleted = 'deleted' in (root.get('class') or '')
 
-        if not deleted and not (type_id and subject_option_id and object_question_id):
-            warnings.warn('unable to create rule in question %s (trigger %s, question %s)' % (question.id, subject_option_id, object_question_id))
+        subject_option_ids = [Survey.get_option_id(idmap, id) for id in root.get('data-subject-options', '').split()]
+        subject_option_ids = [id for id in subject_option_ids if id is not None]
+        object_question_id = Survey.get_question_id(idmap, root.get('data-object-question'))
+        object_option_ids = [Survey.get_option_id(idmap, id) for id in root.get('data-object-options', '').split()]
+        object_option_ids = [id for id in object_option_ids if id is not None]
+
+        if not deleted and not type_id and not object_question_id:
+            warnings.warn('unable to create rule in question %s (triggers %s, question %s)' % (question.id, subject_option_ids, object_question_id))
             return None
 
-        if deleted or question is None or Survey.get_option_id(idmap, subject_option_id) is None or Survey.get_question_id(idmap, object_question_id) is None:
+        if deleted or question is None or object_question_id is None:
             Rule.objects.filter(id = int(match.group(1))).delete()
             rule = None
         elif match:
             rule = Rule.objects.get(id = int(match.group(1)))
             rule.rule_type = RuleType.objects.get(id = int(type_id))
             rule.subject_question = question
-            rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
-            rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
+            rule.object_question = Question.objects.get(id = object_question_id)
             rule.save()
+            rule.subject_options.clear()
             rule.object_options.clear()
-            for id in [Survey.get_option_id(idmap, object_option_id) for object_option_id in object_option_ids]:
-                if id is not None:
-                    rule.object_options.add(Option.objects.get(id = id))
+            for id in subject_option_ids:
+                rule.subject_options.add(Option.objects.get(id = id))
+            for id in object_option_ids:
+                rule.object_options.add(Option.objects.get(id = id))
             rule.save()
         else:
             rule = Rule()
             rule.rule_type = RuleType.objects.get(id = int(type_id))
             rule.subject_question = question
-            rule.subject_option = Option.objects.get(id = Survey.get_option_id(idmap, subject_option_id))
-            rule.object_question = Question.objects.get(id = Survey.get_question_id(idmap, object_question_id))
+            rule.object_question = Question.objects.get(id = object_question_id)
             rule.save()
             rule.object_options.clear()
-            for id in [Survey.get_option_id(idmap, object_option_id) for object_option_id in object_option_ids]:
-                if id is not None:
-                    rule.object_options.add(Option.objects.get(id = id))
+            rule.subject_options.clear()
+            for id in object_option_ids:
+                rule.object_options.add(Option.objects.get(id = id))
+            for id in subject_option_ids:
+                rule.subject_options.add(Option.objects.get(id = id))
             rule.save()
         return rule
 
@@ -416,7 +421,7 @@ class Option(models.Model):
 class Rule(models.Model):
     rule_type = models.ForeignKey(RuleType)
     subject_question = models.ForeignKey(Question, related_name='subject_of_rules', db_index=True)
-    subject_option = models.ForeignKey(Option, related_name='subject_of_rules', limit_choices_to = {'question': subject_question}, blank=True, null=True)
+    subject_options = models.ManyToManyField(Option, related_name='subject_of_rules', limit_choices_to = {'question': subject_question})
     object_question = models.ForeignKey(Question, related_name='object_of_rules', blank=True, null=True)
     object_options = models.ManyToManyField(Option, related_name='object_of_rules', limit_choices_to = {'question': object_question})
 

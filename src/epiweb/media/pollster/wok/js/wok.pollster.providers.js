@@ -35,8 +35,12 @@
     }
 
     function getRulesByOption($canvas, option) {
-        return $canvas.find('.rule')
-            .filter("[data-object-option='"+option+"'], [data-subject-option='"+option+"']");
+        return $canvas.find('.rule').filter(function() {
+            var $this = $(this);
+            var subj = $this.attr('data-subject-options');
+            var obj = $this.attr('data-object-options');
+            return $.inArray(option, (obj+' '+subj).split()) >= 0;
+        });
     }
 
     function getText($element, toRemove) {
@@ -72,10 +76,14 @@
             idmap[this.id] = newId;
             this.id = newId;
         });
-        $element.find('[data-subject-option]').each(function(){
-            var id = $(this).attr('data-subject-option');
-            if (jQuery.contains(idmap, id))
-                $(this).attr('data-subject-option', idmap[id]);
+        $element.find('[data-subject-options]').each(function(){
+            var ids = $(this).attr('data-subject-options');
+            ids = jQuery.map(ids, function(id) {
+                if (jQuery.contains(idmap, id))
+                    return idmap[id];
+                return id;
+            });
+            $(this).attr('data-subject-options', ids.join(' '));
         });
         $element.find('[data-object-question]').each(function(){
             var id = $(this).attr('data-object-question');
@@ -622,7 +630,7 @@
         function formatText($element) {
             var val = $properties.find("[name=field_rule_type]").val();
             var type = $properties.find("[name=field_rule_type] :selected").text();
-            var subject_option = $properties.find("[name=field_rule_subject_option] :selected");
+            var subject_options = $properties.find("[name=field_rule_subject_options] :selected");
             var object_question = $properties.find("[name=field_rule_object_question] :selected");
             var object_options = $properties.find("[name=field_rule_object_options] :selected");
 
@@ -630,8 +638,8 @@
             var showoptions = "3 4 5 6".indexOf(val) >= 0;
 
             var subject = '';
-            if (subject_option.val())
-                subject = subject_option.text();
+            if (subject_options.val())
+                subject = "(" + subject_options.length + " triggers)";
             var object = '';
             if (showquestion)
                 object = object_question.text();
@@ -657,13 +665,14 @@
             var $type = $properties.find("[name=field_rule_type]");
             $type.val($element.attr("data-type")).change();
 
-            var $subject_option = $properties.find("[name=field_rule_subject_option]").empty();
+            var $subject_options = $properties.find("[name=field_rule_subject_options]").empty();
             var $object_question = $properties.find("[name=field_rule_object_question]").empty();
 
             // FIXME: Propagate options.
-            $subject_option.empty();
-            fillOptions($element, $subject_option);
-            $subject_option.val($element.attr("data-subject-option")).change();
+            $subject_options.empty();
+            fillOptions($element, $subject_options);
+            var ids = ($element.attr("data-subject-options") || '').split(' ');
+            $subject_options.val(ids).change();
 
             // FIXME: Propagate options.
             $(".question-wrapper > .question").each(function() {
@@ -703,9 +712,13 @@
             return false;
         });
 
-        $properties.find("[name=field_rule_subject_option]").change(function(evt) {
+        $properties.find("[name=field_rule_subject_options]").change(function(evt) {
             if (self.$element === null) return true;
-            self.$element.attr("data-subject-option", $(this).val());
+            var val = $(this).val();
+            if (val)
+                self.$element.attr("data-subject-options", val.join(" "));
+            else
+                self.$element.attr("data-subject-options", '');
             formatText(self.$element);
             return false;
         });
@@ -751,9 +764,9 @@
                 updateUI($e);
                 $properties
                     .find("[name=field_rule_type]").val($e.attr("data-type")).end()
-                    .find("[name=field_rule_trigger]").val($e.attr("data-trigger")).end()
-                    .find("[name=field_rule_question]").val($e.attr("data-question")).end()
-                    .find("[name=field_rule_option]").val($e.attr("data-option")).end()
+                    .find("[name=field_rule_subject_options]").val($e.attr("data-subject-options").split(' ')).end()
+                    .find("[name=field_rule_object_question]").val($e.attr("data-object-question")).end()
+                    .find("[name=field_rule_object_options]").val($e.attr("data-object-options").split(' ')).end()
                     .show();
                 formatText($e);
             },
