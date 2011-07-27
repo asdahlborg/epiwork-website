@@ -24,7 +24,7 @@
             </ul>
             {% endif %}
             {% if question.is_single_choice %}
-            <ul class="choices">
+            <ul class="choices sortable">
                 {% for option in question.option_set.all %}
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
@@ -44,7 +44,7 @@
             </ul>
             {% endif %}
             {% if question.is_multiple_choice %}
-            <ul class="choices">
+            <ul class="choices sortable">
                 {% for option in question.option_set.all %}
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
@@ -65,19 +65,19 @@
             {% endif %}
             {% if question.is_matrix_select %}
             <div>Columns</div>
-            <ul class="columns">
+            <ul class="columns sortable">
                 {% for column in question.column_set.all %}
-                <li id="column-{{ column.id }}">{{ column.title }}</li>
+                <li id="column-{{ column.id }}"><span class="title">{{ column.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
-            <ul class="rows">
+            <ul class="rows sortable">
                 {% for row in question.row_set.all %}
-                <li id="row-{{ row.id }}">{{ row.title }}</li>
+                <li id="row-{{ row.id }}"><span class="title">{{ row.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Options</div>
-            <ul class="choices">
+            <ul class="choices sortable">
                 {% for option in question.option_set.all %}
                 <li id="option-{{ option.id }}">
                     <input type="radio" value="{{ option.value }}" id="option-{{ option.id }}-field"/>
@@ -89,15 +89,15 @@
             {% endif %}
             {% if question.is_matrix_entry %}
             <div>Columns</div>
-            <ul class="columns">
+            <ul class="columns sortable">
                 {% for column in question.column_set.all %}
-                <li id="column-{{ column.id }}">{{ column.title }}</li>
+                <li id="column-{{ column.id }}"><span class="title">{{ column.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
-            <ul class="rows">
+            <ul class="rows sortable">
                 {% for row in question.row_set.all %}
-                <li id="row-{{ row.id }}">{{ row.title }}</li>
+                <li id="row-{{ row.id }}"><span class="title">{{ row.title }}</span></li>
                 {% endfor %}
             </ul>
             <input type="text"/>

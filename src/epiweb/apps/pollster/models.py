@@ -138,7 +138,7 @@ class Survey(models.Model):
             QuestionColumn.objects.filter(id = int(match.group(1))).delete()
             column = None
         else:
-            title = root.text
+            title = [e.text for e in root.findall('span') if 'title' in e.get('class', '')][0]
             if match:
                 column = QuestionColumn.objects.get(id = int(match.group(1)))
                 column.title = title or ''
@@ -161,7 +161,7 @@ class Survey(models.Model):
             QuestionRow.objects.filter(id = int(match.group(1))).delete()
             row = None
         else:
-            title = root.text
+            title = [e.text for e in root.findall('span') if 'title' in e.get('class', '')][0]
             if match:
                 row = QuestionRow.objects.get(id = int(match.group(1)))
                 row.title = title or ''
@@ -377,10 +377,16 @@ class QuestionRow(models.Model):
     ordinal = models.IntegerField()
     title = models.CharField(max_length=255, default='')
 
+    class Meta:
+        ordering = ['question', 'ordinal']
+
 class QuestionColumn(models.Model):
     question = models.ForeignKey(Question, related_name="column_set", db_index=True)
     ordinal = models.IntegerField()
     title = models.CharField(max_length=255, default='')
+
+    class Meta:
+        ordering = ['question', 'ordinal']
 
 class Option(models.Model):
     question = models.ForeignKey(Question, db_index=True)

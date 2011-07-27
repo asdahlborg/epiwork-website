@@ -291,28 +291,33 @@
                     $properties.find("[name=tool_rule_type]").closest(".tool").show()
                     $properties.find("[name=tool_rule_type] [value='derived-value']").show();
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
+                    $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "single-choice") {
                     $properties.find("[name=tool_choice_type]").closest(".tool").show();
                     $properties.find("[name=tool_rule_type]").closest(".tool").show()
                     $properties.find("[name=tool_rule_type] [value='derived-value']").hide().parent().val("rule");
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').show();
+                    $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "multiple-choice") {
                     $properties.find("[name=tool_choice_type]").closest(".tool").show();
                     $properties.find("[name=tool_rule_type]").closest(".tool").show()
                     $properties.find("[name=tool_rule_type] [value='derived-value']").hide().parent().val("rule");
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').show();
+                    $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "matrix-select") {
                     $properties.find("[name=tool_choice_type]").closest(".tool").show();
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
+                    $properties.find(".action-add-column, .action-add-row").closest(".tool").show();
                 }
                 else if (type === "matrix-entry") {
                     $properties.find("[name=tool_choice_type]").closest(".tool").hide();
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
+                    $properties.find(".action-add-column, .action-add-row").closest(".tool").show();
                 }
             },
             detach: function() {
@@ -417,7 +422,7 @@
 
         $properties.find("[name=field_column_title]").keyup(function(evt) {
             if (self.$element === null) return true;
-            self.$element.text($(this).val());
+            self.$element.find('.title').text($(this).val());
             return false;
         });
 
@@ -429,7 +434,7 @@
                     self.detach();
                 self.$element = $e;
                 $properties
-                    .find("[name=field_column_title]").val($e.text()).end()
+                    .find("[name=field_column_title]").val($e.find('.title').text()).end()
                     .show();
             },
             detach: function() {
@@ -459,7 +464,7 @@
 
         $properties.find("[name=field_row_title]").keyup(function(evt) {
             if (self.$element === null) return true;
-            self.$element.text($(this).val());
+            self.$element.find('.title').text($(this).val());
             return false;
         });
 
@@ -471,7 +476,7 @@
                     self.detach();
                 self.$element = $e;
                 $properties
-                    .find("[name=field_row_title]").val($e.text()).end()
+                    .find("[name=field_row_title]").val($e.find('.title').text()).end()
                     .show();
             },
             detach: function() {

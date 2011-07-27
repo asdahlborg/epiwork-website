@@ -47,3 +47,8 @@
 .deleted { display: none; }
 .actions { visibility: hidden; }
 .error-message { display: block; }
+
+.sortable > * { position: relative; }
+.sortable .sort-buttons { position: absolute; top: -5px; right: -20px; border: 1px solid #CCC;
+    padding: 2px; background: #FFF; -webkit-border-radius: 5px; }
+.sortable .sort-buttons button { font-size: 11px; background: #EEE; border: 1px solid #D2D2D2; cursor: pointer; padding: 1px 3px; }

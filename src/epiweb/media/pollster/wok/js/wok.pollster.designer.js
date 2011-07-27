@@ -183,6 +183,36 @@
             return false;
         });
 
+        $(".sortable > *").hoverIntent(
+            function() {
+                var $tmpl = $(".wok-templates .sort-buttons").clone();
+                $(this).append($tmpl);
+            },
+            function() {
+                $(this).find('.sort-buttons').remove();
+            }
+        );
+
+        $(".sortable .sort-buttons .up").live("click", function(){
+            var $item = $(this).closest('.sortable > *');
+            var $prev = $item.prev();
+            if ($prev.length) {
+                $item[0].parentNode.insertBefore($item[0], $prev[0]);
+                $item.mouseleave();
+            }
+            return false;
+        });
+
+        $(".sortable .sort-buttons .down").live("click", function(){
+            var $item = $(this).closest('.sortable > *');
+            var $next = $item.next();
+            if ($next.length) {
+                $item[0].parentNode.insertBefore($next[0], $item[0]);
+                $item.mouseleave();
+            }
+            return false;
+        });
+
         // Public methods.
 
         $.extend(this, {

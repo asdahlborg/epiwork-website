@@ -2,7 +2,9 @@
 .question ul.choices, .question ul.derived-values { list-style: none; margin-bottom: 10px; }
 .question li { margin-left: 20px; }
 .question input[type=text] { margin: 0 0 10px 20px; }
+.question .choices input[type=text] { margin: 0 0 0 15px; }
 .question .title { font-weight: bold; margin-right: 5px; }
+.question .columns .title, .question .rows .title { font-weight: normal; margin: 0; }
 .question .number { font-weight: bold; margin-right: 3px; }
 .question .info { display: none; }
 .question .matrix th, .question .matrix td { vertical-align: middle; padding: 1px 3px; }
