@@ -34,14 +34,12 @@
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                     <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ question.open_option_data_type.css_class }}"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                    <div class="info">{{ option.value }}</div>
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
                     <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <div class="info">{{ option.value }}</div>
                 </li>
                 {% endif %}
                 {% endfor %}
@@ -57,14 +55,12 @@
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                     <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ question.open_option_data_type.css_class }}"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                    <div class="info">{{ option.value }}</div>
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
                     <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <div class="info">{{ option.value }}</div>
                 </li>
                 {% endif %}
                 {% endfor %}
@@ -138,7 +134,6 @@
             </tbody>
             </table>
             {% endif %}
-            <div class="info">{{ question.data_name }}</div>
         </div>
         <div class="rules">
             {% for rule in question.subject_of_rules.all %}
