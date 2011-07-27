@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.utils import simplejson
-from . import models, forms
+from . import models, forms, parser
 import re
 
 @login_required
@@ -22,7 +22,7 @@ def survey_add(request):
         form = forms.SurveyXmlForm(request.POST)
         if form.is_valid():
             # create and redirect
-            survey.create_from_xml(form.cleaned_data['surveyxml'])
+            parser.survey_update_from_xml(survey, form.cleaned_data['surveyxml'])
             return redirect(survey)
     # return an empty survey structure
     virtual_option_types = models.VirtualOptionType.objects.all()
@@ -41,7 +41,7 @@ def survey_edit(request, id):
     if (request.method == 'POST'):
         form = forms.SurveyXmlForm(request.POST)
         if form.is_valid():
-            survey.update_from_xml(form.cleaned_data['surveyxml'])
+            parser.survey_update_from_xml(survey, form.cleaned_data['surveyxml'])
             return redirect(survey)
     virtual_option_types = models.VirtualOptionType.objects.all()
     question_data_types = models.QuestionDataType.objects.all()
