@@ -1,7 +1,7 @@
 
 /* POLLSTER CANVAS */
 
-#pollster-canvas { min-height: 100%; overflow: auto; padding: 10px; }
+#pollster-canvas { min-height: 100%; overflow: auto; padding: 10px 0 10px 10px; overflow: hidden; }
 #pollster-canvas .template { position: relative; }
 
 /* POLLSTER PROPERTIES PANEL */
@@ -45,7 +45,6 @@
 .mandatory .number { color: #C00; }
 .starts-hidden { display: block; opacity: 0.5; }
 .deleted { display: none; }
-.actions { visibility: hidden; }
 .error-message { display: block; }
 
 .sortable > * { position: relative; }
