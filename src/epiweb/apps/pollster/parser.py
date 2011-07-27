@@ -53,6 +53,12 @@ def survey_update_from_xml(survey, xmlstring):
 
     survey.save()
 
+def _get_question_id(idmap, idstr):
+    return idmap[idstr]
+
+def _get_option_id(idmap, idstr):
+    return idmap[idstr]
+
 def _update_question_from_xml(survey, idmap, root, ordinal):
     # Extract question ID and load corresponding question; if it does not exists
     # insert and empty question to generate it. In both cases we have a question
@@ -245,10 +251,10 @@ def _update_rule_from_xml(survey, idmap, question, root):
     type_id = root.get('data-type')
     deleted = 'deleted' in (root.get('class') or '')
 
-    subject_option_ids = [models.Survey.get_option_id(idmap, id) for id in root.get('data-subject-options', '').split()]
+    subject_option_ids = [_get_option_id(idmap, id) for id in root.get('data-subject-options', '').split()]
     subject_option_ids = [id for id in subject_option_ids if id is not None]
-    object_question_id = models.Survey.get_question_id(idmap, root.get('data-object-question'))
-    object_option_ids = [models.Survey.get_option_id(idmap, id) for id in root.get('data-object-options', '').split()]
+    object_question_id = _get_question_id(idmap, root.get('data-object-question'))
+    object_option_ids = [_get_option_id(idmap, id) for id in root.get('data-object-options', '').split()]
     object_option_ids = [id for id in object_option_ids if id is not None]
 
     if not deleted and not type_id and not object_question_id:

@@ -11,14 +11,6 @@ class Survey(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    @staticmethod
-    def get_question_id(idmap, idstr):
-        return idmap[idstr]
-
-    @staticmethod
-    def get_option_id(idmap, idstr):
-        return idmap[idstr]
-
     @models.permalink
     def get_absolute_url(self):
         return ('pollster_survey_edit', [str(self.id)])
