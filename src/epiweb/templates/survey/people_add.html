@@ -1,9 +1,9 @@
-{% extends "survey/base.html" %}
+{% extends "base/blankbase.html" %}
 
 {% block content %}
 <h1>Add Person</h1>
 
-<form method="post">
+<form method="post">{% csrf_token %}
 {{ form.as_p }}
 <p><input type="submit" value="Add Person"/></p>
 </form>

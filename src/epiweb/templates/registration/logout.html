@@ -1,11 +1,7 @@
-{% extends "registration/base.html" %}
+{% extends "sitebase.html" %}
 
-{% block title %}Logged out{% endblock %}
+{% block title %}{{ block.super }}Uitgelogd{% endblock %}
 
-{% block content %}
+{% block authentication %}{% endblock authentication %}
 
-<p>You have logged out.</p>
-
-<p><a href="/">Back to the home page</a>.</p>
-
-{% endblock %}
+{% block menubar %}<li class="selected error"><a href="/">U bent uitgelogd</a></li>{{ block.super }}{% endblock menubar %}

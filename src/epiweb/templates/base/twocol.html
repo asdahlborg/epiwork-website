@@ -1,0 +1,22 @@
+{% extends "sitebase.html" %}
+{% load cms_tags %}
+
+{% block content %}
+        <div id="colmask">
+            <div id="colleft">
+                <div id="colright"> 
+                    <div id="col1wrap"> 
+                         <div id="colleftpad"> 
+                             <div id="col1"> 
+                                 {% block col1 %}{% placeholder "hoofdpagina" %}{% endblock col1 %}
+                             </div> 
+                         </div> 
+                    </div> 
+                    <div id="col2" class="disable"> 
+                    </div> 
+                    <div id="col3"> 
+                        {% block col3 %}<p><img src="{{ MEDIA_URL }}base/img/local_ggm/content/petridishes.jpg" alt="Virus cultivation" /></p>{% placeholder "balk rechts" %}{% endblock col3 %}
+                    </div> 
+                </div> 
+            </div> 
+        </div>{% endblock content %}

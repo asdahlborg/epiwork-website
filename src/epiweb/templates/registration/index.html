@@ -1,12 +1,2 @@
-{% extends "registration/base.html" %}
-
-{% block content %}
-<h1>{{ user }}</h1>
-
-<ul>
-<li><a href="{% url django.contrib.auth.views.password_change %}">Change Password</a></li>
-<li><a href="{% url epiweb.apps.survey.views.profile_index %}">Update Profile</a></li>
-</ul>
-
-{% endblock %}
+{% extends "sitebase.html" %}
 

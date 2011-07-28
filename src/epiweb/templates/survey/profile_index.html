@@ -1,15 +1,15 @@
 {% extends "survey/base.html" %}
 
 {% block extrahead %}
-<link rel="stylesheet" type="text/css" href="/+media/css/ui-lightness/jquery-ui-1.8.5.custom.css"/>
-<link rel="stylesheet" type="text/css" href="/+media/survey/style.css"/>
-<script type="text/javascript" src="/+media/jquery.js"></script>
-<script type="text/javascript" src="/+media/jquery.form.js"></script>
-<script type="text/javascript" src="/+media/js/jquery-ui-1.8.5.custom.min.js"></script>
-<script type="text/javascript" src="/+media/survey/survey.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.5.custom.css"/>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}survey/style.css"/>
+<script type="text/javascript" src="{{ MEDIA_URL }}jquery.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}jquery.form.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-ui-1.8.5.custom.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}survey/survey.js"></script>
 {% endblock %}
 
-{% block content %}
+{% block col1 %}
 <div id="survey">
 
 <h1>Edit Profile</h1>
@@ -17,4 +17,4 @@
 {% include "survey/form.html" %}
 
 </div>
-{% endblock %}
+{% endblock col1 %}
