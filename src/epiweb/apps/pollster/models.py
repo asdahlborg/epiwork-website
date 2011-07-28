@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 from xml.etree import ElementTree
 import re, warnings
 from . import dynamicmodels
@@ -53,6 +54,11 @@ class Survey(models.Model):
         for question in self.question_set.all():
             fields += question.as_fields()
         return dynamicmodels.create('results_'+str(self.shortname)+'_'+str(self.version), fields=dict(fields), app_label='pollster')
+
+    def as_form(self):
+        model = self.as_model()
+        form = dynamicmodels.to_form(model)
+        return form
 
     def publish(self):
         model = self.as_model()

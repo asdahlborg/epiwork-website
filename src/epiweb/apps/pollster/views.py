@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.utils import simplejson
 from . import models, forms, parser
-import re
+import re, datetime
 
 @login_required
 def survey_list(request):
@@ -66,6 +66,15 @@ def survey_publish(request, id):
 @login_required
 def survey_test(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
+    if request.method == 'POST':
+        form = survey.as_form()(request.POST)
+        if form.is_valid():
+            form.cleaned_data['timestamp'] = datetime.datetime.now()
+            if survey.is_published:
+                form.save()
+            return redirect(survey_test, id=id)
+        else:
+            print form.errors
     return render_to_response('pollster/survey_test.html', {
         "survey": survey
     })
