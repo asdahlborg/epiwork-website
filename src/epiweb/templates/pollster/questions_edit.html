@@ -1,15 +1,19 @@
 <div class="survey clearfix" id="survey-{{ survey.id }}">
     {% for question in survey.question_set.all %}
     <div class="question-wrapper clearfix">
-        <div id="question-{{ question.id }}" class="question {{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %} {% if question.is_mandatory %} mandatory {% endif %}"
+        <div id="question-{{ question.id }}" class="question question-{{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %} {% if question.is_mandatory %} mandatory {% endif %}"
              data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
-             data-regex="{{ question.regex|default:'' }}" data-error-message="{{ question.error_message|default:'' }}">
+             data-regex="{{ question.regex|default:'' }}" data-error-message="{{ question.error_message|default:'' }}"
+             data-open-option-data-type="{{ question.open_option_data_type.id }}">
             <div class="info">{{ question.data_name }}</div>
             <p>
                 <span class="number"></span>
                 <span class="title">{{ question.title }}</span>
                 {{ question.description }}
-            </p>
+                {% if question.is_builtin %}
+                (builtin value)
+                {% endif %}
+                </p>
             {% if question.is_text %}
             <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
                 pattern="{{ question.regex|default:'' }}" />
@@ -32,7 +36,7 @@
                     <div class="info">{{ option.value }}</div>
                     <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ question.open_option_data_type.css_class }}" />
+                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ option.open_option_data_type.css_class }}" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
@@ -52,7 +56,7 @@
                     <div class="info">{{ option.value }}</div>
                     <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ question.open_option_data_type.css_class }}" />
+                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ option.open_option_data_type.css_class }}" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
@@ -68,13 +72,13 @@
             <div>Columns</div>
             <ul class="columns sortable">
                 {% for column in question.column_set.all %}
-                <li id="column-{{ column.id }}"><span class="title">{{ column.title }}</span></li>
+                <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
             <ul class="rows sortable">
                 {% for row in question.row_set.all %}
-                <li id="row-{{ row.id }}"><span class="title">{{ row.title }}</span></li>
+                <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Options</div>
@@ -92,13 +96,13 @@
             <div>Columns</div>
             <ul class="columns sortable">
                 {% for column in question.column_set.all %}
-                <li id="column-{{ column.id }}"><span class="title">{{ column.title }}</span></li>
+                <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
             <ul class="rows sortable">
                 {% for row in question.row_set.all %}
-                <li id="row-{{ row.id }}"><span class="title">{{ row.title }}</span></li>
+                <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}</span></li>
                 {% endfor %}
             </ul>
             <input type="text"/>

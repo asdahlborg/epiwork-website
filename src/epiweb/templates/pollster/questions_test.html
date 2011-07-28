@@ -1,7 +1,8 @@
 <form class="survey" id="survey-{{ survey.id }}">
     {% for question in survey.question_set.all %}
+    {% if not question.is_builtin %}
     <div class="question-wrapper clearfix">
-        <div id="question-{{ question.id }}" class="question {{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %} {% if question.is_mandatory %} mandatory {% endif %}"
+        <div id="question-{{ question.id }}" class="question question-{{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %} {% if question.is_mandatory %} mandatory {% endif %}"
              data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
              data-regex="{{ question.regex|default:'' }}" data-error-message="{{ question.error_message|default:'' }}">
             <p>
@@ -32,7 +33,7 @@
                     <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ question.open_option_data_type.css_class }}"
+                    <input type="text" name="{{ option.open_option_data_name }}" class="open_option_data {{ option.open_option_data_type.css_class }}"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                 </li>
                 {% else %}
@@ -53,7 +54,7 @@
                     <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ question.open_option_data_type.css_class }}"
+                    <input type="text" name="{{ option.open_option_data_name }}" class="open_option_data {{ option.open_option_data_type.css_class }}"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                 </li>
                 {% else %}
@@ -90,7 +91,7 @@
                     {% endif %}
                     {% for column in question.column_set.all %}
                     <td>
-                        <select name="{{ question.data_name }}_c{{ column.ordinal}}_r{{ row.ordinal }}">
+                        <select name="{{ question.data_name }}_r{{ row.ordinal}}_c{{ column.ordinal }}">
                             {% for option in question.option_set.all %}
                             <option value="{{ option.value }}">{{ option.text }}</option>
                             {% endfor %}
@@ -149,6 +150,7 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
     {% endfor %}
     <div class="actions">
         <button type="submit">Submit</button>

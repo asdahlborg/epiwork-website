@@ -38,7 +38,9 @@ def survey_add(request):
 @login_required
 def survey_edit(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
-    if (request.method == 'POST'):
+    if not survey.is_draft:
+        return redirect(survey_test, id=id)
+    if request.method == 'POST':
         form = forms.SurveyXmlForm(request.POST)
         if form.is_valid():
             parser.survey_update_from_xml(survey, form.cleaned_data['surveyxml'])
@@ -52,6 +54,14 @@ def survey_edit(request, id):
         "question_data_types": question_data_types,
         "rule_types": rule_types
     })
+
+@login_required
+def survey_publish(request, id):
+    survey = get_object_or_404(models.Survey, pk=id)
+    if (request.method == 'POST'):
+        survey.publish()
+        return redirect(survey)
+    return redirect(survey)
 
 @login_required
 def survey_test(request, id):

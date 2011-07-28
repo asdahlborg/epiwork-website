@@ -4,7 +4,6 @@
 .question input[type=text] { margin: 0 0 10px 20px; }
 .question .choices input[type=text] { margin: 0 0 0 15px; }
 .question .title { font-weight: bold; margin-right: 5px; }
-.question .columns .title, .question .rows .title { font-weight: normal; margin: 0; }
 .question .number { font-weight: bold; margin-right: 3px; }
 .question .info { display: none; }
 .question .matrix th, .question .matrix td { vertical-align: middle; padding: 1px 3px; }
@@ -17,3 +16,8 @@
 .starts-hidden { display: none; }
 .error-message { display: none; margin: 0 0 10px 20px; color: #C00; }
 .error .error-message { display: block; }
+
+#survey-list form { display: inline; }
+#survey-list button { margin: 0; border: none; background: none; padding: 0; cursor: pointer; }
+#survey-list a, button { color: black; text-decoration: none; }
+#survey-list a:hover, button:hover { text-decoration: underline; }

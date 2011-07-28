@@ -13,6 +13,17 @@ def survey_update_from_xml(survey, xmlstring):
     survey.version = root.find('h1').get('data-version') or ''
     survey.save()
 
+    builtins = [q.data_name for q in survey.question_set.all() if q.is_builtin]
+    if 'timestamp' not in builtins:
+        question = models.Question()
+        question.survey = survey
+        question.data_name = 'timestamp'
+        question.ordinal = 0
+        question.type = 'builtin'
+        question.title = 'Compilation Date'
+        question.data_type = models.QuestionDataType.default_timestamp_type()
+        question.save()
+
     idmap = {}
     question_ordinal = 1
     question_xrules = []
@@ -63,6 +74,7 @@ def _update_question_from_xml(survey, idmap, root, ordinal):
     # Extract question ID and load corresponding question; if it does not exists
     # insert and empty question to generate it. In both cases we have a question
     # to fill with options and rules.
+    question_type = root.get('data-question-type')
     data_type = root.get('data-data-type')
     open_option_data_type = root.get('data-open-option-data-type')
     tags = root.get('data-tags')
@@ -83,11 +95,16 @@ def _update_question_from_xml(survey, idmap, root, ordinal):
     temp_id = root.get('id') or ''
     match = re.match('^question-(\d+)$', temp_id)
 
-    if deleted:
-        models.Question.objects.filter(id = int(match.group(1))).delete()
+    if question_type == 'builtin':
+        # builtin queestions are not modifiable
+        question = models.Question.objects.get(id = int(match.group(1)))
+    elif deleted:
+        models.Question.objects.filter(id = int(match.group(1))).exclude(type = 'builtin').delete()
         question = None
     elif match:
         question = models.Question.objects.get(id = int(match.group(1)))
+        if question.type == 'builtin':
+            raise StandardError('cannot modify builtin questions')
         question.data_name = data_name or ''
         question.title = title or ''
         question.description = description or ''
@@ -103,7 +120,6 @@ def _update_question_from_xml(survey, idmap, root, ordinal):
             question.open_option_data_type = models.QuestionDataType.objects.get(id = open_option_data_type)
         question.save()
     else:
-        question_type = root.get('data-question-type')
         question = models.Question()
         question.survey = survey
         question.type = question_type
@@ -119,7 +135,7 @@ def _update_question_from_xml(survey, idmap, root, ordinal):
         if data_type:
             question.data_type = models.QuestionDataType.objects.get(id = data_type)
         else:
-            question.data_type = models.QuestionDataType.objects.get(id = 1)
+            question.data_type = models.QuestionDataType.default_type()
         if open_option_data_type:
             question.open_option_data_type = models.QuestionDataType.objects.get(id = open_option_data_type)
         question.save()
@@ -134,7 +150,7 @@ def _update_column_from_xml(survey, idmap, question, root, ordinal):
         models.QuestionColumn.objects.filter(id = int(match.group(1))).delete()
         column = None
     else:
-        title = [e.text for e in root.findall('span') if 'title' in e.get('class', '')][0]
+        title = [e.text for e in root.findall('span') if 'column-title' in e.get('class', '')][0]
         if match:
             column = models.QuestionColumn.objects.get(id = int(match.group(1)))
             column.title = title or ''
@@ -157,7 +173,7 @@ def _update_row_from_xml(survey, idmap, question, root, ordinal):
         models.QuestionRow.objects.filter(id = int(match.group(1))).delete()
         row = None
     else:
-        title = [e.text for e in root.findall('span') if 'title' in e.get('class', '')][0]
+        title = [e.text for e in root.findall('span') if 'row-title' in e.get('class', '')][0]
         if match:
             row = models.QuestionRow.objects.get(id = int(match.group(1)))
             row.title = title or ''

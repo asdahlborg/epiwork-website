@@ -219,6 +219,7 @@
         </div>
         <div class="template-question-text" data-visual="entry">
             <div class="question text">
+                <div class="info"></div>
                 <p><span class="number"></span><span class="title"></span></p>
                 <input type="text" name="$$" />
                 <p class="error-message"/>
@@ -227,49 +228,65 @@
         </div>
         <div class="template-question-single-choice" data-visual="radio">
             <div class="question single-choice">
+                <div class="info"></div>
                 <p><span class="number"></span><span class="title"></span></p>
                 <ul class="choices">
-                    <li><input type="radio" value="" name="$$"/><label></label><div class="info"></div></li>
+                    <li>
+                        <div class="info"></div>
+                        <input type="radio" value="" name="$$"/>
+                        <label></label>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="template-question-multiple-choice">
             <div class="question multiple-choice" data-visual="check">
+                <div class="info"></div>
                 <p><span class="number"></span><span class="title"></span></p>
                 <ul class="choices">
-                    <li><input type="checkbox" value="" name="$$"/><label></label><div class="info"></div></li>
+                    <li>
+                        <div class="info"></div>
+                        <input type="checkbox" value="" name="$$"/>
+                        <label></label>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="template-question-matrix-select">
             <div class="question matrix-select" data-visual="select">
+                <div class="info"></div>
                 <p><span class="number"></span><span class="title"></span></p>
                 <div>Columns</div>
                 <ul class="columns">
-                    <li></li>
+                    <li><span class="column-title"/></li>
                 </ul>
                 <div>Rows</div>
                 <ul class="rows">
-                    <li></li>
+                    <li><span class="row-title"/></li>
                 </ul>
                 <div>Options</div>
                 <ul class="choices">
-                    <li><input type="radio" value="" name="$$"/><label></label><div class="info"></div></li>
+                    <li>
+                        <div class="info"></div>
+                        <input type="radio" value="" name="$$"/>
+                        <label></label>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="template-question-matrix-entry">
             <div class="question matrix-entry">
+                <div class="info"></div>
                 <p><span class="number"></span><span class="title"></span></p>
                 <div>Columns</div>
                 <ul class="columns">
-                    <li></li>
+                    <li><span class="column-title"/></li>
                 </ul>
                 <div>Rows</div>
                 <ul class="rows">
-                    <li></li>
+                    <li><span class="row-title"/></li>
                 </ul>
-                <input type="text" value="" name="$$"/><label></label><div class="info"></div>
+                <input type="text"/>
             </div>
         </div>
     </div>

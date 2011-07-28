@@ -56,11 +56,9 @@
         // Question numbering.
 
         function renumberQuestions() {
-            self.nextTemporaryId = $template.find(".question").each(function(i) {
+            self.nextTemporaryId = $template.find(".question:not(.question-builtin)").each(function(i) {
                 var $q = $(this);
                 var $i = $q.children(".info");
-                if ($i.length === 0)
-                    $i = $('<div class="info"></div>').appendTo($q);
                 $q.find(".number").text((i+1)+'.');
                 $i.text(self.getQuestionShortname($q));
             }).length + 1;

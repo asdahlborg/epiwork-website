@@ -116,13 +116,26 @@
         });
     }
 
+    // used internally for builtin questions
+    function TimestampType() {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            bind: function($question) {
+            }
+        });
+    }
+
     // MODULE INITIALIZATION
 
     window.wok.pollster.datatypes = {
         "Text": TextType,
         "Numeric": NumericType,
         "Date": DateType,
-        "MonthYear": MonthYearType
+        "MonthYear": MonthYearType,
+        "Timestamp": TimestampType
     };
 
 })(jQuery);

@@ -30,6 +30,8 @@
 
 .question-wrapper { position: relative; width: 670px; }
 .question { position: relative; float: left; width: 400px; min-height: 30px; }
+.question-builtin { opacity: 0.5; }
+.question-builtin p { margin-bottom: 0; }
 .question:hover { -webkit-box-shadow: 0 0 5px 1px #ff0; -moz-box-shadow: 0 0 5px 1px #ff0; box-shadow: 0 0 5px 1px #ff0; }
 .active .question { -webkit-box-shadow: 0 0 5px 1px #0f0; -moz-box-shadow: 0 0 5px 1px #0f0; box-shadow: 0 0 5px 1px #0f0; }
 .question li { position: relative; }
