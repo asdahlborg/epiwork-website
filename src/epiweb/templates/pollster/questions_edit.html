@@ -23,6 +23,7 @@
                 <li id="option-{{ option.id }}"
                     data-type="{{ option.virtual_type.id }}"
                     data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
+                    Derived Value {{ option.id }}
                     <div class="info"><input class="derived" type="checkbox" disabled="disabled"/></div>
                 </li>
                 {% endfor %}

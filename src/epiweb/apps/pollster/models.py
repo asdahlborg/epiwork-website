@@ -50,7 +50,7 @@ class Survey(models.Model):
         return "#%d %s" % (self.id, self.title)
 
     def get_table_name(self):
-        if not self.shortname or not self.version:
+        if self.is_published and (not self.shortname or not self.version):
             raise RuntimeError('cannot generate a table name with empty shortname or version')
         return 'results_'+str(self.shortname)+'_'+str(self.version)
 
@@ -67,9 +67,9 @@ class Survey(models.Model):
         return form
 
     def publish(self):
+        self.status = 'PUBLISHED'
         model = self.as_model()
         dynamicmodels.install(model)
-        self.status = 'PUBLISHED'
         self.save()
 
 

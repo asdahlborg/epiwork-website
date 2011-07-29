@@ -501,13 +501,13 @@
         function formatText($element) {
             var $e = $element;
             var info = $e.find(".info").remove();
-            var text = $properties.find("[name=field_derived_value_type] option:selected").text();
+            var text = $properties.find("[name=field_derived_value_type] option:selected").text() || 'Derived value';
             var inf = $e.attr("data-inf") || "";
             var sup = $e.attr("data-sup") || "";
             var regexp = $e.attr("data-regex") || "";
 
-            // TODO: Find a way to not hard-code "5" here.
-            if ($e.attr("data-type") === "5")
+            // TODO: Find a way to not hard-code "6" here.
+            if ($e.attr("data-type") === "6")
                 $element.text(text+": " + regexp).append(info);
             else
                 $element.text(text+": [" + inf + "," + sup + "]").append(info);
@@ -535,9 +535,9 @@
                 });
                 $derived_value_types.val($element.attr('data-type')).change();
 
-                // TODO: Find a way to not hard-code "5" here.
+                // TODO: Find a way to not hard-code "6" here.
 
-                if ($element.attr("data-type") === "5") {
+                if ($element.attr("data-type") === "6") {
                     $properties.find("[name=field_derived_value_regex]").closest(".property").show();
                     $properties.find("[name=field_derived_value_inf],[name=field_derived_value_sup]").closest(".property").hide();
                 }

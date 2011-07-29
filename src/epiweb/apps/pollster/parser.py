@@ -47,7 +47,7 @@ def survey_update_from_xml(survey, xmlstring):
             row_ordinal += 1
 
         option_ordinal = 1
-        xoptions = [ul for ul in xquestion.findall('ul') if 'choices' in ul.get('class')] or [[]]
+        xoptions = [ul for ul in xquestion.findall('ul') if 'choices' in ul.get('class') or 'derived-values' in ul.get('class')] or [[]]
         for xoption in xoptions[0]:
             _update_option_from_xml(survey, idmap, question, xoption, option_ordinal)
             option_ordinal += 1
@@ -269,7 +269,7 @@ def _update_rule_from_xml(survey, idmap, question, root):
 
     subject_option_ids = [_get_option_id(idmap, id) for id in root.get('data-subject-options', '').split()]
     subject_option_ids = [id for id in subject_option_ids if id is not None]
-    object_question_id = _get_question_id(idmap, root.get('data-object-question'))
+    object_question_id = root.get('data-object-question') and _get_question_id(idmap, root.get('data-object-question'))
     object_option_ids = [_get_option_id(idmap, id) for id in root.get('data-object-options', '').split()]
     object_option_ids = [id for id in object_option_ids if id is not None]
 
