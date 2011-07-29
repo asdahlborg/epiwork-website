@@ -155,12 +155,16 @@
 
         $properties.find(".action-add-column").click(function(evt) {
             if (self.$element === null) return true;
-            self.$element.find(".columns").append($('<li><span class="title"/></li>'));
+            var type = getQuestionType(self.$element.closest('.question'));
+            var $tmpl = $(".wok-templates .template-question-"+type+" .columns li")
+            self.$element.find(".columns").append($tmpl);
         });
 
         $properties.find(".action-add-row").click(function(evt) {
             if (self.$element === null) return true;
-            self.$element.find(".rows").append($('<li><span class="title"/></li>'));
+            var type = getQuestionType(self.$element.closest('.question'));
+            var $tmpl = $(".wok-templates .template-question-"+type+" .rows li")
+            self.$element.find(".rows").append($tmpl);
         });
 
         // Events.
