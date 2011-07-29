@@ -28,6 +28,12 @@ class Survey(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=255, default='DRAFT', choices=SURVEY_STATUS_CHOICES)
 
+    _standard_result_fields =[
+        ('user', models.IntegerField(null=True, blank=True)),
+        ('global_id', models.CharField(max_length=36, null=True, blank=True)),
+        ('channel', models.CharField(max_length=36, null=True, blank=True))
+    ]
+
     @property
     def is_draft(self):
         return self.status == 'DRAFT'
@@ -44,16 +50,13 @@ class Survey(models.Model):
         return "#%d %s" % (self.id, self.title)
 
     def get_table_name(self):
+        if not self.shortname or not self.version:
+            raise RuntimeError('cannot generate a table name with empty shortname or version')
         return 'results_'+str(self.shortname)+'_'+str(self.version)
 
     def as_model(self):
-        import django.db.models
-        if not self.shortname and not self.version:
-            raise RuntimeError('cannot publish with empty shortname or version')
-        fields = [
-            ('user', models.IntegerField(null=True, blank=True)),
-            ('global_id', models.CharField(max_length=36, null=True, blank=True))
-        ]
+        fields = []
+        fields.extend(Survey._standard_result_fields)
         for question in self.question_set.all():
             fields += question.as_fields()
         return dynamicmodels.create(self.get_table_name(), fields=dict(fields), app_label='pollster')
