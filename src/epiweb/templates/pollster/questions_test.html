@@ -1,6 +1,21 @@
+<div>
+FORM!
+{{ form }}
+</div>
+
+
 <form class="survey" id="survey-{{ survey.id }}" method="POST">
     {% for question in survey.question_set.all %}
-    {% if not question.is_builtin %}
+    {% if question.is_builtin %}
+    <div class="question-wrapper clearfix" style="display:none">
+        <div id="question-{{ question.id }}" class="question question-{{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %} {% if question.is_mandatory %} mandatory {% endif %}"
+             data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
+             data-regex="{{ question.regex|default:'' }}" data-error-message="{{ question.error_message|default:'' }}">
+            <input type="hidden" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
+                disabled="disabled" value="{{ question.value|default:'' }}" />
+        </div>
+    </div>
+    {% else %}
     <div class="question-wrapper clearfix">
         <div id="question-{{ question.id }}" class="question question-{{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %} {% if question.is_mandatory %} mandatory {% endif %}"
              data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"

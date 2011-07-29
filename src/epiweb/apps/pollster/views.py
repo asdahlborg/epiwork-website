@@ -75,8 +75,6 @@ def survey_test(request, id):
             if user:
                 form.cleaned_data['global_id'] = user.global_id
             form.cleaned_data['timestamp'] = datetime.datetime.now()
-            if survey.is_published:
-                form.save()
             destination = reverse(survey_test, kwargs={'id':id})
             if user:
                 destination += '?gid='+user.global_id
