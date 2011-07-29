@@ -39,14 +39,6 @@ else
     echo "not found; automatic MySQL configuration disabled"
 fi
 
-echo -n "Checking for pre-requisites: mono ...   "
-exe_mono="$(which mono)"
-if [ -n "$exe_mono" ] ; then
-    echo "$exe_mono"
-else
-    echo "not found; advanced functionality won't be available"
-fi
-
 echo ""
 while [ -z "$LANGUAGE" ] ; do
     echo -n "Please, choose your country and language (be, it, nl, uk, pt, se): "
