@@ -43,17 +43,20 @@ class Survey(models.Model):
     def __unicode__(self):
         return "#%d %s" % (self.id, self.title)
 
+    def get_table_name(self):
+        return 'results_'+str(self.shortname)+'_'+str(self.version)
+
     def as_model(self):
         import django.db.models
         if not self.shortname and not self.version:
             raise RuntimeError('cannot publish with empty shortname or version')
         fields = [
             ('user', models.IntegerField(null=True, blank=True)),
-            ('profile', models.IntegerField(null=True, blank=True))
+            ('global_id', models.CharField(max_length=36, null=True, blank=True))
         ]
         for question in self.question_set.all():
             fields += question.as_fields()
-        return dynamicmodels.create('results_'+str(self.shortname)+'_'+str(self.version), fields=dict(fields), app_label='pollster')
+        return dynamicmodels.create(self.get_table_name(), fields=dict(fields), app_label='pollster')
 
     def as_form(self):
         model = self.as_model()

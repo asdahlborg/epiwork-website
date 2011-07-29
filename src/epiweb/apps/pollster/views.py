@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.core.urlresolvers import get_resolver
-from django.http import HttpResponse
+from django.core.urlresolvers import get_resolver, reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.utils import simplejson
+from epiweb.apps.survey.models import SurveyUser
 from . import models, forms, parser
 import re, datetime
 
@@ -66,13 +67,20 @@ def survey_publish(request, id):
 @login_required
 def survey_test(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
+    user = _get_active_survey_user(request)
     if request.method == 'POST':
         form = survey.as_form()(request.POST)
         if form.is_valid():
+            form.cleaned_data['user'] = request.user.id
+            if user:
+                form.cleaned_data['global_id'] = user.global_id
             form.cleaned_data['timestamp'] = datetime.datetime.now()
             if survey.is_published:
                 form.save()
-            return redirect(survey_test, id=id)
+            destination = reverse(survey_test, kwargs={'id':id})
+            if user:
+                destination += '?gid='+user.global_id
+            return HttpResponseRedirect(destination)
         else:
             print form.errors
     return render_to_response('pollster/survey_test.html', {
@@ -121,3 +129,9 @@ def urls(request, prefix=''):
 
     return render_to_response("pollster/urls.js", {'urls':urls}, mimetype="application/javascript")
 
+def _get_active_survey_user(request):
+    gid = request.GET.get('gid', None)
+    if gid is None:
+        return None
+    else:
+        return SurveyUser.objects.get(global_id=gid, user=request.user)

@@ -19,5 +19,5 @@
 
 #survey-list form { display: inline; }
 #survey-list button { margin: 0; border: none; background: none; padding: 0; cursor: pointer; }
-#survey-list a, button { color: black; text-decoration: none; }
-#survey-list a:hover, button:hover { text-decoration: underline; }
+#survey-list a, #survey-list button { color: black; text-decoration: none; }
+#survey-list a:hover, #survey-list button:hover { text-decoration: underline; }
