@@ -1,9 +1,3 @@
-<div>
-FORM!
-{{ form }}
-</div>
-
-
 <form class="survey" id="survey-{{ survey.id }}" method="POST">
     {% for question in survey.question_set.all %}
     {% if question.is_builtin %}

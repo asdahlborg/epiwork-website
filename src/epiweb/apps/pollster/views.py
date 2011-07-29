@@ -68,6 +68,7 @@ def survey_publish(request, id):
 def survey_test(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     user = _get_active_survey_user(request)
+    form = None
     if request.method == 'POST':
         form = survey.as_form()(request.POST)
         if form.is_valid():
@@ -79,10 +80,28 @@ def survey_test(request, id):
             if user:
                 destination += '?gid='+user.global_id
             return HttpResponseRedirect(destination)
-        else:
-            print form.errors
     return render_to_response('pollster/survey_test.html', {
-        "survey": survey
+        "survey": survey,
+        "form": form
+    })
+
+@login_required
+def survey_run(request, id):
+    survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
+    user = _get_active_survey_user(request)
+    form = None
+    if request.method == 'POST':
+        form = survey.as_form()(request.POST)
+        if form.is_valid():
+            form.cleaned_data['user'] = request.user.id
+            if user:
+                form.cleaned_data['global_id'] = user.global_id
+            form.cleaned_data['timestamp'] = datetime.datetime.now()
+            form.save()
+            return HttpResponseRedirect('/survey/thanks')
+    return render_to_response('pollster/survey_test.html', {
+        "survey": survey,
+        "form": form
     })
 
 @login_required
