@@ -10,8 +10,9 @@ class PageIndex(SearchIndex):
 
     def prepare(self, obj):
         self.prepared_data = super(PageIndex, self).prepare(obj)
-        placeholders = Placeholder.objects.filter(page=obj)
+        placeholders = obj.placeholders.all()
         text = ''
+
         for placeholder in placeholders:
             for plugin in placeholder.get_plugins_list():
                 instance, _ = plugin.get_plugin_instance()
@@ -22,7 +23,8 @@ class PageIndex(SearchIndex):
                         text += getattr(instance, field)
 
             self.prepared_data['text'] = text
-            return self.prepared_data
+
+        return self.prepared_data
 
     def index_queryset(self):
         return Page.objects.published()
