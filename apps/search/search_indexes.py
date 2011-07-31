@@ -25,7 +25,7 @@ class PageIndex(SearchIndex):
             return self.prepared_data
 
     def index_queryset(self):
-        return Page.objects.published().filter(publisher_is_draft=False)
+        return Page.objects.published()
 
 
 site.register(Page, PageIndex)
