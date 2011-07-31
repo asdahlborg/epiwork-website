@@ -7,8 +7,5 @@ include
 lib
 build
 epiweb.db
-ggm.db
-influenzanet.db
-requirements.txt
 *.swp
 .DS_Store
