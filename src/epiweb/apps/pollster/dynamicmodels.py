@@ -1,6 +1,7 @@
 # taken from https://code.djangoproject.com/wiki/DynamicModels and http://www.agmweb.ca/blog/andy/2249/
 from django import forms
 from django.db import models, connection
+from django.db.models.loading import cache
 from django.core.management import color
 
 def create(name, fields=None, app_label='', module='', options=None, admin_opts=None):
@@ -29,6 +30,9 @@ def create(name, fields=None, app_label='', module='', options=None, admin_opts=
 
     # Create the class, which automatically triggers ModelBase processing
     model = type(name, (models.Model,), attrs)
+
+    # Ensure that the dynamic class is not cached
+    del cache.app_models[app_label][model._meta.object_name]
 
     # Create an Admin class if admin options were provided
     if admin_opts is not None:
