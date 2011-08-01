@@ -3,17 +3,18 @@
         <div class="tool">
             <input type="hidden" name="survey-id" value="{{ survey.id|default:'' }}" />
             <label>Survey</label>
-            <input name="survey-title" value="{{ survey.title|default:'' }}" />
+            <input type="text" name="survey-title" value="{{ survey.title|default:'' }}" />
         </div>
         <div class="tool">
             <label>Shortname</label>
-            <input name="survey-shortname" value="{{ survey.shortname|default:'' }}" />
-        </div>
-        <div class="tool">
-            <label>Version</label>
             <button type="button" class="action-save">Save</button>
-            <input class="short" name="survey-version" value="{{ survey.version|default:'' }}" />
+            <input type="text" class="short" name="survey-shortname" value="{{ survey.shortname|default:'' }}" />
         </div>
+        <input type="hidden" name="survey-version" value="{{ survey.version|default:'' }}" />
+        <!--div class="tool">
+            <label>Version</label>
+            <input type="text" class="short" name="survey-version" value="{{ survey.version|default:'' }}" />
+        </div-->
         <hr/>
         <div class="tool">
             <label>New Question</label>
@@ -34,11 +35,11 @@
         </h2>
         <div class="property readonly">
             <label>Type</label>
-            <input name="field_question_type" readonly="readonly"/>
+            <input type="text" name="field_question_type" readonly="readonly"/>
         </div>
         <div class="property">
             <label>Data Name</label>
-            <input name="field_question_shortname"/>
+            <input type="text" name="field_question_shortname"/>
         </div>
         <div class="property">
             <label>Data Type</label>
@@ -82,7 +83,7 @@
         </div>
         <div class="property">
             <label>Title</label>
-            <input name="field_question_title"/>
+            <input type="text" name="field_question_title"/>
         </div>
         <div class="property clearfix">
             <label>Text</label>
@@ -90,11 +91,11 @@
         </div>
         <div class="property">
             <label>Tags</label>
-            <input name="field_question_tags"/>
+            <input type="text" name="field_question_tags"/>
         </div>
         <div class="property">
             <label>Regular Expression</label>
-            <input name="field_question_regex"/>
+            <input type="text" name="field_question_regex"/>
         </div>
         <div class="property clearfix">
             <label>Error Message</label>
@@ -129,25 +130,25 @@
         <h2>Column <button type="button" class="action-delete">Delete</button></h2>
         <div class="property">
             <label>Title</label>
-            <input name="field_column_title"/>
+            <input type="text" name="field_column_title"/>
         </div>
     </div>
     <div class="property-group builtin-row">
         <h2>Row <button type="button" class="action-delete">Delete</button></h2>
         <div class="property">
             <label>Title</label>
-            <input name="field_row_title"/>
+            <input type="text" name="field_row_title"/>
         </div>
     </div>
     <div class="property-group builtin-choice">
         <h2>Choice <button type="button" class="action-delete">Delete</button></h2>
         <div class="property">
             <label>Text</label>
-            <input name="field_choice_text"/>
+            <input type="text" name="field_choice_text"/>
         </div>
         <div class="property">
             <label>Value</label>
-            <input name="field_choice_value"/>
+            <input type="text" name="field_choice_value"/>
         </div>
         <div class="property">
             <label>Start</label>
@@ -176,15 +177,15 @@
         </div>
         <div class="property">
             <label>Regular Expression</label>
-            <input name="field_derived_value_regex"/>
+            <input type="text" name="field_derived_value_regex"/>
         </div>
         <div class="property">
             <label>Inferior Limit</label>
-            <input name="field_derived_value_inf"/>
+            <input type="text" name="field_derived_value_inf"/>
         </div>
         <div class="property">
             <label>Superior Limit</label>
-            <input name="field_derived_value_sup"/>
+            <input type="text" name="field_derived_value_sup"/>
         </div>
     </div>
     <div class="property-group builtin-rule">

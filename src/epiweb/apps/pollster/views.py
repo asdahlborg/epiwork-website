@@ -39,7 +39,7 @@ def survey_add(request):
 @login_required
 def survey_edit(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
-    if not survey.is_draft:
+    if not survey.is_editable:
         return redirect(survey_test, id=id)
     if request.method == 'POST':
         form = forms.SurveyXmlForm(request.POST)
@@ -61,6 +61,14 @@ def survey_publish(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     if (request.method == 'POST'):
         survey.publish()
+        return redirect(survey)
+    return redirect(survey)
+
+@login_required
+def survey_unpublish(request, id):
+    survey = get_object_or_404(models.Survey, pk=id)
+    if (request.method == 'POST'):
+        survey.unpublish()
         return redirect(survey)
     return redirect(survey)
 

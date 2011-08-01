@@ -12,7 +12,7 @@
 
 {% block navigation %}
     <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
-    {% if survey.is_draft %}
+    {% if survey.is_editable %}
     <li><a href="{% url pollster_survey_edit survey.id %}">Edit Survey</a></li>
     {% endif %}
 {% endblock %}

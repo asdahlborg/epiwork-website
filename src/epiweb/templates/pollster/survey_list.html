@@ -17,10 +17,24 @@
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <form action="{% url pollster_survey_publish survey.id %}" method="POST"><button>publish</button></form>)
             </li>
-            {% else %}
+            {% endif %}
+            {% if survey.is_unpublished %}
+            <li class="status-{{survey.status}}">
+                {% if survey.title %}
+                {{ survey.title }}
+                {% else %}
+                No Name
+                {% endif %}
+                (<a href="{% url pollster_survey_test survey.id %}">test</a>
+                | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
+                | <form action="{% url pollster_survey_publish survey.id %}" method="POST"><button>re-publish</button></form>)
+            </li>
+            {% endif %}
+            {% if survey.is_published %}
             <li class="status-{{survey.status}}">
                 {{ survey.title }}
-                (<a href="{% url pollster_survey_test survey.id %}">test</a>)
+                (<a href="{% url pollster_survey_test survey.id %}">test</a>
+                | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST"><button>unpublish</button></form>)
             </li>
             {% endif %}
             {% endfor %}

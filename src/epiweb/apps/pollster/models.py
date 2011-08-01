@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, connection
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from xml.etree import ElementTree
@@ -7,7 +7,8 @@ from . import dynamicmodels
 
 SURVEY_STATUS_CHOICES = (
     ('DRAFT', 'Draft'),
-    ('PUBLISHED', 'Published')
+    ('PUBLISHED', 'Published'),
+    ('UNPUBLISHED', 'Unpublished')
 )
 
 QUESTION_TYPE_CHOICES = (
@@ -42,6 +43,14 @@ class Survey(models.Model):
     def is_published(self):
         return self.status == 'PUBLISHED'
 
+    @property
+    def is_unpublished(self):
+        return self.status == 'UNPUBLISHED'
+
+    @property
+    def is_editable(self):
+        return self.is_draft or self.is_unpublished
+
     @models.permalink
     def get_absolute_url(self):
         return ('pollster_survey_edit', [str(self.id)])
@@ -50,16 +59,20 @@ class Survey(models.Model):
         return "#%d %s" % (self.id, self.title)
 
     def get_table_name(self):
-        if self.is_published and (not self.shortname or not self.version):
-            raise RuntimeError('cannot generate a table name with empty shortname or version')
-        return 'results_'+str(self.shortname)+'_'+str(self.version)
+        if self.is_published and not self.shortname:
+            raise RuntimeError('cannot generate tables for surveys with no shortname')
+        if self.version:
+            return 'results_'+str(self.shortname)+'_'+str(self.version)
+        else:
+            return 'results_'+str(self.shortname)
 
     def as_model(self):
         fields = []
         fields.extend(Survey._standard_result_fields)
         for question in self.question_set.all():
             fields += question.as_fields()
-        return dynamicmodels.create(self.get_table_name(), fields=dict(fields), app_label='pollster')
+        model = dynamicmodels.create(self.get_table_name(), fields=dict(fields), app_label='pollster')
+        return model
 
     def as_form(self):
         model = self.as_model()
@@ -67,11 +80,23 @@ class Survey(models.Model):
         return form
 
     def publish(self):
+        if self.is_published:
+            return
         self.status = 'PUBLISHED'
         model = self.as_model()
+        table = model._meta.db_table
+        if table in connection.introspection.table_names():
+            now = datetime.datetime.now()
+            backup = table+'_'+format(now, '%Y%m%d%H%M%s')
+            connection.cursor().execute('ALTER TABLE '+table+' RENAME TO '+backup)
         dynamicmodels.install(model)
         self.save()
 
+    def unpublish(self):
+        if not self.is_published:
+            return
+        self.status = 'UNPUBLISHED'
+        self.save()
 
 class RuleType(models.Model):
     title = models.CharField(max_length=255, unique=True)
