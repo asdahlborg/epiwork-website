@@ -39,7 +39,7 @@
                 {% for option in question.option_set.all %}
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
-                    <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field"
+                    <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                     <input type="text" name="{{ option.open_option_data_name }}" class="open_option_data {{ option.open_option_data_type.css_class }}"
@@ -47,7 +47,7 @@
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
-                    <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field"
+                    <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                 </li>
@@ -60,7 +60,7 @@
                 {% for option in question.option_set.all %}
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
-                    <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field"
+                    <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                     <input type="text" name="{{ option.open_option_data_name }}" class="open_option_data {{ option.open_option_data_type.css_class }}"
@@ -68,7 +68,7 @@
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
-                    <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field"
+                    <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                 </li>
@@ -165,6 +165,9 @@
         <button type="submit">Submit</button>
     </div>
     <script type="text/javascript" class="pollster-fill">
+        function pollster_last_partecipation_data() {
+            return {{ last_partecipation_data_json|safe|default:'{}' }};
+        }
         function pollster_fill_data_types(d) {
             var t;
             {% for question in survey.question_set.all %}
@@ -193,6 +196,7 @@
             t = d[{{question.id}}] = [];
             {% for rule in question.subject_of_rules.all %}
             t.push(new {{rule.js_class}}(
+                                         {{ rule.subject_question.id }},
                                          [ {% for option in rule.subject_options.all %}
                                             {{ option.id }}{% if not forloop.last %},{% endif%}
                                          {% endfor %} ],

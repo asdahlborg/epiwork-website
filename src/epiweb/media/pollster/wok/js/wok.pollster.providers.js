@@ -636,8 +636,8 @@
             var object_question = $properties.find("[name=field_rule_object_question] :selected");
             var object_options = $properties.find("[name=field_rule_object_options] :selected");
 
-            var showquestion = "1 2 3 4 5 6".indexOf(val) >= 0;
-            var showoptions = "3 4 5 6".indexOf(val) >= 0;
+            var showquestion = "1 2 3 4 5 6 8".indexOf(val) >= 0;
+            var showoptions = "3 4 5 6 8".indexOf(val) >= 0;
 
             var subject = '';
             if (subject_options.val())
@@ -706,9 +706,9 @@
             var val = $(this).val();
             self.$element.attr("data-type", val);
             // TODO: don't hard-code values here.
-            var showquestion = "1 2 3 4 5 6".indexOf(val) >= 0;
+            var showquestion = "1 2 3 4 5 6 8".indexOf(val) >= 0;
             $properties.find("[name=field_rule_object_question]").closest(".property").toggle(showquestion);
-            var showoptions = "3 4 5 6".indexOf(val) >= 0;
+            var showoptions = "3 4 5 6 8".indexOf(val) >= 0;
             $properties.find("[name=field_rule_object_options]").closest(".property").toggle(showoptions);
             formatText(self.$element);
             return false;

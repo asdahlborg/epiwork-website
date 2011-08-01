@@ -186,6 +186,7 @@ echo ""
 ./bin/django rule_type_register --title 'Check Options' --jsclass 'wok.pollster.rules.CheckOptions'
 ./bin/django rule_type_register --title 'Uncheck Options' --jsclass 'wok.pollster.rules.UncheckOptions'
 ./bin/django rule_type_register --title 'Exclusive' --jsclass 'wok.pollster.rules.Exclusive'
+./bin/django rule_type_register --title 'Future Preload' --jsclass 'wok.pollster.rules.FuturePreload'
 ./bin/django question_data_type_register --title 'Text' --dbtype 'django.db.models.TextField(null=True, blank=True)' --cssclass 'text-type' --jsclass 'wok.pollster.datatypes.Text'
 ./bin/django question_data_type_register --title 'Numeric' --dbtype 'django.db.models.PositiveIntegerField(null=True, blank=True)' --cssclass 'numeric-type' --jsclass 'wok.pollster.datatypes.Numeric'
 ./bin/django question_data_type_register --title 'Date' --dbtype 'django.db.models.DateField(null=True, blank=True)' --cssclass 'date-type' --jsclass 'wok.pollster.datatypes.Date'

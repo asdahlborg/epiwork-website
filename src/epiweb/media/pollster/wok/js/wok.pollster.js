@@ -25,6 +25,8 @@
         var $survey = $('.'+options.templateClass, context);
         var questionSelector = '.'+options.questionClass;
 
+        var last_partecipation_data = pollster_last_partecipation_data();
+
         var data_types = {}, rules_by_question = {}, derived_values = {};
 
         pollster_fill_data_types(data_types);
@@ -112,6 +114,12 @@
                     }
                 }
             }
+        });
+
+        jQuery.each(rules_by_question, function(i, by_question) {
+            jQuery.each(by_question, function(i, rule) {
+                rule.init($survey, last_partecipation_data);
+            });
         });
     }
 

@@ -39,14 +39,14 @@
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
                     <div class="info">{{ option.value }}</div>
-                    <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                    <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ option.open_option_data_type.css_class }}" />
+                    <input type="text" name="{{ option.data_name }}_open" class="open_option_data {{ option.open_option_data_type.css_class }}" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
                     <div class="info">{{ option.value }}</div>
-                    <input type="radio" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                    <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                 </li>
                 {% endif %}
@@ -59,14 +59,14 @@
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
                     <div class="info">{{ option.value }}</div>
-                    <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                    <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ question.data_name }}_open" class="open_option_data {{ option.open_option_data_type.css_class }}" />
+                    <input type="text" name="{{ option.data_name }}_open" class="open_option_data {{ option.open_option_data_type.css_class }}" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
                     <div class="info">{{ option.value }}</div>
-                    <input type="checkbox" value="{{ option.value }}" name="{{ question.data_name }}" id="option-{{ option.id }}-field" />
+                    <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
                 </li>
                 {% endif %}

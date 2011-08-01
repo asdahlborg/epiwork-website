@@ -66,6 +66,17 @@ class Survey(models.Model):
         else:
             return 'results_'+str(self.shortname)
 
+    def get_last_partecipation_data(self, user_id, global_id):
+        model = self.as_model()
+        partecipation = model.objects\
+            .filter(user=user_id)\
+            .filter(global_id = global_id)\
+            .order_by('-timestamp')[0:1]\
+            .values()[0:1]
+        if partecipation:
+            return partecipation[0]
+        return None
+
     def as_model(self):
         fields = []
         fields.extend(Survey._standard_result_fields)

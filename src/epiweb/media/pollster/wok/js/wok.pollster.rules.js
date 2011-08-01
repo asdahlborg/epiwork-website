@@ -1,9 +1,58 @@
 (function($) {
     // COMMON UTILITIES
 
+    function get_question_data_names($survey, question, options) {
+        var $question = $survey.find("#question-"+question);
+        var names = [];
+        if ($question.is('.question-text')) {
+            names = [ $question.attr('data-shortname') ];
+        }
+        else if ($question.is('.question-single-choice')) {
+            names = [ $question.attr('data-shortname') ];
+        }
+        else if ($question.is('.question-multiple-choice')) {
+            if (options && options.length)
+                names = jQuery.map(options, function(o){ return $question.find('#option-'+o+'-field').attr('name'); });
+            else
+                names = $question.find('.choices > li > :checkbox').map(function() { return this.name; } );
+        }
+        return names;
+    }
+
+    function form_element_fill($element, value) {
+        $element.each(function() {
+            switch (this.nodeName.toLowerCase()) {
+                case "input":
+                    switch (this.type) {
+                        case "radio":
+                            if (value == this.value)
+                                this.checked = true;
+                            break;
+                        case "checkbox":
+                            if (jQuery.isArray(value) && jQuery.inArray(value, this.value))
+                                this.checked = true;
+                            else if (value == this.value)
+                                this.checked = true;
+                            break;
+                        default:
+                            jQuery(this).val(value);
+                        break;
+                    }
+                    break;
+                case "select":
+                    jQuery("option", this).each(function() {
+                        if (this.value == value)
+                            this.selected = true;
+                    });
+                break;
+            }
+        });
+        return $element;
+    }
+
     // BUILTIN RULES
 
-    function ShowQuestionRule(subjectOptions, objectQuestion, objectOption) {
+    function ShowQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
         var self = this;
 
         // Public methods.
@@ -11,6 +60,9 @@
         $.extend(this, {
             subject: subjectOptions,
             isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+            },
 
             apply: function($survey, checked) {
                 var $t = $survey.find("#question-"+objectQuestion);
@@ -26,7 +78,7 @@
         });
     }
 
-    function HideQuestionRule(subjectOptions, objectQuestion, objectOption) {
+    function HideQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
         var self = this;
 
         // Public methods.
@@ -34,6 +86,9 @@
         $.extend(this, {
             subject: subjectOptions,
             isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+            },
 
             apply: function($survey, checked) {
                 var $t = $survey.find("#question-"+objectQuestion);
@@ -49,7 +104,7 @@
         });
     }
 
-    function ShowOptionsRule(subjectOptions, objectQuestion, objectOptions) {
+    function ShowOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -57,6 +112,9 @@
         $.extend(this, {
             subject: subjectOptions,
             isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+            },
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
@@ -69,7 +127,7 @@
         });
     }
 
-    function HideOptionsRule(subjectOptions, objectQuestion, objectOptions) {
+    function HideOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -77,6 +135,9 @@
         $.extend(this, {
             subject: subjectOptions,
             isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+            },
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
@@ -89,7 +150,7 @@
         });
     }
 
-    function CheckOptionsRule(subjectOptions, objectQuestion, objectOptions) {
+    function CheckOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -97,6 +158,9 @@
         $.extend(this, {
             subject: subjectOptions,
             isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+            },
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
@@ -107,7 +171,7 @@
         });
     }
 
-    function UncheckOptionsRule(subjectOptions, objectQuestion, objectOptions) {
+    function UncheckOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -115,6 +179,9 @@
         $.extend(this, {
             subject: subjectOptions,
             isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+            },
 
             apply: function($survey, checked) {
                 var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
@@ -125,7 +192,7 @@
         });
     }
 
-    function ExclusiveRule(subjectOptions, objectQuestion, objectOptions) {
+    function ExclusiveRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -134,10 +201,47 @@
             subject: subjectOptions,
             isExclusive: true,
 
+            init: function($survey, last_partecipation_data) {
+            },
+
             apply: function($survey, checked) {
-                var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
-                var $t = $survey.find(selectors);
-                // TODO
+            }
+        });
+    }
+
+    function FuturePreloadRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            question: subjectQuestion,
+            subject: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
+            isExclusive: true,
+
+            init: function($survey, last_partecipation_data) {
+                var subject_names = get_question_data_names($survey, self.question, self.subject);
+
+                // check that at least one option was filled
+                var is_filled = false;
+                jQuery.each(subject_names, function(i, subject_name) {
+                    var subject_data = last_partecipation_data[subject_name];
+                    if (subject_data)
+                        is_filled = true;
+                });
+
+                if (is_filled) {
+                    var object_names = get_question_data_names($survey, self.objectQuestion, self.objectOptions);
+                    jQuery.each(object_names, function(i, object_name) {
+                        var object_data = last_partecipation_data[object_name];
+                        form_element_fill($survey.find('[name='+object_name+']'), object_data).change();
+                    });
+                }
+            },
+
+            apply: function($survey, checked) {
             }
         });
     }
@@ -151,7 +255,8 @@
         "HideOptions": HideOptionsRule,
         "CheckOptions": CheckOptionsRule,
         "UncheckOptions": UncheckOptionsRule,
-        "Exclusive": ExclusiveRule
+        "Exclusive": ExclusiveRule,
+        "FuturePreload": FuturePreloadRule
     };
 
 })(jQuery);

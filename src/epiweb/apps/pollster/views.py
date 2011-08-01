@@ -4,9 +4,9 @@ from django.core.urlresolvers import get_resolver, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
-from django.utils import simplejson
+from django.utils.safestring import mark_safe
 from epiweb.apps.survey.models import SurveyUser
-from . import models, forms, parser
+from . import models, forms, parser, json
 import re, datetime
 
 @login_required
@@ -96,19 +96,25 @@ def survey_test(request, id):
 @login_required
 def survey_run(request, id):
     survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
-    user = _get_active_survey_user(request)
+    survey_user = _get_active_survey_user(request)
     form = None
+    user_id = request.user.id
+    global_id = survey_user and survey_user.global_id
+    last_partecipation_data = survey.get_last_partecipation_data(user_id, global_id)
     if request.method == 'POST':
         form = survey.as_form()(request.POST)
         if form.is_valid():
-            form.cleaned_data['user'] = request.user.id
-            if user:
-                form.cleaned_data['global_id'] = user.global_id
+            form.cleaned_data['user'] = user_id
+            form.cleaned_data['global_id'] = global_id
             form.cleaned_data['timestamp'] = datetime.datetime.now()
             form.save()
             return HttpResponseRedirect('/survey/thanks')
+    encoder = json.JSONEncoder(ensure_ascii=False, indent=2)
+    last_partecipation_data_json = encoder.encode(last_partecipation_data)
+
     return render_to_response('pollster/survey_test.html', {
         "survey": survey,
+        "last_partecipation_data_json": last_partecipation_data_json,
         "form": form
     })
 
