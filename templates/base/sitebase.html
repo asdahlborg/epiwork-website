@@ -1,4 +1,4 @@
-{% load cms_tags menu_tags %}
+{% load cms_tags menu_tags partnersites %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -11,7 +11,7 @@
         <link rel="shortcut icon" href="{{ MEDIA_URL }}base/img/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="{{ MEDIA_URL }}base/img/apple-touch-icon.png" />      
 
-		<title>{% block title %}Influenzanet: {% page_attribute page_title %}{% endblock title %}</title>
+		<title>{% block title %}{% site_name %}: {% page_attribute page_title %}{% endblock title %}</title>
 		<meta name="description" content="{% page_attribute meta_description %}"/>
         <meta name="keywords" content="{% page_attribute meta_keywords %}"/>
         {% block add_head %}{% endblock add_head %}
@@ -88,7 +88,7 @@
 				</div>
 			</div>{% endblock footercontent %}
 			<div id="footerclose">
-                &copy; {% now "Y" %} Influenzanet &nbsp;|&nbsp; <a href="{% url contact_form %}" title="Contact us">Contact</a>
+                &copy; {% now "Y" %} {% site_name %} &nbsp;|&nbsp; <a href="{% url contact_form %}" title="Contact us">Contact</a>
 			</div>
 		</div>
 	</div>
