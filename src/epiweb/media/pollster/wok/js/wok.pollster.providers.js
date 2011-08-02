@@ -367,7 +367,7 @@
 
         $properties.find("[name=field_choice_value]").keyup(function(evt) {
             if (self.$element === null) return true;
-            self.$element.find("input").val($(this).val());
+            self.$element.find(":checkbox,:radio").val($(this).val());
             self.$element.find(".info").text($(this).val());
             return false;
         });
@@ -400,7 +400,7 @@
                 self.$element = $e;
                 $properties
                     .find("[name=field_choice_text]").val($e.find("label").text()).end()
-                    .find("[name=field_choice_value]").val($e.find("input").val()).end()
+                    .find("[name=field_choice_value]").val($e.find(":checkbox,:radio").val()).end()
                     .find("[name=field_choice_starts_hidden]").val(getChoiceStartsHidden($e)).end()
                     .find("[name=field_choice_is_open]").val(getChoiceIsOpen($e)).end()
                     .show();

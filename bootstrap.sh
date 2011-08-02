@@ -191,6 +191,7 @@ echo ""
 ./bin/django rule_type_register --title 'Future Hide Question' --jsclass 'wok.pollster.rules.FutureHideQuestion'
 ./bin/django rule_type_register --title 'Future Show Options' --jsclass 'wok.pollster.rules.FutureShowOptions'
 ./bin/django rule_type_register --title 'Future Hide Options' --jsclass 'wok.pollster.rules.FutureHideOptions'
+./bin/django rule_type_register --title 'Fill' --jsclass 'wok.pollster.rules.Fill'
 ./bin/django question_data_type_register --title 'Text' --dbtype 'django.db.models.TextField(null=True, blank=True)' --cssclass 'text-type' --jsclass 'wok.pollster.datatypes.Text'
 ./bin/django question_data_type_register --title 'Numeric' --dbtype 'django.db.models.PositiveIntegerField(null=True, blank=True)' --cssclass 'numeric-type' --jsclass 'wok.pollster.datatypes.Numeric'
 ./bin/django question_data_type_register --title 'Date' --dbtype 'django.db.models.DateField(null=True, blank=True)' --cssclass 'date-type' --jsclass 'wok.pollster.datatypes.Date'

@@ -41,7 +41,7 @@
                     <div class="info">{{ option.value }}</div>
                     <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ option.data_name }}_open" class="open_option_data {{ option.open_option_data_type.css_class }}" />
+                    <input type="text" name="{{ option.data_name }}_open" class="open-option-data {{ option.open_option_data_type.css_class }}" id="option-{{ option.id }}-field-open" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
@@ -61,7 +61,7 @@
                     <div class="info">{{ option.value }}</div>
                     <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ option.data_name }}_open" class="open_option_data {{ option.open_option_data_type.css_class }}" />
+                    <input type="text" name="{{ option.data_name }}_open" class="open-option-data {{ option.open_option_data_type.css_class }}"  id="option-{{ option.id }}-field-open" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">

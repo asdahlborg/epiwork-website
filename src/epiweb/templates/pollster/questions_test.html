@@ -42,7 +42,8 @@
                     <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ option.open_option_data_name }}" class="open_option_data {{ option.open_option_data_type.css_class }}"
+                    <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                        id="option-{{ option.id }}-field-open"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                 </li>
                 {% else %}
@@ -63,7 +64,8 @@
                     <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ option.open_option_data_name }}" class="open_option_data {{ option.open_option_data_type.css_class }}"
+                    <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                        id="option-{{ option.id }}-field-open"
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
                 </li>
                 {% else %}

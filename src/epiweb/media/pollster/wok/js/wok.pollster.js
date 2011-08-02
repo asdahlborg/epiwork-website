@@ -33,7 +33,7 @@
         pollster_fill_rules(rules_by_question);
         pollster_fill_derived_values(derived_values);
 
-        $survey.find('.open_option_data').attr('disabled', true);
+        $survey.find('.open-option-data').attr('disabled', true);
 
         // Bind data types to question elements
 
@@ -59,8 +59,9 @@
 
             if ($input.is(":radio,:checkbox")) {
                 checked = $input.is(":checked");
-                $question.find('.open_option_data').attr('disabled', true);
-                $option.find('.open_option_data').attr('disabled', !checked);
+                $question.find('.open-option-data').attr('disabled', function(){
+                    return !$(this).closest('li').find(":radio,:checkbox").is(':checked');
+                });
             }
 
             // Else check regular expressions for text entries

@@ -12,14 +12,16 @@
         }
         else if ($question.is('.question-multiple-choice')) {
             if (options && options.length)
-                names = jQuery.map(options, function(o){ return $question.find('#option-'+o+'-field').attr('name'); });
+                names = jQuery.map(options, function(o){ return $question.find('#option-'+o+'-field, #option-'+o+'-field-open').attr('name'); });
             else
-                names = $question.find('.choices > li > :checkbox').map(function() { return this.name; } );
+                names = $question.find('.choices > li').find('> :checkbox, .open-option-data').map(function() { return this.name; } );
         }
         return names;
     }
 
     function was_filled($survey, question, options, last_partecipation_data) {
+        if (!last_partecipation_data)
+            return false;
         var subject_names = get_question_data_names($survey, question, options);
 
         // check that at least one option was filled
@@ -65,7 +67,7 @@
 
     // BUILTIN RULES
 
-    function ShowQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
+    function ShowQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -81,10 +83,10 @@
             },
 
             apply: function($survey, checked) {
-                var $t = $survey.find("#question-"+objectQuestion);
+                var $t = $survey.find("#question-"+self.objectQuestion);
                 if ($t.length === 1 && $t.is(":hidden") && checked) {
                     $t.slideDown(
-                        function() { $(this).find(':input:visible').attr('disabled', false); }
+                        function() { $(this).find(':input:visible:not(.open-option-data)').attr('disabled', false); }
                     );
                 }
                 if ($t.length === 1 && $t.is(":visible") && !checked) {
@@ -96,7 +98,7 @@
     ShowQuestionRule.showQuestions = true;
     ShowQuestionRule.showOptions = false;
 
-    function HideQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
+    function HideQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -112,13 +114,13 @@
             },
 
             apply: function($survey, checked) {
-                var $t = $survey.find("#question-"+objectQuestion);
+                var $t = $survey.find("#question-"+self.objectQuestion);
                 if ($t.length === 1 && $t.is(":visible") && checked) {
                     $t.slideUp().find(':input').attr('disabled', true);
                 }
                 if ($t.length === 1 && $t.is(":hidden") && !checked) {
                     $t.slideDown(
-                        function() { $(this).find(':input:visible').attr('disabled', false); }
+                        function() { $(this).find(':input:visible:not(.open-option-data)').attr('disabled', false); }
                     );
                 }
             }
@@ -143,7 +145,7 @@
             },
 
             apply: function($survey, checked) {
-                var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
+                var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
                 if (checked)
                     $t.slideDown().find(':input').attr('disabled', false);
@@ -171,7 +173,7 @@
             },
 
             apply: function($survey, checked) {
-                var selectors = objectOptions.map(function(o){return '#option-'+o}).join(',');
+                var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
                 if (checked)
                     $t.slideUp().find(':input').attr('disabled', true);
@@ -199,7 +201,7 @@
             },
 
             apply: function($survey, checked) {
-                var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
+                var selectors = self.objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
                 var $t = $survey.find(selectors);
                 if (checked)
                     $t.attr('checked', true).change();
@@ -225,7 +227,7 @@
             },
 
             apply: function($survey, checked) {
-                var selectors = objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
+                var selectors = self.objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
                 var $t = $survey.find(selectors);
                 if (checked)
                     $t.attr('checked', false).change();
@@ -286,7 +288,7 @@
     FutureFillRule.showQuestions = true;
     FutureFillRule.showOptions = true;
 
-    function FutureShowQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
+    function FutureShowQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -301,7 +303,7 @@
             init: function($survey, last_partecipation_data) {
                 var $t = $survey.find("#question-"+self.objectQuestion);
                 if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
-                    $t.show().find(':input:visible').attr('disabled', false);
+                    $t.show().find(':input:visible:not(.open-option-data)').attr('disabled', false);
                 }
                 else {
                     $t.hide().find(':input').attr('disabled', true);
@@ -315,7 +317,7 @@
     FutureShowQuestionRule.showQuestions = true;
     FutureShowQuestionRule.showOptions = false;
 
-    function FutureHideQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
+    function FutureHideQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -333,7 +335,7 @@
                     $t.hide().find(':input').attr('disabled', true);
                 }
                 else {
-                    $t.show().find(':input:visible').attr('disabled', false);
+                    $t.show().find(':input:visible:not(.open-option-data)').attr('disabled', false);
                 }
             },
 
@@ -360,7 +362,7 @@
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
                 if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
-                    $t.show().find(':input:visible').attr('disabled', false);
+                    $t.show().find(':input:visible:not(.open-option-data)').attr('disabled', false);
                 }
                 else {
                     $t.hide().find(':input').attr('disabled', true);
@@ -393,7 +395,7 @@
                     $t.hide().find(':input').attr('disabled', true);
                 }
                 else {
-                    $t.show().find(':input:visible').attr('disabled', false);
+                    $t.show().find(':input:visible:not(.open-option-data)').attr('disabled', false);
                 }
             },
 
@@ -403,6 +405,36 @@
     }
     FutureHideOptionsRule.showQuestions = true;
     FutureHideOptionsRule.showOptions = true;
+
+    function FillRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
+            isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+                self.last_partecipation_data = last_partecipation_data;
+            },
+
+            apply: function($survey, checked) {
+                if (checked) {
+                    var object_names = get_question_data_names($survey, self.objectQuestion, self.objectOptions);
+                    jQuery.each(object_names, function(i, object_name) {
+                        var object_data = self.last_partecipation_data[object_name];
+                        form_element_fill($survey.find('[name='+object_name+']'), object_data).change();
+                    });
+                }
+            }
+        });
+    }
+    FillRule.showQuestions = true;
+    FillRule.showOptions = true;
 
     // MODULE INITIALIZATION
 
@@ -418,7 +450,8 @@
         "FutureShowQuestion": FutureShowQuestionRule,
         "FutureHideQuestion": FutureHideQuestionRule,
         "FutureShowOptions": FutureShowOptionsRule,
-        "FutureHideOptions": FutureHideOptionsRule
+        "FutureHideOptions": FutureHideOptionsRule,
+        "Fill": FillRule
     };
 
 })(jQuery);
