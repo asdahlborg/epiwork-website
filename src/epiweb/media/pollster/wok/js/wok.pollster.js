@@ -83,7 +83,7 @@
             var rules = rules_by_question[qid] || [];
             for (var i=0 ; i < rules.length ; i++) {
                 var rule = rules[i];
-                if (jQuery.inArray(oid, rule.subject) >= 0)
+                if (jQuery.inArray(oid, rule.subjectOptions) >= 0)
                     rule.apply($survey, checked);
                 else if (isRadio)
                     rule.apply($survey, false);

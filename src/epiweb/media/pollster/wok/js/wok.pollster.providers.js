@@ -630,22 +630,21 @@
         self.$element = null;
 
         function formatText($element) {
-            var val = $properties.find("[name=field_rule_type]").val();
-            var type = $properties.find("[name=field_rule_type] :selected").text();
+            var $selected = $properties.find("[name=field_rule_type] :selected");
+            var type = $selected.text();
             var subject_options = $properties.find("[name=field_rule_subject_options] :selected");
             var object_question = $properties.find("[name=field_rule_object_question] :selected");
             var object_options = $properties.find("[name=field_rule_object_options] :selected");
 
-            var showquestion = "1 2 3 4 5 6 8".indexOf(val) >= 0;
-            var showoptions = "3 4 5 6 8".indexOf(val) >= 0;
+            var ruleClass = eval($selected.attr('data-js-class'));
 
             var subject = '';
             if (subject_options.val())
                 subject = "(" + subject_options.length + " triggers)";
             var object = '';
-            if (showquestion)
+            if (ruleClass.showQuestions)
                 object = object_question.text();
-            if (showoptions)
+            if (ruleClass.showOptions)
                 object = "(" + object_options.length + ") from " + object_question.text();
             $element.text(subject + " => " + type + " " + object);
         }
@@ -677,7 +676,7 @@
             $subject_options.val(ids).change();
 
             // FIXME: Propagate options.
-            $(".question-wrapper > .question").each(function() {
+            $(".question-wrapper > .question:not(.question-builtin)").each(function() {
                 var $q = $(this);
                 $object_question.append($('<option></option>')
                     .text($q.find(".number").text()+" "+$q.find(".title").text() + " [" + $q.children(".info").text() + "]")
@@ -703,13 +702,12 @@
 
         $properties.find("[name=field_rule_type]").change(function(evt) {
             if (self.$element === null) return true;
-            var val = $(this).val();
+            var $this = $(this);
+            var val = $this.val();
             self.$element.attr("data-type", val);
-            // TODO: don't hard-code values here.
-            var showquestion = "1 2 3 4 5 6 8".indexOf(val) >= 0;
-            $properties.find("[name=field_rule_object_question]").closest(".property").toggle(showquestion);
-            var showoptions = "3 4 5 6 8".indexOf(val) >= 0;
-            $properties.find("[name=field_rule_object_options]").closest(".property").toggle(showoptions);
+            var ruleClass = eval($this.find(':selected').attr('data-js-class'));
+            $properties.find("[name=field_rule_object_question]").closest(".property").toggle(Boolean(ruleClass.showQuestions));
+            $properties.find("[name=field_rule_object_options]").closest(".property").toggle(Boolean(ruleClass.showOptions));
             formatText(self.$element);
             return false;
         });

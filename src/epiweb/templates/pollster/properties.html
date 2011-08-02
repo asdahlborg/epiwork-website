@@ -199,7 +199,7 @@
             <label>Type</label>
             <select name="field_rule_type">
                 {% for rule_type in rule_types %}
-                <option value="{{ rule_type.id }}">{{ rule_type.title }}</option>
+                <option value="{{ rule_type.id }}" data-js-class="{{ rule_type.js_class }}">{{ rule_type.title }}</option>
                 {% endfor %}
             </select>
         </div>

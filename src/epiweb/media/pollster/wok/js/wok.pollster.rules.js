@@ -19,6 +19,19 @@
         return names;
     }
 
+    function was_filled($survey, question, options, last_partecipation_data) {
+        var subject_names = get_question_data_names($survey, question, options);
+
+        // check that at least one option was filled
+        var is_filled = false;
+        jQuery.each(subject_names, function(i, subject_name) {
+            var subject_data = last_partecipation_data[subject_name];
+            if (subject_data)
+                is_filled = true;
+        });
+        return is_filled;
+    }
+
     function form_element_fill($element, value) {
         $element.each(function() {
             switch (this.nodeName.toLowerCase()) {
@@ -58,7 +71,10 @@
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOptions,
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
             isExclusive: false,
 
             init: function($survey, last_partecipation_data) {
@@ -77,6 +93,8 @@
             }
         });
     }
+    ShowQuestionRule.showQuestions = true;
+    ShowQuestionRule.showOptions = false;
 
     function HideQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
         var self = this;
@@ -84,7 +102,10 @@
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOptions,
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
             isExclusive: false,
 
             init: function($survey, last_partecipation_data) {
@@ -103,6 +124,8 @@
             }
         });
     }
+    HideQuestionRule.showQuestions = true;
+    HideQuestionRule.showOptions = false;
 
     function ShowOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
@@ -110,7 +133,10 @@
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOptions,
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
             isExclusive: false,
 
             init: function($survey, last_partecipation_data) {
@@ -126,6 +152,8 @@
             }
         });
     }
+    ShowOptionsRule.showQuestions = true;
+    ShowOptionsRule.showOptions = true;
 
     function HideOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
@@ -133,7 +161,10 @@
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOptions,
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
             isExclusive: false,
 
             init: function($survey, last_partecipation_data) {
@@ -149,6 +180,8 @@
             }
         });
     }
+    HideOptionsRule.showQuestions = true;
+    HideOptionsRule.showOptions = true;
 
     function CheckOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
@@ -156,7 +189,10 @@
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOptions,
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
             isExclusive: false,
 
             init: function($survey, last_partecipation_data) {
@@ -170,6 +206,8 @@
             }
         });
     }
+    CheckOptionsRule.showQuestions = true;
+    CheckOptionsRule.showOptions = true;
 
     function UncheckOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
@@ -177,7 +215,10 @@
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOptions,
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
             isExclusive: false,
 
             init: function($survey, last_partecipation_data) {
@@ -191,6 +232,8 @@
             }
         });
     }
+    UncheckOptionsRule.showQuestions = true;
+    UncheckOptionsRule.showOptions = true;
 
     function ExclusiveRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
@@ -198,7 +241,10 @@
         // Public methods.
 
         $.extend(this, {
-            subject: subjectOptions,
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
             isExclusive: true,
 
             init: function($survey, last_partecipation_data) {
@@ -208,6 +254,8 @@
             }
         });
     }
+    ExclusiveRule.showQuestions = false;
+    ExclusiveRule.showOptions = false;
 
     function FuturePreloadRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
@@ -215,24 +263,14 @@
         // Public methods.
 
         $.extend(this, {
-            question: subjectQuestion,
-            subject: subjectOptions,
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
             objectQuestion: objectQuestion,
             objectOptions: objectOptions,
-            isExclusive: true,
+            isExclusive: false,
 
             init: function($survey, last_partecipation_data) {
-                var subject_names = get_question_data_names($survey, self.question, self.subject);
-
-                // check that at least one option was filled
-                var is_filled = false;
-                jQuery.each(subject_names, function(i, subject_name) {
-                    var subject_data = last_partecipation_data[subject_name];
-                    if (subject_data)
-                        is_filled = true;
-                });
-
-                if (is_filled) {
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
                     var object_names = get_question_data_names($survey, self.objectQuestion, self.objectOptions);
                     jQuery.each(object_names, function(i, object_name) {
                         var object_data = last_partecipation_data[object_name];
@@ -245,6 +283,126 @@
             }
         });
     }
+    FuturePreloadRule.showQuestions = true;
+    FuturePreloadRule.showOptions = true;
+
+    function FutureShowQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
+            isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+                var $t = $survey.find("#question-"+self.objectQuestion);
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                    $t.show().find(':input:visible').attr('disabled', false);
+                }
+                else {
+                    $t.hide().find(':input').attr('disabled', true);
+                }
+            },
+
+            apply: function($survey, checked) {
+            }
+        });
+    }
+    FutureShowQuestionRule.showQuestions = true;
+    FutureShowQuestionRule.showOptions = false;
+
+    function FutureHideQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
+            isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+                var $t = $survey.find("#question-"+self.objectQuestion);
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                    $t.hide().find(':input').attr('disabled', true);
+                }
+                else {
+                    $t.show().find(':input:visible').attr('disabled', false);
+                }
+            },
+
+            apply: function($survey, checked) {
+            }
+        });
+    }
+    FutureHideQuestionRule.showQuestions = true;
+    FutureHideQuestionRule.showOptions = false;
+
+    function FutureShowOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
+            isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+                var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
+                var $t = $survey.find(selectors);
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                    $t.show().find(':input:visible').attr('disabled', false);
+                }
+                else {
+                    $t.hide().find(':input').attr('disabled', true);
+                }
+            },
+
+            apply: function($survey, checked) {
+            }
+        });
+    }
+    FutureShowOptionsRule.showQuestions = true;
+    FutureShowOptionsRule.showOptions = true;
+
+    function FutureHideOptionsRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            subjectQuestion: subjectQuestion,
+            subjectOptions: subjectOptions,
+            objectQuestion: objectQuestion,
+            objectOptions: objectOptions,
+            isExclusive: false,
+
+            init: function($survey, last_partecipation_data) {
+                var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
+                var $t = $survey.find(selectors);
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                    $t.hide().find(':input').attr('disabled', true);
+                }
+                else {
+                    $t.show().find(':input:visible').attr('disabled', false);
+                }
+            },
+
+            apply: function($survey, checked) {
+            }
+        });
+    }
+    FutureHideOptionsRule.showQuestions = true;
+    FutureHideOptionsRule.showOptions = true;
 
     // MODULE INITIALIZATION
 
@@ -256,7 +414,11 @@
         "CheckOptions": CheckOptionsRule,
         "UncheckOptions": UncheckOptionsRule,
         "Exclusive": ExclusiveRule,
-        "FuturePreload": FuturePreloadRule
+        "FuturePreload": FuturePreloadRule,
+        "FutureShowQuestion": FutureShowQuestionRule,
+        "FutureHideQuestion": FutureHideQuestionRule,
+        "FutureShowOptions": FutureShowOptionsRule,
+        "FutureHideOptions": FutureHideOptionsRule
     };
 
 })(jQuery);
