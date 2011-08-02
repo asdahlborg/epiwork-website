@@ -1,7 +1,7 @@
 <div class="survey clearfix" id="survey-{{ survey.id }}">
-    {% for question in survey.question_set.all %}
+    {% for question in survey.questions %}
     <div class="question-wrapper clearfix">
-        <div id="question-{{ question.id }}" class="question question-{{ question.type }} {{ question.data_type.css_class }} {% if question.starts_hidden %} starts-hidden {% endif %} {% if question.is_mandatory %} mandatory {% endif %}"
+        <div id="question-{{ question.id }}" class="{{ question.css_classes|join:' ' }}"
              data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
              data-regex="{{ question.regex|default:'' }}" data-error-message="{{ question.error_message|default:'' }}"
              data-open-option-data-type="{{ question.open_option_data_type.id }}">
@@ -23,7 +23,7 @@
                 pattern="{{ question.regex|default:'' }}" />
             <p class="error-message">{{ question.error_message|default:'' }}</p>
             <ul class="derived-values">
-                {% for option in question.option_set.all %}
+                {% for option in question.options %}
                 <li id="option-{{ option.id }}"
                     data-type="{{ option.virtual_type.id }}"
                     data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
@@ -35,13 +35,14 @@
             {% endif %}
             {% if question.is_single_choice %}
             <ul class="choices sortable">
-                {% for option in question.option_set.all %}
+                {% for option in question.options %}
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
                     <div class="info">{{ option.value }}</div>
                     <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ option.data_name }}_open" class="open-option-data {{ option.open_option_data_type.css_class }}" id="option-{{ option.id }}-field-open" />
+                    <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                        id="option-{{ option.id }}-field-open" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
@@ -61,7 +62,8 @@
                     <div class="info">{{ option.value }}</div>
                     <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
-                    <input type="text" name="{{ option.data_name }}_open" class="open-option-data {{ option.open_option_data_type.css_class }}"  id="option-{{ option.id }}-field-open" />
+                    <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                        id="option-{{ option.id }}-field-open" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
@@ -127,6 +129,9 @@
     </div>
     {% endfor %}
     <script type="text/javascript" class="pollster-fill">
+        function pollster_last_partecipation_data() {
+            return {{ last_partecipation_data_json|safe|default:'{}' }};
+        }
         function pollster_fill_data_types(d) {
         }
         function pollster_fill_derived_values(d) {

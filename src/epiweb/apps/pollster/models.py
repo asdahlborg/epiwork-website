@@ -29,6 +29,8 @@ class Survey(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=255, default='DRAFT', choices=SURVEY_STATUS_CHOICES)
 
+    form = None
+
     _standard_result_fields =[
         ('user', models.IntegerField(null=True, blank=True)),
         ('global_id', models.CharField(max_length=36, null=True, blank=True)),
@@ -50,6 +52,12 @@ class Survey(models.Model):
     @property
     def is_editable(self):
         return self.is_draft or self.is_unpublished
+
+    @property
+    def questions(self):
+        for question in self.question_set.all():
+            question.set_form(self.form)
+            yield question
 
     @models.permalink
     def get_absolute_url(self):
@@ -80,7 +88,7 @@ class Survey(models.Model):
     def as_model(self):
         fields = []
         fields.extend(Survey._standard_result_fields)
-        for question in self.question_set.all():
+        for question in self.questions:
             fields += question.as_fields()
         model = dynamicmodels.create(self.get_table_name(), fields=dict(fields), app_label='pollster')
         return model
@@ -88,7 +96,13 @@ class Survey(models.Model):
     def as_form(self):
         model = self.as_model()
         form = dynamicmodels.to_form(model)
+        for question in self.questions:
+            if question.is_mandatory and question.data_name in form.base_fields:
+                form.base_fields[question.data_name].required = True
         return form
+
+    def set_form(self, form):
+        self.form = form
 
     def publish(self):
         if self.is_published:
@@ -125,9 +139,11 @@ class QuestionDataType(models.Model):
     def __unicode__(self):
         return self.title
 
-    def as_field_type(self):
+    def as_field_type(self, verbose_name=None):
         import django.db.models
-        return eval(self.db_type)
+        field = eval(self.db_type)
+        field.verbose_name = verbose_name
+        return field
 
     @staticmethod
     def default_type():
@@ -160,6 +176,39 @@ class Question(models.Model):
     tags = models.CharField(max_length=255, blank=True, default='')
     regex = models.CharField(max_length=1023, blank=True, default='')
     error_message = models.TextField(blank=True, default='')
+
+    form = None
+
+    @property
+    def errors(self):
+        if not self.form:
+            return {}
+        data_names = [data_name for data_name, data_type in self.as_fields()]
+        errors = [(data_name, self.form.errors[data_name]) for data_name in data_names if data_name in self.form.errors]
+        return dict(errors)
+
+    @property
+    def options(self):
+        for option in self.option_set.all():
+            option.set_form(self.form)
+            yield option
+
+    @property
+    def css_classes(self):
+        c = ['question', 'question-'+self.type, self.data_type.css_class]
+        if self.starts_hidden:
+            c.append('starts-hidden')
+        if self.is_mandatory:
+            c.append('mandatory')
+        if self.errors:
+            c.append('error')
+        return c
+
+    @property
+    def form_value(self):
+        if not self.form:
+            return ''
+        return self.form.data.get(self.data_name, '')
 
     @property
     def is_builtin(self):
@@ -204,18 +253,19 @@ class Question(models.Model):
     def as_fields(self):
         fields = []
         if self.type == 'builtin':
-            fields = [ (self.data_name, self.data_type.as_field_type()) ]
+            fields = [ (self.data_name, self.data_type.as_field_type(verbose_name=self.title)) ]
         elif self.type == 'text':
-            fields = [ (self.data_name, self.data_type.as_field_type()) ]
+            fields = [ (self.data_name, self.data_type.as_field_type(verbose_name=self.title)) ]
         elif self.type == 'single-choice':
             open_option_data_type = self.open_option_data_type or self.data_type
-            fields = [ (self.data_name, self.data_type.as_field_type()) ]
+            fields = [ (self.data_name, self.data_type.as_field_type(verbose_name=self.title)) ]
             for open_option in [o for o in self.option_set.all() if o.is_open]:
                 fields.append( (open_option.open_option_data_name, open_option_data_type.as_field_type()) )
         elif self.type == 'multiple-choice':
             fields = []
             for option in self.option_set.all():
-                fields.append( (option.data_name, models.BooleanField()) )
+                title = ": ".join((self.title, option.name))
+                fields.append( (option.data_name, models.BooleanField(verbose_name=title)) )
                 if option.is_open:
                     fields.append( (option.open_option_data_name, option.open_option_data_type.as_field_type()) )
         elif self.type in ('matrix-select', 'matrix-entry'):
@@ -226,6 +276,9 @@ class Question(models.Model):
         else:
             raise NotImplementedError(self.type)
         return fields
+
+    def set_form(self, form):
+        self.form = form
 
 class QuestionRow(models.Model):
     question = models.ForeignKey(Question, related_name="row_set", db_index=True)
@@ -262,6 +315,8 @@ class Option(models.Model):
     virtual_sup = models.CharField(max_length=255, blank=True, default='')
     virtual_regex = models.CharField(max_length=255, blank=True, default='')
 
+    form = None
+
     @property
     def data_name(self):
         if self.question.type in ('text', 'single-choice'):
@@ -286,6 +341,32 @@ class Option(models.Model):
 
     class Meta:
         ordering = ['question', 'ordinal']
+
+    @property
+    def form_value(self):
+        if not self.form:
+            return ''
+        return self.form.data.get(self.data_name, '')
+
+    @property
+    def open_option_data_form_value(self):
+        if not self.form:
+            return ''
+        return self.form.data.get(self.open_option_data_name, '')
+
+    @property
+    def form_is_checked(self):
+        if self.question.type in ('text', 'single-choice'):
+            return self.form_value == self.value
+        elif self.question.type == 'multiple-choice':
+            return bool(self.form_value)
+        elif self.question.type in ('matrix-select', 'matrix-entry'):
+            return self.form_value == self.value
+        else:
+            raise NotImplementedError(self.question.type)
+
+    def set_form(self, form):
+        self.form = form
 
 class Rule(models.Model):
     rule_type = models.ForeignKey(RuleType)

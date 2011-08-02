@@ -1,3 +1,4 @@
+.survey-error-message { border: 1px solid #C00; -webkit-border-radius: 5px; padding: 5px; background: #FBB; margin-bottom: 10px; }
 .question { border: 1px solid #CCC; -webkit-border-radius: 5px; padding: 5px; background: #fff; margin-bottom: 10px; }
 .question ul.choices, .question ul.derived-values { list-style: none; margin-bottom: 10px; }
 .question li { margin-left: 20px; }
@@ -15,7 +16,8 @@
 
 .starts-hidden { display: none; }
 .error-message { display: none; margin: 0 0 10px 20px; color: #C00; }
-.error .error-message { display: block; }
+.question.error { border-color: #C00; }
+.question.error .error-message { display: block; }
 
 #survey-list form { display: inline; }
 #survey-list button { margin: 0; border: none; background: none; padding: 0; cursor: pointer; }

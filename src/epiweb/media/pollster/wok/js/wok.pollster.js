@@ -49,8 +49,11 @@
 
             var $input = $(evt.target);
             var $question = $(evt.target).closest(questionSelector);
+            if (!$question.length)
+                return true;
             var $option = $input.closest("li");
             var isRadio = $input.is(":radio");
+            var isText = $input.is(":text");
             var qid = parseInt($question.attr("id").replace("question-",""));
             var oid = parseInt(($option.attr("id") || '').replace("option-",""));
             var checked = false;
@@ -84,10 +87,22 @@
             var rules = rules_by_question[qid] || [];
             for (var i=0 ; i < rules.length ; i++) {
                 var rule = rules[i];
-                if (jQuery.inArray(oid, rule.subjectOptions) >= 0)
+                if (isRadio) {
+                    // checking a radio button must apply rules associated with the uncheck of
+                    // all other options
+                    jQuery.each(rule.subjectOptions, function(i, o) {
+                        var option = $question.find('#option-'+o+' :radio');
+                        rule.apply($survey, option.is(':checked'));
+                    });
+                }
+                else if (jQuery.inArray(oid, rule.subjectOptions) >= 0) {
+                    // apply rules if the current option is in the subjectOptions set
                     rule.apply($survey, checked);
-                else if (isRadio)
-                    rule.apply($survey, false);
+                }
+                else if (isText) {
+                    // do not check options for text questions
+                    rule.apply($survey, checked);
+                }
                 if (rule.isExclusive)
                     exclusives.push('#option-'+oid);
             }
@@ -122,6 +137,9 @@
                 rule.init($survey, last_partecipation_data);
             });
         });
+
+        // ensure that the initial status is consistent with rules and whatnot
+        $survey.find(":input").change();
     }
 
     // MODULE FUNCTIONS

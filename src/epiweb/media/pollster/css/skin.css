@@ -24,5 +24,5 @@ h1 { color: #A22B22; }
 /* Pollster overrides */
 
 .question-wrapper { width: 640px; }
-.question { width: 400px; }
+.survey-error-message, .question { width: 400px; }
 .rules { width: 230px; }

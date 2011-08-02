@@ -65,6 +65,14 @@
         return $element;
     }
 
+    function enable_options ($options) {
+        $options.each(function() {
+            var $this = $(this);
+            var checked = $this.find(':input:visible:not(.open-option-data)').attr('disabled', false).is(':checked')
+            $this.find(':input.open-option-data').attr('disabled', !checked);
+        });
+    }
+
     // BUILTIN RULES
 
     function ShowQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
@@ -85,9 +93,9 @@
             apply: function($survey, checked) {
                 var $t = $survey.find("#question-"+self.objectQuestion);
                 if ($t.length === 1 && $t.is(":hidden") && checked) {
-                    $t.slideDown(
-                        function() { $(this).find(':input:visible:not(.open-option-data)').attr('disabled', false); }
-                    );
+                    $t.slideDown(function() {
+                        enable_options($t.find('.choices > li'));
+                    });
                 }
                 if ($t.length === 1 && $t.is(":visible") && !checked) {
                     $t.slideUp().find(':input').attr('disabled', true);
@@ -119,9 +127,9 @@
                     $t.slideUp().find(':input').attr('disabled', true);
                 }
                 if ($t.length === 1 && $t.is(":hidden") && !checked) {
-                    $t.slideDown(
-                        function() { $(this).find(':input:visible:not(.open-option-data)').attr('disabled', false); }
-                    );
+                    $t.slideDown(function() {
+                        enable_options($t.find('.choices > li'));
+                    });
                 }
             }
         });
@@ -147,10 +155,13 @@
             apply: function($survey, checked) {
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
-                if (checked)
-                    $t.slideDown().find(':input').attr('disabled', false);
-                else
+                if (checked) {
+                    $t.slideDown();
+                    enable_options($t);
+                }
+                else {
                     $t.slideUp().find(':input').attr('disabled', true);
+                }
             }
         });
     }
@@ -175,10 +186,13 @@
             apply: function($survey, checked) {
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
-                if (checked)
+                if (checked) {
                     $t.slideUp().find(':input').attr('disabled', true);
-                else
+                }
+                else {
                     $t.slideDown().find(':input').attr('disabled', false);
+                    enable_options($t);
+                }
             }
         });
     }
@@ -272,6 +286,8 @@
             isExclusive: false,
 
             init: function($survey, last_partecipation_data) {
+                if ($survey.is('.error'))
+                    return;
                 if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
                     var object_names = get_question_data_names($survey, self.objectQuestion, self.objectOptions);
                     jQuery.each(object_names, function(i, object_name) {
@@ -303,7 +319,7 @@
             init: function($survey, last_partecipation_data) {
                 var $t = $survey.find("#question-"+self.objectQuestion);
                 if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
-                    $t.show().find(':input:visible:not(.open-option-data)').attr('disabled', false);
+                    enable_options($t.show().find('.choices > li'));
                 }
                 else {
                     $t.hide().find(':input').attr('disabled', true);
@@ -335,7 +351,7 @@
                     $t.hide().find(':input').attr('disabled', true);
                 }
                 else {
-                    $t.show().find(':input:visible:not(.open-option-data)').attr('disabled', false);
+                    enable_options($t.show().find('.choices > li'));
                 }
             },
 
@@ -362,7 +378,7 @@
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
                 if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
-                    $t.show().find(':input:visible:not(.open-option-data)').attr('disabled', false);
+                    enable_options($t.show());
                 }
                 else {
                     $t.hide().find(':input').attr('disabled', true);
@@ -395,7 +411,7 @@
                     $t.hide().find(':input').attr('disabled', true);
                 }
                 else {
-                    $t.show().find(':input:visible:not(.open-option-data)').attr('disabled', false);
+                    enable_options($t.show());
                 }
             },
 
@@ -423,6 +439,8 @@
             },
 
             apply: function($survey, checked) {
+                if ($survey.is('.error'))
+                    return;
                 if (checked) {
                     var object_names = get_question_data_names($survey, self.objectQuestion, self.objectOptions);
                     jQuery.each(object_names, function(i, object_name) {
