@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'apps.search',
     'contact_form',
     'apps.ew_contact_form',
+    'apps.partnersites',
     'cms',
     'cms.plugins.text',
     'cms.plugins.picture',

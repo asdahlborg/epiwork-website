@@ -840,26 +840,3 @@ ul.bullets li {
  margin: 10px 0 10px 0;
 }
 
-
-/* Customisable styles */
-
-#searchbar input#searchsubmit,
-input#commentsubmit {
- background: #ce2626;
-}
-
-#searchbar input#searchsubmit:hover,
-input#commentsubmit:hover {
- background: #880000;
-}
-
-#col2 p.title {
- background: #ce2626;
-}
-
-#col1 a,
-#col2 a,
-#col3 a {
- color: #961414;
-}
-

@@ -1,0 +1,22 @@
+/* Customisable styles */
+
+#searchbar input#searchsubmit,
+input#commentsubmit {
+ background: #{{ settings.light_color }};
+}
+
+#searchbar input#searchsubmit:hover,
+input#commentsubmit:hover {
+ background: #{{ settings.dark_color }};
+}
+
+#col2 p.title {
+ background: #{{ settings.light_color }};
+}
+
+#col1 a,
+#col2 a,
+#col3 a {
+ color: #{{ settings.dark_color }};
+}
+
