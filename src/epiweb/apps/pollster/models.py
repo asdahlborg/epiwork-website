@@ -1,6 +1,8 @@
 from django.db import models, connection
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+# TODO enable when migrating to django > 1.1
+#from django.core.validators import RegexValidator
 from xml.etree import ElementTree
 import re, warnings, datetime
 from . import dynamicmodels
@@ -139,10 +141,13 @@ class QuestionDataType(models.Model):
     def __unicode__(self):
         return self.title
 
-    def as_field_type(self, verbose_name=None):
+    def as_field_type(self, verbose_name=None, regex=None):
         import django.db.models
         field = eval(self.db_type)
         field.verbose_name = verbose_name
+        # TODO enable when migrating to django > 1.1
+        #if regex:
+        #    field.validators.append(RegexValidator(regex=regex))
         return field
 
     @staticmethod
@@ -255,7 +260,7 @@ class Question(models.Model):
         if self.type == 'builtin':
             fields = [ (self.data_name, self.data_type.as_field_type(verbose_name=self.title)) ]
         elif self.type == 'text':
-            fields = [ (self.data_name, self.data_type.as_field_type(verbose_name=self.title)) ]
+            fields = [ (self.data_name, self.data_type.as_field_type(verbose_name=self.title, regex=self.regex)) ]
         elif self.type == 'single-choice':
             open_option_data_type = self.open_option_data_type or self.data_type
             fields = [ (self.data_name, self.data_type.as_field_type(verbose_name=self.title)) ]
