@@ -1167,8 +1167,8 @@
         "pk": 1,
         "model": "sites.site",
         "fields": {
-            "domain": "degrotegriepmeting.nl",
-            "name": "degrotegriepmeting.nl"
+            "domain": "www.example.org",
+            "name": "Your site name"
         }
     },
     {
