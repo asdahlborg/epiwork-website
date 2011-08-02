@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 
 class SiteSettings(models.Model):
     site = models.OneToOneField(Site)
-    light_color = models.CharField(max_length=6)
+    light_color = models.CharField(max_length=6, default="ce2626")
 
     @property
     def dark_color(self):
