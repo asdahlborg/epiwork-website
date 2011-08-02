@@ -43,7 +43,7 @@
 
         // Event handlers.
 
-        $survey.find("input").change(function(evt) {
+        $survey.find("input").change(function(evt, extra) {
             if (evt.target.nodeName !== "INPUT")
                 return;
 
@@ -57,6 +57,8 @@
             var qid = parseInt($question.attr("id").replace("question-",""));
             var oid = parseInt(($option.attr("id") || '').replace("option-",""));
             var checked = false;
+            // some checks are disabled on synthetized 'change' event
+            var synthetic = extra && extra.synthetic;
 
             // If the <input> is a checkbox or radio button determine its checked state.
 
@@ -72,13 +74,16 @@
             else if ($input.attr('pattern')) {
                 var pattern = new RegExp($input.attr('pattern'));
                 checked = pattern.test($input.val());
-                $question.toggleClass("error", !checked);
+                if (!synthetic)
+                    $question.toggleClass("error", !checked);
             }
 
             // Else use a derived value or just the string inside the text entry.
 
             else {
                 checked = $input.val() !== "";
+                if (!synthetic && $question.is('.mandatory'))
+                    $question.toggleClass("error", !checked);
             }
 
             // Invoke all rules for the rule/option combination.
@@ -109,11 +114,13 @@
 
             if (checked && $.inArray('#option-'+oid, exclusives) >= 0) {
                 // uncheck all other options when checking an exclusive one
-                $question.find(':radio,:checkbox').not($input).filter(':checked').attr('checked', false).change();
+                var extra = { synthetic: true };
+                $question.find(':radio,:checkbox').not($input).filter(':checked').attr('checked', false).trigger('change', extra);
             }
             else if (checked && exclusives) {
                 // uncheck all exclusives when checking a non-exclusive option
-                $question.find(exclusives.join(',')).find(':radio,:checkbox').attr('checked', false).change();
+                var extra = { synthetic: true };
+                $question.find(exclusives.join(',')).find(':radio,:checkbox').attr('checked', false).trigger('change', extra);
             }
 
             // Propagate changes to derived options
@@ -126,7 +133,8 @@
                     var match = Boolean(derived[i].match(val));
                     var checked = $derived_input.is(':checked');
                     if (match != checked) {
-                        $derived_input.attr('checked', match).change();
+                        var extra = { synthetic: true };
+                        $derived_input.attr('checked', match).trigger('change', extra);
                     }
                 }
             }
@@ -139,7 +147,8 @@
         });
 
         // ensure that the initial status is consistent with rules and whatnot
-        $survey.find(":input").change();
+        var extra = { synthetic: true };
+        $survey.find(":input").trigger('change', extra);
     }
 
     // MODULE FUNCTIONS

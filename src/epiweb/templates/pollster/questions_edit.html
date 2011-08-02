@@ -3,7 +3,7 @@
     <div class="question-wrapper clearfix">
         <div id="question-{{ question.id }}" class="{{ question.css_classes|join:' ' }}"
              data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
-             data-regex="{{ question.regex|default:'' }}" data-error-message="{{ question.error_message|default:'' }}"
+             data-regex="{{ question.regex|default:'' }}"
              data-open-option-data-type="{{ question.open_option_data_type.id }}">
             <div class="info">{{ question.data_name }}</div>
             <p>
