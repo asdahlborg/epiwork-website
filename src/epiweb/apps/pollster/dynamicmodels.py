@@ -62,9 +62,12 @@ def install(model):
     for statement in statements:
         cursor.execute(statement)
 
-def to_form(model):
+def to_form(model, fields=None):
     class Meta:
         pass
     Meta.model = model
-    form = type('modelform', (forms.ModelForm,), {"Meta": Meta})
+    attrs = {'Meta': Meta}
+    if fields:
+        attrs.update(fields)
+    form = type('modelform', (forms.ModelForm,), attrs)
     return form

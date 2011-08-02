@@ -97,8 +97,17 @@ class Survey(models.Model):
 
     def as_form(self):
         model = self.as_model()
-        form = dynamicmodels.to_form(model)
-        for question in self.questions:
+        questions = list(self.questions)
+        def clean(self):
+            for question in questions:
+                if question.is_multiple_choice and question.is_mandatory:
+                    valid = any([self.cleaned_data.get(d, False) for d in question.data_names])
+                    if not valid:
+                        self._errors[question.data_name] = self.error_class('At least one option should be selected')
+            return self.cleaned_data
+        form = dynamicmodels.to_form(model, {'clean': clean})
+
+        for question in questions:
             if question.is_mandatory and question.data_name in form.base_fields:
                 form.base_fields[question.data_name].required = True
         return form
@@ -188,9 +197,14 @@ class Question(models.Model):
     def errors(self):
         if not self.form:
             return {}
-        data_names = [data_name for data_name, data_type in self.as_fields()]
-        errors = [(data_name, self.form.errors[data_name]) for data_name in data_names if data_name in self.form.errors]
+        errors = [(data_name, self.form.errors[data_name]) for data_name in self.data_names if data_name in self.form.errors]
+        if self.is_multiple_choice and self.data_name in self.form.errors:
+            errors.append((self.data_name, self.form.errors[self.data_name]))
         return dict(errors)
+
+    @property
+    def data_names(self):
+        return [data_name for data_name, data_type in self.as_fields()]
 
     @property
     def options(self):

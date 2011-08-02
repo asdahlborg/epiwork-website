@@ -63,6 +63,7 @@
                 {% endif %}
                 {% endfor %}
             </ul>
+            <p class="error-message">{{ question.error_message }}</p>
             {% endif %}
             {% if question.is_multiple_choice %}
             <ul class="choices">
@@ -88,6 +89,7 @@
                 {% endif %}
                 {% endfor %}
             </ul>
+            <p class="error-message">{{ question.error_message }}</p>
             {% endif %}
             {% if question.is_matrix_select %}
             <table class="matrix">
