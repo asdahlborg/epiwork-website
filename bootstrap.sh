@@ -186,7 +186,7 @@ echo ""
 ./bin/django rule_type_register --title 'Check Options' --jsclass 'wok.pollster.rules.CheckOptions'
 ./bin/django rule_type_register --title 'Uncheck Options' --jsclass 'wok.pollster.rules.UncheckOptions'
 ./bin/django rule_type_register --title 'Exclusive' --jsclass 'wok.pollster.rules.Exclusive'
-./bin/django rule_type_register --title 'Future Preload' --jsclass 'wok.pollster.rules.FuturePreload'
+./bin/django rule_type_register --title 'Future Fill' --jsclass 'wok.pollster.rules.FutureFill'
 ./bin/django rule_type_register --title 'Future Show Question' --jsclass 'wok.pollster.rules.FutureShowQuestion'
 ./bin/django rule_type_register --title 'Future Hide Question' --jsclass 'wok.pollster.rules.FutureHideQuestion'
 ./bin/django rule_type_register --title 'Future Show Options' --jsclass 'wok.pollster.rules.FutureShowOptions'

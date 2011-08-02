@@ -257,7 +257,7 @@
     ExclusiveRule.showQuestions = false;
     ExclusiveRule.showOptions = false;
 
-    function FuturePreloadRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
+    function FutureFillRule(subjectQuestion, subjectOptions, objectQuestion, objectOptions) {
         var self = this;
 
         // Public methods.
@@ -283,8 +283,8 @@
             }
         });
     }
-    FuturePreloadRule.showQuestions = true;
-    FuturePreloadRule.showOptions = true;
+    FutureFillRule.showQuestions = true;
+    FutureFillRule.showOptions = true;
 
     function FutureShowQuestionRule(subjectQuestion, subjectOptions, objectQuestion, objectOption) {
         var self = this;
@@ -414,7 +414,7 @@
         "CheckOptions": CheckOptionsRule,
         "UncheckOptions": UncheckOptionsRule,
         "Exclusive": ExclusiveRule,
-        "FuturePreload": FuturePreloadRule,
+        "FutureFill": FutureFillRule,
         "FutureShowQuestion": FutureShowQuestionRule,
         "FutureHideQuestion": FutureHideQuestionRule,
         "FutureShowOptions": FutureShowOptionsRule,
