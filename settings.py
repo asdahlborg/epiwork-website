@@ -103,7 +103,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 CMS_TEMPLATES = (
     ('base/threecol.html', "3 Columns"),
     ('base/twocol.html', "2 Columns"),
-    ('base/home.html', "Home"),
+    ('base/home.html', "European Map"),
 )
 
 ROOT_URLCONF = 'urls'
