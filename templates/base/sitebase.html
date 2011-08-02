@@ -1,5 +1,4 @@
-{% load cms_tags menu_tags partnersites %}
-
+{% load cms_tags menu_tags partnersites i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
@@ -55,6 +54,17 @@
 		</div>
 		
 		<div id="header">
+            {% if_site_logo %}
+            <div id="headerlogo"><a href="/" title="{% site_name %}"><img src="{% site_logo %}" alt="{% site_name %}" /></a></div> 
+            <div id="account"> 
+                <ul class="anonymous"> 
+                    <li><a href="/accounts/login/" class="fancybox1">Inloggen</a></li> 
+                    <li><a href="/accounts/register/" class="fancybox2">Aanmelden</a></li> 
+                </ul> 
+                <p><a href="/accounts/password/reset/">{% trans "Forgot password?" %}</a></p> 
+            </div> 
+            {% endif_site_logo %}
+
 			<div id="navigation">
 				<div id="menubar">
 					{% spaceless %}<ul>{% block menubar %}{% show_menu 0 1 %}{% endblock menubar %}</ul>{% endspaceless %}

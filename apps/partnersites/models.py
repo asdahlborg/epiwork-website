@@ -4,6 +4,7 @@ from django.utils.translation import ugettext as _
 
 class SiteSettings(models.Model):
     site = models.OneToOneField(Site)
+    logo = models.ImageField(_("Logo"), help_text=_("Preferred height: 55px"), upload_to='uploads', blank=True, null=True)
     light_color = models.CharField(max_length=6, default="ce2626")
 
     @property
@@ -17,4 +18,9 @@ class SiteSettings(models.Model):
     class Meta:
         verbose_name = _("Site settings")
         verbose_name_plural = _("Site settings")
+
+    @classmethod
+    def get(cls, site):
+        settings, _ = cls.objects.get_or_create(site=site)
+        return settings
 

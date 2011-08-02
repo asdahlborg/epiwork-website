@@ -368,6 +368,57 @@ ul.map_buttons li {
  background: #ffffff;
 }
 
+
+#headerlogo {
+ float: left;
+ width: 756px;
+ padding: 0;
+ margin: 12px 0 12px 0;
+}
+
+#account {
+ float: right;
+ margin: 12px 0 12px 0;
+ text-align: center;
+ font-size: 0.75em;
+}
+
+#account p {
+ margin: 0 0 4px 0;
+ font-size: 0.95em;
+}
+
+#account a {
+ color: #999999;
+ text-decoration: none;
+}
+
+#account a:hover {
+ text-decoration: underline;
+}
+
+#account ul {
+ width: 183px;
+}
+
+#account ul li {
+ text-align: center;
+ margin-bottom: 2px;
+ padding: 2px 2px 3px 2px;
+ font-size: 0.95em;
+}
+
+#account ul.member li a,
+#account ul.anonymous li a {
+ text-decoration: none;
+ color: #f8f8f8;
+}
+
+#account ul.anonymous li:hover,
+#account ul.member li:hover {
+ cursor: pointer;
+}
+
 #navigation {
  width: 950px;
  clear: both;

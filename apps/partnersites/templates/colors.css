@@ -1,12 +1,10 @@
 /* Customisable styles */
 
-#searchbar input#searchsubmit,
-input#commentsubmit {
+#account ul.anonymous li, #account ul.member li, #searchbar input#searchsubmit, input#commentsubmit {
  background: #{{ settings.light_color }};
 }
 
-#searchbar input#searchsubmit:hover,
-input#commentsubmit:hover {
+#account ul.anonymous li:hover, #account ul.member li:hover, #searchbar input#searchsubmit:hover, input#commentsubmit:hover {
  background: #{{ settings.dark_color }};
 }
 
