@@ -202,6 +202,7 @@ echo ""
 ./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateRange'
 ./bin/django virtual_option_type_register --title 'Years ago' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateYearsAgo'
 ./bin/django virtual_option_type_register --title 'Years ago' --question-data-type-title 'MonthYear' --jsclass 'wok.pollster.virtualoptions.MonthYearYearsAgo'
+./bin/django virtual_option_type_register --title 'Weeks ago' --question-data-type-title 'Timestamp' --jsclass 'wok.pollster.virtualoptions.TimestampWeeksAgo'
 ./bin/django virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
 if [ "$DB_ENGINE" = "sqlite3" ] ; then

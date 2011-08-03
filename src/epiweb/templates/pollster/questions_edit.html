@@ -17,6 +17,16 @@
             {% if question.is_builtin %}
             <input type="hidden" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
                 value="{{ question.value|default:'' }}" />
+            <ul class="derived-values">
+                {% for option in question.options %}
+                <li id="option-{{ option.id }}"
+                    data-type="{{ option.virtual_type.id }}"
+                    data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
+                    Derived Value {{ option.id }}
+                    <div class="info"><input class="derived" type="checkbox" disabled="disabled"/></div>
+                </li>
+                {% endfor %}
+            </ul>
             {% endif %}
             {% if question.is_text %}
             <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"

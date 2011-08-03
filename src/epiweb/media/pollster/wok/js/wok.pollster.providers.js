@@ -533,9 +533,9 @@
                 $derived_value_types.find("option").each(function() {
                     var $o = $(this);
                     if ($o.attr("data-linked-data-type") === type)
-                        $o.show();
+                        $o.show().attr('disabled', false);
                     else
-                        $o.hide();
+                        $o.hide().attr('disabled', true);
                 });
                 $derived_value_types.val($element.attr('data-type')).change();
 

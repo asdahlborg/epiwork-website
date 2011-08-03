@@ -114,6 +114,29 @@
         });
     }
 
+    function TimestampWeeksAgoType(option, inf, sup, regex) {
+        var self = this;
+
+        // Public methods.
+
+        $.extend(this, {
+            option: option,
+            match: function(val) {
+                val = Date.parse('1/'+val);
+                inf = parseInt(inf);
+                sup = parseInt(sup);
+                if (!inf && !sup)
+                    return false;
+                else if (!inf)
+                    return val <= new Date().addWeeks(-sup);
+                else if (!sup)
+                    return new Date().addWeeks(-inf) <= val;
+                else
+                    return new Date().addWeeks(-inf) <= val && val <= new Date().addWeeks(-sup);
+            }
+        });
+    }
+
     function RegularExpressionType(option, inf, sup, regex) {
         var self = this;
 
@@ -135,7 +158,8 @@
         "DateRange": DateRangeType,
         "RegularExpression": RegularExpressionType,
         "DateYearsAgo": DateYearsAgoType,
-        "MonthYearYearsAgo": MonthYearYearsAgoType
+        "MonthYearYearsAgo": MonthYearYearsAgoType,
+        "TimestampWeeksAgo": TimestampWeeksAgoType
     };
 
 })(jQuery);
