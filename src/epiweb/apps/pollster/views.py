@@ -73,8 +73,11 @@ def survey_unpublish(request, id):
     return redirect(survey)
 
 @login_required
-def survey_test(request, id):
+def survey_test(request, id, language=None):
     survey = get_object_or_404(models.Survey, pk=id)
+    if language:
+        translation = get_object_or_404(models.TranslationSurvey, survey=survey, language=language)
+        survey.set_translation_survey(translation)
     survey_user = _get_active_survey_user(request)
     user = _get_active_survey_user(request)
     form = None
@@ -87,7 +90,7 @@ def survey_test(request, id):
             form.cleaned_data['user'] = user_id
             form.cleaned_data['global_id'] = global_id
             form.cleaned_data['timestamp'] = datetime.datetime.now()
-            destination = reverse(survey_test, kwargs={'id':id})
+            destination = reverse(survey_test, kwargs={'id':id, 'language': language})
             if user:
                 destination += '?gid='+user.global_id
             return HttpResponseRedirect(destination)
@@ -99,6 +102,7 @@ def survey_test(request, id):
     return render_to_response('pollster/survey_test.html', {
         "survey": survey,
         "last_partecipation_data_json": last_partecipation_data_json,
+        "language": language,
         "form": form
     })
 
@@ -127,6 +131,51 @@ def survey_run(request, id):
         "survey": survey,
         "last_partecipation_data_json": last_partecipation_data_json,
         "form": form
+    })
+
+@login_required
+def survey_translation_list_or_add(request, id):
+    survey = get_object_or_404(models.Survey, pk=id)
+    form_add = forms.SurveyTranslationAddForm()
+    if request.method == 'POST':
+        form_add = forms.SurveyTranslationAddForm(request.POST)
+        if form_add.is_valid():
+            language = form_add.cleaned_data['language']
+            if survey.translationsurvey_set.all().filter(language=language)[0:1]:
+                translation = translations[0]
+            else:
+                translation = models.TranslationSurvey(survey=survey, language=language)
+                translation.save()
+            return redirect(translation)
+    return render_to_response('pollster/survey_translation_list.html', {
+        "survey": survey,
+        "form_add": form_add
+    })
+
+
+@login_required
+def survey_translation_edit(request, id, language):
+    survey = get_object_or_404(models.Survey, pk=id)
+    translation = get_object_or_404(models.TranslationSurvey, survey=survey, language=language)
+    survey.set_translation_survey(translation)
+    if request.method == 'POST':
+        forms = []
+        forms.append( survey.translation.as_form(request.POST) )
+        for question in survey.questions:
+            forms.append( question.translation.as_form(request.POST) )
+            for row in question.rows:
+                forms.append( row.translation.as_form(request.POST) )
+            for column in question.columns:
+                forms.append( column.translation.as_form(request.POST) )
+            for option in question.options:
+                forms.append( option.translation.as_form(request.POST) )
+        if all(f.is_valid() for f in forms):
+            for form in forms:
+                form.save()
+            return redirect(translation)
+    return render_to_response('pollster/survey_translation_edit.html', {
+        "survey": survey,
+        "translation": translation
     })
 
 @login_required

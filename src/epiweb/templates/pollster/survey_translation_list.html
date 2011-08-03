@@ -1,0 +1,23 @@
+{% extends "pollster/base.html" %}
+
+{% block content %}
+<div id="wok-main-panel-content">
+    <div id="survey-translation-list">
+        <h1>Translations for {{ survey }}</h1>
+        <ul>
+            {% for translation in survey.translationsurvey_set.all %}
+            <li class="status-{{translation.status}}">
+                [{{translation.status}}] {{ translation.language }}
+                ( <a href="{% url pollster_survey_translation_edit survey.id translation.language %}">edit</a> )
+            </li>
+            {% endfor %}
+            <li>
+                <form action="{% url pollster_survey_translation_add survey.id %}" method="POST">
+                    {{ form_add.as_ul }}
+                    <button>create translation</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -67,7 +67,7 @@
             {% endif %}
             {% if question.is_multiple_choice %}
             <ul class="choices sortable">
-                {% for option in question.option_set.all %}
+                {% for option in question.options %}
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
                     <div class="info">{{ option.value }}</div>
@@ -90,19 +90,19 @@
             {% if question.is_matrix_select %}
             <div>Columns</div>
             <ul class="columns sortable">
-                {% for column in question.column_set.all %}
+                {% for column in question.columns %}
                 <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
             <ul class="rows sortable">
-                {% for row in question.row_set.all %}
+                {% for row in question.rows %}
                 <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Options</div>
             <ul class="choices sortable">
-                {% for option in question.option_set.all %}
+                {% for option in question.options %}
                 <li id="option-{{ option.id }}">
                     <div class="info">{{ option.value }}</div>
                     <input type="radio" value="{{ option.value }}" id="option-{{ option.id }}-field"/>
@@ -114,13 +114,13 @@
             {% if question.is_matrix_entry %}
             <div>Columns</div>
             <ul class="columns sortable">
-                {% for column in question.column_set.all %}
+                {% for column in question.columns %}
                 <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
             <ul class="rows sortable">
-                {% for row in question.row_set.all %}
+                {% for row in question.rows %}
                 <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}</span></li>
                 {% endfor %}
             </ul>

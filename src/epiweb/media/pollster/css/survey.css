@@ -23,3 +23,8 @@
 #survey-list button { margin: 0; border: none; background: none; padding: 0; cursor: pointer; }
 #survey-list a, #survey-list button { color: black; text-decoration: none; }
 #survey-list a:hover, #survey-list button:hover { text-decoration: underline; }
+
+#survey-translation-list form { display: inline; }
+#survey-translation-list form ul { display: inline; margin: 0; }
+#survey-translation-list form li { display: inline; margin: 0; }
+#survey-translation-list form .errorlist { display: none; }

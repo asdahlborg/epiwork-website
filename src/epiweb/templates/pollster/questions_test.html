@@ -29,14 +29,14 @@
              data-regex="{{ question.regex|default:'' }}">
             <p>
                 <span class="number"></span>
-                <span class="title">{{ question.title }}</span>
-                {{ question.description }}
+                <span class="title">{{ question.translated_title }}</span>
+                {{ question.translated_description }}
             </p>
             {% if question.is_text %}
             <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
                 {% if question.starts_hidden %}disabled="disabled"{% endif %}
                 pattern="{{ question.regex|default:'' }}" value="{{ question.form_value }}" />
-            <p class="error-message">{{ question.error_message }}</p>
+            <p class="error-message">{{ question.translated_error_message }}</p>
             <ul class="derived-values">
                 {% for option in question.options %}
                 <li id="option-{{ option.id }}"
@@ -55,7 +55,7 @@
                     <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if option.form_is_checked %}checked="checked"{% endif %}
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
                     <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
                         id="option-{{ option.id }}-field-open"
                         value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open"
@@ -66,12 +66,12 @@
                     <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if option.form_is_checked %}checked="checked"{% endif %}
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
                 </li>
                 {% endif %}
                 {% endfor %}
             </ul>
-            <p class="error-message">{{ question.error_message }}</p>
+            <p class="error-message">{{ question.translated_error_message }}</p>
             {% endif %}
             {% if question.is_multiple_choice %}
             <ul class="choices">
@@ -81,7 +81,7 @@
                     <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if option.form_is_checked %}checked="checked"{% endif %}
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
                     <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
                         id="option-{{ option.id }}-field-open"
                         value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open"
@@ -92,21 +92,21 @@
                     <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if option.form_is_checked %}checked="checked"{% endif %}
                         {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
                 </li>
                 {% endif %}
                 {% endfor %}
             </ul>
-            <p class="error-message">{{ question.error_message }}</p>
+            <p class="error-message">{{ question.translated_error_message }}</p>
             {% endif %}
             {% if question.is_matrix_select %}
             <table class="matrix">
             <thead>
                 <tr>
                     <th class="empty"/>
-                    {% for column in question.column_set.all %}
-                    {% if column.title %}
-                    <th>{{ column.title }}</th>
+                    {% for column in question.columns %}
+                    {% if column.translated_title %}
+                    <th>{{ column.translated_title }}</th>
                     {% else %}
                     <th class="empty"/>
                     {% endif %}
@@ -114,18 +114,18 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in question.row_set.all %}
+                {% for row in question.rows %}
                 <tr>
-                    {% if row.title %}
-                    <th>{{ row.title }}</th>
+                    {% if row.translated_title %}
+                    <th>{{ row.translated_title }}</th>
                     {% else %}
                     <th class="empty"/>
                     {% endif %}
-                    {% for column in question.column_set.all %}
+                    {% for column in question.columns %}
                     <td>
                         <select name="{{ question.data_name }}_r{{ row.ordinal}}_c{{ column.ordinal }}">
                             {% for option in question.options %}
-                            <option value="{{ option.value }}">{{ option.text }}</option>
+                            <option value="{{ option.value }}">{{ option.translated_text }}</option>
                             {% endfor %}
                         </select>
                     </td>
@@ -140,9 +140,9 @@
             <thead>
                 <tr>
                     <th class="empty"/>
-                    {% for column in question.column_set.all %}
-                    {% if column.title %}
-                    <th>{{ column.title }}</th>
+                    {% for column in question.columns %}
+                    {% if column.translated_title %}
+                    <th>{{ column.translated_title }}</th>
                     {% else %}
                     <th class="empty"/>
                     {% endif %}
@@ -150,14 +150,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in question.row_set.all %}
+                {% for row in question.rows %}
                 <tr>
-                    {% if row.title %}
-                    <th>{{ row.title }}</th>
+                    {% if row.translated_title %}
+                    <th>{{ row.translated_title }}</th>
                     {% else %}
                     <th class="empty"/>
                     {% endif %}
-                    {% for column in question.column_set.all %}
+                    {% for column in question.columns %}
                     <td>
                         <input type="text" name="{{ question.data_name }}_c{{ column.ordinal}}_r{{ row.ordinal }}" />
                     </td>

@@ -13,6 +13,11 @@ SURVEY_STATUS_CHOICES = (
     ('UNPUBLISHED', 'Unpublished')
 )
 
+SURVEY_TRANSLATION_STATUS_CHOICES = (
+    ('DRAFT', 'Draft'),
+    ('PUBLISHED', 'Published')
+)
+
 QUESTION_TYPE_CHOICES = (
     ('builtin', 'Builtin'),
     ('text', 'Open Answer'),
@@ -22,9 +27,16 @@ QUESTION_TYPE_CHOICES = (
     ('matrix-entry', 'Matrix Entry'),
 )
 
+def _get_or_default(queryset, default=None):
+    r = queryset[0:1]
+    if r:
+        return r[0]
+    return default
+
+
 class Survey(models.Model):
     parent = models.ForeignKey('self', db_index=True, blank=True, null=True)
-    title = models.CharField(max_length=255, default='')
+    title = models.CharField(max_length=255, blank=True, default='')
     shortname = models.SlugField(max_length=255, default='')
     version = models.SlugField(max_length=255, default='')
     created = models.DateTimeField(auto_now_add=True)
@@ -32,12 +44,19 @@ class Survey(models.Model):
     status = models.CharField(max_length=255, default='DRAFT', choices=SURVEY_STATUS_CHOICES)
 
     form = None
+    translation_survey = None
 
     _standard_result_fields =[
         ('user', models.IntegerField(null=True, blank=True)),
         ('global_id', models.CharField(max_length=36, null=True, blank=True)),
         ('channel', models.CharField(max_length=36, null=True, blank=True))
     ]
+
+    @property
+    def translated_title(self):
+        if self.translation and self.translation.title:
+            return self.translation.title
+        return self.title
 
     @property
     def is_draft(self):
@@ -59,14 +78,19 @@ class Survey(models.Model):
     def questions(self):
         for question in self.question_set.all():
             question.set_form(self.form)
+            question.set_translation_survey(self.translation_survey)
             yield question
+
+    @property
+    def translation(self):
+        return self.translation_survey
 
     @models.permalink
     def get_absolute_url(self):
         return ('pollster_survey_edit', [str(self.id)])
 
     def __unicode__(self):
-        return "#%d %s" % (self.id, self.title)
+        return "Survey #%d %s" % (self.id, self.title)
 
     def get_table_name(self):
         if self.is_published and not self.shortname:
@@ -81,11 +105,9 @@ class Survey(models.Model):
         partecipation = model.objects\
             .filter(user=user_id)\
             .filter(global_id = global_id)\
-            .order_by('-timestamp')[0:1]\
-            .values()[0:1]
-        if partecipation:
-            return partecipation[0]
-        return None
+            .order_by('-timestamp')\
+            .values()
+        return _get_or_default(partecipation)
 
     def as_model(self):
         fields = []
@@ -115,6 +137,9 @@ class Survey(models.Model):
     def set_form(self, form):
         self.form = form
 
+    def set_translation_survey(self, translation_survey):
+        self.translation_survey = translation_survey
+
     def publish(self):
         if self.is_published:
             return
@@ -135,14 +160,14 @@ class Survey(models.Model):
         self.save()
 
 class RuleType(models.Model):
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255, blank=True, default='')
     js_class = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.title
 
 class QuestionDataType(models.Model):
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255, blank=True, default='')
     db_type = models.CharField(max_length=255)
     css_class = models.CharField(max_length=255)
     js_class = models.CharField(max_length=255)
@@ -168,7 +193,7 @@ class QuestionDataType(models.Model):
         return QuestionDataType.objects.filter(title = 'Timestamp')[0]
 
 class VirtualOptionType(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, blank=True, default='')
     question_data_type = models.ForeignKey(QuestionDataType)
     js_class = models.CharField(max_length=255)
 
@@ -180,7 +205,7 @@ class Question(models.Model):
     starts_hidden = models.BooleanField(default=False)
     is_mandatory = models.BooleanField(default=False)
     ordinal = models.IntegerField()
-    title = models.CharField(max_length=255, default='')
+    title = models.CharField(max_length=255, blank=True, default='')
     description = models.TextField(blank=True, default='')
     type = models.CharField(max_length=255, choices=QUESTION_TYPE_CHOICES)
     data_type = models.ForeignKey(QuestionDataType)
@@ -192,6 +217,27 @@ class Question(models.Model):
     error_message = models.TextField(blank=True, default='')
 
     form = None
+    translation_survey = None
+    translation_question = None
+
+    @property
+    def translated_title(self):
+        if self.translation and self.translation.title:
+            return self.translation.title
+        return self.title
+
+    @property
+    def translated_description(self):
+        if self.translation and self.translation.description:
+            return self.translation.description
+        return self.description
+
+    @property
+    def translated_error_message(self):
+        if self.translation and self.translation.error_message:
+            return self.translation.error_message
+        return self.error_message
+
 
     @property
     def errors(self):
@@ -203,6 +249,18 @@ class Question(models.Model):
         return dict(errors)
 
     @property
+    def rows(self):
+        for row in self.row_set.all():
+            row.set_translation_survey(self.translation_survey)
+            yield row
+
+    @property
+    def columns(self):
+        for column in self.column_set.all():
+            column.set_translation_survey(self.translation_survey)
+            yield column
+
+    @property
     def data_names(self):
         return [data_name for data_name, data_type in self.as_fields()]
 
@@ -210,7 +268,12 @@ class Question(models.Model):
     def options(self):
         for option in self.option_set.all():
             option.set_form(self.form)
+            option.set_translation_survey(self.translation_survey)
             yield option
+
+    @property
+    def translation(self):
+        return self.translation_question
 
     @property
     def css_classes(self):
@@ -292,21 +355,68 @@ class Question(models.Model):
     def set_form(self, form):
         self.form = form
 
+    def set_translation_survey(self, translation_survey):
+        self.translation_survey = translation_survey
+        if translation_survey:
+            r = translation_survey.translationquestion_set.all().filter(question=self)
+            default = TranslationQuestion(translation = translation_survey, question=self)
+            self.translation_question = _get_or_default(r, default)
+
 class QuestionRow(models.Model):
     question = models.ForeignKey(Question, related_name="row_set", db_index=True)
     ordinal = models.IntegerField()
-    title = models.CharField(max_length=255, default='')
+    title = models.CharField(max_length=255, blank=True, default='')
+
+    translation_survey = None
+    translation_row = None
 
     class Meta:
         ordering = ['question', 'ordinal']
+
+    @property
+    def translated_title(self):
+        if self.translation and self.translation.title:
+            return self.translation.title
+        return self.title
+
+    @property
+    def translation(self):
+        return self.translation_row
+
+    def set_translation_survey(self, translation_survey):
+        self.translation_survey = translation_survey
+        if translation_survey:
+            r = translation_survey.translationquestionrow_set.all().filter(row=self)
+            default = TranslationQuestionRow(translation = translation_survey, row=self)
+            self.translation_row = _get_or_default(r, default)
 
 class QuestionColumn(models.Model):
     question = models.ForeignKey(Question, related_name="column_set", db_index=True)
     ordinal = models.IntegerField()
-    title = models.CharField(max_length=255, default='')
+    title = models.CharField(max_length=255, blank=True, default='')
+
+    translation_survey = None
+    translation_column = None
 
     class Meta:
         ordering = ['question', 'ordinal']
+
+    @property
+    def translated_title(self):
+        if self.translation and self.translation.title:
+            return self.translation.title
+        return self.title
+
+    @property
+    def translation(self):
+        return self.translation_column
+
+    def set_translation_survey(self, translation_survey):
+        self.translation_survey = translation_survey
+        if translation_survey:
+            r = translation_survey.translationquestioncolumn_set.all().filter(column=self)
+            default = TranslationQuestionColumn(translation = translation_survey, column=self)
+            self.translation_column = _get_or_default(r, default)
 
 class Option(models.Model):
     question = models.ForeignKey(Question, db_index=True)
@@ -318,7 +428,7 @@ class Option(models.Model):
     starts_hidden = models.BooleanField(default=False)
     ordinal = models.IntegerField()
     name = models.CharField(max_length=255, default='')
-    text = models.TextField(default='')
+    text = models.CharField(max_length=4095, blank=True, default='')
     group = models.CharField(max_length=255, blank=True, default='')
     value = models.CharField(max_length=255, default='')
 
@@ -328,6 +438,14 @@ class Option(models.Model):
     virtual_regex = models.CharField(max_length=255, blank=True, default='')
 
     form = None
+    translation_survey = None
+    translation_option = None
+
+    @property
+    def translated_text(self):
+        if self.translation and self.translation.text:
+            return self.translation.text
+        return self.text
 
     @property
     def data_name(self):
@@ -339,6 +457,10 @@ class Option(models.Model):
             return self.question.data_name_for_row_column(self.row, self.column)
         else:
             raise NotImplementedError(self.question.type)
+
+    @property
+    def translation(self):
+        return self.translation_option
 
     @property
     def open_option_data_name(self):
@@ -380,6 +502,13 @@ class Option(models.Model):
     def set_form(self, form):
         self.form = form
 
+    def set_translation_survey(self, translation_survey):
+        self.translation_survey = translation_survey
+        if translation_survey:
+            r = translation_survey.translationoption_set.all().filter(option=self)
+            default = TranslationOption(translation = translation_survey, option=self)
+            self.translation_option = _get_or_default(r, default)
+
 class Rule(models.Model):
     rule_type = models.ForeignKey(RuleType)
     subject_question = models.ForeignKey(Question, related_name='subject_of_rules', db_index=True)
@@ -393,3 +522,94 @@ class Rule(models.Model):
     def __unicode__(self):
         return '%s on question %s' % (self.rule_type, self.subject_question.id)
 
+# I18n models
+
+class TranslationSurvey(models.Model):
+    survey = models.ForeignKey(Survey, db_index=True)
+    language = models.CharField(max_length=3, db_index=True)
+    title = models.CharField(max_length=255, blank=True, default='')
+    status = models.CharField(max_length=255, default='DRAFT', choices=SURVEY_TRANSLATION_STATUS_CHOICES)
+
+    class Meta:
+        ordering = ['survey', 'language']
+        unique_together = ('survey', 'language')
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('pollster_survey_translation_edit', [str(self.survey.id), self.language])
+
+    def __unicode__(self):
+        return "Translation(%s) for %s" % (self.language, self.survey)
+
+    def as_form(self, data=None):
+        class TranslationSurveyForm(ModelForm):
+            class Meta:
+                model = TranslationSurvey
+                fields = ['title', 'status']
+        return TranslationSurveyForm(data, instance=self, prefix="survey")
+
+class TranslationQuestion(models.Model):
+    translation = models.ForeignKey(TranslationSurvey, db_index=True)
+    question = models.ForeignKey(Question, db_index=True)
+    title = models.CharField(max_length=255, blank=True, default='')
+    description = models.TextField(blank=True, default='')
+    error_message = models.TextField(blank=True, default='')
+
+    class Meta:
+        ordering = ['translation', 'question']
+        unique_together = ('translation', 'question')
+
+    def as_form(self, data=None):
+        class TranslationQuestionForm(ModelForm):
+            class Meta:
+                model = TranslationQuestion
+                fields = ['title', 'description', 'error_message']
+        return TranslationQuestionForm(data, instance=self, prefix="question_%s"%(self.id,))
+
+class TranslationQuestionRow(models.Model):
+    translation = models.ForeignKey(TranslationSurvey, db_index=True)
+    row = models.ForeignKey(QuestionRow, db_index=True)
+    title = models.CharField(max_length=255, blank=True, default='')
+
+    class Meta:
+        ordering = ['translation', 'row']
+        unique_together = ('translation', 'row')
+
+    def as_form(self, data=None):
+        class TranslationRowForm(ModelForm):
+            class Meta:
+                model = TranslationQuestionRow
+                fields = ['title']
+        return TranslationRowForm(data, instance=self, prefix="row_%s"%(self.id,))
+
+class TranslationQuestionColumn(models.Model):
+    translation = models.ForeignKey(TranslationSurvey, db_index=True)
+    column = models.ForeignKey(QuestionColumn, db_index=True)
+    title = models.CharField(max_length=255, blank=True, default='')
+
+    class Meta:
+        ordering = ['translation', 'column']
+        unique_together = ('translation', 'column')
+
+    def as_form(self, data=None):
+        class TranslationColumnForm(ModelForm):
+            class Meta:
+                model = TranslationQuestionColumn
+                fields = ['title']
+        return TranslationColumnForm(data, instance=self, prefix="column_%s"%(self.id,))
+
+class TranslationOption(models.Model):
+    translation = models.ForeignKey(TranslationSurvey, db_index=True)
+    option = models.ForeignKey(Option, db_index=True)
+    text = models.CharField(max_length=4095, blank=True, default='')
+
+    class Meta:
+        ordering = ['translation', 'option']
+        unique_together = ('translation', 'option')
+
+    def as_form(self, data=None):
+        class TranslationOptionForm(ModelForm):
+            class Meta:
+                model = TranslationOption
+                fields = ['text']
+        return TranslationOptionForm(data, instance=self, prefix="option_%s"%(self.id,))

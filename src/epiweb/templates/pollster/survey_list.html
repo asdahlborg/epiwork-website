@@ -15,6 +15,7 @@
                 {% endif %}
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
+                | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <form action="{% url pollster_survey_publish survey.id %}" method="POST"><button>publish</button></form>)
             </li>
             {% endif %}
@@ -27,6 +28,7 @@
                 {% endif %}
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
+                | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <form action="{% url pollster_survey_publish survey.id %}" method="POST"><button>re-publish</button></form>)
             </li>
             {% endif %}
@@ -34,6 +36,7 @@
             <li class="status-{{survey.status}}">
                 {{ survey.title }}
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
+                | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST"><button>unpublish</button></form>)
             </li>
             {% endif %}
