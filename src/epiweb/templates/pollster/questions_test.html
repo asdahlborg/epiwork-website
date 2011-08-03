@@ -7,11 +7,19 @@
     {% for question in survey.questions %}
     {% if question.is_builtin %}
     <div class="question-wrapper clearfix" style="display:none">
-        <div id="question-{{ question.id }}" class="{{ question.css_classes %}"
+        <div id="question-{{ question.id }}" class="{{ question.css_classes|join:' ' }}"
              data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
              data-regex="{{ question.regex|default:'' }}">
-            <input type="hidden" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
-                disabled="disabled" value="{{ question.value|default:'' }}" />
+            <input type="hidden" name="{{ question.data_name }}" id="question-{{ question.id }}-field" disabled="disabled" />
+            <ul class="derived-values">
+                {% for option in question.options %}
+                <li id="option-{{ option.id }}"
+                    data-type="{{ option.virtual_type.id }}"
+                    data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
+                    <div class="info"><input class="derived" type="checkbox" disabled="disabled"/></div>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
     {% else %}

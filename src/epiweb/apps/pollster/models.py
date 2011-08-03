@@ -259,13 +259,6 @@ class Question(models.Model):
     class Meta:
         ordering = ['survey', 'ordinal']
 
-    @property
-    def value(self):
-        if self.is_builtin and self.data_name == 'timestamp':
-            return datetime.datetime.now()
-        else:
-            raise NotImplementedError()
-
     def data_name_for_row_column(self, row, column):
         return '%s_r%d_c%d' % (self.data_name, row.ordinal, column.ordinal)
 

@@ -34,6 +34,8 @@
         pollster_fill_derived_values(derived_values);
 
         $survey.find('.open-option-data').attr('disabled', true);
+        if (last_partecipation_data && last_partecipation_data.timestamp)
+            $('.question-builtin [name=timestamp]').val(last_partecipation_data.timestamp);
 
         // Bind data types to question elements
 
@@ -54,6 +56,7 @@
             var $option = $input.closest("li");
             var isRadio = $input.is(":radio");
             var isText = $input.is(":text");
+            var isHidden = $input.is("[type=hidden]");
             var qid = parseInt($question.attr("id").replace("question-",""));
             var oid = parseInt(($option.attr("id") || '').replace("option-",""));
             var checked = false;
@@ -78,7 +81,7 @@
                     $question.toggleClass("error", !checked);
             }
 
-            // Else use a derived value or just the string inside the text entry.
+            // Else just use the string inside the text entry.
 
             else {
                 checked = $input.val() !== "";
@@ -104,7 +107,7 @@
                     // apply rules if the current option is in the subjectOptions set
                     rule.apply($survey, checked);
                 }
-                else if (isText) {
+                else if (isText || isHidden) {
                     // do not check options for text questions
                     rule.apply($survey, checked);
                 }
