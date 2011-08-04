@@ -41,6 +41,16 @@ else
     echo "not found; automatic MySQL configuration disabled"
 fi
 
+echo -n "Checking for pre-requisites: mysql_config ...  "
+exe_mysql_config="$(which mysql_config)"
+if [ -n "$exe_mysql_config" ] ; then
+    echo "$exe_mysql_config"
+else
+    unset exe_mysql
+    echo "not found; automatic MySQL configuration disabled (please install the libmysqlclient-dev package)"
+fi
+
+
 echo ""
 while [ -z "$LANGUAGE" ] ; do
     echo -n "Please, choose your country and language (be, it, nl, uk, pt, se): "
@@ -160,7 +170,7 @@ echo "done"
 echo -n "Generating settings.py ... "
 
 cat local_settings.py.in \
-    | sed -e "s/@DB_ENGINE@/$DB_ENGINE/g" \
+    | sed -e "s/@DB_ENGINE@/django.db.backends.$DB_ENGINE/g" \
     | sed -e "s/@DB_NAME@/$DB_NAME/g" \
     | sed -e "s/@DB_HOST@/$DB_HOST/g" \
     | sed -e "s/@DB_PORT@/$DB_PORT/g" \
@@ -176,41 +186,41 @@ echo ""
 echo "Initializing Django database and loading default surveys:"
 echo ""
 
-./bin/django syncdb
-./bin/django loaddata data/initial.json 
-#./bin/django survey_register data/surveys/gsq/gold-standard-weekly.py 
-#./bin/django survey_register data/surveys/gsq/gold-standard-intake.py 
-#./bin/django survey_register data/surveys/gsq/gold-standard-contact.py
-./bin/django rule_type_register --title 'Show Question' --jsclass 'wok.pollster.rules.ShowQuestion'
-./bin/django rule_type_register --title 'Hide Question' --jsclass 'wok.pollster.rules.HideQuestion'
-./bin/django rule_type_register --title 'Show Options' --jsclass 'wok.pollster.rules.ShowOptions'
-./bin/django rule_type_register --title 'Hide Options' --jsclass 'wok.pollster.rules.HideOptions'
-./bin/django rule_type_register --title 'Check Options' --jsclass 'wok.pollster.rules.CheckOptions'
-./bin/django rule_type_register --title 'Uncheck Options' --jsclass 'wok.pollster.rules.UncheckOptions'
-./bin/django rule_type_register --title 'Exclusive' --jsclass 'wok.pollster.rules.Exclusive'
-./bin/django rule_type_register --title 'Future Fill' --jsclass 'wok.pollster.rules.FutureFill'
-./bin/django rule_type_register --title 'Future Show Question' --jsclass 'wok.pollster.rules.FutureShowQuestion'
-./bin/django rule_type_register --title 'Future Hide Question' --jsclass 'wok.pollster.rules.FutureHideQuestion'
-./bin/django rule_type_register --title 'Future Show Options' --jsclass 'wok.pollster.rules.FutureShowOptions'
-./bin/django rule_type_register --title 'Future Hide Options' --jsclass 'wok.pollster.rules.FutureHideOptions'
-./bin/django rule_type_register --title 'Fill' --jsclass 'wok.pollster.rules.Fill'
-./bin/django question_data_type_register --title 'Text' --dbtype 'django.db.models.TextField(null=True, blank=True)' --cssclass 'text-type' --jsclass 'wok.pollster.datatypes.Text'
-./bin/django question_data_type_register --title 'Numeric' --dbtype 'django.db.models.PositiveIntegerField(null=True, blank=True)' --cssclass 'numeric-type' --jsclass 'wok.pollster.datatypes.Numeric'
-./bin/django question_data_type_register --title 'Date' --dbtype 'django.db.models.DateField(null=True, blank=True)' --cssclass 'date-type' --jsclass 'wok.pollster.datatypes.Date'
-./bin/django question_data_type_register --title 'MonthYear' --dbtype 'django.db.models.CharField(max_length=255, null=True, blank=True)' --cssclass 'monthyear-type' --jsclass 'wok.pollster.datatypes.MonthYear'
-./bin/django question_data_type_register --title 'Timestamp' --dbtype 'django.db.models.DateTimeField(null=True, blank=True)' --cssclass 'timestamp-type' --jsclass 'wok.pollster.datatypes.Timestamp'
-./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.TextRange'
-./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Numeric' --jsclass 'wok.pollster.virtualoptions.NumericRange'
-./bin/django virtual_option_type_register --title 'Range' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateRange'
-./bin/django virtual_option_type_register --title 'Years ago' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateYearsAgo'
-./bin/django virtual_option_type_register --title 'Years ago' --question-data-type-title 'MonthYear' --jsclass 'wok.pollster.virtualoptions.MonthYearYearsAgo'
-./bin/django virtual_option_type_register --title 'Weeks ago' --question-data-type-title 'Timestamp' --jsclass 'wok.pollster.virtualoptions.TimestampWeeksAgo'
-./bin/django virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
+python manage.py syncdb
+#python manage.py loaddata data/initial.json
+#python manage.py survey_register data/surveys/gsq/gold-standard-weekly.py 
+#python manage.py survey_register data/surveys/gsq/gold-standard-intake.py 
+#python manage.py survey_register data/surveys/gsq/gold-standard-contact.py
+python manage.py rule_type_register --title 'Show Question' --jsclass 'wok.pollster.rules.ShowQuestion'
+python manage.py rule_type_register --title 'Hide Question' --jsclass 'wok.pollster.rules.HideQuestion'
+python manage.py rule_type_register --title 'Show Options' --jsclass 'wok.pollster.rules.ShowOptions'
+python manage.py rule_type_register --title 'Hide Options' --jsclass 'wok.pollster.rules.HideOptions'
+python manage.py rule_type_register --title 'Check Options' --jsclass 'wok.pollster.rules.CheckOptions'
+python manage.py rule_type_register --title 'Uncheck Options' --jsclass 'wok.pollster.rules.UncheckOptions'
+python manage.py rule_type_register --title 'Exclusive' --jsclass 'wok.pollster.rules.Exclusive'
+python manage.py rule_type_register --title 'Future Fill' --jsclass 'wok.pollster.rules.FutureFill'
+python manage.py rule_type_register --title 'Future Show Question' --jsclass 'wok.pollster.rules.FutureShowQuestion'
+python manage.py rule_type_register --title 'Future Hide Question' --jsclass 'wok.pollster.rules.FutureHideQuestion'
+python manage.py rule_type_register --title 'Future Show Options' --jsclass 'wok.pollster.rules.FutureShowOptions'
+python manage.py rule_type_register --title 'Future Hide Options' --jsclass 'wok.pollster.rules.FutureHideOptions'
+python manage.py rule_type_register --title 'Fill' --jsclass 'wok.pollster.rules.Fill'
+python manage.py question_data_type_register --title 'Text' --dbtype 'django.db.models.TextField(null=True, blank=True)' --cssclass 'text-type' --jsclass 'wok.pollster.datatypes.Text'
+python manage.py question_data_type_register --title 'Numeric' --dbtype 'django.db.models.PositiveIntegerField(null=True, blank=True)' --cssclass 'numeric-type' --jsclass 'wok.pollster.datatypes.Numeric'
+python manage.py question_data_type_register --title 'Date' --dbtype 'django.db.models.DateField(null=True, blank=True)' --cssclass 'date-type' --jsclass 'wok.pollster.datatypes.Date'
+python manage.py question_data_type_register --title 'MonthYear' --dbtype 'django.db.models.CharField(max_length=255, null=True, blank=True)' --cssclass 'monthyear-type' --jsclass 'wok.pollster.datatypes.MonthYear'
+python manage.py question_data_type_register --title 'Timestamp' --dbtype 'django.db.models.DateTimeField(null=True, blank=True)' --cssclass 'timestamp-type' --jsclass 'wok.pollster.datatypes.Timestamp'
+python manage.py virtual_option_type_register --title 'Range' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.TextRange'
+python manage.py virtual_option_type_register --title 'Range' --question-data-type-title 'Numeric' --jsclass 'wok.pollster.virtualoptions.NumericRange'
+python manage.py virtual_option_type_register --title 'Range' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateRange'
+python manage.py virtual_option_type_register --title 'Years ago' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateYearsAgo'
+python manage.py virtual_option_type_register --title 'Years ago' --question-data-type-title 'MonthYear' --jsclass 'wok.pollster.virtualoptions.MonthYearYearsAgo'
+python manage.py virtual_option_type_register --title 'Weeks ago' --question-data-type-title 'Timestamp' --jsclass 'wok.pollster.virtualoptions.TimestampWeeksAgo'
+python manage.py virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
 if [ "$DB_ENGINE" = "sqlite3" ] ; then
     echo ".read data/extra-survey.sqlite3.sql" | sqlite3 ggm.db
 fi
 
 echo ""
-echo "** All done. You can start the system by issuing: ./bin/django runserver"
+echo "** All done. You can start the system by issuing: python manage.py runserver"
 echo ""

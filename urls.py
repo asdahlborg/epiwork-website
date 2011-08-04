@@ -12,8 +12,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^admin/surveys-editor/', include('apps.pollster.urls')),
     (r'^admin/', include(admin.site.urls)),
-    (r'^tools/surveys-editor/', include('apps.pollster.urls')),
     (r'^surveys/(?P<id>\d+)/$', 'apps.pollster.views.survey_run'),
     (r'^influenzanet/', 'django.views.generic.simple.direct_to_template', {'template': 'influenzanet.html'}),
     (r'^googlec96088c11ef7e5c4.html$', 'django.views.generic.simple.direct_to_template', {'template': 'googlec96088c11ef7e5c4.html'}),

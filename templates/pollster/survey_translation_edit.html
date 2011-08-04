@@ -3,10 +3,10 @@
 {% block title %}{{ survey }} Translation - EPIWork Survey Designer{% endblock %}
 
 {% block extrahead %}
-    <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.js"></script>
-    <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.datatypes.js"></script>
-    <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.rules.js"></script>
-    <script type="text/javascript" src="/+media/pollster/wok/js/wok.pollster.virtualoptions.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.datatypes.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.rules.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.virtualoptions.js"></script>
     <script type="text/javascript">$(function() { wok.pollster.createPollsterRuntime(null, {}); })</script>
 {% endblock %}
 
@@ -15,6 +15,7 @@
     {% if survey.is_editable %}
     <li><a href="{% url pollster_survey_edit survey.id %}">Edit Survey</a></li>
     {% endif %}
+    <li><a href="{% url pollster_survey_translation_list survey.id %}">Translate Survey</a></li>
     <li><a href="{% url pollster_survey_test survey.id survey.translation.language %}">Test Survey</a></li>
 {% endblock %}
 
@@ -22,6 +23,7 @@
 <div id="wok-main-panel-content">
 
 <form class="survey" id="survey-{{ survey.id }}" method="POST">
+    {% csrf_token %}
     <div>
     <h1>{{ survey.title }}<br/>{{ survey.translation.as_form.title }} {{ survey.translation.as_form.status }}</h1>
     </div>

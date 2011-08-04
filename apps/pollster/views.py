@@ -5,14 +5,20 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.utils.safestring import mark_safe
-from apps.survey.models import SurveyUser
+from django.template import RequestContext
+from cms import settings as cms_settings
+#from apps.survey.models import SurveyUser
 from . import models, forms, parser, json
 import re, datetime
+
+def request_render_to_response(req, *args, **kwargs):
+    kwargs['context_instance'] = RequestContext(req)
+    return render_to_response(*args, **kwargs)
 
 @login_required
 def survey_list(request):
     surveys = models.Survey.objects.all()
-    return render_to_response('pollster/survey_list.html', {
+    return request_render_to_response(request, 'pollster/survey_list.html', {
         "surveys": surveys
     })
 
@@ -29,11 +35,12 @@ def survey_add(request):
     virtual_option_types = models.VirtualOptionType.objects.all()
     question_data_types = models.QuestionDataType.objects.all()
     rule_types = models.RuleType.objects.all()
-    return render_to_response('pollster/survey_edit.html', {
+    return request_render_to_response(request, 'pollster/survey_edit.html', {
         "survey": survey,
         "virtual_option_types": virtual_option_types,
         "question_data_types": question_data_types,
-        "rule_types": rule_types
+        "rule_types": rule_types,
+        "CMS_MEDIA_URL": cms_settings.CMS_MEDIA_URL,
     })
 
 @login_required
@@ -49,11 +56,12 @@ def survey_edit(request, id):
     virtual_option_types = models.VirtualOptionType.objects.all()
     question_data_types = models.QuestionDataType.objects.all()
     rule_types = models.RuleType.objects.all()
-    return render_to_response('pollster/survey_edit.html', {
+    return request_render_to_response(request, 'pollster/survey_edit.html', {
         "survey": survey,
         "virtual_option_types": virtual_option_types,
         "question_data_types": question_data_types,
-        "rule_types": rule_types
+        "rule_types": rule_types,
+        "CMS_MEDIA_URL": cms_settings.CMS_MEDIA_URL,
     })
 
 @login_required
@@ -85,11 +93,12 @@ def survey_test(request, id, language=None):
     global_id = survey_user and survey_user.global_id
     last_partecipation_data = None
     if request.method == 'POST':
-        form = survey.as_form()(request.POST)
+        data = request.POST.copy()
+        data['user'] = user_id
+        data['global_id'] = global_id
+        data['timestamp'] = datetime.datetime.now()
+        form = survey.as_form()(data)
         if form.is_valid():
-            form.cleaned_data['user'] = user_id
-            form.cleaned_data['global_id'] = global_id
-            form.cleaned_data['timestamp'] = datetime.datetime.now()
             destination = reverse(survey_test, kwargs={'id':id, 'language': language})
             if user:
                 destination += '?gid='+user.global_id
@@ -99,7 +108,7 @@ def survey_test(request, id, language=None):
     encoder = json.JSONEncoder(ensure_ascii=False, indent=2)
     last_partecipation_data_json = encoder.encode(last_partecipation_data)
 
-    return render_to_response('pollster/survey_test.html', {
+    return request_render_to_response(request, 'pollster/survey_test.html', {
         "survey": survey,
         "last_partecipation_data_json": last_partecipation_data_json,
         "language": language,
@@ -115,11 +124,12 @@ def survey_run(request, id):
     global_id = survey_user and survey_user.global_id
     last_partecipation_data = survey.get_last_partecipation_data(user_id, global_id)
     if request.method == 'POST':
-        form = survey.as_form()(request.POST)
+        data = request.POST.copy()
+        data['user'] = user_id
+        data['global_id'] = global_id
+        data['timestamp'] = datetime.datetime.now()
+        form = survey.as_form()(data)
         if form.is_valid():
-            form.cleaned_data['user'] = user_id
-            form.cleaned_data['global_id'] = global_id
-            form.cleaned_data['timestamp'] = datetime.datetime.now()
             form.save()
             return HttpResponseRedirect('/survey/thanks')
         else:
@@ -127,7 +137,7 @@ def survey_run(request, id):
     encoder = json.JSONEncoder(ensure_ascii=False, indent=2)
     last_partecipation_data_json = encoder.encode(last_partecipation_data)
 
-    return render_to_response('pollster/survey_test.html', {
+    return request_render_to_response(request, 'pollster/survey_test.html', {
         "survey": survey,
         "last_partecipation_data_json": last_partecipation_data_json,
         "form": form
@@ -147,7 +157,7 @@ def survey_translation_list_or_add(request, id):
                 translation = models.TranslationSurvey(survey=survey, language=language)
                 translation.save()
             return redirect(translation)
-    return render_to_response('pollster/survey_translation_list.html', {
+    return request_render_to_response(request, 'pollster/survey_translation_list.html', {
         "survey": survey,
         "form_add": form_add
     })
@@ -173,7 +183,7 @@ def survey_translation_edit(request, id, language):
             for form in forms:
                 form.save()
             return redirect(translation)
-    return render_to_response('pollster/survey_translation_edit.html', {
+    return request_render_to_response(request, 'pollster/survey_translation_edit.html', {
         "survey": survey,
         "translation": translation
     })
@@ -181,7 +191,7 @@ def survey_translation_edit(request, id, language):
 @login_required
 def survey_export(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
-    return render_to_response('pollster/survey_export.json', {
+    return request_render_to_response(request, 'pollster/survey_export.json', {
         "survey": survey
     }, mimetype='application/json')
 
@@ -218,11 +228,12 @@ def urls(request, prefix=''):
 
             urls[name] = "/" + url_regex[:-1]
 
-    return render_to_response("pollster/urls.js", {'urls':urls}, mimetype="application/javascript")
+    return request_render_to_response(request, "pollster/urls.js", {'urls':urls}, mimetype="application/javascript")
 
 def _get_active_survey_user(request):
     gid = request.GET.get('gid', None)
     if gid is None:
         return None
     else:
-        return SurveyUser.objects.get(global_id=gid, user=request.user)
+        raise NotImplementedError('TODO: restore survey users management')
+        #return SurveyUser.objects.get(global_id=gid, user=request.user)

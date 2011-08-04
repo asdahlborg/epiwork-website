@@ -45,7 +45,7 @@
         var $properties = $(options.propertiesSelector, context);
         var $selection = null, $question = null;
 
-        if (!window.urls)
+        if (!window.pollster_urls)
             return window.wok.error("can't find URLs resolver");
         if ($canvas.length === 0)
             return window.wok.error("can't find canvas element: " + options.canvasSelector);
@@ -242,14 +242,14 @@
 
             getSurveyUrl: function(surveyId) {
                 if (surveyId)
-                    return urls.url('pollster_survey_edit', {id: surveyId});
+                    return pollster_urls.url('pollster_survey_edit', {id: surveyId});
             },
 
             getPostUrl: function(surveyId) {
                 if (surveyId)
-                    return urls.url('pollster_survey_edit', {id: surveyId});
+                    return pollster_urls.url('pollster_survey_edit', {id: surveyId});
                 else
-                    return urls.url('pollster_survey_add');
+                    return pollster_urls.url('pollster_survey_add');
             },
 
             validate: function() {

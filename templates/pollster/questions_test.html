@@ -1,4 +1,5 @@
 <form class="survey {% if survey.form.errors %}error{% endif %}" id="survey-{{ survey.id }}" method="POST">
+    {% csrf_token %}
     {% if survey.form.errors %}
     <div class="survey-error-message">
         Please check the answers for the highlighted questions.

@@ -16,7 +16,7 @@
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
-                | <form action="{% url pollster_survey_publish survey.id %}" method="POST"><button>publish</button></form>)
+                | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button>publish</button></form>)
             </li>
             {% endif %}
             {% if survey.is_unpublished %}
@@ -29,7 +29,7 @@
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
-                | <form action="{% url pollster_survey_publish survey.id %}" method="POST"><button>re-publish</button></form>)
+                | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button>re-publish</button></form>)
             </li>
             {% endif %}
             {% if survey.is_published %}
@@ -37,7 +37,7 @@
                 {{ survey.title }}
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
-                | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST"><button>unpublish</button></form>)
+                | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST">{% csrf_token %}<button>unpublish</button></form>)
             </li>
             {% endif %}
             {% endfor %}

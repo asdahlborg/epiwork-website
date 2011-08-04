@@ -1,6 +1,6 @@
-window.urls = window.urls || {
+window.pollster_urls = window.pollster_urls || {
     url: function(name, kwargs) {
-        var ret = urls.urls[name];
+        var ret = pollster_urls.urls[name];
         for( name in kwargs) {
             ret = ret.replace("{"+name+"}", kwargs[name]);
         }
