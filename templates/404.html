@@ -1,0 +1,9 @@
+{% extends "base/sitebase.html" %}
+
+{% block title%}{{ block.super }}Page not found{% endblock title%}
+
+{% block authentication %}{% endblock authentication %}
+
+{% block menubar %}<li class="selected error"><a href="/">The page you requested could not be found. We apologize for the inconvenience. Go to <u>home</u></a></li>{% endblock menubar %}
+
+{% block footercontent %}{% endblock footercontent %}

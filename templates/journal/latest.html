@@ -1,0 +1,8 @@
+{% load i18n %}
+<p class="title">{% trans "Latest news" %}</p>
+{% for news in latest %}
+	<h2>{{ news.title }}</h2>
+	<p>{{ news.excerpt }} <a href="{{ base_path }}/{{ news.get_relative_url }}">LEES MEER</a></p><hr />
+{% empty %}
+	<h2>{% trans "No news yet" %}</h2>
+{% endfor %}

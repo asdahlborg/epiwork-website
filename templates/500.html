@@ -1,0 +1,9 @@
+{% extends "base/sitebase.html" %}
+
+{% block title%}{{ block.super }}Error{% endblock title%}
+
+{% block authentication %}{% endblock authentication %}
+
+{% block menubar %}<li class="selected error"><a href="/">An unexpected system error has occured. We apologize for the inconvenience. Go to <u>home</u></a></li>{% endblock menubar %}
+
+{% block footercontent %}{% endblock footercontent %}

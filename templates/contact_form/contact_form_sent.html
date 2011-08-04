@@ -1,0 +1,14 @@
+{% extends "contact_form/base.html" %}
+{% load cms_tags %}
+
+{% block col1 %}
+{% placeholder "Main content" %}
+{% endblock col1 %}
+
+{% block col2 %}
+{% show_placeholder "Left bar" "contact" %}
+{% endblock col2 %}
+
+{% block col3 %}
+{% show_placeholder "Right bar" "contact" %}
+{% endblock col3 %}

@@ -4,7 +4,9 @@
 # the database and making sure a consistent Mono development environment is
 # installed.
 
-python bootstrap.py && ./bin/buildout
+virtualenv --no-site-packages .
+source ./bin/activate
+pip install -r requirements.txt
 
 # Here we customize src/epiweb/settings.py by setting the user preferred
 # database, language and country. Note that the database and the user used
@@ -157,7 +159,7 @@ fi
 echo "done"
 echo -n "Generating settings.py ... "
 
-cat src/epiweb/settings.py.in \
+cat local_settings.py.in \
     | sed -e "s/@DB_ENGINE@/$DB_ENGINE/g" \
     | sed -e "s/@DB_NAME@/$DB_NAME/g" \
     | sed -e "s/@DB_HOST@/$DB_HOST/g" \
@@ -167,7 +169,7 @@ cat src/epiweb/settings.py.in \
     | sed -e "s/@LANGUAGE@/$LANGUAGE/g" \
     | sed -e "s/@COUNTRY@/$COUNTRY/g" \
     | sed -e "s%@TIMEZONE@%$TIMEZONE%g" \
-    > src/epiweb/settings.py
+    > local_settings.py
 
 echo "done"
 echo ""
@@ -176,9 +178,9 @@ echo ""
 
 ./bin/django syncdb
 ./bin/django loaddata data/initial.json 
-./bin/django survey_register data/surveys/gsq/gold-standard-weekly.py 
-./bin/django survey_register data/surveys/gsq/gold-standard-intake.py 
-./bin/django survey_register data/surveys/gsq/gold-standard-contact.py
+#./bin/django survey_register data/surveys/gsq/gold-standard-weekly.py 
+#./bin/django survey_register data/surveys/gsq/gold-standard-intake.py 
+#./bin/django survey_register data/surveys/gsq/gold-standard-contact.py
 ./bin/django rule_type_register --title 'Show Question' --jsclass 'wok.pollster.rules.ShowQuestion'
 ./bin/django rule_type_register --title 'Hide Question' --jsclass 'wok.pollster.rules.HideQuestion'
 ./bin/django rule_type_register --title 'Show Options' --jsclass 'wok.pollster.rules.ShowOptions'
@@ -206,7 +208,7 @@ echo ""
 ./bin/django virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
 if [ "$DB_ENGINE" = "sqlite3" ] ; then
-    echo ".read src/extra-survey.sqlite3.sql" | sqlite3 ggm.db
+    echo ".read data/extra-survey.sqlite3.sql" | sqlite3 ggm.db
 fi
 
 echo ""

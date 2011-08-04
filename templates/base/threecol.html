@@ -1,0 +1,23 @@
+{% extends "base/sitebase.html" %}
+{% load cms_tags %}
+
+{% block content %}
+        <div id="colmask">
+            <div id="colmid">
+                <div id="colright"> 
+                    <div id="col1wrap"> 
+                         <div id="col1pad"> 
+                             <div id="col1"> 
+                                 {% block col1 %}{% placeholder "Main content" %}{% endblock col1 %}
+                             </div> 
+                         </div> 
+                    </div> 
+                    <div id="col2"> 
+                        {% block col2 %}{% placeholder "Left bar" %}{% endblock col2 %}
+                    </div> 
+                    <div id="col3"> 
+                        {% block col3 %}{% placeholder "Right bar" %}{% endblock col3 %}
+                    </div> 
+                </div> 
+            </div> 
+        </div>{% endblock content %}

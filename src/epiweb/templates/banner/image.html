@@ -1,9 +1,0 @@
-{% if banner %}
-<div class="banner">
-{% if banner.url %}
-    <a href="{{ banner.url }} "><img border="0" alt="{{ banner.title }}" src="{{ banner.image }}" /></a>
-{% else %}
-    <img border="0" alt="{{ banner.title }}" src="{{ banner.image }}" />
-{% endif %}
-</div>
-{% endif %}
