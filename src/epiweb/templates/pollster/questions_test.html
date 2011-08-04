@@ -114,17 +114,17 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in question.rows %}
+                {% for row, columns in question.rows_columns %}
                 <tr>
                     {% if row.translated_title %}
                     <th>{{ row.translated_title }}</th>
                     {% else %}
                     <th class="empty"/>
                     {% endif %}
-                    {% for column in question.columns %}
+                    {% for column in columns %}
                     <td>
-                        <select name="{{ question.data_name }}_r{{ row.ordinal}}_c{{ column.ordinal }}">
-                            {% for option in question.options %}
+                        <select name="{{ column.data_name }}">
+                            {% for option in column.options %}
                             <option value="{{ option.value }}">{{ option.translated_text }}</option>
                             {% endfor %}
                         </select>
@@ -150,16 +150,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in question.rows %}
+                {% for row, columns in question.rows_columns %}
                 <tr>
                     {% if row.translated_title %}
                     <th>{{ row.translated_title }}</th>
                     {% else %}
                     <th class="empty"/>
                     {% endif %}
-                    {% for column in question.columns %}
+                    {% for column in columns %}
                     <td>
-                        <input type="text" name="{{ question.data_name }}_c{{ column.ordinal}}_r{{ row.ordinal }}" />
+                        <input type="text" name="{{ column.data_name }}" />
                     </td>
                     {% endfor %}
                 </tr>

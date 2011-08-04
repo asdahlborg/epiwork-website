@@ -261,6 +261,16 @@ class Question(models.Model):
             yield column
 
     @property
+    def rows_columns(self):
+        for row in self.rows:
+            yield (row, self._columns_for_row(row))
+
+    def _columns_for_row(self, row):
+        for column in self.columns:
+            column.set_row(row)
+            yield column
+
+    @property
     def data_names(self):
         return [data_name for data_name, data_type in self.as_fields()]
 
@@ -323,7 +333,7 @@ class Question(models.Model):
         ordering = ['survey', 'ordinal']
 
     def data_name_for_row_column(self, row, column):
-        return '%s_r%d_c%d' % (self.data_name, row.ordinal, column.ordinal)
+        return '%s_multi_row%d_col%d' % (self.data_name, row.ordinal, column.ordinal)
 
     def as_fields(self):
         fields = []
@@ -345,9 +355,9 @@ class Question(models.Model):
                     fields.append( (option.open_option_data_name, option.open_option_data_type.as_field_type()) )
         elif self.type in ('matrix-select', 'matrix-entry'):
             fields = []
-            for row in self.row_set.all():
-                for column in self.column_set.all():
-                    fields.append( (self.data_name_for_row_column(row, column), self.data_type.as_field_type()) )
+            for row, columns in self.rows_columns:
+                for column in columns:
+                    fields.append( (column.data_name, self.data_type.as_field_type()) )
         else:
             raise NotImplementedError(self.type)
         return fields
@@ -397,6 +407,7 @@ class QuestionColumn(models.Model):
 
     translation_survey = None
     translation_column = None
+    row = None
 
     class Meta:
         ordering = ['question', 'ordinal']
@@ -417,6 +428,25 @@ class QuestionColumn(models.Model):
             r = translation_survey.translationquestioncolumn_set.all().filter(column=self)
             default = TranslationQuestionColumn(translation = translation_survey, column=self)
             self.translation_column = _get_or_default(r, default)
+
+    def set_row(self, row):
+        self.row = row
+
+    @property
+    def options(self):
+        for option in self.question.options:
+            if option.row and option.row != self.row:
+                continue
+            if option.column and option.column != self:
+                continue
+            option.set_row_column(self.row, self)
+            yield option
+
+    @property
+    def data_name(self):
+        if not self.row:
+            raise NotImplementedError('use Question.rows_columns() to get the right data_name here')
+        return self.question.data_name_for_row_column(self.row, self)
 
 class Option(models.Model):
     question = models.ForeignKey(Question, db_index=True)
@@ -440,6 +470,7 @@ class Option(models.Model):
     form = None
     translation_survey = None
     translation_option = None
+    current_row_column = (None, None)
 
     @property
     def translated_text(self):
@@ -454,7 +485,9 @@ class Option(models.Model):
         elif self.question.type == 'multiple-choice':
             return self.question.data_name+'_'+self.value
         elif self.question.type in ('matrix-select', 'matrix-entry'):
-            return self.question.data_name_for_row_column(self.row, self.column)
+            row = self.row or self.current_row_column[0]
+            column = self.column or self.current_row_column[1]
+            return self.question.data_name_for_row_column(row, column)
         else:
             raise NotImplementedError(self.question.type)
 
@@ -508,6 +541,9 @@ class Option(models.Model):
             r = translation_survey.translationoption_set.all().filter(option=self)
             default = TranslationOption(translation = translation_survey, option=self)
             self.translation_option = _get_or_default(r, default)
+
+    def set_row_column(self, row, column):
+        self.current_row_column = (row, column)
 
 class Rule(models.Model):
     rule_type = models.ForeignKey(RuleType)
