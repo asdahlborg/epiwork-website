@@ -1,0 +1,15 @@
+{
+  "prot_v" : "1.0",
+  "serv": 99,
+  "uid": "427621639782",
+  "reports": [{ "uid" : "427621639782",
+                "surv_v" : "gold-standard-weekly-1.6",
+                "ts" : 1262304000000,
+                "data": [{ "id" : "WeeklyQ1",
+                           "value" : ["17"] },
+                         { "id" : "WeeklyQ1b",
+                            "value" : "0" }
+                        ]
+               }
+             ]
+}

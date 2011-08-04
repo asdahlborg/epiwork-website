@@ -1,4 +1,4 @@
-{% extends "pollster/base_admin.html" %}
+{% extends "pollster/base_run.html" %}
 
 {% block title %}{{ survey.translated_title }} - EPIWork Survey Designer{% endblock %}
 
@@ -10,19 +10,7 @@
     <script type="text/javascript">$(function() { wok.pollster.createPollsterRuntime(null, {}); })</script>
 {% endblock %}
 
-{% block navigation %}
-    <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
-    {% if survey.is_editable %}
-    <li><a href="{% url pollster_survey_edit survey.id %}">Edit Survey</a></li>
-    {% endif %}
-    {% if language %}
-    <li><a href="{% url pollster_survey_translation_edit survey.id language %}">Translate Survey</a></li>
-    {% else %}
-    <li><a href="{% url pollster_survey_translation_list survey.id %}">Translate Survey</a></li>
-    {% endif %}
-{% endblock %}
-
-{% block content %}
+{% block col1 %}
 <div id="wok-main-panel-content">
     {% include "pollster/questions_run.html" %}
 </div>

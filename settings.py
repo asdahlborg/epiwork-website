@@ -129,7 +129,7 @@ INSTALLED_APPS = (
 #    'registration',
 #    'loginurl',
 #    'apps.accounts',
-#    'apps.survey',
+    'apps.survey',
 #    'apps.reminder',
 #    'apps.banner',
     'apps.search',

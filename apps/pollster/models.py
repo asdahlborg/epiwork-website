@@ -52,6 +52,10 @@ class Survey(models.Model):
         ('channel', models.CharField(max_length=36, null=True, blank=True))
     ]
 
+    @staticmethod
+    def get_by_shortname(shortname):
+        return Survey.objects.all().get(shortname=shortname, status="PUBLISHED")
+
     @property
     def translated_title(self):
         if self.translation and self.translation.title:

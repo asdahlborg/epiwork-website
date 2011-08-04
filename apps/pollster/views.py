@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.utils.safestring import mark_safe
 from django.template import RequestContext
+from django.contrib.admin.views.decorators import staff_member_required
 from cms import settings as cms_settings
-#from apps.survey.models import SurveyUser
+from apps.survey.models import SurveyUser
 from . import models, forms, parser, json
 import re, datetime
 
@@ -15,14 +16,14 @@ def request_render_to_response(req, *args, **kwargs):
     kwargs['context_instance'] = RequestContext(req)
     return render_to_response(*args, **kwargs)
 
-@login_required
+@staff_member_required
 def survey_list(request):
     surveys = models.Survey.objects.all()
     return request_render_to_response(request, 'pollster/survey_list.html', {
         "surveys": surveys
     })
 
-@login_required
+@staff_member_required
 def survey_add(request):
     survey = models.Survey()
     if (request.method == 'POST'):
@@ -43,7 +44,7 @@ def survey_add(request):
         "CMS_MEDIA_URL": cms_settings.CMS_MEDIA_URL,
     })
 
-@login_required
+@staff_member_required
 def survey_edit(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     if not survey.is_editable:
@@ -64,7 +65,7 @@ def survey_edit(request, id):
         "CMS_MEDIA_URL": cms_settings.CMS_MEDIA_URL,
     })
 
-@login_required
+@staff_member_required
 def survey_publish(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     if (request.method == 'POST'):
@@ -72,7 +73,7 @@ def survey_publish(request, id):
         return redirect(survey)
     return redirect(survey)
 
-@login_required
+@staff_member_required
 def survey_unpublish(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     if (request.method == 'POST'):
@@ -80,7 +81,7 @@ def survey_unpublish(request, id):
         return redirect(survey)
     return redirect(survey)
 
-@login_required
+@staff_member_required
 def survey_test(request, id, language=None):
     survey = get_object_or_404(models.Survey, pk=id)
     if language:
@@ -99,10 +100,8 @@ def survey_test(request, id, language=None):
         data['timestamp'] = datetime.datetime.now()
         form = survey.as_form()(data)
         if form.is_valid():
-            destination = reverse(survey_test, kwargs={'id':id, 'language': language})
-            if user:
-                destination += '?gid='+user.global_id
-            return HttpResponseRedirect(destination)
+            next_url = _get_next_url(request, reverse(survey_test, kwargs={'id':id, 'language': language}))
+            return HttpResponseRedirect(next_url)
         else:
             survey.set_form(form)
     encoder = json.JSONEncoder(ensure_ascii=False, indent=2)
@@ -131,19 +130,20 @@ def survey_run(request, id):
         form = survey.as_form()(data)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/survey/thanks')
+            next_url = _get_next_url(request, reverse(survey_run, kwargs={'id': id}))
+            return HttpResponseRedirect(next_url)
         else:
             survey.set_form(form)
     encoder = json.JSONEncoder(ensure_ascii=False, indent=2)
     last_partecipation_data_json = encoder.encode(last_partecipation_data)
 
-    return request_render_to_response(request, 'pollster/survey_test.html', {
+    return request_render_to_response(request, 'pollster/survey_run.html', {
         "survey": survey,
         "last_partecipation_data_json": last_partecipation_data_json,
         "form": form
     })
 
-@login_required
+@staff_member_required
 def survey_translation_list_or_add(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     form_add = forms.SurveyTranslationAddForm()
@@ -163,7 +163,7 @@ def survey_translation_list_or_add(request, id):
     })
 
 
-@login_required
+@staff_member_required
 def survey_translation_edit(request, id, language):
     survey = get_object_or_404(models.Survey, pk=id)
     translation = get_object_or_404(models.TranslationSurvey, survey=survey, language=language)
@@ -188,7 +188,7 @@ def survey_translation_edit(request, id, language):
         "translation": translation
     })
 
-@login_required
+@staff_member_required
 def survey_export(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     return request_render_to_response(request, 'pollster/survey_export.json', {
@@ -235,5 +235,12 @@ def _get_active_survey_user(request):
     if gid is None:
         return None
     else:
-        raise NotImplementedError('TODO: restore survey users management')
-        #return SurveyUser.objects.get(global_id=gid, user=request.user)
+        return SurveyUser.objects.get(global_id=gid, user=request.user)
+
+def _get_next_url(request, default):
+    url = request.GET.get('next', default)
+    survey_user = _get_active_survey_user(request)
+    if survey_user:
+        url = '%s?gid=%s' % (url, survey_user.global_id)
+    return url
+
