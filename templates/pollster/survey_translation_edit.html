@@ -1,0 +1,123 @@
+{% extends "pollster/base_admin.html" %}
+
+{% block title %}{{ survey }} Translation - EPIWork Survey Designer{% endblock %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.datatypes.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.rules.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.virtualoptions.js"></script>
+    <script type="text/javascript">$(function() { wok.pollster.createPollsterRuntime(null, {}); })</script>
+{% endblock %}
+
+{% block navigation %}
+    <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
+    {% if survey.is_editable %}
+    <li><a href="{% url pollster_survey_edit survey.id %}">Edit Survey</a></li>
+    {% endif %}
+    <li><a href="{% url pollster_survey_translation_list survey.id %}">Translate Survey</a></li>
+    <li><a href="{% url pollster_survey_test survey.id survey.translation.language %}">Test Survey</a></li>
+{% endblock %}
+
+{% block content %}
+<div id="wok-main-panel-content">
+
+<form class="survey" id="survey-{{ survey.id }}" method="POST">
+    {% csrf_token %}
+    <div>
+    <h1>{{ survey.title }}<br/>{{ survey.translation.as_form.title }} {{ survey.translation.as_form.status }}</h1>
+    </div>
+    
+    {% for question in survey.questions %}
+    {% if not question.is_builtin %}
+    <div class="question-wrapper clearfix">
+        <div id="question-{{ question.id }}" class="question">
+            <p>
+                <span class="number"></span>
+                <span class="title">{{ question.title }}<br/>{{ question.translation.as_form.title }}</span>
+                {{ question.description }}<br/>{{ question.translation.as_form.description }}
+            </p>
+            {% if question.is_text %}
+            <p class="error-message">{{ question.error_message }}<br/>{{ question.translation.as_form.error_message }}</p>
+            {% endif %}
+            {% if question.is_single_choice or question.is_multiple_choice %}
+            <ul class="choices">
+                {% for option in question.options %}
+                <li id="option-{{ option.id }}">
+                    <label for="option-{{ option.id }}-field">{{ option.text }}<br/>{{ option.translation.as_form.text }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+            <p class="error-message">{{ question.error_message }}<br/>{{ question.translation.as_form.error_message }}</p>
+            {% endif %}
+            {% if question.is_matrix_select %}
+            <div>Columns</div>
+            <ul class="columns sortable">
+                {% for column in question.columns %}
+                <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span></li>
+                {% endfor %}
+            </ul>
+            <div>Rows</div>
+            <ul class="rows sortable">
+                {% for row in question.rows %}
+                <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span></li>
+                {% endfor %}
+            </ul>
+            <div>Options</div>
+            <ul class="choices sortable">
+                {% for option in question.options %}
+                <li id="option-{{ option.id }}">
+                    <label for="option-{{ option.id }}-field">{{ option.text }}<br/>{{ option.translation.as_form.text }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if question.is_matrix_entry %}
+            <div>Columns</div>
+            <ul class="columns sortable">
+                {% for column in question.columns %}
+                <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span></li>
+                {% endfor %}
+            </ul>
+            <div>Rows</div>
+            <ul class="rows sortable">
+                {% for row in question.rows %}
+                <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="rules">
+            {% for rule in question.subject_of_rules.all %}
+            <div id="rule-{{ rule.id }}"
+                 data-type="{{ rule.rule_type.id }}"
+                 {% if rule.subject_option.id %}
+                 data-subject-option="option-{{ rule.subject_option.id }}"
+                 {% endif %}
+                 data-object-question="question-{{ rule.object_question.id }}"
+                 data-object-options="{% for option in rule.object_options.all %} option-{{ option.id }} {% endfor %}"
+                 class="rule">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <script type="text/javascript" class="pollster-fill">
+        function pollster_last_partecipation_data() {
+            return {{ last_partecipation_data_json|safe|default:'{}' }};
+        }
+        function pollster_fill_data_types(d) {
+        }
+        function pollster_fill_derived_values(d) {
+        }
+        function pollster_fill_rules(d) {
+        }
+    </script>
+    <div class="actions">
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+</div>
+{% endblock %}

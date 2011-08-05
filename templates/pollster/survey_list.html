@@ -1,0 +1,48 @@
+{% extends "pollster/base_admin.html" %}
+
+{% block content %}
+<div id="wok-main-panel-content">
+    <div id="survey-list">
+        <h1>Surveys</h1>
+        <ul>
+            {% for survey in surveys %}
+            {% if survey.is_draft %}
+            <li class="status-{{survey.status}}">
+                {% if survey.title %}
+                {{ survey.title }}
+                {% else %}
+                No Name
+                {% endif %}
+                (<a href="{% url pollster_survey_test survey.id %}">test</a>
+                | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
+                | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
+                | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button>publish</button></form>)
+            </li>
+            {% endif %}
+            {% if survey.is_unpublished %}
+            <li class="status-{{survey.status}}">
+                {% if survey.title %}
+                {{ survey.title }}
+                {% else %}
+                No Name
+                {% endif %}
+                (<a href="{% url pollster_survey_test survey.id %}">test</a>
+                | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
+                | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
+                | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button>re-publish</button></form>)
+            </li>
+            {% endif %}
+            {% if survey.is_published %}
+            <li class="status-{{survey.status}}">
+                {{ survey.title }}
+                (<a href="{% url pollster_survey_test survey.id %}">test</a>
+                | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
+                | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST">{% csrf_token %}<button>unpublish</button></form>)
+            </li>
+            {% endif %}
+            {% endfor %}
+            <li><a href="{% url pollster_survey_add %}">new survey</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

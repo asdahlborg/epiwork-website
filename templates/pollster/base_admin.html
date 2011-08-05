@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8">
+    <meta name="description" content="Survey Designer"/>
+
+    <title>{% block title %}EPIWork Survey{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="/media/pollster/wok/css/reset.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/media/pollster/jquery/css/smoothness/jquery-ui-1.8.14.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/media/pollster/css/survey.css" media="all" />
+
+    <script type="text/javascript" src="/media/pollster/jquery/js/jquery-1.5.2.min.js"></script>
+    <script type="text/javascript" src="/media/pollster/jquery/js/jquery-ui-1.8.14.min.js"></script>
+    <script type="text/javascript" src="/media/pollster/jquery/js/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="/media/pollster/jquery/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/media/pollster/jquery/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/media/pollster/datejs/js/date-it-IT.js"></script>
+
+    <script type="text/javascript" src="{{ CMS_MEDIA_URL }}js/csrf.js"></script>
+    <script type="text/javascript">jQuery().cmsPatchCSRF()</script>
+
+    <script type="text/javascript" src="/media/pollster/wok/js/innerxhtml.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.jquery.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.properties.js"></script>
+    <script type="text/javascript" src="{% url pollster_urls %}"></script>
+
+    {% block extrahead %}{% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="/media/pollster/css/skin.css" media="all" />
+</head>
+<body>
+    <div id="wok-body">
+        <div id="wok-header">
+            <img class="influenzanet" src="/media/pollster/css/im/influenzanet.gif" alt="Influenzanet Logo"/>
+            <img class="epiwork" src="/media/pollster/css/im/logo-epiwork.jpg" alt="Epiwork Logo"/>
+        </div>
+        <div id="wok-navigation">
+            <ul>
+                {% block navigation %}{% endblock %}
+            </ul>
+        </div>
+        <div id="wok-main-panel">
+            {% block content %}{% endblock %}
+        </div>
+        <div id="wok-footer">
+        </div>
+    </div>
+</body>
+</html>

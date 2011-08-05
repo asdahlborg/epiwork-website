@@ -1,0 +1,28 @@
+DATABASES = {
+    'default': {
+        'ENGINE': '@DB_ENGINE@',         # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '@DB_NAME@',             # Or path to database file if using sqlite3.
+        'USER': '@DB_USERNAME@',         # Not used with sqlite3.
+        'PASSWORD': '@DB_PASSWORD@',     # Not used with sqlite3.
+        'HOST': '@DB_HOST@',             # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '@DB_PORT@',             # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = '@TIMEZONE@'
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = '@LANGUAGE@'
+
+# For checking postcodes etc.
+# Use ISO3166 two-letter country code
+# See http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
+# Avaliable: be, it, nl, uk, pt, se
+COUNTRY = '@COUNTRY@'
+

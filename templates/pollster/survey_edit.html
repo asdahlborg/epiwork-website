@@ -1,0 +1,37 @@
+{% extends "pollster/base_admin.html" %}
+
+{% block title %}EPIWork Survey Designer{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="/media/pollster/wok/css/wok.pollster.css" media="all" />
+    <script type="text/javascript" src="/media/pollster/jquery/js/jquery.hoverIntent.minified.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.datatypes.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.rules.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.virtualoptions.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.providers.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.designer.js"></script>
+    <script type="text/javascript">$(function() { wok.pollster.createPollsterDesigner(null, {mode:"design"}); })</script>
+{% endblock %}
+
+{% block navigation %}
+    <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
+    {% if survey.id %}
+    <li><a href="{% url pollster_survey_test survey.id %}">Test Survey</a></li>
+    <li><a href="{% url pollster_survey_translation_list survey.id %}">Translate Survey</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div>
+    <div id="pollster-properties">
+        {% include "pollster/properties.html" %}
+    </div>
+    <div id="pollster-canvas">
+        {% include "pollster/questions_edit.html" %}
+    </div>
+    <div id="pollster-tools">
+        {% block pollster-tools %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

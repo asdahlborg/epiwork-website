@@ -10,3 +10,4 @@ epiweb.db
 *.swp
 .DS_Store
 media/uploads
+/local_settings.py

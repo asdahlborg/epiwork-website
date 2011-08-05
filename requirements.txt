@@ -14,3 +14,4 @@ wsgiref==0.1.2
 simplejson
 django-loginurl
 psycopg2
+MySQL-python

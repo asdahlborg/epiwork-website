@@ -51,6 +51,10 @@ USE_L10N = False
 
 LANGUAGES = (
    ('en', 'English'),
+   ('nl', 'Dutch'),
+   ('it', 'Italian'),
+   ('se', 'Swedish'),
+   ('pt', 'Portuguese'),
 )
 
 # Absolute path to the directory that holds media.
@@ -93,7 +97,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.core.context_processors.auth",
+    "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.i18n",
     "django.core.context_processors.request",
     "django.core.context_processors.media",
@@ -125,7 +129,7 @@ INSTALLED_APPS = (
 #    'registration',
 #    'loginurl',
 #    'apps.accounts',
-#    'apps.survey',
+    'apps.survey',
 #    'apps.reminder',
 #    'apps.banner',
     'apps.search',
@@ -145,6 +149,7 @@ INSTALLED_APPS = (
     'appmedia',
     'publisher',
     'haystack',
+    'apps.pollster',
 )
 
 HAYSTACK_SITECONF = 'search_sites'
@@ -212,3 +217,7 @@ elif _hostname in ['via']:
     STORE_RESPONSES_LOCALLY = True
     EXTRA_SURVEY = 'contact-survey-1.0'
 
+try:
+    from local_settings import *
+except ImportError:
+    pass

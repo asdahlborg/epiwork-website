@@ -1,0 +1,87 @@
+#survey form ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+#survey form label {
+}
+
+#survey .question {
+    border: 1px solid #ccc;
+    /* border-left-width: 3px; */
+    padding: 10px;
+    margin-bottom: 10px;
+    
+}
+#survey .label {
+	color:#ffffff;
+	font-weight:bold;
+	background-color:green;
+	padding:10px;
+	background: #3a3 url(/+media-ggm/green_gradient_high.jpg) bottom left repeat-x;
+}
+#survey .answer > * {
+    margin: 10px 0;
+}
+#survey .help {
+    margin-bottom: 0px;
+}
+#survey .skip {
+    font-size: 12px;
+    text-align: center;
+    background: #eee;
+    margin-bottom: 5px;
+    padding: 2px 20px;
+}
+
+#survey .question.error {
+    border-color: #c00;
+    background: #fff6f6;
+}
+#survey .errormsg {
+    color: red;
+    margin-bottom: 15px;
+}
+#survey p {
+    margin-top: 0px;
+}
+#survey ul {
+    margin-bottom: 0px;
+}
+#survey ul.errorlist {
+    margin-top: 0px;
+}
+
+#survey .answer input.sDateField {
+    text-align: center;
+    width: 80px;
+}
+#survey .answer .datepickerbutton {
+    vertical-align: middle;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#survey {
+    line-height: 14px;
+}
+
+#survey table.table-options-single {
+    border-collapse: collapse;
+    border: 1px solid #aaa;
+}
+#survey table.table-options-single th {
+    background: #ccc;
+    border: 1px solid #aaa;
+}
+#survey table.table-options-single td {
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    vertical-align: middle;
+}
+#survey table.table-options-single td:first-child {
+    text-align: left;
+    padding: 5px;
+}
+

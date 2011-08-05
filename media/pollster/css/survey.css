@@ -1,0 +1,30 @@
+.survey-error-message { border: 1px solid #C00; -webkit-border-radius: 5px; padding: 5px; background: #FBB; margin-bottom: 10px; }
+.question { border: 1px solid #CCC; -webkit-border-radius: 5px; padding: 5px; background: #fff; margin-bottom: 10px; }
+.question ul.choices, .question ul.derived-values { list-style: none; margin-bottom: 10px; }
+.question li { margin-left: 20px; }
+.question input[type=text] { margin: 0 0 10px 20px; }
+.question .choices input[type=text] { margin: 0 0 0 15px; }
+.question .title { font-weight: bold; margin-right: 5px; }
+.question .number { font-weight: bold; margin-right: 3px; }
+.question .info { display: none; }
+.question .matrix th, .question .matrix td { vertical-align: middle; padding: 1px 3px; }
+.question .matrix th { background: #EEE; border: 1px solid white; padding: 3px; }
+.question .matrix th.empty { background: none; border: none; padding: 0; }
+.question .matrix select, .question .matrix input { width: 100%; margin: 0; }
+
+.rules, .derived-values { display: none; }
+
+.starts-hidden { display: none; }
+.error-message { display: none; margin: 0 0 10px 20px; color: #C00; }
+.question.error { border-color: #C00; }
+.question.error .error-message { display: block; }
+
+#survey-list form { display: inline; }
+#survey-list button { margin: 0; border: none; background: none; padding: 0; cursor: pointer; }
+#survey-list a, #survey-list button { color: black; text-decoration: none; }
+#survey-list a:hover, #survey-list button:hover { text-decoration: underline; }
+
+#survey-translation-list form { display: inline; }
+#survey-translation-list form ul { display: inline; margin: 0; }
+#survey-translation-list form li { display: inline; margin: 0; }
+#survey-translation-list form .errorlist { display: none; }

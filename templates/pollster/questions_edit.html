@@ -1,0 +1,154 @@
+<div class="survey clearfix" id="survey-{{ survey.id }}">
+    {% for question in survey.questions %}
+    <div class="question-wrapper clearfix">
+        <div id="question-{{ question.id }}" class="{{ question.css_classes|join:' ' }}"
+             data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
+             data-regex="{{ question.regex|default:'' }}"
+             data-open-option-data-type="{{ question.open_option_data_type.id }}">
+            <div class="info">{{ question.data_name }}</div>
+            <p>
+                <span class="number"></span>
+                <span class="title">{{ question.title }}</span>
+                {{ question.description }}
+                {% if question.is_builtin %}
+                (builtin value)
+                {% endif %}
+                </p>
+            {% if question.is_builtin %}
+            <input type="hidden" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
+                value="{{ question.value|default:'' }}" />
+            <ul class="derived-values">
+                {% for option in question.options %}
+                <li id="option-{{ option.id }}"
+                    data-type="{{ option.virtual_type.id }}"
+                    data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
+                    Derived Value {{ option.id }}
+                    <div class="info"><input class="derived" type="checkbox" disabled="disabled"/></div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if question.is_text %}
+            <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
+                pattern="{{ question.regex|default:'' }}" />
+            <p class="error-message">{{ question.error_message|default:'' }}</p>
+            <ul class="derived-values">
+                {% for option in question.options %}
+                <li id="option-{{ option.id }}"
+                    data-type="{{ option.virtual_type.id }}"
+                    data-inf="{{ option.virtual_inf }}" data-sup="{{ option.virtual_sup }}" data-regex="{{ option.virtual_regex }}">
+                    Derived Value {{ option.id }}
+                    <div class="info"><input class="derived" type="checkbox" disabled="disabled"/></div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if question.is_single_choice %}
+            <ul class="choices sortable">
+                {% for option in question.options %}
+                {% if option.is_open %}
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                    <div class="info">{{ option.value }}</div>
+                    <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                        id="option-{{ option.id }}-field-open" />
+                </li>
+                {% else %}
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                    <div class="info">{{ option.value }}</div>
+                    <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <p class="error-message">{{ question.error_message|default:'' }}</p>
+            {% endif %}
+            {% if question.is_multiple_choice %}
+            <ul class="choices sortable">
+                {% for option in question.options %}
+                {% if option.is_open %}
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                    <div class="info">{{ option.value }}</div>
+                    <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                    <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                        id="option-{{ option.id }}-field-open" />
+                </li>
+                {% else %}
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                    <div class="info">{{ option.value }}</div>
+                    <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <p class="error-message">{{ question.error_message|default:'' }}</p>
+            {% endif %}
+            {% if question.is_matrix_select %}
+            <div>Columns</div>
+            <ul class="columns sortable">
+                {% for column in question.columns %}
+                <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}</span></li>
+                {% endfor %}
+            </ul>
+            <div>Rows</div>
+            <ul class="rows sortable">
+                {% for row in question.rows %}
+                <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}</span></li>
+                {% endfor %}
+            </ul>
+            <div>Options</div>
+            <ul class="choices sortable">
+                {% for option in question.options %}
+                <li id="option-{{ option.id }}">
+                    <div class="info">{{ option.value }}</div>
+                    <input type="radio" value="{{ option.value }}" id="option-{{ option.id }}-field"/>
+                    <label for="option-{{ option.id }}-field">{{ option.text }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if question.is_matrix_entry %}
+            <div>Columns</div>
+            <ul class="columns sortable">
+                {% for column in question.columns %}
+                <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}</span></li>
+                {% endfor %}
+            </ul>
+            <div>Rows</div>
+            <ul class="rows sortable">
+                {% for row in question.rows %}
+                <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}</span></li>
+                {% endfor %}
+            </ul>
+            <input type="text"/>
+            {% endif %}
+        </div>
+        <div class="rules">
+            {% for rule in question.subject_of_rules.all %}
+            <div id="rule-{{ rule.id }}"
+                 data-type="{{ rule.rule_type.id }}"
+                 data-subject-options="{% for option in rule.subject_options.all %} option-{{ option.id }} {% endfor %}"
+                 data-object-question="question-{{ rule.object_question.id }}"
+                 data-object-options="{% for option in rule.object_options.all %} option-{{ option.id }} {% endfor %}"
+                 class="rule">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <script type="text/javascript" class="pollster-fill">
+        function pollster_last_partecipation_data() {
+            return {{ last_partecipation_data_json|safe|default:'{}' }};
+        }
+        function pollster_fill_data_types(d) {
+        }
+        function pollster_fill_derived_values(d) {
+        }
+        function pollster_fill_rules(d) {
+        }
+    </script>
+</div>
