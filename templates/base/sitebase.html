@@ -97,7 +97,9 @@
 				</div>
 			</div>{% endblock footercontent %}
 			<div id="footerclose">
-                &copy; {% now "Y" %} {% site_name %} &nbsp;|&nbsp; <a href="{% url contact_form %}" title="Contact us">Contact</a>
+                &copy; {% now "Y" %} {% site_name %} &nbsp;|&nbsp;
+                {% language_chooser %}
+                <a href="{% url contact_form %}" title="Contact us">Contact</a>
 			</div>
 		</div>
 	</div>
