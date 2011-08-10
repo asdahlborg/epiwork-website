@@ -17,6 +17,8 @@ from .survey import ( Specification,
                       get_survey_context, )
 import apps.pollster as pollster
 import extra
+import pickle
+
 
 _ = lambda x: x
 
@@ -36,7 +38,31 @@ def get_active_survey_user(request):
 
 @login_required
 def thanks(request):
-    return render_to_response('survey/thanks.html',
+    persons = models.SurveyUser.objects.filter(user=request.user)
+    for person in persons:
+        responses = list(models.LastResponse.objects.filter(user=person))
+        if responses[0].data:
+            response_dict = pickle.loads(str(responses[0].data))
+            wq1 = set(response_dict['WeeklyQ1'])
+            wq1b = response_dict['WeeklyQ1b']
+            if wq1==set([0]):
+                person.diag = 'Nessun sintomo'
+            elif (wq1b == 0) and wq1.intersection([1,17,11,8,9]) and wq1.intersection([6,5,18]):
+                person.diag = 'Sintomi influenzali'
+            elif wq1.intersection([2,3,4,5,6]):
+               person.diag = 'Raffreddore / allergia'
+            elif len(wq1.intersection([15,19,14,12,13]))>1:
+               person.diag = 'Sintomi gastro-intestinali'
+            else:
+               person.diag = 'Altri sintomi non influenzali'
+        else: 
+           person.diag = 'Nessuno status'
+    return render_to_response('survey/thanks.html', {'persons': persons}, 
+                              context_instance=RequestContext(request))
+
+@login_required
+def thanks_profile(request):
+    return render_to_response('survey/thanks_profile.html',
         context_instance=RequestContext(request))
 
 @login_required
@@ -45,7 +71,7 @@ def select_user(request, template='survey/select_user.html'):
     if next is None:
         next = reverse(index)
 
-    users = models.SurveyUser.objects.filter(user=request.user)
+    users = models.SurveyUser.objects.filter(user=request.user, deleted=False)
     total = len(users)
     if total == 0:
         url = '%s?next=%s' % (reverse(people_add), next)
@@ -92,6 +118,8 @@ def index(request):
             utils.add_response_queue(participation, spec, form.cleaned_data)
             data = utils.format_response_data(spec, form.cleaned_data)
             utils.save_last_response(survey_user, participation, data)
+            utils.save_local_flu_survey(survey_user, spec.survey.id, data)
+            utils.update_local_profile(survey_user)
             utils.save_response_locally(survey_user.name,
                                         spec.survey.id,
                                         data,
@@ -189,6 +217,8 @@ def people_edit(request):
     if survey_user is None:
         url = '%s?next=%s' % (reverse(select_user), reverse(people_edit))
         return HttpResponseRedirect(url)
+    elif survey_user.deleted == True:
+        raise Http404()
 
     if request.method == 'POST':
         form = forms.AddPeople(request.POST)
@@ -202,6 +232,32 @@ def people_edit(request):
         form = forms.AddPeople(initial={'name': survey_user.name})
 
     return render_to_response('survey/people_edit.html', {'form': form},
+                              context_instance=RequestContext(request))
+
+@login_required
+def people_remove(request):
+    try:
+        survey_user = get_active_survey_user(request)
+    except ValueError:
+        raise Http404()
+
+    if survey_user is None:
+        url = reverse(people)
+        return HttpResponseRedirect(url)
+    elif survey_user.deleted == True:
+        raise Http404()
+
+    confirmed = request.POST.get('confirmed', None)
+
+    if confirmed == 'T':
+        survey_user.deleted = True
+        survey_user.save()
+        
+        url = reverse(people)
+        return HttpResponseRedirect(url)
+
+    else:
+        return render_to_response('survey/people_remove.html', {'person': survey_user},
                               context_instance=RequestContext(request))
 
 @login_required
@@ -232,7 +288,7 @@ def people_add(request):
 
 @login_required
 def people(request):
-    users = models.SurveyUser.objects.filter(user=request.user)
+    users = models.SurveyUser.objects.filter(user=request.user, deleted=False)
     return render_to_response('survey/people.html', {'people': users},
                               context_instance=RequestContext(request))
 

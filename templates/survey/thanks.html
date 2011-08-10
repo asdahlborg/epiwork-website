@@ -1,6 +1,54 @@
 {% extends "survey/base.html" %}
 
 {% block col1 %}
+
 <p>Thanks for taking the time to fill out this survey.</p>
+<p>Grazie per aver compilato il questionario. Ecco il riepilogo dei dati da te inseriti per te e per i componenti del tuo gruppo o nucleo familiare:
+</p>
+
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+table.imagetable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.imagetable th {
+	background:#A22C22;
+	color: #FFFFFF;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+table.imagetable td {
+	background:#dcddc0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+</style>
+
+<!-- Table goes in the document BODY -->
+<table class="imagetable">
+<tr>
+	<th>Membri del gruppo</th><th>Stato di salute</th><th colspan="4">Gestisci</th>
+</tr>
+{% for person in persons %}
+<tr><td>{{ person.name }}</td>
+	<td><b>{{ person.diag }}</b></td>
+        <td><a href="{{ person.get_edit_url }}">Modifica nome</a></td>
+        <td><a href="{{ person.get_profile_url }}">Modifica profilo</a></td>
+        <td><a href="{{ person.get_survey_url }}">Inserisci sintomi</a></td>
+        <td><a href="{{ person.get_remove_url }}">Rimuovi</a></td>
+</tr>
+
+{% endfor %}
+</table>
+
 {% endblock %}
 

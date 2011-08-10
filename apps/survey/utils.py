@@ -294,3 +294,85 @@ def flush_profile_queue():
         total += 1
 
     return total_sent, total_error
+
+### Local data storage management
+
+# Auxiliary functions
+
+def get_user_region(zipcode):
+    # To be added! (related to check zipcode existance)
+    return None
+
+def flu_status(data):
+    symptoms = set(data['WeeklyQ1'])
+    if data['WeeklyQ1'] == [0]:
+        return 'H'
+    elif ['WeeklyQ1b'] == 0 and ( symptoms.intersection([1, 17, 11, 8, 9])
+                                  and symptoms.intersection([6, 5, 18]) ):
+        return 'F'
+    else:
+        return 'O'
+
+# Data functions
+
+def save_local_profile(survey_user, data):
+    try:
+        lp = models.LocalProfile.objects.get(surveyuser=survey_user)
+    except models.LocalProfile.DoesNotExist:
+        lp = models.LocalProfile()
+        lp.surveyuser = survey_user
+        lp.sq_num_season = 0
+        lp.sq_num_total = 0
+    
+    lp.birth_date = data['IntakeQ2']
+    lp.zip_code = data['IntakeQ3']
+    lp.region = get_user_region(data['IntakeQ3'])
+    if data['IntakeQ1'] == 0:
+        lp.gender = 'M'
+    else:
+        lp.gender = 'F'
+    if data['IntakeQ6'] == [u'99', u'99', u'99', u'99', u'99']:
+        lp.a_family = -1
+    elif sum([int(x) for x in data['IntakeQ6'] if x != '99']) == 0:
+        lp.a_family = 0
+    elif ( data['IntakeQ6'][0] not in ('0', '99') or
+           data['IntakeQ6'][1] not in ('0', '99') ):
+        lp.a_family = 2
+    else:
+        lp.a_family = 1
+    if data['IntakeQ14'] in (1, 2):
+        lp.a_smoker = 'Y'
+    else:
+        lp.a_smoker = 'N'
+    if data['IntakeQ8'] == 0:
+        lp.a_vaccine_prev_swine = 'Y'
+    else:
+        lp.a_vaccine_prev_swine = 'N'
+    if data['IntakeQ8'] == 0:
+        lp.a_vaccine_prev_seasonal = 'Y'
+    else:
+        lp.a_vaccine_prev_seasonal = 'N'
+    if data['IntakeQ8'] == 0:
+        lp.a_vaccine_current = 'Y'
+    else:
+        lp.a_vaccine_current = 'N'
+    
+    lp.save()
+
+def update_local_profile(survey_user):
+    lp = models.LocalProfile.objects.get(surveyuser=survey_user)
+    lp.sq_num_season += 1
+    lp.sq_num_total += 1
+    lp.sq_date_last = datetime.today()
+    lp.save()
+
+def save_local_flu_survey(survey_user, survey_id, data):
+    ls = models.LocalFluSurvey()
+    lp = models.LocalProfile.objects.get(surveyuser=survey_user)
+    ls.surveyuser = survey_user
+    ls.date = datetime.today()
+    ls.status = flu_status(data)
+    ls.age_user = (datetime.date(datetime.today()) - lp.birth_date).days/365
+    ls.data = pickle.dumps(data)
+    ls.survey_id = survey_id
+    ls.save()

@@ -136,3 +136,29 @@ def add_empty_last_response(sender, instance, created, **kwargs):
 post_save.connect(add_empty_profile, sender=SurveyUser)
 post_save.connect(add_empty_last_response, sender=SurveyUser)
 
+
+class LocalProfile(models.Model):
+    surveyuser = models.ForeignKey(SurveyUser, unique=True)
+    sq_num_season = models.SmallIntegerField(null=True)
+    sq_num_total = models.SmallIntegerField(null=True)
+    sq_date_first = models.DateField(null=True)
+    sq_date_last = models.DateField(null=True)
+    birth_date = models.DateField()
+    zip_code = models.CharField(max_length=5) # check internationalization
+    region = models.CharField(max_length=30, null=True)
+    gender = models.CharField(max_length=1)
+    a_family = models.SmallIntegerField() # aggregated info
+    a_smoker = models.CharField(max_length=1)
+    a_vaccine_prev_seasonal = models.CharField(max_length=1)
+    a_vaccine_prev_swine = models.CharField(max_length=1)
+    a_vaccine_current = models.CharField(max_length=1)
+
+class LocalFluSurvey(models.Model):
+    surveyuser = models.ForeignKey(SurveyUser, unique=False)
+    date = models.DateTimeField()
+    status = models.CharField(max_length=8) # aggregated info
+    age_user = models.SmallIntegerField()
+    data = models.TextField() # pickled
+    survey_id = models.CharField(max_length=50)
+
+
