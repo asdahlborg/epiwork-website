@@ -51,6 +51,8 @@ USE_L10N = False
 
 LANGUAGES = (
    ('en', 'English'),
+   ('de', 'German'),
+   ('fr', 'French'),
    ('nl', 'Dutch'),
    ('it', 'Italian'),
    ('se', 'Swedish'),
