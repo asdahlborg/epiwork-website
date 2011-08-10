@@ -1,8 +1,7 @@
 from django.db import models, connection
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-# TODO enable when migrating to django > 1.1
-#from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator
 from xml.etree import ElementTree
 import re, warnings, datetime
 from . import dynamicmodels
@@ -183,9 +182,8 @@ class QuestionDataType(models.Model):
         import django.db.models
         field = eval(self.db_type)
         field.verbose_name = verbose_name
-        # TODO enable when migrating to django > 1.1
-        #if regex:
-        #    field.validators.append(RegexValidator(regex=regex))
+        if regex:
+            field.validators.append(RegexValidator(regex=regex))
         return field
 
     @staticmethod
