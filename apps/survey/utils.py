@@ -244,7 +244,7 @@ def flush_response_queue():
     total_sent = 0
     total_error = 0
 
-    surveys = ResponseSendQueue.objects.order_by('date')
+    surveys = models.ResponseSendQueue.objects.order_by('date')
     for survey in surveys:
         date = survey.date
         survey_id = survey.survey_id
