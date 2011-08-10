@@ -19,15 +19,15 @@
         return names;
     }
 
-    function was_filled($survey, question, options, last_partecipation_data) {
-        if (!last_partecipation_data)
+    function was_filled($survey, question, options, last_participation_data) {
+        if (!last_participation_data)
             return false;
         var subject_names = get_question_data_names($survey, question, options);
 
         // check that at least one option was filled
         var is_filled = false;
         jQuery.each(subject_names, function(i, subject_name) {
-            var subject_data = last_partecipation_data[subject_name];
+            var subject_data = last_participation_data[subject_name];
             if (subject_data)
                 is_filled = true;
         });
@@ -87,7 +87,7 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
             },
 
             apply: function($survey, checked) {
@@ -118,7 +118,7 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
             },
 
             apply: function($survey, checked) {
@@ -149,7 +149,7 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
             },
 
             apply: function($survey, checked) {
@@ -180,7 +180,7 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
             },
 
             apply: function($survey, checked) {
@@ -211,7 +211,7 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
             },
 
             apply: function($survey, checked) {
@@ -237,7 +237,7 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
             },
 
             apply: function($survey, checked) {
@@ -263,7 +263,7 @@
             objectOptions: objectOptions,
             isExclusive: true,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
             },
 
             apply: function($survey, checked) {
@@ -285,13 +285,13 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
                 if ($survey.is('.error'))
                     return;
-                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_participation_data)) {
                     var object_names = get_question_data_names($survey, self.objectQuestion, self.objectOptions);
                     jQuery.each(object_names, function(i, object_name) {
-                        var object_data = last_partecipation_data[object_name];
+                        var object_data = last_participation_data[object_name];
                         form_element_fill($survey.find('[name='+object_name+']'), object_data).change();
                     });
                 }
@@ -316,9 +316,9 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
                 var $t = $survey.find("#question-"+self.objectQuestion);
-                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_participation_data)) {
                     enable_options($t.show().find('.choices > li'));
                 }
                 else {
@@ -345,9 +345,9 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
                 var $t = $survey.find("#question-"+self.objectQuestion);
-                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_participation_data)) {
                     $t.hide().find(':input').attr('disabled', true);
                 }
                 else {
@@ -374,10 +374,10 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
-                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_participation_data)) {
                     enable_options($t.show());
                 }
                 else {
@@ -404,10 +404,10 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
+            init: function($survey, last_participation_data) {
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
-                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_partecipation_data)) {
+                if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_participation_data)) {
                     $t.hide().find(':input').attr('disabled', true);
                 }
                 else {
@@ -434,8 +434,8 @@
             objectOptions: objectOptions,
             isExclusive: false,
 
-            init: function($survey, last_partecipation_data) {
-                self.last_partecipation_data = last_partecipation_data;
+            init: function($survey, last_participation_data) {
+                self.last_participation_data = last_participation_data;
             },
 
             apply: function($survey, checked) {
@@ -444,7 +444,7 @@
                 if (checked) {
                     var object_names = get_question_data_names($survey, self.objectQuestion, self.objectOptions);
                     jQuery.each(object_names, function(i, object_name) {
-                        var object_data = self.last_partecipation_data[object_name];
+                        var object_data = self.last_participation_data[object_name];
                         form_element_fill($survey.find('[name='+object_name+']'), object_data).change();
                     });
                 }

@@ -25,7 +25,7 @@
         var $survey = $('.'+options.templateClass, context);
         var questionSelector = '.'+options.questionClass;
 
-        var last_partecipation_data = pollster_last_partecipation_data();
+        var last_participation_data = pollster_last_participation_data();
 
         var data_types = {}, rules_by_question = {}, derived_values = {};
 
@@ -34,8 +34,8 @@
         pollster_fill_derived_values(derived_values);
 
         $survey.find('.open-option-data').attr('disabled', true);
-        if (last_partecipation_data && last_partecipation_data.timestamp)
-            $('.question-builtin [name=timestamp]').val(last_partecipation_data.timestamp);
+        if (last_participation_data && last_participation_data.timestamp)
+            $('.question-builtin [name=timestamp]').val(last_participation_data.timestamp);
 
         // Bind data types to question elements
 
@@ -145,7 +145,7 @@
 
         jQuery.each(rules_by_question, function(i, by_question) {
             jQuery.each(by_question, function(i, rule) {
-                rule.init($survey, last_partecipation_data);
+                rule.init($survey, last_participation_data);
             });
         });
 

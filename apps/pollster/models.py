@@ -103,14 +103,14 @@ class Survey(models.Model):
         else:
             return 'results_'+str(self.shortname)
 
-    def get_last_partecipation_data(self, user_id, global_id):
+    def get_last_participation_data(self, user_id, global_id):
         model = self.as_model()
-        partecipation = model.objects\
+        participation = model.objects\
             .filter(user=user_id)\
             .filter(global_id = global_id)\
             .order_by('-timestamp')\
             .values()
-        return _get_or_default(partecipation)
+        return _get_or_default(participation)
 
     def as_model(self):
         fields = []
