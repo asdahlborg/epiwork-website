@@ -477,6 +477,159 @@
         }
     },
     {
+        "pk": 54,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "file",
+            "migration": "0001_initial"
+        }
+    },
+    {
+        "pk": 55,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "file",
+            "migration": "0002_freeze"
+        }
+    },
+    {
+        "pk": 56,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "file",
+            "migration": "0003_publisher"
+        }
+    },
+    {
+        "pk": 57,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "link",
+            "migration": "0001_initial"
+        }
+    },
+    {
+        "pk": 58,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "link",
+            "migration": "0002_link_rename"
+        }
+    },
+    {
+        "pk": 59,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "link",
+            "migration": "0003_page_link"
+        }
+    },
+    {
+        "pk": 60,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "link",
+            "migration": "0004_larger_link_names"
+        }
+    },
+    {
+        "pk": 61,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "link",
+            "migration": "0005_publisher"
+        }
+    },
+    {
+        "pk": 62,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "file",
+            "migration": "0004_table_rename"
+        }
+    },
+    {
+        "pk": 63,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:36",
+            "app_name": "file",
+            "migration": "0005_publisher2"
+        }
+    },
+    {
+        "pk": 64,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:42",
+            "app_name": "link",
+            "migration": "0006_table_rename"
+        }
+    },
+    {
+        "pk": 65,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:42",
+            "app_name": "link",
+            "migration": "0007_publisher2"
+        }
+    },
+    {
+        "pk": 66,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-07-30 09:06:42",
+            "app_name": "link",
+            "migration": "0008_mailto"
+        }
+    },
+    {
+        "pk": 67,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-05 10:49:08",
+            "app_name": "partnersites",
+            "migration": "0001_initial"
+        }
+    },
+    {
+        "pk": 68,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-05 10:49:08",
+            "app_name": "partnersites",
+            "migration": "0002_auto__add_field_sitesettings_logo"
+        }
+    },
+    {
+        "pk": 69,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-10 10:29:16",
+            "app_name": "survey",
+            "migration": "0001_initial"
+        }
+    },
+    {
+        "pk": 70,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-10 10:29:20",
+            "app_name": "pollster",
+            "migration": "0001_initial"
+        }
+    },
+    {
         "pk": 28,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -528,6 +681,15 @@
             "model": "pagemoderator",
             "name": "PageModerator",
             "app_label": "cms"
+        }
+    },
+    {
+        "pk": 50,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "sitesettings",
+            "name": "Site settings",
+            "app_label": "partnersites"
         }
     },
     {
@@ -747,6 +909,15 @@
         }
     },
     {
+        "pk": 58,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "option",
+            "name": "option",
+            "app_label": "pollster"
+        }
+    },
+    {
         "pk": 31,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -810,6 +981,42 @@
         }
     },
     {
+        "pk": 55,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "question",
+            "name": "question",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 57,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "questioncolumn",
+            "name": "question column",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 53,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "questiondatatype",
+            "name": "question data type",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 56,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "questionrow",
+            "name": "question row",
+            "app_label": "pollster"
+        }
+    },
+    {
         "pk": 9,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -834,6 +1041,24 @@
             "model": "responsesendqueue",
             "name": "response send queue",
             "app_label": "survey"
+        }
+    },
+    {
+        "pk": 59,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "rule",
+            "name": "rule",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 52,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "ruletype",
+            "name": "rule type",
+            "app_label": "pollster"
         }
     },
     {
@@ -864,6 +1089,15 @@
         }
     },
     {
+        "pk": 51,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "survey",
+            "name": "survey",
+            "app_label": "pollster"
+        }
+    },
+    {
         "pk": 15,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -891,12 +1125,66 @@
         }
     },
     {
+        "pk": 64,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "translationoption",
+            "name": "translation option",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 61,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "translationquestion",
+            "name": "translation question",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 63,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "translationquestioncolumn",
+            "name": "translation question column",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 62,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "translationquestionrow",
+            "name": "translation question row",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 60,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "translationsurvey",
+            "name": "translation survey",
+            "app_label": "pollster"
+        }
+    },
+    {
         "pk": 3,
         "model": "contenttypes.contenttype",
         "fields": {
             "model": "user",
             "name": "user",
             "app_label": "auth"
+        }
+    },
+    {
+        "pk": 54,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "virtualoptiontype",
+            "name": "virtual option type",
+            "app_label": "pollster"
         }
     },
     {
@@ -1164,11 +1452,87 @@
         }
     },
     {
+        "pk": "3b5842040754bafa87e975c7d27bdd6f",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2011-08-14 15:02:57",
+            "session_data": "Y2I1ZjQ0ODMyYTUxYmM0ZTAyYmYxNDEzNDIyNGY0ZTEzOTk5YjNlMTqAAn1xAS4=\n"
+        }
+    },
+    {
+        "pk": "a66ea9763749c5e30ca82bbbd5debd9e",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2011-08-19 12:50:50",
+            "session_data": "NDk4ODE3N2ZmMzA0N2YzNzdjZmRkYTQyYmVlZTEyN2RlMWEwM2IxZTqAAn1xAShVDmNtc19hZG1p\nbl9zaXRlcQJLAVUNX2F1dGhfdXNlcl9pZHEDSwFVEl9hdXRoX3VzZXJfYmFja2VuZHEEVSlkamFu\nZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEFVQhjbXNfZWRpdHEGiHUu\n"
+        }
+    },
+    {
+        "pk": "3268611749d7048351ca4802de4f82c3",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2011-08-21 09:46:50",
+            "session_data": "MjZkODY5ZDg1MjYzOWU0MDBkNGU4MmU4ZjA4OTk2ZjBkOGE2MTE0MzqAAn1xAShVDmNtc19hZG1p\nbl9zaXRlcQJLAVUIY21zX2VkaXRxA4hVEl9hdXRoX3VzZXJfYmFja2VuZHEEVSlkamFuZ28uY29u\ndHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEFVQ1fYXV0aF91c2VyX2lkcQZLAXUu\n"
+        }
+    },
+    {
         "pk": 1,
         "model": "sites.site",
         "fields": {
-            "domain": "www.example.org",
-            "name": "Your site name"
+            "domain": "influenzanet.eu",
+            "name": "Influenzanet"
+        }
+    },
+    {
+        "pk": 358,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-05 15:38:43",
+            "object_repr": "influenzanet.eu",
+            "object_id": "1",
+            "change_message": "No fields changed.",
+            "user": 1,
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 357,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-05 15:38:19",
+            "object_repr": "influenzanet.eu",
+            "object_id": "1",
+            "change_message": "Changed logo and light_color for Site settings \"Site settings\".",
+            "user": 1,
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 356,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-05 15:37:01",
+            "object_repr": "influenzanet.eu",
+            "object_id": "1",
+            "change_message": "Changed domain and name. Changed logo and light_color for Site settings \"Site settings\".",
+            "user": 1,
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 355,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-05 12:50:24",
+            "object_repr": "News snippet (Left bar)",
+            "object_id": "10",
+            "change_message": "Changed html.",
+            "user": 1,
+            "content_type": 25
         }
     },
     {
@@ -5775,6 +6139,413 @@
     },
     {
         "pk": 1,
+        "model": "survey.surveyuser",
+        "fields": {
+            "last_participation": 2,
+            "last_participation_date": "2010-11-04 12:50:43",
+            "name": "bon",
+            "global_id": "193807d8-4a30-4601-9bc5-bc59db1696cd",
+            "user": []
+        }
+    },
+    {
+        "pk": 2,
+        "model": "survey.surveyuser",
+        "fields": {
+            "last_participation": 4,
+            "last_participation_date": "2010-11-04 15:26:57",
+            "name": "zo",
+            "global_id": "cd81f47b-779d-42fe-8dbf-332401e0b9a4",
+            "user": []
+        }
+    },
+    {
+        "pk": 3,
+        "model": "survey.surveyuser",
+        "fields": {
+            "last_participation": 8,
+            "last_participation_date": "2010-11-08 15:45:34",
+            "name": "bon",
+            "global_id": "b9e8353b-e113-4b03-856f-c118e0b70666",
+            "user": []
+        }
+    },
+    {
+        "pk": 4,
+        "model": "survey.surveyuser",
+        "fields": {
+            "last_participation": null,
+            "last_participation_date": null,
+            "name": "Antwan",
+            "global_id": "12139e6b-3b87-4c2f-80e8-5b0e6f98afbd",
+            "user": [
+                1
+            ]
+        }
+    },
+    {
+        "pk": 1,
+        "model": "survey.survey",
+        "fields": {
+            "updated": "2010-11-04 15:09:17",
+            "description": null,
+            "title": "",
+            "specification": "# 'Gold Standard' Questionnaires (Deliverable of Task 2) KULeuven\n# 1) New user registration: intake questions\n\nclass IntakeQ1(d.Question):\n  question = 'What is your gender?'\n  type = 'options-single'\n  options = ((0, 'Male'),\n             (1, 'Female'), )\n  \nclass IntakeQ2(d.Question):\n  question = 'What is your birth month and birth year?'\n  type = 'month-year'\n\nclass IntakeQ3(d.Question):\n  question = 'What is your home postal code?'\n  type = 'postcode'\n\nclass IntakeQ4(d.Question):\n  question = 'What is your school/workplace postal code?'\n  type = 'postcode'\n\nclass IntakeQ5(d.Question):\n  question = \"\"\"In your daily life, do you come into frequent contact with any \n  of the following? (Tick all that apply)\"\"\"\n  type = 'options-multiple'\n  options = ((0, 'Groups of children or teenagers'),\n             (1, 'Groups of the elderly (>65 years of age)'),\n             (2, 'Patients'),\n             (3, \"\"\"Crowds of people (more than 10 individuals on one and the\n             same occasion)\"\"\"), )\n\nclass IntakeQ6(d.Question):\n  question = \"\"\"Not counting you, how many people in each of the following age\n  groups live in your household?\"\"\"\n  type = 'multiple-number'\n  categories = ((0, '0-4 years'),\n                (1, '5-18 years'),\n                (2, '19-44 years'),\n                (3, '45-64 years'),\n                (4, '65+ years'), )\n\nclass IntakeQ6b(d.Question):\n  question = \"\"\"How many of ther children aged 0-4 in your household go to\n  school or day-care?\"\"\"\n  type = 'options-single'\n  options = ((1, '1'),\n             (2, '2'),\n             (3, '3'),\n             (4, '4'),\n             (5, '5'),\n             (99, 'more than 5'), )\n  \nclass IntakeQ7(d.Question):\n  question = 'What is your daily main means of transportation?'\n  type = 'options-single'\n  options = ((0, 'Walking'),\n             (1, 'Bike'),\n             (2, 'Motorbike/scooter'),\n             # wording '(including taxi)' added to question following telco\n             # 26-10-2010.\n             (3, 'Car (including taxi)'),\n             (4, 'Public transportation (Bus, train, ...'),\n             (5, 'Other'), )\n\nclass IntakeQ7b(d.Question):\n  question = \"\"\"On a normal day, how much time do you spend on public transport\n  (bus, train, underground)?\"\"\"\n  type = 'options-single'\n  options = ((0, 'No time at all'),\n             (1, '0-30 minutes'),\n             (2, '30 minutes - 1,5 hours'),\n             (4, '1,5 hours - 4 hours'),\n             (5, '>4 hours'), )\n\nclass IntakeQ8(d.Question):\n  question = 'Were you vaccinated against swine flu last winter?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ8b(d.Question):\n  question = \"\"\"When were you vaccinated against swine flu? Date of the first\n  dose?\"\"\"\n  type = 'date'\n\nclass IntakeQ8c(d.Question):\n  question = 'If you received two doses: date of the second dose?'\n  type = 'date'\n\nclass IntakeQ9(d.Question):\n  question = \"\"\"Did you receive seasonal flu vaccine last autumn/winter\n  (i.e. 2009-2010)?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ10(d.Question):\n  # word 'seasonal' added to question following telco 26-10-2010.\n  question = 'Have you had a seasonal flu vaccine this season ({{ SEASON }})?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ10b(d.Question):\n  question = \"\"\"When did you receive a flu vaccine this season ({{ SEASON }})?\n  Date of the seasonal flu vaccination?\"\"\"\n  type = 'date'\n\nclass IntakeQ10c(d.Question):\n  question = \"\"\"What were your reasons for getting a seasonal influenza\n  vaccination this fall or winter season ({{ SEASON }})? (Tick all that apply)\"\"\"\n  type = 'options-multiple'\n  options = ((0, 'Because I belong to a risk group'),\n             (1, \"\"\"Because vaccination decreases the risk of me getting\n             influenza\"\"\"),\n             (2, \"\"\"Because vaccination decreases the risk of spreading\n             influenza to others\"\"\"),\n             (3, \"\"\"Because my general practitioner recommended influenza\n             vaccination\"\"\"),\n             (4, 'Because it was recommended in my workplace/school'),\n             (5, \"\"\"Because the vaccine was readily available and vaccine\n             administration was convenient\"\"\"),\n             (6, 'Because the vaccine was free'),\n             (7, \"Because I don't want to miss work/school\"),\n             (8, 'Because I believe that the vaccine is effective'),\n             (9, 'Other reason(s)'), )\n  \nclass IntakeQ10d(d.Question):\n  question = \"\"\"What are your reasons for NOT getting a flu vaccine this season\n  ({{ SEASON }})? (Tick all that apply)\"\"\"\n  type= 'options-multiple'\n  options = ((0, 'I am still (planning to) get a vaccine'),\n             (1, 'Because I don\u2019t belong to a risk group'),\n             (2, \"\"\"Because it is better to build your own natural immunity\n             against the flu\"\"\"),\n             (3, 'Because I doubt that the influenza vaccine is effective'),\n             (4, 'Because influenza is a minor illness'),\n             (5, 'Because influenza vaccine can cause influenza'),\n             (6, \"\"\"Because I am worried that the vaccine is not safe or will\n             cause illness or other adverse events\"\"\"),\n             (7, 'Because the vaccine is not readily available to me'),\n             (8, 'Because the vaccine is not free of charge'),\n             (9, 'Because I dislike injections'),\n             (10, 'No particular reason'),\n             (11, 'Other reason(s)'), )\n\nclass IntakeQ11(d.Question):\n  question = \"\"\"Did you get an invitation from your doctor to receive flu\n  vaccine this fall/winter season?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ12(d.Question):\n  question = \"\"\"Do you take medication for any of the following medical\n  conditions?  (Tick all that apply)\"\"\"\n  type = 'options-multiple'\n  options = ((0, 'Yes, I am taking medication because of Asthma'),\n             (1, 'Yes, I am taking medication because of Diabetes'),\n             (2, \"\"\"Yes, I am taking medication because of Lung disorder (COPD,\n             emphysema, ...)\"\"\"),\n             (3, 'Yes, I am taking medication because of a Heart disorder'),\n             (4, 'Yes, I am taking medication because of a Kidney disorder'),\n             (5, \"\"\"Yes, I am taking medication because of an immunocompromised\n             condition (e.g. splenectomy, organ transplant, aquired immune\n             deficiency, cancer treatment)\"\"\"), )\n  \nclass IntakeQ13(d.Question):\n  question = 'Are you currently pregnant?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ13b(d.Question):\n  question = \"In which trimester of the pregnancy are you?\"\n  type = 'options-single'\n  options = ((0, 'First trimester (week 1-12)'),\n             (1, 'Second trimester (week 13-28)'),\n             (2, 'Third trimester (week 29-delivery)'),\n             (3, \"I don't know\"), )\n\nclass IntakeQ14(d.Question):\n  question = 'Do you smoke?'\n  type = 'options-single'\n  options = ((0, 'No'),\n             (1, 'Yes, less than 10 cigarettes a day'),\n             (2, 'Yes, 10 cigarettes or more a day'),\n             (3, 'Yes, but exclusively pipe or cigars'),\n             (4, \"I don't know\"), )\n  \nclass IntakeQ15(d.Question):\n  question = \"\"\"Do you have one of the following allergies that can cause\n  respiratory symptoms? (Multiple answers possible)\"\"\"\n  type = 'options-multiple'\n  options = ((0, 'Pollen (hay fever)'),\n             (1, 'House dust mite'),\n             (2, 'Domestic animals/pets'),\n             (3, \"\"\"Other allergies that cause respiratory symptoms (e.g.\n             sneezing, runny eyes)\"\"\"), )\n\nclass IntakeQ18(d.Question):\n  question = \"\"\"On average over the past 5 years, how many times per year did\n  you have common colds or flu-like diseases?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Never'),\n             (1, 'One or two times a year'),\n             (2, 'Between 3 and 5 times a year'),\n             (3, 'Between 6 and 10 times a year'),\n             (4, 'More than 10 times a year'), )\n\nclass IntakeQ16(d.Question):\n  question = 'Do you follow a special diet?'\n  type = 'options-single'\n  options = ((0, 'No special diet'),\n             (1, 'Vegetarian'),\n             (2, 'Veganism'),\n             (3, 'Low-calorie'),\n             (4, 'Other'), )\n  \nclass IntakeQ17(d.Question):\n  question = 'Do you have pets at home? (Multiple answers possible)'\n  type = 'options-multiple'\n  options = ((0, 'No'),\n             (1, 'Yes, one or more dogs'),\n             (2, 'Yes, one or more cats'),\n             (3, 'Yes, one or more birds'),\n             (4, 'Yes, one ore more other animals'), )\n\nclass Survey(d.Survey):\n    id = 'gold-standard-intake-0.1.0'\n    rules = ( IntakeQ1,\n              IntakeQ2,\n              IntakeQ3,\n              IntakeQ4,\n              IntakeQ5,\n#              IntakeQ6,\n#              d.If(~d.Equal(IntakeQ6[0], 0)) ( IntakeQ6b ), # category 0 not 0\n              IntakeQ7,\n              IntakeQ7b,\n              IntakeQ8,\n              d.If(d.Equal(IntakeQ8, 0)) ( IntakeQ8b, IntakeQ8c ),\n              IntakeQ9,\n              IntakeQ10,\n\n              d.If(d.Equal(IntakeQ10, 0)) ( IntakeQ10b, IntakeQ10c ),\n              d.Else( IntakeQ10d ),\n\n              IntakeQ11,\n              IntakeQ12,\n              IntakeQ13,\n              d.If(d.Equal(IntakeQ13, 0)) ( IntakeQ13b ),\n              IntakeQ14,\n              IntakeQ15,\n              IntakeQ18, # decided in telco 26-10-2010.\n              IntakeQ16,\n              IntakeQ17,\n              )\n",
+            "created": "2010-11-04 15:09:17",
+            "survey_id": "gold-standard-intake-0.1.0"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "survey.survey",
+        "fields": {
+            "updated": "2010-11-08 15:44:12",
+            "description": null,
+            "title": "",
+            "specification": "# Weekly evaluation of disease symptoms\n\nclass WeeklyQ1(d.Question):\n  question = \"\"\"Did you have one or more of the following symptoms since your\n  last visit? (Tick all that apply)\"\"\"\n  type = 'options-multiple'\n  options = ((1, 'Fever'),\n             (17, 'Chills'),\n             (3, 'Runny or blocked nose'),\n             (4, 'Sneezing'),\n             (5, 'Sore throat'),\n             (6, 'Cough'),\n             (18, 'Shortness of breath'),\n             (8, 'Headache'),\n             (9, 'Muscle pain'),\n             (10, 'Chest pain'),\n             (11, 'Feeling tired or exhausted'),\n             (12, 'Loss of appetite'),\n             (7, 'Coloured sputum'),\n             (2, 'Watery, bloodshot eyes'),\n             (13, 'Nausea'),\n             (14, 'Vomiting'),\n             (15, 'Diarrhoea'),\n             (19, 'Stomach ache'),\n             (16, 'Other'),\n             # (0, 'No symptoms'), # Removed to use d.Empty\n             )\n\nclass WeeklyQ1b(d.Question):\n  question = 'Did your symptoms develop suddenly?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass WeeklyQ2(d.Question):\n  question = 'Did you take your temperature?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass WeeklyQ2b(d.Question):\n  question = \"\"\"When you measured your temperature, what was the highest\n  temperature measured?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Below 37\u00b0C'),\n             (1, '37\u00b0 - 37.4\u00b0C'),\n             (2, '37.5\u00b0 - 37.9\u00b0C'),\n             (3, '38\u00b0 \u2013 38.9\u00b0C'),\n             (4, '39\u00b0 - 39.9\u00b0C'),\n             (5, '40\u00b0C or more'), )\n\nclass WeeklyQ2c(d.Question):\n  question = 'When did the fever start?' \n  type = 'date'\n  # or \"I don\u2019t remember\"\n\nclass WeeklyQ3(d.Question):\n  question = \"\"\"On {{ LAST_SURVEY.DATE|date:'l F jS' }} you reported that you\n  were still ill with symptoms that began on\n  {{ LAST_SURVEY.WeeklyQ4|date:'l F jS' }}. Are the symptoms you reported today\n  part of the same bout of illness?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'), )\n  \nclass Message1(d.Question):\n  question = \"\"\"To save you time, we have filled in the information you gave us\n  previously about your illness. Please check that it is still correct, and\n  make any changes -- for instance, if you have visited a doctor since you last\n  completed the survey.\"\"\"\n  type = 'advise'\n  \nclass WeeklyQ4(d.Question):\n  question = 'When did the first symptoms appear?'\n  type = 'date'\n\nclass WeeklyQ5(d.Question):\n  question = 'When did your symptoms end?'\n  type = 'date'\n# We also need the option of \"I am still ill\"\n\n#class WeeklyQ5(d.Question):\n#  question = 'When did your symptoms end?'\n#  type = 'date-or-text'\n#  text = 'I am still ill'\n\nclass WeeklyQ6(d.Question):\n  question = \"\"\"Because of your symptoms, did you seek medical attention by\n  visiting (seeing face to face) any of the following (tick all that apply)?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Yes: general practitioner (GP) or GP\u2019s practice nurse'),\n             (1, 'Yes: Hospital admission'),\n             (2, \"\"\"Yes: Hospital accident & emergency department/out of hours\n             service\"\"\"),\n             (3, 'Yes: Other'),\n             (4, 'No'),\n             (5, 'No, but I have an appointment scheduled in the future'), )\n\n# this should be asked for each option ticked in the previous question\nclass WeeklyQ6b(d.Question):\n  question = \"\"\"How soon after your symptoms appeared did you seek medical\n  attention?\"\"\"\n  type = 'table-of-options-single'\n  options = ((0, '<12 hours'),\n             (1, '12-24 hours (1 day)'),\n             (2, '2 days'),\n             (3, '3 days'),\n             (4, '4 days'),\n             (5, '5-7 days'),\n             (6, '>7 days'), )\n\nclass WeeklyQ7(d.Question):\n  question = \"Did you take medication for these symptoms?\"\n  type = 'options-multiple'\n  options = ((0, \"No medication\"),\n             (1, \"\"\"Pain killers or antipyretics (e.g. paracetamol, lemsip,\n             ibuprofen, aspirin, etc)\"\"\"),\n             (2, \"Expectorants (cough medicine)\"),\n             (3, \"Antivirals (Tamiflu, Relenza)\"),\n             (4, \"Antibiotics\"),\n             (5, \"Other\"), )\n\nclass WeeklyQ7b(d.Question):\n  question = \"\"\"How long after the beginning of your symptoms did you start\n  taking antiviral medication?\"\"\"\n  type = 'options-multiple'\n  options = ((0, \"Same day (within 24 hours)\"),\n             (1, \"1 day later\"),\n             (2, \"2 days later\"),\n             (3, \"3 days later \"),\n             (4, \"4 days later\"),\n             (5, \"5-7 days later\"),\n             (6, \">7 days later\"), )\n\nclass WeeklyQ8(d.Question):\n  question = \"Did you change your daily routine because of your illness?\"\n  type = 'options-single'\n  options = ((0, \"No\"),\n             (1, \"Yes, but I did not take time off work/school\"),\n             (2, \"Yes, I took time off work/school\"), )\n\nclass WeeklyQ8b(d.Question):\n  question = \"Are you still off work/school?\"\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass WeeklyQ8c(d.Question):\n  question = \"How long were you off work/school?\"\n  type = 'options-single'\n  options = ((0, \"1 day\"),\n             (1, \"2 days\"),\n             (2, \"3 days\"),\n             (3, \"4 days\"),\n             (4, \"5 days\"),\n             (5, \"6 days\"),\n             (6, \"1 to 2 weeks\"),\n             (7, \"2 to 3 weeks\"),\n             (8, \">3 weeks\"), )\n\nclass WeeklyQ9a(d.Question):\n  question = \"\"\"How many people did you meet inside or outside your household\n  that had flu-like symptoms in the past week?\n\n  <em>Inside</em> your household:\"\"\"  # Emphasise the word 'Inside' \n  type = 'options-single'\n  options = ((0, \"0\"),\n             (1, \"1\"),\n             (2, \"2\"),\n             (3, \"3\"),\n             (4, \"4\"),\n             (5, \"5\"),\n             (6, \">5\"),\n             (7, \"Don\u2019t know\"), )\n\nclass WeeklyQ9b(d.Question):\n  question = \"\"\"How many people did you meet inside or outside your household\n  that had flu-like symptoms in the past week?\n\n  <em>Outside</em> your household:\"\"\"  # Emphasise the word 'Outside' \n  type = 'options-single'\n  options = ((0, \"0\"),\n             (1, \"1\"),\n             (2, \"2\"),\n             (3, \"3\"),\n             (4, \"4\"),\n             (5, \"5\"),\n             (6, \">5\"),\n             (7, \"Don\u2019t know\"), )\n\nclass WeeklyQ10(d.Question):\n  question = \"\"\"According to our data you did not receive a seasonal flu\n  vaccination. Have you had one in the meantime?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Meanwhile I have received a seasonal flu vaccination'),\n             (1, 'I did not receive a seasonal flu vaccination'), )\n\nclass WeeklyQ11(d.Question):\n  question = 'What do you think yourself is causing your symptoms?'\n  type = 'options-single'\n  options = ((0, \"Influenza or influenza-like illness\"),\n             (1, \"Common cold\"),\n             (2, \"Allergy/hay fever\"),\n             (3, \"Gastroenteritis/gastric flu\"),\n             (4, \"I don\u2019t have an idea\"), )\n\n# WeeklyQ11 requires an answer so if its value is empty in the previous\n# response then the previous response must not exist.\nprevious_response_exists = ~ d.Empty(d.Response('WeeklyQ11'))\n\n\nclass Survey(d.Survey):\n  id = 'gold-standard-weekly-0.1.0'\n\n  # Local propositions\n  symptoms_present             = ~ d.Empty(WeeklyQ1)\n  took_temp                    = d.Equal(WeeklyQ2, 0)\n  fever_among_symptoms         = d.Contains(WeeklyQ1, [1])\n  temp_over_37half             = d.In(WeeklyQ2b, [2,3,4,5])\n  took_antivirals              = d.Contains(WeeklyQ7, [3])\n  reported_no_seasonal_flu_jab = ~ d.Equal(d.Profile('IntakeQ9'), 0)\n  # TODO still_ill                    = d.Equal(WeeklyQ3, 0)\n  # Tautology:\n  still_ill                    = d.Empty(WeeklyQ1) | ~ d.Empty(WeeklyQ1)\n  \n  rules = (\n    WeeklyQ1,\n    d.If( symptoms_present )\n    ( WeeklyQ1b ),\n    WeeklyQ2,\n    d.If( symptoms_present & took_temp)\n    ( WeeklyQ2b ),\n    d.If( fever_among_symptoms | temp_over_37half )\n    ( WeeklyQ2c),\n\n    d.If( previous_response_exists\n          & still_ill\n          & ~ d.Empty(WeeklyQ1) # Symptoms are present\n          )\n    ( WeeklyQ3,\n      d.If(d.Equal(WeeklyQ3, 0)) ( Message1, WeeklyQ4 ),\n      WeeklyQ5,\n      WeeklyQ6,\n      d.If(d.Equal(WeeklyQ6, 1)) ( WeeklyQ6b ),\n      WeeklyQ7,\n      d.If( took_antivirals ) ( WeeklyQ7b ),\n      WeeklyQ8,\n      d.If(d.Equal(WeeklyQ8, 2)) ( WeeklyQ8b, WeeklyQ8c,)),\n    \n    WeeklyQ9a,\n    WeeklyQ9b,\n\n    d.If( reported_no_seasonal_flu_jab ) ( WeeklyQ10 ),\n    # TODO Possibly update IntakeQ9 here?\n\n    WeeklyQ11,\n    )\n\n  # TODO tidy up this syntax: see survey.py lines 100-125\n  prefill = { WeeklyQ4:  still_ill,\n              WeeklyQ5:  still_ill,\n              WeeklyQ6:  still_ill,\n              WeeklyQ6b: still_ill,\n              WeeklyQ7:  still_ill,\n              WeeklyQ7b: still_ill,\n              WeeklyQ8:  still_ill,\n              WeeklyQ8b: still_ill,\n              WeeklyQ8c: still_ill,\n              WeeklyQ9a: still_ill,\n              WeeklyQ9b: still_ill,\n              }\n\n",
+            "created": "2010-11-04 15:09:18",
+            "survey_id": "gold-standard-weekly-0.1.0"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "survey.survey",
+        "fields": {
+            "updated": "2010-12-22 15:45:52",
+            "description": null,
+            "title": "",
+            "specification": "# Weekly evaluation of disease symptoms including contact questions.\n\nclass WeeklyQ1(d.Question):\n  question = \"\"\"Did you have one or more of the following symptoms\n  {% if LAST_SURVEY %}since your last visit{% else %}during the last\n  week{% endif %}? (Tick all that apply)\"\"\"\n  type = 'options-multiple'\n  options = ((1, 'Fever'),\n             (17, 'Chills'),\n             (3, 'Runny or blocked nose'),\n             (4, 'Sneezing'),\n             (5, 'Sore throat'),\n             (6, 'Cough'),\n             (18, 'Shortness of breath'),\n             (8, 'Headache'),\n             (9, 'Muscle pain'),\n             (10, 'Chest pain'),\n             (11, 'Feeling tired or exhausted'),\n             (12, 'Loss of appetite'),\n             (7, 'Coloured sputum'),\n             (2, 'Watery, bloodshot eyes'),\n             (13, 'Nausea'),\n             (14, 'Vomiting'),\n             (15, 'Diarrhoea'),\n             (19, 'Stomach ache'),\n             (16, 'Other'),\n             (0, 'No symptoms'),\n             )\n\nclass WeeklyQ1b(d.Question):\n  question = 'Did your symptoms develop suddenly?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass WeeklyQ2(d.Question):\n  question = 'Did you take your temperature?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass WeeklyQ2b(d.Question):\n  question = \"\"\"When you measured your temperature, what was the highest\n  temperature measured?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Below 37C'),\n             (1, '37 - 37.4C'),\n             (2, '37.5 - 37.9C'),\n             (3, '38 - 38.9C'),\n             (4, '39 - 39.9C'),\n             (5, '40C or more'), )\n\nclass WeeklyQ2c(d.Question):\n  question = 'When did the fever start?' \n  type = 'date'\n  # or \"I don't remember\"\n\nclass WeeklyQ3(d.Question):\n  question = \"\"\"On {{ LAST_SURVEY.DATE|date:'l F jS' }} you reported that you\n  were still ill with symptoms that began on\n  {{ LAST_SURVEY.WeeklyQ4|date:'l F jS' }}. Are the symptoms you reported today\n  part of the same bout of illness?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'), )\n  \nclass Message1(d.Question):\n  question = \"\"\"To save you time, we have filled in the information you gave us\n  previously about your illness. Please check that it is still correct, and\n  make any changes -- for instance, if you have visited a doctor since you last\n  completed the survey.\"\"\"\n  type = 'advise'\n  \nclass WeeklyQ4(d.Question):\n  question = 'When did the first symptoms appear?'\n  type = 'date'\n\nclass WeeklyQ5(d.Question):\n  question = 'When did your symptoms end?'\n  type = 'date-or-option'\n  text = 'I am still ill'\n\nclass WeeklyQ6(d.Question):\n  question = \"\"\"Because of your symptoms, did you seek medical attention by\n  visiting (seeing face to face) any of the following (tick all that apply)?\"\"\"\n  type = 'options-multiple'\n  options = ((0, \"Yes: family doctor or family doctor's practice nurse\"),\n             (1, 'Yes: Hospital admission'),\n             (2, \"\"\"Yes: Hospital accident & emergency department/out of hours\n             service\"\"\"),\n             (3, 'Yes: Other'),\n             (4, 'No'),\n             (5, 'No, but I have an appointment scheduled in the future'), )\n\n# this should be asked for each option ticked in the previous question\nclass WeeklyQ6b(d.Question):\n  question = \"\"\"How soon after your symptoms appeared did you seek medical\n  attention?\"\"\"\n  type = 'table-of-options-single'\n  type_args = [WeeklyQ6, [0,1,2,3]]\n  options = ((0, '<12 hours'),\n             (1, '12-24 hours (1 day)'),\n             (2, '2 days'),\n             (3, '3 days'),\n             (4, '4 days'),\n             (5, '5-7 days'),\n             (6, '>7 days'), )\n\nclass WeeklyQ6c(d.Question):\n  question = \"\"\"Because of your symptoms, did you seek medical attention by\n  telephone with any of the following (tick all that apply)?\"\"\"\n  type = 'options-multiple'\n  options = ((0, 'Yes: Family doctor - spoke to receptionist only'),\n             (1, 'Yes: Family doctor - spoke to doctor or nurse'),\n             (2, 'Yes: National health advice service'),\n             (3, 'Yes: National pandemic flu service'),\n             (4, 'Yes: Other'),\n             (5, 'No'),)\n\nclass WeeklyQ7(d.Question):\n  question = \"Did you take medication for these symptoms?\"\n  type = 'options-multiple'\n  options = ((0, \"No medication\"),\n             (1, \"\"\"Pain killers or antipyretics (e.g. paracetamol, lemsip,\n             ibuprofen, aspirin, etc)\"\"\"),\n             (2, \"Expectorants (cough medicine)\"),\n             (3, \"Antivirals (Tamiflu, Relenza)\"),\n             (4, \"Antibiotics\"),\n             (5, \"Other\"), )\n\nclass WeeklyQ7b(d.Question):\n  question = \"\"\"How long after the beginning of your symptoms did you start\n  taking antiviral medication?\"\"\"\n  type = 'options-single'\n  options = ((0, \"Same day (within 24 hours)\"),\n             (1, \"1 day later\"),\n             (2, \"2 days later\"),\n             (3, \"3 days later \"),\n             (4, \"4 days later\"),\n             (5, \"5-7 days later\"),\n             (6, \">7 days later\"), )\n\nclass WeeklyQ8(d.Question):\n  question = \"Did you change your daily routine because of your illness?\"\n  type = 'options-single'\n  options = ((0, \"No\"),\n             (1, \"Yes, but I did not take time off work/school\"),\n             (2, \"Yes, I took time off work/school\"), )\n\nclass WeeklyQ8b(d.Question):\n  question = \"Are you still off work/school?\"\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'), )\n\nclass WeeklyQ8c(d.Question):\n  question = \"How long were you off work/school?\"\n  type = 'options-single'\n  options = ((0, \"1 day\"),\n             (1, \"2 days\"),\n             (2, \"3 days\"),\n             (3, \"4 days\"),\n             (4, \"5 days\"),\n             (5, \"6 days\"),\n             (6, \"1 to 2 weeks\"),\n             (7, \"2 to 3 weeks\"),\n             (8, \">3 weeks\"), )\n\nclass WeeklyQ9a(d.Question):\n  question = \"\"\"How many people did you meet inside or outside your household\n  that had flu-like symptoms in the past week?\n\n  <em>Inside</em> your household:\"\"\"  # Emphasise the word 'Inside' \n  type = 'options-single'\n  options = ((0, \"0\"),\n             (1, \"1\"),\n             (2, \"2\"),\n             (3, \"3\"),\n             (4, \"4\"),\n             (5, \"5\"),\n             (6, \">5\"),\n             (7, \"Don't know\"), )\n\nclass WeeklyQ9b(d.Question):\n  question = \"\"\"How many people did you meet inside or outside your household\n  that had flu-like symptoms in the past week?\n\n  <em>Outside</em> your household:\"\"\"  # Emphasise the word 'Outside' \n  type = 'options-single'\n  options = ((0, \"0\"),\n             (1, \"1\"),\n             (2, \"2\"),\n             (3, \"3\"),\n             (4, \"4\"),\n             (5, \"5\"),\n             (6, \">5\"),\n             (7, \"Don't know\"), )\n\nclass WeeklyQ10(d.Question):\n  question = \"\"\"According to our data you did not receive a seasonal flu\n  vaccination. Have you had one in the meantime?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Meanwhile I have received a seasonal flu vaccination'),\n             (1, 'I did not receive a seasonal flu vaccination'), )\n\nclass WeeklyQ11(d.Question):\n  question = 'What do you think yourself is causing your symptoms?'\n  type = 'options-single'\n  options = ((0, \"Influenza or influenza-like illness\"),\n             (1, \"Common cold\"),\n             (2, \"Allergy/hay fever\"),\n             (3, \"Gastroenteritis/gastric flu\"),\n             (4, \"I don't have an idea\"), )\n\nclass ContactQ1(d.Question):\n  question = \"\"\"How many people did you have conversational contact with\n             yesterday?\"\"\"\n  type = 'table-of-selects'\n  rows = ['Home', 'Work', 'Other']\n  columns = ['0-4 years',\n             '5-18 years',\n             '19-44 years',\n             '45-64 years',\n             '65+ years',]\n  choices = (( 0,  '0'),\n             ( 1,  '1'),\n             ( 2,  '2'),\n             ( 3,  '3'),\n             ( 4,  '4'),\n             ( 5,  '5'),\n             ( 6,  '6'),\n             ( 7,  '7'),\n             ( 8,  '8'),\n             ( 9,  '9'),\n             (10, '>9'),)\n\nclass ContactQ2(d.Question):\n  question = 'How many people did you have physical contact with yesterday?'\n  type = 'table-of-selects'\n  rows = ['Home', 'Work', 'Other']\n  columns = ['0-4 years',\n             '5-18 years',\n             '19-44 years',\n             '45-64 years',\n             '65+ years',]\n  choices = (( 0,  '0'),\n             ( 1,  '1'),\n             ( 2,  '2'),\n             ( 3,  '3'),\n             ( 4,  '4'),\n             ( 5,  '5'),\n             ( 6,  '6'),\n             ( 7,  '7'),\n             ( 8,  '8'),\n             ( 9,  '9'),\n             (10, '>9'),)\n\nclass ContactQ3(d.Question):\n  question = \"\"\"On a normal day, how much time do you spend on public\n  transport (bus, train, undergound)?\"\"\"\n  type = 'options-single'\n  options = ((0, 'No time at all'),\n             (1, '0-30 minutes'),\n             (2, '30 minutes \u2013 1,5 hours'),\n             (3, '1,5 hours \u2013 4 hours'),\n             (4, '>4 hours'), )\n\nclass ContactQ4(d.Question):\n  question = \"\"\"Not including public transport, how long did you spend in an\n  enclosed indoor space (e.g. office, classroom, bar, cinema) with more than 10\n  other people yesterday ?\"\"\"\n  type = 'options-single'\n  options = ((0, 'No time at all'),\n             (1, '0-30 minutes'),\n             (2, '30 minutes \u2013 1,5 hours'),\n             (3, '1,5 hours \u2013 4 hours'),\n             (4, '>4 hours'),)\n  \nclass Survey(d.Survey):\n  id = 'gold-standard-weekly-1.6'\n\n  # Propositions depending on the previous response.\n  \n  # WeeklyQ11 requires an answer so if its value is empty in the previous\n  # response then the previous response must not exist.\n  previous_response_exists = ~ d.Empty(d.Response('WeeklyQ11'))\n  previously_still_ill = previous_response_exists & \\\n                         d.Equal(d.Response('WeeklyQ5'), 0)\n\n  # Propositions depending on (previous) answers in this response.\n  symptoms_present             = ~ d.In(WeeklyQ1, [0]) & \\\n                                 d.In(WeeklyQ1, [1,2,3,4,5,6,7,8,9,10,11,\n                                                 12,13,14,15,16,17,18,19])\n  took_temp                    = d.Equal(WeeklyQ2, 0)\n  fever_among_symptoms         = d.In(WeeklyQ1, [1])\n  temp_over_37half             = d.In(WeeklyQ2b, [2,3,4,5])\n  took_antivirals              = d.In(WeeklyQ7, [3])\n  reported_no_seasonal_flu_jab = ~ d.Equal(d.Profile('IntakeQ9'), 0)\n  still_ill                    = d.Equal(WeeklyQ3, 0)\n  sought_medical_attention     = d.In(WeeklyQ6, [0,1,2,3])\n  \n  rules = ( WeeklyQ1,\n            d.If(symptoms_present) (WeeklyQ1b, WeeklyQ2),\n            d.If(symptoms_present & took_temp) (WeeklyQ2b),\n            d.If(fever_among_symptoms | (took_temp & temp_over_37half))\n            (WeeklyQ2c),\n            d.If(previously_still_ill & symptoms_present) (WeeklyQ3),\n            d.If(still_ill) (Message1),\n            d.If(symptoms_present)\n            ( WeeklyQ4,\n              WeeklyQ5,\n              WeeklyQ6,\n              d.If(sought_medical_attention) (WeeklyQ6b),\n              WeeklyQ6c,\n              WeeklyQ7,\n              d.If(took_antivirals) (WeeklyQ7b),\n              WeeklyQ8,\n              d.If(d.Equal(WeeklyQ8, 2)) (WeeklyQ8b, WeeklyQ8c,)),\n            WeeklyQ9a,\n            WeeklyQ9b,\n            d.If(reported_no_seasonal_flu_jab) (WeeklyQ10),\n            # TODO Possibly update IntakeQ9 here?\n            d.If(symptoms_present) (WeeklyQ11),\n\n#            ContactQ1,\n#            ContactQ2,\n#            ContactQ3,\n#            ContactQ4,\n            )\n\n  # TODO tidy up this syntax: see survey.py lines 100-125\n  prefill = { WeeklyQ4:  still_ill,\n              WeeklyQ5:  still_ill,\n              WeeklyQ6:  still_ill,\n              WeeklyQ6b: still_ill,\n              WeeklyQ6c: still_ill,\n              WeeklyQ7:  still_ill,\n              WeeklyQ7b: still_ill,\n              WeeklyQ8:  still_ill,\n              WeeklyQ8b: still_ill,\n              WeeklyQ8c: still_ill,\n              WeeklyQ9a: still_ill,\n              WeeklyQ9b: still_ill,\n              }\n\n",
+            "created": "2010-12-22 15:45:52",
+            "survey_id": "gold-standard-weekly-1.6"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "survey.survey",
+        "fields": {
+            "updated": "2010-12-22 15:48:41",
+            "description": null,
+            "title": "",
+            "specification": "# 'Gold Standard' Questionnaires (Deliverable of Task 2) KULeuven\n# 1) New user registration: intake questions\n\nclass IntakeQ1(d.Question):\n  question = 'What is your gender?'\n  type = 'options-single'\n  options = ((0, 'Male'),\n             (1, 'Female'), )\n  \nclass IntakeQ2(d.Question):\n  question = 'What is your birth month and birth year?'\n  type = 'month-year'\n\nclass IntakeQ3(d.Question):\n  question = 'What is your home postal code?'\n  type = 'postcode'\n\nclass IntakeQ4(d.Question):\n  question = 'What is your school/workplace postal code?'\n  type = 'postcode'\n\nclass IntakeQ5(d.Question):\n  question = \"\"\"In your daily life, do you come into frequent contact with any \n  of the following? (Tick all that apply)\"\"\"\n  type = 'options-multiple'\n  blank = True\n  options = ((0, 'Groups of children or teenagers'),\n             (1, 'Groups of the elderly (>65 years of age)'),\n             (2, 'Patients'),\n             (3, \"\"\"Crowds of people (more than 10 individuals on one and the\n             same occasion)\"\"\"), )\n\nclass IntakeQ6(d.Question):\n  question = \"\"\"Not counting you, how many people in each of the following age\n  groups live in your household?\"\"\"\n  type = 'table-of-selects'\n  rows = ['']\n  columns = ['0-4 years',\n             '5-18 years',\n             '19-44 years',\n             '45-64 years',\n             '65+ years']\n  choices = (( 0,  '0'),\n             ( 1,  '1'),\n             ( 2,  '2'),\n             ( 3,  '3'),\n             ( 4,  '4'),\n             ( 5,  '5'),\n             ( 6,  '6'),\n             ( 7,  '7'),\n             ( 8,  '8'),\n             ( 9,  '9'),\n             (10, '>9'),)\n\nclass IntakeQ6b(d.Question):\n  question = \"\"\"How many of the children aged 0-4 in your household go to\n  school or day-care?\"\"\"\n  type = 'options-single'\n  options = ((0, 'None'),\n             (1, '1'),\n             (2, '2'),\n             (3, '3'),\n             (4, '4'),\n             (5, '5'),\n             (99, 'more than 5'), )\n  \nclass IntakeQ7(d.Question):\n  question = 'What is your daily main means of transportation?'\n  type = 'options-single'\n  options = ((0, 'Walking'),\n             (1, 'Bike'),\n             (2, 'Motorbike/scooter'),\n             # wording '(including taxi)' added to question following telco\n             # 26-10-2010.\n             (3, 'Car (including taxi)'),\n             (4, 'Public transportation (Bus, train, ...'),\n             (5, 'Other'), )\n\nclass IntakeQ7b(d.Question):\n  question = \"\"\"On a normal day, how much time do you spend on public transport\n  (bus, train, underground)?\"\"\"\n  type = 'options-single'\n  options = ((0, 'No time at all'),\n             (1, '0-30 minutes'),\n             (2, '30 minutes - 1,5 hours'),\n             (4, '1,5 hours - 4 hours'),\n             (5, '>4 hours'), )\n\nclass IntakeQ8(d.Question):\n  question = 'Were you vaccinated against swine flu last winter?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ8b(d.Question):\n  question = \"\"\"When were you vaccinated against swine flu? Date of the first\n  dose?\"\"\"\n  type = 'date'\n\nclass IntakeQ8c(d.Question):\n  question = 'If you received two doses: date of the second dose?'\n  type = 'date'\n\nclass IntakeQ9(d.Question):\n  question = \"\"\"Did you receive seasonal flu vaccine last autumn/winter\n  ({{ LAST_SEASON }})?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ10(d.Question):\n  # word 'seasonal' added to question following telco 26-10-2010.\n  question = 'Have you had a seasonal flu vaccine this season ({{ SEASON }})?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ10b(d.Question):\n  question = \"\"\"When did you receive a flu vaccine this season ({{ SEASON }})?\n  Date of the seasonal flu vaccination?\"\"\"\n  type = 'date-or-option'\n  text = \"I don't know/don't remember\"\n\nclass IntakeQ10c(d.Question):\n  question = \"\"\"What were your reasons for getting a seasonal influenza\n  vaccination this fall or winter season ({{ SEASON }})? (Tick all that apply)\"\"\"\n  type = 'options-multiple'\n  options = ((0, 'Because I belong to a risk group'),\n             (1, \"\"\"Because vaccination decreases the risk of me getting\n             influenza\"\"\"),\n             (2, \"\"\"Because vaccination decreases the risk of spreading\n             influenza to others\"\"\"),\n             (3, \"\"\"Because my general practitioner recommended influenza\n             vaccination\"\"\"),\n             (4, 'Because it was recommended in my workplace/school'),\n             (5, \"\"\"Because the vaccine was readily available and vaccine\n             administration was convenient\"\"\"),\n             (6, 'Because the vaccine was free'),\n             (7, \"Because I don't want to miss work/school\"),\n             (8, 'Because I believe that the vaccine is effective'),\n             (9, 'Other reason(s)'), )\n  \nclass IntakeQ10d(d.Question):\n  question = \"\"\"What are your reasons for NOT getting a flu vaccine this season\n  ({{ SEASON }})? (Tick all that apply)\"\"\"\n  type= 'options-multiple'\n  options = ((0, 'I am still (planning to) get a vaccine'),\n             (1, \"Because I don't belong to a risk group\"),\n             (2, \"\"\"Because it is better to build your own natural immunity\n             against the flu\"\"\"),\n             (3, 'Because I doubt that the influenza vaccine is effective'),\n             (4, 'Because influenza is a minor illness'),\n             (5, 'Because influenza vaccine can cause influenza'),\n             (6, \"\"\"Because I am worried that the vaccine is not safe or will\n             cause illness or other adverse events\"\"\"),\n             (7, 'Because the vaccine is not readily available to me'),\n             (8, 'Because the vaccine is not free of charge'),\n             (9, 'Because I dislike injections'),\n             (10, 'No particular reason'),\n             (11, 'Other reason(s)'), )\n\nclass IntakeQ11(d.Question):\n  question = \"\"\"Did you get an invitation from your doctor to receive flu\n  vaccine this fall/winter season ({{ SEASON }})?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know\"), )\n\nclass IntakeQ12(d.Question):\n  question = \"\"\"Do you take medication for any of the following medical\n  conditions?  (Tick all that apply)\"\"\"\n  type = 'options-multiple'\n  blank = True\n  options = ((0, 'No'),\n             (1, 'Yes, I am taking medication because of Asthma'),\n             (2, 'Yes, I am taking medication because of Diabetes'),\n             (3, \"\"\"Yes, I am taking medication because of Lung disorder (COPD,\n             emphysema, ...)\"\"\"),\n             (4, 'Yes, I am taking medication because of a Heart disorder'),\n             (5, 'Yes, I am taking medication because of a Kidney disorder'),\n             (6, \"\"\"Yes, I am taking medication because of an immunocompromised\n             condition (e.g. splenectomy, organ transplant, aquired immune\n             deficiency, cancer treatment)\"\"\"), )\n  \nclass IntakeQ13(d.Question):\n  question = 'Are you currently pregnant?'\n  type = 'options-single'\n  options = ((0, 'Yes'),\n             (1, 'No'),\n             (2, \"I don't know/I prefer not to answer\"), )\n\nclass IntakeQ13b(d.Question):\n  question = \"In which trimester of the pregnancy are you?\"\n  type = 'options-single'\n  options = ((0, 'First trimester (week 1-12)'),\n             (1, 'Second trimester (week 13-28)'),\n             (2, 'Third trimester (week 29-delivery)'),\n             (3, \"I don't know\"), )\n\nclass IntakeQ14(d.Question):\n  question = 'Do you smoke?'\n  type = 'options-single'\n  options = ((0, 'No'),\n             (1, 'Yes, less than 10 cigarettes a day'),\n             (2, 'Yes, 10 cigarettes or more a day'),\n             (3, 'Yes, but exclusively pipe or cigars'),\n             (4, \"I don't know/I prefer not to answer\"), )\n  \nclass IntakeQ15(d.Question):\n  question = \"\"\"Do you have one of the following allergies that can cause\n  respiratory symptoms? (Multiple answers possible)\"\"\"\n  type = 'options-multiple'\n  blank = True\n  options = ((1, 'Pollen (hay fever)'),\n             (2, 'House dust mite'),\n             (3, 'Domestic animals/pets'),\n             (4, \"\"\"Other allergies that cause respiratory symptoms (e.g.\n             sneezing, runny eyes)\"\"\"),\n             (0, 'None of the above'),)\n\nclass IntakeQ18(d.Question):\n  question = \"\"\"On average over the past 5 years, how many times per year did\n  you have common colds or flu-like diseases?\"\"\"\n  type = 'options-single'\n  options = ((0, 'Never'),\n             (1, 'One or two times a year'),\n             (2, 'Between 3 and 5 times a year'),\n             (3, 'Between 6 and 10 times a year'),\n             (4, 'More than 10 times a year'), )\n\nclass IntakeQ16(d.Question):\n  question = 'Do you follow a special diet?'\n  type = 'options-single'\n  options = ((0, 'No special diet'),\n             (1, 'Vegetarian'),\n             (2, 'Veganism'),\n             (3, 'Low-calorie'),\n             (4, 'Other'), )\n  \nclass IntakeQ17(d.Question):\n  question = 'Do you have pets at home? (Multiple answers possible)'\n  type = 'options-multiple'\n  options = ((0, 'No'),\n             (1, 'Yes, one or more dogs'),\n             (2, 'Yes, one or more cats'),\n             (3, 'Yes, one or more birds'),\n             (4, 'Yes, one ore more other animals'), )\n\nclass Survey(d.Survey):\n  id = 'gold-standard-intake-1.5'\n\n  # Local propositions\n  children_under_4 = ~d.EqualIndex(IntakeQ6, 0, 0)\n  female = d.Equal(IntakeQ1, 1)\n  aged_15_to_50 = female | ~ female # True\n  # aged_15_to_50 = 15 < (year.now - IntakeQ2.year) < 50\n  pregnant = female & d.Equal(IntakeQ13, 0)\n  had_seasonal_flu_vaccine = d.Equal(IntakeQ10, 0)\n  had_swine_flu_vaccine_last_winter = d.Equal(IntakeQ8, 0)\n  \n  rules = ( IntakeQ1,\n              IntakeQ2,\n              IntakeQ3,\n              IntakeQ4,\n              IntakeQ5,\n              IntakeQ6,\n              d.If(children_under_4) (IntakeQ6b),\n              IntakeQ7,\n              IntakeQ7b,\n              IntakeQ8,\n              IntakeQ9,\n              IntakeQ10,\n              d.If(had_seasonal_flu_vaccine) (IntakeQ10b, IntakeQ10c),\n              d.Else(IntakeQ10d),\n              IntakeQ11,\n              IntakeQ12,\n              d.If(female & aged_15_to_50) (IntakeQ13),\n              d.If(pregnant) (IntakeQ13b),\n              IntakeQ14,\n              IntakeQ15,\n              IntakeQ18, # decided in telco 26-10-2010.\n              IntakeQ16,\n              IntakeQ17,\n              )\n",
+            "created": "2010-12-22 15:48:00",
+            "survey_id": "gold-standard-intake-1.5"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "survey.survey",
+        "fields": {
+            "updated": "2010-12-23 11:21:43",
+            "description": null,
+            "title": "Contact survey",
+            "specification": "class ContactQ1(d.Question):\n  question = \"\"\"How many people did you have conversational contact with\n             yesterday?\"\"\"\n  type = 'table-of-selects'\n  rows = ['Home', 'Work', 'Other']\n  columns = ['0-4 years',\n             '5-18 years',\n             '19-44 years',\n             '45-64 years',\n             '65+ years',]\n  choices = (( 0,  '0'),\n             ( 1,  '1'),\n             ( 2,  '2'),\n             ( 3,  '3'),\n             ( 4,  '4'),\n             ( 5,  '5'),\n             ( 6,  '6'),\n             ( 7,  '7'),\n             ( 8,  '8'),\n             ( 9,  '9'),\n             (10, '>9'),)\n\nclass ContactQ2(d.Question):\n  question = 'How many people did you have physical contact with yesterday?'\n  type = 'table-of-selects'\n  rows = ['Home', 'Work', 'Other']\n  columns = ['0-4 years',\n             '5-18 years',\n             '19-44 years',\n             '45-64 years',\n             '65+ years',]\n  choices = (( 0,  '0'),\n             ( 1,  '1'),\n             ( 2,  '2'),\n             ( 3,  '3'),\n             ( 4,  '4'),\n             ( 5,  '5'),\n             ( 6,  '6'),\n             ( 7,  '7'),\n             ( 8,  '8'),\n             ( 9,  '9'),\n             (10, '>9'),)\n\nclass ContactQ3(d.Question):\n  question = \"\"\"On a normal day, how much time do you spend on public\n  transport (bus, train, undergound)?\"\"\"\n  type = 'options-single'\n  options = ((0, 'No time at all'),\n             (1, '0-30 minutes'),\n             (2, '30 minutes \u2013 1,5 hours'),\n             (3, '1,5 hours \u2013 4 hours'),\n             (4, '>4 hours'), )\n\nclass ContactQ4(d.Question):\n  question = \"\"\"Not including public transport, how long did you spend in an\n  enclosed indoor space (e.g. office, classroom, bar, cinema) with more than 10\n  other people yesterday ?\"\"\"\n  type = 'options-single'\n  options = ((0, 'No time at all'),\n             (1, '0-30 minutes'),\n             (2, '30 minutes \u2013 1,5 hours'),\n             (3, '1,5 hours \u2013 4 hours'),\n             (4, '>4 hours'),)\n  \nclass Survey(d.Survey):\n  id = 'contact-survey-1.0'\n  title = 'Contact survey'\n  \n  rules = ( ContactQ1,\n            ContactQ2,\n            ContactQ3,\n            ContactQ4,\n            )\n",
+            "created": "2010-12-23 11:21:43",
+            "survey_id": "contact-survey-1.0"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "survey.participation",
+        "fields": {
+            "previous_participation": null,
+            "epidb_id": null,
+            "survey": 1,
+            "user": 1,
+            "date": "2010-11-04 12:34:27",
+            "previous_participation_date": null
+        }
+    },
+    {
+        "pk": 2,
+        "model": "survey.participation",
+        "fields": {
+            "previous_participation": 1,
+            "epidb_id": null,
+            "survey": 3,
+            "user": 1,
+            "date": "2010-11-04 12:50:43",
+            "previous_participation_date": "2010-11-04 12:34:27"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "survey.participation",
+        "fields": {
+            "previous_participation": null,
+            "epidb_id": null,
+            "survey": 3,
+            "user": 2,
+            "date": "2010-11-04 13:19:44",
+            "previous_participation_date": null
+        }
+    },
+    {
+        "pk": 4,
+        "model": "survey.participation",
+        "fields": {
+            "previous_participation": 3,
+            "epidb_id": null,
+            "survey": 2,
+            "user": 2,
+            "date": "2010-11-04 15:26:57",
+            "previous_participation_date": "2010-11-04 13:19:44"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "survey.participation",
+        "fields": {
+            "previous_participation": null,
+            "epidb_id": null,
+            "survey": 2,
+            "user": 3,
+            "date": "2010-11-05 10:22:32",
+            "previous_participation_date": null
+        }
+    },
+    {
+        "pk": 6,
+        "model": "survey.participation",
+        "fields": {
+            "previous_participation": 5,
+            "epidb_id": null,
+            "survey": 2,
+            "user": 3,
+            "date": "2010-11-08 15:01:13",
+            "previous_participation_date": "2010-11-05 10:22:32"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "survey.participation",
+        "fields": {
+            "previous_participation": 6,
+            "epidb_id": null,
+            "survey": 2,
+            "user": 3,
+            "date": "2010-11-08 15:35:38",
+            "previous_participation_date": "2010-11-08 15:01:13"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "survey.participation",
+        "fields": {
+            "previous_participation": 7,
+            "epidb_id": null,
+            "survey": 2,
+            "user": 3,
+            "date": "2010-11-08 15:45:34",
+            "previous_participation_date": "2010-11-08 15:35:38"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "survey.responsesendqueue",
+        "fields": {
+            "date": "2010-11-04 12:34:27",
+            "survey_id": "dev-survey-0.0",
+            "user_id": "193807d8-4a30-4601-9bc5-bc59db1696cd",
+            "answers": "(dp1\nS'RepQ10'\np2\nV0\nsS'RepQ11'\np3\nV1\nsS'RepQ08'\np4\nV0\nsS'RepQ09'\np5\nNsS'RepQ12'\np6\nV1\nsS'RepQ04'\np7\nS'2010-11-01'\np8\nsS'RepQ05'\np9\nV0\nsS'RepQ06'\np10\nV0\nsS'RepQ07'\np11\nV0\nsS'RepQ01'\np12\n(lp13\nV0\nasS'RepQ02'\np14\nS'2010-11-01'\np15\nsS'RepQ03'\np16\nV0\ns.",
+            "participation": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "survey.responsesendqueue",
+        "fields": {
+            "date": "2010-11-04 12:50:44",
+            "survey_id": "gold-standard-weekly-0.1.0",
+            "user_id": "193807d8-4a30-4601-9bc5-bc59db1696cd",
+            "answers": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ6b'\np3\nNsS'WeeklyQ11'\np4\nV0\nsS'WeeklyQ8c'\np5\nNsS'WeeklyQ8b'\np6\nNsS'WeeklyQ9a'\np7\nV1\nsS'WeeklyQ9b'\np8\nV1\nsS'WeeklyQ6'\np9\nNsS'WeeklyQ7'\np10\nNsS'WeeklyQ4'\np11\nNsS'WeeklyQ5'\np12\nNsS'WeeklyQ2'\np13\nV0\nsS'WeeklyQ3'\np14\nNsS'WeeklyQ1b'\np15\nV0\nsS'WeeklyQ1'\np16\n(lp17\nV1\nasS'WeeklyQ8'\np18\nNsS'WeeklyQ2c'\np19\nNsS'WeeklyQ2b'\np20\nNs.",
+            "participation": 2
+        }
+    },
+    {
+        "pk": 3,
+        "model": "survey.responsesendqueue",
+        "fields": {
+            "date": "2010-11-04 13:19:44",
+            "survey_id": "gold-standard-weekly-0.1.0",
+            "user_id": "cd81f47b-779d-42fe-8dbf-332401e0b9a4",
+            "answers": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ6b'\np3\nNsS'WeeklyQ11'\np4\nV0\nsS'WeeklyQ8c'\np5\nNsS'WeeklyQ8b'\np6\nNsS'WeeklyQ9a'\np7\nV0\nsS'WeeklyQ9b'\np8\nV0\nsS'WeeklyQ6'\np9\nNsS'WeeklyQ7'\np10\nNsS'WeeklyQ4'\np11\nNsS'WeeklyQ5'\np12\nNsS'WeeklyQ2'\np13\nV0\nsS'WeeklyQ3'\np14\nNsS'WeeklyQ1b'\np15\nV0\nsS'WeeklyQ1'\np16\n(lp17\nV3\nasS'WeeklyQ8'\np18\nNsS'WeeklyQ2c'\np19\nNsS'WeeklyQ2b'\np20\nNs.",
+            "participation": 3
+        }
+    },
+    {
+        "pk": 4,
+        "model": "survey.responsesendqueue",
+        "fields": {
+            "date": "2010-11-04 15:26:58",
+            "survey_id": "gold-standard-weekly-0.1.0",
+            "user_id": "cd81f47b-779d-42fe-8dbf-332401e0b9a4",
+            "answers": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ6b'\np3\nNsS'WeeklyQ11'\np4\nV0\nsS'WeeklyQ8c'\np5\nNsS'WeeklyQ8b'\np6\nNsS'WeeklyQ9a'\np7\nV0\nsS'WeeklyQ9b'\np8\nV1\nsS'WeeklyQ6'\np9\nV0\nsS'WeeklyQ7'\np10\n(lp11\nV0\nasS'WeeklyQ4'\np12\nS'2010-11-01'\np13\nsS'WeeklyQ5'\np14\nS'2010-11-01'\np15\nsS'WeeklyQ2'\np16\nV0\nsS'WeeklyQ3'\np17\nV0\nsS'WeeklyQ1b'\np18\nV0\nsS'WeeklyQ1'\np19\n(lp20\nV5\nasS'WeeklyQ8'\np21\nV2\nsS'WeeklyQ2c'\np22\nNsS'WeeklyQ2b'\np23\nNs.",
+            "participation": 4
+        }
+    },
+    {
+        "pk": 5,
+        "model": "survey.responsesendqueue",
+        "fields": {
+            "date": "2010-11-05 10:22:32",
+            "survey_id": "gold-standard-weekly-0.1.0",
+            "user_id": "b9e8353b-e113-4b03-856f-c118e0b70666",
+            "answers": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ6b'\np3\nNsS'WeeklyQ11'\np4\nV0\nsS'WeeklyQ8c'\np5\nNsS'WeeklyQ8b'\np6\nNsS'WeeklyQ9a'\np7\nV0\nsS'WeeklyQ9b'\np8\nV0\nsS'WeeklyQ6'\np9\nV0\nsS'WeeklyQ7'\np10\n(lp11\nV3\nasS'WeeklyQ4'\np12\nS'2010-11-01'\np13\nsS'WeeklyQ5'\np14\nS'2010-11-03'\np15\nsS'WeeklyQ2'\np16\nV0\nsS'WeeklyQ3'\np17\nV0\nsS'WeeklyQ1b'\np18\nV0\nsS'WeeklyQ1'\np19\n(lp20\nV1\naV17\np21\nasS'WeeklyQ8'\np22\nV2\nsS'WeeklyQ2c'\np23\nNsS'WeeklyQ2b'\np24\nNs.",
+            "participation": 5
+        }
+    },
+    {
+        "pk": 6,
+        "model": "survey.responsesendqueue",
+        "fields": {
+            "date": "2010-11-08 15:01:13",
+            "survey_id": "gold-standard-weekly-0.1.0",
+            "user_id": "b9e8353b-e113-4b03-856f-c118e0b70666",
+            "answers": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ9b'\np3\nV0\nsS'WeeklyQ6b'\np4\nNsS'WeeklyQ11'\np5\nV0\nsS'WeeklyQ8c'\np6\nNsS'WeeklyQ8b'\np7\nNsS'WeeklyQ9a'\np8\nV0\nsS'Message1'\np9\nNsS'WeeklyQ6'\np10\nNsS'WeeklyQ7'\np11\nNsS'WeeklyQ4'\np12\nNsS'WeeklyQ5'\np13\nNsS'WeeklyQ2'\np14\nV1\nsS'WeeklyQ3'\np15\nNsS'WeeklyQ1b'\np16\nV0\nsS'WeeklyQ1'\np17\n(lp18\nV6\nasS'WeeklyQ8'\np19\nNsS'WeeklyQ2c'\np20\nNsS'WeeklyQ2b'\np21\nNs.",
+            "participation": 6
+        }
+    },
+    {
+        "pk": 7,
+        "model": "survey.responsesendqueue",
+        "fields": {
+            "date": "2010-11-08 15:35:38",
+            "survey_id": "gold-standard-weekly-0.1.0",
+            "user_id": "b9e8353b-e113-4b03-856f-c118e0b70666",
+            "answers": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ9b'\np3\nV0\nsS'WeeklyQ6b'\np4\nNsS'WeeklyQ10'\np5\nNsS'WeeklyQ11'\np6\nV0\nsS'WeeklyQ8c'\np7\nNsS'WeeklyQ8b'\np8\nNsS'WeeklyQ9a'\np9\nV0\nsS'Message1'\np10\nI01\nsS'WeeklyQ6'\np11\nV4\nsS'WeeklyQ7'\np12\n(lp13\nV0\nasS'WeeklyQ4'\np14\nS'2010-11-01'\np15\nsS'WeeklyQ5'\np16\nS'2010-11-02'\np17\nsS'WeeklyQ2'\np18\nV1\nsS'WeeklyQ3'\np19\nV0\nsS'WeeklyQ1b'\np20\nV0\nsS'WeeklyQ1'\np21\n(lp22\nV18\np23\nasS'WeeklyQ8'\np24\nV0\nsS'WeeklyQ2c'\np25\nNsS'WeeklyQ2b'\np26\nNs.",
+            "participation": 7
+        }
+    },
+    {
+        "pk": 8,
+        "model": "survey.responsesendqueue",
+        "fields": {
+            "date": "2010-11-08 15:45:34",
+            "survey_id": "gold-standard-weekly-0.1.0",
+            "user_id": "b9e8353b-e113-4b03-856f-c118e0b70666",
+            "answers": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ9b'\np3\nV0\nsS'WeeklyQ6b'\np4\nNsS'WeeklyQ10'\np5\nNsS'WeeklyQ11'\np6\nV3\nsS'WeeklyQ8c'\np7\nNsS'WeeklyQ8b'\np8\nNsS'WeeklyQ9a'\np9\nV0\nsS'Message1'\np10\nI01\nsS'WeeklyQ6'\np11\nV4\nsS'WeeklyQ7'\np12\n(lp13\nV0\nasS'WeeklyQ4'\np14\nS'2010-11-01'\np15\nsS'WeeklyQ5'\np16\nS'2010-11-02'\np17\nsS'WeeklyQ2'\np18\nV1\nsS'WeeklyQ3'\np19\nV0\nsS'WeeklyQ1b'\np20\nV0\nsS'WeeklyQ1'\np21\n(lp22\nV9\nasS'WeeklyQ8'\np23\nV0\nsS'WeeklyQ2c'\np24\nNsS'WeeklyQ2b'\np25\nNs.",
+            "participation": 8
+        }
+    },
+    {
+        "pk": 1,
+        "model": "survey.profilesendqueue",
+        "fields": {
+            "owner": 1,
+            "date": "2010-11-04 11:34:00",
+            "survey_id": "dev-profile-0.0",
+            "user_id": "193807d8-4a30-4601-9bc5-bc59db1696cd",
+            "answers": "(dp1\nS'RegQ14'\np2\n(lp3\nV0\nasS'RegQ12'\np4\nV0\nsS'RegQ13'\np5\n(lp6\nV0\nasS'RegQ10'\np7\nV0\nsS'RegQ11'\np8\nV0\nsS'RegQ4'\np9\nV0\nsS'RegQ5'\np10\nV0\nsS'RegQ6'\np11\nV0\nsS'RegQ7'\np12\nNsS'RegQ1'\np13\nV0\nsS'RegQ2'\np14\nV0\nsS'RegQ3'\np15\nV0\nsS'RegQ8'\np16\n(lp17\nV0\nasS'RegQ9'\np18\n(lp19\nV0\nas."
+        }
+    },
+    {
+        "pk": 2,
+        "model": "survey.profilesendqueue",
+        "fields": {
+            "owner": 2,
+            "date": "2010-11-04 12:19:19",
+            "survey_id": "gold-standard-intake-0.1.0",
+            "user_id": "cd81f47b-779d-42fe-8dbf-332401e0b9a4",
+            "answers": "(dp1\nS'IntakeQ7b'\np2\nV0\nsS'IntakeQ10b'\np3\nNsS'IntakeQ9'\np4\nV0\nsS'IntakeQ8'\np5\nV0\nsS'IntakeQ7'\np6\nV0\nsS'IntakeQ6'\np7\nV3\nsS'IntakeQ5'\np8\n(lp9\nV0\nasS'IntakeQ4'\np10\nV2020 CX\np11\nsS'IntakeQ3'\np12\nV1010 AB\np13\nsS'IntakeQ2'\np14\ncdatetime\ndatetime\np15\n(S'\\x07\\xb2\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00'\ntRp16\nsS'IntakeQ1'\np17\nV0\nsS'IntakeQ10c'\np18\nNsS'IntakeQ18'\np19\nV0\nsS'IntakeQ13'\np20\nV0\nsS'IntakeQ12'\np21\n(lp22\nV0\nasS'IntakeQ11'\np23\nV0\nsS'IntakeQ10'\np24\nV0\nsS'IntakeQ17'\np25\n(lp26\nV0\nasS'IntakeQ16'\np27\nV0\nsS'IntakeQ15'\np28\n(lp29\nV0\nasS'IntakeQ14'\np30\nV0\nsS'IntakeQ8b'\np31\nNsS'IntakeQ13b'\np32\nNsS'IntakeQ10d'\np33\n(lp34\nV0\nasS'IntakeQ8c'\np35\nNs."
+        }
+    },
+    {
+        "pk": 3,
+        "model": "survey.profilesendqueue",
+        "fields": {
+            "owner": 3,
+            "date": "2010-11-05 09:21:24",
+            "survey_id": "gold-standard-intake-0.1.0",
+            "user_id": "b9e8353b-e113-4b03-856f-c118e0b70666",
+            "answers": "(dp1\nS'IntakeQ7b'\np2\nV0\nsS'IntakeQ10b'\np3\nNsS'IntakeQ9'\np4\nV0\nsS'IntakeQ8'\np5\nV0\nsS'IntakeQ7'\np6\nV0\nsS'IntakeQ5'\np7\n(lp8\nV0\nasS'IntakeQ4'\np9\nV2020 CD\np10\nsS'IntakeQ3'\np11\nV1010 AB\np12\nsS'IntakeQ2'\np13\ncdatetime\ndatetime\np14\n(S'\\x07\\xb2\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00'\ntRp15\nsS'IntakeQ1'\np16\nV0\nsS'IntakeQ10c'\np17\nNsS'IntakeQ18'\np18\nV0\nsS'IntakeQ13'\np19\nV0\nsS'IntakeQ12'\np20\n(lp21\nV0\nasS'IntakeQ11'\np22\nV0\nsS'IntakeQ10'\np23\nV0\nsS'IntakeQ17'\np24\n(lp25\nV0\nasS'IntakeQ16'\np26\nV0\nsS'IntakeQ15'\np27\n(lp28\nV0\nasS'IntakeQ14'\np29\nV0\nsS'IntakeQ8b'\np30\nNsS'IntakeQ13b'\np31\nNsS'IntakeQ10d'\np32\n(lp33\nV0\nasS'IntakeQ8c'\np34\nNs."
+        }
+    },
+    {
+        "pk": 1,
+        "model": "survey.profile",
+        "fields": {
+            "updated": "2010-11-04 12:34:01",
+            "created": "2010-11-04 12:34:01",
+            "valid": true,
+            "survey": 2,
+            "user": 1,
+            "data": "(dp1\nS'RegQ14'\np2\n(lp3\nI0\nasS'RegQ12'\np4\nI0\nsS'RegQ13'\np5\n(lp6\nI0\nasS'RegQ10'\np7\nI0\nsS'RegQ11'\np8\nI0\nsS'RegQ4'\np9\nI0\nsS'RegQ5'\np10\nI0\nsS'RegQ6'\np11\nI0\nsS'RegQ7'\np12\nNsS'RegQ1'\np13\nI0\nsS'RegQ2'\np14\nI0\nsS'RegQ3'\np15\nI0\nsS'RegQ8'\np16\n(lp17\nI0\nasS'RegQ9'\np18\n(lp19\nI0\nas."
+        }
+    },
+    {
+        "pk": 2,
+        "model": "survey.profile",
+        "fields": {
+            "updated": "2010-11-04 13:19:19",
+            "created": "2010-11-04 13:19:19",
+            "valid": true,
+            "survey": 4,
+            "user": 2,
+            "data": "(dp1\nS'IntakeQ7b'\np2\nI0\nsS'IntakeQ10b'\np3\nNsS'IntakeQ9'\np4\nI0\nsS'IntakeQ8'\np5\nI0\nsS'IntakeQ7'\np6\nI0\nsS'IntakeQ6'\np7\nV3\nsS'IntakeQ5'\np8\n(lp9\nI0\nasS'IntakeQ4'\np10\nV2020 CX\np11\nsS'IntakeQ3'\np12\nV1010 AB\np13\nsS'IntakeQ2'\np14\ncdatetime\ndatetime\np15\n(S'\\x07\\xb2\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00'\ntRp16\nsS'IntakeQ1'\np17\nI0\nsS'IntakeQ10c'\np18\nNsS'IntakeQ18'\np19\nI0\nsS'IntakeQ13'\np20\nI0\nsS'IntakeQ12'\np21\n(lp22\nI0\nasS'IntakeQ11'\np23\nI0\nsS'IntakeQ10'\np24\nI0\nsS'IntakeQ17'\np25\n(lp26\nI0\nasS'IntakeQ16'\np27\nI0\nsS'IntakeQ15'\np28\n(lp29\nI0\nasS'IntakeQ14'\np30\nI0\nsS'IntakeQ8b'\np31\nNsS'IntakeQ13b'\np32\nNsS'IntakeQ10d'\np33\n(lp34\nI0\nasS'IntakeQ8c'\np35\nNs."
+        }
+    },
+    {
+        "pk": 3,
+        "model": "survey.profile",
+        "fields": {
+            "updated": "2010-11-05 10:21:24",
+            "created": "2010-11-05 10:21:24",
+            "valid": true,
+            "survey": 1,
+            "user": 3,
+            "data": "(dp1\nS'IntakeQ7b'\np2\nI0\nsS'IntakeQ10b'\np3\nNsS'IntakeQ9'\np4\nI0\nsS'IntakeQ8'\np5\nI0\nsS'IntakeQ7'\np6\nI0\nsS'IntakeQ5'\np7\n(lp8\nI0\nasS'IntakeQ4'\np9\nV2020 CD\np10\nsS'IntakeQ3'\np11\nV1010 AB\np12\nsS'IntakeQ2'\np13\ncdatetime\ndatetime\np14\n(S'\\x07\\xb2\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00'\ntRp15\nsS'IntakeQ1'\np16\nI0\nsS'IntakeQ10c'\np17\nNsS'IntakeQ18'\np18\nI0\nsS'IntakeQ13'\np19\nI0\nsS'IntakeQ12'\np20\n(lp21\nI0\nasS'IntakeQ11'\np22\nI0\nsS'IntakeQ10'\np23\nI0\nsS'IntakeQ17'\np24\n(lp25\nI0\nasS'IntakeQ16'\np26\nI0\nsS'IntakeQ15'\np27\n(lp28\nI0\nasS'IntakeQ14'\np29\nI0\nsS'IntakeQ8b'\np30\nNsS'IntakeQ13b'\np31\nNsS'IntakeQ10d'\np32\n(lp33\nI0\nasS'IntakeQ8c'\np34\nNs."
+        }
+    },
+    {
+        "pk": 4,
+        "model": "survey.profile",
+        "fields": {
+            "updated": null,
+            "created": null,
+            "valid": false,
+            "survey": null,
+            "user": 4,
+            "data": null
+        }
+    },
+    {
+        "pk": 1,
+        "model": "survey.lastresponse",
+        "fields": {
+            "data": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ6b'\np3\nNsS'WeeklyQ11'\np4\nI0\nsS'WeeklyQ8c'\np5\nNsS'WeeklyQ8b'\np6\nNsS'WeeklyQ9a'\np7\nI1\nsS'WeeklyQ9b'\np8\nI1\nsS'WeeklyQ6'\np9\nNsS'WeeklyQ7'\np10\nNsS'WeeklyQ4'\np11\nNsS'WeeklyQ5'\np12\nNsS'WeeklyQ2'\np13\nI0\nsS'WeeklyQ3'\np14\nNsS'WeeklyQ1b'\np15\nI0\nsS'WeeklyQ1'\np16\n(lp17\nI1\nasS'WeeklyQ8'\np18\nNsS'WeeklyQ2c'\np19\nNsS'WeeklyQ2b'\np20\nNs.",
+            "user": 1,
+            "participation": 2
+        }
+    },
+    {
+        "pk": 2,
+        "model": "survey.lastresponse",
+        "fields": {
+            "data": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ6b'\np3\nNsS'WeeklyQ11'\np4\nI0\nsS'WeeklyQ8c'\np5\nNsS'WeeklyQ8b'\np6\nNsS'WeeklyQ9a'\np7\nI0\nsS'WeeklyQ9b'\np8\nI1\nsS'WeeklyQ6'\np9\nI0\nsS'WeeklyQ7'\np10\n(lp11\nI0\nasS'WeeklyQ4'\np12\ncdatetime\ndate\np13\n(S'\\x07\\xda\\x0b\\x01'\ntRp14\nsS'WeeklyQ5'\np15\ng13\n(S'\\x07\\xda\\x0b\\x01'\ntRp16\nsS'WeeklyQ2'\np17\nI0\nsS'WeeklyQ3'\np18\nI0\nsS'WeeklyQ1b'\np19\nI0\nsS'WeeklyQ1'\np20\n(lp21\nI5\nasS'WeeklyQ8'\np22\nI2\nsS'WeeklyQ2c'\np23\nNsS'WeeklyQ2b'\np24\nNs.",
+            "user": 2,
+            "participation": 4
+        }
+    },
+    {
+        "pk": 3,
+        "model": "survey.lastresponse",
+        "fields": {
+            "data": "(dp1\nS'WeeklyQ7b'\np2\nNsS'WeeklyQ9b'\np3\nI0\nsS'WeeklyQ6b'\np4\nNsS'WeeklyQ10'\np5\nNsS'WeeklyQ11'\np6\nI3\nsS'WeeklyQ8c'\np7\nNsS'WeeklyQ8b'\np8\nNsS'WeeklyQ9a'\np9\nI0\nsS'Message1'\np10\nI01\nsS'WeeklyQ6'\np11\nI4\nsS'WeeklyQ7'\np12\n(lp13\nI0\nasS'WeeklyQ4'\np14\ncdatetime\ndate\np15\n(S'\\x07\\xda\\x0b\\x01'\ntRp16\nsS'WeeklyQ5'\np17\ng15\n(S'\\x07\\xda\\x0b\\x02'\ntRp18\nsS'WeeklyQ2'\np19\nI1\nsS'WeeklyQ3'\np20\nI0\nsS'WeeklyQ1b'\np21\nI0\nsS'WeeklyQ1'\np22\n(lp23\nI9\nasS'WeeklyQ8'\np24\nI0\nsS'WeeklyQ2c'\np25\nNsS'WeeklyQ2b'\np26\nNs.",
+            "user": 3,
+            "participation": 8
+        }
+    },
+    {
+        "pk": 4,
+        "model": "survey.lastresponse",
+        "fields": {
+            "data": null,
+            "user": 4,
+            "participation": null
+        }
+    },
+    {
+        "pk": 1,
         "model": "contact_form.feedback",
         "fields": {
             "body": "cf",
@@ -5903,6 +6674,26 @@
             "sent_time": "2011-07-12 17:38:21",
             "user": 1,
             "name": "Antwan Wiersma"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "contact_form.feedback",
+        "fields": {
+            "body": "",
+            "email": "antwan@prime-creation.com",
+            "sent_time": "2011-08-05 16:46:58",
+            "user": 1,
+            "name": "Antwan Wiersma"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "partnersites.sitesettings",
+        "fields": {
+            "logo": "",
+            "site": 1,
+            "light_color": "ce2626"
         }
     },
     {
@@ -6818,6 +7609,14 @@
         }
     },
     {
+        "pk": 143,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Left bar",
+            "default_width": null
+        }
+    },
+    {
         "pk": 2,
         "model": "cms.cmsplugin",
         "fields": {
@@ -6877,22 +7676,6 @@
             "lft": 1,
             "tree_id": 105,
             "position": 0,
-            "placeholder": 114,
-            "plugin_type": "SnippetPlugin"
-        }
-    },
-    {
-        "pk": 115,
-        "model": "cms.cmsplugin",
-        "fields": {
-            "rght": 2,
-            "parent": null,
-            "language": "en",
-            "level": 0,
-            "creation_date": "2011-07-04 14:52:47",
-            "lft": 1,
-            "tree_id": 106,
-            "position": 1,
             "placeholder": 114,
             "plugin_type": "SnippetPlugin"
         }
@@ -7212,7 +7995,7 @@
             "creation_date": "2011-07-11 17:14:12",
             "lft": 1,
             "tree_id": 126,
-            "position": 1,
+            "position": 3,
             "placeholder": 137,
             "plugin_type": "TextPlugin"
         }
@@ -7228,7 +8011,7 @@
             "creation_date": "2011-07-11 17:14:52",
             "lft": 1,
             "tree_id": 127,
-            "position": 2,
+            "position": 1,
             "placeholder": 137,
             "plugin_type": "TextPlugin"
         }
@@ -7244,7 +8027,7 @@
             "creation_date": "2011-07-11 17:16:02",
             "lft": 1,
             "tree_id": 128,
-            "position": 3,
+            "position": 2,
             "placeholder": 137,
             "plugin_type": "SnippetPlugin"
         }
@@ -7410,6 +8193,102 @@
         }
     },
     {
+        "pk": 150,
+        "model": "cms.cmsplugin",
+        "fields": {
+            "rght": 2,
+            "parent": null,
+            "language": "en",
+            "level": 0,
+            "creation_date": "2011-08-05 15:45:17",
+            "lft": 1,
+            "tree_id": 139,
+            "position": 1,
+            "placeholder": 138,
+            "plugin_type": "SnippetPlugin"
+        }
+    },
+    {
+        "pk": 151,
+        "model": "cms.cmsplugin",
+        "fields": {
+            "rght": 2,
+            "parent": null,
+            "language": "en",
+            "level": 0,
+            "creation_date": "2011-08-05 15:48:08",
+            "lft": 1,
+            "tree_id": 140,
+            "position": 1,
+            "placeholder": 128,
+            "plugin_type": "SnippetPlugin"
+        }
+    },
+    {
+        "pk": 152,
+        "model": "cms.cmsplugin",
+        "fields": {
+            "rght": 2,
+            "parent": null,
+            "language": "en",
+            "level": 0,
+            "creation_date": "2011-08-06 10:11:18",
+            "lft": 1,
+            "tree_id": 141,
+            "position": 0,
+            "placeholder": 126,
+            "plugin_type": "TextPlugin"
+        }
+    },
+    {
+        "pk": 153,
+        "model": "cms.cmsplugin",
+        "fields": {
+            "rght": 4,
+            "parent": null,
+            "language": "en",
+            "level": 0,
+            "creation_date": "2011-08-06 10:20:54",
+            "lft": 1,
+            "tree_id": 142,
+            "position": 1,
+            "placeholder": 126,
+            "plugin_type": "TextPlugin"
+        }
+    },
+    {
+        "pk": 154,
+        "model": "cms.cmsplugin",
+        "fields": {
+            "rght": 3,
+            "parent": 153,
+            "language": "en",
+            "level": 1,
+            "creation_date": "2011-08-06 10:27:42",
+            "lft": 2,
+            "tree_id": 142,
+            "position": null,
+            "placeholder": 126,
+            "plugin_type": "LinkPlugin"
+        }
+    },
+    {
+        "pk": 155,
+        "model": "cms.cmsplugin",
+        "fields": {
+            "rght": 2,
+            "parent": null,
+            "language": "en",
+            "level": 0,
+            "creation_date": "2011-08-06 11:48:42",
+            "lft": 1,
+            "tree_id": 143,
+            "position": 3,
+            "placeholder": 126,
+            "plugin_type": "LinkPlugin"
+        }
+    },
+    {
         "pk": 1,
         "model": "cms.page",
         "fields": {
@@ -7570,18 +8449,19 @@
             "tree_id": 8,
             "placeholders": [
                 125,
-                126
+                126,
+                143
             ],
             "limit_visibility_in_menu": null,
             "parent": null,
             "publisher_state": 1,
             "soft_root": false,
-            "publication_date": null,
+            "publication_date": "2011-08-06 11:55:58",
             "publisher_public": null,
             "level": 0,
             "changed_by": "admin",
             "publisher_is_draft": true,
-            "published": false
+            "published": true
         }
     },
     {
@@ -8098,7 +8978,7 @@
         "pk": 134,
         "model": "text.text",
         "fields": {
-            "body": "\t\t\t\t\t\t<p class=\"title\">Data contact information</p>\r\n\t\t\t\t\t\t<p><strong>Influenzanet Science Committee</strong><br />\r\n\t\t\t\t\t\tSecretary: Ronald Smallenburg<br />\r\n\t\t\t\t\t\tdirectie [at] grotegriepmeting.nl<br /><br />\r\n\t\t\t\t\t\t<strong>The Netherlands and Belgium</strong><br />\r\n\t\t\t\t\t\tProject leader: Carl Koppeschaar<br />\r\n\t\t\t\t\t\tOrganisers Grote Griepmeting<br />\r\n\t\t\t\t\t\tredactie [at] grotegriepmeting.nl<br /><br />\r\n\t\t\t\t\t\t<strong>Portugal</strong><br />\r\n\t\t\t\t\t\tProject leader: Vitor Faustino<br />\r\n\t\t\t\t\t\tOrganisers Gripenet<br />\r\n\t\t\t\t\t\tinfo [at] gripenet.pt<br /><br />\r\n\t\t\t\t\t\t<strong>Italy</strong><br />\r\n\t\t\t\t\t\tProject leaders: Vittoria Collizza and Daniela Paolotti<br />\r\n\t\t\t\t\t\tOrganisers InfluWeb<br />\r\n\t\t\t\t\t\tinfo [at] influweb.it<br /><br />\r\n\t\t\t\t\t\t<strong>United Kingdom</strong><br />\r\n\t\t\t\t\t\tProject leader: John Edmunds<br />\r\n\t\t\t\t\t\torganisers FluSurvey<br />\r\n\t\t\t\t\t\twebmaster [at] flusurvey.org.uk<br /><br />\r\n\t\t\t\t\t\t<strong>Sweden</strong><br />\r\n\t\t\t\t\t\tProject leader: Annasara Carnahan<br />\r\n\t\t\t\t\t\torganisers Influensakoll<br />\r\n\t\t\t\t\t\tinfluensakoll [at] smi.se<br /><br />\r\n\t\t\t\t\t\t<strong>Austria, Germany and Switzerland</strong><br />\r\n\t\t\t\t\t\tProject leader: Markus Schwehm<br />\r\n\t\t\t\t\t\torganisers Aktiv gegen Grippe<br />\r\n\t\t\t\t\t\tmarkus.schwehm [at] explosys.de</p>"
+            "body": "<p class=\"title\">Influenzanet Science Committee</p>\r\n<p>\r\n<strong>Dr. Daniela Paolotti</strong><br />\r\nISI, Turin, Italy<br /><br />\r\n<strong>Prof. dr. John Edmunds</strong><br />\r\nLSHTM, London, UK<br /><br />\r\n<strong>Prof. dr. Olof Nyren</strong><br />\r\nKarolinska Institutet, Stockholm, Sweden<br /><br />\r\n<strong>Prof. Marc van Ranst</strong><br />\r\nRega Instituut, KU, Leuven, Belgium<br /><br />\r\n<strong>Drs. Sander van Noort</strong><br />\r\nIGC, Oeiras, Portugal<br />\r\nGrote Griepmeting, Amsterdam, Netherlands<br /><br />\r\n<strong>Secretary: Ronald Smallenburg</strong><br />\r\ndirectie [at] grotegriepmeting.nl\r\n</p>"
         }
     },
     {
@@ -8140,7 +9020,7 @@
         "pk": 146,
         "model": "text.text",
         "fields": {
-            "body": "<h1>Send us a comment</h1> "
+            "body": "<h1>General contact information</h1>\r\n<p><strong>Influenzanet coordination</strong><br />\r\nRonald Smallenburg<br />\r\ndirectie [at] grotegriepmeting.nl<br /><br />\r\n<strong>Influenzanet analysis</strong><br />\r\nSander van Noort<br />\r\nvnoort [at] igc.gulbenkian.pt<br /><br />\r\n<strong>Influenzanet webdevelopment</strong><br />\r\nAntwan Wiersma<br />\r\nwebdev [at] grotegriepmeting.nl<br /><br />\r\n<strong>Influenzanet database management</strong><br />\r\nKlaas van Schelven<br />\r\ndbmgt [at] grotegriepmeting.nl<br />\r\n</p>\r\n<h2>Send us a comment</h2>"
         }
     },
     {
@@ -8161,7 +9041,7 @@
         "pk": 149,
         "model": "text.text",
         "fields": {
-            "body": "\t\t\t\t\t\t<p class=\"title\">General contact information</p>\r\n\t\t\t\t\t\t<p><strong>Influenzanet coordination</strong><br />\r\n\t\t\t\t\t\tRonald Smallenburg<br />\r\n\t\t\t\t\t\tdirectie [at] grotegriepmeting.nl<br /><br />\r\n\t\t\t\t\t\t<strong>Influenzanet analysis</strong><br />\r\n\t\t\t\t\t\tSander van Noort<br />\r\n\t\t\t\t\t\tvnoort [at] igc.gulbenkian.pt<br /><br />\r\n\t\t\t\t\t\t<strong>Influenzanet webdevelopment</strong><br />\r\n\t\t\t\t\t\tAntwan Wiersma<br />\r\n\t\t\t\t\t\twebdev [at] grotegriepmeting.nl<br /><br />\r\n\t\t\t\t\t\t<strong>Influenzanet database management</strong><br />\r\n\t\t\t\t\t\tKlaas van Schelven<br />\r\n\t\t\t\t\t\tdbmgt [at] grotegriepmeting.nl<br />\r\n\t\t\t\t\t\t</p>\r\n"
+            "body": "<p class=\"title\">Partners</p>\r\n<p>\r\n<strong>The Netherlands and Belgium</strong><br />\r\nProject leader: Carl Koppeschaar<br />\r\nOrganisers Grote Griepmeting<br />\r\nredactie [at] grotegriepmeting.nl<br /><br />\r\n<strong>Portugal</strong><br />\r\nProject leader: Vitor Faustino<br />\r\nOrganisers Gripenet<br />\r\ninfo [at] gripenet.pt<br /><br />\r\n<strong>Italy</strong><br />\r\nProject leader: Daniela Paolotti<br />\r\nOrganisers InfluWeb<br />\r\ninfo [at] influweb.it<br /><br />\r\n<strong>United Kingdom</strong><br />\r\nProject leader: John Edmunds<br />\r\norganisers FluSurvey<br />\r\nwebmaster [at] flusurvey.org.uk<br /><br />\r\n<strong>Sweden</strong><br />\r\nProject leader: Annasara Carnahan<br />\r\norganisers Influensakoll<br />\r\ninfluensakoll [at] smi.se<br /><br />\r\n<strong>Austria, Germany and Switzerland</strong><br />\r\nProject leader: Markus Schwehm<br />\r\norganisers Aktiv gegen Grippe<br />\r\nmarkus.schwehm [at] explosys.de<br /><br />\r\n<strong>France (coming soon)</strong><br />\r\nProject leader: Vittoria Colizza<br />\r\nvittoria.colizza [at] inserm.fr\r\n</p>"
         }
     },
     {
@@ -8204,7 +9084,7 @@
         "pk": 10,
         "model": "snippet.snippet",
         "fields": {
-            "html": "<p class=\"title\">Latest news</p>\r\n\t\t\t\t\t\t<p><img src=\"{{ MEDIA_URL }}base/img/temp/left-cold.jpg\" alt=\"Cold\" class=\"imgleft\" /></p><h2>Zinc supplements lessen duration of common cold</h2>\r\n\t\t\t\t\t\t<p><strong>A new systematic review that pooled data from 15 trials concluded that taking zinc supplements in syrup, lozenge or tablet form within a day of symptoms starting can reduce their severity and shorten the length of illness.</strong></p><p>To be published on Wednesday in The Cochrane Library, the review updates an earlier Cochrane Systematic Review from 1999 that found there was no strong evidence that zinc lozenges reduced the duration of the common cold and highlighted numerous side effects, including mouth irritation, unpleasant taste, nausea and diarrhoea. <a href=\"newsitem-1\" title=\"Continue reading\">CONTINUE READING</a></p>\r\n\t\t\t\t\t\t<hr />\r\n\t\t\t\t\t\t<h2>Effectiveness of wastewater treatment may be undermined during a severe flu pandemic</h2>\r\n\t\t\t\t\t\t<p><strong>Current plans for antiviral and antibiotic use during a severe influenza pandemic could reduce wastewater treatment effectiveness prior to discharge into receiving rivers, resulting in water quality deterioration at drinking water abstraction points.</strong></p><p> These conclusions are published this week (2 March 2011) in a new paper in the journal Environmental Health Perspectives, which reports on a study designed to assess the ecotoxicologic risks of a pandemic influenza medical response. <img src=\"{{ MEDIA_URL }}base/img/temp/left-virus.jpg\" alt=\"Influenza close up\" class=\"imgright\" /> The research was carried out by a team from the Centre for Ecology &amp; Hydrology (UK), the Institute for Scientific Interchange (Italy), Utrecht University (Netherlands), the University of Sheffield (UK), and Indiana University (USA).</p><p>The global public health community closely monitored the unfolding of the 2009 H1N1 influenza pandemic to best mitigate its impact on society. However, little attention was given to the impact that the medical response might have on the environment. <a href=\"newsitem-2\" title=\"Continue reading\">CONTINUE READING</a></p>",
+            "html": "<p class=\"title\">Latest news</p>\r\n<h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" rel=\"external\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" rel=\"external\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"{{ MEDIA_URL }}docs/recruitment/job_adv_epipop.pdf\" rel=\"external\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>\r\n<h2>Influenza emergence in the face of evolutionary constraints</h2>\r\n<img src=\"{{ MEDIA_URL }}base/img/temp/left-virus.jpg\" alt=\"Influenza close up\" class=\"imgleft\" height=\"60\" /><p><strong>Different influenza subtypes can evolve at very different rates, but the causes are not well understood.</strong></p><p>In this paper, we explore whether differences in transmissibility between subtypes can play a role if there are fitness constraints on antigenic evolution. We investigate the problem using a mathematical model that separates the interaction of strains through cross-immunity from the process of emergence for new antigenic variants. <a href=\"http://rspb.royalsocietypublishing.org/content/early/2011/07/14/rspb.2011.1168.full\" rel=\"external\" title=\"Continue reading\">CONTINUE READING</a></p>",
             "name": "News snippet (Left bar)",
             "template": ""
         }
@@ -8223,13 +9103,6 @@
         "model": "snippet.snippetptr",
         "fields": {
             "snippet": 8
-        }
-    },
-    {
-        "pk": 115,
-        "model": "snippet.snippetptr",
-        "fields": {
-            "snippet": 9
         }
     },
     {
@@ -8338,12 +9211,335 @@
         }
     },
     {
+        "pk": 150,
+        "model": "snippet.snippetptr",
+        "fields": {
+            "snippet": 9
+        }
+    },
+    {
+        "pk": 151,
+        "model": "snippet.snippetptr",
+        "fields": {
+            "snippet": 11
+        }
+    },
+    {
         "pk": 1,
         "model": "menus.cachekey",
         "fields": {
             "key": "cms-menu_nodes_en_1",
             "site": 1,
             "language": "en"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "menus.cachekey",
+        "fields": {
+            "key": "cms-menu_nodes_en_1",
+            "site": 1,
+            "language": "en"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "journal.category",
+        "fields": {
+            "slug": "latest-news",
+            "title": "Latest news"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "journal.entry",
+        "fields": {
+            "category": 1,
+            "updated": "2010-03-15 17:13:58",
+            "title": "Periode van droogte gaat vaak vooraf aan griepuitbraak",
+            "created": "2010-03-15 17:13:58",
+            "excerpt": "5 maart - De jaarlijkse seizoensgriep breekt vaak uit na een periode waarin de luchtvochtigheid lager is dan normaal. Dat hebben Amerikaanse onderzoekers ontdekt aan de hand van een wiskundig model van griep en luchtvochtigheid.",
+            "content": "<p>De link tussen griepuitbraken en luchtvochtigheid is al vaak gelegd. Uit laboratoriumonderzoek bleek dat het griepvirus zich in droge lucht beter kan verspreiden dan in vochtige lucht. Of die snellere verspreiding in droge lucht ook terug te zien is in de menselijke situatie, was nog niet duidelijk. Daarom hebben Amerikaanse onderzoekers een model gemaakt dat luchtvochtigheid koppelt aan de uitbraak van seizoensgriep. De resultaten waren eind februari te lezen in vakblad PLoS Biology.&#160;</p><p>De Amerikanen gebruikten 31 jaar aan data over luchtvochtigheid in New York, Washington, Illinois, Arizona en Florida. Hun model voorspelde nauwkeurig in welke perioden griepvirussen het meeste kans hadden om toe te slaan. De berekeningen kwamen goed overeen met de werkelijke verspreiding van griep in de jaren tussen 1972 en 2002.&#160;</p><p>Daarnaast ontdekten de onderzoekers dat aan 55 tot 60 procent van alle griepuitbraken een extreem droge periode vooraf gaat. Zo\u2019n droge periode is niet noodzakelijk voor het griepvirus om toe te slaan, maar het vergroot wel de kans op een griepuitbraak. Het griepvirus reageert direct op droog weer en begint zich snel te verspreiden. Binnen tien dagen na de start van een droge periode is het effect zichtbaar doordat er veel mensen met griepverschijnselen rond lopen.&#160;</p><p>Een droge periode speelt dus een belangrijke rol bij het uitbreken van griep, maar je kunt er niet op voorhand een griepepidemie mee voorspellen. De luchtvochtigheid is van invloed op de overlevingskansen van het virus, maar bij een uitbraak spelen ook andere factoren een rol. Bijvoorbeeld hoe gevoelig mensen zijn voor het virustype dat rond gaat en hoeveel contact mensen onderling met elkaar hebben.&#160;</p><p>Elles Lalieu&#160;</p>",
+            "pub_date": "2010-03-15 17:04:31",
+            "slug": "periode-van-droogte-gaat-vaak-vooraf-aan-griepuitb",
+            "is_published": true
+        }
+    },
+    {
+        "pk": 4,
+        "model": "journal.entry",
+        "fields": {
+            "category": 1,
+            "updated": "2010-03-15 17:14:55",
+            "title": "Mengvirus kan gevaarlijk zijn",
+            "created": "2010-03-15 17:14:55",
+            "excerpt": "26 februari - Bij de kruising tussen een vogelgriepvirus en een menselijk griepvirus kunnen gevaarlijke mengvormen ontstaan, zo waarschuwen Amerikaanse wetenschappers deze week in vakblad PNAS. Zij maakten 254 van deze mengvirussen in het laboratorium.",
+            "content": "<p>Het vogelgriepvirus (influenza A/H5N1) dook in 1996 voor het eerst op bij ganzen in China. Kort daarop werden in Hongkong achttien mensen besmet, waarvan er uiteindelijk zes stierven. In 2003 was er een grote uitbraak van vogelgriep onder Aziatisch pluimvee. Het virus heeft zich toen verspreid naar wilde vogels en pluimvee op verschillende continenten. Inmiddels zijn er wereldwijd al 442 mensen met vogelgriep besmet geraakt. 262 daarvan zijn overleden.&#160;</p><p>Het aantal besmettingen ligt nog vrij laag, omdat het vogelgriepvirus niet in staat is zich succesvol onder mensen te verspreiden. Daar kan verandering in komen als influenza A/H5N1 erin slaagt om genetisch materiaal uit te wisselen met een menselijk griepvirus. Dit gebeurt wanneer beide griepvirussen op hetzelfde moment een gastheercel infecteren. Er ontstaat dan een mengvirus dat een aantal RNA-fragmenten van het vogelgriepvirus en een aantal fragmenten van het menselijke griepvirus bevat. Hoe gevaarlijk is zo\u2019n mengvirus?&#160;</p><p>Om dat uit te zoeken hebben Amerikaanse wetenschappers 254 mengvormen gemaakt van een influenza A/H5N1 virus uit kippen en een menselijk influenza A/H3N2 virus. 75 van die mengvirussen konden goed groeien in cellijnen en hadden bovendien de HA-genen (die eiwitten produceren waarmee het virus een menselijke cel binnendringt) van het vogelgriepvirus. Deze virussen zijn waarschijnlijk het meest gevaarlijk voor mensen, omdat ons afweersysteem het vreemde HA-eiwit niet kan herkennen.&#160;</p><p>De wetenschappers infecteerden per mengvirus vier muizen. 22 van de 75 mengvirussen bleken alle ge\u00efnfecteerde muizen binnen tien dagen te doden. Deze gevaarlijke mengvirussen hebben \u00e9\u00e9n overeenkomst: ze hebben allemaal het PB2-fragment van het menselijke influenza A/H3N2 virus gekregen. De Amerikanen denken dat het PB2-RNA ervoor zorgt dat een mengvirus effici\u00ebnt kan groeien in de bovenste luchtwegen van mensen. Die eigenschap is kritiek voor het virus om zich succesvol onder mensen te verspreiden.&#160;</p><p>Elles Lalieu</p>",
+            "pub_date": "2010-03-15 17:04:31",
+            "slug": "mengvirus-kan-gevaarlijk-zijn",
+            "is_published": true
+        }
+    },
+    {
+        "pk": 5,
+        "model": "journal.entry",
+        "fields": {
+            "category": 1,
+            "updated": "2010-03-15 17:16:20",
+            "title": "Pandemie of blinde paniek?",
+            "created": "2010-03-15 17:16:20",
+            "excerpt": "26 februari - De Mexicaanse griep ligt stilaan achter ons. Een evaluatie van de hele periode ligt in het vooruitzicht. De Standaard geeft alvast een voorzet.",
+            "content": "<p>De Mexicaanse griep ligt stilaan achter ons. De pandemische fase kan elk moment opgeheven worden. Minister van Volksgezondheid Onkelinx (PS) en haar Europese collega's stellen een evaluatie van de hele periode in het vooruitzicht. Een voorzet.&#160;</p><p>Lees het hele bericht bij: De Standaard Online</p>",
+            "pub_date": "2010-03-15 17:04:31",
+            "slug": "pandemie-blinde-paniek",
+            "is_published": true
+        }
+    },
+    {
+        "pk": 1,
+        "model": "journal.entry",
+        "fields": {
+            "category": 1,
+            "updated": "2010-03-15 16:54:34",
+            "title": "Nieuwe virusremmer lijkt veelbelovend",
+            "created": "2010-03-15 16:54:34",
+            "excerpt": "12 maart - Japanse wetenschappers hebben een nieuwe virusremmer ontwikkeld die beter werkt tegen gevaarlijke vormen van vogelgriep dan de huidige virusremmers. Dat komt doordat het nieuwe middel sterker aan het neuraminidase-eiwit van het griepvirus bindt.",
+            "content": "<p>Resistentie van griepvirussen tegen de huidige virusremmers, zoals Tamiflu, is een groeiend probleem. Daarom zijn wetenschappers hard op zoek naar nieuwe, betere virusremmers. Het medicijn CS-8958 lijkt een goede mogelijkheid. Uit dierstudies is gebleken dat dit nieuwe middel werkt tegen verschillende seizoensgriepvirussen en Mexicaanse griep. Ook vogelgriep vormt echter een belangrijke dreiging. Hoe gaat CS-8958 om met dat virus?&#160;</p><p>Dat hebben Japanse wetenschappers onderzocht in een studie met muizen. Zij infecteerden twee groepen muizen met het vogelgriepvirus en startten vervolgens een behandeling. De ene groep muizen kreeg een vijfdaagse standaardbehandeling met Tamiflu, terwijl de andere groep twee uur na infectie eenmalig een dosis CS-8958 kreeg. De overlevingskans van de muizen die het nieuwe middel kregen toegediend was hoger dan die van de muizen op een kuur van Tamiflu. Bovendien was de concentratie van virusdeeltjes in de longen van muizen met een CS-8958 behandeling lager.&#160;</p><p>CS-8958 is, net als Tamiflu, niet alleen bruikbaar voor behandeling van griep maar ook voor preventie. Als de nieuwe virusremmer zeven dagen voor infectie wordt toegediend, sterven muizen niet aan een dodelijke vorm van vogelgriep.&#160;</p><p>Zowel CS-8958 als Tamiflu zijn neuraminidase remmers. Dit betekent dat zij het neuraminidase-eiwit, dat het griepvirus nodig heeft om een gastheercel te verlaten en zich verder te verspreiden, blokkeren. Als beide virusremmers op dezelfde manier werken, waarom is CS-8958 dan zoveel krachtiger dan Tamilfu? De Japanners denken dat dat komt doordat CS-8958 veel sterker aan het neuraminidase-eiwit bindt dan Tamiflu.&#160;</p><p>De resultaten van het onderzoek naar CS-8958 zijn veelbelovend, maar vervolgonderzoek is nodig om te kijken of het nieuwe middel bij mensen net zo goed aanslaat als bij muizen.&#160;</p><p>Elles Lalieu</p>",
+            "pub_date": "2010-03-15 15:46:09",
+            "slug": "nieuwe-virusremmer-lijkt-veelbelovend",
+            "is_published": true
+        }
+    },
+    {
+        "pk": 2,
+        "model": "journal.entry",
+        "fields": {
+            "category": 1,
+            "updated": "2010-03-15 16:55:52",
+            "title": "Miljoenen vaccins Mexicaanse griep over",
+            "created": "2010-03-15 16:55:52",
+            "excerpt": "8 maart - Demissionair minister van Volksgezondheid Ab Klink (CDA) zit in zijn maag met negentien miljoen overtollige vaccins tegen de Mexicaanse griep.",
+            "content": "<p>Hij kan de vaccins niet verkopen aan andere landen en onderhandelt daarom nu met in ieder geval een van de twee fabrikanten over terugverkoop van ongebruikte vaccins, meldt NRC Handelsblad zaterdag.&#160;</p><p>De vaccins hebben Nederland twee- tot driehonderd miljoen euro gekost. Het ministerie zegt in onderhandeling te zijn met medicijnenfabrikanten GlaxoSmithKline. De eerste bevestigt dit, de tweede, waar zo'n driekwart van de vaccins vandaan komen, ontkent echter.&#160;</p><p>Klink schafte vorig jaar 34 miljoen doses aan. Daarmee kon de hele Nederlandse bevolking twee keer worden inge\u00ebnt. De gehele bevolking hoefde echter niet te worden gevaccineerd. Alleen de zogeheten risicogroepen, zoals zwangere vrouwen, kregen een prik. Het virus bleek slechts een milde griep te veroorzaken.&#160;</p><p>Klink besloot daarop dat hij zou proberen de meeste overgebleven vaccins door te verkopen aan andere landen. Cyprus kocht in oktober tweehonderdduizend vaccins van het ministerie, Malta nam in december tachtigduizend vaccins over.</p><p>Bron: AD.nl</p>",
+            "pub_date": "2010-03-15 15:46:09",
+            "slug": "miljoenen-vaccins-mexicaanse-griep-over",
+            "is_published": true
+        }
+    },
+    {
+        "pk": 1,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.ShowQuestion",
+            "title": "Show Question"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.HideQuestion",
+            "title": "Hide Question"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.ShowOptions",
+            "title": "Show Options"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.HideOptions",
+            "title": "Hide Options"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.CheckOptions",
+            "title": "Check Options"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.UncheckOptions",
+            "title": "Uncheck Options"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.Exclusive",
+            "title": "Exclusive"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.FutureFill",
+            "title": "Future Fill"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.FutureShowQuestion",
+            "title": "Future Show Question"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.FutureHideQuestion",
+            "title": "Future Hide Question"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.FutureShowOptions",
+            "title": "Future Show Options"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.FutureHideOptions",
+            "title": "Future Hide Options"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "pollster.ruletype",
+        "fields": {
+            "js_class": "wok.pollster.rules.Fill",
+            "title": "Fill"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "pollster.questiondatatype",
+        "fields": {
+            "js_class": "wok.pollster.datatypes.Text",
+            "css_class": "text-type",
+            "db_type": "django.db.models.TextField(null=True, blank=True)",
+            "title": "Text"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "pollster.questiondatatype",
+        "fields": {
+            "js_class": "wok.pollster.datatypes.Numeric",
+            "css_class": "numeric-type",
+            "db_type": "django.db.models.PositiveIntegerField(null=True, blank=True)",
+            "title": "Numeric"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "pollster.questiondatatype",
+        "fields": {
+            "js_class": "wok.pollster.datatypes.Date",
+            "css_class": "date-type",
+            "db_type": "django.db.models.DateField(null=True, blank=True)",
+            "title": "Date"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "pollster.questiondatatype",
+        "fields": {
+            "js_class": "wok.pollster.datatypes.MonthYear",
+            "css_class": "monthyear-type",
+            "db_type": "django.db.models.CharField(max_length=255, null=True, blank=True)",
+            "title": "MonthYear"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "pollster.questiondatatype",
+        "fields": {
+            "js_class": "wok.pollster.datatypes.Timestamp",
+            "css_class": "timestamp-type",
+            "db_type": "django.db.models.DateTimeField(null=True, blank=True)",
+            "title": "Timestamp"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "pollster.virtualoptiontype",
+        "fields": {
+            "js_class": "wok.pollster.virtualoptions.TextRange",
+            "question_data_type": 1,
+            "title": "Range"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "pollster.virtualoptiontype",
+        "fields": {
+            "js_class": "wok.pollster.virtualoptions.NumericRange",
+            "question_data_type": 2,
+            "title": "Range"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "pollster.virtualoptiontype",
+        "fields": {
+            "js_class": "wok.pollster.virtualoptions.DateRange",
+            "question_data_type": 3,
+            "title": "Range"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "pollster.virtualoptiontype",
+        "fields": {
+            "js_class": "wok.pollster.virtualoptions.DateYearsAgo",
+            "question_data_type": 3,
+            "title": "Years ago"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "pollster.virtualoptiontype",
+        "fields": {
+            "js_class": "wok.pollster.virtualoptions.MonthYearYearsAgo",
+            "question_data_type": 4,
+            "title": "Years ago"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "pollster.virtualoptiontype",
+        "fields": {
+            "js_class": "wok.pollster.virtualoptions.TimestampWeeksAgo",
+            "question_data_type": 5,
+            "title": "Weeks ago"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "pollster.virtualoptiontype",
+        "fields": {
+            "js_class": "wok.pollster.virtualoptions.RegularExpression",
+            "question_data_type": 1,
+            "title": "Regular expression"
         }
     },
     {
@@ -9103,6 +10299,33 @@
         }
     },
     {
+        "pk": 145,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_sitesettings",
+            "name": "Can add Site settings",
+            "content_type": 50
+        }
+    },
+    {
+        "pk": 146,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_sitesettings",
+            "name": "Can change Site settings",
+            "content_type": 50
+        }
+    },
+    {
+        "pk": 147,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_sitesettings",
+            "name": "Can delete Site settings",
+            "content_type": 50
+        }
+    },
+    {
         "pk": 64,
         "model": "auth.permission",
         "fields": {
@@ -9127,6 +10350,384 @@
             "codename": "delete_picture",
             "name": "Can delete picture",
             "content_type": 22
+        }
+    },
+    {
+        "pk": 169,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_option",
+            "name": "Can add option",
+            "content_type": 58
+        }
+    },
+    {
+        "pk": 170,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_option",
+            "name": "Can change option",
+            "content_type": 58
+        }
+    },
+    {
+        "pk": 171,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_option",
+            "name": "Can delete option",
+            "content_type": 58
+        }
+    },
+    {
+        "pk": 160,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_question",
+            "name": "Can add question",
+            "content_type": 55
+        }
+    },
+    {
+        "pk": 161,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_question",
+            "name": "Can change question",
+            "content_type": 55
+        }
+    },
+    {
+        "pk": 162,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_question",
+            "name": "Can delete question",
+            "content_type": 55
+        }
+    },
+    {
+        "pk": 166,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_questioncolumn",
+            "name": "Can add question column",
+            "content_type": 57
+        }
+    },
+    {
+        "pk": 167,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_questioncolumn",
+            "name": "Can change question column",
+            "content_type": 57
+        }
+    },
+    {
+        "pk": 168,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_questioncolumn",
+            "name": "Can delete question column",
+            "content_type": 57
+        }
+    },
+    {
+        "pk": 154,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_questiondatatype",
+            "name": "Can add question data type",
+            "content_type": 53
+        }
+    },
+    {
+        "pk": 155,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_questiondatatype",
+            "name": "Can change question data type",
+            "content_type": 53
+        }
+    },
+    {
+        "pk": 156,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_questiondatatype",
+            "name": "Can delete question data type",
+            "content_type": 53
+        }
+    },
+    {
+        "pk": 163,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_questionrow",
+            "name": "Can add question row",
+            "content_type": 56
+        }
+    },
+    {
+        "pk": 164,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_questionrow",
+            "name": "Can change question row",
+            "content_type": 56
+        }
+    },
+    {
+        "pk": 165,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_questionrow",
+            "name": "Can delete question row",
+            "content_type": 56
+        }
+    },
+    {
+        "pk": 172,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_rule",
+            "name": "Can add rule",
+            "content_type": 59
+        }
+    },
+    {
+        "pk": 173,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_rule",
+            "name": "Can change rule",
+            "content_type": 59
+        }
+    },
+    {
+        "pk": 174,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_rule",
+            "name": "Can delete rule",
+            "content_type": 59
+        }
+    },
+    {
+        "pk": 151,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_ruletype",
+            "name": "Can add rule type",
+            "content_type": 52
+        }
+    },
+    {
+        "pk": 152,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_ruletype",
+            "name": "Can change rule type",
+            "content_type": 52
+        }
+    },
+    {
+        "pk": 153,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_ruletype",
+            "name": "Can delete rule type",
+            "content_type": 52
+        }
+    },
+    {
+        "pk": 148,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_survey",
+            "name": "Can add survey",
+            "content_type": 51
+        }
+    },
+    {
+        "pk": 149,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_survey",
+            "name": "Can change survey",
+            "content_type": 51
+        }
+    },
+    {
+        "pk": 150,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_survey",
+            "name": "Can delete survey",
+            "content_type": 51
+        }
+    },
+    {
+        "pk": 187,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_translationoption",
+            "name": "Can add translation option",
+            "content_type": 64
+        }
+    },
+    {
+        "pk": 188,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_translationoption",
+            "name": "Can change translation option",
+            "content_type": 64
+        }
+    },
+    {
+        "pk": 189,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_translationoption",
+            "name": "Can delete translation option",
+            "content_type": 64
+        }
+    },
+    {
+        "pk": 178,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_translationquestion",
+            "name": "Can add translation question",
+            "content_type": 61
+        }
+    },
+    {
+        "pk": 179,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_translationquestion",
+            "name": "Can change translation question",
+            "content_type": 61
+        }
+    },
+    {
+        "pk": 180,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_translationquestion",
+            "name": "Can delete translation question",
+            "content_type": 61
+        }
+    },
+    {
+        "pk": 184,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_translationquestioncolumn",
+            "name": "Can add translation question column",
+            "content_type": 63
+        }
+    },
+    {
+        "pk": 185,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_translationquestioncolumn",
+            "name": "Can change translation question column",
+            "content_type": 63
+        }
+    },
+    {
+        "pk": 186,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_translationquestioncolumn",
+            "name": "Can delete translation question column",
+            "content_type": 63
+        }
+    },
+    {
+        "pk": 181,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_translationquestionrow",
+            "name": "Can add translation question row",
+            "content_type": 62
+        }
+    },
+    {
+        "pk": 182,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_translationquestionrow",
+            "name": "Can change translation question row",
+            "content_type": 62
+        }
+    },
+    {
+        "pk": 183,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_translationquestionrow",
+            "name": "Can delete translation question row",
+            "content_type": 62
+        }
+    },
+    {
+        "pk": 175,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_translationsurvey",
+            "name": "Can add translation survey",
+            "content_type": 60
+        }
+    },
+    {
+        "pk": 176,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_translationsurvey",
+            "name": "Can change translation survey",
+            "content_type": 60
+        }
+    },
+    {
+        "pk": 177,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_translationsurvey",
+            "name": "Can delete translation survey",
+            "content_type": 60
+        }
+    },
+    {
+        "pk": 157,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_virtualoptiontype",
+            "name": "Can add virtual option type",
+            "content_type": 54
+        }
+    },
+    {
+        "pk": 158,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_virtualoptiontype",
+            "name": "Can change virtual option type",
+            "content_type": 54
+        }
+    },
+    {
+        "pk": 159,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_virtualoptiontype",
+            "name": "Can delete virtual option type",
+            "content_type": 54
         }
     },
     {
@@ -9742,7 +11343,7 @@
             "is_active": true,
             "is_superuser": true,
             "is_staff": true,
-            "last_login": "2011-07-12 13:02:07",
+            "last_login": "2011-08-06 10:10:35",
             "groups": [
                 1
             ],
