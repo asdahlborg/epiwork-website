@@ -250,10 +250,6 @@ python manage.py virtual_option_type_register --title 'Years ago' --question-dat
 python manage.py virtual_option_type_register --title 'Weeks ago' --question-data-type-title 'Timestamp' --jsclass 'wok.pollster.virtualoptions.TimestampWeeksAgo'
 python manage.py virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
-if [ "$DB_ENGINE" = "sqlite3" ] ; then
-    echo ".read data/extra-survey.sqlite3.sql" | sqlite3 ggm.db
-fi
-
 echo ""
 echo "** All done. You can start the system by issuing: 'source ./bin/activate && python manage.py runserver'"
 echo ""
