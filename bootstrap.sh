@@ -4,10 +4,6 @@
 # the database and making sure a consistent Mono development environment is
 # installed.
 
-virtualenv --no-site-packages .
-source ./bin/activate
-pip install -r requirements.txt
-
 # Here we customize src/epiweb/settings.py by setting the user preferred
 # database, language and country. Note that the database and the user used
 # to connect should already exist.
@@ -33,6 +29,39 @@ else
     exit 1
 fi
 
+echo ""
+echo -n "Checking for pre-requisites: easy_install ... "
+exe_easy_install="$(which easy_install)"
+if [ -n "$exe_easy_install" ] ; then
+    echo "$exe_easy_install"
+else
+    echo "no found; place make sure setuptools are installed"
+    echo ""
+    exit 1
+fi
+
+echo ""
+echo -n "Checking for pre-requisites: pip ... "
+exe_pip="$(which pip)"
+if [ -n "$exe_pip" ] ; then
+    echo "$exe_pip"
+else
+    echo "no found; place make sure pip is installed (sudo easy_install pip)"
+    echo ""
+    exit 1
+fi
+
+echo ""
+echo -n "Checking for pre-requisites: virtualenv ... "
+exe_virtualenv="$(which virtualenv)"
+if [ -n "$exe_virtualenv" ] ; then
+    echo "$exe_virtualenv"
+else
+    echo "no found; place make sure virtualenv is installed (sudo pip install --upgrade virtualenv)"
+    echo ""
+    exit 1
+fi
+
 echo -n "Checking for pre-requisites: mysql ...  "
 exe_mysql="$(which mysql)"
 if [ -n "$exe_mysql" ] ; then
@@ -50,6 +79,9 @@ else
     echo "not found; automatic MySQL configuration disabled (please install the libmysqlclient-dev package)"
 fi
 
+virtualenv --no-site-packages .
+source ./bin/activate
+pip install -r requirements.txt
 
 echo ""
 while [ -z "$LANGUAGE" ] ; do
