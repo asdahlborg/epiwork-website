@@ -187,6 +187,7 @@ echo "Initializing Django database and loading default surveys:"
 echo ""
 
 python manage.py syncdb
+python manage.py migrate
 #python manage.py loaddata data/initial.json
 #python manage.py survey_register data/surveys/gsq/gold-standard-weekly.py 
 #python manage.py survey_register data/surveys/gsq/gold-standard-intake.py 
@@ -222,5 +223,5 @@ if [ "$DB_ENGINE" = "sqlite3" ] ; then
 fi
 
 echo ""
-echo "** All done. You can start the system by issuing: python manage.py runserver"
+echo "** All done. You can start the system by issuing: 'source ./bin/activate && python manage.py runserver'"
 echo ""
