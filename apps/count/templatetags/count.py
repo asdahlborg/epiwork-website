@@ -4,6 +4,7 @@ import urllib
 
 from django.template import Library, Node
 from django.contrib.sites.models import Site
+from django.core.cache import cache 
 
 register = Library()
 
@@ -36,10 +37,16 @@ class MemberCountNode(Node):
         self.country = country 
 
     def render(self, context):
+        key = "count-counter-%s" % self.country
+        if cache.get(key):
+            return cache.get(key)
+
         if self.country in FAKED:
             return FAKED[self.country]
 
-        return urllib.urlopen(SOURCES[self.country]).read()
+        result = urllib.urlopen(SOURCES[self.country]).read()
+        cache.set(key, result, timeout=60 * 30) # timeout 30 minutes
+        return result 
 
 register.tag('member_count', do_member_count)
 

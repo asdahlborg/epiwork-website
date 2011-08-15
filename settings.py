@@ -230,3 +230,11 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'django_cache',
+    }
+}
+
