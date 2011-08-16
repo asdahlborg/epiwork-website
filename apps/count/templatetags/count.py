@@ -49,7 +49,10 @@ class MemberCountNode(Node):
         if country in FAKED:
             return FAKED[country]
 
-        result = urllib.urlopen(SOURCES[country]).read()
+        try:
+            result = urllib.urlopen(SOURCES[country]).read()
+        except:
+            result = '0'
         cache.set(key, result, timeout=60 * 30) # timeout 30 minutes
 
         try:
