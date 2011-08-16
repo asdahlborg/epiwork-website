@@ -217,6 +217,8 @@ python manage.py virtual_option_type_register --title 'Years ago' --question-dat
 python manage.py virtual_option_type_register --title 'Weeks ago' --question-data-type-title 'Timestamp' --jsclass 'wok.pollster.virtualoptions.TimestampWeeksAgo'
 python manage.py virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
+python manage.py createcachetable django_cache 2>/dev/null || echo 'Cache table errors ignored'
+
 if [ "$DB_ENGINE" = "sqlite3" ] ; then
     echo ".read data/extra-survey.sqlite3.sql" | sqlite3 ggm.db
 fi
