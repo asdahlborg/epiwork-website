@@ -4,10 +4,6 @@
 # the database and making sure a consistent Mono development environment is
 # installed.
 
-virtualenv --no-site-packages .
-source ./bin/activate
-pip install -r requirements.txt
-
 # Here we customize src/epiweb/settings.py by setting the user preferred
 # database, language and country. Note that the database and the user used
 # to connect should already exist.
@@ -33,6 +29,39 @@ else
     exit 1
 fi
 
+echo ""
+echo -n "Checking for pre-requisites: easy_install ... "
+exe_easy_install="$(which easy_install)"
+if [ -n "$exe_easy_install" ] ; then
+    echo "$exe_easy_install"
+else
+    echo "no found; place make sure setuptools are installed"
+    echo ""
+    exit 1
+fi
+
+echo ""
+echo -n "Checking for pre-requisites: pip ... "
+exe_pip="$(which pip)"
+if [ -n "$exe_pip" ] ; then
+    echo "$exe_pip"
+else
+    echo "no found; place make sure pip is installed (sudo easy_install pip)"
+    echo ""
+    exit 1
+fi
+
+echo ""
+echo -n "Checking for pre-requisites: virtualenv ... "
+exe_virtualenv="$(which virtualenv)"
+if [ -n "$exe_virtualenv" ] ; then
+    echo "$exe_virtualenv"
+else
+    echo "no found; place make sure virtualenv is installed (sudo pip install --upgrade virtualenv)"
+    echo ""
+    exit 1
+fi
+
 echo -n "Checking for pre-requisites: mysql ...  "
 exe_mysql="$(which mysql)"
 if [ -n "$exe_mysql" ] ; then
@@ -50,6 +79,9 @@ else
     echo "not found; automatic MySQL configuration disabled (please install the libmysqlclient-dev package)"
 fi
 
+virtualenv --no-site-packages .
+source ./bin/activate
+pip install -r requirements.txt
 
 echo ""
 while [ -z "$LANGUAGE" ] ; do
@@ -187,6 +219,7 @@ echo "Initializing Django database and loading default surveys:"
 echo ""
 
 python manage.py syncdb
+python manage.py migrate
 #python manage.py loaddata data/initial.json
 #python manage.py survey_register data/surveys/gsq/gold-standard-weekly.py 
 #python manage.py survey_register data/surveys/gsq/gold-standard-intake.py 
@@ -217,10 +250,6 @@ python manage.py virtual_option_type_register --title 'Years ago' --question-dat
 python manage.py virtual_option_type_register --title 'Weeks ago' --question-data-type-title 'Timestamp' --jsclass 'wok.pollster.virtualoptions.TimestampWeeksAgo'
 python manage.py virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
-if [ "$DB_ENGINE" = "sqlite3" ] ; then
-    echo ".read data/extra-survey.sqlite3.sql" | sqlite3 ggm.db
-fi
-
 echo ""
-echo "** All done. You can start the system by issuing: python manage.py runserver"
+echo "** All done. You can start the system by issuing: 'source ./bin/activate && python manage.py runserver'"
 echo ""
