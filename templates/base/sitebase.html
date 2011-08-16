@@ -57,11 +57,15 @@
             {% if_site_logo %}
             <div id="headerlogo"><a href="/" title="{% site_name %}"><img src="{% site_logo %}" alt="{% site_name %}" /></a></div> 
             <div id="account"> 
+                {% if user.is_authenticated %}
+                    {{ user.first_name }} {{ user.last_name }}
+                {% else %}
                 <ul class="anonymous"> 
                     <li><a href="/accounts/login/" class="fancybox1">{% trans "Log in" %}</a></li> 
                     <li><a href="/accounts/register/" class="fancybox2">{% trans "New account" %}</a></li> 
                 </ul> 
                 <p><a href="/accounts/password/reset/">{% trans "Forgot password?" %}</a></p> 
+                {% endif %}
             </div> 
             {% endif_site_logo %}
 
