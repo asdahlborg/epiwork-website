@@ -135,7 +135,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'registration',
-#    'loginurl',
+    'loginurl',
     'apps.accounts',
     'apps.survey',
 #    'apps.reminder',
