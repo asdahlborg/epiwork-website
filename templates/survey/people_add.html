@@ -1,12 +1,13 @@
 {% extends "survey/base.html" %}
+{% load i18n %}
 
 {% block col1 %}
-<h1>Add Person</h1>
+<h1>{% trans "Add Person" %}</h1>
 
 <form method="post">
 {% csrf_token %}
 {{ form.as_p }}
-<p><input type="submit" value="Add Person"/></p>
+<p><input type="submit" value="{% trans "Add Person" %}"/></p>
 </form>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "survey/base.html" %}
+{% load i18n %}
 
 {% block content %}
-<p>Grazie per aver modificato il tuo profilo, {{ user }}</p>
-Ti invitiamo, se non lo hai già fatto,
-a compilare il <a href="http://www.influweb.it/survey/">questionario dei sintomi</a>.
+<p>{% trans "Thanks for changing your profile," %} {{ user }}</p>
+{% trans "Please, if you have not already done so, fill in" %} <a href="http://www.influweb.it/survey/">{% trans "the symptoms questionaire" %}</a>.
 {% endblock %}

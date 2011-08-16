@@ -1,9 +1,9 @@
 {% extends "survey/base.html" %}
+{% load i18n %}
 
 {% block col1 %}
 
-<p>Thanks for taking the time to fill out this survey.</p>
-<p>Grazie per aver compilato il questionario. Ecco il riepilogo dei dati da te inseriti per te e per i componenti del tuo gruppo o nucleo familiare:
+<p>{% trans "Thanks for taking the time to fill out this survey." %} {% trans "Here is a summary of the information you entered for you and the members of your group or family:" %}
 </p>
 
 <!-- CSS goes in the document HEAD or added to your external stylesheet -->
@@ -36,15 +36,15 @@ table.imagetable td {
 <!-- Table goes in the document BODY -->
 <table class="imagetable">
 <tr>
-	<th>Membri del gruppo</th><th>Stato di salute</th><th colspan="4">Gestisci</th>
+	<th>{% trans "Group members" %}</th><th>{% trans "Health status" %}</th><th colspan="4">{% trans "Manage " %}</th>
 </tr>
 {% for person in persons %}
 <tr><td>{{ person.name }}</td>
 	<td><b>{{ person.diag }}</b></td>
-        <td><a href="{{ person.get_edit_url }}">Modifica nome</a></td>
-        <td><a href="{{ person.get_profile_url }}">Modifica profilo</a></td>
-        <td><a href="{{ person.get_survey_url }}">Inserisci sintomi</a></td>
-        <td><a href="{{ person.get_remove_url }}">Rimuovi</a></td>
+        <td><a href="{{ person.get_edit_url }}">{% trans "Change name" %}</a></td>
+        <td><a href="{{ person.get_profile_url }}">{% trans "Change profile" %}</a></td>
+        <td><a href="{{ person.get_survey_url }}">{% trans "Enter symptoms" %}</a></td>
+        <td><a href="{{ person.get_remove_url }}">{% trans "Remove" %}</a></td>
 </tr>
 
 {% endfor %}
