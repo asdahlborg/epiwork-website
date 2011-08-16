@@ -1,13 +1,13 @@
 {% extends "registration/base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{% trans "Login" %}{% endblock %}
 
 {% block col1 %}
 
-<h1>Login</h1>
+<h1>{% trans "Login" %}</h1>
 
-<p>Enter your username and password to log in.
-<a href="{% url django.contrib.auth.views.password_reset %}">Forgot your password?</a>
+<p>{% trans "Enter your username and password to log in." %}
+<a href="{% url django.contrib.auth.views.password_reset %}">{% trans "Forgot your password?" %}</a>
 </p>
 
 <form method="post" action="?next=/" id="login">{% csrf_token %}

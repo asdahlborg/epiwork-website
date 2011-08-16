@@ -1,15 +1,14 @@
 {% extends "registration/base.html" %}
 
-{% block title %}Registration complete{% endblock %}
+{% block title %}{% trans "Registration complete" %}{% endblock %}
 
 {% block col1 %}
 
-<p>Registration is complete.</p>
+<p>{% trans "Registration is complete." %}</p>
 
-<p>An e-mail containing information about how to activate your account has been
-sent to your e-mail address.</p>
+<p>{% trans "An e-mail containing information about how to activate your account has been sent to your e-mail address." %}</p>
 
-<p><a href="/">Back to the home page</a>.</p>
+<p><a href="/">{% trans "Back to the home page" %}</a>.</p>
 
 {% endblock %}
 
