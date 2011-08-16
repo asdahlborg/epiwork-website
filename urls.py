@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     ), name='haystack_search'),
 
     (r'^test-search/$', 'views.test_search'),
+    (r'^accounts/', include('apps.accounts.urls')),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),
                                             'template_name': 'news'}),
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
