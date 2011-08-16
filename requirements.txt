@@ -12,6 +12,6 @@ wsgiref==0.1.2
 -e git://github.com/vanschelven/epidb-client-python.git#egg=epidb-client
 -e git://github.com/vanschelven/cmsplugin-journal.git#egg=cmsplugin-journal
 simplejson
-django-loginurl
+-e git://github.com/vanschelven/django-loginurl.git#egg=loginurl
 psycopg2
 MySQL-python
