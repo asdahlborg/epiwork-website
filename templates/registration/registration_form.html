@@ -8,7 +8,7 @@
 
 <div class="userformblock">
 
-<form method="post" id="registration">
+<form method="post" id="registration">{% csrf_token %}
 
 {{ form.as_p }}
 
