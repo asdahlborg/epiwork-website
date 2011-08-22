@@ -212,7 +212,6 @@ def _update_option_from_xml(survey, idmap, question, root, ordinal):
             option.text = text or ''
             option.value = value or ''
             option.ordinal = ordinal
-            option.name = "%s_%s" % (question.data_name, option.id)
             option.save()
         else:
             option = models.Option()
@@ -223,9 +222,6 @@ def _update_option_from_xml(survey, idmap, question, root, ordinal):
             option.text = text or ''
             option.value = value or ''
             option.ordinal = ordinal
-            option.save()
-            # to update the name we need the generated option id.
-            option.name = "%s_%s" % (question.data_name, option.id)
             option.save()
     else:
         type_id = root.get('data-type')
@@ -242,7 +238,6 @@ def _update_option_from_xml(survey, idmap, question, root, ordinal):
             option.value = value or ''
             option.starts_hidden = hidden
             option.ordinal = ordinal
-            option.name = "%s_%s" % (question.data_name, option.id)
             option.save()
         else:
             option = models.Option()
@@ -254,9 +249,6 @@ def _update_option_from_xml(survey, idmap, question, root, ordinal):
             option.value = value or ''
             option.starts_hidden = hidden
             option.ordinal = ordinal
-            option.save()
-            # to update the name we need the generated option id.
-            option.name = "%s_%s" % (question.data_name, option.id)
             option.save()
     idmap[temp_id] = option and option.id
     return option

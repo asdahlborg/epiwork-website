@@ -16,6 +16,7 @@
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
+                | <a href="{% url pollster_survey_export survey.id %}">export</a>
                 | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button>publish</button></form>)
             </li>
             {% endif %}
@@ -29,6 +30,7 @@
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
+                | <a href="{% url pollster_survey_export survey.id %}">export</a>
                 | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button>re-publish</button></form>)
             </li>
             {% endif %}
@@ -37,6 +39,7 @@
                 {{ survey.title }}
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
+                | <a href="{% url pollster_survey_export survey.id %}">export</a>
                 | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST">{% csrf_token %}<button>unpublish</button></form>)
             </li>
             {% endif %}

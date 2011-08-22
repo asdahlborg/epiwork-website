@@ -3,7 +3,7 @@
 from django.core.urlresolvers import get_resolver, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.utils.safestring import mark_safe
 from django.template import RequestContext
 from django.contrib.admin.views.decorators import staff_member_required
@@ -191,9 +191,10 @@ def survey_translation_edit(request, id, language):
 @staff_member_required
 def survey_export(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
-    return request_render_to_response(request, 'pollster/survey_export.json', {
-        "survey": survey
-    }, mimetype='application/json')
+    response = render(request, 'pollster/survey_export.xml', { "survey": survey }, content_type='application/xml')
+    now = datetime.datetime.now()
+    response['Content-Disposition'] = 'attachment; filename=survey-export-%d-%s.xml' % (survey.id, format(now, '%Y%m%d%H%M'))
+    return response
 
 # based on http://djangosnippets.org/snippets/2059/
 def urls(request, prefix=''):

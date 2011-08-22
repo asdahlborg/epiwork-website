@@ -353,7 +353,7 @@ class Question(models.Model):
         elif self.type == 'multiple-choice':
             fields = []
             for option in self.option_set.all():
-                title = ": ".join((self.title, option.name))
+                title = ": ".join((self.title, option.data_name))
                 fields.append( (option.data_name, models.BooleanField(verbose_name=title)) )
                 if option.is_open:
                     fields.append( (option.open_option_data_name, option.open_option_data_type.as_field_type()) )
@@ -461,7 +461,6 @@ class Option(models.Model):
     is_open = models.BooleanField(default=False)
     starts_hidden = models.BooleanField(default=False)
     ordinal = models.IntegerField()
-    name = models.CharField(max_length=255, default='')
     text = models.CharField(max_length=4095, blank=True, default='')
     group = models.CharField(max_length=255, blank=True, default='')
     value = models.CharField(max_length=255, default='')

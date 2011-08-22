@@ -1,0 +1,122 @@
+<survey id="survey-{{ survey.id }}" xmlns="http://dndg.it/ns/pollster-1.0">
+    <title>{{ survey.title }}</title>
+    <shortname>{{ survey.shortname }}</shortname>
+    <version>{{ survey.version }}</version>
+    <created>{{ survey.created|date:"c" }}</created>
+    <updated>{{ survey.updated|date:"c" }}</updated>
+    <questions>
+    {% for question in survey.question_set.all %}
+        <question id="question-{{ question.id }}">
+            <title>{{ question.title|default:'' }}</title>
+            <shortname>{{ question.shortname|default:'' }}</shortname>
+            <data_name>{{ question.data_name|default:'' }}</data_name>
+            <description>{{ question.description|default:'' }}</description>
+            <type>{{ question.type }}</type>
+            <data_type>{{ question.data_type.js_class }}</data_type>
+            <open_option_data_type>{{ question.open_option_data_type.js_class }}</open_option_data_type>
+            <starts_hidden>{{ question.starts_hidden|yesno:"true,false" }}</starts_hidden>
+            <is_mandatory>{{ question.is_mandatory|yesno:"true,false" }}</is_mandatory>
+            <visual>{{ question.visual }}</visual>
+            <tags>{{ question.tags|default:'' }}</tags>
+            <regex>{{ question.regex|default:'' }}</regex>
+            <error_message>{{ question.error_message|default:'' }}</error_message>
+            <columns>
+                {% for column in question.columns %}
+                <column id="column-{{ column.id }}">
+                    <title>{{ column.title }}</title>
+                </column>
+                {% endfor %}
+            </columns>
+            <rows>
+                {% for row in question.rows %}
+                <row id="row-{{ row.id }}">
+                    <title>{{ row.title }}</title>
+                </row>
+                {% endfor %}
+            </rows>
+            <options>
+                {% for option in question.option_set.all %}
+                <option id="option-{{ option.id }}">
+                    {% if option.column %}<column ref="column-{{ option.column.id }}"/>{% endif %}
+                    {% if option.row %}<row ref="row-{{ option.row.id }}"/>{% endif %}
+                    <group>{{ option.group }}</group>
+                    <data_name>{{ option.data_name }}</data_name>
+                    <is_virtual>{{ option.is_virtual|yesno:"true,false" }}</is_virtual>
+                    {% if option.is_virtual %} 
+                    <virtual_type>{{ option.virtual_type.js_class }}</virtual_type>
+                    <virtual_inf>{{ option.virtual_inf }}</virtual_inf>
+                    <virtual_sup>{{ option.virtual_sup }}</virtual_sup>
+                    <virtual_regex>{{ option.virtual_regex }}</virtual_regex>
+                    <virtual_type>{{ option.virtual_type.js_class }}</virtual_type>
+                    {% else %}
+                    <text>{{ option.text }}</text>
+                    <value>{{ option.value }}</value>
+                    <is_open>{{ option.is_open|yesno:"true,false" }}</is_open>
+                    {% if option.is_open %} 
+                    <open_option_data_name>{{ option.open_option_data_name }}</open_option_data_name>
+                    {% endif %}
+                    <starts_hidden>{{ option.starts_hidden|yesno:"true,false" }}</starts_hidden>
+                    {% endif %}
+                </option>
+                {% endfor %}
+            </options>
+        </question>
+    {% endfor %}
+    </questions>
+    <rules>
+        {% for question in survey.question_set.all %}{% for rule in question.subject_of_rules.all %}
+        <rule id="rule-{{ rule.id }}">
+            <type>{{rule.js_class}}</type>
+            <subject_question ref="question-{{ question.id }}"/>
+            <subject_options>
+                 {% for option in rule.subject_options.all %}
+                 <subject_option ref="option-{{ option.id }}"/>
+                 {% endfor %}
+            </subject_options>
+            {% if rule.object_question %}<object_question ref="question-{{ rule.object_question.id }}"/>{% endif %}
+            <object_options>
+                 {% for option in rule.object_options.all %}
+                 <object_option ref="option-{{ option.id }}"/>
+                 {% endfor %}
+            </object_options>
+        </rule>
+        {% endfor %}{% endfor %}
+    </rules>
+    <translations>
+        {% for translationsurvey in survey.translationsurvey_set.all %}
+        <translation lang="{{ translationsurvey.language }}">
+            <title>{{ translationsurvey.title }}</title>
+            <questions>
+            {% for translationquestion in translationsurvey.translationquestion_set.all %}
+                <question ref="question-{{ translationquestion.question.id }}">
+                    <title>{{ translationquestion.title }}</title>
+                    <description>{{ translationquestion.description }}</description>
+                    <error_message>{{ translationquestion.error_message }}</error_message>
+                </question>
+            {% endfor %}
+            </questions>
+            <columns>
+            {% for translationcolumn in translationsurvey.translationquestioncolumn_set.all %}
+                <column ref="column-{{ translationcolumn.column.id }}">
+                    <title>{{ translationcolumn.title }}</title>
+                </column>
+            {% endfor %}
+            </columns>
+            <rows>
+            {% for translationrow in translationsurvey.translationquestionrow_set.all %}
+                <row ref="row-{{ translationrow.row.id }}">
+                    <title>{{ translationrow.title }}</title>
+                </row>
+            {% endfor %}
+            </rows>
+            <options>
+            {% for translationoption in translationsurvey.translationoption_set.all %}
+                <option ref="option-{{ translationoption.option.id }}">
+                    <text>{{ translationoption.text }}</text>
+                </option>
+            {% endfor %}
+            </options>
+        </translation>
+        {% endfor %}
+    </translations>
+</survey>
