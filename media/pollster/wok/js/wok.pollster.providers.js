@@ -506,15 +506,16 @@
         function formatText($element) {
             var $e = $element;
             var info = $e.find(".info").remove();
-            var text = $properties.find("[name=field_derived_value_type] option:selected").text() || 'Derived value';
+            var $option = $properties.find("[name=field_derived_value_type] option:selected");
+            var text = $option.text() || 'Derived value';
+            var jsclass = eval('('+$option.attr('data-js-class')+')');
             var inf = $e.attr("data-inf") || "";
             var sup = $e.attr("data-sup") || "";
             var regexp = $e.attr("data-regex") || "";
 
-            // TODO: Find a way to not hard-code "6" here.
-            if ($e.attr("data-type") === "6")
+            if (jsclass.isRegularExpression)
                 $element.text(text+": " + regexp).append(info);
-            else
+            if (jsclass.isRange)
                 $element.text(text+": [" + inf + "," + sup + "]").append(info);
         }
 
@@ -540,13 +541,12 @@
                 });
                 $derived_value_types.val($element.attr('data-type')).change();
 
-                // TODO: Find a way to not hard-code "6" here.
-
-                if ($element.attr("data-type") === "6") {
+                var jsclass = eval('('+$derived_value_types.find(':selected').attr("data-js-class")+')');
+                if (jsclass.isRegularExpression) {
                     $properties.find("[name=field_derived_value_regex]").closest(".property").show();
                     $properties.find("[name=field_derived_value_inf],[name=field_derived_value_sup]").closest(".property").hide();
                 }
-                else {
+                if (jsclass.isRange) {
                     $properties.find("[name=field_derived_value_regex]").closest(".property").hide();
                     $properties.find("[name=field_derived_value_inf],[name=field_derived_value_sup]").closest(".property").show();
                 }

@@ -171,7 +171,8 @@
             <label>Type</label>
             <select name="field_derived_value_type">
                 {% for virtual_option_type in virtual_option_types %}
-                <option value="{{ virtual_option_type.id }}" data-linked-data-type="{{ virtual_option_type.question_data_type.id }}">{{ virtual_option_type.title }}</option>
+                <option value="{{ virtual_option_type.id }}" data-linked-data-type="{{ virtual_option_type.question_data_type.id }}"
+                        data-js-class="{{ virtual_option_type.js_class }}">{{ virtual_option_type.title }}</option>
                 {% endfor %}
             </select>
         </div>

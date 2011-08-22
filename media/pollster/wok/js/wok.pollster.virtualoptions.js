@@ -21,6 +21,8 @@
             }
         });
     }
+    TextRangeType.isRange = true;
+    TextRangeType.isRegularExpression = false;
 
     function NumericRangeType(option, inf, sup, regex) {
         var self = this;
@@ -44,6 +46,8 @@
             }
         });
     }
+    NumericRangeType.isRange = true;
+    NumericRangeType.isRegularExpression = false;
 
     function DateRangeType(option, inf, sup, regex) {
         var self = this;
@@ -67,6 +71,8 @@
             }
         });
     }
+    DateRangeType.isRange = true;
+    DateRangeType.isRegularExpression = false;
 
     function DateYearsAgoType(option, inf, sup, regex) {
         var self = this;
@@ -90,6 +96,8 @@
             }
         });
     }
+    DateYearsAgoType.isRange = true;
+    DateYearsAgoType.isRegularExpression = false;
 
     function MonthYearYearsAgoType(option, inf, sup, regex) {
         var self = this;
@@ -113,6 +121,8 @@
             }
         });
     }
+    MonthYearYearsAgoType.isRange = true;
+    MonthYearYearsAgoType.isRegularExpression = false;
 
     function TimestampWeeksAgoType(option, inf, sup, regex) {
         var self = this;
@@ -136,6 +146,8 @@
             }
         });
     }
+    TimestampWeeksAgoType.isRange = true;
+    TimestampWeeksAgoType.isRegularExpression = false;
 
     function RegularExpressionType(option, inf, sup, regex) {
         var self = this;
@@ -149,6 +161,8 @@
             }
         });
     }
+    RegularExpressionType.isRange = false;
+    RegularExpressionType.isRegularExpression = true;
 
     // MODULE INITIALIZATION
 
