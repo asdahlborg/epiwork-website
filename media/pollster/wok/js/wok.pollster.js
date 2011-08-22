@@ -111,8 +111,9 @@
                     // do not check options for text questions
                     rule.apply($survey, checked);
                 }
-                if (rule.isExclusive)
-                    exclusives.push('#option-'+oid);
+                if (rule.isExclusive) {
+                    exclusives = exclusives.concat(jQuery.map(rule.subjectOptions, function(i){ return '#option-'+i;}));
+                }
             }
 
             if (checked && $.inArray('#option-'+oid, exclusives) >= 0) {
@@ -120,7 +121,7 @@
                 var extra = { synthetic: true };
                 $question.find(':radio,:checkbox').not($input).filter(':checked').attr('checked', false).trigger('change', extra);
             }
-            else if (checked && exclusives) {
+            else if (checked && exclusives.length) {
                 // uncheck all exclusives when checking a non-exclusive option
                 var extra = { synthetic: true };
                 $question.find(exclusives.join(',')).find(':radio,:checkbox').attr('checked', false).trigger('change', extra);
