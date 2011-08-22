@@ -303,28 +303,29 @@
                     $properties.find("[name=tool_rule_type]").closest(".tool").show()
                 }
                 else if (type === "text") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_choice_type]").closest(".tool").hide();
+                    $properties.find("[name=tool_rule_type] [value='derived-value']").show();
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                     $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "single-choice") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_rule_type] [value='derived-value']").hide().parent().val("rule");
                     $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "multiple-choice") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_rule_type] [value='derived-value']").hide().parent().val("rule");
                     $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "matrix-select") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                 }
                 else if (type === "matrix-entry") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_choice_type]").closest(".tool").hide();
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
