@@ -59,7 +59,7 @@
         });
     }
 
-    function MonthYearType() {
+    function YearMonthType() {
         var self = this;
 
         // Public methods.
@@ -75,8 +75,8 @@
                         changeYear: true ,
                         yearRange: '-110:+0',
                         beforeShow: function(input, inst) {
-                            inst.dpDiv.addClass('month-year-only');
-                            $('head').append('<style id="hide-month-year-only-calendar" type="text/css">.month-year-only .ui-datepicker-calendar { display: none; }</style>');
+                            inst.dpDiv.addClass('year-month-only');
+                            $('head').append('<style id="hide-year-month-only-calendar" type="text/css">.year-month-only .ui-datepicker-calendar { display: none; }</style>');
                             var val = $(input).val();
                             var month = parseInt(val.replace(/\/.*$/, ''));
                             var year = parseInt(val.replace(/^.*\//, ''));
@@ -94,8 +94,10 @@
                             $(inst.input).val(val).change();
                         },
                         onClose: function(dateText, inst) { 
-                            inst.dpDiv.removeClass('month-year-only');
-                            $('head #hide-month-year-only-calendar').remove();
+                            inst.dpDiv.removeClass('year-month-only');
+                            setTimeout(function(){
+                                $('head #hide-year-month-only-calendar').remove();
+                            }, 0);
                         }
                     })
                     .change(function(evt){
@@ -134,7 +136,7 @@
         "Text": TextType,
         "Numeric": NumericType,
         "Date": DateType,
-        "MonthYear": MonthYearType,
+        "YearMonth": YearMonthType,
         "Timestamp": TimestampType
     };
 

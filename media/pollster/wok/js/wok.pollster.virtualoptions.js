@@ -99,7 +99,7 @@
     DateYearsAgoType.isRange = true;
     DateYearsAgoType.isRegularExpression = false;
 
-    function MonthYearYearsAgoType(option, inf, sup, regex) {
+    function YearMonthYearsAgoType(option, inf, sup, regex) {
         var self = this;
 
         // Public methods.
@@ -121,8 +121,8 @@
             }
         });
     }
-    MonthYearYearsAgoType.isRange = true;
-    MonthYearYearsAgoType.isRegularExpression = false;
+    YearMonthYearsAgoType.isRange = true;
+    YearMonthYearsAgoType.isRegularExpression = false;
 
     function TimestampWeeksAgoType(option, inf, sup, regex) {
         var self = this;
@@ -172,7 +172,7 @@
         "DateRange": DateRangeType,
         "RegularExpression": RegularExpressionType,
         "DateYearsAgo": DateYearsAgoType,
-        "MonthYearYearsAgo": MonthYearYearsAgoType,
+        "YearMonthYearsAgo": YearMonthYearsAgoType,
         "TimestampWeeksAgo": TimestampWeeksAgoType
     };
 

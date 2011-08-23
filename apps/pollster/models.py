@@ -180,6 +180,7 @@ class QuestionDataType(models.Model):
 
     def as_field_type(self, verbose_name=None, regex=None):
         import django.db.models
+        import db.models
         field = eval(self.db_type)
         field.verbose_name = verbose_name
         if regex:
