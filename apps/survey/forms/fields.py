@@ -1,3 +1,6 @@
+"""In the pollster approach we no longer see Postalcodes as a separate field
+These files are kept for backwards compatability"""
+
 import datetime
 import re
 
