@@ -8,11 +8,9 @@ from django.contrib.localflavor.it.forms import ITZipCodeField
 from django.contrib.localflavor.nl.forms import NLZipCodeField
 from django.contrib.localflavor.uk.forms \
      import UKPostcodeField as fullUKPostcodeField
-
-# Backported from Django version 1.2.2
-from apps.survey.forms.localflavor.be.forms import BEPostalCodeField
-from apps.survey.forms.localflavor.pt.forms import PTZipCodeField
-from apps.survey.forms.localflavor.se.forms import SEPostalCodeField
+from django.contrib.localflavor.be.forms import BEPostalCodeField
+from django.contrib.localflavor.pt.forms import PTZipCodeField
+from django.contrib.localflavor.se.forms import SEPostalCodeField
 
 from .widgets import ( AdviseWidget, MonthYearWidget,
                        DatePickerWidget, DateOrOptionPickerWidget,
