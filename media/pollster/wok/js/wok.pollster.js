@@ -50,6 +50,9 @@
                 return;
 
             var $input = $(evt.target);
+
+            if ($input.hasClass('open-option-data'))
+                return true;
             var $question = $(evt.target).closest(questionSelector);
             if (!$question.length)
                 return true;
