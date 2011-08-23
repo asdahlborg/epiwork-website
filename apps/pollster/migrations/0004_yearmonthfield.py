@@ -7,26 +7,34 @@ from django.db import models
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        yearmonth = orm.QuestionDataType.objects.all().get(js_class='wok.pollster.datatypes.MonthYear')
-        yearmonth.title = 'YearMonth'
-        yearmonth.css_class = 'yearmonth-type'
-        yearmonth.js_class = 'wok.pollster.datatypes.YearMonth'
-        yearmonth.db_type = 'db.models.YearMonthField(null=True, blank=True)'
-        yearmonth.save()
-        ago = orm.VirtualOptionType.objects.all().get(js_class='wok.pollster.virtualoptions.MonthYearYearsAgo')
-        ago.js_class = 'wok.pollster.virtualoptions.YearMonthYearsAgo'
-        ago.save()
+        yearmonth = orm.QuestionDataType.objects.all().filter(js_class='wok.pollster.datatypes.MonthYear')
+        if len(yearmonth):
+            yearmonth = yearmonth[0]
+            yearmonth.title = 'YearMonth'
+            yearmonth.css_class = 'yearmonth-type'
+            yearmonth.js_class = 'wok.pollster.datatypes.YearMonth'
+            yearmonth.db_type = 'db.models.YearMonthField(null=True, blank=True)'
+            yearmonth.save()
+        ago = orm.VirtualOptionType.objects.all().filter(js_class='wok.pollster.virtualoptions.MonthYearYearsAgo')
+        if len(ago):
+            ago = ago[0]
+            ago.js_class = 'wok.pollster.virtualoptions.YearMonthYearsAgo'
+            ago.save()
 
     def backwards(self, orm):
-        monthyear = orm.QuestionDataType.objects.all().get(js_class='wok.pollster.datatypes.YearMonth')
-        monthyear.title = 'MonthYear'
-        monthyear.css_class = 'monthyear-type'
-        monthyear.js_class = 'wok.pollster.datatypes.MonthYear'
-        monthyear.db_type = 'db.models.MonthYearField(null=True, blank=True)'
-        monthyear.save()
-        ago = orm.VirtualOptionType.objects.all().get(js_class='wok.pollster.virtualoptions.YearMonthYearsAgo')
-        ago.js_class = 'wok.pollster.virtualoptions.MonthYearYearsAgo'
-        ago.save()
+        monthyear = orm.QuestionDataType.objects.all().filter(js_class='wok.pollster.datatypes.YearMonth')
+        if len(monthyear):
+            monthyear = monthyear[0]
+            monthyear.title = 'MonthYear'
+            monthyear.css_class = 'monthyear-type'
+            monthyear.js_class = 'wok.pollster.datatypes.MonthYear'
+            monthyear.db_type = 'db.models.MonthYearField(null=True, blank=True)'
+            monthyear.save()
+        ago = orm.VirtualOptionType.objects.all().filter(js_class='wok.pollster.virtualoptions.YearMonthYearsAgo')
+        if len(ago):
+            ago = ago[0]
+            ago.js_class = 'wok.pollster.virtualoptions.MonthYearYearsAgo'
+            ago.save()
 
     models = {
         'pollster.option': {
