@@ -5,6 +5,7 @@ from . import views
 urlpatterns = patterns('',
     url(r'^urls.js$', views.urls, kwargs={'prefix': 'pollster_'}, name='pollster_urls'),
     url(r'^pollster/$', views.survey_add, name='pollster_survey_add'),
+    url(r'^pollster/import$', views.survey_import, name='pollster_survey_import'),
     url(r'^pollster/(?P<id>\d+)/$', views.survey_edit, name='pollster_survey_edit'),
     url(r'^pollster/(?P<id>\d+)/export$', views.survey_export, name='pollster_survey_export'),
     url(r'^pollster/(?P<id>\d+)/publish$', views.survey_publish, name='pollster_survey_publish'),

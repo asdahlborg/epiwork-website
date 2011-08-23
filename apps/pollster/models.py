@@ -165,19 +165,19 @@ class Survey(models.Model):
 
 class RuleType(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
-    js_class = models.CharField(max_length=255)
+    js_class = models.CharField(max_length=255, unique=True)
 
     def __unicode__(self):
-        return self.title
+        return "RuleType #%d %s" % (self.id, self.title)
 
 class QuestionDataType(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
     db_type = models.CharField(max_length=255)
     css_class = models.CharField(max_length=255)
-    js_class = models.CharField(max_length=255)
+    js_class = models.CharField(max_length=255, unique=True)
 
     def __unicode__(self):
-        return self.title
+        return "QuestionDataType #%d %s" % (self.id, self.title)
 
     def as_field_type(self, verbose_name=None, regex=None):
         import django.db.models
@@ -199,10 +199,10 @@ class QuestionDataType(models.Model):
 class VirtualOptionType(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
     question_data_type = models.ForeignKey(QuestionDataType)
-    js_class = models.CharField(max_length=255)
+    js_class = models.CharField(max_length=255, unique=True)
 
     def __unicode__(self):
-        return self.title
+        return "VirtualOptionType #%d %s for %s" % (self.id, self.title, self.question_data_type.title)
 
 class Question(models.Model):
     survey = models.ForeignKey(Survey, db_index=True)
@@ -331,7 +331,7 @@ class Question(models.Model):
         return self.type == 'matrix-entry'
 
     def __unicode__(self):
-        return self.title
+        return "Question #%d %s" % (self.id, self.title)
 
     class Meta:
         ordering = ['survey', 'ordinal']
@@ -387,6 +387,9 @@ class QuestionRow(models.Model):
     class Meta:
         ordering = ['question', 'ordinal']
 
+    def __unicode__(self):
+        return "QuestionRow #%d %s" % (self.id, self.title)
+
     @property
     def translated_title(self):
         if self.translation and self.translation.title:
@@ -415,6 +418,9 @@ class QuestionColumn(models.Model):
 
     class Meta:
         ordering = ['question', 'ordinal']
+
+    def __unicode__(self):
+        return "QuestionColumn #%d %s" % (self.id, self.title)
 
     @property
     def translated_title(self):
@@ -507,7 +513,7 @@ class Option(models.Model):
         return self.question.open_option_data_type or self.question.data_type
 
     def __unicode__(self):
-        return self.name
+        return 'Option #%d %s' % (self.id, self.value)
 
     class Meta:
         ordering = ['question', 'ordinal']
@@ -559,7 +565,7 @@ class Rule(models.Model):
         return self.rule_type.js_class
 
     def __unicode__(self):
-        return '%s on question %s' % (self.rule_type, self.subject_question.id)
+        return 'Rule #%d' % (self.id)
 
 # I18n models
 
@@ -578,7 +584,7 @@ class TranslationSurvey(models.Model):
         return ('pollster_survey_translation_edit', [str(self.survey.id), self.language])
 
     def __unicode__(self):
-        return "Translation(%s) for %s" % (self.language, self.survey)
+        return "TranslationSurvey(%s) for %s" % (self.language, self.survey)
 
     def as_form(self, data=None):
         class TranslationSurveyForm(ModelForm):
@@ -614,6 +620,9 @@ class TranslationQuestionRow(models.Model):
         ordering = ['translation', 'row']
         unique_together = ('translation', 'row')
 
+    def __unicode__(self):
+        return "TranslationQuestionRow(%s) for %s" % (self.language, self.row)
+
     def as_form(self, data=None):
         class TranslationRowForm(ModelForm):
             class Meta:
@@ -630,6 +639,9 @@ class TranslationQuestionColumn(models.Model):
         ordering = ['translation', 'column']
         unique_together = ('translation', 'column')
 
+    def __unicode__(self):
+        return "TranslationQuestionColumn(%s) for %s" % (self.language, self.column)
+
     def as_form(self, data=None):
         class TranslationColumnForm(ModelForm):
             class Meta:
@@ -645,6 +657,9 @@ class TranslationOption(models.Model):
     class Meta:
         ordering = ['translation', 'option']
         unique_together = ('translation', 'option')
+
+    def __unicode__(self):
+        return "TranslationQuestionOption(%s) for %s" % (self.language, self.option)
 
     def as_form(self, data=None):
         class TranslationOptionForm(ModelForm):

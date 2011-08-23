@@ -45,6 +45,13 @@
             {% endif %}
             {% endfor %}
             <li><a href="{% url pollster_survey_add %}">new survey</a></li>
+            <li>
+            <form action="{% url pollster_survey_import %}" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                {{ form_import.as_p }} »
+                <button>import survey</button>
+            </form>
+            </li>
         </ul>
     </div>
 </div>

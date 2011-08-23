@@ -47,7 +47,6 @@
                     <virtual_inf>{{ option.virtual_inf }}</virtual_inf>
                     <virtual_sup>{{ option.virtual_sup }}</virtual_sup>
                     <virtual_regex>{{ option.virtual_regex }}</virtual_regex>
-                    <virtual_type>{{ option.virtual_type.js_class }}</virtual_type>
                     {% else %}
                     <text>{{ option.text }}</text>
                     <value>{{ option.value }}</value>

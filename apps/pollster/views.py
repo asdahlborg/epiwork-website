@@ -19,8 +19,10 @@ def request_render_to_response(req, *args, **kwargs):
 @staff_member_required
 def survey_list(request):
     surveys = models.Survey.objects.all()
+    form_import = forms.SurveyImportForm()
     return request_render_to_response(request, 'pollster/survey_list.html', {
-        "surveys": surveys
+        "surveys": surveys,
+        "form_import": form_import
     })
 
 @staff_member_required
@@ -30,7 +32,7 @@ def survey_add(request):
         form = forms.SurveyXmlForm(request.POST)
         if form.is_valid():
             # create and redirect
-            parser.survey_update_from_xml(survey, form.cleaned_data['surveyxml'])
+            parser.survey_update_from_xhtml(survey, form.cleaned_data['surveyxml'])
             return redirect(survey)
     # return an empty survey structure
     virtual_option_types = models.VirtualOptionType.objects.all()
@@ -52,7 +54,7 @@ def survey_edit(request, id):
     if request.method == 'POST':
         form = forms.SurveyXmlForm(request.POST)
         if form.is_valid():
-            parser.survey_update_from_xml(survey, form.cleaned_data['surveyxml'])
+            parser.survey_update_from_xhtml(survey, form.cleaned_data['surveyxml'])
             return redirect(survey)
     virtual_option_types = models.VirtualOptionType.objects.all()
     question_data_types = models.QuestionDataType.objects.all()
@@ -100,7 +102,10 @@ def survey_test(request, id, language=None):
         data['timestamp'] = datetime.datetime.now()
         form = survey.as_form()(data)
         if form.is_valid():
-            next_url = _get_next_url(request, reverse(survey_test, kwargs={'id':id, 'language': language}))
+            if language:
+                next_url = _get_next_url(request, reverse(survey_test, kwargs={'id':id, 'language': language}))
+            else:
+                next_url = _get_next_url(request, reverse(survey_test, kwargs={'id':id}))
             return HttpResponseRedirect(next_url)
         else:
             survey.set_form(form)
@@ -195,6 +200,23 @@ def survey_export(request, id):
     now = datetime.datetime.now()
     response['Content-Disposition'] = 'attachment; filename=survey-export-%d-%s.xml' % (survey.id, format(now, '%Y%m%d%H%M'))
     return response
+
+@staff_member_required
+def survey_import(request):
+    form_import = forms.SurveyImportForm()
+    if request.method == 'POST':
+        print form_import.is_valid()
+        import pprint
+        pprint.pprint(form_import.errors)
+        pprint.pprint(request.FILES)
+        form_import = forms.SurveyImportForm(request.POST, request.FILES)
+        if form_import.is_valid():
+            xml = request.FILES['data'].read()
+            survey = models.Survey()
+            # create and redirect
+            parser.survey_update_from_xml(survey, xml)
+            return redirect(survey)
+    return redirect(survey_list)
 
 # based on http://djangosnippets.org/snippets/2059/
 def urls(request, prefix=''):
