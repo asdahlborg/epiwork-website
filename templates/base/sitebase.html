@@ -1,4 +1,4 @@
-{% load cms_tags menu_tags partnersites i18n %}
+{% load cms_tags menu_tags partnersites i18n count %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
@@ -38,11 +38,11 @@
 						<img src="{{ MEDIA_URL }}base/img/influbar/7thframework.gif" alt="7th Framework Logo" title="7th Framework" /></div>
 				    <div id="participants">
 						Participating countries and volunteers:<br /><br />
-						<a href="http://www.degrotegriepmeting.nl/"><img src="{{ MEDIA_URL }}base/img/influbar/nl.png" title="The Netherlands" alt="The Netherlands" /></a> 17952<br />
-						<a href="http://www.degrotegriepmeting.be/"><img src="{{ MEDIA_URL }}base/img/influbar/be.png" title="Belgium" alt="Belgium" /></a> 4717<br />
-						<a href="http://www.gripenet.pt/"><img src="{{ MEDIA_URL }}base/img/influbar/pt.png" title="Portugal" alt="Portugal" /></a> 2538<br />
-						<a href="http://www.influweb.it/"><img src="{{ MEDIA_URL }}base/img/influbar/it.png" title="Italy" alt="Italy" /></a> 3423<br />
-						<a href="http://www.flusurvey.org.uk/"><img src="{{ MEDIA_URL }}base/img/influbar/gb.png" title="Great Britain" alt="Great Britain" /></a> 703<br />
+						<a href="http://www.degrotegriepmeting.nl/"><img src="{{ MEDIA_URL }}base/img/influbar/nl.png" title="The Netherlands" alt="The Netherlands" /></a> {% member_count "nl" %}<br />
+						<a href="http://www.degrotegriepmeting.be/"><img src="{{ MEDIA_URL }}base/img/influbar/be.png" title="Belgium" alt="Belgium" /></a> {% member_count "be" %}<br />
+						<a href="http://www.gripenet.pt/"><img src="{{ MEDIA_URL }}base/img/influbar/pt.png" title="Portugal" alt="Portugal" /></a> {% member_count "pt" %}<br />
+						<a href="http://www.influweb.it/"><img src="{{ MEDIA_URL }}base/img/influbar/it.png" title="Italy" alt="Italy" /></a> {% member_count "it" %}<br />
+						<a href="http://www.flusurvey.org.uk/"><img src="{{ MEDIA_URL }}base/img/influbar/gb.png" title="Great Britain" alt="Great Britain" /></a> {% member_count "uk" %}<br />
 					</div>
 				    <div id="influenzatext">
 						InfluenzaNet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet. It has been operational in The Netherlands and Belgium (since 2003), Portugal (since 2005) and Italy (since 2008), and the current objective is to implement InfluenzaNet in more European countries.<br /><br />
@@ -57,11 +57,15 @@
             {% if_site_logo %}
             <div id="headerlogo"><a href="/" title="{% site_name %}"><img src="{% site_logo %}" alt="{% site_name %}" /></a></div> 
             <div id="account"> 
+                {% if user.is_authenticated %}
+                    {{ user.first_name }} {{ user.last_name }}
+                {% else %}
                 <ul class="anonymous"> 
                     <li><a href="/accounts/login/" class="fancybox1">{% trans "Log in" %}</a></li> 
                     <li><a href="/accounts/register/" class="fancybox2">{% trans "New account" %}</a></li> 
                 </ul> 
                 <p><a href="/accounts/password/reset/">{% trans "Forgot password?" %}</a></p> 
+                {% endif %}
             </div> 
             {% endif_site_logo %}
 
@@ -93,12 +97,13 @@
 						<a href="http://www.flusurvey.org.uk/" rel="external" title="Flusurvey United Kingdom">Flusurvey United Kingdom</a><br />
 						<a href="http://www.gripenet.pt/" rel="external" title="Gripenet Portugal">Gripenet Portugal</a><br />
 						<a href="http://www.influensakoll.se/" rel="external" title="Influensakoll Sverige">Influensakoll Sverige</a><br />
-						<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italia</a><br />				
-						<a href="#top" title="Mesure de la grippe France">Mesure de la grippe France</a><br />
+						<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italy</a><br />				
 				</div>
 			</div>{% endblock footercontent %}
 			<div id="footerclose">
-                &copy; {% now "Y" %} {% site_name %} &nbsp;|&nbsp; <a href="{% url contact_form %}" title="Contact us">Contact</a>
+                &copy; {% now "Y" %} {% site_name %} &nbsp;|&nbsp;
+                {% language_chooser %}
+                <a href="{% url contact_form %}" title="Contact us">Contact</a>
 			</div>
 		</div>
 	</div>

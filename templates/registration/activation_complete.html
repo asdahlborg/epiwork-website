@@ -1,0 +1,11 @@
+{% extends "registration/base.html" %}
+
+{% block title %}{% trans "Account Activation" %}{% endblock %}
+
+{% block col1 %}
+
+<p>{% trans "Activation is complete." %}</p>
+
+<p><a href="/">{% trans "Back to the home page" %}</a> {% trans "or" %} <a href="/accounts/login/">{% trans "proceed to the login page" %}</a>.</p>
+
+{% endblock %}

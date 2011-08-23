@@ -94,7 +94,7 @@ def survey_test(request, id, language=None):
     form = None
     user_id = request.user.id
     global_id = survey_user and survey_user.global_id
-    last_partecipation_data = None
+    last_participation_data = None
     if request.method == 'POST':
         data = request.POST.copy()
         data['user'] = user_id
@@ -110,11 +110,11 @@ def survey_test(request, id, language=None):
         else:
             survey.set_form(form)
     encoder = json.JSONEncoder(ensure_ascii=False, indent=2)
-    last_partecipation_data_json = encoder.encode(last_partecipation_data)
+    last_participation_data_json = encoder.encode(last_participation_data)
 
     return request_render_to_response(request, 'pollster/survey_test.html', {
         "survey": survey,
-        "last_partecipation_data_json": last_partecipation_data_json,
+        "last_participation_data_json": last_participation_data_json,
         "language": language,
         "form": form
     })
@@ -126,7 +126,7 @@ def survey_run(request, id):
     form = None
     user_id = request.user.id
     global_id = survey_user and survey_user.global_id
-    last_partecipation_data = survey.get_last_partecipation_data(user_id, global_id)
+    last_participation_data = survey.get_last_participation_data(user_id, global_id)
     if request.method == 'POST':
         data = request.POST.copy()
         data['user'] = user_id
@@ -140,11 +140,11 @@ def survey_run(request, id):
         else:
             survey.set_form(form)
     encoder = json.JSONEncoder(ensure_ascii=False, indent=2)
-    last_partecipation_data_json = encoder.encode(last_partecipation_data)
+    last_participation_data_json = encoder.encode(last_participation_data)
 
     return request_render_to_response(request, 'pollster/survey_run.html', {
         "survey": survey,
-        "last_partecipation_data_json": last_partecipation_data_json,
+        "last_participation_data_json": last_participation_data_json,
         "form": form
     })
 

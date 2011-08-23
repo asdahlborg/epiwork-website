@@ -1,0 +1,20 @@
+{% extends "survey/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Confirm removal" %}</h1>
+
+<p>{% trans "Confirm the removal of the person:" %}</p>
+
+<p>&gt; {{ person.name }} </p>
+
+<form method="post">
+<p><input type="submit" value="{% trans "Remove" %}"/></p>
+<input type="hidden" id="id_confirmed" name="confirmed" value="T"/>
+</form>
+
+<p>{% trans "Or select the link on the right to return to the people." %}</p>
+
+{% endblock %}
+
+

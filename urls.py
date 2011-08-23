@@ -25,11 +25,13 @@ urlpatterns = patterns('',
     ), name='haystack_search'),
 
     (r'^test-search/$', 'views.test_search'),
+    (r'^accounts/', include('apps.accounts.urls')),
     (r'^nieuws/', include('journal.urls'), {'categories': ('nieuws',),
                                             'template_name': 'news'}),
     url(r'^login/$', redirect_to, {'url': settings.LOGIN_URL}, 
                      name='loginurl-index'),
     (r'^login/', include('loginurl.urls')),
+    (r'^count/', include('apps.count.urls')),
 
     url(r'^contact/$', 'contact_form.views.contact_form', {'form_class': ContactForm}, name='contact_form'),
     url(r'^contact/sent/$', 'django.views.generic.simple.direct_to_template', {'template': 'contact_form/contact_form_sent.html'}, name='contact_form_sent'),

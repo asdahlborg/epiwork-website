@@ -1,0 +1,359 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-16 13:51+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: apps/ew_contact_form/forms.py:10 apps/survey/forms/__init__.py:16
+msgid "Name"
+msgstr ""
+
+#: apps/ew_contact_form/forms.py:11
+msgid "Email"
+msgstr ""
+
+#: apps/ew_contact_form/forms.py:12
+msgid "Message"
+msgstr ""
+
+#: apps/partnersites/forms.py:7
+msgid "Light color"
+msgstr ""
+
+#: apps/partnersites/forms.py:7
+msgid ""
+"Hexidecimal value w/o preceding '#'; The dark color is calculated from this."
+msgstr ""
+
+#: apps/partnersites/forms.py:7
+msgid "Use a hexidecimal value (length: 6) without the preceding #"
+msgstr ""
+
+#: apps/partnersites/models.py:7
+msgid "Logo"
+msgstr ""
+
+#: apps/partnersites/models.py:7
+msgid "Preferred height: 55px"
+msgstr ""
+
+#: apps/partnersites/models.py:16 apps/partnersites/models.py:19
+#: apps/partnersites/models.py:20
+msgid "Site settings"
+msgstr ""
+
+#: apps/survey/views.py:102
+msgid "You have to fill your profile data first."
+msgstr ""
+
+#: apps/survey/views.py:131 apps/survey/views.py:194
+msgid ""
+"One or more questions have empty or invalid answer. Please fix it first."
+msgstr ""
+
+#: apps/survey/views.py:274
+msgid "A new person has been added."
+msgstr ""
+
+#: templates/base/sitebase.html:64
+#: templates/registration/password_reset_complete.html:12
+msgid "Log in"
+msgstr ""
+
+#: templates/base/sitebase.html:65
+msgid "New account"
+msgstr ""
+
+#: templates/base/sitebase.html:67
+msgid "Forgot password?"
+msgstr ""
+
+#: templates/journal/latest.html:2
+msgid "Latest news"
+msgstr ""
+
+#: templates/journal/latest.html:7
+msgid "No news yet"
+msgstr ""
+
+#: templates/registration/activate.html:3
+#: templates/registration/activate.html:7
+#: templates/registration/activation_complete.html:3
+msgid "Account Activation"
+msgstr ""
+
+#: templates/registration/activate.html:9
+msgid "User activation failed."
+msgstr ""
+
+#: templates/registration/activate.html:11
+#: templates/registration/activation_complete.html:9
+#: templates/registration/logout.html:9
+#: templates/registration/registration_complete.html:11
+msgid "Back to the home page"
+msgstr ""
+
+#: templates/registration/activation_complete.html:7
+msgid "Activation is complete."
+msgstr ""
+
+#: templates/registration/activation_complete.html:9
+msgid "or"
+msgstr ""
+
+#: templates/registration/activation_complete.html:9
+msgid "proceed to the login page"
+msgstr ""
+
+#: templates/registration/index.html:7
+msgid "Change Password"
+msgstr ""
+
+#: templates/registration/index.html:8
+msgid "Update Profile"
+msgstr ""
+
+#: templates/registration/login.html:3 templates/registration/login.html:7
+msgid "Login"
+msgstr ""
+
+#: templates/registration/login.html:9
+msgid "Enter your username and password to log in."
+msgstr ""
+
+#: templates/registration/login.html:10
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/registration/logout.html:3
+msgid "Logged out"
+msgstr ""
+
+#: templates/registration/logout.html:7
+msgid "You have logged out."
+msgstr ""
+
+#: templates/registration/password_change_done.html:4
+#: templates/registration/password_change_done.html:8
+msgid "Password change successful"
+msgstr ""
+
+#: templates/registration/password_change_done.html:10
+msgid "Your password was changed."
+msgstr ""
+
+#: templates/registration/password_change_form.html:3
+#: templates/registration/password_change_form.html:7
+msgid "Password change"
+msgstr ""
+
+#: templates/registration/password_change_form.html:9
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: templates/registration/password_change_form.html:14
+msgid "Old password:"
+msgstr ""
+
+#: templates/registration/password_change_form.html:16
+#: templates/registration/password_reset_confirm.html:16
+msgid "New password:"
+msgstr ""
+
+#: templates/registration/password_change_form.html:18
+#: templates/registration/password_reset_confirm.html:18
+msgid "Confirm password:"
+msgstr ""
+
+#: templates/registration/password_change_form.html:20
+#: templates/registration/password_reset_confirm.html:19
+msgid "Change my password"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:4
+#: templates/registration/password_reset_complete.html:8
+msgid "Password reset complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:10
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:4
+#: templates/registration/password_reset_form.html:4
+#: templates/registration/password_reset_form.html:8
+msgid "Password reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:10
+msgid "Enter new password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:12
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:24
+msgid "Password reset unsuccessful"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:26
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:4
+#: templates/registration/password_reset_done.html:8
+msgid "Password reset successful"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:10
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:2
+msgid "You're receiving this e-mail because you requested a password reset"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:3
+#, python-format
+msgid "for your user account at %(site_name)s"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:5
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:9
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:11
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:13
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:10
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:14
+msgid "E-mail address:"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:15
+msgid "Reset my password"
+msgstr ""
+
+#: templates/registration/registration_complete.html:3
+msgid "Registration complete"
+msgstr ""
+
+#: templates/registration/registration_complete.html:7
+msgid "Registration is complete."
+msgstr ""
+
+#: templates/registration/registration_complete.html:9
+msgid ""
+"An e-mail containing information about how to activate your account has been "
+"sent to your e-mail address."
+msgstr ""
+
+#: templates/registration/registration_form.html:3
+msgid "Register"
+msgstr ""
+
+#: templates/registration/registration_form.html:7
+msgid "Registration Form"
+msgstr ""
+
+
+msgid "No symptoms"
+msgstr "Nessun sintomo"
+
+msgid "Flu symptoms"
+msgstr "Sintomi influenzali"
+
+msgid "Gastrointestinal symptoms"
+msgstr "Sintomi gastro-intestinali"
+
+msgid "Cold / allergy"
+msgstr "Raffreddore / allergia"
+
+msgid "Other non-influenza symptoms"
+msgstr "Altri sintomi non influenzali"
+
+msgid "Next status"
+msgstr "Nessuno status"
+
+msgid "Confirm removal"
+msgstr "Conferma rimozione"
+
+msgid "Confirm the removal of the person:"
+msgstr "Conferma la rimozione della persona:"
+
+msgid "Remove"
+msgstr "Rimuovi"
+
+msgid "Or select the link on the right to return to the people."
+msgstr "Oppure seleziona il link a destra per tornare all'elenco delle persone."
+
+msgid "Thanks for taking the time to fill out this survey."
+msgstr "Grazie per aver compilato il questionario."
+
+msgid "Here is a summary of the information you entered for you and the members of your group or family:"
+msgstr "Ecco il riepilogo dei dati da te inseriti per te e per i componenti del tuo gruppo o nucleo familiare:"
+
+msgid "Group members"
+msgstr "Membri del gruppo"
+
+msgid "Health status"
+msgstr "Stato di salute"
+
+msgid "Manage"
+msgstr "Gestisci"
+
+msgid "Change name"
+msgstr "Modifica nome"
+
+msgid "Change profile"
+msgstr "Modifica profilo"
+
+msgid "Enter symptoms"
+msgstr "Inserisci sintomi"
+
+msgid "Thanks for changing your profile,"
+msgstr "Grazie per aver modificato il tuo profilo,"
+
+msgid "Please, if you have not already done so, fill in"
+msgstr "Ti invitiamo, se non lo hai già fatto, a compilare"
+
+msgid "the symptoms questionnaire"
+msgstr "il questionario dei sintomi"
+

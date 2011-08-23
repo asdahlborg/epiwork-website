@@ -46,11 +46,13 @@ COUNTRY = 'en'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = False
-USE_L10N = False
+USE_I18N = True
+USE_L10N = True
 
 LANGUAGES = (
    ('en', 'English'),
+   ('de', 'German'),
+   ('fr', 'French'),
    ('nl', 'Dutch'),
    ('it', 'Italian'),
    ('se', 'Swedish'),
@@ -88,13 +90,19 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.media.PlaceholderMediaMiddleware',
-    # 'cms.middleware.multilingual.MultilingualURLMiddleware',
 )
+
+if len(LANGUAGES) > 1:
+    # note that this is always true, so rather, if you want to have
+    # a 'local' (or production, or whatever) settings file, you'll have
+    # to drop the last element
+    MIDDLEWARE_CLASSES += ( 
+        'cms.middleware.multilingual.MultilingualURLMiddleware',
+    )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -126,9 +134,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-#    'registration',
-#    'loginurl',
-#    'apps.accounts',
+    'registration',
+    'loginurl',
+    'apps.accounts',
     'apps.survey',
 #    'apps.reminder',
 #    'apps.banner',
@@ -136,6 +144,7 @@ INSTALLED_APPS = (
     'contact_form',
     'apps.ew_contact_form',
     'apps.partnersites',
+    'apps.count',
     'cms',
     'cms.plugins.text',
     'cms.plugins.picture',
@@ -221,3 +230,11 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'django_cache',
+    }
+}
+

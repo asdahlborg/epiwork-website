@@ -1,0 +1,22 @@
+{% extends "registration/base.html" %}
+
+{% block title %}{% trans "Register" %}{% endblock %}
+
+{% block col1 %}
+
+<h1>{% trans "Registration Form" %}</h1>
+
+<div class="userformblock">
+
+<form method="post" id="registration">{% csrf_token %}
+
+{{ form.as_p }}
+
+<input type='submit' value="Register"/>
+
+</form>
+
+</div>
+
+{% endblock %}
+

@@ -1,8 +1,7 @@
 from django.db import models, connection
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-# TODO enable when migrating to django > 1.1
-#from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator
 from xml.etree import ElementTree
 import re, warnings, datetime
 from . import dynamicmodels
@@ -104,14 +103,14 @@ class Survey(models.Model):
         else:
             return 'results_'+str(self.shortname)
 
-    def get_last_partecipation_data(self, user_id, global_id):
+    def get_last_participation_data(self, user_id, global_id):
         model = self.as_model()
-        partecipation = model.objects\
+        participation = model.objects\
             .filter(user=user_id)\
             .filter(global_id = global_id)\
             .order_by('-timestamp')\
             .values()
-        return _get_or_default(partecipation)
+        return _get_or_default(participation)
 
     def as_model(self):
         fields = []
@@ -183,9 +182,8 @@ class QuestionDataType(models.Model):
         import django.db.models
         field = eval(self.db_type)
         field.verbose_name = verbose_name
-        # TODO enable when migrating to django > 1.1
-        #if regex:
-        #    field.validators.append(RegexValidator(regex=regex))
+        if regex:
+            field.validators.append(RegexValidator(regex=regex))
         return field
 
     @staticmethod
@@ -659,7 +657,7 @@ class TranslationOption(models.Model):
         unique_together = ('translation', 'option')
 
     def __unicode__(self):
-        return "TranslationQuestionOption(%s) for %s" % (self.language, self.option)
+        return "TranslationOption(%s) for %s" % (self.language, self.option)
 
     def as_form(self, data=None):
         class TranslationOptionForm(ModelForm):
