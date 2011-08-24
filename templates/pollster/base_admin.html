@@ -35,6 +35,15 @@
             <img class="influenzanet" src="/media/pollster/css/im/influenzanet.gif" alt="Influenzanet Logo"/>
             <img class="epiwork" src="/media/pollster/css/im/logo-epiwork.jpg" alt="Epiwork Logo"/>
         </div>
+        <div id="wok-messages">
+        {% if messages %}
+        <ul class="messagelist">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        </div>
         <div id="wok-navigation">
             <ul>
                 {% block navigation %}{% endblock %}

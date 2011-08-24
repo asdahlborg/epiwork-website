@@ -17,7 +17,7 @@
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <a href="{% url pollster_survey_export survey.id %}">export</a>
-                | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button>publish</button></form>)
+                | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button class="link">publish</button></form>)
             </li>
             {% endif %}
             {% if survey.is_unpublished %}
@@ -31,7 +31,7 @@
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <a href="{% url pollster_survey_export survey.id %}">export</a>
-                | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button>re-publish</button></form>)
+                | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button class="link">re-publish</button></form>)
             </li>
             {% endif %}
             {% if survey.is_published %}
@@ -40,7 +40,7 @@
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <a href="{% url pollster_survey_export survey.id %}">export</a>
-                | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST">{% csrf_token %}<button>unpublish</button></form>)
+                | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST">{% csrf_token %}<button class="link">unpublish</button></form>)
             </li>
             {% endif %}
             {% endfor %}
@@ -48,7 +48,7 @@
             <li>
             <form action="{% url pollster_survey_import %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
-                {{ form_import.as_p }} »
+                {{ form_import.as_p }}
                 <button>import survey</button>
             </form>
             </li>

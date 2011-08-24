@@ -23,7 +23,7 @@
                 <form action="{% url pollster_survey_translation_add survey.id %}" method="POST">
                     {% csrf_token %}
                     {{ form_add.as_p }}
-                    <button>create translation</button>
+                    <button class="link">create translation</button>
                 </form>
             </li>
         </ul>

@@ -90,6 +90,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -109,6 +110,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.request",
     "django.core.context_processors.media",
+    "django.contrib.messages.context_processors.messages",
     "cms.context_processors.media",
 )
 
@@ -134,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
+    'django.contrib.messages',
     'registration',
     'loginurl',
     'apps.accounts',
@@ -174,6 +177,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'loginurl.backends.LoginUrlBackend',
 )
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 CMSPLUGIN_NEWS_RSS_TITLE = "News"
 CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"

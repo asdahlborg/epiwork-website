@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.utils.safestring import mark_safe
 from django.template import RequestContext
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from cms import settings as cms_settings
 from apps.survey.models import SurveyUser
@@ -71,7 +72,11 @@ def survey_edit(request, id):
 def survey_publish(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     if (request.method == 'POST'):
-        survey.publish()
+        errors = survey.publish()
+        if errors:
+            messages.error(request, 'Unable to publish the survey, please check the errors below')
+            for error in errors:
+                messages.warning(request, error)
         return redirect(survey)
     return redirect(survey)
 
