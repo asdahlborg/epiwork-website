@@ -345,6 +345,10 @@ class Question(models.Model):
     def is_matrix_entry(self):
         return self.type == 'matrix-entry'
 
+    @property
+    def is_visual_dropdown(self):
+        return self.visual == 'dropdown'
+
     def __unicode__(self):
         return "Question #%d %s" % (self.id, self.title)
 

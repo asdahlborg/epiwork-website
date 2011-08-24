@@ -44,12 +44,18 @@
             </li>
             {% endif %}
             {% endfor %}
-            <li><a href="{% url pollster_survey_add %}">new survey</a></li>
+        </ul>
+        <ul>
             <li>
             <form action="{% url pollster_survey_import %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
-                {{ form_import.as_p }}
+                {{ form_import.data }}
                 <button>import survey</button>
+            </form>
+            </li>
+            <li>
+            <form action="{% url pollster_survey_add %}" method="GET">
+                <button>new survey</button>
             </form>
             </li>
         </ul>

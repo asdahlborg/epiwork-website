@@ -81,6 +81,7 @@ def _update_question_from_xhtml(survey, idmap, root, ordinal):
     question_type = root.get('data-question-type')
     data_type = root.get('data-data-type')
     open_option_data_type = root.get('data-open-option-data-type')
+    visual = root.get('data-visual') or ''
     tags = root.get('data-tags')
     regex = None
     if root.find('input') is not None:
@@ -100,7 +101,7 @@ def _update_question_from_xhtml(survey, idmap, root, ordinal):
     match = re.match('^question-(\d+)$', temp_id)
 
     if question_type == 'builtin':
-        # builtin queestions are not modifiable
+        # builtin questions are not modifiable
         question = models.Question.objects.get(id = int(match.group(1)))
     elif deleted:
         models.Question.objects.filter(id = int(match.group(1))).exclude(type = 'builtin').delete()
@@ -117,6 +118,7 @@ def _update_question_from_xhtml(survey, idmap, root, ordinal):
         question.error_message = error_message or ''
         question.starts_hidden = hidden
         question.is_mandatory = mandatory
+        question.visual = visual
         question.ordinal = ordinal
         if data_type:
             question.data_type = models.QuestionDataType.objects.get(id = data_type)
@@ -135,6 +137,7 @@ def _update_question_from_xhtml(survey, idmap, root, ordinal):
         question.error_message = error_message or ''
         question.starts_hidden = hidden
         question.is_mandatory = mandatory
+        question.visual = visual
         question.ordinal = ordinal
         if data_type:
             question.data_type = models.QuestionDataType.objects.get(id = data_type)

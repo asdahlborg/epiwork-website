@@ -108,18 +108,6 @@
 
         self.$element = null;
 
-        /* function changeVisual(visual) {
-            var $e = self.$element;
-            if (visual === "radio") {
-                if ($e.find("select").length === 0)
-                    return;
-                var $x = $('<ul></ul>');
-                $e.find("select option").each(function() {
-                    $x.append()
-                });
-            }
-        }*/
-
         // Tool actions.
 
         $properties.find(".action-add-choice").click(function(evt) {
@@ -236,6 +224,12 @@
             return false;
         });
 
+        $properties.find("[name=field_question_visual]").change(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.attr("data-visual", $(this).val());
+            return false;
+        });
+
         $properties.find("[name=field_question_starts_hidden]").change(function(evt) {
             if (self.$element === null) return true;
             self.$element.toggleClass('starts-hidden', $(this).val() == 'true');
@@ -272,6 +266,7 @@
                     .find("[name=field_question_type]").val(type).end()
                     .find("[name=field_question_data_type]").val($e.attr("data-data-type")).end()
                     .find("[name=field_question_open_option_data_type]").val($e.attr("data-open-option-data-type")).end()
+                    .find("[name=field_question_visual]").val($e.attr("data-visual")).end()
                     .find("[name=field_question_tags]").val($e.attr("data-tags")).end()
                     .find("[name=field_question_title]").val($.trim($e.find(".title").text())).end()
                     .find("[name=field_question_text]").val(getText($e.find("p").first())).end()
@@ -285,16 +280,20 @@
                 // We display visual options depending on the question type.
 
                 var $v = $properties.find("[name=field_question_visual]");
+                var visual = $e.attr("data-visual");
+                var enabled;
                 if (type === "text") {
-                    $v.find("option").hide().end().find("[value=entry]").show().parent().val("entry");
+                    enabled = "[value=entry]";
                 }
                 else if (type === "single-choice") {
-                    var visual = $e.find("select").length === 1 ? "select" : "radio";
-                    $v.find("option").hide().end().find("[value=radio],[value=dropdown]").show().parent().val(visual);
+                    enabled = "[value=radio],[value=dropdown]";
                 }
                 else if (type === "multiple-choice") {
-                    $v.find("option").hide().end().find("[value=check]").show().parent().val("check");
+                    enabled = "[value=check]";
                 }
+                $v.find("option").hide().attr('disabled', true).end()
+                $v.find(enabled).attr('disabled', false).show();
+                $v.val(visual);
 
                 // We display the tools depending on the question type.
 

@@ -4,7 +4,8 @@
         <div id="question-{{ question.id }}" class="{{ question.css_classes|join:' ' }}"
              data-question-type="{{ question.type }}" data-data-type="{{ question.data_type.id }}" data-shortname="{{ question.data_name }}" data-tags="{{ question.tags }}"
              data-regex="{{ question.regex|default:'' }}"
-             data-open-option-data-type="{{ question.open_option_data_type.id }}">
+             data-open-option-data-type="{{ question.open_option_data_type.id }}"
+             data-visual="{{ question.visual }}">
             <div class="info">{{ question.data_name }}</div>
             <p>
                 <span class="number"></span>
