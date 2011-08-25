@@ -243,3 +243,4 @@ CACHES = {
     }
 }
 
+GOOGLE_ANALYTICS_ACCOUNT = None
