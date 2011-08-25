@@ -24,12 +24,12 @@ def test_search(request):
     class SearchForm(forms.Form):
         q = forms.CharField(label="Search")
 
-    query = True
+    query = 'highlighted'
     page = {
         'object_list': [
-            {'object': "Resultaat nr. 1"},
-            {'object': "Resultaat nr. 2"},
-            {'object': "Resultaat nr. 3"},
+            {'object': "Resultaat nr. 1", 'get_stored_fields': {'summary': 'this word is highlighted in some way'}},
+            {'object': "Resultaat nr. 2", 'get_stored_fields': {'summary': 'this word is highlighted in some way'}},
+            {'object': "Resultaat nr. 3", 'get_stored_fields': {'summary': 'this word is highlighted in some way'}},
         ],
         'previous_page_number': 1,
         'next_page_number': 3,
