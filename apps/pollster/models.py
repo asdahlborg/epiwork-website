@@ -1,9 +1,10 @@
-from django.db import models, connection
+from django.db import models, connection, transaction, IntegrityError, DatabaseError
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.core.validators import RegexValidator
 from xml.etree import ElementTree
-import re, warnings, datetime
+import re, warnings, datetime, json
+import simplejson as json
 from . import dynamicmodels
 
 SURVEY_STATUS_CHOICES = (
@@ -17,6 +18,11 @@ SURVEY_TRANSLATION_STATUS_CHOICES = (
     ('PUBLISHED', 'Published')
 )
 
+CHART_STATUS_CHOICES = (
+    ('DRAFT', 'Draft'),
+    ('PUBLISHED', 'Published'),
+)
+
 QUESTION_TYPE_CHOICES = (
     ('builtin', 'Builtin'),
     ('text', 'Open Answer'),
@@ -24,6 +30,12 @@ QUESTION_TYPE_CHOICES = (
     ('multiple-choice', 'Multiple Choice'),
     ('matrix-select', 'Matrix Select'),
     ('matrix-entry', 'Matrix Entry'),
+)
+
+CHART_SQLFILTER_CHOICES = (
+    ('NONE', 'None'),
+    ('USER', 'Current User'),
+    ('PERSON', 'Current Person'),
 )
 
 IDENTIFIER_REGEX = r'^[a-zA-Z][a-zA-Z0-9_]*$'
@@ -726,3 +738,95 @@ class TranslationOption(models.Model):
                 model = TranslationOption
                 fields = ['text', 'description']
         return TranslationOptionForm(data, instance=self, prefix="option_%s"%(self.id,))
+
+class ChartType(models.Model):
+    shortname = models.SlugField(max_length=255, unique=True)
+    description = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.description or self.shortname
+
+class Chart(models.Model):
+    survey = models.ForeignKey(Survey, db_index=True)
+    type = models.ForeignKey(ChartType, db_index=True)
+    shortname = models.SlugField(max_length=255)
+    chartwrapper = models.TextField(blank=True, default='')
+    sqlsource = models.TextField(blank=True, default='', verbose_name="SQL Source Query")
+    sqlfilter = models.CharField(max_length=255, default='NONE', choices=CHART_SQLFILTER_CHOICES, verbose_name="Results Filter")
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=255, default='DRAFT', choices=CHART_STATUS_CHOICES)
+
+    class Meta:
+        ordering = ['survey', 'shortname']
+        unique_together = ('survey', 'shortname')
+
+    def __unicode__(self):
+        return "Chart %s" % (self.shortname, )
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('pollster_survey_chart_edit', [str(self.survey.id), self.shortname])
+
+    @property
+    def is_draft(self):
+        return self.status == 'DRAFT'
+
+    @property
+    def is_published(self):
+        return self.status == 'PUBLISHED'
+
+    @property
+    def has_data(self):
+        if not self.sqlsource:
+            return False
+        else:
+            return True
+
+    def to_json(self, user_id, global_id):
+        data = { "chartType": "Table" }
+        if self.chartwrapper:
+            data = json.loads(self.chartwrapper)
+        descriptions, cells = self.load_data(user_id, global_id)
+        cols = [{"id": desc[0], "label": desc[0], "type": "number"} for desc in descriptions]
+        rows = [{"c": [{"v": v} for v in c]} for c in cells]
+        data["dataTable"] = { "cols": cols, "rows": rows }
+        return json.dumps(data)
+
+    def get_table_name(self):
+        return 'pollster_charts_'+str(self.survey.shortname)+'_'+str(self.shortname)
+
+    def update_table(self):
+        query = self.sqlsource
+        if query:
+            table = self.get_table_name()
+            backup = table+'_'+format(datetime.datetime.now(), '%Y%m%d%H%M%s')
+            exists = table in connection.introspection.table_names()
+            execute = connection.cursor().execute
+            try:
+                if exists:
+                    execute('ALTER TABLE '+table+' RENAME TO '+backup)
+                create = 'CREATE TABLE %s AS %s' % (table, query)
+                execute(create)
+                if exists:
+                    execute('DROP TABLE '+backup)
+                return True
+            except IntegrityError:
+                return False
+            except DatabaseError:
+                return False
+        return False
+
+    def load_data(self, user, global_id):
+        table = self.get_table_name()
+        query = 'SELECT * FROM %s' % (table,)
+        if self.sqlfilter == 'USER' :
+            query += " WHERE user = :user"
+        elif self.sqlfilter == 'PERSON':
+            query += " WHERE user = :user AND global_id = :global_id"
+        parameters = { "user": user, "global_id": global_id }
+        try:
+            cursor = connection.cursor().execute(query, parameters)
+            return (cursor.description, cursor.fetchall())
+        except DatabaseError, e:
+            return ((('Error',),), ((str(e),),))

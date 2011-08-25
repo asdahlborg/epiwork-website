@@ -22,9 +22,13 @@
 #pollster-properties .readonly input { border: 1px solid #EEE; background: #FFF; }
 #pollster-properties .property-group { background: #FFF; padding: 5px; margin: 5px; -webkit-border-radius: 5px; }
 #pollster-properties .property-group .reset { float: right; height: 20px; width: 20px; }
-#pollster-properties .property { clear: both; margin: 0 0 3px 0; }
+#pollster-properties .property { clear: both; margin: 0 0 3px 0; position: relative; }
+#pollster-properties .property.error input, #pollster-properties .property.error textarea { border-color: #F44; }
 #pollster-properties .tool-group { clear: both; background: #FFF; padding: 5px; margin: 5px; -webkit-border-radius: 5px; }
 #pollster-properties .tool { clear: both; margin: 0 0 3px 0; }
+#pollster-properties .property.error:hover .errorlist { display: block; }
+#pollster-properties .errorlist { display: none; position: absolute; z-index: 10; }
+#pollster-properties .errorlist li { background-color: #F44; -webkit-border-radius: 3px; }
 
 #portamento_container { float:right; position:relative; }
 #portamento_container #pollster-properties { float:none; position:absolute; }

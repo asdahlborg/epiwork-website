@@ -14,6 +14,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/surveys-editor/', include('apps.pollster.urls')),
     (r'^admin/', include(admin.site.urls)),
+    url(r'^surveys/(?P<id>\d+)/charts/(?P<shortname>.+)\.json$', 'apps.pollster.views.chart_data', name='pollster_chart_data'),
     (r'^surveys/(?P<id>\d+)/$', 'apps.pollster.views.survey_run'),
     (r'^survey/', include('apps.survey.urls')),
     (r'^reminder/', include('apps.reminder.urls')),
