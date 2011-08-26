@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="{{ MEDIA_URL }}base/img/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="{{ MEDIA_URL }}base/img/apple-touch-icon.png" />      
 
-		<title>{% block title %}{% site_name %}: {% page_attribute page_title %}{% endblock title %}</title>
+		<title>{% block title %}{{ site_name }}: {% page_attribute page_title %}{% endblock title %}</title>
 		<meta name="description" content="{% page_attribute meta_description %}"/>
         <meta name="keywords" content="{% page_attribute meta_keywords %}"/>
         {% block add_head %}{% endblock add_head %}
@@ -55,8 +55,8 @@
 		</div>
 		
 		<div id="header">
-            {% if_site_logo %}
-            <div id="headerlogo"><a href="/" title="{% site_name %}"><img src="{% site_logo %}" alt="{% site_name %}" /></a></div> 
+            {% if site_logo %}
+            <div id="headerlogo"><a href="/" title="{{ site_name }}"><img src="{{ site_logo }}" alt="{{ site_name }}" /></a></div> 
             <div id="account"> 
                 {% if user.is_authenticated %}
                     {{ user.first_name }} {{ user.last_name }}
@@ -68,7 +68,7 @@
                 <p><a href="/accounts/password/reset/">{% trans "Forgot password?" %}</a></p> 
                 {% endif %}
             </div> 
-            {% endif_site_logo %}
+            {% endif %}
 
 			<div id="navigation">
 				<div id="menubar">
@@ -102,7 +102,7 @@
 				</div>
 			</div>{% endblock footercontent %}
 			<div id="footerclose">
-                &copy; {% now "Y" %} {% site_name %} &nbsp;|&nbsp;
+                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
                 {% language_chooser %}
                 <a href="{% url contact_form %}" title="Contact us">Contact</a>
 			</div>

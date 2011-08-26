@@ -115,6 +115,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.contrib.messages.context_processors.messages",
     "cms.context_processors.media",
+    "apps.partnersites.context_processors.customizations",
 )
 
 CMS_TEMPLATES = (
