@@ -86,6 +86,9 @@
 		
 		<div id="footer">{% block footercontent %}
 			<div id="footercontent">
+            {% if site_footer %}
+                {{ site_footer }}
+            {% else %}
 				<div id="footercol1"><img src="{{ MEDIA_URL }}base/img/main/influenzanetlogo.png" alt="Influenzanet logo" /><p>Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet with the aid of volunteers.<br />We have tried to ensure that all information we provide through this website is correct at the time we include it.</p></div>
 				<div id="footercol2"><h2>Partners</h2>
 						<a href="http://preview.aktivgegengrippe.de/" rel="external" title="Aktiv gegen Grippe Deutschland">Aktiv gegen Grippe Deutschland</a><br />
@@ -100,6 +103,7 @@
 						<a href="http://www.influensakoll.se/" rel="external" title="Influensakoll Sverige">Influensakoll Sverige</a><br />
 						<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italy</a><br />				
 				</div>
+            {% endif %}
 			</div>{% endblock footercontent %}
 			<div id="footerclose">
                 &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;

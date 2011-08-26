@@ -6,6 +6,7 @@ class SiteSettings(models.Model):
     site = models.OneToOneField(Site)
     logo = models.ImageField(_("Logo"), help_text=_("Preferred height: 55px"), upload_to='uploads', blank=True, null=True)
     light_color = models.CharField(max_length=6, default="ce2626")
+    footer = models.TextField(_("Footer"), help_text=_("The footer will be displayed at the bottom of each page"), blank=True, null=True)
 
     @property
     def dark_color(self):
