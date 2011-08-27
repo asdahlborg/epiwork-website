@@ -5,6 +5,6 @@
 
 <p class="date">{{ entry.pub_date }}</p>
 
-<div class="content">{{ entry.content|safe }}</div>{% endblock col1 %}
+<div class="content">{{ entry_content }}</div>{% endblock col1 %}
 
 {% block col2 %}{% include "journal/latest.html" %}{% endblock col2 %}
