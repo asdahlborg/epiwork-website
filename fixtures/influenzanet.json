@@ -630,6 +630,60 @@
         }
     },
     {
+        "pk": 71,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "partnersites",
+            "migration": "0003_auto__add_field_sitesettings_footer"
+        }
+    },
+    {
+        "pk": 72,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "text",
+            "migration": "0006_2_1_4_upgrade"
+        }
+    },
+    {
+        "pk": 73,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "pollster",
+            "migration": "0002_del_field_option_name"
+        }
+    },
+    {
+        "pk": 74,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "pollster",
+            "migration": "0003_add_unique_js_class"
+        }
+    },
+    {
+        "pk": 75,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "pollster",
+            "migration": "0004_yearmonthfield"
+        }
+    },
+    {
+        "pk": 76,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:24:54",
+            "app_name": "survey",
+            "migration": "0002_auto__add_localprofile__add_localflusurvey"
+        }
+    },
+    {
         "pk": 28,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -870,6 +924,24 @@
             "model": "link",
             "name": "link",
             "app_label": "link"
+        }
+    },
+    {
+        "pk": 66,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "localflusurvey",
+            "name": "local flu survey",
+            "app_label": "survey"
+        }
+    },
+    {
+        "pk": 65,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "localprofile",
+            "name": "local profile",
+            "app_label": "survey"
         }
     },
     {
@@ -6692,6 +6764,7 @@
         "model": "partnersites.sitesettings",
         "fields": {
             "logo": "",
+            "footer": null,
             "site": 1,
             "light_color": "ce2626"
         }
@@ -9463,10 +9536,10 @@
         "pk": 4,
         "model": "pollster.questiondatatype",
         "fields": {
-            "js_class": "wok.pollster.datatypes.MonthYear",
-            "css_class": "monthyear-type",
-            "db_type": "django.db.models.CharField(max_length=255, null=True, blank=True)",
-            "title": "MonthYear"
+            "js_class": "wok.pollster.datatypes.YearMonth",
+            "css_class": "yearmonth-type",
+            "db_type": "db.models.YearMonthField(null=True, blank=True)",
+            "title": "YearMonth"
         }
     },
     {
@@ -9519,7 +9592,7 @@
         "pk": 5,
         "model": "pollster.virtualoptiontype",
         "fields": {
-            "js_class": "wok.pollster.virtualoptions.MonthYearYearsAgo",
+            "js_class": "wok.pollster.virtualoptions.YearMonthYearsAgo",
             "question_data_type": 4,
             "title": "Years ago"
         }
@@ -10971,6 +11044,60 @@
             "codename": "delete_lastresponse",
             "name": "Can delete last response",
             "content_type": 41
+        }
+    },
+    {
+        "pk": 193,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_localflusurvey",
+            "name": "Can add local flu survey",
+            "content_type": 66
+        }
+    },
+    {
+        "pk": 194,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_localflusurvey",
+            "name": "Can change local flu survey",
+            "content_type": 66
+        }
+    },
+    {
+        "pk": 195,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_localflusurvey",
+            "name": "Can delete local flu survey",
+            "content_type": 66
+        }
+    },
+    {
+        "pk": 190,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_localprofile",
+            "name": "Can add local profile",
+            "content_type": 65
+        }
+    },
+    {
+        "pk": 191,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_localprofile",
+            "name": "Can change local profile",
+            "content_type": 65
+        }
+    },
+    {
+        "pk": 192,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_localprofile",
+            "name": "Can delete local profile",
+            "content_type": 65
         }
     },
     {
