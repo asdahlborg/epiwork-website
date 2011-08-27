@@ -82,6 +82,7 @@ fi
 virtualenv --no-site-packages .
 source ./bin/activate
 pip install -r requirements.txt
+pip install MySQL-python
 
 echo ""
 while [ -z "$LANGUAGE" ] ; do
