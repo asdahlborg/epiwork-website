@@ -684,6 +684,15 @@
         }
     },
     {
+        "pk": 78,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 11:53:46",
+            "app_name": "journal",
+            "migration": "0002_auto__del_field_latestentryplugin_base_path__del_field_latestentryplug"
+        }
+    },
+    {
         "pk": 28,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -1551,8 +1560,8 @@
         "pk": "b240d0902c9b270e874778f1acce41e1",
         "model": "sessions.session",
         "fields": {
-            "expire_date": "2011-09-10 12:08:15",
-            "session_data": "MWQ2MTcyYjYxNTFlNGZiZGUwNmQxYmZkZGRiMjhlYzg4YmQ2YTE5MjqAAn1xAShVDV9hdXRoX3Vz\nZXJfaWRxAksBVQ9kamFuZ29fbGFuZ3VhZ2VxA1gCAAAAZW5xBFUSX2F1dGhfdXNlcl9iYWNrZW5k\ncQVVKWRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kcQZ1Lg==\n"
+            "expire_date": "2011-09-10 14:06:59",
+            "session_data": "YzUxYjQzNzliYTg4OWE4Yjg5MTMzODI5MTJkN2QyMDViZjE3NzVmYzqAAn1xAShVDmNtc19hZG1p\nbl9zaXRlcQJLAVUNX2F1dGhfdXNlcl9pZHEDSwFVCGNtc19lZGl0cQSJVRJfYXV0aF91c2VyX2Jh\nY2tlbmRxBVUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBlUPZGph\nbmdvX2xhbmd1YWdlcQdYAgAAAGVucQh1Lg==\n"
         }
     },
     {
@@ -1561,6 +1570,71 @@
         "fields": {
             "domain": "influenzanet.eu",
             "name": "Influenzanet"
+        }
+    },
+    {
+        "pk": 365,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-27 14:06:56",
+            "object_repr": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
+            "object_id": "1",
+            "change_message": "Changed content.",
+            "user": 1,
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 364,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 3,
+            "action_time": "2011-08-27 14:01:03",
+            "object_repr": "News snippet (Left bar)",
+            "object_id": "10",
+            "change_message": "",
+            "user": 1,
+            "content_type": 25
+        }
+    },
+    {
+        "pk": 363,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-27 13:21:09",
+            "object_repr": "News",
+            "object_id": "15",
+            "change_message": "Changed published, application_urls and moderator_state.",
+            "user": 1,
+            "content_type": 31
+        }
+    },
+    {
+        "pk": 362,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2011-08-27 13:20:52",
+            "object_repr": "News",
+            "object_id": "15",
+            "change_message": "",
+            "user": 1,
+            "content_type": 31
+        }
+    },
+    {
+        "pk": 361,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-27 13:18:52",
+            "object_repr": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
+            "object_id": "1",
+            "change_message": "Changed title, slug, excerpt and content.",
+            "user": 1,
+            "content_type": 29
         }
     },
     {
@@ -7724,6 +7798,30 @@
         }
     },
     {
+        "pk": 144,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Left bar",
+            "default_width": null
+        }
+    },
+    {
+        "pk": 145,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Right bar",
+            "default_width": null
+        }
+    },
+    {
+        "pk": 146,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Main content",
+            "default_width": null
+        }
+    },
+    {
         "pk": 2,
         "model": "cms.cmsplugin",
         "fields": {
@@ -7804,38 +7902,6 @@
         }
     },
     {
-        "pk": 117,
-        "model": "cms.cmsplugin",
-        "fields": {
-            "rght": 2,
-            "parent": null,
-            "language": "en",
-            "level": 0,
-            "creation_date": "2011-07-11 15:23:58",
-            "lft": 1,
-            "tree_id": 108,
-            "position": 0,
-            "placeholder": 113,
-            "plugin_type": "SnippetPlugin"
-        }
-    },
-    {
-        "pk": 118,
-        "model": "cms.cmsplugin",
-        "fields": {
-            "rght": 2,
-            "parent": null,
-            "language": "en",
-            "level": 0,
-            "creation_date": "2011-07-11 15:32:51",
-            "lft": 1,
-            "tree_id": 109,
-            "position": 0,
-            "placeholder": 131,
-            "plugin_type": "SnippetPlugin"
-        }
-    },
-    {
         "pk": 119,
         "model": "cms.cmsplugin",
         "fields": {
@@ -7864,22 +7930,6 @@
             "tree_id": 111,
             "position": 1,
             "placeholder": 132,
-            "plugin_type": "SnippetPlugin"
-        }
-    },
-    {
-        "pk": 121,
-        "model": "cms.cmsplugin",
-        "fields": {
-            "rght": 2,
-            "parent": null,
-            "language": "en",
-            "level": 0,
-            "creation_date": "2011-07-11 15:34:12",
-            "lft": 1,
-            "tree_id": 112,
-            "position": 0,
-            "placeholder": 134,
             "plugin_type": "SnippetPlugin"
         }
     },
@@ -8769,6 +8819,40 @@
         }
     },
     {
+        "pk": 15,
+        "model": "cms.page",
+        "fields": {
+            "rght": 2,
+            "navigation_extenders": "",
+            "site": 1,
+            "creation_date": "2011-08-27 13:20:52",
+            "lft": 1,
+            "in_navigation": false,
+            "reverse_id": null,
+            "login_required": false,
+            "created_by": "admin",
+            "publication_end_date": null,
+            "moderator_state": 0,
+            "template": "base/threecol.html",
+            "tree_id": 14,
+            "placeholders": [
+                144,
+                145,
+                146
+            ],
+            "limit_visibility_in_menu": null,
+            "parent": null,
+            "publisher_state": 1,
+            "soft_root": false,
+            "publication_date": "2011-08-27 13:21:09",
+            "publisher_public": null,
+            "level": 0,
+            "changed_by": "admin",
+            "publisher_is_draft": true,
+            "published": true
+        }
+    },
+    {
         "pk": 1,
         "model": "cms.title",
         "fields": {
@@ -9035,6 +9119,25 @@
         }
     },
     {
+        "pk": 70,
+        "model": "cms.title",
+        "fields": {
+            "menu_title": "",
+            "redirect": "",
+            "meta_keywords": "",
+            "page_title": "",
+            "language": "en",
+            "title": "News",
+            "has_url_overwrite": false,
+            "application_urls": "JournalApphook",
+            "creation_date": "2011-08-27 13:20:52",
+            "page": 15,
+            "path": "news",
+            "meta_description": "",
+            "slug": "news"
+        }
+    },
+    {
         "pk": 2,
         "model": "text.text",
         "fields": {
@@ -9204,15 +9307,6 @@
         }
     },
     {
-        "pk": 10,
-        "model": "snippet.snippet",
-        "fields": {
-            "html": "<p class=\"title\">Latest news</p>\r\n<h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" rel=\"external\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" rel=\"external\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"{{ MEDIA_URL }}docs/recruitment/job_adv_epipop.pdf\" rel=\"external\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>\r\n<h2>Influenza emergence in the face of evolutionary constraints</h2>\r\n<img src=\"{{ MEDIA_URL }}base/img/temp/left-virus.jpg\" alt=\"Influenza close up\" class=\"imgleft\" height=\"60\" /><p><strong>Different influenza subtypes can evolve at very different rates, but the causes are not well understood.</strong></p><p>In this paper, we explore whether differences in transmissibility between subtypes can play a role if there are fitness constraints on antigenic evolution. We investigate the problem using a mathematical model that separates the interaction of strains through cross-immunity from the process of emergence for new antigenic variants. <a href=\"http://rspb.royalsocietypublishing.org/content/early/2011/07/14/rspb.2011.1168.full\" rel=\"external\" title=\"Continue reading\">CONTINUE READING</a></p>",
-            "name": "News snippet (Left bar)",
-            "template": ""
-        }
-    },
-    {
         "pk": 12,
         "model": "snippet.snippet",
         "fields": {
@@ -9229,31 +9323,10 @@
         }
     },
     {
-        "pk": 117,
-        "model": "snippet.snippetptr",
-        "fields": {
-            "snippet": 10
-        }
-    },
-    {
-        "pk": 118,
-        "model": "snippet.snippetptr",
-        "fields": {
-            "snippet": 10
-        }
-    },
-    {
         "pk": 120,
         "model": "snippet.snippetptr",
         "fields": {
             "snippet": 9
-        }
-    },
-    {
-        "pk": 121,
-        "model": "snippet.snippetptr",
-        "fields": {
-            "snippet": 10
         }
     },
     {
@@ -9357,24 +9430,6 @@
         }
     },
     {
-        "pk": 2,
-        "model": "menus.cachekey",
-        "fields": {
-            "key": "cms-menu_nodes_en_1",
-            "site": 1,
-            "language": "en"
-        }
-    },
-    {
-        "pk": 3,
-        "model": "menus.cachekey",
-        "fields": {
-            "key": "cms-menu_nodes_en_1",
-            "site": 1,
-            "language": "en"
-        }
-    },
-    {
         "pk": 1,
         "model": "journal.category",
         "fields": {
@@ -9387,13 +9442,13 @@
         "model": "journal.entry",
         "fields": {
             "category": 1,
-            "updated": "2011-08-27 12:07:39",
-            "title": "My first entry",
+            "updated": "2011-08-27 14:06:56",
+            "title": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
             "created": "2011-08-27 12:07:39",
-            "excerpt": "This is a short excerpt",
-            "content": "This is the full article<br />",
+            "excerpt": "The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "content": "<h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
             "pub_date": "2011-08-27 11:59:10",
-            "slug": "my-first-entry",
+            "slug": "recruitment-of-animator",
             "is_published": true
         }
     },
@@ -9401,12 +9456,8 @@
         "pk": 156,
         "model": "journal.latestentryplugin",
         "fields": {
-            "category": [
-                1
-            ],
+            "category": [],
             "limit": 3,
-            "template": "journal/latest.html",
-            "base_path": "/this/is/a/test",
             "title": "Latest News"
         }
     },
