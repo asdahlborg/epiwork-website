@@ -6,7 +6,12 @@
     {# later, but for now we don't want to assume such a page has been created on all #}
     {# already running instances of the site. #}
 
-	<p>{{ news.excerpt }} <a href="/news/{{ news.get_relative_url }}">{% trans "Read more..." %}</a></p><hr />
+
+	<p>
+    {% if news.image %}<img src="{% url journal_thumbnail slug=news.slug %}" {% if news.alignment %}align="{{ news.alignment }}"{% endif %} alt="{{ news.title }}"/>{% endif %}
+    {{ news.excerpt }}
+    <a href="/news/{{ news.get_relative_url }}">{% trans "Read more..." %}</a></p><hr />
+
 {% empty %}
 	<h2>{% trans "No news yet" %}</h2>
 {% endfor %}

@@ -10,4 +10,5 @@ epiweb.db
 *.swp
 .DS_Store
 media/uploads
+media/journal_images
 /local_settings.py
