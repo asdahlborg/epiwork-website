@@ -12,7 +12,7 @@ class CMSLatestEntryPlugin(CMSPluginBase):
         Plugin class for the latest news
     """
     model = LatestEntryPlugin
-    name = _('Latest journal entries')
+    name = _('Journal entries')
     render_template = "journal/latest.html"
     
     def render(self, context, instance, placeholder):
