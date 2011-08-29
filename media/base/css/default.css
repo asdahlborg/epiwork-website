@@ -426,8 +426,9 @@ ul.map_buttons li {
 
 #menubar {
  float: left;
- max-width: 720px;
+ max-width: 754px;
  overflow: hidden;
+ margin: 0 0 4px 0;
 }
 
 #menubar li {
@@ -470,6 +471,32 @@ ul.map_buttons li {
 }
 
 #submenu {
+ float: left;
+ width: 736px;
+ overflow: hidden;
+ background: url("../img/main/submenu.jpg") no-repeat right top #e8e8e8;
+ color: #FFFFFF;
+ font-weight: bold;
+ font-size: 0.7em;
+ padding: 2px 4px 3px 0;
+ margin: 0 0 4px 0;
+}
+
+#submenu li,
+#submenu li a {
+ float: left;
+ margin: 0 0 0 6px;
+ color: #8e8e8e;
+ text-decoration: none;
+}
+
+#submenu li.selected a {
+ color: #2E2E31;
+ text-decoration: underline;
+}
+
+#submenu li:first-child {
+ margin: 0 0 0 3px;  
 }
 
 #searchbar {
