@@ -247,4 +247,8 @@ CACHES = {
     }
 }
 
+# SEO Settings
+
 GOOGLE_ANALYTICS_ACCOUNT = None
+CMS_SEO_FIELDS = True
+
