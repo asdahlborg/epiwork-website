@@ -145,7 +145,7 @@ INSTALLED_APPS = (
     'loginurl',
     'apps.accounts',
     'apps.survey',
-#    'apps.reminder',
+    'apps.reminder',
 #    'apps.banner',
     'apps.search',
     'apps.journal',

@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 
 from mock import Mock, patch, patch_object
 
-from epiweb.apps.reminder import send
-from epiweb.apps.reminder.models import Reminder
+from . import send
+from .models import Reminder
 
 class Base(unittest.TestCase):
     def _createUser(self, *args):

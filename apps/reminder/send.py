@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.conf import settings
 
-from epiweb.apps.reminder.models import Reminder
+from .models import Reminder
 
 def create_subject(user):
     t = loader.get_template('reminder/subject.txt')
@@ -90,7 +90,7 @@ def _get_url_survey():
     global _url
     if _url is None:
         domain = Site.objects.get_current()
-        path = reverse('epiweb.apps.survey.views.index')
+        path = reverse('apps.survey.views.index')
         _url = 'http://%s%s' % (domain, path)
     return _url
 

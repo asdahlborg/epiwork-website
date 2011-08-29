@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from epiweb.apps.reminder.models import Reminder
+from .models import Reminder
 
 def make_active(modeladmin, request, queryset):
     queryset.update(active=True)

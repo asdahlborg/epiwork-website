@@ -4,8 +4,9 @@ class Command(NoArgsCommand):
     help = "Send reminders."
 
     def handle_noargs(self, **options):
-        from epiweb.apps.reminder.send import send_reminder
+        from ...send import send_reminder
         succeed, fail = send_reminder()
+        fail
 
         if succeed + fail == 0:
             return u'No reminder sent.'
