@@ -7,4 +7,7 @@
 
 <div class="content">{% if entry.image %}<img src="{% url journal_image slug=entry.slug %}" {% if entry.alignment %}align="{{ entry.alignment }}"{% endif %} alt="{{ entry.title }}"/>{% endif %}{{ entry_content }}</div>{% endblock col1 %}
 
-{% block col2 %}{% include "journal/latest.html" %}{% endblock col2 %}
+{% block col2 %}
+    {% include "journal/latest.html" %}
+    {% include "journal/categories.html" %}
+{% endblock col2 %}

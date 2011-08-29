@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 from django.utils.safestring import mark_safe
 from django.shortcuts import get_object_or_404
+from django.utils.datastructures import SortedDict
 
 from cms.utils.html import clean_html
 
@@ -47,7 +48,7 @@ def index(request, categories=(), paginate_by=10, template_name=None):
     if template_name is not None:
         template = '%s_%s' % (template_name, template)
     template = 'journal/%s' % template
-    return render_to_response(template, {'items': items},
+    return render_to_response(template, {'items': items, 'months': _sidebar(_get_queryset([]))},
                               context_instance=RequestContext(request))
 
 def archive_year(request, year, categories=(), paginate_by=10,
@@ -67,8 +68,7 @@ def archive_year(request, year, categories=(), paginate_by=10,
     if template_name is not None:
         template = '%s_%s' % (template_name, template)
     template = 'journal/%s' % template
-    return render_to_response(template, {'year': year,
-                                         'items': items},
+    return render_to_response(template, {'year': year, 'items': items, 'months': _sidebar(_get_queryset([]))},
                               context_instance=RequestContext(request))
 
 def archive_month(request, year, month, categories=(), paginate_by=10,
@@ -91,8 +91,7 @@ def archive_month(request, year, month, categories=(), paginate_by=10,
     if template_name is not None:
         template = '%s_%s' % (template_name, template)
     template = 'journal/%s' % template
-    return render_to_response(template, {'year': year, 'month': start,
-                                         'items': items},
+    return render_to_response(template, {'year': year, 'month': start, 'items': items, 'months': _sidebar(_get_queryset([]))},
                               context_instance=RequestContext(request))
 
 def archive_day(request, year, month, day, categories=(), paginate_by=10,
@@ -112,7 +111,7 @@ def archive_day(request, year, month, day, categories=(), paginate_by=10,
     if template_name is not None:
         template = '%s_%s' % (template_name, template)
     template = 'journal/%s' % template
-    return render_to_response(template, {'date': start, 'items': items},
+    return render_to_response(template, {'date': start, 'items': items, 'months': _sidebar(_get_queryset([]))},
                               context_instance=RequestContext(request))
 
 def entry(request, year, month, day, slug, categories=(), paginate_by=10,
@@ -135,12 +134,16 @@ def entry(request, year, month, day, slug, categories=(), paginate_by=10,
     if template_name is not None:
         template = '%s_%s' % (template_name, template)
     template = 'journal/%s' % template
-    return render_to_response(template, {
+
+    c = {
         'date': date,
         'entry': item,
         'entry_content': mark_safe(clean_html(item.content, full=False)),
         'latest': queryset[:5],
-        }, context_instance=RequestContext(request)) 
+        'months': _sidebar(_get_queryset([]))
+        }
+
+    return render_to_response(template, c, context_instance=RequestContext(request)) 
 
 def image(request, slug=None, max_width=250):
     entry = get_object_or_404(Entry, slug=slug)
@@ -154,3 +157,19 @@ def image(request, slug=None, max_width=250):
     response['Content-type'] = "image/jpeg"
     image.save(response, "JPEG")
     return response 
+
+def _sidebar(queryset):
+    def t2(d):
+        return [{"date": datetime.date(x[0], x[1], 1), "count": y} for x, y in d.items()]
+
+    months = SortedDict()
+    categories = SortedDict()
+
+    for item in queryset.order_by('-pub_date'):
+        month = (item.pub_date.year, item.pub_date.month)
+        if not month in months:
+            months[month] = 0
+        months[month] += 1
+
+    return t2(months)
+
