@@ -21,10 +21,13 @@
 		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/jquery-1.5.1.min.js"></script>
 		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/influenzanet.js"></script>
         {% block add_js %}{% endblock add_js %}
+
+	    {% google_analytics %}
+
 	</head>
 
 	<body{% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
-    {% google_analytics %}
+
 	<div id="page">
 		
 		<div id="influenzabar">
