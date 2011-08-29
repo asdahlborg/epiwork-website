@@ -469,6 +469,9 @@ ul.map_buttons li {
  color: #ffffff;
 }
 
+#submenu {
+}
+
 #searchbar {
  float: right;
 }
@@ -669,14 +672,24 @@ input#commentsubmit:hover {
  background: #ffffff;
 }
 
-#footercontent {
- width: 946px;
- overflow: auto;
- padding: 20px 14px 18px 14px;
- background: #575757 url(../img/main/footerbar.gif) bottom center repeat-x;
+#footercontent-main {
+ background: url("../img/main/footerbar-main.gif") repeat-x scroll center bottom #575757;
  border-top: 2px solid #909090;
- color: #f8f8f8;
+ color: #F8F8F8;
  font-size: 0.75em;
+ overflow: auto;
+ padding: 20px 14px 18px;
+ width: 946px;
+}
+
+
+#footercontent-client {
+ background: url("../img/main/footerbar-client.gif") repeat-x scroll center bottom #727272;
+ border-top: 2px solid #909090;
+ color: #F8F8F8;
+ font-size: 0.75em;
+ padding: 14px 14px 18px;
+ width: 946px;
 }
 
 #footercol1, #footercol2, #footercol3 {

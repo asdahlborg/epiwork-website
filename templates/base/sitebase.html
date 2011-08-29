@@ -74,7 +74,7 @@
 				<div id="menubar">
 					{% block menubar %}
                     {% spaceless %}{% show_menu 0 1 0 0 "base/menu.html" %}{% endspaceless %}
-                    {% spaceless %}{% show_sub_menu 1 "base/sub_menu.html" %}{% endspaceless %}
+                    {% spaceless %}{% show_sub_menu 1 "base/submenu.html" %}{% endspaceless %}
 					{% endblock menubar %}
 				</div>
 				<div id="searchbar">
@@ -88,31 +88,38 @@
 		{% block content %}{% endblock content %}
 		
 		<div id="footer">{% block footercontent %}
-			<div id="footercontent">
             {% if site_footer %}
-                {{ site_footer }}
+				<div id="footercontent-client">
+                	{{ site_footer }}
+				</div>
+				<div id="footerclose">
+	                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
+	                {% language_chooser %}
+	                <a href="{% url contact_form %}" title="Contact us">Contact</a>
+				</div>
             {% else %}
-				<div id="footercol1"><img src="{{ MEDIA_URL }}base/img/main/influenzanetlogo.png" alt="Influenzanet logo" /><p>Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet with the aid of volunteers.<br />We have tried to ensure that all information we provide through this website is correct at the time we include it.</p></div>
-				<div id="footercol2"><h2>Partners</h2>
-						<a href="http://preview.aktivgegengrippe.de/" rel="external" title="Aktiv gegen Grippe Deutschland">Aktiv gegen Grippe Deutschland</a><br />
-						<a href="http://preview.aktivgegengrippe.at/" rel="external" title="Aktiv gegen Grippe Österreich">Aktiv gegen Grippe Österreich</a><br />
-						<a href="http://preview.aktivgegengrippe.ch/" rel="external" title="Aktiv gegen Grippe Schweiz">Aktiv gegen Grippe Schweiz</a><br />
-						<a href="http://www.degrotegriepmeting.nl/" rel="external" title="De Grote Griepmeting Nederland">De Grote Griepmeting Nederland</a><br />
-						<a href="http://www.degrotegriepmeting.be/" rel="external" title="De Grote Griepmeting België">De Grote Griepmeting België</a><br />
+				<div id="footercontent-main">
+					<div id="footercol1"><img src="{{ MEDIA_URL }}base/img/main/influenzanetlogo.png" alt="Influenzanet logo" /><p>Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet with the aid of volunteers.<br />We have tried to ensure that all information we provide through this website is correct at the time we include it.</p></div>
+					<div id="footercol2"><h2>Partners</h2>
+							<a href="http://preview.aktivgegengrippe.de/" rel="external" title="Aktiv gegen Grippe Deutschland">Aktiv gegen Grippe Deutschland</a><br />
+							<a href="http://preview.aktivgegengrippe.at/" rel="external" title="Aktiv gegen Grippe Österreich">Aktiv gegen Grippe Österreich</a><br />
+							<a href="http://preview.aktivgegengrippe.ch/" rel="external" title="Aktiv gegen Grippe Schweiz">Aktiv gegen Grippe Schweiz</a><br />
+							<a href="http://www.degrotegriepmeting.nl/" rel="external" title="De Grote Griepmeting Nederland">De Grote Griepmeting Nederland</a><br />
+							<a href="http://www.degrotegriepmeting.be/" rel="external" title="De Grote Griepmeting België">De Grote Griepmeting België</a><br />
+						</div>
+						<div id="footercol3"><h2>&nbsp;</h2>
+							<a href="http://www.flusurvey.org.uk/" rel="external" title="Flusurvey United Kingdom">Flusurvey United Kingdom</a><br />
+							<a href="http://www.gripenet.pt/" rel="external" title="Gripenet Portugal">Gripenet Portugal</a><br />
+							<a href="http://www.influensakoll.se/" rel="external" title="Influensakoll Sverige">Influensakoll Sverige</a><br />
+							<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italy</a><br />				
 					</div>
-					<div id="footercol3"><h2>&nbsp;</h2>
-						<a href="http://www.flusurvey.org.uk/" rel="external" title="Flusurvey United Kingdom">Flusurvey United Kingdom</a><br />
-						<a href="http://www.gripenet.pt/" rel="external" title="Gripenet Portugal">Gripenet Portugal</a><br />
-						<a href="http://www.influensakoll.se/" rel="external" title="Influensakoll Sverige">Influensakoll Sverige</a><br />
-						<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italy</a><br />				
+				</div>
+				<div id="footerclose">
+	                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
+	                <a href="{% url contact_form %}" title="Contact us">Contact</a>
 				</div>
             {% endif %}
 			</div>{% endblock footercontent %}
-			<div id="footerclose">
-                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
-                {% language_chooser %}
-                <a href="{% url contact_form %}" title="Contact us">Contact</a>
-			</div>
 		</div>
 	</div>
 	</body>
