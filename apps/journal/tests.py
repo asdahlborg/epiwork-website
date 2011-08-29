@@ -6,8 +6,8 @@ import datetime
 
 from django.test import TestCase
 
-from journal.models import Entry
-from journal.navigation import get_nodes
+from .models import Entry
+from .navigation import get_nodes
 
 class EntryTest(TestCase):
     def setUp(self):

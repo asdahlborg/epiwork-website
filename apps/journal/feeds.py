@@ -2,7 +2,7 @@ from django.contrib.syndication.feeds import Feed
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
-from journal.models import Entry
+from .models import Entry
 
 class EntryEntryFeed(Feed):
     title = settings.CMSPLUGIN_NEWS_RSS_TITLE

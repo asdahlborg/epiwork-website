@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 
 from cms.utils.html import clean_html
 
-from journal.models import Entry
+from .models import Entry
 
 def _get_queryset(categories=(), date_range=(None, None)):
     # Filter by category

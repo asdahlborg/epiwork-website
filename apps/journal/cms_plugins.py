@@ -4,8 +4,8 @@ from django.db.models import Q
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from journal.models import LatestEntryPlugin, Entry
-from journal import settings
+from .models import LatestEntryPlugin, Entry
+from . import settings
 
 class CMSLatestEntryPlugin(CMSPluginBase):
     """

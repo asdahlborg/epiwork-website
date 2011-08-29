@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class JournalApphook(CMSApp):
     name = _("Journal")
-    urls = ["journal.urls"]
+    urls = ["apps.journal.urls"]
 
 apphook_pool.register(JournalApphook)
 

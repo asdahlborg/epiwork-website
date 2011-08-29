@@ -3,10 +3,10 @@ from django.conf import settings
 
 from cms.plugin_pool import plugin_pool
 from cms.plugins.text.settings import USE_TINYMCE
-from journal.widgets.wymeditor_widget import WYMEditor
+from .widgets.wymeditor_widget import WYMEditor
 
 
-from journal.models import Entry
+from .models import Entry
 
 class EntryForm(forms.ModelForm):
     class Meta:

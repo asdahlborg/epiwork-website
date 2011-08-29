@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('journal.views',
+urlpatterns = patterns('apps.journal.views',
     (r'^$', 'index'),
     (r'^(?P<year>\d{4})/$', 'archive_year'),
     (r'^(?P<year>\d{4})/(?P<month>\d{2})/$', 'archive_month'),

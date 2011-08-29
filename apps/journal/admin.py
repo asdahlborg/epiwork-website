@@ -5,8 +5,8 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.core import serializers
 
-from journal.forms import EntryForm
-from journal.models import Entry, Category
+from .forms import EntryForm
+from .models import Entry, Category
     
 class EntryAdmin(admin.ModelAdmin):
     """
