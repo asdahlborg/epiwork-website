@@ -72,7 +72,10 @@
 
 			<div id="navigation">
 				<div id="menubar">
-					{% spaceless %}<ul>{% block menubar %}{% show_menu 0 1 %}{% endblock menubar %}</ul>{% endspaceless %}
+					{% block menubar %}
+                    {% spaceless %}{% show_menu 0 1 0 0 "base/menu.html" %}{% endspaceless %}
+                    {% spaceless %}{% show_sub_menu 1 "base/sub_menu.html" %}{% endspaceless %}
+					{% endblock menubar %}
 				</div>
 				<div id="searchbar">
                     <form method="get" action="/search/">
