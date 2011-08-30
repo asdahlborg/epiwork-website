@@ -2,248 +2,166 @@ import unittest
 from datetime import datetime, timedelta, date
 
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
+from django.conf import settings
 
 from mock import Mock, patch, patch_object
 
 from . import send
-from .models import Reminder
+from .models import UserReminderInfo, ReminderSettings, NewsLetter, NewsLetterTemplate, get_upcoming_dates, get_prev_reminder_date, get_prev_reminder, get_reminders_for_users
 
-class Base(unittest.TestCase):
-    def _createUser(self, *args):
-        for item in args:
-            user = User()
-            user.username = item
-            user.email = '%s@example.com' % item
-            user.password = 'password'
-            user.save()
+class ReminderTestCase(unittest.TestCase):
+    def setUp(self):
+        ReminderSettings.objects.all().delete()
+        NewsLetter.objects.all().delete()
+        NewsLetterTemplate.objects.all().delete()
 
-    def _removeUser(self, *args):
-        for item in args:
-            user = User.objects.get(username=item)
-            user.delete()
-
-    def _update(self, user, **kwargs):
-        reminder = Reminder.objects.filter(user__username=user)[0]
-        
-        for key in kwargs:
-            setattr(reminder, key, kwargs[key])
-
-        reminder.save()
+        self.old_languages = settings.LANGUAGES
+        settings.LANGUAGES = (('en', 'English'), ('de', 'German'), ('fr', 'French'))
 
     def tearDown(self):
-        items = User.objects.all()
-        for item in items:
-            item.delete()
+        settings.LANGUAGES = self.old_languages
 
-        items = Reminder.objects.all()
-        for item in items:
-            item.delete()
+    def test_get_upcoming_updates(self):
+        def test(first_date, last_date, result):
+            result = list(result) 
+            self.assertEqual(first_date, result[0][0])
+            self.assertEqual(last_date, result[-1][0])
 
-class InsertTriggerTestCase(Base):
-    def setUp(self):
-        self._createUser('user01')
+        site = Site.objects.get()
 
-    def testReminder(self):
-        items = Reminder.objects.filter(user__username='user01')
-        self.assertEqual(len(items), 1)
+        self.assertEquals([], list(get_upcoming_dates(datetime(2010, 10, 1, 15, 0, 0))))
 
-class DeleteTriggerTestCase(Base):
-    def setUp(self):
-        self._createUser('user01')
+        settings = ReminderSettings.objects.create(
+            site=site,
+            send_reminders=False,
+            begin_date=datetime(2010, 9, 1, 14, 0, 0),
+            interval=14,
+        )
 
-    def testReminder(self):
-        users = User.objects.all()
-        reminders = Reminder.objects.all()
-        nusers = len(users)
-        nreminders = len(reminders)
-        self.assertEqual(nusers, nreminders)
+        self.assertEquals([], list(get_upcoming_dates(datetime(2010, 10, 1, 15, 0, 0))))
 
-        user = User.objects.filter(username='user01')[0]
-        user.delete()
+        settings.send_reminders = True
+        settings.save()
 
-        users = User.objects.all()
-        reminders = Reminder.objects.all()
-        self.assertEqual(len(reminders), len(users))
+        test(datetime(2010, 10, 13, 14, 0), datetime(2010, 12, 8, 14, 0), get_upcoming_dates(datetime(2010, 10, 1, 15, 0, 0)))
+         
+    def test_get_prev_reminder_date(self):
+        site = Site.objects.get()
 
-        self.assertEqual(len(reminders), nreminders-1)
+        self.assertEquals(None, get_prev_reminder_date(datetime(2010, 12, 12)))
 
-class JustCreatedTestCase(Base):
-    def setUp(self):
-        self._createUser('user01')
+        settings = ReminderSettings.objects.create(
+            site=site,
+            send_reminders=False,
+            begin_date=datetime(2010, 9, 1, 14, 0, 0),
+            interval=7,
+        )
 
-    def testReminder(self):
-        mock = Mock()
-        @patch_object(send, 'send_mail', mock)
-        def test():
-            send.send_reminder()
-        test()
+        self.assertEquals(None, get_prev_reminder_date(datetime(2010, 12, 12)))
 
-        self.assertFalse(mock.called)
+        settings.send_reminders = True
+        settings.save()
 
-class OneWeekTestCase(Base):
-    def setUp(self):
-        now = datetime.now()
+        self.assertEquals(None, get_prev_reminder_date(datetime(2010, 9, 1, 13, 0, 0)))
+        self.assertEquals(datetime(2010, 9, 1, 14, 0, 0), get_prev_reminder_date(datetime(2010, 9, 1, 14, 0, 0)))
+        self.assertEquals(datetime(2010, 9, 1, 14, 0, 0), get_prev_reminder_date(datetime(2010, 9, 8, 13, 0, 0)))
+        self.assertEquals(datetime(2010, 9, 8, 14, 0, 0), get_prev_reminder_date(datetime(2010, 9, 8, 15, 0, 0)))
 
-        self._createUser('user01')
-        self._update('user01', 
-                     last_reminder=now - timedelta(days=7),
-                     next_reminder=now)
+    def test_get_prev_reminder_with_newsletter(self):
+        september_first = datetime(2010, 9, 1, 14, 0, 0)
 
-    def testReminder(self):
-        mock = Mock()
-        @patch_object(send, 'send_mail', mock)
-        def test():
-            send.send_reminder()
-        test()
+        site = Site.objects.get()
+        settings = ReminderSettings.objects.create(
+            site=site,
+            send_reminders=True,
+            begin_date=september_first,
+            interval=7,
+        )
 
-        self.assertTrue(mock.called)
+        newsletter = NewsLetter.objects.create(date=september_first, sender_email="test@example.org", sender_name="Test")
+        newsletter.translate('en')
+        newsletter.subject = "English subject"
+        newsletter.message = "English message"
+        newsletter.save()
 
-        emails = mock.call_args[0][3]
-        self.assertEqual(emails, ('user01@example.com',))
+        newsletter.translate('de')
+        newsletter.subject = "German subject"
+        newsletter.message = "German message"
+        newsletter.save()
 
-        reminder = Reminder.objects.filter(user__username='user01')[0]
+        result = get_prev_reminder(september_first)
 
-        now = date.today()
+        self.assertEqual("test@example.org", result['en'].sender_email)
+        self.assertEqual("English subject", result['en'].subject)
+        self.assertEqual("German subject", result['de'].subject)
+        self.assertFalse('fr' in result)
 
-        next = now + timedelta(days=7)
-        self.assertEqual(reminder.next_reminder, next)
+    def test_get_prev_reminder_with_template(self):
+        september_first = datetime(2010, 9, 1, 14, 0, 0)
 
-        # only compare the date
-        last = reminder.last_reminder
-        self.assertEqual(last.year, now.year)
-        self.assertEqual(last.month, now.month)
-        self.assertEqual(last.day, now.day)
+        site = Site.objects.get()
+        settings = ReminderSettings.objects.create(
+            site=site,
+            send_reminders=True,
+            begin_date=september_first,
+            interval=7,
+        )
 
-class FiveDaysTestCase(Base):
-    def setUp(self):
-        now = datetime.now()
+        template = NewsLetterTemplate.objects.create(is_default_reminder=True, sender_email="test@example.org", sender_name="Test")
+        template.translate('en')
+        template.subject = "English subject"
+        template.message = "English message"
+        template.save()
 
-        self._createUser('user01')
-        self._update('user01', 
-                     last_reminder=now - timedelta(days=5),
-                     next_reminder=now + timedelta(days=2))
+        template.translate('de')
+        template.subject = "German subject"
+        template.message = "German message"
+        template.save()
 
-    def testReminder(self):
-        mock = Mock()
-        @patch_object(send, 'send_mail', mock)
-        def test():
-            send.send_reminder()
-        test()
+        result = get_prev_reminder(september_first)
 
-        self.assertFalse(mock.called)
+        self.assertEqual("test@example.org", result['en'].sender_email)
+        self.assertEqual("English subject", result['en'].subject)
+        self.assertEqual("German subject", result['de'].subject)
+        self.assertFalse('fr' in result)
 
-class LateReminderTestCase(Base):
-    def setUp(self):
-        now = datetime.now()
+    def test_get_reminders_for_users(self):
+        september_first = datetime(2010, 9, 1, 14, 0, 0)
 
-        self._createUser('user01')
-        self._update('user01', 
-                     wday=(now - timedelta(days=3)).weekday(),
-                     last_reminder=now - timedelta(days=10),
-                     next_reminder=now - timedelta(days=3))
+        site = Site.objects.get()
+        settings = ReminderSettings.objects.create(
+            site=site,
+            send_reminders=True,
+            begin_date=september_first,
+            interval=7,
+        )
 
-    def testReminder(self):
-        mock = Mock()
-        @patch_object(send, 'send_mail', mock)
-        def test():
-            send.send_reminder()
-        test()
+        newsletter = NewsLetter.objects.create(date=september_first, sender_email="test@example.org", sender_name="Test")
+        newsletter.translate('en')
+        newsletter.subject = "English subject"
+        newsletter.save()
 
-        self.assertTrue(mock.called)
+        newsletter.translate('de')
+        newsletter.subject = "German subject"
+        newsletter.save()
 
-        emails = mock.call_args[0][3]
-        self.assertEqual(emails, ('user01@example.com',))
+        for i, (language, active, last_reminder, expected) in enumerate([
+            ('en', False, None, None),              # inactive: don't send
+            (None, True, None, "English subject"),  # no language set: use default language
+            ('en', True, None, "English subject"),  # english: use english
+            ('de', True, None, "German subject"),   # german: use german
+            ('fr', True, None, "English subject"),   # french not available: use default language
+            ('en', True, september_first, None),    # already sent, don't send again
+        ]):
 
-        reminder = Reminder.objects.filter(user__username='user01')[0]
+            user = User.objects.create(username="user%s" % i)
+            info = UserReminderInfo.objects.create(user=user, last_reminder=last_reminder, active=active, language=language)
 
-        now = date.today()
-
-        next = now + timedelta(days=4)
-        self.assertEqual(reminder.next_reminder, next)
-
-        # only compare the date
-        last = reminder.last_reminder
-        self.assertEqual(last.year, now.year)
-        self.assertEqual(last.month, now.month)
-        self.assertEqual(last.day, now.day)
-
-class InactiveReminderTestCase(Base):
-    def setUp(self):
-        now = datetime.now()
-
-        self._createUser('user01')
-        self._update('user01', 
-                     last_reminder=now - timedelta(days=7),
-                     next_reminder=now,
-                     active=False)
-
-    def testReminder(self):
-        mock = Mock()
-        @patch_object(send, 'send_mail', mock)
-        def test():
-            send.send_reminder()
-        test()
-
-        self.assertFalse(mock.called)
-
-class NextReminderTestCase(unittest.TestCase):
-    def _test(self, next, year, month, day):
-        self.assertEqual(next.year, year)
-        self.assertEqual(next.month, month)
-        self.assertEqual(next.day, day)
-        
-    def testSunday(self):
-        now = datetime(2009, 11, 1, 0, 0, 0)
-        next = send.determine_next(now, 6)
-        self._test(next, 2009, 11, 8)
-
-    def testMonday(self):
-        now = datetime(2009, 11, 2, 0, 0, 0)
-        next = send.determine_next(now, 0)
-        self._test(next, 2009, 11, 9)
-
-    def testTuesday(self):
-        now = datetime(2009, 11, 3, 0, 0, 0)
-        next = send.determine_next(now, 1)
-        self._test(next, 2009, 11, 10)
-
-    def testWednesday(self):
-        now = datetime(2009, 11, 4, 0, 0, 0)
-        next = send.determine_next(now, 2)
-        self._test(next, 2009, 11, 11)
-
-    def testThursday(self):
-        now = datetime(2009, 11, 5, 0, 0, 0)
-        next = send.determine_next(now, 3)
-        self._test(next, 2009, 11, 12)
-
-    def testFriday(self):
-        now = datetime(2009, 11, 6, 0, 0, 0)
-        next = send.determine_next(now, 4)
-        self._test(next, 2009, 11, 13)
-
-    def testSaturday(self):
-        now = datetime(2009, 11, 7, 0, 0, 0)
-        next = send.determine_next(now, 5)
-        self._test(next, 2009, 11, 14)
-
-    def testNextMonth(self):
-        now = datetime(2009, 11, 30, 0, 0, 0)
-        next = send.determine_next(now, 0)
-        self._test(next, 2009, 12, 7)
-
-    def testNextYear(self):
-        now = datetime(2009, 12, 30, 0, 0, 0)
-        next = send.determine_next(now, 2)
-        self._test(next, 2010, 1, 6)
-
-    def testNextWeekLeap(self):
-        now = datetime(2008, 2, 22, 0, 0, 0)
-        next = send.determine_next(now, 4)
-        self._test(next, 2008, 2, 29)
-
-    def testNextWeekNotLeap(self):
-        now = datetime(2010, 2, 22, 0, 0, 0)
-        next = send.determine_next(now, 0)
-        self._test(next, 2010, 3, 1)
+            result = list(get_reminders_for_users(september_first, User.objects.filter(id=user.id)))
+            if expected is None:
+                self.assertEqual([], result)
+            else:
+                self.assertEqual(1, len(result))
+                self.assertEqual(expected, result[0][1].subject, "%s, %s, %s, '%s' failed with actual: '%s'" %(language, active, last_reminder, expected, result[0][1].subject))
 

@@ -1,7 +1,6 @@
 from os.path import join
 
 from django.contrib import admin
-from django.contrib.sites.admin import SiteAdmin
 from django.contrib.sites.models import Site
 from django.conf import settings
 
@@ -12,8 +11,9 @@ class SiteSettingsInline(admin.StackedInline):
     model = SiteSettings
     form = SiteSettingsForm
 
-class ExtendedSiteAdmin(SiteAdmin):
-    inlines = [SiteSettingsInline]
+current_site_admin = type(admin.site._registry[Site])
+class PartnerSiteAdmin(current_site_admin):
+    inlines = current_site_admin.inlines + [SiteSettingsInline]
 
     class Media:
         js = [join(settings.CMS_MEDIA_URL, path) for path in (
@@ -23,5 +23,5 @@ class ExtendedSiteAdmin(SiteAdmin):
         )]
 
 admin.site.unregister(Site)
-admin.site.register(Site, ExtendedSiteAdmin)
+admin.site.register(Site, PartnerSiteAdmin)
 

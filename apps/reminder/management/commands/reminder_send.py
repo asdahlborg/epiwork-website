@@ -1,17 +1,9 @@
 from django.core.management.base import NoArgsCommand
 
+from ...send import send_reminders
+
 class Command(NoArgsCommand):
     help = "Send reminders."
 
     def handle_noargs(self, **options):
-        from ...send import send_reminder
-        succeed, fail = send_reminder()
-        fail
-
-        if succeed + fail == 0:
-            return u'No reminder sent.'
-        elif fail == 0:
-            return u'%d reminders sent.' % succeed
-        else:
-            return u'%d reminders sent, %d failed.' % (succeed, fail)
-
+        return u'%d reminders sent.\n' % send_reminders()

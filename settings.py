@@ -134,6 +134,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'nani',
     'south',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -201,11 +202,6 @@ if DEBUG:
 # Subject-line prefix for email messages send with django.core.mail.mail_admins
 # or ...mail_managers.  Make sure to include the trailing space.
 EMAIL_SUBJECT_PREFIX = '[Influenzanet] '
-
-REMINDER_FROM = 'reminder-no-reply@epiwork.example'
-REMINDER_USE_LOGINURL = True
-REMINDER_LOGINURL_EXPIRES = 7
-REMINDER_HTML = False
 
 EPIDB_API_KEY = '0000000000000000000000000000000000000000'
 EPIDB_SERVER = 'http://127.0.0.1:8080/'
