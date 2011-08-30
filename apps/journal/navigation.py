@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.core.urlresolvers import reverse
 
-from cms.utils.navigation import NavigationNode
+from menus.base import NavigationNode
 
 from .models import Entry
 
