@@ -693,6 +693,69 @@
         }
     },
     {
+        "pk": 79,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:31",
+            "app_name": "reminder",
+            "migration": "0001_initial"
+        }
+    },
+    {
+        "pk": 80,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0002_auto__add_remindersettings"
+        }
+    },
+    {
+        "pk": 81,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0003_auto__add_newslettertemplate__add_newslettertranslation__add_unique_ne"
+        }
+    },
+    {
+        "pk": 82,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0004_auto__del_field_reminder_next_reminder__del_field_reminder_wday__chg_f"
+        }
+    },
+    {
+        "pk": 83,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0005_auto__del_reminder__add_userreminderinfo"
+        }
+    },
+    {
+        "pk": 84,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0006_auto__add_field_userreminderinfo_language"
+        }
+    },
+    {
+        "pk": 85,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:37",
+            "app_name": "journal",
+            "migration": "0003_auto__add_field_entry_image__add_field_entry_alignment"
+        }
+    },
+    {
         "pk": 28,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -990,6 +1053,42 @@
         }
     },
     {
+        "pk": 72,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "newsletter",
+            "name": "news letter",
+            "app_label": "reminder"
+        }
+    },
+    {
+        "pk": 70,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "newslettertemplate",
+            "name": "news letter template",
+            "app_label": "reminder"
+        }
+    },
+    {
+        "pk": 69,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "newslettertemplatetranslation",
+            "name": "news letter template translation",
+            "app_label": "reminder"
+        }
+    },
+    {
+        "pk": 71,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "newslettertranslation",
+            "name": "news letter translation",
+            "app_label": "reminder"
+        }
+    },
+    {
         "pk": 58,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -1107,11 +1206,11 @@
         }
     },
     {
-        "pk": 17,
+        "pk": 68,
         "model": "contenttypes.contenttype",
         "fields": {
-            "model": "reminder",
-            "name": "reminder",
+            "model": "remindersettings",
+            "name": "reminder settings",
             "app_label": "reminder"
         }
     },
@@ -1257,6 +1356,15 @@
             "model": "user",
             "name": "user",
             "app_label": "auth"
+        }
+    },
+    {
+        "pk": 67,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "userreminderinfo",
+            "name": "user reminder info",
+            "app_label": "reminder"
         }
     },
     {
@@ -4901,19 +5009,6 @@
         }
     },
     {
-        "pk": 109,
-        "model": "admin.logentry",
-        "fields": {
-            "action_flag": 2,
-            "action_time": "2010-08-17 04:56:24",
-            "object_repr": "admin",
-            "object_id": "1",
-            "change_message": "No fields changed.",
-            "user": 1,
-            "content_type": 17
-        }
-    },
-    {
         "pk": 108,
         "model": "admin.logentry",
         "fields": {
@@ -4924,19 +5019,6 @@
             "change_message": "Changed email.",
             "user": 1,
             "content_type": 3
-        }
-    },
-    {
-        "pk": 107,
-        "model": "admin.logentry",
-        "fields": {
-            "action_flag": 2,
-            "action_time": "2010-08-17 04:54:54",
-            "object_repr": "admin",
-            "object_id": "1",
-            "change_message": "Changed next_reminder.",
-            "user": 1,
-            "content_type": 17
         }
     },
     {
@@ -6722,6 +6804,50 @@
             "data": null,
             "user": 4,
             "participation": null
+        }
+    },
+    {
+        "pk": 1,
+        "model": "reminder.userreminderinfo",
+        "fields": {
+            "last_reminder": "2010-03-15 15:45:01",
+            "active": true,
+            "user": 1,
+            "language": null
+        }
+    },
+    {
+        "pk": 1,
+        "model": "journal.category",
+        "fields": {
+            "slug": "influenza",
+            "title": "Influenza"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "journal.entry",
+        "fields": {
+            "category": 1,
+            "updated": "2011-08-27 14:06:56",
+            "title": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
+            "image": "",
+            "created": "2011-08-27 12:07:39",
+            "excerpt": "The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "content": "<h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "pub_date": "2011-08-27 11:59:10",
+            "slug": "recruitment-of-animator",
+            "alignment": null,
+            "is_published": true
+        }
+    },
+    {
+        "pk": 156,
+        "model": "journal.latestentryplugin",
+        "fields": {
+            "category": [],
+            "limit": 3,
+            "title": "Latest News"
         }
     },
     {
@@ -9431,38 +9557,6 @@
     },
     {
         "pk": 1,
-        "model": "journal.category",
-        "fields": {
-            "slug": "influenza",
-            "title": "Influenza"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "journal.entry",
-        "fields": {
-            "category": 1,
-            "updated": "2011-08-27 14:06:56",
-            "title": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
-            "created": "2011-08-27 12:07:39",
-            "excerpt": "The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
-            "content": "<h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
-            "pub_date": "2011-08-27 11:59:10",
-            "slug": "recruitment-of-animator",
-            "is_published": true
-        }
-    },
-    {
-        "pk": 156,
-        "model": "journal.latestentryplugin",
-        "fields": {
-            "category": [],
-            "limit": 3,
-            "title": "Latest News"
-        }
-    },
-    {
-        "pk": 1,
         "model": "pollster.ruletype",
         "fields": {
             "js_class": "wok.pollster.rules.ShowQuestion",
@@ -10894,30 +10988,165 @@
         }
     },
     {
-        "pk": 49,
+        "pk": 211,
         "model": "auth.permission",
         "fields": {
-            "codename": "add_reminder",
-            "name": "Can add reminder",
-            "content_type": 17
+            "codename": "add_newsletter",
+            "name": "Can add news letter",
+            "content_type": 72
         }
     },
     {
-        "pk": 50,
+        "pk": 212,
         "model": "auth.permission",
         "fields": {
-            "codename": "change_reminder",
-            "name": "Can change reminder",
-            "content_type": 17
+            "codename": "change_newsletter",
+            "name": "Can change news letter",
+            "content_type": 72
         }
     },
     {
-        "pk": 51,
+        "pk": 213,
         "model": "auth.permission",
         "fields": {
-            "codename": "delete_reminder",
-            "name": "Can delete reminder",
-            "content_type": 17
+            "codename": "delete_newsletter",
+            "name": "Can delete news letter",
+            "content_type": 72
+        }
+    },
+    {
+        "pk": 205,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_newslettertemplate",
+            "name": "Can add news letter template",
+            "content_type": 70
+        }
+    },
+    {
+        "pk": 206,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_newslettertemplate",
+            "name": "Can change news letter template",
+            "content_type": 70
+        }
+    },
+    {
+        "pk": 207,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_newslettertemplate",
+            "name": "Can delete news letter template",
+            "content_type": 70
+        }
+    },
+    {
+        "pk": 202,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_newslettertemplatetranslation",
+            "name": "Can add news letter template translation",
+            "content_type": 69
+        }
+    },
+    {
+        "pk": 203,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_newslettertemplatetranslation",
+            "name": "Can change news letter template translation",
+            "content_type": 69
+        }
+    },
+    {
+        "pk": 204,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_newslettertemplatetranslation",
+            "name": "Can delete news letter template translation",
+            "content_type": 69
+        }
+    },
+    {
+        "pk": 208,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_newslettertranslation",
+            "name": "Can add news letter translation",
+            "content_type": 71
+        }
+    },
+    {
+        "pk": 209,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_newslettertranslation",
+            "name": "Can change news letter translation",
+            "content_type": 71
+        }
+    },
+    {
+        "pk": 210,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_newslettertranslation",
+            "name": "Can delete news letter translation",
+            "content_type": 71
+        }
+    },
+    {
+        "pk": 199,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_remindersettings",
+            "name": "Can add reminder settings",
+            "content_type": 68
+        }
+    },
+    {
+        "pk": 200,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_remindersettings",
+            "name": "Can change reminder settings",
+            "content_type": 68
+        }
+    },
+    {
+        "pk": 201,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_remindersettings",
+            "name": "Can delete reminder settings",
+            "content_type": 68
+        }
+    },
+    {
+        "pk": 196,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_userreminderinfo",
+            "name": "Can add user reminder info",
+            "content_type": 67
+        }
+    },
+    {
+        "pk": 197,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_userreminderinfo",
+            "name": "Can change user reminder info",
+            "content_type": 67
+        }
+    },
+    {
+        "pk": 198,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_userreminderinfo",
+            "name": "Can delete user reminder info",
+            "content_type": 67
         }
     },
     {
@@ -11472,9 +11701,6 @@
                 25,
                 26,
                 27,
-                49,
-                50,
-                51,
                 16,
                 17,
                 18,
