@@ -1,0 +1,33 @@
+{% load cms_tags menu_tags partnersites i18n count %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=0.75, user-scalable=yes" />
+		<meta name="robots" content="noindex, nofollow" />
+        <link rel="shortcut icon" href="{{ MEDIA_URL }}base/img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="{{ MEDIA_URL }}base/img/apple-touch-icon.png" />      
+
+		<title>{% block title %}{{ site_name }}: {% page_attribute page_title %}{% endblock title %}</title>
+        {% block add_head %}{% endblock add_head %}
+
+        <link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}base/css/default.css" />
+        <link type="text/css" rel="stylesheet" media="all" href="/colors.css" />
+        {% block add_css %}{% endblock add_css %}
+        {% block add_js %}{% endblock add_js %}
+
+	    {% google_analytics %}
+
+	</head>
+
+    <body {% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
+        <div id="boxwrapper">
+            <div id="box">
+                {% block content %}{% endblock content %}        <noscript><img src="{{ MEDIA_URL }}base/img/logo-influenzanet.gif" alt="Influenzanet" /></noscript>
+            </div>
+        </div>
+    </body>
+
+</html>

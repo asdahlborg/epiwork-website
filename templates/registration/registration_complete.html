@@ -1,15 +1,9 @@
-{% extends "registration/base.html" %}
+{% extends "registration/boxbase.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Registration complete" %}{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Registration complete" %}{% endblock %}
 
-{% block col1 %}
-
-<p>{% trans "Registration is complete." %}</p>
-
-<p>{% trans "An e-mail containing information about how to activate your account has been sent to your e-mail address." %}</p>
-
-<p><a href="/">{% trans "Back to the home page" %}</a>.</p>
-
-{% endblock %}
-
+{% block content %}<h1>{% trans "Registration complete." %}</h1>
+                <p>{% trans "An e-mail containing information about how to activate your account has been sent to your e-mail address." %}</p>
+				<p>&nbsp;</p>
+                <p><a href="/">{% trans "Back to the home page" %}</a>.</p>{% endblock content %}

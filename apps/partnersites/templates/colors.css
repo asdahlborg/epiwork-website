@@ -18,3 +18,11 @@
  color: #{{ settings.dark_color }};
 }
 
+#box input#boxsubmit {
+ background: #{{ settings.light_color }};
+}
+
+#box input#boxsubmit:hover,
+#box input#boxsubmit:focus {
+ background: #{{ settings.dark_color }};
+}

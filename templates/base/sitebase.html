@@ -20,6 +20,7 @@
         {% block add_css %}{% endblock add_css %}
 		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/jquery-1.5.1.min.js"></script>
 		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/influenzanet.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         {% block add_js %}{% endblock add_js %}
 
 	    {% google_analytics %}
@@ -58,21 +59,20 @@
 		</div>
 		
 		<div id="header">
-            {% if site_logo %}
-            <div id="headerlogo"><a href="/" title="{{ site_name }}"><img src="{{ site_logo }}" alt="{{ site_name }}" /></a></div> 
-            <div id="account"> 
-                {% if user.is_authenticated %}
-                    {{ user.first_name }} {{ user.last_name }}
-                {% else %}
-                <ul class="anonymous"> 
-                    <li><a href="/accounts/login/" class="fancybox1">{% trans "Log in" %}</a></li> 
-                    <li><a href="/accounts/register/" class="fancybox2">{% trans "New account" %}</a></li> 
-                </ul> 
-                <p><a href="/accounts/password/reset/">{% trans "Forgot password?" %}</a></p> 
-                {% endif %}
-            </div> 
-            {% endif %}
-
+			{% if site_logo %}
+			{% block authentication %}<div id="account">{% if user.is_authenticated %}
+			    <p><a href="/survey/profile/">{% trans "Logged in as" %} {{ user.first_name }} {{ user.last_name }}</a></p>
+			    <ul class="member">
+			        <li><a href="/survey/profile/">{% trans "My account" %}</a></li>
+			        <li><a href="/accounts/logout/">{% trans "Log out" %}</a></li>
+			    </ul>{% else %}
+			    <ul class="anonymous">
+			        <li><a href="/accounts/login/" class="fancybox1">{% trans "Log in" %}</a></li>
+			        <li><a href="/accounts/register/" class="fancybox2">{% trans "Register" %}</a></li>
+			    </ul>
+			    <p><a href="/accounts/password/reset/">{% trans "Forgot password?" %}</a></p>{% endif %}
+			</div>{% endblock authentication %}
+			{% endif %}
 			<div id="navigation">
 				<div id="menubars">
 					{% block menubar %}

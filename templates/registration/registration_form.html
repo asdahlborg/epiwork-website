@@ -1,23 +1,10 @@
-{% extends "registration/base.html" %}
+{% extends "registration/boxbase.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Register" %}{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Register" %}{% endblock %}
 
-{% block col1 %}
+{% block add_body %}  onload="document.getElementsByTagName('input') [0].focus();"{% endblock add_body %}
 
-<h1>{% trans "Registration Form" %}</h1>
-
-<div class="userformblock">
-
-<form method="post" id="registration">{% csrf_token %}
-
-{{ form.as_p }}
-
-<input type='submit' value="Register"/>
-
-</form>
-
-</div>
-
-{% endblock %}
+{% block content %}<h1>{% trans "Registration Form" %}</h1>
+                {% spaceless %}<form method="post" id="registration">{% csrf_token %}{{ form.as_p }}<p><input type="submit" id="boxsubmit" value="OK"/></p></form>{% endspaceless %}{% endblock content %}
 
