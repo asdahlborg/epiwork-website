@@ -7,7 +7,7 @@ from django.conf import settings
 
 from mock import Mock, patch, patch_object
 
-from . import send
+from .send import create_message
 from .models import UserReminderInfo, ReminderSettings, NewsLetter, NewsLetterTemplate, get_upcoming_dates, get_prev_reminder_date, get_prev_reminder, get_reminders_for_users
 
 class ReminderTestCase(unittest.TestCase):
@@ -165,3 +165,11 @@ class ReminderTestCase(unittest.TestCase):
                 self.assertEqual(1, len(result))
                 self.assertEqual(expected, result[0][1].subject, "%s, %s, %s, '%s' failed with actual: '%s'" %(language, active, last_reminder, expected, result[0][1].subject))
 
+    def test_create_message(self):
+        user = User.objects.create(username="user")
+
+        text_base, html = create_message(user, 'this is text')
+        self.assertTrue('this is text' in text_base)
+        self.assertTrue('<body' in html)
+        self.assertTrue('this is text' in html)
+        self.assertFalse('<body' in text_base)
