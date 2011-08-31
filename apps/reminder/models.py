@@ -70,6 +70,21 @@ class MockNewsLetter(object):
     def __init__(self):
         self.date = self.sender_email= self.sender_name = self.subject = self.message = None
 
+class ReminderError(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User)
+    message = models.CharField(max_length=255)
+    traceback = models.TextField()
+
+    def __unicode__(self):
+        return self.message
+
+    class Meta:
+        ordering = ("-timestamp",)
+
+    def email(self):
+        return self.user.email
+
 def get_upcoming_dates(now):
     if ReminderSettings.objects.count() == 0:
         raise StopIteration()

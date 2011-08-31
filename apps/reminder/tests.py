@@ -7,8 +7,8 @@ from django.conf import settings
 
 from mock import Mock, patch, patch_object
 
-from .send import create_message
-from .models import UserReminderInfo, ReminderSettings, NewsLetter, NewsLetterTemplate, get_upcoming_dates, get_prev_reminder_date, get_prev_reminder, get_reminders_for_users
+from .send import create_message, send
+from .models import UserReminderInfo, ReminderSettings, NewsLetter, NewsLetterTemplate, get_upcoming_dates, get_prev_reminder_date, get_prev_reminder, get_reminders_for_users, ReminderError, ReminderError
 
 class ReminderTestCase(unittest.TestCase):
     def setUp(self):
@@ -173,3 +173,28 @@ class ReminderTestCase(unittest.TestCase):
         self.assertTrue('<body' in html)
         self.assertTrue('this is text' in html)
         self.assertFalse('<body' in text_base)
+
+    def test_email_errors(self):
+        return
+        # not implemented right now; I can't find the proper way to make email sending fail for test-purposes
+
+        user = User.objects.create(username="malformed-user", email="")
+        info = UserReminderInfo.objects.create(user=user)
+         
+        september_first = datetime(2010, 9, 1, 14, 0, 0)
+
+        site = Site.objects.get()
+        settings = ReminderSettings.objects.create(
+            site=site,
+            send_reminders=True,
+            begin_date=september_first,
+            interval=7,
+        )
+
+        newsletter = NewsLetter.objects.create(date=september_first, sender_email="test@example.org", sender_name="Test")
+        newsletter.translate('en')
+        newsletter.subject = "English subject"
+        newsletter.message = "English message"
+        newsletter.save()
+
+        send(datetime(2010, 10, 10, 12, 0, 0), user, newsletter)

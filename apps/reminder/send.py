@@ -1,5 +1,6 @@
 import datetime
 import smtplib
+from traceback import format_exc
 
 from django.db.models import Q
 from django.core.mail import EmailMultiAlternatives
@@ -13,7 +14,7 @@ from django.contrib.auth.models import User
 
 import loginurl.utils
 
-from .models import get_reminders_for_users, UserReminderInfo
+from .models import get_reminders_for_users, UserReminderInfo, ReminderError
 
 def create_message(user, message):
     t = Template(message)
@@ -75,7 +76,15 @@ def send(now, user, message):
     )
 
     msg.attach_alternative(html_content, "text/html")
-    msg.send(fail_silently=True)
+
+    try:
+        msg.send()
+    except Exception, e:
+        ReminderError.objects.create(
+            user=user,
+            message=unicode(e),
+            traceback=format_exc(),
+        )
 
     info = UserReminderInfo.objects.get(user=user)
     info.last_reminder = now

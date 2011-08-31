@@ -6,7 +6,7 @@ from django.conf import settings
 
 from nani.admin import TranslatableAdmin
 
-from .models import UserReminderInfo, ReminderSettings, NewsLetterTemplate, NewsLetter
+from .models import UserReminderInfo, ReminderSettings, NewsLetterTemplate, NewsLetter, ReminderError
 from .forms import ReminderSettingsForm, NewsLetterTemplateForm, NewsLetterForm
 
 def make_active(modeladmin, request, queryset):
@@ -67,3 +67,9 @@ class NewsLetterAdmin(TranslatableAdmin):
         )]
 
 admin.site.register(NewsLetter, NewsLetterAdmin)
+
+class ReminderErrorAdmin(admin.ModelAdmin):
+    list_display = ("timestamp", "message", "user", "email")
+    search_fields = ('user__username', 'user__email',)
+
+admin.site.register(ReminderError, ReminderErrorAdmin)
