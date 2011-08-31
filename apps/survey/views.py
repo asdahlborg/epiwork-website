@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from django.contrib import messages
 
 from apps.survey import utils, models, forms
 from .survey import ( Specification,
@@ -96,8 +97,8 @@ def index(request):
 
     # Check if the user has filled user profile
     if utils.get_user_profile(survey_user) is None:
-        request.user.message_set.create(
-            message=_('You have to fill your profile data first.'))
+        messages.add_message(request, messages.INFO, 
+            _('You have to fill your profile data first.'))
         url = reverse('apps.survey.views.profile_index')
         url_next = reverse('apps.survey.views.index')
         url = '%s?gid=%s&next=%s' % (url, survey_user.global_id, url_next)
@@ -125,8 +126,8 @@ def index(request):
 
             return HttpResponseRedirect(reverse(thanks))
         else:
-            request.user.message_set.create(
-                message=_('One or more questions have empty or invalid ' \
+            messages.add_message(request, messages.INFO, 
+                _('One or more questions have empty or invalid ' \
                           'answer. Please fix it first.'))
     else:
         form = builder.get_form(context)
@@ -188,8 +189,8 @@ def extra_index(request):
             return HttpResponseRedirect(reverse(thanks))
 
         else:
-            request.user.message_set.create(
-                message=_('One or more questions have empty or invalid ' \
+            messages.add_message(request, messages.INFO, 
+                _('One or more questions have empty or invalid ' \
                           'answer. Please fix it first.'))
 
     else:
@@ -268,8 +269,8 @@ def people_add(request):
             survey_user.save()
             survey_user.user.add(request.user)
 
-            request.user.message_set.create(
-                message=_('A new person has been added.'))
+            messages.add_message(request, messages.INFO, 
+                _('A new person has been added.'))
 
             next = request.GET.get('next', None)
             if next is None:
