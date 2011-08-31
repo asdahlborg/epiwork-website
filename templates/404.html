@@ -1,9 +1,10 @@
 {% extends "base/sitebase.html" %}
+{% load i18n %}
 
-{% block title%}{{ block.super }}Page not found{% endblock title%}
+{% block title%}{{ block.super }}{% trans "Page not found" %}{% endblock title%}
 
 {% block authentication %}{% endblock authentication %}
 
-{% block menubar %}<li class="selected error"><a href="/">The page you requested could not be found. We apologize for the inconvenience. Go to <u>home</u></a></li>{% endblock menubar %}
+{% block menubar %}<ul id="menubar"><li class="selected error"><a href="/">{% trans "The page you requested could not be found. We apologize for the inconvenience. Go to " %}<u>{% trans "home" %}</u></a></li></ul>{% endblock menubar %}
 
 {% block footercontent %}{% endblock footercontent %}
