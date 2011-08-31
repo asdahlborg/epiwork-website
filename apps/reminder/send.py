@@ -25,7 +25,10 @@ def create_message(user, message):
     inner = t.render(c)
 
     t = loader.get_template('reminder/message.html')
-    return inner, t.render(Context({'inner': inner}))
+    return inner, t.render(Context({
+        'inner': inner,
+        'MEDIA_URL': get_media_url(),
+    }))
 
 def send_reminders():
     now = datetime.datetime.now()
@@ -35,6 +38,10 @@ def send_reminders():
         send(now, user, message)
 
     return i + 1
+
+def get_media_url():
+    site = Site.objects.get_current()
+    return 'http://%s%s' % (site.domain, settings.MEDIA_URL)
 
 def get_url(user):
     return get_login_url(user, get_survey_url())
