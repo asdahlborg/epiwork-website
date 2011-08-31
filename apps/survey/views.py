@@ -253,10 +253,14 @@ def people_remove(request):
 
     confirmed = request.POST.get('confirmed', None)
 
-    if confirmed == 'T':
+    if confirmed == 'Y':
         survey_user.deleted = True
         survey_user.save()
-        
+   
+        url = reverse(people)
+        return HttpResponseRedirect(url)
+
+    elif confirmed == 'N':
         url = reverse(people)
         return HttpResponseRedirect(url)
 
