@@ -150,7 +150,11 @@ def profile_index(request):
         url = '%s?next=%s' % (reverse(select_user), reverse(profile_index))
         return HttpResponseRedirect(url)
 
-    survey = pollster.models.Survey.get_by_shortname('intake')
+    try:
+        survey = pollster.models.Survey.get_by_shortname('intake')
+    except:
+        raise Exception("The survey application requires a published survey with the shortname 'intake'")
+
     from apps.pollster import views as pollster_views
     return pollster_views.survey_run(request, survey.id)
 
