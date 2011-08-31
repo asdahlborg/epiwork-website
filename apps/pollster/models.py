@@ -110,6 +110,7 @@ class Survey(models.Model):
         participation = model.objects\
             .filter(user=user_id)\
             .filter(global_id = global_id)\
+            .order_by('-timestamp')\
             .values()
         return _get_or_default(participation)
 
