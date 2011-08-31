@@ -151,7 +151,8 @@ def profile_index(request):
         return HttpResponseRedirect(url)
 
     survey = pollster.models.Survey.get_by_shortname('intake')
-    return pollster.views.survey_run(request, survey.id)
+    from apps.pollster import views as pollster_views
+    return pollster_views.survey_run(request, survey.id)
 
 @login_required
 def extra_index(request):
