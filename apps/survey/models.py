@@ -18,6 +18,7 @@ class SurveyUser(models.Model):
     last_participation_date = models.DateTimeField(null=True)
 
     name = models.CharField(max_length=100)
+    deleted = models.BooleanField() 
 
     class Meta:
         verbose_name_plural = 'User'
