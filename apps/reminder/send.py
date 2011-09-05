@@ -18,18 +18,18 @@ from .models import get_reminders_for_users, UserReminderInfo, ReminderError
 
 def create_message(user, message):
     t = Template(message)
-    c = Context({
+    c = {
         'url': get_url(user),
+        'unsubscribe_url': get_login_url(user, reverse('apps.reminder.views.unsubscribe')),
         'first_name': user.first_name,
         'last_name': user.last_name,
-    })
-    inner = t.render(c)
+    }
+    inner = t.render(Context(c))
 
     t = loader.get_template('reminder/message.html')
-    return inner, t.render(Context({
-        'inner': inner,
-        'MEDIA_URL': get_media_url(),
-    }))
+    c['inner'] = inner
+    c['MEDIA_URL'] = get_media_url()
+    return inner, t.render(Context(c))
 
 def send_reminders():
     now = datetime.datetime.now()
