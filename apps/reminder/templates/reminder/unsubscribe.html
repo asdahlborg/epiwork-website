@@ -1,0 +1,12 @@
+{% extends 'base/twocol.html' %}
+{% load i18n %}
+
+{% block col1 %}
+
+    <h1>{% trans "Unsubscribe" %}</h1>
+    {% trans "You may unsubscribe from the Influenzanet reminder/newsletter by pressing the button below." %}
+
+    <form method="post" action=".">{% csrf_token %}
+    <input type="submit" value="{% trans "Unsubscribe" %}">
+    </form>
+{% endblock %}
