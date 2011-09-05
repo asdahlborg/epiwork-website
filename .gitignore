@@ -12,3 +12,7 @@ epiweb.db
 media/uploads
 media/journal_images
 /local_settings.py
+*.swp
+dist
+build
+MANIFEST
