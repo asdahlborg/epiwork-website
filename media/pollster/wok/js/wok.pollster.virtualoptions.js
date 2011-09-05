@@ -110,14 +110,18 @@
                 val = Date.parse('1/'+val);
                 inf = parseInt(inf);
                 sup = parseInt(sup);
-                if (!inf && !sup)
-                    return false;
+                var ret;
+                if (!val)
+                    ret = false;
+                else if (!inf && !sup)
+                    ret = false;
                 else if (!inf)
-                    return val <= new Date().addYears(-sup);
+                    ret = val <= new Date().addYears(-sup);
                 else if (!sup)
-                    return new Date().addYears(-inf) <= val;
+                    ret = new Date().addYears(-inf) <= val;
                 else
-                    return new Date().addYears(-inf) <= val && val <= new Date().addYears(-sup);
+                    ret = new Date().addYears(-inf) <= val && val <= new Date().addYears(-sup);
+                return ret;
             }
         });
     }

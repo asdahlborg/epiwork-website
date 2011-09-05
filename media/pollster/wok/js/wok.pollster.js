@@ -110,7 +110,7 @@
                     // apply rules if the current option is in the subjectOptions set
                     rule.apply($survey, checked);
                 }
-                else if (isText || isHidden) {
+                else if ((isText || isHidden) && !rule.subjectOptions.length) {
                     // do not check options for text questions
                     rule.apply($survey, checked);
                 }

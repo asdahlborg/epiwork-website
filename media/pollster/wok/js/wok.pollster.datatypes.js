@@ -78,8 +78,8 @@
                             inst.dpDiv.addClass('year-month-only');
                             $('head').append('<style id="hide-year-month-only-calendar" type="text/css">.year-month-only .ui-datepicker-calendar { display: none; }</style>');
                             var val = $(input).val();
-                            var month = parseInt(val.replace(/\/.*$/, ''));
-                            var year = parseInt(val.replace(/^.*\//, ''));
+                            var month = parseInt(val.replace(/\/.*$/, ''), 10);
+                            var year = parseInt(val.replace(/^.*\//, ''), 10);
                             if (year && month) {
                                 setTimeout(function(){
                                     $(input).datepicker('setDate', new Date(year, month-1, 1));
