@@ -1,5 +1,6 @@
 from os.path import join
 
+from django.contrib.auth.models import User
 from django.contrib import admin
 from django.contrib.sites.models import Site
 from django.conf import settings
@@ -31,6 +32,16 @@ class UserReminderInfoAdmin(admin.ModelAdmin):
         return actions
 
 admin.site.register(UserReminderInfo, UserReminderInfoAdmin)
+
+class UserReminderInfoInline(admin.StackedInline):
+    model = UserReminderInfo
+
+current_user_admin = type(admin.site._registry[User])
+class InfoUserAdmin(current_user_admin):
+    inlines = current_user_admin.inlines + [UserReminderInfoInline]
+
+admin.site.unregister(User)
+admin.site.register(User, InfoUserAdmin)
 
 class SiteSettingsInline(admin.StackedInline):
     model = ReminderSettings
