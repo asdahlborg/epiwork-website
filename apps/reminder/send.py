@@ -50,7 +50,7 @@ def get_url(user):
 def get_login_url(user, next):
     expires = datetime.datetime.now() + datetime.timedelta(days=7)
 
-    usage_left = 0
+    usage_left = 5
     key = loginurl.utils.create(user, usage_left, expires, next)
 
     domain = Site.objects.get_current()
