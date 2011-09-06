@@ -43,6 +43,17 @@
         var $canvas = $(options.canvasSelector, context);
         var $tools = $(options.toolsSelector, context);
         var $properties = $(options.propertiesSelector, context);
+
+        $(window).resize(function(evt){
+            // show scrollbars if the floating panel is too tall for the current window
+            $properties.css( {'max-height': window.innerHeight-5, 'overflow-y': 'auto'});
+        }).resize();
+        // enable panel scrolling
+        $properties.portamento({
+            wrapper: $properties.parent(),
+            gap: 0
+        });
+
         var $selection = null, $question = null;
 
         if (!window.pollster_urls)
