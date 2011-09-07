@@ -30,7 +30,7 @@
                 window.location = designer.getSurveyUrl($(responseText).find(".survey").attr("id").replace("survey-", ""));
             else
                 window.location.reload();
-        })
+        }).error(function(jqXHR, textStatus, errorThrown) { wok.error("error on save: "+errorThrown); });
     }
 
     // DESIGNER WINDOW
@@ -182,6 +182,7 @@
         $canvas.bind("mousedown.art", onMouseDown);
 
         $(".action-save").click(function(evt) {
+            $(this).attr('disabled', true);
             (options.onSave || onSave)(evt, self);
             return false;
         })
