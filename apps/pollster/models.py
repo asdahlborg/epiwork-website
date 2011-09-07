@@ -506,6 +506,7 @@ class Option(models.Model):
     text = models.CharField(max_length=4095, blank=True, default='')
     group = models.CharField(max_length=255, blank=True, default='')
     value = models.CharField(max_length=255, default='')
+    description = models.TextField(blank=True, default='')
 
     virtual_type = models.ForeignKey(VirtualOptionType, blank=True, null=True)
     virtual_inf = models.CharField(max_length=255, blank=True, default='')
@@ -522,6 +523,12 @@ class Option(models.Model):
         if self.translation and self.translation.text:
             return self.translation.text
         return self.text
+
+    @property
+    def translated_description(self):
+        if self.translation and self.translation.description:
+            return self.translation.description
+        return self.description
 
     @property
     def data_name(self):
@@ -606,6 +613,7 @@ class Option(models.Model):
 
 class Rule(models.Model):
     rule_type = models.ForeignKey(RuleType)
+    is_sufficient = models.BooleanField(default=True)
     subject_question = models.ForeignKey(Question, related_name='subject_of_rules', db_index=True)
     subject_options = models.ManyToManyField(Option, related_name='subject_of_rules', limit_choices_to = {'question': subject_question})
     object_question = models.ForeignKey(Question, related_name='object_of_rules', blank=True, null=True)
@@ -703,6 +711,7 @@ class TranslationOption(models.Model):
     translation = models.ForeignKey(TranslationSurvey, db_index=True)
     option = models.ForeignKey(Option, db_index=True)
     text = models.CharField(max_length=4095, blank=True, default='')
+    description = models.TextField(blank=True, default='')
 
     class Meta:
         ordering = ['translation', 'option']
@@ -715,5 +724,5 @@ class TranslationOption(models.Model):
         class TranslationOptionForm(ModelForm):
             class Meta:
                 model = TranslationOption
-                fields = ['text']
+                fields = ['text', 'description']
         return TranslationOptionForm(data, instance=self, prefix="option_%s"%(self.id,))

@@ -32,19 +32,36 @@
     {% if not question.is_builtin %}
     <div class="question-wrapper clearfix">
         <div id="question-{{ question.id }}" class="question">
-            <p>
+            <p title="Question Title">
                 <span class="number"></span>
-                <span class="title">{{ question.title }}<br/>{{ question.translation.as_form.title }}</span>
+                <span class="title">
+                    {{ question.title }}
+                    <br/>
+                    {{ question.translation.as_form.title }}
+                </span>
+            </p>
+            <p title="Question Text">
                 {{ question.description }}<br/>{{ question.translation.as_form.description }}
             </p>
             {% if question.is_text %}
-            <p class="error-message">{{ question.error_message }}<br/>{{ question.translation.as_form.error_message }}</p>
+            <p title="Question Error Message"
+               class="error-message">{{ question.error_message }}<br/>{{ question.translation.as_form.error_message }}</p>
             {% endif %}
             {% if question.is_single_choice or question.is_multiple_choice %}
-            <ul class="choices">
+            <ul>
                 {% for option in question.options %}
                 <li id="option-{{ option.id }}">
-                    <label for="option-{{ option.id }}-field">{{ option.text }}<br/>{{ option.translation.as_form.text }}</label>
+                    <label title="Option Text">
+                    {{ option.text }}
+                    <br/>
+                    {{ option.translation.as_form.text }}
+                    </label>
+                    <br/>
+                    <label title="Option Description">
+                    {{ option.description }}
+                    <br/>
+                    {{ option.translation.as_form.description }}
+                    </label>
                 </li>
                 {% endfor %}
             </ul>
@@ -52,22 +69,32 @@
             {% endif %}
             {% if question.is_matrix_select %}
             <div>Columns</div>
-            <ul class="columns sortable">
+            <ul class="columns">
                 {% for column in question.columns %}
-                <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span></li>
+                <li id="column-{{ column.id }}"><span title="Column Title" class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
-            <ul class="rows sortable">
+            <ul class="rows">
                 {% for row in question.rows %}
-                <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span></li>
+                <li id="row-{{ row.id }}"><span title="Row Title" class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Options</div>
-            <ul class="choices sortable">
+            <ul>
                 {% for option in question.options %}
                 <li id="option-{{ option.id }}">
-                    <label for="option-{{ option.id }}-field">{{ option.text }}<br/>{{ option.translation.as_form.text }}</label>
+                    <label title="Option Text">
+                    {{ option.text }}
+                    <br/>
+                    {{ option.translation.as_form.text }}
+                    </label>
+                    <br/>
+                    <label title="Option Description">
+                    {{ option.description }}
+                    <br/>
+                    {{ option.translation.as_form.description }}
+                    </label>
                 </li>
                 {% endfor %}
             </ul>
@@ -76,13 +103,13 @@
             <div>Columns</div>
             <ul class="columns sortable">
                 {% for column in question.columns %}
-                <li id="column-{{ column.id }}"><span class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span></li>
+                <li id="column-{{ column.id }}"><span title="Column Title" class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span></li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
             <ul class="rows sortable">
                 {% for row in question.rows %}
-                <li id="row-{{ row.id }}"><span class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span></li>
+                <li id="row-{{ row.id }}"><span title="Row Title" class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span></li>
                 {% endfor %}
             </ul>
             {% endif %}

@@ -52,7 +52,8 @@
                 <select class="choices" name="{{ question.data_name }}">
                     {% for option in question.options %}
                     <option id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}"
-                         value="{{ option.value }}" {% if option.form_is_checked %}selected="selected"{% endif %}/>
+                         value="{{ option.value }}" {% if option.form_is_checked %}selected="selected"{% endif %}
+                         title="{{ option.translated_description }}">
                         {{ option.translated_text }}
                     </option>
                     {% endfor %}
@@ -61,7 +62,8 @@
                 <ul class="choices">
                     {% for option in question.options %}
                     {% if option.is_open %}
-                    <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                    <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open"
+                        title="{{ option.translated_description }}">
                         <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                             {% if option.form_is_checked %}checked="checked"{% endif %} />
                         <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
@@ -70,7 +72,8 @@
                             value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open" />
                     </li>
                     {% else %}
-                    <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                    <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}"
+                        title="{{ option.translated_description }}">
                         <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                             {% if option.form_is_checked %}checked="checked"{% endif %} />
                         <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
@@ -85,7 +88,8 @@
             <ul class="choices">
                 {% for option in question.options %}
                 {% if option.is_open %}
-                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open"
+                    title="{{ option.translated_description }}">
                     <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if option.form_is_checked %}checked="checked"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
@@ -94,7 +98,8 @@
                         value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open" />
                 </li>
                 {% else %}
-                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}"
+                    title="{{ option.translated_description }}">
                     <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
                         {% if option.form_is_checked %}checked="checked"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
@@ -130,7 +135,7 @@
                     <td>
                         <select name="{{ column.data_name }}">
                             {% for option in column.options %}
-                            <option value="{{ option.value }}">{{ option.translated_text }}</option>
+                            <option value="{{ option.value }}" title="{{ option.translated_description }}">{{ option.translated_text }}</option>
                             {% endfor %}
                         </select>
                     </td>

@@ -147,6 +147,10 @@
             <input type="text" name="field_choice_text"/>
         </div>
         <div class="property">
+            <label>Description</label>
+            <textarea name="field_choice_description"></textarea>
+        </div>
+        <div class="property">
             <label>Value</label>
             <input type="text" name="field_choice_value"/>
         </div>
@@ -202,6 +206,13 @@
                 {% for rule_type in rule_types %}
                 <option value="{{ rule_type.id }}" data-js-class="{{ rule_type.js_class }}">{{ rule_type.title }}</option>
                 {% endfor %}
+            </select>
+        </div>
+        <div class="property">
+            <label>Sufficient</label>
+            <select name="field_rule_is_sufficient">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
             </select>
         </div>
         <div class="property">
