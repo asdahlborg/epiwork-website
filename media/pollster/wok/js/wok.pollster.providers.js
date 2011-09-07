@@ -638,14 +638,27 @@
 
             var ruleClass = eval($selected.attr('data-js-class'));
 
-            var subject = '';
-            if (subject_options.val())
-                subject = "(" + subject_options.length + " triggers)";
+            function describeOptions(selected) {
+                var ret = '';
+                if (selected.val()) {
+                    var $o = $('#'+selected.first().val());
+                    var i = $o.index() + 1;
+                    var v = $o.find("input").val() || $o.attr("data-value") || "NO VALUE";
+                    ret = "Option "+i+" ["+v+"]";
+                    if (selected.length == 2)
+                        ret += " + another";
+                    else if(selected.length > 2)
+                        ret += " +"+(selected.length-1)+" others";
+                }
+                return ret;
+            }
+
+            var subject = describeOptions(subject_options);
             var object = '';
             if (ruleClass.showQuestions)
                 object = object_question.text();
             if (ruleClass.showOptions)
-                object = "(" + object_options.length + ") from " + object_question.text();
+                object = "(" + describeOptions(object_options) + ") from " + object_question.text();
             $element.text(subject + " => " + type + " " + object);
         }
 
