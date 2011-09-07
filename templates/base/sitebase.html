@@ -60,12 +60,14 @@
 		
 		<div id="header">
 			{% if site_logo %}
+			<div id="headerlogo"><a href="/" title="{{ site_name }}"><img src="{{ site_logo }}" alt="{{ site_name }}" /></a></div>
 			{% block authentication %}<div id="account">{% if user.is_authenticated %}
-			    <p><a href="/survey/profile/">{% trans "Logged in as" %} {{ user.first_name }} {{ user.last_name }}</a></p>
 			    <ul class="member">
 			        <li><a href="/survey/profile/">{% trans "My account" %}</a></li>
 			        <li><a href="/accounts/logout/">{% trans "Log out" %}</a></li>
-			    </ul>{% else %}
+			    </ul>
+			    <p><a href="/survey/profile/">{% trans "Logged in as" %} {{ user.first_name }} {{ user.last_name }}</a></p>
+			{% else %}
 			    <ul class="anonymous">
 			        <li><a href="/accounts/login/" class="fancybox1">{% trans "Log in" %}</a></li>
 			        <li><a href="/accounts/register/" class="fancybox2">{% trans "Register" %}</a></li>

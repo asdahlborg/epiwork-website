@@ -367,7 +367,7 @@ ul.map_buttons li {
 #header {
  float: left;
  width: 950px;
- padding: 18px 12px 12px 12px;
+ padding: 10px 12px 12px 12px;
  background: #ffffff;
 }
 
@@ -375,13 +375,14 @@ ul.map_buttons li {
 #headerlogo {
  float: left;
  width: 756px;
+ overflow: hidden;
  padding: 0;
- margin: 12px 0 12px 0;
+ margin: 0 0 12px 0;
 }
 
 #account {
  float: right;
- margin: 12px 0 12px 0;
+ margin: 0 0 10px 0;
  text-align: center;
  font-size: 0.75em;
 }
