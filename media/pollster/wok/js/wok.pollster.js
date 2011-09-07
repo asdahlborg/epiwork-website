@@ -27,9 +27,10 @@
 
         var last_participation_data = pollster_last_participation_data();
 
-        var data_types = {}, rules_by_question = {}, derived_values = {};
+        var data_types = {}, open_option_data_types = {}, rules_by_question = {}, derived_values = {};
 
         pollster_fill_data_types(data_types);
+        pollster_fill_open_option_data_types(open_option_data_types);
         pollster_fill_rules(rules_by_question);
         pollster_fill_derived_values(derived_values);
 
@@ -40,7 +41,15 @@
         // Bind data types to question elements
 
         $.each(data_types, function(question, data_type) {
-            data_type.bind($('#question-'+question));
+            var $field = $('#question-'+question+'-field');
+            data_type.bind($field);
+        });
+
+        $.each(open_option_data_types, function(question, option_data_types) {
+            $.each(option_data_types, function(option, data_type) {
+                var $field = $('#option-'+option+'-field-open');
+                data_type.bind($field);
+            });
         });
 
         // Event handlers.
