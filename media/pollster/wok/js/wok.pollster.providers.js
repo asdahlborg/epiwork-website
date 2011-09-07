@@ -206,7 +206,7 @@
             return false;
         });
 
-        $properties.find("[name=field_question_tags]").change(function(evt) {
+        $properties.find("[name=field_question_tags]").keyup(function(evt) {
             if (self.$element === null) return true;
             self.$element.attr("data-tags", $(this).val());
             return false;
@@ -242,7 +242,7 @@
             return false;
         });
 
-        $properties.find("[name=field_question_regex]").change(function(evt) {
+        $properties.find("[name=field_question_regex]").keyup(function(evt) {
             if (self.$element === null) return true;
             self.$element.find('input').attr("pattern", $(this).val());
             return false;
