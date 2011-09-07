@@ -423,6 +423,12 @@ ul.map_buttons li {
  cursor: pointer;
 }
 
+.loggedinas {
+ width: 183px;
+ padding: 4px 0 0 0;
+ line-height: 1.3em;
+}
+
 #navigation {
  width: 950px;
  clear: both;
