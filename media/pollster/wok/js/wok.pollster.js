@@ -84,21 +84,16 @@
                 });
             }
 
-            // Else check regular expressions for text entries
-
-            else if ($input.attr('pattern')) {
-                var pattern = new RegExp($input.attr('pattern'));
-                checked = pattern.test($input.val());
-                if (!synthetic)
-                    $question.toggleClass("error", !checked);
-            }
-
-            // Else just use the string inside the text entry.
+            // Else check the validity by data type
 
             else {
-                checked = $input.val() !== "";
-                if (!synthetic && $question.is('.mandatory'))
-                    $question.toggleClass("error", !checked);
+                data_type = data_types[qid];
+                var valid = data_type.check($input);
+                var empty = $input.val() == "";
+                var err = !valid || ($question.is('.mandatory') && empty);
+                if (!synthetic)
+                    $question.toggleClass("error", err);
+                checked = !empty;
             }
 
             // Invoke all rules for the rule/option combination.

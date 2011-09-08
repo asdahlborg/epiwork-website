@@ -9,6 +9,9 @@
         // Public methods.
 
         $.extend(this, {
+            check: function($field) {
+                return true;
+            },
             bind: function($field) {
                 $field
                     .datepicker({
@@ -35,6 +38,10 @@
         // Public methods.
 
         $.extend(this, {
+            check: function($field) {
+                var pattern = new RegExp($field.attr('pattern'));
+                return pattern.test($field.val());
+            },
             bind: function($field) {
             }
         });
@@ -46,6 +53,9 @@
         // Public methods.
 
         $.extend(this, {
+            check: function($field) {
+                return true;
+            },
             bind: function($field) {
                 $field
                     .keypress(function(evt) {
@@ -57,12 +67,38 @@
         });
     }
 
+    function PostalCodeType() {
+        var self = this;
+        self.fmt = window.pollster_get_postal_code_format ? pollster_get_postal_code_format() : null;
+        if (self.fmt)
+            self.regex = new RegExp('^'+self.fmt+'$');
+
+        // Public methods.
+
+        $.extend(this, {
+            check: function($field) {
+                var value = $field.val();
+                if (!value)
+                    return true;
+                return self.regex.test(value);
+            },
+            bind: function($field) {
+            }
+        });
+    }
+
     function YearMonthType() {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
+            check: function($field) {
+                var val = $field.val();
+                var month = parseInt(val.replace(/\/.*$/, ''), 10);
+                var year = parseInt(val.replace(/^.*\//, ''), 10);
+                return year && month;
+            },
             bind: function($field) {
                 $field
                     .datepicker({
@@ -122,6 +158,9 @@
         // Public methods.
 
         $.extend(this, {
+            check: function($field) {
+                return true;
+            },
             bind: function($field) {
             }
         });
@@ -132,6 +171,7 @@
     window.wok.pollster.datatypes = {
         "Text": TextType,
         "Numeric": NumericType,
+        "PostalCode": PostalCodeType,
         "Date": DateType,
         "YearMonth": YearMonthType,
         "Timestamp": TimestampType

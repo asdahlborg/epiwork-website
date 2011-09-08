@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from cms import settings as cms_settings
 from apps.survey.models import SurveyUser
-from . import models, forms, parser, json
+from . import models, forms, fields, parser, json
 import re, datetime
 
 def request_render_to_response(req, *args, **kwargs):
@@ -119,6 +119,7 @@ def survey_test(request, id, language=None):
 
     return request_render_to_response(request, 'pollster/survey_test.html', {
         "survey": survey,
+        "default_postal_code_format": fields.PostalCodeField.get_default_postal_code_format(),
         "last_participation_data_json": last_participation_data_json,
         "language": language,
         "form": form
@@ -149,6 +150,7 @@ def survey_run(request, id):
 
     return request_render_to_response(request, 'pollster/survey_run.html', {
         "survey": survey,
+        "default_postal_code_format": fields.PostalCodeField.get_default_postal_code_format(),
         "last_participation_data_json": last_participation_data_json,
         "form": form
     })

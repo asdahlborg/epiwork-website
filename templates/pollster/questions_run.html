@@ -245,5 +245,8 @@
             {% endfor %}
             {% endfor %}
         }
+        function pollster_get_postal_code_format() {
+            return '{{ default_postal_code_format|escapejs }}';
+        }
     </script>
 </form>
