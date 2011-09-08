@@ -197,9 +197,19 @@
             return {{ last_participation_data_json|safe|default:'{}' }};
         }
         function pollster_fill_data_types(d) {
-            var t;
             {% for question in survey.questions %}
             d[{{question.id}}] = new {{question.data_type.js_class}}();
+            {% endfor %}
+        }
+        function pollster_fill_open_option_data_types(d) {
+            var t;
+            {% for question in survey.questions %}
+                t = d[{{question.id}}] = {};
+                {% for option in question.options %}
+                    {% if option.is_open and question.open_option_data_type %}
+                        t[{{option.id}}] = new {{question.open_option_data_type.js_class}}();
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
         }
         function pollster_fill_derived_values(d) {

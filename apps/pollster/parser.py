@@ -325,7 +325,6 @@ def get_ref(objects, element):
 def survey_update_from_xml(survey, xmlstring):
     # ElementTree does not like being passed unicode objects
     p = "{http://dndg.it/ns/pollster-1.0}" # pollster namespace
-    xmlstring = '<?xml version="1.0" encoding="UTF-8"?>'+xmlstring.encode('utf-8')
     xsurvey = ElementTree.XML(xmlstring)
 
     survey.title = xsurvey.findtext(p+'title')

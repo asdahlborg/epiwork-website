@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <survey id="survey-{{ survey.id }}" xmlns="http://dndg.it/ns/pollster-1.0">
     <title>{{ survey.title }}</title>
     <shortname>{{ survey.shortname }}</shortname>

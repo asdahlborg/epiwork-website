@@ -9,9 +9,8 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
-                $question
-                    .find(':text,:date')
+            bind: function($field) {
+                $field
                     .datepicker({
                         constrainInput: true,
                         dateFormat: 'dd/mm/yy',
@@ -36,7 +35,7 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
+            bind: function($field) {
             }
         });
     }
@@ -47,9 +46,8 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
-                $question
-                    .find(':text,:number')
+            bind: function($field) {
+                $field
                     .keypress(function(evt) {
                         var key = String.fromCharCode(evt.which);
                         var regex = /[0-9]/;
@@ -65,9 +63,8 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
-                $question
-                    .find(':text,:date')
+            bind: function($field) {
+                $field
                     .datepicker({
                         constrainInput: true,
                         dateFormat: 'mm/yy',
@@ -125,7 +122,7 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
+            bind: function($field) {
             }
         });
     }
