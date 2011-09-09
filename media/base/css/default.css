@@ -1021,6 +1021,35 @@ ul.bullets li {
 }
 
 
+/* Survey styles*/
+
+table.imagetable {
+ font-family: verdana,arial,sans-serif;
+ font-size: 11px;
+ color: #333333;
+ border-width: 1px;
+ border-color: #999999;
+ border-collapse: collapse;
+}
+
+table.imagetable th {
+ background: #A22C22;
+ color: #FFFFFF;
+ border-width: 1px;
+ padding: 8px;
+ border-style: solid;
+ border-color: #999999;
+}
+
+table.imagetable td {
+ background: #dcddc0;
+ border-width: 1px;
+ padding: 8px;
+ border-style: solid;
+ border-color: #999999;
+}
+
+
 /* Jquery UI */
 
 #accordion,
