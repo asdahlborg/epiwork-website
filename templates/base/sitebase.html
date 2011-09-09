@@ -96,11 +96,6 @@
 				<div id="footercontent-client">
                 	{{ site_footer }}
 				</div>
-				<div id="footerclose">
-	                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
-	                {% language_chooser %}
-	                <a href="{% url contact_form %}" title="{% trans "Contact us" %}">{% trans "Contact" %}</a>
-				</div>
             {% else %}
 				<div id="footercontent-main">
 					<div id="footercol1"><img src="{{ MEDIA_URL }}base/img/main/influenzanetlogo.png" alt="Influenzanet logo" /><p>Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet with the aid of volunteers.<br />We have tried to ensure that all information we provide through this website is correct at the time we include it.</p></div>
@@ -118,11 +113,12 @@
 							<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italy</a><br />				
 					</div>
 				</div>
-				<div id="footerclose">
-	                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
-	                <a href="{% url contact_form %}" title="{% trans "Contact us" %}">{% trans "Contact" %}</a>
-				</div>
             {% endif %}
+            <div id="footerclose">
+                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
+                {% language_chooser %}
+                <a href="{% url contact_form %}" title="{% trans "Contact us" %}">{% trans "Contact" %}</a>
+            </div>
 			</div>{% endblock footercontent %}
 		</div>
 	</div>
