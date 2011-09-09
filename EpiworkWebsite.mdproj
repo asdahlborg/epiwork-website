@@ -391,5 +391,6 @@
     <None Include="media\pollster\wok\js\wok.pollster.rules.js" />
     <None Include="media\pollster\wok\js\wok.pollster.virtualoptions.js" />
     <None Include="media\pollster\wok\js\wok.properties.js" />
+    <None Include="bootstrap.sh" />
   </ItemGroup>
 </Project>
