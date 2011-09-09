@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block col1 %}
-<h1>People</h1>
+<h1>{% trans "People" %}</h1>
 
 <table>
 <tr><th>{% trans "Name" %}</th>
@@ -10,15 +10,15 @@
 </tr>
 {% for person in people %}
 <tr><td>{{ person.name }}</td>
-    <td><a href="{{ person.get_edit_url }}">edit</a></td>
-    <td><a href="{{ person.get_profile_url }}">profile</a></td>
-    <td><a href="{{ person.get_survey_url }}">survey</a></td>
-    <td><a href="{{ person.get_remove_url }}">remove</a></td>
+    <td><a href="{{ person.get_edit_url }}">{% trans "Edit" %}</a></td>
+    <td><a href="{{ person.get_profile_url }}">{% trans "Profile" %}</a></td>
+    <td><a href="{{ person.get_survey_url }}">{% trans "Survey" %}</a></td>
+    <td><a href="{{ person.get_remove_url }}">{% trans "Remove" %}</a></td>
 </tr>
 {% endfor %}
 </table>
 
-<p><a href="{% url survey_people_add %}">{% trans "add new person" %}</a></p>
+<p><a href="{% url survey_people_add %}">{% trans "Add new person" %}</a></p>
 
 {% endblock %}
 

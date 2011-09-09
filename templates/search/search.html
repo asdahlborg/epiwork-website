@@ -2,11 +2,11 @@
 {% load i18n highlight %}
 
 {% block col1 %}
-    <h1>Search</h1>
+    <h1>{% trans "Search result" %}</h1>
 
     <form method="get" action=".">
         {{ form.as_p }}
-        <input type="submit" value="Search">
+        <input type="submit" value="{% trans "Search" %}">
 
         {% if query %}
             <h2>{% trans "Results" %}</h2>
