@@ -3,11 +3,13 @@
 *.userprefs
 *.pidb
 *.swp
+*~
 .installed.cfg
 .DS_Store
 epiweb.db
 MANIFEST
 local_settings.py
+ggm.db
 bin/
 src/
 include/
