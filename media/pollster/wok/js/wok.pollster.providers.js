@@ -137,7 +137,7 @@
                 );
             }
             if (type == "rule") {
-                self.$element.siblings(".rules").append($('<div class="rule">EMPTY RULE</div>'));
+                self.$element.siblings(".rules").append($('<div class="rule sufficient">EMPTY RULE</div>'));
             }
         });
 
