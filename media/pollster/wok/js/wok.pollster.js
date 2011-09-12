@@ -77,7 +77,7 @@
                 // If this is an ExclusiveRule instance remove subject options from the
                 // list if not exclusive options; used later to generate an extra ExclusiveRule.
 
-                if (rule.isExclusive) {
+                if (rule.name == "ExclusiveRule") {
                     for (var j=0 ; j < rule.subjectOptions.length ; j++) {
                         var index = not_exclusive_options.indexOf(rule.subjectOptions[j]);
                         if (index >= 0)
@@ -164,7 +164,7 @@
             var rules_active = [];
             for (var i=0 ; i < rules.length ; i++) {
                 var rule = rules[i];
-                if (rule.activate($survey, $question, evt))
+                if (!rule.isFuture && rule.activate($survey, $question, evt))
                     rules_active.push(rule);
             }
 
@@ -235,11 +235,54 @@
             window.wok.pollster._eh();
         });
 
+        // Initialize all rules.
+
         jQuery.each(rules_by_question, function(i, by_question) {
             jQuery.each(by_question, function(i, rule) {
                 rule.init($survey, last_participation_data);
             });
         });
+
+        // Invoke future rules just once.
+
+        for (var signature in rules_by_object) {
+            var target = rules_by_object[signature];
+            var required_fail = {};
+            var sufficient_ok = {};
+            for (var i=0 ; i < target.rules.length ; i++) {
+                var rule = target.rules[i];
+                if (rule.isFuture) {
+                    if (rule.isSufficient) {
+                        var ok = sufficient_ok[rule.name] || [false, null];
+                        if (!ok[0] && rule.activate($survey, $survey.find("#question-"+rule.subjectQuestion), null)) {
+                            sufficient_ok[rule.name] = [true, rule];
+                        }
+                    }
+                    else {
+                        var fail = required_fail[rule.name] || [false, null];
+                        if (!fail[0] && rule.activate($survey, $survey.find("#question-"+rule.subjectQuestion), null)) {
+                            required_fail[rule.name] = [false, rule];
+                        }
+                        else {
+                            required_fail[rule.name] = [true, null];
+                        }
+                    }
+                }
+            }
+
+            // Execute sufficient and required rules.
+
+            for (var k in sufficient_ok) {
+                if (sufficient_ok[k][0] === true)
+                    sufficient_ok[k][1].apply($survey, target);
+            }
+
+            for (var k in required_fail) {
+                if (required_fail[k][0] === false)
+                    required_fail[k][1].apply($survey, target);
+            }
+
+        }
 
         // Ensure that the initial status is consistent with rules and whatnot.
 
