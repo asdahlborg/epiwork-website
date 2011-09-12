@@ -246,7 +246,7 @@
                                          {{rule.object_question.id}},
                                          [ {% for option in rule.object_options.all %}
                                             {{ option.id }}{% if not forloop.last %},{% endif%}
-                                         {% endfor %} ]));
+                                         {% endfor %} ], { isSufficient: {{ rule.is_sufficient|default:'false'|lower }} }));
             {% endfor %}
             {% endfor %}
         }

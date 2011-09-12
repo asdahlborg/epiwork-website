@@ -25,14 +25,72 @@
         var $survey = $('.'+options.templateClass, context);
         var questionSelector = '.'+options.questionClass;
 
-        var last_participation_data = pollster_last_participation_data();
+        // Useful methods.
 
-        var data_types = {}, open_option_data_types = {}, rules_by_question = {}, derived_values = {};
+        function get_homologous_rules(rule, rules) {
+            var filtered = [];
+            for (var i=0 ; i < rules.length ; i++) {
+                var hr = rules[i];
+                if (rule.objectSignature === hr.objectSignature && rule.name === hr.name)
+                    filtered.push(hr);
+            }
+            return filtered;
+        }
+
+        // Fill types and rules from generated Javascript code.
+
+        var last_participation_data = pollster_last_participation_data();
+        var data_types = {}, open_option_data_types = {}, derived_values = {};
+        var rules_by_question = {}, rules_by_object = {};
 
         pollster_fill_data_types(data_types);
         pollster_fill_open_option_data_types(open_option_data_types);
         pollster_fill_rules(rules_by_question);
         pollster_fill_derived_values(derived_values);
+        
+        // Fill the "by object" and "state" rule dictionaries.
+
+        for (var q in rules_by_question) {
+            // Create a list of all options for current question.
+
+            var not_exclusive_options = [];
+            $("#question-"+q+" li").each(function() {
+                not_exclusive_options.push(parseInt(($(this).attr("id") || '').replace("option-","")));
+            });
+
+            for (var i=0 ; i < rules_by_question[q].length ; i++) {
+                var rule = rules_by_question[q][i];
+                if (rule.objectSignature !== null) {
+                    var target = rules_by_object[rule.objectSignature];
+                    if (!target) {
+                        target = rules_by_object[rule.objectSignature] = {
+                            state: { visibility: [0,0] },
+                            rules: []
+                        };
+                    }
+                    target.rules.push(rule);
+                }
+
+                // Set the initial active flag for the rule to false.
+                rule.active = false;
+
+                // If this is an ExclusiveRule instance remove subject options from the
+                // list if not exclusive options; used later to generate an extra ExclusiveRule.
+
+                if (rule.isExclusive) {
+                    for (var j=0 ; j < rule.subjectOptions.length ; j++) {
+                        var index = not_exclusive_options.indexOf(rule.subjectOptions[j]);
+                        if (index >= 0)
+                            not_exclusive_options.splice(index, 1);
+                    }
+                }
+            }
+
+            // Create one ExclusiveRule instance for each option that is not already
+            // subject of an ExclusiveRule.
+
+            rules_by_question[q].push(new window.wok.pollster.rules.Exclusive(q, not_exclusive_options, {}));
+        }
 
         $survey.find('.open-option-data').attr('disabled', true);
         if (last_participation_data && last_participation_data.timestamp)
@@ -54,9 +112,13 @@
 
         // Event handlers.
 
-        $survey.find("input").change(function(evt, extra) {
-            if (evt.target.nodeName !== "INPUT")
-                return;
+        window.wok.pollster._eh_args = [];
+        window.wok.pollster._eh = function() {
+            var args = window.wok.pollster._eh_args.pop();
+            if (!args) return;
+
+            var evt = args[0];
+            var extra = args[1];
 
             var $input = $(evt.target);
 
@@ -96,45 +158,60 @@
                 checked = !empty;
             }
 
-            // Invoke all rules for the rule/option combination.
+            // Set the active flag on all rules for this event.
 
-            var exclusives = [];
             var rules = rules_by_question[qid] || [];
+            var rules_active = [];
             for (var i=0 ; i < rules.length ; i++) {
                 var rule = rules[i];
-                if (isRadio) {
-                    // checking a radio button must apply rules associated with the uncheck of
-                    // all other options
-                    jQuery.each(rule.subjectOptions, function(i, o) {
-                        var option = $question.find('#option-'+o+' :radio');
-                        rule.apply($survey, option.is(':checked'));
-                    });
+                if (rule.activate($survey, $question, evt))
+                    rules_active.push(rule);
+            }
+
+            // For every active rule check "required" and "sufficient" conditions
+            // for every rule with the same target object and type.
+
+            for (var i=0 ; i < rules_active.length ; i++) {
+                var rule = rules_active[i];
+                var target = null, hrs = [];
+                if (rule.objectSignature !== null) {
+                    target = rules_by_object[rule.objectSignature];
+                    hrs = get_homologous_rules(rule, target.rules);
                 }
-                else if (jQuery.inArray(oid, rule.subjectOptions) >= 0) {
-                    // apply rules if the current option is in the subjectOptions set
-                    rule.apply($survey, checked);
+
+                // If the current rule was switched to active we just apply it if
+                // sufficient, but if necessary we need to make sure all other
+                // necessary rules are active too.
+
+                if (rule.active) {
+                    var apply = true;
+                    if (!rule.isSufficient) {
+                        for (var j=0 ; j < hrs.length ; j++) {
+                            if (!hrs[j].isSufficient && !hrs[j].active)
+                                apply = false;
+                        }
+                    }
+                    if (apply)
+                        rule.apply($survey, target);
                 }
-                else if ((isText || isHidden) && !rule.subjectOptions.length) {
-                    // do not check options for text questions
-                    rule.apply($survey, checked);
-                }
-                if (rule.isExclusive) {
-                    exclusives = exclusives.concat(jQuery.map(rule.subjectOptions, function(i){ return '#option-'+i;}));
+
+                // If the current rule was switched to inactive we do as above
+                // but the logic is inverted.
+
+                else {
+                    var apply = true;
+                    if (rule.isSufficient) {
+                        for (var j=0 ; j < hrs.length ; j++) {
+                            if (hrs[j].isSufficient && hrs[j].active)
+                                apply = false;
+                        }
+                    }
+                    if (apply)
+                        rule.apply($survey, target);
                 }
             }
 
-            if (checked && $.inArray('#option-'+oid, exclusives) >= 0) {
-                // uncheck all other options when checking an exclusive one
-                var extra = { synthetic: true };
-                $question.find(':radio,:checkbox').not($input).filter(':checked').attr('checked', false).trigger('change', extra);
-            }
-            else if (checked && exclusives.length) {
-                // uncheck all exclusives when checking a non-exclusive option
-                var extra = { synthetic: true };
-                $question.find(exclusives.join(',')).find(':radio,:checkbox').attr('checked', false).trigger('change', extra);
-            }
-
-            // Propagate changes to derived options
+            // Propagate changes to derived options.
 
             if ($input.is(':not(.derived)')) {
                 var val = $input.val();
@@ -144,11 +221,18 @@
                     var match = Boolean(derived[i].match(val));
                     var checked = $derived_input.is(':checked');
                     if (match != checked) {
-                        var extra = { synthetic: true };
-                        $derived_input.attr('checked', match).trigger('change', extra);
+                        $derived_input.attr('checked', match).trigger('change', { synthetic: true });
                     }
                 }
             }
+        };
+
+        $survey.find("input").change(function(evt, extra) {
+            if (evt.target.nodeName !== "INPUT")
+                return;
+            window.wok.pollster._eh_args.push([evt, extra]);
+            //setTimeout("window.wok.pollster._eh()", 1);
+            window.wok.pollster._eh();
         });
 
         jQuery.each(rules_by_question, function(i, by_question) {
@@ -157,9 +241,9 @@
             });
         });
 
-        // ensure that the initial status is consistent with rules and whatnot
-        var extra = { synthetic: true };
-        $survey.find(":input").trigger('change', extra);
+        // Ensure that the initial status is consistent with rules and whatnot.
+
+        $survey.find(":input").trigger('change', { synthetic: true });
     }
 
     // MODULE FUNCTIONS
