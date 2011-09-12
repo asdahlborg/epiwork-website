@@ -10,7 +10,3 @@ class ContactForm(DefaultContactForm):
         self.fields['name'].label = _("Name")
         self.fields['email'].label = _("Email")
         self.fields['body'].label = _("Message")
-        
-        self.fields['name'].required = False
-        self.fields['email'].required = False
-        self.fields['body'].required = False    
