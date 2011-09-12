@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.sites.models import Site
 from django.utils.translation import ugettext as _
+from django.conf import settings
 
 class SiteSettings(models.Model):
     site = models.OneToOneField(Site)
     logo = models.ImageField(_("Logo"), help_text=_("Preferred height: 70px, maximum width: 756px"), upload_to='uploads', blank=True, null=True)
     light_color = models.CharField(max_length=6, default="ce2626")
     footer = models.TextField(_("Footer"), help_text=_("The footer will be displayed at the bottom of each page"), blank=True, null=True)
+    contact_form_recipient = models.EmailField(blank=True, default=settings.MANAGERS[0][1])
 
     @property
     def dark_color(self):
