@@ -558,7 +558,10 @@ ul.map_buttons li {
 
 /* Forms */
 
-form.contact_form label {
+form.contact_form label,
+input#id_name,
+input#id_email,
+textarea#id_body {
     float: left;
     clear: left;
 }
@@ -598,13 +601,14 @@ textarea#id_message:focus {
 
 input#commentsubmit {
  height: 2.2em;
- width: 54px;
+ width: auto;
  margin: 0;
- padding: 0;
+ padding: 0 6px 2px 6px;
  font-size: 0.7em;
  line-height: 2.2em;
  border: 0;
  color: #f8f8f8;
+ font-weight: bold;
  text-align: center;
  cursor: pointer;
  float: left;
@@ -687,9 +691,9 @@ input#commentsubmit:hover {
 
 #box input#boxsubmit {
  height: 2.2em;
- width: 54px;
+ width: auto;
  margin: 16px 0 0 0;
- padding: 0;
+ padding: 0 10px 3px 10px;
  font-size: 1em;
  line-height: 2.2em;
  border: 0;
@@ -1014,6 +1018,35 @@ ul.bullets li {
 
 .facebook {
  margin: 8px 0 0 -6px;
+}
+
+
+/* Survey styles*/
+
+table.imagetable {
+ font-family: verdana,arial,sans-serif;
+ font-size: 11px;
+ color: #333333;
+ border-width: 1px;
+ border-color: #999999;
+ border-collapse: collapse;
+}
+
+table.imagetable th {
+ background: #A22C22;
+ color: #FFFFFF;
+ border-width: 1px;
+ padding: 8px;
+ border-style: solid;
+ border-color: #999999;
+}
+
+table.imagetable td {
+ background: #dcddc0;
+ border-width: 1px;
+ padding: 8px;
+ border-style: solid;
+ border-color: #999999;
 }
 
 

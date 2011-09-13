@@ -83,7 +83,7 @@
 				</div>
 				<div id="searchbar">
                     <form method="get" action="/search/">
-                        <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Search" /></p>
+                        <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="{% trans "Search" %}" /></p>
                     </form>
 				</div>
 			</div>			
@@ -95,11 +95,6 @@
             {% if site_footer %}
 				<div id="footercontent-client">
                 	{{ site_footer }}
-				</div>
-				<div id="footerclose">
-	                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
-	                {% language_chooser %}
-	                <a href="{% url contact_form %}" title="Contact us">Contact</a>
 				</div>
             {% else %}
 				<div id="footercontent-main">
@@ -118,11 +113,12 @@
 							<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italy</a><br />				
 					</div>
 				</div>
-				<div id="footerclose">
-	                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
-	                <a href="{% url contact_form %}" title="Contact us">Contact</a>
-				</div>
             {% endif %}
+            <div id="footerclose">
+                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
+                {% language_chooser %}
+                <a href="{% url contact_form %}" title="{% trans "Contact us" %}">{% trans "Contact" %}</a>
+            </div>
 			</div>{% endblock footercontent %}
 		</div>
 	</div>

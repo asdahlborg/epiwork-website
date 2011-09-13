@@ -121,7 +121,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 CMS_TEMPLATES = (
     ('base/threecol.html', "3 Columns"),
     ('base/twocol.html', "2 Columns"),
-    ('base/home.html', "European Map"),
+    ('base/influhome.html', "European Map"),
 )
 
 ROOT_URLCONF = 'urls'
@@ -245,6 +245,7 @@ CACHES = {
 
 # SEO Settings
 
+#GOOGLE_ANALYTICS_ACCOUNT = 'UA-24124829-1'
 GOOGLE_ANALYTICS_ACCOUNT = None
 CMS_SEO_FIELDS = True
 

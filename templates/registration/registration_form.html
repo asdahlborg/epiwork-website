@@ -6,5 +6,5 @@
 {% block add_body %}  onload="document.getElementsByTagName('input') [0].focus();"{% endblock add_body %}
 
 {% block content %}<h1>{% trans "Registration Form" %}</h1>
-                {% spaceless %}<form method="post" id="registration">{% csrf_token %}{{ form.as_p }}<p><input type="submit" id="boxsubmit" value="OK"/></p></form>{% endspaceless %}{% endblock content %}
+                {% spaceless %}<form method="post" id="registration">{% csrf_token %}{{ form.as_p }}<p><input type="submit" id="boxsubmit" value="{% trans "Register" %}"/></p></form>{% endspaceless %}{% endblock content %}
 

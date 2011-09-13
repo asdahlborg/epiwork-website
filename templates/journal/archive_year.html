@@ -1,18 +1,20 @@
-<h1>Entries for {{ year }}</h1>
+{% load i18n %}
+
+<h1>{% trans "Entries for" %} {{ year }}</h1>
 
 <div class="entries">
 {% for object in items.object_list %}
 <p><strong>{{ object.title }}</strong><br/>
-<a href="{{ object.get_relative_url_archive_year }}">Read more</a></p>
+<a href="{{ object.get_relative_url_archive_year }}">{% trans "Read more..." %}</a></p>
 {% endfor %}
 </div>
 
 <div class="pagination">
 {% if items.has_previous %}
-<a href="?page={{ items.previous_page_number }}">previous</a>
+<a href="?page={{ items.previous_page_number }}">{% trans "Previous" %}</a>
 {% endif %}
 {% if items.has_next %}
-<a href="?page={{ items.next_page_number }}">next</a>
+<a href="?page={{ items.next_page_number }}">{% trans "Next" %}</a>
 {% endif %}
 </div>
 
