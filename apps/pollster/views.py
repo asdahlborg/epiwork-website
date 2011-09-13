@@ -75,7 +75,7 @@ def survey_publish(request, id):
         errors = survey.publish()
         if errors:
             messages.error(request, 'Unable to publish the survey, please check the errors below')
-            for error in errors:
+            for error in errors[:5]:
                 messages.warning(request, error)
         return redirect(survey)
     return redirect(survey)

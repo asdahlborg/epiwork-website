@@ -27,6 +27,7 @@ QUESTION_TYPE_CHOICES = (
 )
 
 IDENTIFIER_REGEX = r'^[a-zA-Z][a-zA-Z0-9_]*$'
+IDENTIFIER_OPTION_REGEX = r'^[a-zA-Z0-9_]*$'
 
 def _get_or_default(queryset, default=None):
     r = queryset[0:1]
@@ -607,7 +608,7 @@ class Option(models.Model):
                 errors.append('Empty text for option in question "%s"' % (self.question.title, ))
             if not self.value:
                 errors.append('Missing value for option "%s" in question "%s"' % (self.text, self.question.title))
-            elif self.question.type == 'multiple-choice' and not re.match(IDENTIFIER_REGEX, self.value):
+            elif self.question.type == 'multiple-choice' and not re.match(IDENTIFIER_OPTION_REGEX, self.value):
                 errors.append('Invalid value "%s" for option "%s" in question "%s"' % (self.value, self.text, self.question.title))
         return errors
 
