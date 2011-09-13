@@ -1,7 +1,8 @@
 .survey-error-message { border: 1px solid #C00; -webkit-border-radius: 5px; padding: 5px; background: #FBB; margin-bottom: 10px; }
 .question { border: 1px solid #CCC; -webkit-border-radius: 5px; padding: 5px; background: #fff; margin-bottom: 10px; }
-.question ul.choices, .question ul.derived-values { list-style: none; margin-bottom: 10px; }
+.question ul.choices, .question ul.derived-values { list-style: none; margin-bottom: 10px;}
 .question li { margin-left: 20px; }
+.question select.choices { margin-left: 20px; margin-bottom: 10px; max-width: 95%; }
 .question input[type=text] { margin: 0 0 10px 20px; }
 .question .choices input[type=text] { margin: 0 0 0 15px; }
 .question .title { font-weight: bold; margin-right: 5px; }
@@ -19,12 +20,104 @@
 .question.error { border-color: #C00; }
 .question.error .error-message { display: block; }
 
-#survey-list form { display: inline; }
-#survey-list button { margin: 0; border: none; background: none; padding: 0; cursor: pointer; }
-#survey-list a, #survey-list button { color: black; text-decoration: none; }
-#survey-list a:hover, #survey-list button:hover { text-decoration: underline; }
+#survey-list form { display: inline; text-transform: lowercase; }
+#survey-list form p { display: inline; margin: 0; }
+#survey-list .link { margin: 0; border: none; background: none; padding: 0; cursor: pointer; font-size: 12px; }
+#survey-list a, #survey-list .link { color: black; text-decoration: none; }
+#survey-list a:hover, #survey-list .link:hover { text-decoration: underline; }
 
 #survey-translation-list form { display: inline; }
-#survey-translation-list form ul { display: inline; margin: 0; }
-#survey-translation-list form li { display: inline; margin: 0; }
+#survey-translation-list form p { display: inline; margin: 0; }
 #survey-translation-list form .errorlist { display: none; }
+
+/* MESSAGES & ERRORS */
+/* Taken from /django/contrib/admin/media/css/base.css */
+
+ul.messagelist {
+    padding: 0 0 5px 0;
+    margin: 0;
+}
+
+ul.messagelist li {
+    font-size: 12px;
+    display: block;
+    padding: 4px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    border-bottom: 1px solid #ddd;
+    color: #666;
+    background: #ffc url(/admin/media/img/admin/icon_success.gif) 5px .3em no-repeat;
+}
+
+ul.messagelist li.warning{
+    background-image: url(/admin/media/img/admin/icon_alert.gif);
+}
+
+ul.messagelist li.error{
+    background-image: url(/admin/media/img/admin/icon_error.gif);
+}
+
+.errornote {
+    font-size: 12px !important;
+    display: block;
+    padding: 4px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    border: 1px solid red;
+    color: red;
+    background: #ffc url(/admin/media/img/admin/icon_error.gif) 5px .3em no-repeat;
+}
+
+ul.errorlist {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.errorlist li {
+    font-size: 12px !important;
+    display: block;
+    padding: 4px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    border: 1px solid red;
+    color: white;
+    background: red url(/admin/media/img/admin/icon_alert.gif) 5px .3em no-repeat;
+}
+
+.errorlist li a {
+    color: white;
+    text-decoration: underline;
+}
+
+td ul.errorlist {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+td ul.errorlist li {
+    margin: 0 !important;
+}
+
+.errors {
+    background: #ffc;
+}
+
+.errors input, .errors select, .errors textarea {
+    border: 1px solid red;
+}
+
+div.system-message {
+    background: #ffc;
+    margin: 10px;
+    padding: 6px 8px;
+    font-size: .8em;
+}
+
+div.system-message p.system-message-title {
+    padding: 4px 5px 4px 25px;
+    margin: 0;
+    color: red;
+    background: #ffc url(/admin/media/img/admin/icon_error.gif) 5px .3em no-repeat;
+}
+
+.description {
+    font-size: 12px;
+    padding: 5px 0 0 12px;
+}

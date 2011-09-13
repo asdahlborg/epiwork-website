@@ -15,6 +15,7 @@
     <script type="text/javascript" src="/media/pollster/jquery/js/jquery.tools.min.js"></script>
     <script type="text/javascript" src="/media/pollster/jquery/js/jquery.form.js"></script>
     <script type="text/javascript" src="/media/pollster/jquery/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/media/pollster/jquery/js/portamento-min.js"></script>
     <script type="text/javascript" src="/media/pollster/datejs/js/date-it-IT.js"></script>
 
     <script type="text/javascript" src="{{ CMS_MEDIA_URL }}js/csrf.js"></script>
@@ -34,6 +35,15 @@
         <div id="wok-header">
             <img class="influenzanet" src="/media/pollster/css/im/influenzanet.gif" alt="Influenzanet Logo"/>
             <img class="epiwork" src="/media/pollster/css/im/logo-epiwork.jpg" alt="Epiwork Logo"/>
+        </div>
+        <div id="wok-messages">
+        {% if messages %}
+        <ul class="messagelist">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
         </div>
         <div id="wok-navigation">
             <ul>

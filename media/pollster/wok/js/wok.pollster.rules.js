@@ -98,7 +98,7 @@
                     });
                 }
                 if ($t.length === 1 && $t.is(":visible") && !checked) {
-                    $t.slideUp().find(':input').attr('disabled', true);
+                    $t.slideUp();
                 }
             }
         });
@@ -124,7 +124,7 @@
             apply: function($survey, checked) {
                 var $t = $survey.find("#question-"+self.objectQuestion);
                 if ($t.length === 1 && $t.is(":visible") && checked) {
-                    $t.slideUp().find(':input').attr('disabled', true);
+                    $t.slideUp();
                 }
                 if ($t.length === 1 && $t.is(":hidden") && !checked) {
                     $t.slideDown(function() {
@@ -160,7 +160,7 @@
                     enable_options($t);
                 }
                 else {
-                    $t.slideUp().find(':input').attr('disabled', true);
+                    $t.slideUp();
                 }
             }
         });
@@ -187,10 +187,10 @@
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
                 if (checked) {
-                    $t.slideUp().find(':input').attr('disabled', true);
+                    $t.slideUp();
                 }
                 else {
-                    $t.slideDown().find(':input').attr('disabled', false);
+                    $t.slideDown();
                     enable_options($t);
                 }
             }
@@ -322,7 +322,7 @@
                     enable_options($t.show().find('.choices > li'));
                 }
                 else {
-                    $t.hide().find(':input').attr('disabled', true);
+                    $t.hide();
                 }
             },
 
@@ -348,7 +348,7 @@
             init: function($survey, last_participation_data) {
                 var $t = $survey.find("#question-"+self.objectQuestion);
                 if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_participation_data)) {
-                    $t.hide().find(':input').attr('disabled', true);
+                    $t.hide();
                 }
                 else {
                     enable_options($t.show().find('.choices > li'));
@@ -381,7 +381,7 @@
                     enable_options($t.show());
                 }
                 else {
-                    $t.hide().find(':input').attr('disabled', true);
+                    $t.hide();
                 }
             },
 
@@ -408,7 +408,7 @@
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o}).join(',');
                 var $t = $survey.find(selectors);
                 if (was_filled($survey, self.subjectQuestion, self.subjectOptions, last_participation_data)) {
-                    $t.hide().find(':input').attr('disabled', true);
+                    $t.hide();
                 }
                 else {
                     enable_options($t.show());

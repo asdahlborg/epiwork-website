@@ -21,6 +21,8 @@
             }
         });
     }
+    TextRangeType.isRange = true;
+    TextRangeType.isRegularExpression = false;
 
     function NumericRangeType(option, inf, sup, regex) {
         var self = this;
@@ -44,6 +46,8 @@
             }
         });
     }
+    NumericRangeType.isRange = true;
+    NumericRangeType.isRegularExpression = false;
 
     function DateRangeType(option, inf, sup, regex) {
         var self = this;
@@ -67,6 +71,8 @@
             }
         });
     }
+    DateRangeType.isRange = true;
+    DateRangeType.isRegularExpression = false;
 
     function DateYearsAgoType(option, inf, sup, regex) {
         var self = this;
@@ -90,8 +96,10 @@
             }
         });
     }
+    DateYearsAgoType.isRange = true;
+    DateYearsAgoType.isRegularExpression = false;
 
-    function MonthYearYearsAgoType(option, inf, sup, regex) {
+    function YearMonthYearsAgoType(option, inf, sup, regex) {
         var self = this;
 
         // Public methods.
@@ -102,17 +110,23 @@
                 val = Date.parse('1/'+val);
                 inf = parseInt(inf);
                 sup = parseInt(sup);
-                if (!inf && !sup)
-                    return false;
+                var ret;
+                if (!val)
+                    ret = false;
+                else if (!inf && !sup)
+                    ret = false;
                 else if (!inf)
-                    return val <= new Date().addYears(-sup);
+                    ret = val <= new Date().addYears(-sup);
                 else if (!sup)
-                    return new Date().addYears(-inf) <= val;
+                    ret = new Date().addYears(-inf) <= val;
                 else
-                    return new Date().addYears(-inf) <= val && val <= new Date().addYears(-sup);
+                    ret = new Date().addYears(-inf) <= val && val <= new Date().addYears(-sup);
+                return ret;
             }
         });
     }
+    YearMonthYearsAgoType.isRange = true;
+    YearMonthYearsAgoType.isRegularExpression = false;
 
     function TimestampWeeksAgoType(option, inf, sup, regex) {
         var self = this;
@@ -136,6 +150,8 @@
             }
         });
     }
+    TimestampWeeksAgoType.isRange = true;
+    TimestampWeeksAgoType.isRegularExpression = false;
 
     function RegularExpressionType(option, inf, sup, regex) {
         var self = this;
@@ -149,6 +165,8 @@
             }
         });
     }
+    RegularExpressionType.isRange = false;
+    RegularExpressionType.isRegularExpression = true;
 
     // MODULE INITIALIZATION
 
@@ -158,7 +176,7 @@
         "DateRange": DateRangeType,
         "RegularExpression": RegularExpressionType,
         "DateYearsAgo": DateYearsAgoType,
-        "MonthYearYearsAgo": MonthYearYearsAgoType,
+        "YearMonthYearsAgo": YearMonthYearsAgoType,
         "TimestampWeeksAgo": TimestampWeeksAgoType
     };
 

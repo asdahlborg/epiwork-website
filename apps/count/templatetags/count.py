@@ -4,22 +4,27 @@ import urllib
 
 from django.template import Library, Node
 from django.contrib.sites.models import Site
+from django.core.cache import cache 
 
 register = Library()
 
 FAKED = {
     'nl': '17952',
     'be': '4717',
+    'de': '0',
+    'at': '0',
+    'se': '0',
     'uk': '703',
 }
 
 SOURCES = {
     'nl': 'http://www.grotegriepmeting.nl/count/counter/',
+    'be': 'http://www.grotegriepmeting.be/count/counter/',
     'de': 'http://www.aktivgegengrippe.de/count/counter/',
     'at': 'http://www.aktivgegengrippe.at/count/counter/',
-    'se': 'http://www.aktivgegengrippe.at/count/counter/',
-    'uk': 'http://www.aktivgegengrippe.at/count/counter/',
-    'it': 'http://www.influweb.it/count/counter',
+    'se': 'http://www.influensakoll.se/count/counter/',
+    'uk': 'http://www.flusurvey.org.uk/count/counter/',
+    'it': 'http://www.influweb.it/count/counter/',
     'pt': 'http://www.gripenet.pt/cgear/pt.php',
 }
 
@@ -35,11 +40,33 @@ class MemberCountNode(Node):
     def __init__(self, country):
         self.country = country 
 
-    def render(self, context):
-        if self.country in FAKED:
-            return FAKED[self.country]
+    @classmethod
+    def get(cls, country):
+        key = "count-counter-%s" % country
+        if cache.get(key):
+            return cache.get(key)
 
-        return urllib.urlopen(SOURCES[self.country]).read()
+        if country in FAKED:
+            return FAKED[country]
+
+        try:
+            result = urllib.urlopen(SOURCES[country]).read()
+        except:
+            result = '0'
+        cache.set(key, result, timeout=60 * 30) # timeout 30 minutes
+
+        try:
+            int(result)
+        except ValueError:
+            return '0'
+
+        return result 
+
+    def render(self, context):
+        if self.country == 'total':
+            return "%s" % sum([int(self.get(country)) for country in SOURCES.keys()])
+
+        return self.get(self.country)
 
 register.tag('member_count', do_member_count)
 

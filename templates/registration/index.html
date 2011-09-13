@@ -1,0 +1,12 @@
+{% extends "registration/boxbase.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{{ user }}</h1>
+
+<ul>
+	<li><a href="{% url django.contrib.auth.views.password_change %}">{% trans "Change Password" %}</a></li>
+	<li><a href="{% url apps.survey.views.profile_index %}">{% trans "Update Profile" %}</a></li>
+</ul>
+
+{% endblock %}

@@ -5,6 +5,9 @@ Author: Antwan Wiersma (http://www.prime-creation.com/)
 Version: 1.0
 */
 
+@import url("../js/fancybox/jquery.fancybox-1.3.4.css");
+
+
 /* Main */
 
 html {
@@ -364,7 +367,7 @@ ul.map_buttons li {
 #header {
  float: left;
  width: 950px;
- padding: 18px 12px 12px 12px;
+ padding: 10px 12px 12px 12px;
  background: #ffffff;
 }
 
@@ -372,13 +375,14 @@ ul.map_buttons li {
 #headerlogo {
  float: left;
  width: 756px;
+ overflow: hidden;
  padding: 0;
- margin: 12px 0 12px 0;
+ margin: 0 0 12px 0;
 }
 
 #account {
  float: right;
- margin: 12px 0 12px 0;
+ margin: 0 0 10px 0;
  text-align: center;
  font-size: 0.75em;
 }
@@ -419,6 +423,12 @@ ul.map_buttons li {
  cursor: pointer;
 }
 
+.loggedinas {
+ width: 183px;
+ padding: 4px 0 0 0;
+ line-height: 1.3em;
+}
+
 #navigation {
  width: 950px;
  clear: both;
@@ -426,8 +436,9 @@ ul.map_buttons li {
 
 #menubar {
  float: left;
- max-width: 720px;
+ max-width: 754px;
  overflow: hidden;
+ margin: 0 0 4px 0;
 }
 
 #menubar li {
@@ -463,10 +474,43 @@ ul.map_buttons li {
 
 #menubar li.selected,
 #menubar li.ancestor {
- padding: 0 8px 0 8px; 
+ padding: 0 0px 0 0px; 
  background: #2e2e31;
  font-weight: bold;
  color: #ffffff;
+}
+
+#menubar li.error {
+ background: #bc0000;
+}
+
+#submenu {
+ float: left;
+ width: 736px;
+ overflow: hidden;
+ background: url("../img/main/submenu.jpg") no-repeat right top #e8e8e8;
+ color: #FFFFFF;
+ font-weight: bold;
+ font-size: 0.7em;
+ padding: 2px 4px 3px 0;
+ margin: 0 0 4px 0;
+}
+
+#submenu li,
+#submenu li a {
+ float: left;
+ margin: 0 0 0 6px;
+ color: #8e8e8e;
+ text-decoration: none;
+}
+
+#submenu li.selected a {
+ color: #2E2E31;
+ text-decoration: underline;
+}
+
+#submenu li:first-child {
+ margin: 0 0 0 3px;  
 }
 
 #searchbar {
@@ -514,7 +558,10 @@ ul.map_buttons li {
 
 /* Forms */
 
-form.contact_form label {
+form.contact_form label,
+input#id_name,
+input#id_email,
+textarea#id_body {
     float: left;
     clear: left;
 }
@@ -535,8 +582,6 @@ textarea#id_body {
  line-height: 2em;
  background-color: #ffffff;
  border: 1px solid #cccccc;
- clear: left;
- float: left;
 }
 
 textarea#id_body {
@@ -556,13 +601,14 @@ textarea#id_message:focus {
 
 input#commentsubmit {
  height: 2.2em;
- width: 54px;
+ width: auto;
  margin: 0;
- padding: 0;
+ padding: 0 6px 2px 6px;
  font-size: 0.7em;
  line-height: 2.2em;
  border: 0;
  color: #f8f8f8;
+ font-weight: bold;
  text-align: center;
  cursor: pointer;
  float: left;
@@ -571,6 +617,104 @@ input#commentsubmit {
 
 input#commentsubmit:hover {
  cursor: pointer;
+}
+
+
+/* Modal box */
+
+#boxwrapper {
+ position: absolute;
+ height: 50%;
+ width: 50%;
+ left: 25%;
+ top: 10%;
+}
+
+#box {
+ position: absolute;
+ left: 50%;
+ width: 240px;
+ margin: 0 0 0 -150px;
+ padding: 30px 30px 40px 30px;
+ font-size: 0.8em;
+ background: #ffffff;
+}
+
+#box img {
+ margin: 30px 0 -24px -9px;	
+}
+
+#box h1 {
+ margin: 6px 0 16px 0;
+ padding: 0;
+ color: #595959;
+ font-size: 1.6em;
+ line-height: 1.1em;
+}
+
+#box a {
+ color: #000000;
+ text-decoration: none;
+ font-weight: bold;
+}
+
+#box a:hover {
+ text-decoration: underline;
+}
+
+#box form {
+ margin: 10px 0 10px 0;
+}
+
+#box input {
+ height: 2em;
+ width: 180px;
+ padding: 0 4px 0 4px;
+ margin: 0;
+ font-size: 1em;
+ line-height: 1em;
+ background: #ffffff;
+ border: 1px solid #cccccc;
+}
+
+#box input:focus {
+ background-color: #f0f0f0;
+ border: 1px solid #000000;
+}
+
+#box label {
+ display: inline-block;
+ width: 180px;
+ margin: 10px 30px 2px 0;
+ color: #aaaaaa;
+}
+
+#box input#boxsubmit {
+ height: 2.2em;
+ width: auto;
+ margin: 16px 0 0 0;
+ padding: 0 10px 3px 10px;
+ font-size: 1em;
+ line-height: 2.2em;
+ border: 0;
+ color: #f8f8f8;
+ text-align: center;
+ cursor: pointer;
+}
+
+#box input#boxsubmit:hover,
+#box input#boxsubmit:focus {
+}
+
+#box ul.errorlist li {
+ display: block;
+ clear: both;
+ margin: 14px 0 -5px 0;
+ padding: 0;
+ font-size: 0.8em;
+ line-height: 1.4em;
+ color: red;
+ font-weight: bold;
 }
 
 
@@ -669,14 +813,24 @@ input#commentsubmit:hover {
  background: #ffffff;
 }
 
-#footercontent {
- width: 946px;
- overflow: auto;
- padding: 20px 14px 18px 14px;
- background: #575757 url(../img/main/footerbar.gif) bottom center repeat-x;
+#footercontent-main {
+ background: url("../img/main/footerbar-main.gif") repeat-x scroll center bottom #575757;
  border-top: 2px solid #909090;
- color: #f8f8f8;
+ color: #F8F8F8;
  font-size: 0.75em;
+ overflow: auto;
+ padding: 20px 14px 18px;
+ width: 946px;
+}
+
+
+#footercontent-client {
+ background: url("../img/main/footerbar-client.gif") repeat-x scroll center bottom #727272;
+ border-top: 2px solid #909090;
+ color: #F8F8F8;
+ font-size: 0.75em;
+ padding: 14px 14px 18px;
+ width: 946px;
 }
 
 #footercol1, #footercol2, #footercol3 {
@@ -864,6 +1018,35 @@ ul.bullets li {
 
 .facebook {
  margin: 8px 0 0 -6px;
+}
+
+
+/* Survey styles*/
+
+table.imagetable {
+ font-family: verdana,arial,sans-serif;
+ font-size: 11px;
+ color: #333333;
+ border-width: 1px;
+ border-color: #999999;
+ border-collapse: collapse;
+}
+
+table.imagetable th {
+ background: #A22C22;
+ color: #FFFFFF;
+ border-width: 1px;
+ padding: 8px;
+ border-style: solid;
+ border-color: #999999;
+}
+
+table.imagetable td {
+ background: #dcddc0;
+ border-width: 1px;
+ padding: 8px;
+ border-style: solid;
+ border-color: #999999;
 }
 
 

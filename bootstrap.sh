@@ -82,6 +82,7 @@ fi
 virtualenv --no-site-packages .
 source ./bin/activate
 pip install -r requirements.txt
+pip install MySQL-python
 
 echo ""
 while [ -z "$LANGUAGE" ] ; do
@@ -240,15 +241,22 @@ python manage.py rule_type_register --title 'Fill' --jsclass 'wok.pollster.rules
 python manage.py question_data_type_register --title 'Text' --dbtype 'django.db.models.TextField(null=True, blank=True)' --cssclass 'text-type' --jsclass 'wok.pollster.datatypes.Text'
 python manage.py question_data_type_register --title 'Numeric' --dbtype 'django.db.models.PositiveIntegerField(null=True, blank=True)' --cssclass 'numeric-type' --jsclass 'wok.pollster.datatypes.Numeric'
 python manage.py question_data_type_register --title 'Date' --dbtype 'django.db.models.DateField(null=True, blank=True)' --cssclass 'date-type' --jsclass 'wok.pollster.datatypes.Date'
-python manage.py question_data_type_register --title 'MonthYear' --dbtype 'django.db.models.CharField(max_length=255, null=True, blank=True)' --cssclass 'monthyear-type' --jsclass 'wok.pollster.datatypes.MonthYear'
+python manage.py question_data_type_register --title 'YearMonth' --dbtype 'db.models.YearMonthField(null=True, blank=True)' --cssclass 'monthyear-type' --jsclass 'wok.pollster.datatypes.YearMonth'
 python manage.py question_data_type_register --title 'Timestamp' --dbtype 'django.db.models.DateTimeField(null=True, blank=True)' --cssclass 'timestamp-type' --jsclass 'wok.pollster.datatypes.Timestamp'
+python manage.py question_data_type_register --title 'PostalCode' --dbtype 'django.db.models.PostalCodeField(null=True, blank=True)' --cssclass 'postalcode-type' --jsclass 'wok.pollster.datatypes.PostalCode'
 python manage.py virtual_option_type_register --title 'Range' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.TextRange'
 python manage.py virtual_option_type_register --title 'Range' --question-data-type-title 'Numeric' --jsclass 'wok.pollster.virtualoptions.NumericRange'
 python manage.py virtual_option_type_register --title 'Range' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateRange'
 python manage.py virtual_option_type_register --title 'Years ago' --question-data-type-title 'Date' --jsclass 'wok.pollster.virtualoptions.DateYearsAgo'
-python manage.py virtual_option_type_register --title 'Years ago' --question-data-type-title 'MonthYear' --jsclass 'wok.pollster.virtualoptions.MonthYearYearsAgo'
+python manage.py virtual_option_type_register --title 'Years ago' --question-data-type-title 'YearMonth' --jsclass 'wok.pollster.virtualoptions.YearMonthYearsAgo'
 python manage.py virtual_option_type_register --title 'Weeks ago' --question-data-type-title 'Timestamp' --jsclass 'wok.pollster.virtualoptions.TimestampWeeksAgo'
 python manage.py virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
+
+python manage.py createcachetable django_cache 2>/dev/null || echo 'Cache table errors ignored'
+
+#if [ "$DB_ENGINE" = "sqlite3" ] ; then
+#    echo ".read data/extra-survey.sqlite3.sql" | sqlite3 ggm.db
+#fi
 
 echo ""
 echo "** All done. You can start the system by issuing: 'source ./bin/activate && python manage.py runserver'"

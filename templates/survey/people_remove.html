@@ -1,19 +1,26 @@
 {% extends "survey/base.html" %}
+{% load i18n %}
 
-{% block content %}
-<h1>Conferma rimozione</h1>
+{% block col1 %}
+<h1>{% trans "Confirm removal" %}</h1>
 
-<p>Conferma la rimozione della persona:</p>
+<p>
+  {% trans "Confirm the removal of the person:" %}
+  <ul>
+    <li>{{ person.name }}</li>
+  </ul>
+</p>
 
-<p>&gt; {{ person.name }} </p>
-
-<form method="post">
-<p><input type="submit" value="Rimuovi !"/></p>
-<input type="hidden" id="id_confirmed" name="confirmed" value="T"/>
+<form method="post" style="display: inline;">
+{% csrf_token %}
+  <input type="submit" value="{% trans "Yes" %}" />
+  <input type="hidden" name="confirmed" value="Y"/>
 </form>
 
-<p>Oppure seleziona il link a destra per tornare all'elenco delle persone.</p>
+<form method="post" style="display: inline;">
+{% csrf_token %}
+  <input type="submit" value="{% trans "No" %}" />
+  <input type="hidden" name="confirmed" value="N"/>
+</form>
 
 {% endblock %}
-
-

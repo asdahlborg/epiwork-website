@@ -1,7 +1,8 @@
 {% extends "survey/base.html" %}
+{% load i18n %}
 
 {% block col1 %}
-<h1>Select User</h1>
+<h1>{% trans "Select User" %}</h1>
 
 <ul>
 {% for user in users %}

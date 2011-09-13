@@ -26,6 +26,8 @@ QUESTION_TYPE_CHOICES = (
     ('matrix-entry', 'Matrix Entry'),
 )
 
+IDENTIFIER_REGEX = r'^[a-zA-Z][a-zA-Z0-9_]*$'
+
 def _get_or_default(queryset, default=None):
     r = queryset[0:1]
     if r:
@@ -143,9 +145,22 @@ class Survey(models.Model):
     def set_translation_survey(self, translation_survey):
         self.translation_survey = translation_survey
 
+    def check(self):
+        errors = []
+        if not self.shortname:
+            errors.append('Missing survey shortname')
+        elif not re.match(IDENTIFIER_REGEX, self.shortname):
+            errors.append('Invalid survey shortname "%s"' % (self.shortname,))
+        for question in self.questions:
+            errors.extend(question.check())
+        return errors
+
     def publish(self):
         if self.is_published:
-            return
+            return None
+        errors = self.check()
+        if errors:
+            return errors
         self.status = 'PUBLISHED'
         model = self.as_model()
         table = model._meta.db_table
@@ -155,6 +170,7 @@ class Survey(models.Model):
             connection.cursor().execute('ALTER TABLE '+table+' RENAME TO '+backup)
         dynamicmodels.install(model)
         self.save()
+        return None
 
     def unpublish(self):
         if not self.is_published:
@@ -164,22 +180,23 @@ class Survey(models.Model):
 
 class RuleType(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
-    js_class = models.CharField(max_length=255)
+    js_class = models.CharField(max_length=255, unique=True)
 
     def __unicode__(self):
-        return self.title
+        return "RuleType #%d %s" % (self.id, self.title)
 
 class QuestionDataType(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
     db_type = models.CharField(max_length=255)
     css_class = models.CharField(max_length=255)
-    js_class = models.CharField(max_length=255)
+    js_class = models.CharField(max_length=255, unique=True)
 
     def __unicode__(self):
-        return self.title
+        return "QuestionDataType #%d %s" % (self.id, self.title)
 
     def as_field_type(self, verbose_name=None, regex=None):
         import django.db.models
+        import db.models
         field = eval(self.db_type)
         field.verbose_name = verbose_name
         if regex:
@@ -197,10 +214,10 @@ class QuestionDataType(models.Model):
 class VirtualOptionType(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
     question_data_type = models.ForeignKey(QuestionDataType)
-    js_class = models.CharField(max_length=255)
+    js_class = models.CharField(max_length=255, unique=True)
 
     def __unicode__(self):
-        return self.title
+        return "VirtualOptionType #%d %s for %s" % (self.id, self.title, self.question_data_type.title)
 
 class Question(models.Model):
     survey = models.ForeignKey(Survey, db_index=True)
@@ -328,8 +345,12 @@ class Question(models.Model):
     def is_matrix_entry(self):
         return self.type == 'matrix-entry'
 
+    @property
+    def is_visual_dropdown(self):
+        return self.visual == 'dropdown'
+
     def __unicode__(self):
-        return self.title
+        return "Question #%d %s" % (self.id, self.title)
 
     class Meta:
         ordering = ['survey', 'ordinal']
@@ -351,7 +372,7 @@ class Question(models.Model):
         elif self.type == 'multiple-choice':
             fields = []
             for option in self.option_set.all():
-                title = ": ".join((self.title, option.name))
+                title = ": ".join((self.title, option.data_name))
                 fields.append( (option.data_name, models.BooleanField(verbose_name=title)) )
                 if option.is_open:
                     fields.append( (option.open_option_data_name, option.open_option_data_type.as_field_type()) )
@@ -374,6 +395,23 @@ class Question(models.Model):
             default = TranslationQuestion(translation = translation_survey, question=self)
             self.translation_question = _get_or_default(r, default)
 
+    def check(self):
+        errors = []
+        if not self.data_name:
+            errors.append('Missing data name for question "%s"' % (self.title, ))
+        elif not re.match(IDENTIFIER_REGEX, self.data_name):
+            errors.append('Invalid data name "%s" for question "%s"' % (self.data_name, self.title))
+        values = {}
+        for option in self.options:
+            errors.extend(option.check())
+            values[option.value] = values.get(option.value, 0) + 1
+        if self.type == 'multiple-choice':
+            dups = [val for val, count in values.items() if count > 1]
+            for dup in dups:
+                errors.append('Duplicated value %s in question %s' % (dup, self.title))
+        return errors
+
+
 class QuestionRow(models.Model):
     question = models.ForeignKey(Question, related_name="row_set", db_index=True)
     ordinal = models.IntegerField()
@@ -384,6 +422,9 @@ class QuestionRow(models.Model):
 
     class Meta:
         ordering = ['question', 'ordinal']
+
+    def __unicode__(self):
+        return "QuestionRow #%d %s" % (self.id, self.title)
 
     @property
     def translated_title(self):
@@ -413,6 +454,9 @@ class QuestionColumn(models.Model):
 
     class Meta:
         ordering = ['question', 'ordinal']
+
+    def __unicode__(self):
+        return "QuestionColumn #%d %s" % (self.id, self.title)
 
     @property
     def translated_title(self):
@@ -459,7 +503,6 @@ class Option(models.Model):
     is_open = models.BooleanField(default=False)
     starts_hidden = models.BooleanField(default=False)
     ordinal = models.IntegerField()
-    name = models.CharField(max_length=255, default='')
     text = models.CharField(max_length=4095, blank=True, default='')
     group = models.CharField(max_length=255, blank=True, default='')
     value = models.CharField(max_length=255, default='')
@@ -506,7 +549,7 @@ class Option(models.Model):
         return self.question.open_option_data_type or self.question.data_type
 
     def __unicode__(self):
-        return self.name
+        return 'Option #%d %s' % (self.id, self.value)
 
     class Meta:
         ordering = ['question', 'ordinal']
@@ -547,6 +590,20 @@ class Option(models.Model):
     def set_row_column(self, row, column):
         self.current_row_column = (row, column)
 
+    def check(self):
+        errors = []
+        if self.is_virtual:
+            if not self.virtual_inf and not self.virtual_sup and not self.virtual_regex:
+                errors.append('Missing parameters for derived value in question "%s"' % (self.question.title, ))
+        else:
+            if not self.text:
+                errors.append('Empty text for option in question "%s"' % (self.question.title, ))
+            if not self.value:
+                errors.append('Missing value for option "%s" in question "%s"' % (self.text, self.question.title))
+            elif self.question.type == 'multiple-choice' and not re.match(IDENTIFIER_REGEX, self.value):
+                errors.append('Invalid value "%s" for option "%s" in question "%s"' % (self.value, self.text, self.question.title))
+        return errors
+
 class Rule(models.Model):
     rule_type = models.ForeignKey(RuleType)
     subject_question = models.ForeignKey(Question, related_name='subject_of_rules', db_index=True)
@@ -558,7 +615,7 @@ class Rule(models.Model):
         return self.rule_type.js_class
 
     def __unicode__(self):
-        return '%s on question %s' % (self.rule_type, self.subject_question.id)
+        return 'Rule #%d' % (self.id)
 
 # I18n models
 
@@ -577,7 +634,7 @@ class TranslationSurvey(models.Model):
         return ('pollster_survey_translation_edit', [str(self.survey.id), self.language])
 
     def __unicode__(self):
-        return "Translation(%s) for %s" % (self.language, self.survey)
+        return "TranslationSurvey(%s) for %s" % (self.language, self.survey)
 
     def as_form(self, data=None):
         class TranslationSurveyForm(ModelForm):
@@ -613,6 +670,9 @@ class TranslationQuestionRow(models.Model):
         ordering = ['translation', 'row']
         unique_together = ('translation', 'row')
 
+    def __unicode__(self):
+        return "TranslationQuestionRow(%s) for %s" % (self.language, self.row)
+
     def as_form(self, data=None):
         class TranslationRowForm(ModelForm):
             class Meta:
@@ -629,6 +689,9 @@ class TranslationQuestionColumn(models.Model):
         ordering = ['translation', 'column']
         unique_together = ('translation', 'column')
 
+    def __unicode__(self):
+        return "TranslationQuestionColumn(%s) for %s" % (self.language, self.column)
+
     def as_form(self, data=None):
         class TranslationColumnForm(ModelForm):
             class Meta:
@@ -644,6 +707,9 @@ class TranslationOption(models.Model):
     class Meta:
         ordering = ['translation', 'option']
         unique_together = ('translation', 'option')
+
+    def __unicode__(self):
+        return "TranslationOption(%s) for %s" % (self.language, self.option)
 
     def as_form(self, data=None):
         class TranslationOptionForm(ModelForm):

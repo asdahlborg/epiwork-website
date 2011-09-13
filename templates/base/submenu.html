@@ -1,0 +1,11 @@
+{% if child.children %}
+<div id="submenu">
+<ul id="submenubar">
+    {% for subchild in child.children %}
+        <li class="{% if subchild.selected %}selected{% endif %}{% if subchild.ancestor %}ancestor{% endif %}{% if subchild.sibling %}sibling{% endif %}{% if subchild.descendant %}descendant{% endif %}">
+            <a href="{{ subchild.attr.redirect_url|default:subchild.get_absolute_url }}">{{ subchild.get_menu_title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}

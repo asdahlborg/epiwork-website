@@ -18,6 +18,7 @@ class SurveyUser(models.Model):
     last_participation_date = models.DateTimeField(null=True)
 
     name = models.CharField(max_length=100)
+    deleted = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = 'User'
@@ -36,6 +37,10 @@ class SurveyUser(models.Model):
     def get_survey_url(self):
         from . import views
         return '%s?gid=%s' % (reverse(views.index), self.global_id)
+
+    def get_remove_url(self):
+        from . import views
+        return '%s?gid=%s' % (reverse(views.people_remove), self.global_id)
 
 class Survey(models.Model):
     survey_id = models.CharField(max_length=50, unique=True)

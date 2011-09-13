@@ -369,15 +369,6 @@
         }
     },
     {
-        "pk": 42,
-        "model": "south.migrationhistory",
-        "fields": {
-            "applied": "2011-06-27 07:55:24",
-            "app_name": "journal",
-            "migration": "0001_initial"
-        }
-    },
-    {
         "pk": 43,
         "model": "south.migrationhistory",
         "fields": {
@@ -630,6 +621,141 @@
         }
     },
     {
+        "pk": 71,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "partnersites",
+            "migration": "0003_auto__add_field_sitesettings_footer"
+        }
+    },
+    {
+        "pk": 72,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "text",
+            "migration": "0006_2_1_4_upgrade"
+        }
+    },
+    {
+        "pk": 73,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "pollster",
+            "migration": "0002_del_field_option_name"
+        }
+    },
+    {
+        "pk": 74,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "pollster",
+            "migration": "0003_add_unique_js_class"
+        }
+    },
+    {
+        "pk": 75,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:18:52",
+            "app_name": "pollster",
+            "migration": "0004_yearmonthfield"
+        }
+    },
+    {
+        "pk": 76,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 09:24:54",
+            "app_name": "survey",
+            "migration": "0002_auto__add_localprofile__add_localflusurvey"
+        }
+    },
+    {
+        "pk": 77,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 10:05:22",
+            "app_name": "journal",
+            "migration": "0001_initial"
+        }
+    },
+    {
+        "pk": 78,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-27 11:53:46",
+            "app_name": "journal",
+            "migration": "0002_auto__del_field_latestentryplugin_base_path__del_field_latestentryplug"
+        }
+    },
+    {
+        "pk": 79,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:31",
+            "app_name": "reminder",
+            "migration": "0001_initial"
+        }
+    },
+    {
+        "pk": 80,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0002_auto__add_remindersettings"
+        }
+    },
+    {
+        "pk": 81,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0003_auto__add_newslettertemplate__add_newslettertranslation__add_unique_ne"
+        }
+    },
+    {
+        "pk": 82,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0004_auto__del_field_reminder_next_reminder__del_field_reminder_wday__chg_f"
+        }
+    },
+    {
+        "pk": 83,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0005_auto__del_reminder__add_userreminderinfo"
+        }
+    },
+    {
+        "pk": 84,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:35",
+            "app_name": "reminder",
+            "migration": "0006_auto__add_field_userreminderinfo_language"
+        }
+    },
+    {
+        "pk": 85,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-08-31 09:05:37",
+            "app_name": "journal",
+            "migration": "0003_auto__add_field_entry_image__add_field_entry_alignment"
+        }
+    },
+    {
         "pk": 28,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -873,6 +999,24 @@
         }
     },
     {
+        "pk": 66,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "localflusurvey",
+            "name": "local flu survey",
+            "app_label": "survey"
+        }
+    },
+    {
+        "pk": 65,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "localprofile",
+            "name": "local profile",
+            "app_label": "survey"
+        }
+    },
+    {
         "pk": 42,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -906,6 +1050,42 @@
             "model": "migrationhistory",
             "name": "migration history",
             "app_label": "south"
+        }
+    },
+    {
+        "pk": 72,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "newsletter",
+            "name": "news letter",
+            "app_label": "reminder"
+        }
+    },
+    {
+        "pk": 70,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "newslettertemplate",
+            "name": "news letter template",
+            "app_label": "reminder"
+        }
+    },
+    {
+        "pk": 69,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "newslettertemplatetranslation",
+            "name": "news letter template translation",
+            "app_label": "reminder"
+        }
+    },
+    {
+        "pk": 71,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "newslettertranslation",
+            "name": "news letter translation",
+            "app_label": "reminder"
         }
     },
     {
@@ -1026,11 +1206,11 @@
         }
     },
     {
-        "pk": 17,
+        "pk": 68,
         "model": "contenttypes.contenttype",
         "fields": {
-            "model": "reminder",
-            "name": "reminder",
+            "model": "remindersettings",
+            "name": "reminder settings",
             "app_label": "reminder"
         }
     },
@@ -1176,6 +1356,15 @@
             "model": "user",
             "name": "user",
             "app_label": "auth"
+        }
+    },
+    {
+        "pk": 67,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "userreminderinfo",
+            "name": "user reminder info",
+            "app_label": "reminder"
         }
     },
     {
@@ -1476,11 +1665,110 @@
         }
     },
     {
+        "pk": "b240d0902c9b270e874778f1acce41e1",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2011-09-10 14:06:59",
+            "session_data": "YzUxYjQzNzliYTg4OWE4Yjg5MTMzODI5MTJkN2QyMDViZjE3NzVmYzqAAn1xAShVDmNtc19hZG1p\nbl9zaXRlcQJLAVUNX2F1dGhfdXNlcl9pZHEDSwFVCGNtc19lZGl0cQSJVRJfYXV0aF91c2VyX2Jh\nY2tlbmRxBVUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBlUPZGph\nbmdvX2xhbmd1YWdlcQdYAgAAAGVucQh1Lg==\n"
+        }
+    },
+    {
         "pk": 1,
         "model": "sites.site",
         "fields": {
             "domain": "influenzanet.eu",
             "name": "Influenzanet"
+        }
+    },
+    {
+        "pk": 365,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-27 14:06:56",
+            "object_repr": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
+            "object_id": "1",
+            "change_message": "Changed content.",
+            "user": 1,
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 364,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 3,
+            "action_time": "2011-08-27 14:01:03",
+            "object_repr": "News snippet (Left bar)",
+            "object_id": "10",
+            "change_message": "",
+            "user": 1,
+            "content_type": 25
+        }
+    },
+    {
+        "pk": 363,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-27 13:21:09",
+            "object_repr": "News",
+            "object_id": "15",
+            "change_message": "Changed published, application_urls and moderator_state.",
+            "user": 1,
+            "content_type": 31
+        }
+    },
+    {
+        "pk": 362,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2011-08-27 13:20:52",
+            "object_repr": "News",
+            "object_id": "15",
+            "change_message": "",
+            "user": 1,
+            "content_type": 31
+        }
+    },
+    {
+        "pk": 361,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-08-27 13:18:52",
+            "object_repr": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
+            "object_id": "1",
+            "change_message": "Changed title, slug, excerpt and content.",
+            "user": 1,
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 360,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2011-08-27 12:07:39",
+            "object_repr": "My first entry",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 359,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2011-08-27 12:06:54",
+            "object_repr": "Influenza",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 28
         }
     },
     {
@@ -4721,19 +5009,6 @@
         }
     },
     {
-        "pk": 109,
-        "model": "admin.logentry",
-        "fields": {
-            "action_flag": 2,
-            "action_time": "2010-08-17 04:56:24",
-            "object_repr": "admin",
-            "object_id": "1",
-            "change_message": "No fields changed.",
-            "user": 1,
-            "content_type": 17
-        }
-    },
-    {
         "pk": 108,
         "model": "admin.logentry",
         "fields": {
@@ -4744,19 +5019,6 @@
             "change_message": "Changed email.",
             "user": 1,
             "content_type": 3
-        }
-    },
-    {
-        "pk": 107,
-        "model": "admin.logentry",
-        "fields": {
-            "action_flag": 2,
-            "action_time": "2010-08-17 04:54:54",
-            "object_repr": "admin",
-            "object_id": "1",
-            "change_message": "Changed next_reminder.",
-            "user": 1,
-            "content_type": 17
         }
     },
     {
@@ -6546,6 +6808,50 @@
     },
     {
         "pk": 1,
+        "model": "reminder.userreminderinfo",
+        "fields": {
+            "last_reminder": "2010-03-15 15:45:01",
+            "active": true,
+            "user": 1,
+            "language": null
+        }
+    },
+    {
+        "pk": 1,
+        "model": "journal.category",
+        "fields": {
+            "slug": "influenza",
+            "title": "Influenza"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "journal.entry",
+        "fields": {
+            "category": 1,
+            "updated": "2011-08-27 14:06:56",
+            "title": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
+            "image": "",
+            "created": "2011-08-27 12:07:39",
+            "excerpt": "The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "content": "<h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "pub_date": "2011-08-27 11:59:10",
+            "slug": "recruitment-of-animator",
+            "alignment": null,
+            "is_published": true
+        }
+    },
+    {
+        "pk": 156,
+        "model": "journal.latestentryplugin",
+        "fields": {
+            "category": [],
+            "limit": 3,
+            "title": "Latest News"
+        }
+    },
+    {
+        "pk": 1,
         "model": "contact_form.feedback",
         "fields": {
             "body": "cf",
@@ -6692,6 +6998,7 @@
         "model": "partnersites.sitesettings",
         "fields": {
             "logo": "",
+            "footer": null,
             "site": 1,
             "light_color": "ce2626"
         }
@@ -7617,6 +7924,30 @@
         }
     },
     {
+        "pk": 144,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Left bar",
+            "default_width": null
+        }
+    },
+    {
+        "pk": 145,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Right bar",
+            "default_width": null
+        }
+    },
+    {
+        "pk": 146,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Main content",
+            "default_width": null
+        }
+    },
+    {
         "pk": 2,
         "model": "cms.cmsplugin",
         "fields": {
@@ -7697,38 +8028,6 @@
         }
     },
     {
-        "pk": 117,
-        "model": "cms.cmsplugin",
-        "fields": {
-            "rght": 2,
-            "parent": null,
-            "language": "en",
-            "level": 0,
-            "creation_date": "2011-07-11 15:23:58",
-            "lft": 1,
-            "tree_id": 108,
-            "position": 0,
-            "placeholder": 113,
-            "plugin_type": "SnippetPlugin"
-        }
-    },
-    {
-        "pk": 118,
-        "model": "cms.cmsplugin",
-        "fields": {
-            "rght": 2,
-            "parent": null,
-            "language": "en",
-            "level": 0,
-            "creation_date": "2011-07-11 15:32:51",
-            "lft": 1,
-            "tree_id": 109,
-            "position": 0,
-            "placeholder": 131,
-            "plugin_type": "SnippetPlugin"
-        }
-    },
-    {
         "pk": 119,
         "model": "cms.cmsplugin",
         "fields": {
@@ -7757,22 +8056,6 @@
             "tree_id": 111,
             "position": 1,
             "placeholder": 132,
-            "plugin_type": "SnippetPlugin"
-        }
-    },
-    {
-        "pk": 121,
-        "model": "cms.cmsplugin",
-        "fields": {
-            "rght": 2,
-            "parent": null,
-            "language": "en",
-            "level": 0,
-            "creation_date": "2011-07-11 15:34:12",
-            "lft": 1,
-            "tree_id": 112,
-            "position": 0,
-            "placeholder": 134,
             "plugin_type": "SnippetPlugin"
         }
     },
@@ -8289,6 +8572,22 @@
         }
     },
     {
+        "pk": 156,
+        "model": "cms.cmsplugin",
+        "fields": {
+            "rght": 2,
+            "parent": null,
+            "language": "en",
+            "level": 0,
+            "creation_date": "2011-08-27 12:06:22",
+            "lft": 1,
+            "tree_id": 144,
+            "position": 1,
+            "placeholder": 113,
+            "plugin_type": "CMSLatestEntryPlugin"
+        }
+    },
+    {
         "pk": 1,
         "model": "cms.page",
         "fields": {
@@ -8646,6 +8945,40 @@
         }
     },
     {
+        "pk": 15,
+        "model": "cms.page",
+        "fields": {
+            "rght": 2,
+            "navigation_extenders": "",
+            "site": 1,
+            "creation_date": "2011-08-27 13:20:52",
+            "lft": 1,
+            "in_navigation": false,
+            "reverse_id": null,
+            "login_required": false,
+            "created_by": "admin",
+            "publication_end_date": null,
+            "moderator_state": 0,
+            "template": "base/threecol.html",
+            "tree_id": 14,
+            "placeholders": [
+                144,
+                145,
+                146
+            ],
+            "limit_visibility_in_menu": null,
+            "parent": null,
+            "publisher_state": 1,
+            "soft_root": false,
+            "publication_date": "2011-08-27 13:21:09",
+            "publisher_public": null,
+            "level": 0,
+            "changed_by": "admin",
+            "publisher_is_draft": true,
+            "published": true
+        }
+    },
+    {
         "pk": 1,
         "model": "cms.title",
         "fields": {
@@ -8912,6 +9245,25 @@
         }
     },
     {
+        "pk": 70,
+        "model": "cms.title",
+        "fields": {
+            "menu_title": "",
+            "redirect": "",
+            "meta_keywords": "",
+            "page_title": "",
+            "language": "en",
+            "title": "News",
+            "has_url_overwrite": false,
+            "application_urls": "JournalApphook",
+            "creation_date": "2011-08-27 13:20:52",
+            "page": 15,
+            "path": "news",
+            "meta_description": "",
+            "slug": "news"
+        }
+    },
+    {
         "pk": 2,
         "model": "text.text",
         "fields": {
@@ -9081,15 +9433,6 @@
         }
     },
     {
-        "pk": 10,
-        "model": "snippet.snippet",
-        "fields": {
-            "html": "<p class=\"title\">Latest news</p>\r\n<h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" rel=\"external\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" rel=\"external\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"{{ MEDIA_URL }}docs/recruitment/job_adv_epipop.pdf\" rel=\"external\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>\r\n<h2>Influenza emergence in the face of evolutionary constraints</h2>\r\n<img src=\"{{ MEDIA_URL }}base/img/temp/left-virus.jpg\" alt=\"Influenza close up\" class=\"imgleft\" height=\"60\" /><p><strong>Different influenza subtypes can evolve at very different rates, but the causes are not well understood.</strong></p><p>In this paper, we explore whether differences in transmissibility between subtypes can play a role if there are fitness constraints on antigenic evolution. We investigate the problem using a mathematical model that separates the interaction of strains through cross-immunity from the process of emergence for new antigenic variants. <a href=\"http://rspb.royalsocietypublishing.org/content/early/2011/07/14/rspb.2011.1168.full\" rel=\"external\" title=\"Continue reading\">CONTINUE READING</a></p>",
-            "name": "News snippet (Left bar)",
-            "template": ""
-        }
-    },
-    {
         "pk": 12,
         "model": "snippet.snippet",
         "fields": {
@@ -9106,31 +9449,10 @@
         }
     },
     {
-        "pk": 117,
-        "model": "snippet.snippetptr",
-        "fields": {
-            "snippet": 10
-        }
-    },
-    {
-        "pk": 118,
-        "model": "snippet.snippetptr",
-        "fields": {
-            "snippet": 10
-        }
-    },
-    {
         "pk": 120,
         "model": "snippet.snippetptr",
         "fields": {
             "snippet": 9
-        }
-    },
-    {
-        "pk": 121,
-        "model": "snippet.snippetptr",
-        "fields": {
-            "snippet": 10
         }
     },
     {
@@ -9231,98 +9553,6 @@
             "key": "cms-menu_nodes_en_1",
             "site": 1,
             "language": "en"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "menus.cachekey",
-        "fields": {
-            "key": "cms-menu_nodes_en_1",
-            "site": 1,
-            "language": "en"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "journal.category",
-        "fields": {
-            "slug": "latest-news",
-            "title": "Latest news"
-        }
-    },
-    {
-        "pk": 3,
-        "model": "journal.entry",
-        "fields": {
-            "category": 1,
-            "updated": "2010-03-15 17:13:58",
-            "title": "Periode van droogte gaat vaak vooraf aan griepuitbraak",
-            "created": "2010-03-15 17:13:58",
-            "excerpt": "5 maart - De jaarlijkse seizoensgriep breekt vaak uit na een periode waarin de luchtvochtigheid lager is dan normaal. Dat hebben Amerikaanse onderzoekers ontdekt aan de hand van een wiskundig model van griep en luchtvochtigheid.",
-            "content": "<p>De link tussen griepuitbraken en luchtvochtigheid is al vaak gelegd. Uit laboratoriumonderzoek bleek dat het griepvirus zich in droge lucht beter kan verspreiden dan in vochtige lucht. Of die snellere verspreiding in droge lucht ook terug te zien is in de menselijke situatie, was nog niet duidelijk. Daarom hebben Amerikaanse onderzoekers een model gemaakt dat luchtvochtigheid koppelt aan de uitbraak van seizoensgriep. De resultaten waren eind februari te lezen in vakblad PLoS Biology.&#160;</p><p>De Amerikanen gebruikten 31 jaar aan data over luchtvochtigheid in New York, Washington, Illinois, Arizona en Florida. Hun model voorspelde nauwkeurig in welke perioden griepvirussen het meeste kans hadden om toe te slaan. De berekeningen kwamen goed overeen met de werkelijke verspreiding van griep in de jaren tussen 1972 en 2002.&#160;</p><p>Daarnaast ontdekten de onderzoekers dat aan 55 tot 60 procent van alle griepuitbraken een extreem droge periode vooraf gaat. Zo\u2019n droge periode is niet noodzakelijk voor het griepvirus om toe te slaan, maar het vergroot wel de kans op een griepuitbraak. Het griepvirus reageert direct op droog weer en begint zich snel te verspreiden. Binnen tien dagen na de start van een droge periode is het effect zichtbaar doordat er veel mensen met griepverschijnselen rond lopen.&#160;</p><p>Een droge periode speelt dus een belangrijke rol bij het uitbreken van griep, maar je kunt er niet op voorhand een griepepidemie mee voorspellen. De luchtvochtigheid is van invloed op de overlevingskansen van het virus, maar bij een uitbraak spelen ook andere factoren een rol. Bijvoorbeeld hoe gevoelig mensen zijn voor het virustype dat rond gaat en hoeveel contact mensen onderling met elkaar hebben.&#160;</p><p>Elles Lalieu&#160;</p>",
-            "pub_date": "2010-03-15 17:04:31",
-            "slug": "periode-van-droogte-gaat-vaak-vooraf-aan-griepuitb",
-            "is_published": true
-        }
-    },
-    {
-        "pk": 4,
-        "model": "journal.entry",
-        "fields": {
-            "category": 1,
-            "updated": "2010-03-15 17:14:55",
-            "title": "Mengvirus kan gevaarlijk zijn",
-            "created": "2010-03-15 17:14:55",
-            "excerpt": "26 februari - Bij de kruising tussen een vogelgriepvirus en een menselijk griepvirus kunnen gevaarlijke mengvormen ontstaan, zo waarschuwen Amerikaanse wetenschappers deze week in vakblad PNAS. Zij maakten 254 van deze mengvirussen in het laboratorium.",
-            "content": "<p>Het vogelgriepvirus (influenza A/H5N1) dook in 1996 voor het eerst op bij ganzen in China. Kort daarop werden in Hongkong achttien mensen besmet, waarvan er uiteindelijk zes stierven. In 2003 was er een grote uitbraak van vogelgriep onder Aziatisch pluimvee. Het virus heeft zich toen verspreid naar wilde vogels en pluimvee op verschillende continenten. Inmiddels zijn er wereldwijd al 442 mensen met vogelgriep besmet geraakt. 262 daarvan zijn overleden.&#160;</p><p>Het aantal besmettingen ligt nog vrij laag, omdat het vogelgriepvirus niet in staat is zich succesvol onder mensen te verspreiden. Daar kan verandering in komen als influenza A/H5N1 erin slaagt om genetisch materiaal uit te wisselen met een menselijk griepvirus. Dit gebeurt wanneer beide griepvirussen op hetzelfde moment een gastheercel infecteren. Er ontstaat dan een mengvirus dat een aantal RNA-fragmenten van het vogelgriepvirus en een aantal fragmenten van het menselijke griepvirus bevat. Hoe gevaarlijk is zo\u2019n mengvirus?&#160;</p><p>Om dat uit te zoeken hebben Amerikaanse wetenschappers 254 mengvormen gemaakt van een influenza A/H5N1 virus uit kippen en een menselijk influenza A/H3N2 virus. 75 van die mengvirussen konden goed groeien in cellijnen en hadden bovendien de HA-genen (die eiwitten produceren waarmee het virus een menselijke cel binnendringt) van het vogelgriepvirus. Deze virussen zijn waarschijnlijk het meest gevaarlijk voor mensen, omdat ons afweersysteem het vreemde HA-eiwit niet kan herkennen.&#160;</p><p>De wetenschappers infecteerden per mengvirus vier muizen. 22 van de 75 mengvirussen bleken alle ge\u00efnfecteerde muizen binnen tien dagen te doden. Deze gevaarlijke mengvirussen hebben \u00e9\u00e9n overeenkomst: ze hebben allemaal het PB2-fragment van het menselijke influenza A/H3N2 virus gekregen. De Amerikanen denken dat het PB2-RNA ervoor zorgt dat een mengvirus effici\u00ebnt kan groeien in de bovenste luchtwegen van mensen. Die eigenschap is kritiek voor het virus om zich succesvol onder mensen te verspreiden.&#160;</p><p>Elles Lalieu</p>",
-            "pub_date": "2010-03-15 17:04:31",
-            "slug": "mengvirus-kan-gevaarlijk-zijn",
-            "is_published": true
-        }
-    },
-    {
-        "pk": 5,
-        "model": "journal.entry",
-        "fields": {
-            "category": 1,
-            "updated": "2010-03-15 17:16:20",
-            "title": "Pandemie of blinde paniek?",
-            "created": "2010-03-15 17:16:20",
-            "excerpt": "26 februari - De Mexicaanse griep ligt stilaan achter ons. Een evaluatie van de hele periode ligt in het vooruitzicht. De Standaard geeft alvast een voorzet.",
-            "content": "<p>De Mexicaanse griep ligt stilaan achter ons. De pandemische fase kan elk moment opgeheven worden. Minister van Volksgezondheid Onkelinx (PS) en haar Europese collega's stellen een evaluatie van de hele periode in het vooruitzicht. Een voorzet.&#160;</p><p>Lees het hele bericht bij: De Standaard Online</p>",
-            "pub_date": "2010-03-15 17:04:31",
-            "slug": "pandemie-blinde-paniek",
-            "is_published": true
-        }
-    },
-    {
-        "pk": 1,
-        "model": "journal.entry",
-        "fields": {
-            "category": 1,
-            "updated": "2010-03-15 16:54:34",
-            "title": "Nieuwe virusremmer lijkt veelbelovend",
-            "created": "2010-03-15 16:54:34",
-            "excerpt": "12 maart - Japanse wetenschappers hebben een nieuwe virusremmer ontwikkeld die beter werkt tegen gevaarlijke vormen van vogelgriep dan de huidige virusremmers. Dat komt doordat het nieuwe middel sterker aan het neuraminidase-eiwit van het griepvirus bindt.",
-            "content": "<p>Resistentie van griepvirussen tegen de huidige virusremmers, zoals Tamiflu, is een groeiend probleem. Daarom zijn wetenschappers hard op zoek naar nieuwe, betere virusremmers. Het medicijn CS-8958 lijkt een goede mogelijkheid. Uit dierstudies is gebleken dat dit nieuwe middel werkt tegen verschillende seizoensgriepvirussen en Mexicaanse griep. Ook vogelgriep vormt echter een belangrijke dreiging. Hoe gaat CS-8958 om met dat virus?&#160;</p><p>Dat hebben Japanse wetenschappers onderzocht in een studie met muizen. Zij infecteerden twee groepen muizen met het vogelgriepvirus en startten vervolgens een behandeling. De ene groep muizen kreeg een vijfdaagse standaardbehandeling met Tamiflu, terwijl de andere groep twee uur na infectie eenmalig een dosis CS-8958 kreeg. De overlevingskans van de muizen die het nieuwe middel kregen toegediend was hoger dan die van de muizen op een kuur van Tamiflu. Bovendien was de concentratie van virusdeeltjes in de longen van muizen met een CS-8958 behandeling lager.&#160;</p><p>CS-8958 is, net als Tamiflu, niet alleen bruikbaar voor behandeling van griep maar ook voor preventie. Als de nieuwe virusremmer zeven dagen voor infectie wordt toegediend, sterven muizen niet aan een dodelijke vorm van vogelgriep.&#160;</p><p>Zowel CS-8958 als Tamiflu zijn neuraminidase remmers. Dit betekent dat zij het neuraminidase-eiwit, dat het griepvirus nodig heeft om een gastheercel te verlaten en zich verder te verspreiden, blokkeren. Als beide virusremmers op dezelfde manier werken, waarom is CS-8958 dan zoveel krachtiger dan Tamilfu? De Japanners denken dat dat komt doordat CS-8958 veel sterker aan het neuraminidase-eiwit bindt dan Tamiflu.&#160;</p><p>De resultaten van het onderzoek naar CS-8958 zijn veelbelovend, maar vervolgonderzoek is nodig om te kijken of het nieuwe middel bij mensen net zo goed aanslaat als bij muizen.&#160;</p><p>Elles Lalieu</p>",
-            "pub_date": "2010-03-15 15:46:09",
-            "slug": "nieuwe-virusremmer-lijkt-veelbelovend",
-            "is_published": true
-        }
-    },
-    {
-        "pk": 2,
-        "model": "journal.entry",
-        "fields": {
-            "category": 1,
-            "updated": "2010-03-15 16:55:52",
-            "title": "Miljoenen vaccins Mexicaanse griep over",
-            "created": "2010-03-15 16:55:52",
-            "excerpt": "8 maart - Demissionair minister van Volksgezondheid Ab Klink (CDA) zit in zijn maag met negentien miljoen overtollige vaccins tegen de Mexicaanse griep.",
-            "content": "<p>Hij kan de vaccins niet verkopen aan andere landen en onderhandelt daarom nu met in ieder geval een van de twee fabrikanten over terugverkoop van ongebruikte vaccins, meldt NRC Handelsblad zaterdag.&#160;</p><p>De vaccins hebben Nederland twee- tot driehonderd miljoen euro gekost. Het ministerie zegt in onderhandeling te zijn met medicijnenfabrikanten GlaxoSmithKline. De eerste bevestigt dit, de tweede, waar zo'n driekwart van de vaccins vandaan komen, ontkent echter.&#160;</p><p>Klink schafte vorig jaar 34 miljoen doses aan. Daarmee kon de hele Nederlandse bevolking twee keer worden inge\u00ebnt. De gehele bevolking hoefde echter niet te worden gevaccineerd. Alleen de zogeheten risicogroepen, zoals zwangere vrouwen, kregen een prik. Het virus bleek slechts een milde griep te veroorzaken.&#160;</p><p>Klink besloot daarop dat hij zou proberen de meeste overgebleven vaccins door te verkopen aan andere landen. Cyprus kocht in oktober tweehonderdduizend vaccins van het ministerie, Malta nam in december tachtigduizend vaccins over.</p><p>Bron: AD.nl</p>",
-            "pub_date": "2010-03-15 15:46:09",
-            "slug": "miljoenen-vaccins-mexicaanse-griep-over",
-            "is_published": true
         }
     },
     {
@@ -9463,10 +9693,10 @@
         "pk": 4,
         "model": "pollster.questiondatatype",
         "fields": {
-            "js_class": "wok.pollster.datatypes.MonthYear",
-            "css_class": "monthyear-type",
-            "db_type": "django.db.models.CharField(max_length=255, null=True, blank=True)",
-            "title": "MonthYear"
+            "js_class": "wok.pollster.datatypes.YearMonth",
+            "css_class": "yearmonth-type",
+            "db_type": "db.models.YearMonthField(null=True, blank=True)",
+            "title": "YearMonth"
         }
     },
     {
@@ -9519,7 +9749,7 @@
         "pk": 5,
         "model": "pollster.virtualoptiontype",
         "fields": {
-            "js_class": "wok.pollster.virtualoptions.MonthYearYearsAgo",
+            "js_class": "wok.pollster.virtualoptions.YearMonthYearsAgo",
             "question_data_type": 4,
             "title": "Years ago"
         }
@@ -10758,30 +10988,165 @@
         }
     },
     {
-        "pk": 49,
+        "pk": 211,
         "model": "auth.permission",
         "fields": {
-            "codename": "add_reminder",
-            "name": "Can add reminder",
-            "content_type": 17
+            "codename": "add_newsletter",
+            "name": "Can add news letter",
+            "content_type": 72
         }
     },
     {
-        "pk": 50,
+        "pk": 212,
         "model": "auth.permission",
         "fields": {
-            "codename": "change_reminder",
-            "name": "Can change reminder",
-            "content_type": 17
+            "codename": "change_newsletter",
+            "name": "Can change news letter",
+            "content_type": 72
         }
     },
     {
-        "pk": 51,
+        "pk": 213,
         "model": "auth.permission",
         "fields": {
-            "codename": "delete_reminder",
-            "name": "Can delete reminder",
-            "content_type": 17
+            "codename": "delete_newsletter",
+            "name": "Can delete news letter",
+            "content_type": 72
+        }
+    },
+    {
+        "pk": 205,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_newslettertemplate",
+            "name": "Can add news letter template",
+            "content_type": 70
+        }
+    },
+    {
+        "pk": 206,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_newslettertemplate",
+            "name": "Can change news letter template",
+            "content_type": 70
+        }
+    },
+    {
+        "pk": 207,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_newslettertemplate",
+            "name": "Can delete news letter template",
+            "content_type": 70
+        }
+    },
+    {
+        "pk": 202,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_newslettertemplatetranslation",
+            "name": "Can add news letter template translation",
+            "content_type": 69
+        }
+    },
+    {
+        "pk": 203,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_newslettertemplatetranslation",
+            "name": "Can change news letter template translation",
+            "content_type": 69
+        }
+    },
+    {
+        "pk": 204,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_newslettertemplatetranslation",
+            "name": "Can delete news letter template translation",
+            "content_type": 69
+        }
+    },
+    {
+        "pk": 208,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_newslettertranslation",
+            "name": "Can add news letter translation",
+            "content_type": 71
+        }
+    },
+    {
+        "pk": 209,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_newslettertranslation",
+            "name": "Can change news letter translation",
+            "content_type": 71
+        }
+    },
+    {
+        "pk": 210,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_newslettertranslation",
+            "name": "Can delete news letter translation",
+            "content_type": 71
+        }
+    },
+    {
+        "pk": 199,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_remindersettings",
+            "name": "Can add reminder settings",
+            "content_type": 68
+        }
+    },
+    {
+        "pk": 200,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_remindersettings",
+            "name": "Can change reminder settings",
+            "content_type": 68
+        }
+    },
+    {
+        "pk": 201,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_remindersettings",
+            "name": "Can delete reminder settings",
+            "content_type": 68
+        }
+    },
+    {
+        "pk": 196,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_userreminderinfo",
+            "name": "Can add user reminder info",
+            "content_type": 67
+        }
+    },
+    {
+        "pk": 197,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_userreminderinfo",
+            "name": "Can change user reminder info",
+            "content_type": 67
+        }
+    },
+    {
+        "pk": 198,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_userreminderinfo",
+            "name": "Can delete user reminder info",
+            "content_type": 67
         }
     },
     {
@@ -10971,6 +11336,60 @@
             "codename": "delete_lastresponse",
             "name": "Can delete last response",
             "content_type": 41
+        }
+    },
+    {
+        "pk": 193,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_localflusurvey",
+            "name": "Can add local flu survey",
+            "content_type": 66
+        }
+    },
+    {
+        "pk": 194,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_localflusurvey",
+            "name": "Can change local flu survey",
+            "content_type": 66
+        }
+    },
+    {
+        "pk": 195,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_localflusurvey",
+            "name": "Can delete local flu survey",
+            "content_type": 66
+        }
+    },
+    {
+        "pk": 190,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_localprofile",
+            "name": "Can add local profile",
+            "content_type": 65
+        }
+    },
+    {
+        "pk": 191,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_localprofile",
+            "name": "Can change local profile",
+            "content_type": 65
+        }
+    },
+    {
+        "pk": 192,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_localprofile",
+            "name": "Can delete local profile",
+            "content_type": 65
         }
     },
     {
@@ -11282,9 +11701,6 @@
                 25,
                 26,
                 27,
-                49,
-                50,
-                51,
                 16,
                 17,
                 18,
@@ -11343,7 +11759,7 @@
             "is_active": true,
             "is_superuser": true,
             "is_staff": true,
-            "last_login": "2011-08-06 10:10:35",
+            "last_login": "2011-08-27 12:06:10",
             "groups": [
                 1
             ],

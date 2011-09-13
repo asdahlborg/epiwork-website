@@ -1,0 +1,9 @@
+{% extends "registration/boxbase.html" %}
+{% load i18n %}
+
+{% block title %}{{ block.super }}: {% trans "Account Activation" %}{% endblock %}
+
+{% block content %}<h1>{% trans "Account Activation" %}</h1>
+                <p>{% trans "Activation is complete." %}</p>
+                <p>&nbsp;</p>
+                <p><a href="/">{% trans "Back to the home page" %}</a> {% trans "or" %} <a href="/accounts/login/">{% trans "proceed to the login page" %}</a>.</p>{% endblock content %}

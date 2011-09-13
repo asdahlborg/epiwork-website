@@ -27,9 +27,10 @@
 
         var last_participation_data = pollster_last_participation_data();
 
-        var data_types = {}, rules_by_question = {}, derived_values = {};
+        var data_types = {}, open_option_data_types = {}, rules_by_question = {}, derived_values = {};
 
         pollster_fill_data_types(data_types);
+        pollster_fill_open_option_data_types(open_option_data_types);
         pollster_fill_rules(rules_by_question);
         pollster_fill_derived_values(derived_values);
 
@@ -40,7 +41,15 @@
         // Bind data types to question elements
 
         $.each(data_types, function(question, data_type) {
-            data_type.bind($('#question-'+question));
+            var $field = $('#question-'+question+'-field');
+            data_type.bind($field);
+        });
+
+        $.each(open_option_data_types, function(question, option_data_types) {
+            $.each(option_data_types, function(option, data_type) {
+                var $field = $('#option-'+option+'-field-open');
+                data_type.bind($field);
+            });
         });
 
         // Event handlers.
@@ -50,6 +59,9 @@
                 return;
 
             var $input = $(evt.target);
+
+            if ($input.hasClass('open-option-data'))
+                return true;
             var $question = $(evt.target).closest(questionSelector);
             if (!$question.length)
                 return true;
@@ -72,21 +84,16 @@
                 });
             }
 
-            // Else check regular expressions for text entries
-
-            else if ($input.attr('pattern')) {
-                var pattern = new RegExp($input.attr('pattern'));
-                checked = pattern.test($input.val());
-                if (!synthetic)
-                    $question.toggleClass("error", !checked);
-            }
-
-            // Else just use the string inside the text entry.
+            // Else check the validity by data type
 
             else {
-                checked = $input.val() !== "";
-                if (!synthetic && $question.is('.mandatory'))
-                    $question.toggleClass("error", !checked);
+                data_type = data_types[qid];
+                var valid = data_type.check($input);
+                var empty = $input.val() == "";
+                var err = !valid || ($question.is('.mandatory') && empty);
+                if (!synthetic)
+                    $question.toggleClass("error", err);
+                checked = !empty;
             }
 
             // Invoke all rules for the rule/option combination.
@@ -107,12 +114,13 @@
                     // apply rules if the current option is in the subjectOptions set
                     rule.apply($survey, checked);
                 }
-                else if (isText || isHidden) {
+                else if ((isText || isHidden) && !rule.subjectOptions.length) {
                     // do not check options for text questions
                     rule.apply($survey, checked);
                 }
-                if (rule.isExclusive)
-                    exclusives.push('#option-'+oid);
+                if (rule.isExclusive) {
+                    exclusives = exclusives.concat(jQuery.map(rule.subjectOptions, function(i){ return '#option-'+i;}));
+                }
             }
 
             if (checked && $.inArray('#option-'+oid, exclusives) >= 0) {
@@ -120,7 +128,7 @@
                 var extra = { synthetic: true };
                 $question.find(':radio,:checkbox').not($input).filter(':checked').attr('checked', false).trigger('change', extra);
             }
-            else if (checked && exclusives) {
+            else if (checked && exclusives.length) {
                 // uncheck all exclusives when checking a non-exclusive option
                 var extra = { synthetic: true };
                 $question.find(exclusives.join(',')).find(':radio,:checkbox').attr('checked', false).trigger('change', extra);

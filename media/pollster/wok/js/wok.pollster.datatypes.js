@@ -9,9 +9,11 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
-                $question
-                    .find(':text,:date')
+            check: function($field) {
+                return true;
+            },
+            bind: function($field) {
+                $field
                     .datepicker({
                         constrainInput: true,
                         dateFormat: 'dd/mm/yy',
@@ -36,7 +38,11 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
+            check: function($field) {
+                var pattern = new RegExp($field.attr('pattern'));
+                return pattern.test($field.val());
+            },
+            bind: function($field) {
             }
         });
     }
@@ -47,9 +53,11 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
-                $question
-                    .find(':text,:number')
+            check: function($field) {
+                return true;
+            },
+            bind: function($field) {
+                $field
                     .keypress(function(evt) {
                         var key = String.fromCharCode(evt.which);
                         var regex = /[0-9]/;
@@ -59,15 +67,40 @@
         });
     }
 
-    function MonthYearType() {
+    function PostalCodeType() {
+        var self = this;
+        self.fmt = window.pollster_get_postal_code_format ? pollster_get_postal_code_format() : null;
+        if (self.fmt)
+            self.regex = new RegExp('^'+self.fmt+'$');
+
+        // Public methods.
+
+        $.extend(this, {
+            check: function($field) {
+                var value = $field.val();
+                if (!value)
+                    return true;
+                return self.regex.test(value);
+            },
+            bind: function($field) {
+            }
+        });
+    }
+
+    function YearMonthType() {
         var self = this;
 
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
-                $question
-                    .find(':text,:date')
+            check: function($field) {
+                var val = $field.val();
+                var month = parseInt(val.replace(/\/.*$/, ''), 10);
+                var year = parseInt(val.replace(/^.*\//, ''), 10);
+                return year && month;
+            },
+            bind: function($field) {
+                $field
                     .datepicker({
                         constrainInput: true,
                         dateFormat: 'mm/yy',
@@ -75,11 +108,11 @@
                         changeYear: true ,
                         yearRange: '-110:+0',
                         beforeShow: function(input, inst) {
-                            inst.dpDiv.addClass('month-year-only');
-                            $('head').append('<style id="hide-month-year-only-calendar" type="text/css">.month-year-only .ui-datepicker-calendar { display: none; }</style>');
+                            inst.dpDiv.addClass('year-month-only');
+                            $('head').append('<style id="hide-year-month-only-calendar" type="text/css">.year-month-only .ui-datepicker-calendar { display: none; }</style>');
                             var val = $(input).val();
-                            var month = parseInt(val.replace(/\/.*$/, ''));
-                            var year = parseInt(val.replace(/^.*\//, ''));
+                            var month = parseInt(val.replace(/\/.*$/, ''), 10);
+                            var year = parseInt(val.replace(/^.*\//, ''), 10);
                             if (year && month) {
                                 setTimeout(function(){
                                     $(input).datepicker('setDate', new Date(year, month-1, 1));
@@ -94,8 +127,10 @@
                             $(inst.input).val(val).change();
                         },
                         onClose: function(dateText, inst) { 
-                            inst.dpDiv.removeClass('month-year-only');
-                            $('head #hide-month-year-only-calendar').remove();
+                            inst.dpDiv.removeClass('year-month-only');
+                            setTimeout(function(){
+                                $('head #hide-year-month-only-calendar').remove();
+                            }, 0);
                         }
                     })
                     .change(function(evt){
@@ -123,7 +158,10 @@
         // Public methods.
 
         $.extend(this, {
-            bind: function($question) {
+            check: function($field) {
+                return true;
+            },
+            bind: function($field) {
             }
         });
     }
@@ -133,8 +171,9 @@
     window.wok.pollster.datatypes = {
         "Text": TextType,
         "Numeric": NumericType,
+        "PostalCode": PostalCodeType,
         "Date": DateType,
-        "MonthYear": MonthYearType,
+        "YearMonth": YearMonthType,
         "Timestamp": TimestampType
     };
 

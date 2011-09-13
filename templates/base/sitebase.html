@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="{{ MEDIA_URL }}base/img/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="{{ MEDIA_URL }}base/img/apple-touch-icon.png" />      
 
-		<title>{% block title %}{% site_name %}: {% page_attribute page_title %}{% endblock title %}</title>
+		<title>{% block title %}{{ site_name }}: {% page_attribute page_title %}{% endblock title %}</title>
 		<meta name="description" content="{% page_attribute meta_description %}"/>
         <meta name="keywords" content="{% page_attribute meta_keywords %}"/>
         {% block add_head %}{% endblock add_head %}
@@ -20,10 +20,15 @@
         {% block add_css %}{% endblock add_css %}
 		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/jquery-1.5.1.min.js"></script>
 		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/influenzanet.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}base/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         {% block add_js %}{% endblock add_js %}
+
+	    {% google_analytics %}
+
 	</head>
 
 	<body{% spaceless %}{% block add_body %}{% endblock add_body %}{% endspaceless %}>
+
 	<div id="page">
 		
 		<div id="influenzabar">
@@ -54,24 +59,31 @@
 		</div>
 		
 		<div id="header">
-            {% if_site_logo %}
-            <div id="headerlogo"><a href="/" title="{% site_name %}"><img src="{% site_logo %}" alt="{% site_name %}" /></a></div> 
-            <div id="account"> 
-                <ul class="anonymous"> 
-                    <li><a href="/accounts/login/" class="fancybox1">{% trans "Log in" %}</a></li> 
-                    <li><a href="/accounts/register/" class="fancybox2">{% trans "New account" %}</a></li> 
-                </ul> 
-                <p><a href="/accounts/password/reset/">{% trans "Forgot password?" %}</a></p> 
-            </div> 
-            {% endif_site_logo %}
-
+			{% if site_logo %}
+			<div id="headerlogo"><a href="/" title="{{ site_name }}"><img src="{{ site_logo }}" alt="{{ site_name }}" /></a></div>
+			{% block authentication %}<div id="account">{% if user.is_authenticated %}
+			    <ul class="member">
+			        <li><a href="/survey/profile/">{% trans "My account" %}</a></li>
+			        <li><a href="/accounts/logout/">{% trans "Log out" %}</a></li>
+			    </ul>
+			    <p class="loggedinas"><a href="/survey/profile/">{% trans "Logged in as" %} {{ user.first_name }} {{ user.last_name }}</a></p>
+			{% else %}
+			    <ul class="anonymous">
+			        <li><a href="/accounts/login/" class="fancybox1">{% trans "Log in" %}</a></li>
+			        <li><a href="/accounts/register/" class="fancybox2">{% trans "Register" %}</a></li>
+			    </ul>
+			    <p><a href="/accounts/password/reset/">{% trans "Forgot password?" %}</a></p>{% endif %}
+			</div>{% endblock authentication %}
+			{% endif %}
 			<div id="navigation">
-				<div id="menubar">
-					{% spaceless %}<ul>{% block menubar %}{% show_menu 0 1 %}{% endblock menubar %}</ul>{% endspaceless %}
+				<div id="menubars">
+					{% block menubar %}
+                    {% spaceless %}{% show_menu 0 2 100 100 "base/menu.html" %}{% endspaceless %}
+					{% endblock menubar %}
 				</div>
 				<div id="searchbar">
                     <form method="get" action="/search/">
-                        <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="Search" /></p>
+                        <p><input type="text" id="searchfield" name="q"/><input type="submit" id="searchsubmit" value="{% trans "Search" %}" /></p>
                     </form>
 				</div>
 			</div>			
@@ -80,27 +92,34 @@
 		{% block content %}{% endblock content %}
 		
 		<div id="footer">{% block footercontent %}
-			<div id="footercontent">
-				<div id="footercol1"><img src="{{ MEDIA_URL }}base/img/main/influenzanetlogo.png" alt="Influenzanet logo" /><p>Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet with the aid of volunteers.<br />We have tried to ensure that all information we provide through this website is correct at the time we include it.</p></div>
-				<div id="footercol2"><h2>Partners</h2>
-						<a href="http://preview.aktivgegengrippe.de/" rel="external" title="Aktiv gegen Grippe Deutschland">Aktiv gegen Grippe Deutschland</a><br />
-						<a href="http://preview.aktivgegengrippe.at/" rel="external" title="Aktiv gegen Grippe Österreich">Aktiv gegen Grippe Österreich</a><br />
-						<a href="http://preview.aktivgegengrippe.ch/" rel="external" title="Aktiv gegen Grippe Schweiz">Aktiv gegen Grippe Schweiz</a><br />
-						<a href="http://www.degrotegriepmeting.nl/" rel="external" title="De Grote Griepmeting Nederland">De Grote Griepmeting Nederland</a><br />
-						<a href="http://www.degrotegriepmeting.be/" rel="external" title="De Grote Griepmeting België">De Grote Griepmeting België</a><br />
-					</div>
-					<div id="footercol3"><h2>&nbsp;</h2>
-						<a href="http://www.flusurvey.org.uk/" rel="external" title="Flusurvey United Kingdom">Flusurvey United Kingdom</a><br />
-						<a href="http://www.gripenet.pt/" rel="external" title="Gripenet Portugal">Gripenet Portugal</a><br />
-						<a href="http://www.influensakoll.se/" rel="external" title="Influensakoll Sverige">Influensakoll Sverige</a><br />
-						<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italy</a><br />				
+            {% if site_footer %}
+				<div id="footercontent-client">
+                	{{ site_footer }}
 				</div>
-			</div>{% endblock footercontent %}
-			<div id="footerclose">
-                &copy; {% now "Y" %} {% site_name %} &nbsp;|&nbsp;
+            {% else %}
+				<div id="footercontent-main">
+					<div id="footercol1"><img src="{{ MEDIA_URL }}base/img/main/influenzanetlogo.png" alt="Influenzanet logo" /><p>Influenzanet is a system to monitor the activity of influenza-like-illness (ILI) with the aid of volunteers via the internet with the aid of volunteers.<br />We have tried to ensure that all information we provide through this website is correct at the time we include it.</p></div>
+					<div id="footercol2"><h2>Partners</h2>
+							<a href="http://preview.aktivgegengrippe.de/" rel="external" title="Aktiv gegen Grippe Deutschland">Aktiv gegen Grippe Deutschland</a><br />
+							<a href="http://preview.aktivgegengrippe.at/" rel="external" title="Aktiv gegen Grippe Österreich">Aktiv gegen Grippe Österreich</a><br />
+							<a href="http://preview.aktivgegengrippe.ch/" rel="external" title="Aktiv gegen Grippe Schweiz">Aktiv gegen Grippe Schweiz</a><br />
+							<a href="http://www.degrotegriepmeting.nl/" rel="external" title="De Grote Griepmeting Nederland">De Grote Griepmeting Nederland</a><br />
+							<a href="http://www.degrotegriepmeting.be/" rel="external" title="De Grote Griepmeting België">De Grote Griepmeting België</a><br />
+						</div>
+						<div id="footercol3"><h2>&nbsp;</h2>
+							<a href="http://www.flusurvey.org.uk/" rel="external" title="Flusurvey United Kingdom">Flusurvey United Kingdom</a><br />
+							<a href="http://www.gripenet.pt/" rel="external" title="Gripenet Portugal">Gripenet Portugal</a><br />
+							<a href="http://www.influensakoll.se/" rel="external" title="Influensakoll Sverige">Influensakoll Sverige</a><br />
+							<a href="http://www.influweb.it/" rel="external" title="Influweb Italia">Influweb Italy</a><br />				
+					</div>
+				</div>
+            {% endif %}
+            <div id="footerclose">
+                &copy; {% now "Y" %} {{ site_name }} &nbsp;|&nbsp;
                 {% language_chooser %}
-                <a href="{% url contact_form %}" title="Contact us">Contact</a>
-			</div>
+                <a href="{% url contact_form %}" title="{% trans "Contact us" %}">{% trans "Contact" %}</a>
+            </div>
+			</div>{% endblock footercontent %}
 		</div>
 	</div>
 	</body>

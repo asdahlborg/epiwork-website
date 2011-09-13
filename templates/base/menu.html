@@ -1,0 +1,24 @@
+{% load menu_tags %}
+{% if children %}
+<ul id="menubar">
+    {% for child in children %}
+    <li class="{% if child.selected %}selected{% endif %}{% if child.ancestor %}ancestor{% endif %}{% if child.sibling %}sibling{% endif %}{% if child.descendant %}descendant{% endif %}">
+        <a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}
+        {% if child.selected %}{% endif %}
+        {% if child.children %}{% endif %}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% for child in children %}
+    {% if child.selected %}
+        {% include "base/submenu.html" %}
+    {% endif %}
+    {% for subchild in child.children %}
+        {% if subchild.selected %}
+            {% include "base/submenu.html" %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}

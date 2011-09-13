@@ -108,18 +108,6 @@
 
         self.$element = null;
 
-        /* function changeVisual(visual) {
-            var $e = self.$element;
-            if (visual === "radio") {
-                if ($e.find("select").length === 0)
-                    return;
-                var $x = $('<ul></ul>');
-                $e.find("select option").each(function() {
-                    $x.append()
-                });
-            }
-        }*/
-
         // Tool actions.
 
         $properties.find(".action-add-choice").click(function(evt) {
@@ -218,7 +206,7 @@
             return false;
         });
 
-        $properties.find("[name=field_question_tags]").change(function(evt) {
+        $properties.find("[name=field_question_tags]").keyup(function(evt) {
             if (self.$element === null) return true;
             self.$element.attr("data-tags", $(this).val());
             return false;
@@ -236,6 +224,12 @@
             return false;
         });
 
+        $properties.find("[name=field_question_visual]").change(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.attr("data-visual", $(this).val());
+            return false;
+        });
+
         $properties.find("[name=field_question_starts_hidden]").change(function(evt) {
             if (self.$element === null) return true;
             self.$element.toggleClass('starts-hidden', $(this).val() == 'true');
@@ -248,7 +242,7 @@
             return false;
         });
 
-        $properties.find("[name=field_question_regex]").change(function(evt) {
+        $properties.find("[name=field_question_regex]").keyup(function(evt) {
             if (self.$element === null) return true;
             self.$element.find('input').attr("pattern", $(this).val());
             return false;
@@ -272,6 +266,7 @@
                     .find("[name=field_question_type]").val(type).end()
                     .find("[name=field_question_data_type]").val($e.attr("data-data-type")).end()
                     .find("[name=field_question_open_option_data_type]").val($e.attr("data-open-option-data-type")).end()
+                    .find("[name=field_question_visual]").val($e.attr("data-visual")).end()
                     .find("[name=field_question_tags]").val($e.attr("data-tags")).end()
                     .find("[name=field_question_title]").val($.trim($e.find(".title").text())).end()
                     .find("[name=field_question_text]").val(getText($e.find("p").first())).end()
@@ -285,16 +280,20 @@
                 // We display visual options depending on the question type.
 
                 var $v = $properties.find("[name=field_question_visual]");
+                var visual = $e.attr("data-visual");
+                var enabled;
                 if (type === "text") {
-                    $v.find("option").hide().end().find("[value=entry]").show().parent().val("entry");
+                    enabled = "[value=entry]";
                 }
                 else if (type === "single-choice") {
-                    var visual = $e.find("select").length === 1 ? "select" : "radio";
-                    $v.find("option").hide().end().find("[value=radio],[value=dropdown]").show().parent().val(visual);
+                    enabled = "[value=radio],[value=dropdown]";
                 }
                 else if (type === "multiple-choice") {
-                    $v.find("option").hide().end().find("[value=check]").show().parent().val("check");
+                    enabled = "[value=check]";
                 }
+                $v.find("option").hide().attr('disabled', true).end()
+                $v.find(enabled).attr('disabled', false).show();
+                $v.val(visual);
 
                 // We display the tools depending on the question type.
 
@@ -303,28 +302,29 @@
                     $properties.find("[name=tool_rule_type]").closest(".tool").show()
                 }
                 else if (type === "text") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_choice_type]").closest(".tool").hide();
+                    $properties.find("[name=tool_rule_type] [value='derived-value']").show();
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                     $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "single-choice") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_rule_type] [value='derived-value']").hide().parent().val("rule");
                     $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "multiple-choice") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_rule_type] [value='derived-value']").hide().parent().val("rule");
                     $properties.find(".action-add-column, .action-add-row").closest(".tool").hide();
                 }
                 else if (type === "matrix-select") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                 }
                 else if (type === "matrix-entry") {
-                    $properties.find(".property, .tool").show();
+                    $properties.find(".property, .tool, .tool option").show();
                     $properties.find("[name=tool_choice_type]").closest(".tool").hide();
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
@@ -505,15 +505,16 @@
         function formatText($element) {
             var $e = $element;
             var info = $e.find(".info").remove();
-            var text = $properties.find("[name=field_derived_value_type] option:selected").text() || 'Derived value';
+            var $option = $properties.find("[name=field_derived_value_type] option:selected");
+            var text = $option.text() || 'Derived value';
+            var jsclass = eval('('+$option.attr('data-js-class')+')');
             var inf = $e.attr("data-inf") || "";
             var sup = $e.attr("data-sup") || "";
             var regexp = $e.attr("data-regex") || "";
 
-            // TODO: Find a way to not hard-code "6" here.
-            if ($e.attr("data-type") === "6")
+            if (jsclass.isRegularExpression)
                 $element.text(text+": " + regexp).append(info);
-            else
+            if (jsclass.isRange)
                 $element.text(text+": [" + inf + "," + sup + "]").append(info);
         }
 
@@ -539,13 +540,12 @@
                 });
                 $derived_value_types.val($element.attr('data-type')).change();
 
-                // TODO: Find a way to not hard-code "6" here.
-
-                if ($element.attr("data-type") === "6") {
+                var jsclass = eval('('+$derived_value_types.find(':selected').attr("data-js-class")+')');
+                if (jsclass.isRegularExpression) {
                     $properties.find("[name=field_derived_value_regex]").closest(".property").show();
                     $properties.find("[name=field_derived_value_inf],[name=field_derived_value_sup]").closest(".property").hide();
                 }
-                else {
+                if (jsclass.isRange) {
                     $properties.find("[name=field_derived_value_regex]").closest(".property").hide();
                     $properties.find("[name=field_derived_value_inf],[name=field_derived_value_sup]").closest(".property").show();
                 }
@@ -638,14 +638,27 @@
 
             var ruleClass = eval($selected.attr('data-js-class'));
 
-            var subject = '';
-            if (subject_options.val())
-                subject = "(" + subject_options.length + " triggers)";
+            function describeOptions(selected) {
+                var ret = '';
+                if (selected.val()) {
+                    var $o = $('#'+selected.first().val());
+                    var i = $o.index() + 1;
+                    var v = $o.find("input").val() || $o.attr("data-value") || "NO VALUE";
+                    ret = "Option "+i+" ["+v+"]";
+                    if (selected.length == 2)
+                        ret += " + another";
+                    else if(selected.length > 2)
+                        ret += " +"+(selected.length-1)+" others";
+                }
+                return ret;
+            }
+
+            var subject = describeOptions(subject_options);
             var object = '';
             if (ruleClass.showQuestions)
                 object = object_question.text();
             if (ruleClass.showOptions)
-                object = "(" + object_options.length + ") from " + object_question.text();
+                object = "(" + describeOptions(object_options) + ") from " + object_question.text();
             $element.text(subject + " => " + type + " " + object);
         }
 

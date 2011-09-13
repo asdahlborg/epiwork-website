@@ -1,5 +1,5 @@
 {% extends "contact_form/base.html" %}
-{% load cms_tags %}
+{% load cms_tags i18n %}
 
 {% block col1 %}
 
@@ -7,7 +7,7 @@
 
 <form method="post" action="" class="contact_form">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" id="commentsubmit" value="Send" />
+    <input type="submit" id="commentsubmit" value="{% trans "Send" %}" />
 </form>
 
 {% endblock col1 %}

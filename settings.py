@@ -75,6 +75,9 @@ MEDIA_URL = '/media/'
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/admin/media/'
 
+CMS_FILE_ICON_PATH = os.path.join(MEDIA_ROOT, 'file_icons/')
+CMS_FILE_ICON_URL = os.path.join(MEDIA_URL, 'file_icons/')
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'swgm*3%po62mg76m4iq!k8h3j+_)x=8b--7skjc_0wiak^wksr'
 
@@ -90,6 +93,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -109,13 +113,15 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.request",
     "django.core.context_processors.media",
+    "django.contrib.messages.context_processors.messages",
     "cms.context_processors.media",
+    "apps.partnersites.context_processors.customizations",
 )
 
 CMS_TEMPLATES = (
     ('base/threecol.html', "3 Columns"),
     ('base/twocol.html', "2 Columns"),
-    ('base/home.html', "European Map"),
+    ('base/influhome.html', "European Map"),
 )
 
 ROOT_URLCONF = 'urls'
@@ -128,19 +134,22 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'nani',
     'south',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-#    'registration',
-#    'loginurl',
-#    'apps.accounts',
+    'django.contrib.messages',
+    'registration',
+    'loginurl',
+    'apps.accounts',
     'apps.survey',
-#    'apps.reminder',
+    'apps.reminder',
 #    'apps.banner',
     'apps.search',
+    'apps.journal',
     'contact_form',
     'apps.ew_contact_form',
     'apps.partnersites',
@@ -153,7 +162,6 @@ INSTALLED_APPS = (
     'cms.plugins.snippet',
 #    'cms.plugins.googlemap',
     'menus',
-    'journal',
     'mptt',
     'appmedia',
     'publisher',
@@ -175,6 +183,8 @@ AUTHENTICATION_BACKENDS = (
     'loginurl.backends.LoginUrlBackend',
 )
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 CMSPLUGIN_NEWS_RSS_TITLE = "News"
 CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
 
@@ -192,11 +202,6 @@ if DEBUG:
 # Subject-line prefix for email messages send with django.core.mail.mail_admins
 # or ...mail_managers.  Make sure to include the trailing space.
 EMAIL_SUBJECT_PREFIX = '[Influenzanet] '
-
-REMINDER_FROM = 'reminder-no-reply@epiwork.example'
-REMINDER_USE_LOGINURL = True
-REMINDER_LOGINURL_EXPIRES = 7
-REMINDER_HTML = False
 
 EPIDB_API_KEY = '0000000000000000000000000000000000000000'
 EPIDB_SERVER = 'http://127.0.0.1:8080/'
@@ -230,3 +235,17 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'django_cache',
+    }
+}
+
+# SEO Settings
+
+#GOOGLE_ANALYTICS_ACCOUNT = 'UA-24124829-1'
+GOOGLE_ANALYTICS_ACCOUNT = None
+CMS_SEO_FIELDS = True
+

@@ -5,3 +5,6 @@ class SurveyXmlForm(forms.Form):
 
 class SurveyTranslationAddForm(forms.Form):
     language = forms.CharField(label="Language code", max_length=3, required=True)
+
+class SurveyImportForm(forms.Form):
+    data = forms.FileField(label="Survey definition", required=True)

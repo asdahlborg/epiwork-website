@@ -1,0 +1,16 @@
+<html>
+<head>
+<style>
+    some css
+</style>
+</head>
+
+<body>
+<div>Containing a logo or something</div>
+<img src="{{ MEDIA_URL }}logo.png">
+
+{{ inner|safe }}
+
+<div>footers and such containing an <a href="{{ unsubscribe_url|safe }}">Unsubscribe url</a></div>
+</body>
+</html>

@@ -35,7 +35,6 @@
             </p>
             {% if question.is_text %}
             <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
-                {% if question.starts_hidden %}disabled="disabled"{% endif %}
                 pattern="{{ question.regex|default:'' }}" value="{{ question.form_value }}" />
             <p class="error-message">{{ question.translated_error_message }}</p>
             <ul class="derived-values">
@@ -49,29 +48,37 @@
             </ul>
             {% endif %}
             {% if question.is_single_choice %}
-            <ul class="choices">
-                {% for option in question.options %}
-                {% if option.is_open %}
-                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
-                    <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
-                        {% if option.form_is_checked %}checked="checked"{% endif %}
-                        {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                    <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
-                    <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
-                        id="option-{{ option.id }}-field-open"
-                        value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open"
-                        {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                </li>
+                {% if question.is_visual_dropdown %}
+                <select class="choices" name="{{ question.data_name }}">
+                    {% for option in question.options %}
+                    <option id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}"
+                         value="{{ option.value }}" {% if option.form_is_checked %}selected="selected"{% endif %}/>
+                        {{ option.translated_text }}
+                    </option>
+                    {% endfor %}
+                </select>
                 {% else %}
-                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
-                    <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
-                        {% if option.form_is_checked %}checked="checked"{% endif %}
-                        {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
-                    <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
-                </li>
+                <ul class="choices">
+                    {% for option in question.options %}
+                    {% if option.is_open %}
+                    <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                        <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
+                            {% if option.form_is_checked %}checked="checked"{% endif %} />
+                        <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
+                        <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                            id="option-{{ option.id }}-field-open"
+                            value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open" />
+                    </li>
+                    {% else %}
+                    <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                        <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
+                            {% if option.form_is_checked %}checked="checked"{% endif %} />
+                        <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
                 {% endif %}
-                {% endfor %}
-            </ul>
             <p class="error-message">{{ question.translated_error_message }}</p>
             {% endif %}
             {% if question.is_multiple_choice %}
@@ -80,19 +87,16 @@
                 {% if option.is_open %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
                     <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
-                        {% if option.form_is_checked %}checked="checked"{% endif %}
-                        {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
+                        {% if option.form_is_checked %}checked="checked"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
                     <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
                         id="option-{{ option.id }}-field-open"
-                        value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open"
-                        {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
+                        value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open" />
                 </li>
                 {% else %}
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
                     <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
-                        {% if option.form_is_checked %}checked="checked"{% endif %}
-                        {% if question.starts_hidden or option.starts_hidden %}disabled="disabled"{% endif %} />
+                        {% if option.form_is_checked %}checked="checked"{% endif %} />
                     <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
                 </li>
                 {% endif %}
@@ -193,9 +197,19 @@
             return {{ last_participation_data_json|safe|default:'{}' }};
         }
         function pollster_fill_data_types(d) {
-            var t;
             {% for question in survey.questions %}
             d[{{question.id}}] = new {{question.data_type.js_class}}();
+            {% endfor %}
+        }
+        function pollster_fill_open_option_data_types(d) {
+            var t;
+            {% for question in survey.questions %}
+                t = d[{{question.id}}] = {};
+                {% for option in question.options %}
+                    {% if option.is_open and question.open_option_data_type %}
+                        t[{{option.id}}] = new {{question.open_option_data_type.js_class}}();
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
         }
         function pollster_fill_derived_values(d) {
@@ -230,6 +244,9 @@
                                          {% endfor %} ]));
             {% endfor %}
             {% endfor %}
+        }
+        function pollster_get_postal_code_format() {
+            return '{{ default_postal_code_format|escapejs }}';
         }
     </script>
 </form>

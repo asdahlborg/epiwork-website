@@ -9,6 +9,8 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _
+from django.contrib import messages
 
 from apps.survey import utils, models, forms
 from .survey import ( Specification,
@@ -18,9 +20,6 @@ from .survey import ( Specification,
 import apps.pollster as pollster
 import extra
 import pickle
-
-
-_ = lambda x: x
 
 survey_form_helper = None
 profile_form_helper = None
@@ -46,17 +45,17 @@ def thanks(request):
             wq1 = set(response_dict['WeeklyQ1'])
             wq1b = response_dict['WeeklyQ1b']
             if wq1==set([0]):
-                person.diag = 'Nessun sintomo'
+                person.diag = _('No symptoms')
             elif (wq1b == 0) and wq1.intersection([1,17,11,8,9]) and wq1.intersection([6,5,18]):
-                person.diag = 'Sintomi influenzali'
+                person.diag = _('Flu symptoms')
             elif wq1.intersection([2,3,4,5,6]):
-               person.diag = 'Raffreddore / allergia'
+               person.diag = _('Cold / allergy')
             elif len(wq1.intersection([15,19,14,12,13]))>1:
-               person.diag = 'Sintomi gastro-intestinali'
+               person.diag = _('Gastrointestinal symptoms')
             else:
-               person.diag = 'Altri sintomi non influenzali'
+               person.diag = _('Other non-influenza symptons')
         else: 
-           person.diag = 'Nessuno status'
+           person.diag = _('Next status')
     return render_to_response('survey/thanks.html', {'persons': persons}, 
                               context_instance=RequestContext(request))
 
@@ -98,8 +97,8 @@ def index(request):
 
     # Check if the user has filled user profile
     if utils.get_user_profile(survey_user) is None:
-        request.user.message_set.create(
-            message=_('You have to fill your profile data first.'))
+        messages.add_message(request, messages.INFO, 
+            _('You have to fill your profile data first.'))
         url = reverse('apps.survey.views.profile_index')
         url_next = reverse('apps.survey.views.index')
         url = '%s?gid=%s&next=%s' % (url, survey_user.global_id, url_next)
@@ -127,8 +126,8 @@ def index(request):
 
             return HttpResponseRedirect(reverse(thanks))
         else:
-            request.user.message_set.create(
-                message=_('One or more questions have empty or invalid ' \
+            messages.add_message(request, messages.INFO, 
+                _('One or more questions have empty or invalid ' \
                           'answer. Please fix it first.'))
     else:
         form = builder.get_form(context)
@@ -151,8 +150,13 @@ def profile_index(request):
         url = '%s?next=%s' % (reverse(select_user), reverse(profile_index))
         return HttpResponseRedirect(url)
 
-    survey = pollster.models.Survey.get_by_shortname('intake')
-    return pollster.views.survey_run(request, survey.id)
+    try:
+        survey = pollster.models.Survey.get_by_shortname('intake')
+    except:
+        raise Exception("The survey application requires a published survey with the shortname 'intake'")
+
+    from apps.pollster import views as pollster_views
+    return pollster_views.survey_run(request, survey.id)
 
 @login_required
 def extra_index(request):
@@ -190,8 +194,8 @@ def extra_index(request):
             return HttpResponseRedirect(reverse(thanks))
 
         else:
-            request.user.message_set.create(
-                message=_('One or more questions have empty or invalid ' \
+            messages.add_message(request, messages.INFO, 
+                _('One or more questions have empty or invalid ' \
                           'answer. Please fix it first.'))
 
     else:
@@ -249,10 +253,14 @@ def people_remove(request):
 
     confirmed = request.POST.get('confirmed', None)
 
-    if confirmed == 'T':
+    if confirmed == 'Y':
         survey_user.deleted = True
         survey_user.save()
-        
+   
+        url = reverse(people)
+        return HttpResponseRedirect(url)
+
+    elif confirmed == 'N':
         url = reverse(people)
         return HttpResponseRedirect(url)
 
@@ -270,8 +278,8 @@ def people_add(request):
             survey_user.save()
             survey_user.user.add(request.user)
 
-            request.user.message_set.create(
-                message=_('A new person has been added.'))
+            messages.add_message(request, messages.INFO, 
+                _('A new person has been added.'))
 
             next = request.GET.get('next', None)
             if next is None:
