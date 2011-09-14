@@ -35,7 +35,7 @@
             </p>
             {% if question.is_text %}
             <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
-                pattern="{{ question.regex|default:'' }}" value="{{ question.form_value }}" />
+                   value="{{ question.form_value }}" />
             <p class="error-message">{{ question.translated_error_message }}</p>
             <ul class="derived-values">
                 {% for option in question.options %}
