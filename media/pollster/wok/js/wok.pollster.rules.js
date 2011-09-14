@@ -102,17 +102,18 @@
 
     function is_active($survey, $question, rule) {
         var $options = $question.find(":checked");
-
         for (var i=0 ; i < $options.length ; i++) {
-            var oid = parseInt(($options.eq(i).attr("id") || '').replace("option-",""));
+            var oid = parseInt(($options.eq(i).closest("li").attr("id") || '').replace("option-",""));
             if ($.inArray(oid, rule.subjectOptions) >= 0)
                 return true;
         }
 
-        var $text = $question.find("input[type=text]:not(.open-option-data)");
-
-        if ($text.length > 0 && $text.val())
-            return true;
+        var $selected = $question.find(":selected");
+        for (var i=0 ; i < $selected.length ; i++) {
+            var oid = parseInt(($selected.eq(i).attr("id") || '').replace("option-",""));
+            if ($.inArray(oid, rule.subjectOptions) >= 0)
+                return true;
+        }
 
         return false;
     }

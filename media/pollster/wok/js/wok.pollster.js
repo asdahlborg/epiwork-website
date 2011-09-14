@@ -92,6 +92,8 @@
             rules_by_question[q].push(new window.wok.pollster.rules.Exclusive(q, not_exclusive_options, {}));
         }
 
+        // Fill timestamp of last last participation data.
+
         $survey.find('.open-option-data').attr('disabled', true);
         if (last_participation_data && last_participation_data.timestamp)
             $('.question-builtin [name=timestamp]').val(last_participation_data.timestamp);
@@ -133,29 +135,30 @@
             var isHidden = $input.is("[type=hidden]");
             var qid = parseInt($question.attr("id").replace("question-",""));
             var oid = parseInt(($option.attr("id") || '').replace("option-",""));
-            var checked = false;
-            // some checks are disabled on synthetized 'change' event
+
+            // Some checks are disabled on synthetized 'change' event.
             var synthetic = extra && extra.synthetic;
 
-            // If the <input> is a checkbox or radio button determine its checked state.
+            // If the INPUT is a checkbox or radio button with open data correctly
+            // set the state of the INPUT depending on the checked state of the option.
 
             if ($input.is(":radio,:checkbox")) {
-                checked = $input.is(":checked");
-                $question.find('.open-option-data').attr('disabled', function(){
+                $question.find('.open-option-data').attr('disabled', function() {
                     return !$(this).closest('li').find(":radio,:checkbox").is(':checked');
                 });
             }
 
-            // Else check the validity by data type
+            // Else, if the INPUT is of type text execute the type checks.
 
             else {
-                data_type = data_types[qid];
-                var valid = data_type.check($input);
-                var empty = $input.val() == "";
-                var err = !valid || ($question.is('.mandatory') && empty);
-                if (!synthetic)
-                    $question.toggleClass("error", err);
-                checked = !empty;
+                var data_type = data_types[qid];
+                if (data_type) {
+                    var valid = data_type.check($input);
+                    var empty = $input.val() == "";
+                    var error = !valid || ($question.is('.mandatory') && empty);
+                    if (!synthetic)
+                        $question.toggleClass("error", error);
+                }
             }
 
             // Set the active flag on all rules for this event.
@@ -227,8 +230,8 @@
             }
         };
 
-        $survey.find("input").change(function(evt, extra) {
-            if (evt.target.nodeName !== "INPUT")
+        $survey.find("input,select").change(function(evt, extra) {
+            if (evt.target.nodeName !== "INPUT" && evt.target.nodeName !== "SELECT")
                 return;
             window.wok.pollster._eh_args.push([evt, extra]);
             //setTimeout("window.wok.pollster._eh()", 1);
