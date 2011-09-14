@@ -39,48 +39,56 @@
 
         $.extend(this, {
             check: function($field) {
-                var pattern = new RegExp($field.attr('pattern'));
-                return pattern.test($field.val());
+                if (this._regex)
+                    return this._regex.test($field.val());
+                else
+                    return true;
             },
             bind: function($field) {
+                var pattern = $field.closest(".question").data("regex");
+                if (pattern)
+                    this._regex = new RegExp(pattern);
+                else
+                    this._regex = null;
             }
         });
     }
 
     function NumericType() {
         var self = this;
-
-        // Public methods.
-
-        $.extend(this, {
-            check: function($field) {
-                return true;
-            },
-            bind: function($field) {
-                $field
-                    .keypress(function(evt) {
-                        var key = String.fromCharCode(evt.which);
-                        var regex = /[0-9]/;
-                        return regex.test(key);
-                    });
-            }
-        });
-    }
-
-    function PostalCodeType() {
-        var self = this;
-        self.fmt = window.pollster_get_postal_code_format ? pollster_get_postal_code_format() : null;
-        if (self.fmt)
-            self.regex = new RegExp('^'+self.fmt+'$');
+        this._regex = /[0-9]/;
 
         // Public methods.
 
         $.extend(this, {
             check: function($field) {
                 var value = $field.val();
-                if (!value)
+                if (value && self._regex)
+                    return self._regex.test(value);
+                else
                     return true;
-                return self.regex.test(value);
+            },
+            bind: function($field) {
+            }
+        });
+    }
+
+    function PostalCodeType() {
+        var self = this;
+        if (window.pollster_get_postal_code_format)
+            this._regex = new RegExp('^'+pollster_get_postal_code_format()+'$');
+        else
+            this._regex = null;
+
+        // Public methods.
+
+        $.extend(this, {
+            check: function($field) {
+                var value = $field.val();
+                if (value && this._regex)
+                    return this._regex.test(value);
+                else
+                    return true;
             },
             bind: function($field) {
             }
