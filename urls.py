@@ -12,6 +12,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    ('^admin/cms/page/18/edit-plugin/[0-9]+/.*escapeHtml.*icon_src.*/$', 'django.views.defaults.page_not_found'),
+
     (r'^admin/surveys-editor/', include('apps.pollster.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^surveys/(?P<id>\d+)/$', 'apps.pollster.views.survey_run'),
