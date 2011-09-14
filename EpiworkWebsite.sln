@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "EpiworkWebsite", "EpiworkWebsite.mdproj", "{EB048AD1-D2B2-440F-B5C3-4783F5126E10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB048AD1-D2B2-440F-B5C3-4783F5126E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB048AD1-D2B2-440F-B5C3-4783F5126E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB048AD1-D2B2-440F-B5C3-4783F5126E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB048AD1-D2B2-440F-B5C3-4783F5126E10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = EpiworkWebsite.mdproj
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.FileWidth = 132
+		$1.RemoveTrailingWhitespace = True
+		$1.inheritsSet = VisualStudio
+		$1.inheritsScope = text/plain
+		$1.scope = text/plain
+	EndGlobalSection
+EndGlobal

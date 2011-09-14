@@ -137,7 +137,7 @@
                 );
             }
             if (type == "rule") {
-                self.$element.siblings(".rules").append($('<div class="rule">EMPTY RULE</div>'));
+                self.$element.siblings(".rules").append($('<div class="rule sufficient">EMPTY RULE</div>'));
             }
         });
 
@@ -365,6 +365,12 @@
             return false;
         });
 
+        $properties.find("[name=field_choice_description]").keyup(function(evt) {
+            if (self.$element === null) return true;
+            self.$element.attr("title", $(this).val());
+            return false;
+        });
+
         $properties.find("[name=field_choice_value]").keyup(function(evt) {
             if (self.$element === null) return true;
             self.$element.find(":checkbox,:radio").val($(this).val());
@@ -401,6 +407,7 @@
                 $properties
                     .find("[name=field_choice_text]").val($e.find("label").text()).end()
                     .find("[name=field_choice_value]").val($e.find(":checkbox,:radio").val()).end()
+                    .find("[name=field_choice_description]").val($e.attr("title")).end()
                     .find("[name=field_choice_starts_hidden]").val(getChoiceStartsHidden($e)).end()
                     .find("[name=field_choice_is_open]").val(getChoiceIsOpen($e)).end()
                     .show();
@@ -679,6 +686,10 @@
             var $type = $properties.find("[name=field_rule_type]");
             $type.val($element.attr("data-type")).change();
 
+            var $isSufficient = $properties.find("[name=field_rule_is_sufficient]");
+            var val = $element.hasClass('sufficient') ? "true" : "false";
+            $isSufficient.val(val).change();
+
             var $subject_options = $properties.find("[name=field_rule_subject_options]").empty();
             var $object_question = $properties.find("[name=field_rule_object_question]").empty();
 
@@ -721,6 +732,16 @@
             var ruleClass = eval($this.find(':selected').attr('data-js-class'));
             $properties.find("[name=field_rule_object_question]").closest(".property").toggle(Boolean(ruleClass.showQuestions));
             $properties.find("[name=field_rule_object_options]").closest(".property").toggle(Boolean(ruleClass.showOptions));
+            formatText(self.$element);
+            return false;
+        });
+
+        $properties.find("[name=field_rule_is_sufficient]").change(function(evt) {
+            if (self.$element === null) return true;
+            var $this = $(this);
+            var sufficient = $this.val() == "true";
+            self.$element.toggleClass('sufficient', sufficient);
+            self.$element.toggleClass('required', !sufficient);
             formatText(self.$element);
             return false;
         });

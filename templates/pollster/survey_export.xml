@@ -67,6 +67,7 @@
         {% for question in survey.question_set.all %}{% for rule in question.subject_of_rules.all %}
         <rule id="rule-{{ rule.id }}">
             <type>{{rule.js_class}}</type>
+            <is_sufficient>{{ rule.is_sufficient|yesno:"true,false" }}</is_sufficient>
             <subject_question ref="question-{{ question.id }}"/>
             <subject_options>
                  {% for option in rule.subject_options.all %}

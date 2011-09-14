@@ -48,7 +48,8 @@
             <ul class="choices sortable">
                 {% for option in question.options %}
                 {% if option.is_open %}
-                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open"
+                    title="{{ option.description }}">
                     <div class="info">{{ option.value }}</div>
                     <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
@@ -56,7 +57,8 @@
                         id="option-{{ option.id }}-field-open" />
                 </li>
                 {% else %}
-                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}"
+                    title="{{ option.description }}">
                     <div class="info">{{ option.value }}</div>
                     <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
@@ -70,7 +72,8 @@
             <ul class="choices sortable">
                 {% for option in question.options %}
                 {% if option.is_open %}
-                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open">
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open"
+                    title="{{ option.description }}">
                     <div class="info">{{ option.value }}</div>
                     <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
@@ -78,7 +81,8 @@
                         id="option-{{ option.id }}-field-open" />
                 </li>
                 {% else %}
-                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}">
+                <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}"
+                    title="{{ option.description }}">
                     <div class="info">{{ option.value }}</div>
                     <input type="checkbox" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field" />
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
@@ -104,7 +108,7 @@
             <div>Options</div>
             <ul class="choices sortable">
                 {% for option in question.options %}
-                <li id="option-{{ option.id }}">
+                <li id="option-{{ option.id }}" title="{{ option.description }}">
                     <div class="info">{{ option.value }}</div>
                     <input type="radio" value="{{ option.value }}" id="option-{{ option.id }}-field"/>
                     <label for="option-{{ option.id }}-field">{{ option.text }}</label>
@@ -135,7 +139,7 @@
                  data-subject-options="{% for option in rule.subject_options.all %} option-{{ option.id }} {% endfor %}"
                  data-object-question="question-{{ rule.object_question.id }}"
                  data-object-options="{% for option in rule.object_options.all %} option-{{ option.id }} {% endfor %}"
-                 class="rule">
+                 class="rule {{ rule.is_sufficient|yesno:'sufficient,required' }}">
             </div>
             {% endfor %}
         </div>

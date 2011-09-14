@@ -212,12 +212,14 @@ def _update_option_from_xhtml(survey, idmap, question, root, ordinal):
     elif xinput is not None:
         text = root.find('label').text
         value = xinput.get('value')
+        description = root.get('title')
         if match:
             option = models.Option.objects.get(id = int(match.group(1)))
             option.starts_hidden = hidden
             option.is_open = is_open
             option.text = text or ''
             option.value = value or ''
+            option.description = description or ''
             option.ordinal = ordinal
             option.save()
         else:
@@ -228,6 +230,7 @@ def _update_option_from_xhtml(survey, idmap, question, root, ordinal):
             option.is_open = is_open
             option.text = text or ''
             option.value = value or ''
+            option.description = description or ''
             option.ordinal = ordinal
             option.save()
     else:
@@ -264,7 +267,9 @@ def _update_rule_from_xhtml(survey, idmap, question, root):
     temp_id = root.get('id') or ''
     match = re.match('^rule-(\d+)$', temp_id)
     type_id = root.get('data-type')
-    deleted = 'deleted' in (root.get('class') or '')
+    classes = root.get('class') or ''
+    deleted = 'deleted' in classes
+    is_sufficient = 'sufficient' in classes
 
     subject_option_ids = [_get_option_id(idmap, id) for id in root.get('data-subject-options', '').split()]
     subject_option_ids = [id for id in subject_option_ids if id is not None]
@@ -281,6 +286,7 @@ def _update_rule_from_xhtml(survey, idmap, question, root):
         rule = None
     elif match:
         rule = models.Rule.objects.get(id = int(match.group(1)))
+        rule.is_sufficient = is_sufficient
         rule.rule_type = models.RuleType.objects.get(id = int(type_id))
         rule.subject_question = question
         rule.object_question = models.Question.objects.get(id = object_question_id)
@@ -294,6 +300,7 @@ def _update_rule_from_xhtml(survey, idmap, question, root):
         rule.save()
     else:
         rule = models.Rule()
+        rule.is_sufficient = is_sufficient
         rule.rule_type = models.RuleType.objects.get(id = int(type_id))
         rule.subject_question = question
         rule.object_question = models.Question.objects.get(id = object_question_id)
@@ -408,6 +415,7 @@ def survey_update_from_xml(survey, xmlstring):
 
     for xrule in xsurvey.find(p+'rules').findall(p+'rule'):
         rule = models.Rule()
+        rule.is_sufficient = (xrule.findtext(p+'is_sufficient') or '').strip() == 'true'
         rule.rule_type = models.RuleType.objects.all().get(js_class=xrule.findtext(p+'type'))
         rule.subject_question = get_ref(questions, xrule.find(p+'subject_question'))
         rule.object_question = get_ref(questions, xrule.find(p+'object_question'))
