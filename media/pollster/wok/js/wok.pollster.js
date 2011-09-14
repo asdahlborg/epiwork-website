@@ -123,21 +123,15 @@
             var extra = args[1];
 
             var $input = $(evt.target);
-
-            if ($input.hasClass('open-option-data'))
-                return true;
             var $question = $(evt.target).closest(questionSelector);
-            if (!$question.length)
-                return true;
             var $option = $input.closest("li");
-            var isRadio = $input.is(":radio");
-            var isText = $input.is(":text");
-            var isHidden = $input.is("[type=hidden]");
-            var qid = parseInt($question.attr("id").replace("question-",""));
-            var oid = parseInt(($option.attr("id") || '').replace("option-",""));
+
+            if ($input.hasClass('open-option-data') || !$question.length)
+                return true;
 
             // Some checks are disabled on synthetized 'change' event.
             var synthetic = extra && extra.synthetic;
+            var qid = parseInt($question.attr("id").replace("question-",""));
 
             // If the INPUT is a checkbox or radio button with open data correctly
             // set the state of the INPUT depending on the checked state of the option.
