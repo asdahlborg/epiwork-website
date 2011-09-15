@@ -212,10 +212,6 @@ def survey_export(request, id):
 def survey_import(request):
     form_import = forms.SurveyImportForm()
     if request.method == 'POST':
-        print form_import.is_valid()
-        import pprint
-        pprint.pprint(form_import.errors)
-        pprint.pprint(request.FILES)
         form_import = forms.SurveyImportForm(request.POST, request.FILES)
         if form_import.is_valid():
             xml = request.FILES['data'].read()
