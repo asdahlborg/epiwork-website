@@ -2,6 +2,7 @@
 django-cms==2.1.4
 django-piston
 south
+django-sekizai
 django-appmedia
 django-contact-form
 django-haystack

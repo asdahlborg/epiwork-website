@@ -1,0 +1,25 @@
+{% load sekizai_tags %}
+
+{% addtoblock "js" %}<script type="text/javascript" src="http://www.google.com/jsapi"></script>{% endaddtoblock %}
+{% addtoblock "js" %}<script type="text/javascript" src="{{ MEDIA_URL }}pollster/wok/js/wok.pollster.js"></script>{% endaddtoblock %}
+{% addtoblock "js" %}<script type="text/javascript" src="{{ MEDIA_URL }}pollster/wok/js/wok.pollster.charts.js"></script>{% endaddtoblock %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+    wok.pollster.charts.init(function() {
+        $(function() {
+            wok.pollster.charts.createCharts('.survey-chart .chart');
+        });
+    });
+</script>
+{% endaddtoblock %}
+
+<div class="survey-chart">
+    {% if chart.has_data %}
+    <div id="pollster-chart-{{ chart.id }}" class="chart" data-chart-url="{% url pollster_chart_data chart.survey.id chart.shortname %}"
+         style="width:440px;height:330px">
+    </div>
+    {% else %}
+    <div class="chart-no-data"
+         style="width:440px;height:330px;background:#EEE;padding:20px">No available data</div>
+    {% endif %}
+</div>

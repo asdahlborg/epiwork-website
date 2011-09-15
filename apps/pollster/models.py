@@ -2,6 +2,7 @@ from django.db import models, connection, transaction, IntegrityError, DatabaseE
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.core.validators import RegexValidator
+from cms.models import CMSPlugin
 from xml.etree import ElementTree
 import re, warnings, datetime, json
 import simplejson as json
@@ -762,7 +763,7 @@ class Chart(models.Model):
         unique_together = ('survey', 'shortname')
 
     def __unicode__(self):
-        return "Chart %s" % (self.shortname, )
+        return "Chart %s for %s" % (self.shortname, self.survey)
 
     @models.permalink
     def get_absolute_url(self):
@@ -830,3 +831,6 @@ class Chart(models.Model):
             return (cursor.description, cursor.fetchall())
         except DatabaseError, e:
             return ((('Error',),), ((str(e),),))
+
+class SurveyChartPlugin(CMSPlugin):
+    chart = models.ForeignKey(Chart)
