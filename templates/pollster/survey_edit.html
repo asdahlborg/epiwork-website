@@ -17,8 +17,9 @@
 {% block navigation %}
     <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
     {% if survey.id %}
-    <li><a href="{% url pollster_survey_test survey.id %}">Test Survey</a></li>
     <li><a href="{% url pollster_survey_translation_list survey.id %}">Translate Survey</a></li>
+    <li><a href="{% url pollster_survey_chart_list survey.id %}">Charts</a></li>
+    <li><a href="{% url pollster_survey_test survey.id %}">Test Survey</a></li>
     {% endif %}
 {% endblock %}
 

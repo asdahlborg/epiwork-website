@@ -163,7 +163,8 @@ def survey_translation_list_or_add(request, id):
         form_add = forms.SurveyTranslationAddForm(request.POST)
         if form_add.is_valid():
             language = form_add.cleaned_data['language']
-            if survey.translationsurvey_set.all().filter(language=language)[0:1]:
+            translations = survey.translationsurvey_set.all().filter(language=language)[0:1]
+            if translations:
                 translation = translations[0]
             else:
                 translation = models.TranslationSurvey(survey=survey, language=language)
@@ -201,6 +202,50 @@ def survey_translation_edit(request, id, language):
     })
 
 @staff_member_required
+def survey_chart_list_or_add(request, id):
+    survey = get_object_or_404(models.Survey, pk=id)
+    form_add = forms.SurveyChartAddForm()
+    if request.method == 'POST':
+        form_add = forms.SurveyChartAddForm(request.POST)
+        if form_add.is_valid():
+            shortname = form_add.cleaned_data['shortname']
+            charts = survey.chart_set.all().filter(shortname=shortname)[0:1]
+            if charts:
+                chart = charts[0]
+            else:
+                chart = models.Chart(survey=survey, shortname=shortname)
+                chart.type = models.ChartType.objects.all().order_by('id')[0]
+                chart.save()
+            return redirect(chart)
+    return request_render_to_response(request, 'pollster/survey_chart_list.html', {
+        "survey": survey,
+        "form_add": form_add
+    })
+
+
+@staff_member_required
+def survey_chart_edit(request, id, shortname):
+    survey = get_object_or_404(models.Survey, pk=id)
+    chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+    form_chart = forms.SurveyChartEditForm(instance=chart)
+    if request.method == 'POST':
+        form_chart = forms.SurveyChartEditForm(request.POST, instance=chart)
+        if form_chart.is_valid():
+            form_chart.save()
+            if not chart.update_table():
+                msg = 'Unable to gather some data. Please check the SQL statements.'
+                if chart.is_published:
+                    messages.error(request, msg)
+                else:
+                    messages.warning(request, msg)
+            return redirect(chart)
+    return request_render_to_response(request, 'pollster/survey_chart_edit.html', {
+        "survey": survey,
+        "chart": chart,
+        "form_chart": form_chart,
+    })
+
+@staff_member_required
 def survey_export(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     response = render(request, 'pollster/survey_export.xml', { "survey": survey }, content_type='application/xml')
@@ -220,6 +265,19 @@ def survey_import(request):
             parser.survey_update_from_xml(survey, xml)
             return redirect(survey)
     return redirect(survey_list)
+
+def chart_data(request, id, shortname):
+    chart = None
+    if request.user.is_active and request.user.is_staff:
+        survey = get_object_or_404(models.Survey, pk=id)
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+    else:
+        survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname, status='PUBLISHED')
+    survey_user = _get_active_survey_user(request)
+    user_id = request.user.id
+    global_id = survey_user and survey_user.global_id
+    return HttpResponse(chart.to_json(user_id, global_id), mimetype='application/json')
 
 # based on http://djangosnippets.org/snippets/2059/
 def urls(request, prefix=''):

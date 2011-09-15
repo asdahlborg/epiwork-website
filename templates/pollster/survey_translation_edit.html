@@ -16,6 +16,7 @@
     <li><a href="{% url pollster_survey_edit survey.id %}">Edit Survey</a></li>
     {% endif %}
     <li><a href="{% url pollster_survey_translation_list survey.id %}">Translate Survey</a></li>
+    <li><a href="{% url pollster_survey_chart_list survey.id %}">Charts</a></li>
     <li><a href="{% url pollster_survey_test survey.id survey.translation.language %}">Test Survey</a></li>
 {% endblock %}
 

@@ -69,7 +69,6 @@
     <None Include="templates\influenzanet.html" />
     <None Include="templates\admin\pollster\survey\change_form.html" />
     <None Include="templates\base\blankbase.html" />
-    <None Include="templates\base\home.html" />
     <None Include="templates\base\menu.html" />
     <None Include="templates\base\sitebase.html" />
     <None Include="templates\base\submenu.html" />
@@ -380,7 +379,6 @@
     <None Include="media\pollster\wok\css\wok.pollster.css" />
     <None Include="media\pollster\wok\css\img\12_col.gif" />
     <None Include="media\pollster\wok\css\img\16_col.gif" />
-    <None Include="media\pollster\wok\js\innerxhtml.js" />
     <None Include="media\pollster\wok\js\parseuri.js" />
     <None Include="media\pollster\wok\js\underscore-min.js" />
     <None Include="media\pollster\wok\js\wok.jquery.js" />
@@ -392,5 +390,8 @@
     <None Include="media\pollster\wok\js\wok.pollster.virtualoptions.js" />
     <None Include="media\pollster\wok\js\wok.properties.js" />
     <None Include="bootstrap.sh" />
+    <None Include="media\pollster\wok\js\wok.pollster.charts.js" />
+    <None Include="templates\pollster\survey_chart_edit.html" />
+    <None Include="templates\pollster\survey_chart_list.html" />
   </ItemGroup>
 </Project>

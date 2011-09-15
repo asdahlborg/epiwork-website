@@ -20,6 +20,7 @@
     {% else %}
     <li><a href="{% url pollster_survey_translation_list survey.id %}">Translate Survey</a></li>
     {% endif %}
+    <li><a href="{% url pollster_survey_chart_list survey.id %}">Charts</a></li>
 {% endblock %}
 
 {% block content %}

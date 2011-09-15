@@ -1,0 +1,81 @@
+{% extends "pollster/base_admin.html" %}
+
+{% block title %}{{ survey }} Chart - EPIWork Survey Designer{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="/media/pollster/wok/css/wok.pollster.css" media="all" />
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.charts.js"></script>
+    <script type="text/javascript" src="/media/pollster/wok/js/wok.pollster.virtualoptions.js"></script>
+    <script type="text/javascript">
+        wok.pollster.charts.init(function() {
+            $(function() {
+                wok.pollster.charts.createCharts('.chart');
+                wok.pollster.charts.activateChartEditor('.chart-edit');
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block navigation %}
+    <li><a href="{% url pollster_survey_list %}">All Surveys</a></li>
+    {% if survey.is_editable %}
+    <li><a href="{% url pollster_survey_edit survey.id %}">Edit Survey</a></li>
+    {% endif %}
+    <li><a href="{% url pollster_survey_translation_list survey.id %}">Translate Survey</a></li>
+    <li><a href="{% url pollster_survey_chart_list survey.id %}">Charts</a></li>
+    <li><a href="{% url pollster_survey_test survey.id %}">Test Survey</a></li>
+{% endblock %}
+
+{% block content %}
+<div>
+    <div id="pollster-properties">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="property-groups">
+                <div class="tool-group">
+                    <div class="tool">
+                        <label>Chart for {{ survey }}</label>
+                        <button type="submit" class="action-save">Save</button>
+                    </div>
+                    {% if chart.has_data %}
+                    <div class="tool">
+                        <label>Visualization editor</label>
+                        <button type="button" class="chart-edit" data-chart-id="pollster-chart-{{ chart.id }}"
+                            data-json-target-id="id_chartwrapper">Edit</button>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="property-group">
+                    {% for field in form_chart.hidden_fields %}
+                        {{ field }}
+                    {% endfor %}
+                    {% for field in form_chart.visible_fields %}
+                    <div class="property readonly {{ field.errors|yesno:'error,' }}">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="pollster-canvas">
+        {% if chart.has_data %}
+        <div id="pollster-chart-{{ chart.id }}" class="chart" data-chart-url="{% url pollster_chart_data survey.id chart.shortname %}"
+             data-chart-type="{{ chart.type.shortname }}"
+             style="width:440px;height:330px">
+        </div>
+        {% else %}
+        <div class="chart-no-data"
+             style="width:440px;height:330px;background:#EEE;padding:20px">No available data</div>
+        {% endif %}
+    </div>
+    <div id="pollster-tools">
+    </div>
+</div>
+
+</div>
+{% endblock %}
