@@ -79,7 +79,7 @@
         $element.find('[data-subject-options]').each(function(){
             var ids = $(this).attr('data-subject-options');
             ids = jQuery.map(ids, function(id) {
-                if (jQuery.contains(idmap, id))
+                if (idmap[id] !== undefined)
                     return idmap[id];
                 return id;
             });
@@ -87,13 +87,13 @@
         });
         $element.find('[data-object-question]').each(function(){
             var id = $(this).attr('data-object-question');
-            if (jQuery.contains(idmap, id))
+            if (idmap[id] !== undefined)
                 $(this).attr('data-object-question', idmap[id]);
         });
         $element.find('[data-object-options]').each(function(){
             var ids = $(this).attr('data-object-options');
             ids = jQuery.map(ids, function(id) {
-                if (jQuery.contains(idmap, id))
+                if (idmap[id] !== undefined)
                     return idmap[id];
                 return id;
             });
@@ -162,6 +162,8 @@
 
             var $wrapper = self.$element.closest('.question-wrapper');
             var $clone = $wrapper.clone();
+            $clone.find('.selected').removeClass("selected");
+            $clone.removeClass("active");
             resetIds(designer, $clone);
             $wrapper.after($clone);
         });
