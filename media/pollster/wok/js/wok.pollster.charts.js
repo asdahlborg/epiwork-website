@@ -10,7 +10,7 @@
 
         var url = self.$container.attr('data-chart-url');
         if (!url)
-            return wok.error("missing data-chart-ref attribute on chart container");
+            return wok.error("missing data-chart-url attribute on chart container");
 
         function getData(callback) {
             $.getJSON(url, {}, function(data, textStatus, jqXHR) {
