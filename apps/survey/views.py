@@ -12,7 +12,8 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 
-from apps.survey import utils, models, forms
+from apps.survey import utils, models, forms, pollsterutils
+from apps.pollster import views as pollster_views
 from .survey import ( Specification,
                       FormBuilder,
                       JavascriptBuilder,
@@ -96,7 +97,8 @@ def index(request):
         return HttpResponseRedirect(url)
 
     # Check if the user has filled user profile
-    if utils.get_user_profile(survey_user) is None:
+    profile = pollsterutils.get_user_profile(request.user.id, survey_user.global_id)
+    if profile is None:
         messages.add_message(request, messages.INFO, 
             _('You have to fill your profile data first.'))
         url = reverse('apps.survey.views.profile_index')
@@ -104,41 +106,16 @@ def index(request):
         url = '%s?gid=%s&next=%s' % (url, survey_user.global_id, url_next)
         return HttpResponseRedirect(url)
 
-    spec = utils.load_specification(settings.SURVEY_ID)
-    context = get_survey_context(survey_user)
-    builder = FormBuilder(spec)
+    try:
+        survey = pollster.models.Survey.get_by_shortname('weekly')
+    except:
+        raise Exception("The survey application requires a published survey with the shortname 'weekly'")
 
-    if request.method == 'POST':
-        form = builder.get_form(context, request.POST)
-        if form.is_valid():
-            participation = utils.add_survey_participation(survey_user,
-                                                           spec.survey.id)
+    next = None
+    if 'next' not in request.GET:
+        next = reverse(thanks)
 
-            utils.add_response_queue(participation, spec, form.cleaned_data)
-            data = utils.format_response_data(spec, form.cleaned_data)
-            utils.save_last_response(survey_user, participation, data)
-            utils.save_local_flu_survey(survey_user, spec.survey.id, data)
-            utils.update_local_profile(survey_user)
-            utils.save_response_locally(survey_user.name,
-                                        spec.survey.id,
-                                        data,
-                                        participation.date)
-
-            return HttpResponseRedirect(reverse(thanks))
-        else:
-            messages.add_message(request, messages.INFO, 
-                _('One or more questions have empty or invalid ' \
-                          'answer. Please fix it first.'))
-    else:
-        form = builder.get_form(context)
-
-    js_builder = JavascriptBuilder(spec)
-    js = mark_safe(js_builder.get_javascript(context))
-
-    return render_to_response('survey/index.html', {
-        'form': form,
-        'js': js
-    }, context_instance=RequestContext(request))
+    return pollster_views.survey_run(request, survey.id, next=next)
 
 @login_required
 def profile_index(request):
@@ -155,8 +132,11 @@ def profile_index(request):
     except:
         raise Exception("The survey application requires a published survey with the shortname 'intake'")
 
-    from apps.pollster import views as pollster_views
-    return pollster_views.survey_run(request, survey.id)
+    next = None
+    if 'next' not in request.GET:
+        next = reverse(thanks_profile)
+
+    return pollster_views.survey_run(request, survey.id, next=next)
 
 @login_required
 def extra_index(request):

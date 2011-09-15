@@ -126,7 +126,7 @@ def survey_test(request, id, language=None):
     })
 
 @login_required
-def survey_run(request, id):
+def survey_run(request, id, next=None):
     survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
     survey_user = _get_active_survey_user(request)
     form = None
@@ -141,7 +141,7 @@ def survey_run(request, id):
         form = survey.as_form()(data)
         if form.is_valid():
             form.save()
-            next_url = _get_next_url(request, reverse(survey_run, kwargs={'id': id}))
+            next_url = next or _get_next_url(request, reverse(survey_run, kwargs={'id': id}))
             return HttpResponseRedirect(next_url)
         else:
             survey.set_form(form)
