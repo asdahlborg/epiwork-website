@@ -61,6 +61,10 @@
         var t = designer.getNextTemporaryId();
         if (id.match(/^question-/))
             return 'question-N'+t;
+        if (id.match(/^column-/))
+            return 'column-N'+t;
+        if (id.match(/^row-/))
+            return 'row-N'+t;
         if (id.match(/^option-/))
             return 'option-N'+t;
         if (id.match(/^rule-/))
@@ -70,7 +74,7 @@
 
     function resetIds(designer, $element) {
         var idmap = {}
-        $element.find('.question, [id^="option-"], [id^="rule-"]').each(function(){
+        $element.find('.question, [id^="column-"], [id^="row-"], [id^="option-"], [id^="rule-"]').each(function(){
             var newId = remakeIdTemporary(designer, this.id);
             $(this).find('#'+this.id+'-field').each(function(){ this.id = newId+'-field'; });
             idmap[this.id] = newId;
