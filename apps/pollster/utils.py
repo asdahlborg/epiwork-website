@@ -1,4 +1,4 @@
-from apps.pollster import models
+from . import models
 
 def get_user_profile(user_id, global_id):
     try:

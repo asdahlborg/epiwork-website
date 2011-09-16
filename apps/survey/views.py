@@ -12,8 +12,9 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 
-from apps.survey import utils, models, forms, pollsterutils
+from apps.survey import utils, models, forms
 from apps.pollster import views as pollster_views
+from apps.pollster import utils as pollster_utils
 from .survey import ( Specification,
                       FormBuilder,
                       JavascriptBuilder,
@@ -97,7 +98,7 @@ def index(request):
         return HttpResponseRedirect(url)
 
     # Check if the user has filled user profile
-    profile = pollsterutils.get_user_profile(request.user.id, survey_user.global_id)
+    profile = pollster_utils.get_user_profile(request.user.id, survey_user.global_id)
     if profile is None:
         messages.add_message(request, messages.INFO, 
             _('You have to fill your profile data first.'))
