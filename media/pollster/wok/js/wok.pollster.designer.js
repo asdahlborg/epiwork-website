@@ -7,7 +7,8 @@
         if ($tmpl.length === 1) {
             $tmpl.attr("id", "question-N" + designer.getNextTemporaryId());
             $tmpl.attr("data-question-type", type);
-            $tmpl.find("li").attr("id", "option-N" + designer.getNextTemporaryId())
+            $tmpl.find("li").attr("id", "option-N" + designer.getNextTemporaryId());
+            $tmpl.find(".data-name").text('?');
             designer.getTemplate().append(
                 $('<div class="question-wrapper clearfix"></div>')
                     .append($tmpl)
@@ -71,7 +72,6 @@
             self.nextTemporaryId = $template.find(".question:not(.question-builtin)").each(function(i) {
                 var $q = $(this);
                 var $i = $q.children(".info");
-                $q.find(".number").text((i+1)+'.');
                 $i.text(self.getQuestionShortname($q));
             }).length + 1;
         }
@@ -247,9 +247,9 @@
             },
 
             getQuestionShortname: function($element) {
-                var dn = $element.attr("data-shortname");
-                if (!dn)
-                    dn = "Q" + $element.attr("id").replace("question-", "");
+                var dn = $element.find(".data-name").text();
+                if (dn == '?')
+                    return '';
                 return dn;
             },
 

@@ -39,7 +39,7 @@
         </div>
         <div class="property">
             <label>Data Name</label>
-            <input type="text" name="field_question_shortname"/>
+            <input type="text" name="field_question_data_name" title="only letters, numbers and underscores allowed"/>
         </div>
         <div class="property">
             <label>Data Type</label>
@@ -91,7 +91,7 @@
         </div>
         <div class="property">
             <label>Tags</label>
-            <input type="text" name="field_question_tags"/>
+            <input type="text" name="field_question_tags" title="comma separated list of tags"/>
         </div>
         <div class="property">
             <label>Regular Expression</label>
@@ -152,7 +152,7 @@
         </div>
         <div class="property">
             <label>Value</label>
-            <input type="text" name="field_choice_value"/>
+            <input type="text" name="field_choice_value" title="only letters, numbers and underscores allowed"/>
         </div>
         <div class="property">
             <label>Start</label>
@@ -233,7 +233,7 @@
         <div class="template-question-text" data-visual="entry">
             <div class="question text">
                 <div class="info"></div>
-                <p><span class="number"></span><span class="title"></span></p>
+                <p class="data"><span class="data-name"></span><span class="title"></span></p>
                 <input type="text" name="$$" />
                 <p class="error-message"/>
                 <ul class="derived-values"></ul>
@@ -242,7 +242,7 @@
         <div class="template-question-single-choice" data-visual="radio">
             <div class="question single-choice">
                 <div class="info"></div>
-                <p><span class="number"></span><span class="title"></span></p>
+                <p class="data"><span class="data-name"></span><span class="title"></span></p>
                 <ul class="choices">
                     <li>
                         <div class="info"></div>
@@ -255,7 +255,7 @@
         <div class="template-question-multiple-choice">
             <div class="question multiple-choice" data-visual="check">
                 <div class="info"></div>
-                <p><span class="number"></span><span class="title"></span></p>
+                <p class="data"><span class="data-name"></span><span class="title"></span></p>
                 <ul class="choices">
                     <li>
                         <div class="info"></div>
@@ -268,7 +268,7 @@
         <div class="template-question-matrix-select">
             <div class="question matrix-select" data-visual="select">
                 <div class="info"></div>
-                <p><span class="number"></span><span class="title"></span></p>
+                <p class="data"><span class="data-name"></span><span class="title"></span></p>
                 <div>Columns</div>
                 <ul class="columns">
                     <li><span class="column-title"/></li>
@@ -290,7 +290,7 @@
         <div class="template-question-matrix-entry">
             <div class="question matrix-entry">
                 <div class="info"></div>
-                <p><span class="number"></span><span class="title"></span></p>
+                <p class="data"><span class="data-name"></span><span class="title"></span></p>
                 <div>Columns</div>
                 <ul class="columns">
                     <li><span class="column-title"/></li>

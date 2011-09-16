@@ -9,7 +9,6 @@
     {% for question in survey.question_set.all %}
         <question id="question-{{ question.id }}">
             <title>{{ question.title|default:'' }}</title>
-            <shortname>{{ question.shortname|default:'' }}</shortname>
             <data_name>{{ question.data_name|default:'' }}</data_name>
             <description>{{ question.description|default:'' }}</description>
             <type>{{ question.type }}</type>

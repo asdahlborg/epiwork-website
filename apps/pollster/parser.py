@@ -87,7 +87,7 @@ def _update_question_from_xhtml(survey, idmap, root, ordinal):
     if root.find('input') is not None:
         regex = root.find('input').get('pattern')
     error_message = ([e.text for e in root.findall('p') if 'error-message' in e.get('class', '')] + [None]) [0]
-    data_name = [e.text for e in root.findall('div') if 'info' in e.get('class', '')][0]
+    data_name = [e.text for e in root.findall('p/span') if 'data-name' in e.get('class', '')][0]
     title = [e.text for e in root.findall('p/span') if 'title' in e.get('class', '')][0]
     hidden = 'starts-hidden' in (root.get('class') or '')
     mandatory = 'mandatory' in (root.get('class') or '')
@@ -351,7 +351,6 @@ def survey_update_from_xml(survey, xmlstring):
         question.ordinal = question_ordinal
         question.survey = survey
         question.title = xquestion.findtext(p+'title')
-        question.shortname = xquestion.findtext(p+'shortname')
         question.data_name = xquestion.findtext(p+'data_name')
         question.description = xquestion.findtext(p+'description')
         question.type = xquestion.findtext(p+'type')

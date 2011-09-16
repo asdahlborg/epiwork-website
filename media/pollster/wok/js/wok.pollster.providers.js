@@ -189,11 +189,10 @@
             $(this).closest('.property-group').nextAll('.property-group').andSelf().hide();
         });
 
-        $properties.find("[name=field_question_shortname]").keyup(function(evt) {
+        $properties.find("[name=field_question_data_name]").keyup(function(evt) {
             if (self.$element === null) return true;
             var v = $(this).val();
-            self.$element.attr("data-shortname", v);
-            self.$element.children(".info").text(v);
+            self.$element.find(".data-name").text(v);
             return false;
         });
 
@@ -276,7 +275,7 @@
                     .find("[name=field_question_tags]").val($e.attr("data-tags")).end()
                     .find("[name=field_question_title]").val($.trim($e.find(".title").text())).end()
                     .find("[name=field_question_text]").val(getText($e.find("p").first())).end()
-                    .find("[name=field_question_shortname]").val(designer.getQuestionShortname($e)).end()
+                    .find("[name=field_question_data_name]").val(designer.getQuestionShortname($e)).end()
                     .find("[name=field_question_starts_hidden]").val(getQuestionStartsHidden($e)).end()
                     .find("[name=field_question_is_mandatory]").val(getQuestionIsMandatory($e)).end()
                     .find("[name=field_question_regex]").val($e.find('input').attr("pattern")).end()
@@ -656,8 +655,8 @@
                 if (selected.val()) {
                     var $o = $('#'+selected.first().val());
                     var i = $o.index() + 1;
-                    var v = $o.find("input").val() || $o.attr("data-value") || "NO VALUE";
-                    ret = "Option "+i+" ["+v+"]";
+                    var v = $o.find("input").val() || $o.attr("data-value") || "?";
+                    ret = "Option '" + v + "'";
                     if (selected.length == 2)
                         ret += " + another";
                     else if(selected.length > 2)
@@ -678,9 +677,9 @@
         function fillOptions($question, $dest) {
             $question.closest(".question-wrapper").find(".question li").each(function(i) {
                 var $o = $(this);
-                var v = $o.find("input").val() || $o.attr("data-value") || "NO VALUE";
+                var v = $o.find("input").val() || $o.attr("data-value") || "?";
                 $dest.append($('<option></option>')
-                    .text("Option " + (i+1) + " [" + v + "]")
+                    .text("Option '" + v + "'")
                     .attr("value", $o.attr("id"))
                 );
             });
@@ -709,7 +708,7 @@
             $(".question-wrapper > .question:not(.question-builtin)").each(function() {
                 var $q = $(this);
                 $object_question.append($('<option></option>')
-                    .text($q.find(".number").text()+" "+$q.find(".title").text() + " [" + $q.children(".info").text() + "]")
+                    .text($q.find(".data .data-name").text()+" '"+$q.find(".data .title").text() + "'")
                     .attr("value", $q.attr("id"))
                 );
             });
