@@ -191,8 +191,10 @@
 
         $properties.find("[name=field_question_data_name]").keyup(function(evt) {
             if (self.$element === null) return true;
-            var v = $(this).val();
-            self.$element.find(".data-name").text(v);
+            var v = $(this).val().trim();
+            var $e = self.$element.find(".data-name");
+            $e.text(v || "??");
+            $e.toggleClass('placeholder', !v);
             return false;
         });
 
@@ -378,8 +380,11 @@
 
         $properties.find("[name=field_choice_value]").keyup(function(evt) {
             if (self.$element === null) return true;
-            self.$element.find(":checkbox,:radio").val($(this).val());
-            self.$element.find(".info").text($(this).val());
+            var v = $(this).val().trim();
+            self.$element.find(":checkbox,:radio").val(v);
+            var $e = self.$element.find(".info");
+            $e.text(v || "??");
+            $e.toggleClass('placeholder', !v);
             return false;
         });
 
@@ -655,7 +660,7 @@
                 if (selected.val()) {
                     var $o = $('#'+selected.first().val());
                     var i = $o.index() + 1;
-                    var v = $o.find("input").val() || $o.attr("data-value") || "?";
+                    var v = $o.find("input").val() || $o.attr("data-value") || "??";
                     ret = "Option '" + v + "'";
                     if (selected.length == 2)
                         ret += " + another";
@@ -677,7 +682,7 @@
         function fillOptions($question, $dest) {
             $question.closest(".question-wrapper").find(".question li").each(function(i) {
                 var $o = $(this);
-                var v = $o.find("input").val() || $o.attr("data-value") || "?";
+                var v = $o.find("input").val() || $o.attr("data-value") || "??";
                 $dest.append($('<option></option>')
                     .text("Option '" + v + "'")
                     .attr("value", $o.attr("id"))

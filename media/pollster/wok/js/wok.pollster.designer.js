@@ -8,7 +8,6 @@
             $tmpl.attr("id", "question-N" + designer.getNextTemporaryId());
             $tmpl.attr("data-question-type", type);
             $tmpl.find("li").attr("id", "option-N" + designer.getNextTemporaryId());
-            $tmpl.find(".data-name").text('?');
             designer.getTemplate().append(
                 $('<div class="question-wrapper clearfix"></div>')
                     .append($tmpl)
@@ -248,7 +247,7 @@
 
             getQuestionShortname: function($element) {
                 var dn = $element.find(".data-name").text();
-                if (dn == '?')
+                if (dn == "??")
                     return '';
                 return dn;
             },
