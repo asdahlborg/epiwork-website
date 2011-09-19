@@ -98,14 +98,19 @@
     function YearMonthType() {
         var self = this;
 
+        function split(val) {
+            var month = parseInt(val.replace(/[/-].*$/, ''), 10);
+            var year = parseInt(val.replace(/^.*[/-]/, ''), 10);
+            return { year: year, month: month };
+        }
+
         // Public methods.
 
         $.extend(this, {
             check: function($field) {
                 var val = $field.val();
-                var month = parseInt(val.replace(/\/.*$/, ''), 10);
-                var year = parseInt(val.replace(/^.*\//, ''), 10);
-                return year && month;
+                var d = split(val)
+                return d.year && d.month;
             },
             bind: function($field) {
                 $field
@@ -119,11 +124,10 @@
                             inst.dpDiv.addClass('year-month-only');
                             $('head').append('<style id="hide-year-month-only-calendar" type="text/css">.year-month-only .ui-datepicker-calendar { display: none; }</style>');
                             var val = $(input).val();
-                            var month = parseInt(val.replace(/\/.*$/, ''), 10);
-                            var year = parseInt(val.replace(/^.*\//, ''), 10);
-                            if (year && month) {
+                            var d = split(val)
+                            if (d.year && d.month) {
                                 setTimeout(function(){
-                                    $(input).datepicker('setDate', new Date(year, month-1, 1));
+                                    $(input).datepicker('setDate', new Date(d.year, d.month-1, 1));
                                 }, 0);
                             }
 
@@ -144,7 +148,7 @@
                     .change(function(evt){
                         var $this = $(this);
                         var value = $this.val();
-                        if (!value.match(/\//)) {
+                        if (!value.match(/[/-]/)) {
                             $this.val('');
                         }
                         else {
