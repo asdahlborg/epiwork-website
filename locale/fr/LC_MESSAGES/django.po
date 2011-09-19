@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-19 14:27+0200\n"
+"POT-Creation-Date: 2011-09-19 14:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 #: apps/ew_contact_form/forms.py:12 apps/survey/forms/__init__.py:16
 #: templates/survey/people.html:8
@@ -283,9 +283,8 @@ msgid "Sender email"
 msgstr ""
 
 #: apps/reminder/models.py:42 apps/reminder/models.py:56
-#, fuzzy
 msgid "Sender name"
-msgstr "Modifica nome"
+msgstr ""
 
 #: apps/reminder/models.py:53
 msgid "Date"
@@ -319,28 +318,27 @@ msgstr ""
 
 #: apps/survey/views.py:50
 msgid "No symptoms"
-msgstr "Nessun sintomo"
+msgstr ""
 
 #: apps/survey/views.py:52
 msgid "Flu symptoms"
-msgstr "Sintomi influenzali"
+msgstr ""
 
 #: apps/survey/views.py:54
 msgid "Cold / allergy"
-msgstr "Raffreddore / allergia"
+msgstr ""
 
 #: apps/survey/views.py:56
 msgid "Gastrointestinal symptoms"
-msgstr "Sintomi gastro-intestinali"
+msgstr ""
 
 #: apps/survey/views.py:58
-#, fuzzy
 msgid "Other non-influenza symptons"
-msgstr "Altri sintomi non influenzali"
+msgstr ""
 
 #: apps/survey/views.py:60
 msgid "Next status"
-msgstr "Nessuno status"
+msgstr ""
 
 #: apps/survey/views.py:104
 msgid "You have to fill your profile data first."
@@ -700,7 +698,7 @@ msgstr ""
 
 #: templates/survey/people.html:16 templates/survey/thanks.html:19
 msgid "Remove"
-msgstr "Rimuovi"
+msgstr ""
 
 #: templates/survey/people.html:21
 msgid "Add new person"
@@ -720,11 +718,11 @@ msgstr ""
 
 #: templates/survey/people_remove.html:5
 msgid "Confirm removal"
-msgstr "Conferma rimozione"
+msgstr ""
 
 #: templates/survey/people_remove.html:8
 msgid "Confirm the removal of the person:"
-msgstr "Conferma la rimozione della persona:"
+msgstr ""
 
 #: templates/survey/people_remove.html:16
 msgid "Yes"
@@ -744,54 +742,46 @@ msgstr ""
 
 #: templates/survey/thanks.html:6
 msgid "Thanks for taking the time to fill out this survey."
-msgstr "Grazie per aver compilato il questionario."
+msgstr ""
 
 #: templates/survey/thanks.html:6
 msgid ""
 "Here is a summary of the information you entered for you and the members of "
 "your group or family:"
 msgstr ""
-"Ecco il riepilogo dei dati da te inseriti per te e per i componenti del tuo "
-"gruppo o nucleo familiare:"
 
 #: templates/survey/thanks.html:11
 msgid "Group members"
-msgstr "Membri del gruppo"
+msgstr ""
 
 #: templates/survey/thanks.html:11
 msgid "Health status"
-msgstr "Stato di salute"
+msgstr ""
 
 #: templates/survey/thanks.html:11
-#, fuzzy
 msgid "Manage "
-msgstr "Gestisci"
+msgstr ""
 
 #: templates/survey/thanks.html:16
 msgid "Change name"
-msgstr "Modifica nome"
+msgstr ""
 
 #: templates/survey/thanks.html:17
 msgid "Change profile"
-msgstr "Modifica profilo"
+msgstr ""
 
 #: templates/survey/thanks.html:18
 msgid "Enter symptoms"
-msgstr "Inserisci sintomi"
+msgstr ""
 
 #: templates/survey/thanks_profile.html:5
 msgid "Thanks for changing your profile,"
-msgstr "Grazie per aver modificato il tuo profilo,"
+msgstr ""
 
 #: templates/survey/thanks_profile.html:6
 msgid "Please, if you have not already done so, fill in"
-msgstr "Ti invitiamo, se non lo hai già fatto, a compilare"
+msgstr ""
 
 #: templates/survey/thanks_profile.html:6
-#, fuzzy
 msgid "the symptoms questionaire"
-msgstr "il questionario dei sintomi"
-
-#~ msgid "Or select the link on the right to return to the people."
-#~ msgstr ""
-#~ "Oppure seleziona il link a destra per tornare all'elenco delle persone."
+msgstr ""
