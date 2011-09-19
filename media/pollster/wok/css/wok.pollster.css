@@ -49,7 +49,7 @@
 .question .data .data-name.placeholder { border-bottom: 2px dotted #C00; }
 .question .derived-values { display: block; margin-left: 25px; list-style: circle; text-transform: uppercase; }
 
-.choices .info { display: block; float: right; font-size: 12px; font-weight: bold; opacity: 0.5; }
+.choices .info { display: block; float: right; font-size: 12px; font-weight: bold; opacity: 0.5; margin-left: 6px; }
 .choices .info.placeholder { border-bottom: 2px dotted #C00; }
 
 .rules { display: block; float: left; width: 242px; margin-left: 10px; font-size: 10px; }

@@ -5,6 +5,7 @@
 .question select.choices { margin-left: 20px; margin-bottom: 10px; max-width: 95%; }
 .question input[type=text] { margin: 0 0 10px 20px; }
 .question .choices input[type=text] { margin: 0 0 0 15px; }
+.question .choices .open-option-data { float: right; }
 .question .title { font-weight: bold; margin-right: 5px; }
 .question .number { font-weight: bold; margin-right: 3px; }
 .question .info { display: none; }
