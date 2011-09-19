@@ -5,16 +5,16 @@
         var $question = $survey.find("#question-"+question);
         var names = [];
         if ($question.is('.question-text')) {
-            names = [ $question.attr('data-shortname') ];
+            names = $question.find('.user-field').map(function() { return this.name; });
         }
         else if ($question.is('.question-single-choice')) {
-            names = [ $question.attr('data-shortname') ];
+            names = $question.find('.user-field').map(function() { return this.name; });
         }
         else if ($question.is('.question-multiple-choice')) {
+            var selectors = '.user-field';
             if (options && options.length)
-                names = jQuery.map(options, function(o){ return $question.find('#option-'+o+'-field, #option-'+o+'-field-open').attr('name'); });
-            else
-                names = $question.find('.choices > li').find('> :checkbox, .open-option-data').map(function() { return this.name; } );
+                selectors = jQuery.map(options, function(o){ return '#option-'+o+'-field, #option-'+o+'-field-open'}).join(',');
+            names = $question.find(selectors).map(function() { return this.name; });
         }
         return names;
     }
@@ -369,7 +369,7 @@
 
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
                 var options = $survey.find(selectors).attr('checked', true);
-                options.change();
+                options.trigger('change', { synthetic: true });
             }
         });
     }
@@ -408,7 +408,7 @@
 
                 var selectors = self.objectOptions.map(function(o){return '#option-'+o+' :input'}).join(',');
                 var options = $survey.find(selectors).attr('checked', false);
-                options.change();
+                options.trigger('change', { synthetic: true });
             }
         });
     }
@@ -495,7 +495,7 @@
                 var object_names = get_question_data_names($survey, this.objectQuestion, this.objectOptions);
                 jQuery.each(object_names, function(i, object_name) {
                     var object_data = self.last_participation_data[object_name];
-                    form_element_fill($survey.find('[name='+object_name+']'), object_data).change();
+                    form_element_fill($survey.find('[name='+object_name+']'), object_data).trigger('change', { synthetic: true });
                 });
             }
         });
@@ -723,7 +723,7 @@
                 var object_names = get_question_data_names($survey, this.objectQuestion, this.objectOptions);
                 $.each(object_names, function(i, object_name) {
                     var object_data = self.last_participation_data[object_name];
-                    form_element_fill($survey.find('[name='+object_name+']'), object_data).change();
+                    form_element_fill($survey.find('[name='+object_name+']'), object_data).trigger('change', { synthetic: true });
                 });
             }
         });

@@ -34,7 +34,7 @@
             </p>
             {% if question.is_text %}
             <input type="text" name="{{ question.data_name }}" id="question-{{ question.id }}-field"
-                   value="{{ question.form_value }}" />
+                   value="{{ question.form_value }}" class="user-field" />
             <p class="error-message">{{ question.translated_error_message }}</p>
             <ul class="derived-values">
                 {% for option in question.options %}
@@ -48,7 +48,7 @@
             {% endif %}
             {% if question.is_single_choice %}
                 {% if question.is_visual_dropdown %}
-                <select class="choices" name="{{ question.data_name }}">
+                <select class="choices user-field" name="{{ question.data_name }}">
                     {% for option in question.options %}
                     <option id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}"
                          value="{{ option.value }}" {% if option.form_is_checked %}selected="selected"{% endif %}
@@ -64,9 +64,9 @@
                     <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open"
                         title="{{ option.translated_description }}">
                         <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
-                            {% if option.form_is_checked %}checked="checked"{% endif %} />
+                            {% if option.form_is_checked %}checked="checked"{% endif %} class="user-field" />
                         <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
-                        <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                        <input type="text" name="{{ option.open_option_data_name }}" class="user-field open-option-data {{ option.open_option_data_type.css_class }}"
                             id="option-{{ option.id }}-field-open"
                             value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open" />
                     </li>
@@ -74,7 +74,7 @@
                     <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %}"
                         title="{{ option.translated_description }}">
                         <input type="radio" value="{{ option.value }}" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
-                            {% if option.form_is_checked %}checked="checked"{% endif %} />
+                            {% if option.form_is_checked %}checked="checked"{% endif %} class="user-field" />
                         <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
                     </li>
                     {% endif %}
@@ -90,9 +90,9 @@
                 <li id="option-{{ option.id }}" class="{% if option.starts_hidden %} starts-hidden {% endif %} open"
                     title="{{ option.translated_description }}">
                     <input type="checkbox" value="1" name="{{ option.data_name }}" id="option-{{ option.id }}-field"
-                        {% if option.form_is_checked %}checked="checked"{% endif %} />
+                        {% if option.form_is_checked %}checked="checked"{% endif %} class="user-field" />
                     <label for="option-{{ option.id }}-field">{{ option.translated_text }}</label>
-                    <input type="text" name="{{ option.open_option_data_name }}" class="open-option-data {{ option.open_option_data_type.css_class }}"
+                    <input type="text" name="{{ option.open_option_data_name }}" class="user-field open-option-data {{ option.open_option_data_type.css_class }}"
                         id="option-{{ option.id }}-field-open"
                         value="{{ option.open_option_data_form_value }}" id="option-{{ option.id }}-field-open" />
                 </li>
@@ -132,7 +132,7 @@
                     {% endif %}
                     {% for column in columns %}
                     <td>
-                        <select name="{{ column.data_name }}">
+                        <select name="{{ column.data_name }}" class="user-field">
                             {% for option in column.options %}
                             <option value="{{ option.value }}" title="{{ option.translated_description }}">{{ option.translated_text }}</option>
                             {% endfor %}
@@ -168,7 +168,7 @@
                     {% endif %}
                     {% for column in columns %}
                     <td>
-                        <input type="text" name="{{ column.data_name }}" />
+                        <input type="text" name="{{ column.data_name }}" class="user-field" />
                     </td>
                     {% endfor %}
                 </tr>
