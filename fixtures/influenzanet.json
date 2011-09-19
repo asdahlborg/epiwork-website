@@ -756,6 +756,78 @@
         }
     },
     {
+        "pk": 86,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-19 13:18:25",
+            "app_name": "survey",
+            "migration": "0003_auto__add_field_surveyuser_deleted"
+        }
+    },
+    {
+        "pk": 87,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-19 13:18:25",
+            "app_name": "reminder",
+            "migration": "0007_auto__add_remindererror"
+        }
+    },
+    {
+        "pk": 88,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-19 13:18:25",
+            "app_name": "partnersites",
+            "migration": "0004_auto__add_field_sitesettings_contact_form_recipient"
+        }
+    },
+    {
+        "pk": 89,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-19 13:18:25",
+            "app_name": "pollster",
+            "migration": "0005_postalcodefield"
+        }
+    },
+    {
+        "pk": 90,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-19 13:18:25",
+            "app_name": "pollster",
+            "migration": "0006_rule_is_sufficient__option_description"
+        }
+    },
+    {
+        "pk": 91,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-19 13:18:25",
+            "app_name": "pollster",
+            "migration": "0007_charts"
+        }
+    },
+    {
+        "pk": 92,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-19 13:18:25",
+            "app_name": "pollster",
+            "migration": "0008_charttypes"
+        }
+    },
+    {
+        "pk": 93,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-19 13:18:26",
+            "app_name": "pollster",
+            "migration": "0009_auto__add_surveychartplugin"
+        }
+    },
+    {
         "pk": 28,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -870,6 +942,24 @@
             "model": "category",
             "name": "category",
             "app_label": "banner"
+        }
+    },
+    {
+        "pk": 75,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "chart",
+            "name": "chart",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 74,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "charttype",
+            "name": "chart type",
+            "app_label": "pollster"
         }
     },
     {
@@ -1206,6 +1296,15 @@
         }
     },
     {
+        "pk": 73,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "remindererror",
+            "name": "reminder error",
+            "app_label": "reminder"
+        }
+    },
+    {
         "pk": 68,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -1274,6 +1373,15 @@
         "fields": {
             "model": "survey",
             "name": "survey",
+            "app_label": "pollster"
+        }
+    },
+    {
+        "pk": 76,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "surveychartplugin",
+            "name": "survey chart plugin",
             "app_label": "pollster"
         }
     },
@@ -6403,46 +6511,50 @@
         "pk": 1,
         "model": "survey.surveyuser",
         "fields": {
-            "last_participation": 2,
-            "last_participation_date": "2010-11-04 12:50:43",
             "name": "bon",
+            "last_participation": 2,
             "global_id": "193807d8-4a30-4601-9bc5-bc59db1696cd",
-            "user": []
+            "deleted": false,
+            "user": [],
+            "last_participation_date": "2010-11-04 12:50:43"
         }
     },
     {
         "pk": 2,
         "model": "survey.surveyuser",
         "fields": {
-            "last_participation": 4,
-            "last_participation_date": "2010-11-04 15:26:57",
             "name": "zo",
+            "last_participation": 4,
             "global_id": "cd81f47b-779d-42fe-8dbf-332401e0b9a4",
-            "user": []
+            "deleted": false,
+            "user": [],
+            "last_participation_date": "2010-11-04 15:26:57"
         }
     },
     {
         "pk": 3,
         "model": "survey.surveyuser",
         "fields": {
-            "last_participation": 8,
-            "last_participation_date": "2010-11-08 15:45:34",
             "name": "bon",
+            "last_participation": 8,
             "global_id": "b9e8353b-e113-4b03-856f-c118e0b70666",
-            "user": []
+            "deleted": false,
+            "user": [],
+            "last_participation_date": "2010-11-08 15:45:34"
         }
     },
     {
         "pk": 4,
         "model": "survey.surveyuser",
         "fields": {
-            "last_participation": null,
-            "last_participation_date": null,
             "name": "Antwan",
+            "last_participation": null,
             "global_id": "12139e6b-3b87-4c2f-80e8-5b0e6f98afbd",
+            "deleted": false,
             "user": [
                 1
-            ]
+            ],
+            "last_participation_date": null
         }
     },
     {
@@ -6998,6 +7110,7 @@
         "model": "partnersites.sitesettings",
         "fields": {
             "logo": "",
+            "contact_form_recipient": "('Antwan Wiersma', 'webdev@grotegriepmeting.nl')",
             "footer": null,
             "site": 1,
             "light_color": "ce2626"
@@ -9710,6 +9823,16 @@
         }
     },
     {
+        "pk": 6,
+        "model": "pollster.questiondatatype",
+        "fields": {
+            "js_class": "wok.pollster.datatypes.PostalCode",
+            "css_class": "postalcode-type",
+            "db_type": "db.models.PostalCodeField(null=True, blank=True)",
+            "title": "PostalCode"
+        }
+    },
+    {
         "pk": 1,
         "model": "pollster.virtualoptiontype",
         "fields": {
@@ -9770,6 +9893,22 @@
             "js_class": "wok.pollster.virtualoptions.RegularExpression",
             "question_data_type": 1,
             "title": "Regular expression"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "pollster.charttype",
+        "fields": {
+            "shortname": "google-charts",
+            "description": "Google Chart"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "pollster.charttype",
+        "fields": {
+            "shortname": "google-fusion-map",
+            "description": "Google Fusion Map"
         }
     },
     {
@@ -10583,6 +10722,60 @@
         }
     },
     {
+        "pk": 220,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_chart",
+            "name": "Can add chart",
+            "content_type": 75
+        }
+    },
+    {
+        "pk": 221,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_chart",
+            "name": "Can change chart",
+            "content_type": 75
+        }
+    },
+    {
+        "pk": 222,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_chart",
+            "name": "Can delete chart",
+            "content_type": 75
+        }
+    },
+    {
+        "pk": 217,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_charttype",
+            "name": "Can add chart type",
+            "content_type": 74
+        }
+    },
+    {
+        "pk": 218,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_charttype",
+            "name": "Can change chart type",
+            "content_type": 74
+        }
+    },
+    {
+        "pk": 219,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_charttype",
+            "name": "Can delete chart type",
+            "content_type": 74
+        }
+    },
+    {
         "pk": 169,
         "model": "auth.permission",
         "fields": {
@@ -10796,6 +10989,33 @@
             "codename": "delete_survey",
             "name": "Can delete survey",
             "content_type": 51
+        }
+    },
+    {
+        "pk": 223,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_surveychartplugin",
+            "name": "Can add survey chart plugin",
+            "content_type": 76
+        }
+    },
+    {
+        "pk": 224,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_surveychartplugin",
+            "name": "Can change survey chart plugin",
+            "content_type": 76
+        }
+    },
+    {
+        "pk": 225,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_surveychartplugin",
+            "name": "Can delete survey chart plugin",
+            "content_type": 76
         }
     },
     {
@@ -11093,6 +11313,33 @@
             "codename": "delete_newslettertranslation",
             "name": "Can delete news letter translation",
             "content_type": 71
+        }
+    },
+    {
+        "pk": 214,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_remindererror",
+            "name": "Can add reminder error",
+            "content_type": 73
+        }
+    },
+    {
+        "pk": 215,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_remindererror",
+            "name": "Can change reminder error",
+            "content_type": 73
+        }
+    },
+    {
+        "pk": 216,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_remindererror",
+            "name": "Can delete reminder error",
+            "content_type": 73
         }
     },
     {
