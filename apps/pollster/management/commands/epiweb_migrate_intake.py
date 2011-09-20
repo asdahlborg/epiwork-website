@@ -161,13 +161,18 @@ class Command(BaseCommand):
             raise CommandError("you need to specify the source database")
 
         Intake = models.Survey.get_by_shortname('intake').as_model()
+        profiles = self.load_profiles(options)
+        count = 0
         for p in self.load_profiles(options):
+            count += 1
+            if verbosity > 1:
+                self.stdout.write("importing %s of %s\n" % (count, len(profiles)))
             u = p["user"]
-            if u and verbosity > 1:
+            if u and verbosity > 2:
                 self.stdout.write("%s (user %s, global_id %s)\n" % (u["name"], u["user_id"], u["global_id"]))
             if p["updated"]:
                 data = p["data"]
-                if verbosity > 1:
+                if verbosity > 2:
                     self.stdout.write("  compiled on %s: %s\n" % (p["updated"], data))
                 intake = Intake()
                 intake.user = u["user_id"]

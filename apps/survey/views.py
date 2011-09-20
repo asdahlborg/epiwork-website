@@ -3,7 +3,7 @@
 from django import forms
 from django.template import Context, loader, RequestContext
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.db import transaction
+from django.db import connection, transaction, DatabaseError
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
@@ -39,23 +39,37 @@ def get_active_survey_user(request):
 
 @login_required
 def thanks(request):
+    try:
+        survey = pollster.models.Survey.get_by_shortname('weekly')
+    except:
+        raise Exception("The survey application requires a published survey with the shortname 'weekly'")
+    Weekly = survey.as_model()
+
     persons = models.SurveyUser.objects.filter(user=request.user)
     for person in persons:
-        responses = list(models.LastResponse.objects.filter(user=person))
-        if responses[0].data:
-            response_dict = pickle.loads(str(responses[0].data))
-            wq1 = set(response_dict['WeeklyQ1'])
-            wq1b = response_dict['WeeklyQ1b']
-            if wq1==set([0]):
-                person.diag = _('No symptoms')
-            elif (wq1b == 0) and wq1.intersection([1,17,11,8,9]) and wq1.intersection([6,5,18]):
-                person.diag = _('Flu symptoms')
-            elif wq1.intersection([2,3,4,5,6]):
-               person.diag = _('Cold / allergy')
-            elif len(wq1.intersection([15,19,14,12,13]))>1:
-               person.diag = _('Gastrointestinal symptoms')
-            else:
-               person.diag = _('Other non-influenza symptons')
+        data = survey.get_last_participation_data(request.user.id, person.global_id)
+        status = None
+        if data:
+            try:
+                cursor = connection.cursor()
+                params = { 'weekly_id': data["id"] }
+                cursor.execute("""
+                    SELECT S.status
+                      FROM pollster_health_status S
+                     WHERE S.pollster_results_weekly_id = :weekly_id""", params)
+                status = cursor.fetchone()[0]
+            except DatabaseError, e:
+                print e
+        if status == "NO-SYMPTOMS":
+            person.diag = _('No symptoms')
+        elif status == "ILI":
+            person.diag = _('Flu symptoms')
+        elif status == "COMMON-COLD":
+           person.diag = _('Cold / allergy')
+        elif status == "GASTROINTESTINAL":
+           person.diag = _('Gastrointestinal symptoms')
+        elif status == "NON-INFLUENZA":
+           person.diag = _('Other non-influenza symptons')
         else: 
            person.diag = _('Next status')
     return render_to_response('survey/thanks.html', {'persons': persons}, 
