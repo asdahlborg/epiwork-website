@@ -56,7 +56,7 @@
 
     function NumericType() {
         var self = this;
-        this._regex = /[0-9]/;
+        this._regex = /^[0-9]$/;
 
         // Public methods.
 

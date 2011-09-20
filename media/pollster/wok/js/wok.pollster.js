@@ -126,12 +126,29 @@
             var $question = $(evt.target).closest(questionSelector);
             var $option = $input.closest("li");
 
-            if ($input.hasClass('open-option-data') || !$question.length)
+            if (!$question.length)
                 return true;
 
             // Some checks are disabled on synthetized 'change' event.
             var synthetic = extra && extra.synthetic;
             var qid = parseInt($question.attr("id").replace("question-",""));
+            var oid = null;
+            if ($option.length)
+                oid = parseInt($option.attr("id").replace("option-",""));
+
+            // If the input is for the open data of an option apply datatype
+            // checks and exit
+            if ($input.hasClass('open-option-data')) {
+                var data_type = open_option_data_types[qid][oid];
+                if (data_type) {
+                    var valid = data_type.check($input);
+                    var empty = $input.val() == "";
+                    var error = !valid || ($question.is('.mandatory') && empty);
+                    if (!synthetic)
+                        $question.toggleClass("error", error);
+                }
+                return true;
+            }
 
             // If the INPUT is a checkbox or radio button with open data correctly
             // set the state of the INPUT depending on the checked state of the option.

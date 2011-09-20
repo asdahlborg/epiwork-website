@@ -53,7 +53,7 @@ class Survey(models.Model):
     parent = models.ForeignKey('self', db_index=True, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, default='')
     shortname = models.SlugField(max_length=255, default='')
-    version = models.SlugField(max_length=255, default='')
+    version = models.SlugField(max_length=255, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=255, default='DRAFT', choices=SURVEY_STATUS_CHOICES)
