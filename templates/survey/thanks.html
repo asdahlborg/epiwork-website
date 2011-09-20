@@ -22,5 +22,28 @@
 {% endfor %}
 </table>
 
+<br/>
+
+<ul class="diag">
+{% for person in persons %}
+{% if person.health_history %}
+<li class="diag-person">
+    <h5 class="diag-name">{{ person.name }}</h5>
+    <ul>
+    {% for item in person.health_history %}
+    <li class="diag-item diag-{{ item.status|default:'UNKNOWN' }}">
+        <img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ item.status }}.png"
+             alt="{{ item.diag }}:" title="{{ item.diag }}"/>
+        <span title="{{ item.timestamp }}" class="diag-timestamp">
+            {{ item.timestamp|date:'SHORT_DATE_FORMAT' }}
+        </span>
+    </li>
+    {% endfor %}
+    </ul>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+
 {% endblock %}
 

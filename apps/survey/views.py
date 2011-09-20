@@ -37,6 +37,57 @@ def get_active_survey_user(request):
         except models.SurveyUser.DoesNotExist:
             raise ValueError()
 
+def _decode_person_health_status(status):
+    if status == "NO-SYMPTOMS":
+        diag = _('No symptoms')
+    elif status == "ILI":
+        diag = _('Flu symptoms')
+    elif status == "COMMON-COLD":
+       diag = _('Cold / allergy')
+    elif status == "GASTROINTESTINAL":
+       diag = _('Gastrointestinal symptoms')
+    elif status == "NON-INFLUENZA":
+       diag = _('Other non-influenza symptons')
+    else:
+       diag = _('Next status')
+    return diag
+
+def _get_person_health_status(request, survey, global_id):
+    data = survey.get_last_participation_data(request.user.id, global_id)
+    status = None
+    if data:
+        try:
+            cursor = connection.cursor()
+            params = { 'weekly_id': data["id"] }
+            cursor.execute("""
+                SELECT S.status
+                  FROM pollster_health_status S
+                 WHERE S.pollster_results_weekly_id = :weekly_id""", params)
+            status = cursor.fetchone()[0]
+        except DatabaseError, e:
+            print e
+    return (status, _decode_person_health_status(status))
+
+def _get_person_health_history(request, survey, global_id):
+    results = []
+    print global_id
+    try:
+        cursor = connection.cursor()
+        params = { 'user_id': request.user.id, 'global_id': global_id }
+        cursor.execute("""
+            SELECT W.timestamp, S.status
+              FROM pollster_health_status S, pollster_results_weekly W
+             WHERE S.pollster_results_weekly_id = W.id
+               AND W.user = :user_id
+               AND W.global_id = :global_id
+             ORDER BY W.timestamp""", params)
+        results = cursor.fetchall()
+    except DatabaseError, e:
+        print e
+    for ret in results:
+        timestamp, status = ret
+        yield {'timestamp': timestamp, 'status': status, 'diag':_decode_person_health_status(status)}
+
 @login_required
 def thanks(request):
     try:
@@ -47,31 +98,9 @@ def thanks(request):
 
     persons = models.SurveyUser.objects.filter(user=request.user)
     for person in persons:
-        data = survey.get_last_participation_data(request.user.id, person.global_id)
-        status = None
-        if data:
-            try:
-                cursor = connection.cursor()
-                params = { 'weekly_id': data["id"] }
-                cursor.execute("""
-                    SELECT S.status
-                      FROM pollster_health_status S
-                     WHERE S.pollster_results_weekly_id = :weekly_id""", params)
-                status = cursor.fetchone()[0]
-            except DatabaseError, e:
-                print e
-        if status == "NO-SYMPTOMS":
-            person.diag = _('No symptoms')
-        elif status == "ILI":
-            person.diag = _('Flu symptoms')
-        elif status == "COMMON-COLD":
-           person.diag = _('Cold / allergy')
-        elif status == "GASTROINTESTINAL":
-           person.diag = _('Gastrointestinal symptoms')
-        elif status == "NON-INFLUENZA":
-           person.diag = _('Other non-influenza symptons')
-        else: 
-           person.diag = _('Next status')
+        person.health_status, person.diag = _get_person_health_status(request, survey, person.global_id)
+        person.health_history = list(_get_person_health_history(request, survey, person.global_id))[-7:]
+        print person.health_history
     return render_to_response('survey/thanks.html', {'persons': persons}, 
                               context_instance=RequestContext(request))
 
