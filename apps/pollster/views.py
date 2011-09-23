@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.utils.safestring import mark_safe
+from django.utils.translation import get_language
 from django.template import RequestContext
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
@@ -16,6 +17,13 @@ import re, datetime
 def request_render_to_response(req, *args, **kwargs):
     kwargs['context_instance'] = RequestContext(req)
     return render_to_response(*args, **kwargs)
+
+def get_object_or_none(model, **kwargs):
+    try:
+        return model.objects.get(**kwargs)
+    except model.DoesNotExist:
+        return None
+
 
 @staff_member_required
 def survey_list(request):
@@ -128,6 +136,9 @@ def survey_test(request, id, language=None):
 @login_required
 def survey_run(request, id, next=None):
     survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
+    language = get_language()
+    translation = get_object_or_none(models.TranslationSurvey, survey=survey, language=language, status="PUBLISHED")
+    survey.set_translation_survey(translation)
     survey_user = _get_active_survey_user(request)
     form = None
     user_id = request.user.id
