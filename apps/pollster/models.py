@@ -648,6 +648,7 @@ class TranslationSurvey(models.Model):
     status = models.CharField(max_length=255, default='DRAFT', choices=SURVEY_TRANSLATION_STATUS_CHOICES)
 
     class Meta:
+        verbose_name = 'Translation'
         ordering = ['survey', 'language']
         unique_together = ('survey', 'language')
 
