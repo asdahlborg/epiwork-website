@@ -12,6 +12,8 @@ from nani.models import TranslatableModel, TranslatedFields
 # "Reminder" may refer to a NewsLetter object, or simply a placeholder
 # that's based on the is_default_reminder NewsLetterTemplate
 
+NO_INTERVAL = -1
+
 class UserReminderInfo(models.Model):
     user = models.ForeignKey(User, unique=True)
     last_reminder = models.DateTimeField(null=True, blank=True)
@@ -29,7 +31,7 @@ class UserReminderInfo(models.Model):
 class ReminderSettings(models.Model):
     site = models.OneToOneField(Site)
     send_reminders = models.BooleanField(_("Send reminders"), help_text=_("Check this box to send reminders"))
-    interval = models.IntegerField(_("Interval"), choices=((7 ,_("Weekly")), (14,_("Bi-weekly")), (-1, _("Don't send reminders at a fixed interval"))), null=True, blank=True)
+    interval = models.IntegerField(_("Interval"), choices=((7 ,_("Weekly")), (14,_("Bi-weekly")), (NO_INTERVAL, _("Don't send reminders at a fixed interval"))), null=True, blank=True)
     begin_date = models.DateTimeField(_("Begin date"), help_text=_("Date & time of the first reminder and point of reference for subsequent reminders; (Time zone: MET)"), null=True, blank=True)
 
     def __unicode__(self):
@@ -133,7 +135,7 @@ def get_prev_reminder_date(now):
         return None
     if now < settings.begin_date:
         return None
-    if settings.interval == -1:
+    if settings.interval == NO_INTERVAL:
         qs = NewsLetter.objects.filter(date__lte=now).exclude(date__gt=now).order_by("-date")
         if qs.count() == 0:
             return None

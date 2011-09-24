@@ -9,7 +9,7 @@ from django import forms
 from mock import Mock, patch, patch_object
 
 from .send import create_message, send
-from .models import UserReminderInfo, ReminderSettings, NewsLetter, NewsLetterTemplate, get_upcoming_dates, get_prev_reminder_date, get_prev_reminder, get_reminders_for_users, ReminderError, ReminderError
+from .models import NO_INTERVAL, UserReminderInfo, ReminderSettings, NewsLetter, NewsLetterTemplate, get_upcoming_dates, get_prev_reminder_date, get_prev_reminder, get_reminders_for_users, ReminderError, ReminderError
 from .forms import NewsLetterForm
 
 class ReminderTestCase(unittest.TestCase):
@@ -137,7 +137,7 @@ class ReminderTestCase(unittest.TestCase):
             site=site,
             send_reminders=True,
             begin_date=september_first,
-            interval=-1,
+            interval=NO_INTERVAL,
         )
 
         # no newsletter: nothing to send
@@ -225,7 +225,7 @@ class ReminderTestCase(unittest.TestCase):
             site=Site.objects.get(),
             send_reminders=True,
             begin_date=datetime(2010, 9, 1, 14, 0, 0),
-            interval=-1,
+            interval=NO_INTERVAL,
         )
 
         form = NewsLetterForm() 
