@@ -4,11 +4,13 @@ from datetime import datetime, timedelta, date
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.conf import settings
+from django import forms
 
 from mock import Mock, patch, patch_object
 
 from .send import create_message, send
 from .models import UserReminderInfo, ReminderSettings, NewsLetter, NewsLetterTemplate, get_upcoming_dates, get_prev_reminder_date, get_prev_reminder, get_reminders_for_users, ReminderError, ReminderError
+from .forms import NewsLetterForm
 
 class ReminderTestCase(unittest.TestCase):
     def setUp(self):
@@ -126,6 +128,47 @@ class ReminderTestCase(unittest.TestCase):
         self.assertEqual("German subject", result['de'].subject)
         self.assertFalse('fr' in result)
 
+    def test_get_prev_reminder_irregular_intervals(self):
+        september_first  = datetime(2010, 9, 1, 14, 0, 0)
+        september_second = datetime(2010, 9, 2, 14, 0, 0)
+
+        site = Site.objects.get()
+        settings = ReminderSettings.objects.create(
+            site=site,
+            send_reminders=True,
+            begin_date=september_first,
+            interval=-1,
+        )
+
+        # no newsletter: nothing to send
+        self.assertEquals(None, get_prev_reminder_date(datetime(2010, 12, 12)))
+
+        # default reminder template is not used
+        template = NewsLetterTemplate.objects.create(is_default_reminder=True, sender_email="test@example.org", sender_name="Test")
+        template.translate('en')
+        template.subject = "Template subject"
+        template.message = "Template message"
+        template.save()
+        self.assertEquals(None, get_prev_reminder_date(datetime(2010, 12, 12)))
+
+        # but newsletters are used
+        newsletter = NewsLetter.objects.create(date=september_first, sender_email="test@example.org", sender_name="Test")
+        newsletter.translate('en')
+        newsletter.subject = "September first"
+        newsletter.message = "September first"
+        newsletter.save()
+        result = get_prev_reminder(datetime(2010, 9, 1, 20))
+        self.assertEqual("test@example.org", result['en'].sender_email)
+
+        # newer newsletters have preference
+        newsletter = NewsLetter.objects.create(date=september_second, sender_email="test@example.org", sender_name="Test")
+        newsletter.translate('en')
+        newsletter.subject = "September second"
+        newsletter.message = "September second"
+        newsletter.save()
+        result = get_prev_reminder(datetime(2010, 9, 2, 20))
+        self.assertEqual("test@example.org", result['en'].sender_email)
+
     def test_get_reminders_for_users(self):
         september_first = datetime(2010, 9, 1, 14, 0, 0)
 
@@ -173,6 +216,20 @@ class ReminderTestCase(unittest.TestCase):
         self.assertTrue('<body' in html)
         self.assertTrue('this is text' in html)
         self.assertFalse('<body' in text_base)
+
+    def test_irregular_intervals_form(self):
+        form = NewsLetterForm() 
+        self.assertEquals(forms.ChoiceField, type(form.fields['date']))
+
+        settings = ReminderSettings.objects.create(
+            site=Site.objects.get(),
+            send_reminders=True,
+            begin_date=datetime(2010, 9, 1, 14, 0, 0),
+            interval=-1,
+        )
+
+        form = NewsLetterForm() 
+        self.assertEquals(forms.DateField, type(form.fields['date']))
 
     def test_email_errors(self):
         return

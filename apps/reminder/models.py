@@ -29,8 +29,8 @@ class UserReminderInfo(models.Model):
 class ReminderSettings(models.Model):
     site = models.OneToOneField(Site)
     send_reminders = models.BooleanField(_("Send reminders"), help_text=_("Check this box to send reminders"))
+    interval = models.IntegerField(_("Interval"), choices=((7 ,_("Weekly")), (14,_("Bi-weekly")), (-1, _("Don't send reminders at a fixed interval"))), null=True, blank=True)
     begin_date = models.DateTimeField(_("Begin date"), help_text=_("Date & time of the first reminder and point of reference for subsequent reminders; (Time zone: MET)"), null=True, blank=True)
-    interval = models.IntegerField(_("Interval"), choices=((7 ,_("Weekly")), (14,_("Bi-weekly"))), null=True, blank=True)
 
     def __unicode__(self):
         return _(u"Reminder settings")
@@ -85,13 +85,14 @@ class ReminderError(models.Model):
     def email(self):
         return self.user.email
 
-def get_upcoming_dates(now):
+def get_settings():
     if ReminderSettings.objects.count() == 0:
-        raise StopIteration()
+        return None
+    return ReminderSettings.objects.all()[0] 
 
-    settings = ReminderSettings.objects.all()[0] 
-
-    if not settings.send_reminders:
+def get_upcoming_dates(now):
+    settings = get_settings()
+    if not settings or not settings.send_reminders:
         raise StopIteration()
 
     to_yield = 5
@@ -120,6 +121,9 @@ def get_default_for_newsitem(language):
     return NewsLetterTemplate.objects.language(language).filter(is_default_newsitem=True)[0]
 
 def get_prev_reminder_date(now):
+    """Returns the date of the previous reminder or None if there's no
+    such date"""
+
     if ReminderSettings.objects.count() == 0:
         return None
 
@@ -129,6 +133,11 @@ def get_prev_reminder_date(now):
         return None
     if now < settings.begin_date:
         return None
+    if settings.interval == -1:
+        qs = NewsLetter.objects.filter(date__lte=now).exclude(date__gt=now).order_by("-date")
+        if qs.count() == 0:
+            return None
+        return qs[0].date
 
     current = settings.begin_date
     prev = settings.begin_date
@@ -140,6 +149,9 @@ def get_prev_reminder_date(now):
         current += datetime.timedelta(settings.interval)
 
 def get_prev_reminder(now):
+    """Returns the reminder (newsletter/tempate) to send at a given moment
+    as a dict with languages as keys, or None if there is no such reminder"""
+
     prev_date = get_prev_reminder_date(now)
     if prev_date is None:
         return None
@@ -150,7 +162,6 @@ def get_prev_reminder(now):
             if NewsLetter.objects.language(language).filter(date=prev_date):
                 result[language] = NewsLetter.objects.language(language).get(date=prev_date)
         return result
-
 
     result = {}
     for language, name in settings.LANGUAGES:

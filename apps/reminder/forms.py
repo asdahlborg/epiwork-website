@@ -7,13 +7,14 @@ from cms.plugins.text.widgets.wymeditor_widget import WYMEditor
 
 from nani.forms import TranslatableModelForm
 
-from .models import ReminderSettings, NewsLetterTemplate, NewsLetter, get_default_for_newsitem, get_upcoming_dates
+from .models import ReminderSettings, NewsLetterTemplate, NewsLetter, get_default_for_newsitem, get_upcoming_dates, get_settings
 
 class ReminderSettingsForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(ReminderSettingsForm, self).clean()
-        if cleaned_data.get('send_reminders') and not (cleaned_data.get('begin_date') and cleaned_data.get('interval')):
-            raise forms.ValidationError(_("If 'send_reminders' is checked the other fields pertaining to reminders are required"))
+        if cleaned_data.get('send_reminders'):
+            if cleaned_data.get('interval') != -1 and not (cleaned_data.get('begin_date') and cleaned_data.get('interval')):
+                raise forms.ValidationError(_("If 'send_reminders' is checked the other fields pertaining to reminders are required"))
         return cleaned_data
 
     class Meta:
@@ -32,7 +33,17 @@ class NewsLetterForm(TranslatableModelForm):
     def __init__(self, *args, **kwargs):
         super(NewsLetterForm, self).__init__(*args, **kwargs)
         
-        self.fields['date'].choices = get_upcoming_dates(datetime.now())
+        if get_settings() and get_settings().interval == -1: 
+            self.fields['date'] = forms.DateField()
+        else:
+            self.fields['date'].choices = get_upcoming_dates(datetime.now())
+            
+
+        # I don't understand where self.language comes from, it must be some magic in TranslatableModelForm
+        # but I can't identify it; in any case we need some default for tests
+        if not hasattr(self, 'language'):
+            self.language = 'en'
+
         for fieldname in ['sender_email', 'sender_name', 'subject', 'message']:
             self.fields[fieldname].initial = getattr(get_default_for_newsitem(self.language), fieldname) if get_default_for_newsitem(self.language) else "" 
 
