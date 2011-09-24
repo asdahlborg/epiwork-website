@@ -169,6 +169,9 @@ class ReminderTestCase(unittest.TestCase):
         result = get_prev_reminder(datetime(2010, 9, 2, 20))
         self.assertEqual("test@example.org", result['en'].sender_email)
 
+        # even for irregular reminders the begin-date is respected
+        self.assertEqual(None, get_prev_reminder(datetime(2008, 9, 2, 20)))
+
     def test_get_reminders_for_users(self):
         september_first = datetime(2010, 9, 1, 14, 0, 0)
 

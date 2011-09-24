@@ -126,15 +126,11 @@ def get_prev_reminder_date(now):
     """Returns the date of the previous reminder or None if there's no
     such date"""
 
-    if ReminderSettings.objects.count() == 0:
+    settings = get_settings()
+
+    if not settings or not settings.send_reminders or now < settings.begin_date:
         return None
 
-    settings = ReminderSettings.objects.all()[0] 
-
-    if not settings.send_reminders:
-        return None
-    if now < settings.begin_date:
-        return None
     if settings.interval == NO_INTERVAL:
         qs = NewsLetter.objects.filter(date__lte=now).exclude(date__gt=now).order_by("-date")
         if qs.count() == 0:
