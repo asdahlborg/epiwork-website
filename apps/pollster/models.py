@@ -648,6 +648,7 @@ class TranslationSurvey(models.Model):
     status = models.CharField(max_length=255, default='DRAFT', choices=SURVEY_TRANSLATION_STATUS_CHOICES)
 
     class Meta:
+        verbose_name = 'Translation'
         ordering = ['survey', 'language']
         unique_together = ('survey', 'language')
 
@@ -676,6 +677,9 @@ class TranslationQuestion(models.Model):
         ordering = ['translation', 'question']
         unique_together = ('translation', 'question')
 
+    def __unicode__(self):
+        return "TranslationQuestion(%s) for %s" % (self.translation.language, self.question)
+
     def as_form(self, data=None):
         class TranslationQuestionForm(ModelForm):
             class Meta:
@@ -693,7 +697,7 @@ class TranslationQuestionRow(models.Model):
         unique_together = ('translation', 'row')
 
     def __unicode__(self):
-        return "TranslationQuestionRow(%s) for %s" % (self.language, self.row)
+        return "TranslationQuestionRow(%s) for %s" % (self.translation.language, self.row)
 
     def as_form(self, data=None):
         class TranslationRowForm(ModelForm):
@@ -712,7 +716,7 @@ class TranslationQuestionColumn(models.Model):
         unique_together = ('translation', 'column')
 
     def __unicode__(self):
-        return "TranslationQuestionColumn(%s) for %s" % (self.language, self.column)
+        return "TranslationQuestionColumn(%s) for %s" % (self.translation.language, self.column)
 
     def as_form(self, data=None):
         class TranslationColumnForm(ModelForm):
@@ -732,7 +736,7 @@ class TranslationOption(models.Model):
         unique_together = ('translation', 'option')
 
     def __unicode__(self):
-        return "TranslationOption(%s) for %s" % (self.language, self.option)
+        return "TranslationOption(%s) for %s" % (self.translation.language, self.option)
 
     def as_form(self, data=None):
         class TranslationOptionForm(ModelForm):
