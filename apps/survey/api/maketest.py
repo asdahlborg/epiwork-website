@@ -51,7 +51,7 @@ fy = '/?format=yaml'
 format = fe
 
 def w(s):
-  fd.write(s + '\n')
+    fd.write(s + '\n')
 
 # Write html test file
 
@@ -70,7 +70,7 @@ header = """<html>
 w(header)
 w('<ul>')
 for resource in gets:
-  w('<li><a href="' + resource + format + '">' + resource + '</a>')
+    w('<li><a href="' + resource + format + '">' + resource + '</a>')
 w('<ul>')
 w('</body>')
 
@@ -102,13 +102,13 @@ w(header)
 
 w('# GETs')
 for resource in gets:
-  w('e curl $opts ${base}' + resource + format)
+    w('e curl $opts ${base}' + resource + format)
 
 # Puts
 
 def ww(s):
-  w("echo '>>>' " + s)
-  w(s)
+    w("echo '>>>' " + s)
+    w(s)
 
 w('# PUTs')
 ww('curl $post $opts --data \"$data\" ${base}Report')
