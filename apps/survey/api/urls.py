@@ -16,7 +16,7 @@ from re import match
 auth = HttpBasicAuthentication(realm="EIP")
 ad = { 'authentication': auth }
 
-# Perform some introspection on the handlers in order to build the urlpatterns.
+# possible TODO: Perform some introspection on the handlers in order to build the urlpatterns.
 
 resources = [ 
               (GetUserProfile, ('uid',)),
@@ -28,19 +28,22 @@ resources = [
               (GetStatistic, ('lang', 'id', 'uid',)),
             ]
 
-q = [url(r'^%s' % handler.__name__ + 
-         reduce(lambda acc,i: r'/(?P<%s>[^/]+)' % str(i) + acc, attrs, ''),
-         Resource(handler=handler, **ad)
-         #, {'emitter_format': 'json'}
-         )
-     for handler, attrs in resources]
+with_attrs = [url(r'^%s/%s' % (handler.__name__, "/".join([r'(?P<%s>[^/]+)' % attr for attr in attrs])),
+                Resource(handler=handler, **ad)
+                #, {'emitter_format': 'json'}
+                )
+                for handler, attrs in resources]
 
-r = [url(r'^%s' % handler.__name__, Resource(handler=handler, **ad)
-         #, {'emitter_format': 'json'}
-         )
-     for handler, attr in resources]
+without_attrs = [url(r'^%s' % handler.__name__,
+                Resource(handler=handler, **ad)
+                #, {'emitter_format': 'json'}
+                )
+                for handler, attr in resources]
 
-p = q + r
-p.insert(0, '')
+urlpatterns = patterns("",
+    *(
+    with_attrs + \
+    without_attrs
+    )
+)
 
-urlpatterns = patterns(*p)
