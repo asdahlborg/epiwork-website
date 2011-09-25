@@ -62,7 +62,6 @@ class GetUserProfile(EpiwebModelResource):
 
     def dehydrate(self, bundle):
         id = bundle.data['id']
-        print 'bundle', bundle.data.keys(), 
         return loads(str(bundle.data['data']))
     
 class GetReportSurvey(ModelResource):
@@ -76,9 +75,7 @@ class GetReportSurvey(ModelResource):
 
     def dehydrate(self, bundle):
         spec = bundle.data['specification']
-        print 1
         xml = xmlify_spec(spec)
-        print 2, xml
         return xml
         # return str(parse_specification(bundle.data['specification']))
 
