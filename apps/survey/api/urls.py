@@ -18,34 +18,27 @@ ad = { 'authentication': auth }
 
 # Perform some introspection on the handlers in order to build the urlpatterns.
 
-resources = [ [GetUserProfile, 'uid'],
-              [GetReportSurvey, 'language'],
-              [GetImage, 'uid', 'image_type'],
-              [Report, 'uid', 'reports'],
-              [GetLanguage],
-              [GetStatsHeaders, 'language'],
-              [GetStatistic, 'lang', 'id', 'uid'],
+resources = [ 
+              (GetUserProfile, ('uid',)),
+              (GetReportSurvey, ('language',)),
+              (GetImage, ('uid', 'image_type',)),
+              (Report, ('uid', 'reports',)),
+              (GetLanguage, ()),
+              (GetStatsHeaders, ('language',)),
+              (GetStatistic, ('lang', 'id', 'uid',)),
             ]
 
-def stringify(c):
-    "Returns string name for class."
-    m = match("<.*\.([^>]+)'>", str(c))
-    if m:
-        return m.group(1)
-    else:
-        return ''
-
-q = [url(r'^%s' % stringify(s[0]) + 
-         reduce(lambda acc,i: r'/(?P<%s>[^/]+)' % str(i) + acc, s[1:], ''),
-         Resource(handler=s[0], **ad)
+q = [url(r'^%s' % handler.__name__ + 
+         reduce(lambda acc,i: r'/(?P<%s>[^/]+)' % str(i) + acc, attrs, ''),
+         Resource(handler=handler, **ad)
          #, {'emitter_format': 'json'}
          )
-     for s in resources]
+     for handler, attrs in resources]
 
-r = [url(r'^%s' % stringify(s[0]), Resource(handler=s[0], **ad)
+r = [url(r'^%s' % handler.__name__, Resource(handler=handler, **ad)
          #, {'emitter_format': 'json'}
          )
-     for s in resources]
+     for handler, attr in resources]
 
 p = q + r
 p.insert(0, '')
