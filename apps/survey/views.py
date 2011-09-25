@@ -56,34 +56,27 @@ def _get_person_health_status(request, survey, global_id):
     data = survey.get_last_participation_data(request.user.id, global_id)
     status = None
     if data:
-        try:
-            cursor = connection.cursor()
-            params = { 'weekly_id': data["id"] }
-            cursor.execute("""
-                SELECT S.status
-                  FROM pollster_health_status S
-                 WHERE S.pollster_results_weekly_id = :weekly_id""", params)
-            status = cursor.fetchone()[0]
-        except DatabaseError, e:
-            print e
+        cursor = connection.cursor()
+        params = { 'weekly_id': data["id"] }
+        cursor.execute("""
+            SELECT S.status
+              FROM pollster_health_status S
+             WHERE S.pollster_results_weekly_id = :weekly_id""", params)
+        status = cursor.fetchone()[0]
     return (status, _decode_person_health_status(status))
 
 def _get_person_health_history(request, survey, global_id):
     results = []
-    print global_id
-    try:
-        cursor = connection.cursor()
-        params = { 'user_id': request.user.id, 'global_id': global_id }
-        cursor.execute("""
-            SELECT W.timestamp, S.status
-              FROM pollster_health_status S, pollster_results_weekly W
-             WHERE S.pollster_results_weekly_id = W.id
-               AND W.user = :user_id
-               AND W.global_id = :global_id
-             ORDER BY W.timestamp""", params)
-        results = cursor.fetchall()
-    except DatabaseError, e:
-        print e
+    cursor = connection.cursor()
+    params = { 'user_id': request.user.id, 'global_id': global_id }
+    cursor.execute("""
+        SELECT W.timestamp, S.status
+          FROM pollster_health_status S, pollster_results_weekly W
+         WHERE S.pollster_results_weekly_id = W.id
+           AND W.user = :user_id
+           AND W.global_id = :global_id
+         ORDER BY W.timestamp""", params)
+    results = cursor.fetchall()
     for ret in results:
         timestamp, status = ret
         yield {'timestamp': timestamp, 'status': status, 'diag':_decode_person_health_status(status)}
@@ -100,7 +93,6 @@ def thanks(request):
     for person in persons:
         person.health_status, person.diag = _get_person_health_status(request, survey, person.global_id)
         person.health_history = list(_get_person_health_history(request, survey, person.global_id))[-7:]
-        print person.health_history
     return render_to_response('survey/thanks.html', {'persons': persons}, 
                               context_instance=RequestContext(request))
 
