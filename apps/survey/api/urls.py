@@ -20,24 +20,13 @@ ad = { 'authentication': auth }
 
 resources = [ [GetUserProfile, 'uid'],
               [GetReportSurvey, 'language'],
-              [GetImage, 'image_type', 'uid'],
+              [GetImage, 'uid', 'image_type'],
               [Report, 'uid', 'reports'],
               [GetLanguage],
               [GetStatsHeaders, 'language'],
-              [GetStatistic, 'uid', 'id', 'lang'],
+              [GetStatistic, 'lang', 'id', 'uid'],
             ]
 
-def reverse_rest(l):
-    "Take a list of list and reverse the 'rest' (cdr) of each list"
-    def rev(l):
-        l.reverse()
-        return l
-    def rr(l):
-        r = rev(l[1:])
-        r.insert(0, l[0])
-        return r
-    return map(rr, l)
-    
 def stringify(c):
     "Returns string name for class."
     m = match("<.*\.([^>]+)'>", str(c))
@@ -51,12 +40,12 @@ q = [url(r'^%s' % stringify(s[0]) +
          Resource(handler=s[0], **ad)
          #, {'emitter_format': 'json'}
          )
-     for s in reverse_rest(resources)]
+     for s in resources]
 
 r = [url(r'^%s' % stringify(s[0]), Resource(handler=s[0], **ad)
          #, {'emitter_format': 'json'}
          )
-     for s in reverse_rest(resources)]
+     for s in resources]
 
 p = q + r
 p.insert(0, '')
