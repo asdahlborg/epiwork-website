@@ -18,4 +18,5 @@ TEMPLATE_CONTEXT_PROCESSORS = tuple([
         "sekizai.context_processors.sekizai",
     ]])
 
+SOUTH_TESTS_MIGRATE = False
 
