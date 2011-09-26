@@ -18,6 +18,10 @@ class EpiwebHandler(BaseHandler):
     # for clarity: the line below is not implemented in any way.
     authorized_EIP_users = ['ema']
 
+    csrf_exempt = True # this is the default, but it's provided here for explicity
+    # this depends on Django-piston with at least the following changeset
+    # https://bitbucket.org/jespern/django-piston/changeset/adeef486579b
+
     def check_args():
         "Each read should have a *args. Check against argslist."
         pass
