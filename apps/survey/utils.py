@@ -206,7 +206,7 @@ def save_last_response(survey_user, participation, data):
 
 def save_extra_response(survey_user, participation, data):
     response = models.ExtraResponse()
-    response.user_id = survey_user.user.all()[0].id
+    response.user_id = survey_user.user.id
     response.user = survey_user
     response.participation = participation
     response.data = pickle.dumps(data)

@@ -122,8 +122,10 @@ def select_user(request, template='survey/select_user.html'):
     users = models.SurveyUser.objects.filter(user=request.user, deleted=False)
     total = len(users)
     if total == 0:
-        survey_user = models.SurveyUser.objects.create(name=request.user.username)
-        survey_user.user.add(request.user)
+        survey_user = models.SurveyUser.objects.create(
+            user=request.user,
+            name=request.user.username,
+        )
         url = '%s?gid=%s' % (next, survey_user.global_id)
         return HttpResponseRedirect(url)
         
@@ -305,9 +307,9 @@ def people_add(request):
         form = forms.AddPeople(request.POST)
         if form.is_valid():
             survey_user = models.SurveyUser()
+            survey_user.user = request.user
             survey_user.name = form.cleaned_data['name']
             survey_user.save()
-            survey_user.user.add(request.user)
 
             messages.add_message(request, messages.INFO, 
                 _('A new person has been added.'))

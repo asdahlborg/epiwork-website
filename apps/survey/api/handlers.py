@@ -46,12 +46,9 @@ class GetUserProfile(EpiwebHandler):
                 raise GetError(4, "activation code '%s' ambiguous" % acode)
             su = sus[0]
             name = su.name
-            sua = su.user.all()
-            if len(sua) == 0:
+            if su.user is None:
                 raise GetError(2, "no django-users for activation code '%s'" % acode)
-            if len(sua) > 1:
-                raise GetError(4, "multiple django-users for activation code '%s'" % acode)
-            u = sua[0]
+            u = su.user
             acodes = [code_hash(s.global_id)
                                 for s in SurveyUser.objects.filter(user=u)]
             pd = su.last_participation_date

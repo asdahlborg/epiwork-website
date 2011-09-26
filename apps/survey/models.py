@@ -11,7 +11,10 @@ def create_global_id():
     return str(uuid.uuid4())
 
 class SurveyUser(models.Model):
-    user = models.ManyToManyField(User)
+    user = models.ForeignKey(User, null=True) # null=True: only so because this happens 'in the wild', i.e.
+                                              # in already existing data. Other than that there is no good
+                                              # reason for it
+
     global_id = models.CharField(max_length=36, unique=True,
                                  default=create_global_id)
     last_participation = models.ForeignKey('Participation', null=True)
