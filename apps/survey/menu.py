@@ -22,7 +22,7 @@ class SurveyMenu(CMSAttachMenu):
                 "views.index",
             ),
             NavigationNode(
-                _("Manage others"),
+                _("Manage household"),
                 reverse(views.people),
                 "views.people",
             ),
