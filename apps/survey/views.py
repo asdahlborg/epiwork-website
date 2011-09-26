@@ -11,6 +11,7 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
+from django.db import connection
 
 from apps.survey import utils, models, forms
 from apps.pollster import views as pollster_views
@@ -52,7 +53,15 @@ def _decode_person_health_status(status):
        diag = _('Next status')
     return diag
 
+def _db_table_exists(table):
+    cursor = connection.cursor()
+    table_names = connection.introspection.get_table_list(cursor)
+    return table in table_names
+
 def _get_person_health_status(request, survey, global_id):
+    if not _db_table_exists("pollster_health_status"):
+        return (None, _decode_person_health_status(None))
+
     data = survey.get_last_participation_data(request.user.id, global_id)
     status = None
     if data:
@@ -66,6 +75,9 @@ def _get_person_health_status(request, survey, global_id):
     return (status, _decode_person_health_status(status))
 
 def _get_person_health_history(request, survey, global_id):
+    if not _db_table_exists("pollster_health_status"):
+        raise StopIteration
+
     results = []
     cursor = connection.cursor()
     params = { 'user_id': request.user.id, 'global_id': global_id }
