@@ -79,13 +79,6 @@ class GetReportSurvey(ModelResource):
         return xml
         # return str(parse_specification(bundle.data['specification']))
 
-class GetImage(ModelResource):
-    """Takes type int and uid
-    Returns Image str
-    """
-    class Meta:
-        queryset = SurveyUser.objects.all()
-
 class Report(ModelResource):
     """Takes uid and reportS
     Returns status
@@ -93,10 +86,4 @@ class Report(ModelResource):
     class Meta:
         queryset = SurveyUser.objects.all()
         allowed_methods = ['put']
-
-# Extra resource
-
-class GetLanguage(ModelResource):
-    class Meta:
-        queryset = SurveyUser.objects.all()
 

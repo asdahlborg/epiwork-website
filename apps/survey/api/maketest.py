@@ -13,18 +13,6 @@ gets = [ 'GetUserProfile',
          'GetReportSurvey',
          'GetReportSurvey/1',
  
-         'GetImage',
-         'GetImage/bogus_type/bogus_uid',
-         'GetImage/123/%s' % activation_code,
- 
-         'GetLanguage',
-         'GetLanguage/bogus_arg',
- 
-         # 'GetStatsHeaders',
-         # 'GetStatsHeaders/bogus_language',
- 
-         # 'GetStatistic',
-         # 'GetStatistic/bogus_uid/bogus_id/bogus_lang',
          ]
 
 puts = [ 'Report',
