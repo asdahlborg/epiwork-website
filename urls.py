@@ -48,6 +48,9 @@ if settings.DEBUG:
         (r'^' + settings.MEDIA_URL.lstrip('/'), include('appmedia.urls'), {'show_indexes': True}),
     ) + urlpatterns
 
+if settings.MOBILE_INTERFACE_ACTIVE:
+    urlpatterns += patterns('', (r'^ema/', include('apps.survey.api.urls')))
+
 # Catchall
 urlpatterns += patterns('', url(r'^', include('cms.urls')))
 
