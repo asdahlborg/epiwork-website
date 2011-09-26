@@ -21,7 +21,6 @@ from .survey import ( Specification,
                       JavascriptBuilder,
                       get_survey_context, )
 import apps.pollster as pollster
-import extra
 import pickle
 
 survey_form_helper = None
@@ -190,60 +189,6 @@ def profile_index(request):
         next = reverse(thanks_profile)
 
     return pollster_views.survey_run(request, survey.id, next=next)
-
-@login_required
-def extra_index(request):
-    try:
-        survey_user = get_active_survey_user(request)
-    except ValueError:
-        raise Http404()
-    if survey_user is None:
-        url = '%s?next=%s' % (reverse(select_user), reverse(extra_index))
-        return HttpResponseRedirect(url)
-    spec = utils.load_specification(settings.EXTRA_SURVEY)
-    context = get_survey_context(survey_user)
-    builder = FormBuilder(spec)
-
-    if request.method == 'POST':
-        form = builder.get_form(context, request.POST)
-        if form.is_valid():
-            participation = utils.add_extra_survey_participation(survey_user,
-                                                                 spec.survey.id)
-            utils.add_response_queue(participation, spec, form.cleaned_data)
-            data = utils.format_response_data(spec, form.cleaned_data)
-            utils.save_extra_response(survey_user, participation, data)
-            utils.save_response_locally(survey_user.name,
-                                        spec.survey.id,
-                                        data,
-                                        None)
-
-            next = request.GET.get('next', None)
-            if next:
-                url = next
-            else:
-                url = reverse('apps.survey.views.extra_index')
-            url = '%s?gid=%s' % (url, survey_user.global_id)
-
-            return HttpResponseRedirect(reverse(thanks))
-
-        else:
-            messages.add_message(request, messages.INFO, 
-                _('One or more questions have empty or invalid ' \
-                          'answer. Please fix it first.'))
-
-    else:
-        initial = utils.get_user_profile(survey_user)
-        form = builder.get_form(context, initial=initial)
-
-    js_builder = JavascriptBuilder(spec)
-    js = mark_safe(js_builder.get_javascript(context))
-
-    return render_to_response('survey/extra_index.html', {
-        'form': form,
-        'js': js,
-        'title': spec.survey.title
-    }, context_instance=RequestContext(request))
-
 
 @login_required
 def people_edit(request):

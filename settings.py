@@ -211,7 +211,6 @@ EPIDB_SERVER = 'http://127.0.0.1:8080/'
 
 SURVEY_ID = 'gold-standard-weekly-1.6'
 SURVEY_PROFILE_ID = 'gold-standard-intake-1.5'
-EXTRA_SURVEY = False
 
 MOBILE_INTERFACE_ACTIVE = False
 
@@ -228,11 +227,9 @@ elif _hostname in ['rekenwolk.nl']:
     EMAIL_PORT = 25
     MOBILE_INTERFACE_ACTIVE = True
     STORE_RESPONSES_LOCALLY = True
-    EXTRA_SURVEY = 'contact-survey-1.0'
 elif _hostname in ['via']:
     MOBILE_INTERFACE_ACTIVE = True
     STORE_RESPONSES_LOCALLY = True
-    EXTRA_SURVEY = 'contact-survey-1.0'
 
 try:
     from local_settings import *

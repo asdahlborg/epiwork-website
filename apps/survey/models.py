@@ -123,11 +123,6 @@ class LastResponse(models.Model):
     participation = models.ForeignKey(Participation, null=True, default=None)
     data = models.TextField(null=True, blank=True, default=None)
 
-class ExtraResponse(models.Model):
-    user = models.ForeignKey(SurveyUser)
-    participation = models.ForeignKey(Participation, null=True, default=None)
-    data = models.TextField(null=True, blank=True, default=None)
-
 def add_empty_profile(sender, instance, created, **kwargs):
     if created:
         profile = Profile()
