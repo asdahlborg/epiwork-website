@@ -11,7 +11,7 @@ from apps.survey.api.handlers import ( GetUserProfile,
                                      )
 from re import match
 
-# htttp basic authentication
+# http basic authentication
 
 auth = HttpBasicAuthentication(realm="EIP")
 ad = { 'authentication': auth }

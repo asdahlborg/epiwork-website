@@ -157,7 +157,7 @@ def code_hash(gid, code_length=12):
     """Take a global_id (a UUID string containing '-' symbols).
     Hash it to a string of digits of length code_length.
     """
-    # divide by 10**code_length and pad left with zeros
+    # modulo 10**code_length and pad left with zeros
     code_format = ('%%0%dd' % code_length)
     gid_int = int(sub('-', '', gid), 16)
     return code_format % (gid_int % 10**code_length)
@@ -175,6 +175,9 @@ def code_unhash(activation_code):
     Returns the corresponding global user ID.
     Flags nonexistent codes and code collisions.
     """
+
+    # TODO the loop over all SurveyUser objects below likely does not scale to 20.000 users
+    # especially since calls to code_unhash are quite common
     matches = [su.global_id for su in SurveyUser.objects.all()
                          if code_hash(su.global_id) == activation_code]
     l = len(matches)
