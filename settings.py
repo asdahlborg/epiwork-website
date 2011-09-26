@@ -193,7 +193,7 @@ CMSPLUGIN_NEWS_RSS_DESCRIPTION = "News List"
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-EMAIL_HOST='127.0.0.1'
+EMAIL_HOST = '127.0.0.1'
 
 # Default e-mail address to use for various automated correspondence from
 # the site managers.
@@ -216,21 +216,6 @@ MOBILE_INTERFACE_ACTIVE = False
 
 STORE_RESPONSES_LOCALLY = False
 
-import socket
-_hostname = socket.gethostname()
-if _hostname in ['rawon.local']:
-    EPIDB_SERVER = 'http://192.168.100.100:8080/'
-    EMAIL_PORT = 2525
-elif _hostname in ['rekenwolk.nl']:
-    EPIDB_SERVER = 'http://178.18.82.138:8080/'
-    EMAIL_HOST = 'localhost'
-    EMAIL_PORT = 25
-    MOBILE_INTERFACE_ACTIVE = True
-    STORE_RESPONSES_LOCALLY = True
-elif _hostname in ['via']:
-    MOBILE_INTERFACE_ACTIVE = True
-    STORE_RESPONSES_LOCALLY = True
-
 try:
     from local_settings import *
 except ImportError:
@@ -245,7 +230,6 @@ CACHES = {
 
 # SEO Settings
 
-#GOOGLE_ANALYTICS_ACCOUNT = 'UA-24124829-1'
 GOOGLE_ANALYTICS_ACCOUNT = None
 CMS_SEO_FIELDS = True
 
