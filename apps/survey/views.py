@@ -89,7 +89,7 @@ def thanks(request):
         raise Exception("The survey application requires a published survey with the shortname 'weekly'")
     Weekly = survey.as_model()
 
-    persons = models.SurveyUser.objects.filter(user=request.user)
+    persons = models.SurveyUser.objects.filter(user=request.user, deleted=False)
     for person in persons:
         person.health_status, person.diag = _get_person_health_status(request, survey, person.global_id)
         person.health_history = list(_get_person_health_history(request, survey, person.global_id))[-7:]
