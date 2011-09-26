@@ -110,8 +110,11 @@ def select_user(request, template='survey/select_user.html'):
     users = models.SurveyUser.objects.filter(user=request.user, deleted=False)
     total = len(users)
     if total == 0:
-        url = '%s?next=%s' % (reverse(people_add), next)
+        survey_user = models.SurveyUser.objects.create(name=request.user.first_name + " " + request.user.last_name)
+        survey_user.user.add(request.user)
+        url = '%s?gid=%s' % (next, survey_user.global_id)
         return HttpResponseRedirect(url)
+        
     elif total == 1:
         survey_user = users[0]
         url = '%s?gid=%s' % (next, survey_user.global_id)
