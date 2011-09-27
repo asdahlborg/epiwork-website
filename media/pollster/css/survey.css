@@ -1,9 +1,9 @@
 .survey-error-message { border: 1px solid #C00; -webkit-border-radius: 5px; padding: 5px; background: #FBB; margin-bottom: 10px; }
 .question { border: 1px solid #CCC; -webkit-border-radius: 5px; padding: 5px; background: #fff; margin-bottom: 10px; }
 .question ul.choices, .question ul.derived-values { list-style: none; margin-bottom: 10px;}
-.question li { margin-left: 20px; overflow: auto; }
+.question li { margin-left: 20px; padding-bottom: 2px; }
 .question select.choices { margin-left: 20px; margin-bottom: 10px; max-width: 95%; }
-.question input[type=text] { margin: 0 0 10px 20px; }
+.question input[type=text] { margin: 0 0 10px 20px; padding: 0; }
 .question .choices input[type=text] { margin: 0 0 0 15px; }
 .question .choices .open-option-data { float: right; }
 .question .title { font-weight: bold; margin-right: 5px; }
