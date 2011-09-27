@@ -1,6 +1,6 @@
 -e hg+https://hg@bitbucket.org/ubernostrum/django-registration#egg=django-registration
 django-cms==2.1.4
--e hg+ssh://hg@bitbucket.org/jespern/django-piston@adeef486579b#egg=django-piston
+-e hg+https://bitbucket.org/jespern/django-piston@adeef486579b#egg=django-piston
 south
 django-sekizai
 django-appmedia
