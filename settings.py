@@ -51,13 +51,13 @@ USE_L10N = True
 
 LANGUAGES = (
    ('en', 'English'),
-   ('de', 'German'),
-   ('fr', 'French'),
-   ('nl', 'Dutch'),
-   ('it', 'Italian'),
-   ('se', 'Swedish'),
-   ('pt', 'Portuguese'),
-   ('es', 'Spanish'),
+   ('de', 'Deutsch'),
+   ('fr', 'Français'),
+   ('nl', 'Nederlands'),
+   ('it', 'Italiano'),
+   ('se', 'Svenska'),
+   ('pt', 'Português'),
+   ('es', 'Español'),
 )
 
 # Absolute path to the directory that holds media.
