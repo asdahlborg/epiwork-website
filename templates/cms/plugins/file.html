@@ -1,7 +1,6 @@
 {% if object.file.url %}
-<p>
 {% if object.get_icon_url %}<img src="{{ object.get_icon_url }}" class="dlicon" alt="Icon" />{% endif %}
-<a href="{{ object.file.url }}" rel="external">{% if object.title %}{{ object.title }}{% else %}{{ object.get_file_name }}{% endif %}</a>
+<span class="dllink"><a href="{{ object.file.url }}" rel="external">{% if object.title %}{{ object.title }}{% else %}{{ object.get_file_name }}{% endif %}</a>
 {% if object.file_exists %}({{ object.file.size|filesizeformat }}){% else %}(file missing!){% endif %}
-</p>
+<br /></span>
 {% endif %}
