@@ -14,6 +14,7 @@ DB_HOST=""
 DB_PORT=""
 DB_USERNAME=""
 DB_USERNAME=""
+DJANGO_ENGINE="unconfigured"
 TIMEZONE=""
 LANGUAGE=""
 COUNTRY=""
@@ -79,10 +80,23 @@ else
     echo "not found; automatic MySQL configuration disabled (please install the libmysqlclient-dev package)"
 fi
 
+echo -n "Checking for pre-requisites: psql ...  "
+exe_psql="$(which psql)"
+if [ -n "$exe_psql" ] ; then
+    echo "$exe_psql"
+else
+    echo "not found; automatic PostgreSQL configuration disabled"
+fi
+
 virtualenv --no-site-packages .
 source ./bin/activate
 pip install -r requirements.txt
-pip install MySQL-python
+if [ -n "$exe_mysql" ] ; then
+    pip install MySQL-python
+fi
+if [ -n "$exe_psql" ] ; then
+    pip install psycopg2
+fi
 
 echo ""
 while [ -z "$LANGUAGE" ] ; do
@@ -98,18 +112,18 @@ while [ -z "$TIMEZONE" ] ; do
 done
 
 while [ -z "$DB_ENGINE" ] ; do
-    echo -n "Please, choose a database engine (sqlite3, the default or mysql): "
+    echo -n "Please, choose a database engine (sqlite3, the default, postgresql or mysql): "
     read line
     DB_ENGINE="${line:-sqlite3}"
-    if [ "$DB_ENGINE" != "sqlite3" -a "$DB_ENGINE" != "mysql" ] ; then
+    if [ "$DB_ENGINE" != "sqlite3" -a "$DB_ENGINE" != "mysql" -a "$DB_ENGINE" != "postgresql" ] ; then
         DB_ENGINE=""
     fi
 done
 
 if [ "$DB_ENGINE" = "sqlite3" ] ; then
     DB_NAME="ggm.db"
+    DJANGO_ENGINE="sqlite3"
 fi
-
 
 if [ "$DB_ENGINE" = "mysql" ] ; then
     echo ""
@@ -134,6 +148,8 @@ if [ "$DB_ENGINE" = "mysql" ] ; then
         echo -n "Database password: "
         read line && [ -n "$line" ] && DB_PASSWORD="$line";
     done    
+
+    DJANGO_ENGINE="mysql"
     
     if [ -n "$exe_mysql" ] ; then
         echo ""
@@ -154,12 +170,51 @@ if [ "$DB_ENGINE" = "mysql" ] ; then
     fi
 fi
 
+if [ "$DB_ENGINE" = "postgresql" ] ; then
+    echo ""
+    
+    echo -n "Database host (just hit enter if on localhost/same host): "
+    read line && [ -n "$line"] && DB_HOST="$line";
+    
+    echo -n "Database port (just hit enter if using default port): "
+    read line && [ -n "$line"] && DB_PORT="$line";
+    
+    while [ -z "$DB_NAME" ] ; do
+        echo -n "Database name (database will be created if necessary; default is epiwork): "
+        read line && DB_NAME="${line:-epiwork}";
+    done
+
+    while [ -z "$DB_USERNAME" ] ; do
+        echo -n "Database username (user will be created if necessary; default is epiwork): "
+        read line && DB_USERNAME="${line:-epiwork}";
+    done
+
+    while [ -z "$DB_PASSWORD" ] ; do
+        echo -n "Database password: "
+        read line && [ -n "$line" ] && DB_PASSWORD="$line";
+    done    
+
+    DJANGO_ENGINE="postgresql_psycopg2"
+    
+    if [ -n "$exe_psql" ] ; then
+        echo ""
+        echo "Note: the following data will NOT be saved, but it is necessary to create"
+        echo "the database '$DB_NAME' and the user '$DB_USERNAME' that will be used to"
+        echo "connect to database for normal operation."
+        
+        echo ""
+        echo -n "Please, insert PostgrSQL administrator's username (default is postgres): "
+        read line
+        root_username="${line:-postgres}"
+    fi
+fi
+
 echo ""
 echo "Configuration parameters:"
 echo ""
 echo "  country and language: $LANGUAGE"
 echo "  time zone:            $TIMEZONE"
-echo "  database engine:      $DB_ENGINE"
+echo "  database engine:      $DB_ENGINE ($DJANGO_ENGINE)"
 echo "  database name:        $DB_NAME"
 echo "  database host:        ${DB_HOST:-localhost}"
 echo "  database port:        ${DB_PORT:-(default)}"
@@ -186,7 +241,7 @@ if [ "$DB_ENGINE" = "sqlite3" ] ; then
     rm -f $DB_NAME
 fi
 
-if [ "$DB_ENGINE" != "sqlite3" -a -n "$exe_mysql" ] ; then
+if [ "$DB_ENGINE" = "mysql" -a -n "$exe_mysql" ] ; then
     mysql --batch --host=${DB_HOST:-localhost} --port=${DB_PORT:-0} --user=$root_username --password=$root_password mysql <<EOF
     CREATE DATABASE IF NOT EXISTS $DB_NAME ;
     INSERT INTO user VALUES ('%', '$DB_USERNAME', PASSWORD('$DB_PASSWORD'),
@@ -199,11 +254,27 @@ if [ "$DB_ENGINE" != "sqlite3" -a -n "$exe_mysql" ] ; then
 EOF
 fi
 
+if [ "$DB_ENGINE" = "postgresql" -a -n "$exe_psql" ] ; then
+    args="--username=$root_username template1"
+    if [ -n "$DB_PORT" ] ; then
+        args=--port=$DB_PORT "$args"
+    fi
+    if [ -n "$DB_HOST" ] ; then
+        args=--host=$DB_HOST "$args"
+    fi
+    psql $args <<EOF
+    DROP DATABASE IF EXISTS $DB_NAME ;
+    DROP USER IF EXISTS $DB_USERNAME ;
+    CREATE USER $DB_USERNAME WITH ENCRYPTED PASSWORD '$DB_PASSWORD' ;
+    CREATE DATABASE $DB_NAME WITH OWNER = $DB_USERNAME ;
+EOF
+fi
+
 echo "done"
 echo -n "Generating settings.py ... "
 
 cat local_settings.py.in \
-    | sed -e "s/@DB_ENGINE@/django.db.backends.$DB_ENGINE/g" \
+    | sed -e "s/@DB_ENGINE@/django.db.backends.$DJANGO_ENGINE/g" \
     | sed -e "s/@DB_NAME@/$DB_NAME/g" \
     | sed -e "s/@DB_HOST@/$DB_HOST/g" \
     | sed -e "s/@DB_PORT@/$DB_PORT/g" \
