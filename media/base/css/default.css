@@ -486,6 +486,7 @@ ul.map_buttons li {
 
 #submenu {
  float: left;
+ clear: left;
  width: 736px;
  overflow: hidden;
  background: url("../img/main/submenu.jpg") no-repeat right top #e8e8e8;
@@ -540,9 +541,9 @@ ul.map_buttons li {
 
 #searchbar input#searchsubmit {
  height: 2.2em;
- width: 54px;
+ width: auto;
  margin: 0 0 0 8px;
- padding: 0;
+ padding: 0 6px 2px 6px;
  font-size: 0.7em;
  line-height: 2.2em;
  border: 0;
