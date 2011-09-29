@@ -6,7 +6,7 @@ import datetime
 
 from django.test import TestCase
 
-from .models import Entry
+from .models import Entry, published_filter
 from .navigation import get_nodes
 
 class EntryTest(TestCase):
@@ -29,13 +29,13 @@ class EntryTest(TestCase):
             is_published=False,
             pub_date=self.yesterday,
         )
-        self.assertEquals(Entry.published.count(), 0)
+        self.assertEquals(published_filter(Entry.objects).count(), 0)
         unpublished.is_published = True
         unpublished.save()
-        self.assertEquals(Entry.published.count(), 1)
+        self.assertEquals(published_filter(Entry.objects).count(), 1)
         unpublished.is_published = False
         unpublished.save()
-        self.assertEquals(Entry.published.count(), 0)
+        self.assertEquals(published_filter(Entry.objects).count(), 0)
         
         unpublished.delete()
         
@@ -49,13 +49,13 @@ class EntryTest(TestCase):
             is_published=True,
             pub_date=self.tomorrow,
         )
-        self.assertEquals(Entry.published.count(), 0)
+        self.assertEquals(published_filter(Entry.objects).count(), 0)
         future_published.pub_date = self.yesterday
         future_published.save()
-        self.assertEquals(Entry.published.count(), 1)
+        self.assertEquals(published_filter(Entry.objects).count(), 1)
         future_published.pub_date = self.tomorrow
         future_published.save()
-        self.assertEquals(Entry.published.count(), 0)
+        self.assertEquals(published_filter(Entry.objects).count(), 0)
         
     def test_navigation(self):
         """

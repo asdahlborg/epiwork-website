@@ -11,19 +11,20 @@ from django.template import RequestContext
 from django.utils.safestring import mark_safe
 from django.shortcuts import get_object_or_404
 from django.utils.datastructures import SortedDict
+from django.utils.translation import get_language
 
 from cms.utils.html import clean_html
 
-from .models import Entry
+from .models import Entry, published_filter
 
 def _get_queryset(categories=(), date_range=(None, None)):
     # Filter by category
     if len(categories) == 0:
-        qs = Entry.published.all()
+        qs = published_filter(Entry.objects.language(get_language()).all())
     else:
         filter = reduce(lambda a, b: a | b,
                         map(lambda cat: Q(category__slug=cat), categories))
-        qs = Entry.published.filter(filter)
+        qs = published_filter(Entry.objects.language(get_language()).filter(filter))
 
     # Filter by date
     start, last = date_range

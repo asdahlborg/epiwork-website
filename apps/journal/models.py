@@ -23,14 +23,9 @@ class Category(TranslatableModel):
     def __unicode__(self):
         return self.title
     
-class PublishedEntryManager(TranslationManager):
-    """
-        Filters out all unpublished and items with a publication date in the future
-    """
-    def get_query_set(self):
-        return super(PublishedEntryManager, self).get_query_set() \
-                    .filter(is_published=True) \
-                    .filter(pub_date__lte=datetime.datetime.now())
+def published_filter(qs):
+    # working around the combination with Nani
+    return qs.filter(is_published=True).filter(pub_date__lte=datetime.datetime.now())
     
 class Entry(TranslatableModel):
     """
@@ -56,8 +51,6 @@ class Entry(TranslatableModel):
     updated         = models.DateTimeField(auto_now=True, editable=False)
 
     category        = models.ForeignKey(Category, null=True)
-    
-    published = PublishedEntryManager()
     
     class Meta:
         verbose_name = _('Entry')

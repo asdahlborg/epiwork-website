@@ -2,14 +2,14 @@ from django.contrib.syndication.feeds import Feed
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
-from .models import Entry
+from .models import Entry, published_filter
 
 class EntryEntryFeed(Feed):
     title = settings.CMSPLUGIN_NEWS_RSS_TITLE
     description = settings.CMSPLUGIN_NEWS_RSS_DESCRIPTION
 
     def items(self):
-        return Entry.published.all()[:10]
+        return published_filter(Entry.objects.all())[:10]
     
     def item_pubdate(self, item):
         return item.pub_date

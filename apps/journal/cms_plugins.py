@@ -4,7 +4,7 @@ from django.db.models import Q
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from .models import LatestEntryPlugin, Entry
+from .models import LatestEntryPlugin, Entry, published_filter
 from . import settings
 
 class CMSLatestEntryPlugin(CMSPluginBase):
@@ -26,7 +26,7 @@ class CMSLatestEntryPlugin(CMSPluginBase):
             query = reduce(lambda a, b: a | b, query)
         else:
             query = Q()
-        latest = Entry.published.filter(query)[:instance.limit]
+        latest = published_filter(Entry.objects.filter(query))[:instance.limit]
         context.update({
             'title': instance.title,
             'instance': instance,

@@ -3,12 +3,12 @@ from django.core.urlresolvers import reverse
 
 from menus.base import NavigationNode
 
-from .models import Entry
+from .models import Entry, published_filter
 
 def get_nodes(request):
     res = []
     
-    items = Entry.published.all()
+    items = published_filter(Entry.objects.all())
     
     years_done = []
     months_done = []
