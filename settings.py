@@ -1,5 +1,5 @@
 # Django settings for epiweb project.
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -50,14 +50,14 @@ USE_I18N = True
 USE_L10N = True
 
 LANGUAGES = (
-   ('en', 'English'),
-   ('de', 'Deutsch'),
-   ('fr', 'Français'),
-   ('nl', 'Nederlands'),
-   ('it', 'Italiano'),
-   ('se', 'Svenska'),
-   ('pt', 'Português'),
-   ('es', 'Español'),
+   ('en', u'English'),
+   ('de', u'Deutsch'),
+   ('fr', u'Français'),
+   ('nl', u'Nederlands'),
+   ('it', u'Italiano'),
+   ('se', u'Svenska'),
+   ('pt', u'Português'),
+   ('es', u'Español'),
 )
 
 # Absolute path to the directory that holds media.
