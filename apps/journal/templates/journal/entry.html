@@ -1,6 +1,0 @@
-<h1>{{ entry.title }}</h1>
-
-<p class="date">{{ entry.pub_date }}</p>
-
-<div class="content">{% if entry.image %}<img src="{% url journal_image slug=entry.slug %}" {% if entry.alignment %}align="{{ entry.alignment }}"{% endif %} alt="{{ entry.title }}"/>{% endif %}{{ entry_content }}</div>
-
