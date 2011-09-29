@@ -1,6 +1,8 @@
 from django import forms
 from django.conf import settings
 
+from nani.forms import TranslatableModelForm
+
 from cms.plugin_pool import plugin_pool
 from cms.plugins.text.settings import USE_TINYMCE
 from .widgets.wymeditor_widget import WYMEditor
@@ -8,7 +10,7 @@ from .widgets.wymeditor_widget import WYMEditor
 
 from .models import Entry
 
-class EntryForm(forms.ModelForm):
+class EntryForm(TranslatableModelForm):
     class Meta:
         model = Entry
         

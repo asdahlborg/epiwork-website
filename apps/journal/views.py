@@ -19,11 +19,11 @@ from .models import Entry
 def _get_queryset(categories=(), date_range=(None, None)):
     # Filter by category
     if len(categories) == 0:
-        qs = Entry.objects.all()
+        qs = Entry.published.all()
     else:
         filter = reduce(lambda a, b: a | b,
                         map(lambda cat: Q(category__slug=cat), categories))
-        qs = Entry.objects.filter(filter)
+        qs = Entry.published.filter(filter)
 
     # Filter by date
     start, last = date_range

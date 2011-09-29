@@ -4,37 +4,32 @@ from django.contrib import admin
 
 from django.http import HttpResponse
 from django.core import serializers
+from nani.admin import TranslatableAdmin
 
 from .forms import EntryForm
 from .models import Entry, Category
     
-class EntryAdmin(admin.ModelAdmin):
+class EntryAdmin(TranslatableAdmin):
     """
         Admin for entry
     """
     date_hierarchy = 'pub_date'
-    list_display = ('slug', 'title', 'category', 'is_published', 'pub_date')
+    list_display = ('__unicode__', 'slug', 'category', 'is_published', 'pub_date')
     list_filter = ('is_published', 'category')
     search_fields = ['title', 'excerpt', 'content']
-    prepopulated_fields = {'slug': ('title',)}
+    #prepopulated_fields = {'slug': ('title',)} # doesn't work with Nani
     form = EntryForm
-    
+
     actions = ['make_published', 'make_unpublished']
 
     fieldsets = ((None, {'fields': ('title', 'slug', 'category')}),
                  ('Entry', {'fields': ('excerpt', 'content')}),
                  ('Image', {'fields': ('image', 'alignment')}),
                  ('Publishing', {'fields': ('is_published', 'pub_date')}))
-    
+
     save_as = True
     save_on_top = True
     
-    def queryset(self, request):
-        """
-            Override to use the objects and not just the default visibles only.
-        """
-        return Entry.objects.all()
-       
     def make_published(self, request, queryset):
         """
             Marks selected news items as published
@@ -56,4 +51,4 @@ class EntryAdmin(admin.ModelAdmin):
     make_unpublished.short_description = _('Unpublish selected news')
 
 admin.site.register(Entry, EntryAdmin)
-admin.site.register(Category)
+admin.site.register(Category, TranslatableAdmin)
