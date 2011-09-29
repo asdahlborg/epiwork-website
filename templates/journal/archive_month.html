@@ -1,4 +1,7 @@
+{% extends "base/threecol.html" %}
 {% load i18n %}
+
+{% block col1 %}
 
 <h1>{% trans "Entries for" %} {{ month|date:"F Y" }}</h1>
 
@@ -17,4 +20,8 @@
 <a href="?page={{ items.next_page_number }}">{% trans "Next" %}</a>
 {% endif %}
 </div>
+{% endblock col1 %}
 
+{% block col2 %}
+    {% include "journal/categories.html" %}
+{% endblock col2 %}
