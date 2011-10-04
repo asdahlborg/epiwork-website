@@ -8,14 +8,14 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
         gchart, _ = orm.ChartType.objects.all().get_or_create(shortname='google-charts', defaults={'description': 'Google Chart'})
-        gfmap, _ = orm.ChartType.objects.all().get_or_create(shortname='google-fusion-map', defaults={'description': 'Google Fusion Map'})
+        gfmap, _ = orm.ChartType.objects.all().get_or_create(shortname='google-map', defaults={'description': 'Google Map'})
         gchart.save()
         gfmap.save()
 
 
     def backwards(self, orm):
         orm.ChartType.objects.all().filter(shortname='google-charts').delete()
-        orm.ChartType.objects.all().filter(shortname='google-fusion-map').delete()
+        orm.ChartType.objects.all().filter(shortname='google-map').delete()
 
 
     models = {

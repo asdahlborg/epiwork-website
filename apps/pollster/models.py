@@ -811,8 +811,8 @@ class Chart(models.Model):
 
     def get_map_tile(self, user_id, global_id, z, x, y):
         filename = self.get_map_tile_filename(z, x, y)
-        #if not os.path.exists(filename):
-        self.generate_map_tile(self.generate_mapnik_map(user_id, global_id), filename, z, x, y)
+        if not os.path.exists(filename):
+            self.generate_map_tile(self.generate_mapnik_map(user_id, global_id), filename, z, x, y)
         return open(filename).read()
 
     def generate_map_tile(self, m, filename, z, x, y):
@@ -840,31 +840,50 @@ class Chart(models.Model):
         im.save(str(filename), "png256")
 
     def generate_mapnik_map(self, user_id, global_id):
-        colors = self.load_colors(user_id, global_id)
-
         m = mapnik.Map(256, 256)
-        m.background = mapnik.Color("transparent")
 
-        poly = mapnik.PolygonSymbolizer(mapnik.Color('lavender'))
-        line = mapnik.LineSymbolizer(mapnik.Color('slategray'),.3)
-        s,r = mapnik.Style(),mapnik.Rule()
-        r.symbols.extend([poly,line])
-        s.rules.append(r)
-        m.append_style('My Style', s)
+        style = self.generate_mapnik_style(user_id, global_id)
+
+        m.background = mapnik.Color("transparent")
+        m.append_style("ZIP_CODES STYLE", style)
         m.srs = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over"
 
-        lyr = mapnik.Layer('ZIP_CODES')
-        lyr.datasource = self.create_mapnik_datasource()
-        lyr.styles.append('My Style')
-        m.layers.append(lyr)
+        layer = mapnik.Layer('ZIP_CODES')
+        layer.datasource = self.create_mapnik_datasource(user_id, global_id)
+        layer.styles.append("ZIP_CODES STYLE")
+        m.layers.append(layer)
+
         return m
 
-    def create_mapnik_datasource(self):
+    def generate_mapnik_style(self, user_id, global_id):
+        style = mapnik.Style()
+        for color in self.load_colors(user_id, global_id):
+            c = mapnik.Color(str(color))
+            line = mapnik.LineSymbolizer(c, 1.5)
+            line.stroke.opacity = 0.7
+            poly = mapnik.PolygonSymbolizer(c)
+            poly.fill_opacity = 0.5
+            rule = mapnik.Rule()
+            rule.filter = mapnik.Filter(str("[color] = '%s'" % (color,)))
+            rule.symbols.extend([poly,line])
+            style.rules.append(rule)
+        return style
+
+    def create_mapnik_datasource(self, user_id, global_id):
+        # First create the SQL query that is a join between pollster_zip_codes and
+        # the chart query as created by the user; then create an appropriate datasource.
+
+        table = "SELECT * FROM %s" % (self.get_view_name(),)
+        if self.sqlfilter == 'USER' :
+            table += " WHERE user = %d" % (user_id,)
+        elif self.sqlfilter == 'PERSON':
+            table += " WHERE user = %d AND global_id = %d" % (user_id, global_id)
+        table = "(" + table + ") AS ZIP_CODES"
+
         if settings.DATABASES["default"]["ENGINE"] == "django.db.backends.sqlite3":
             name = settings.DATABASES["default"]["NAME"]
-            return mapnik.SQLite(file=filename,
-                geometry_field="geometry", wkb_format="spatialite",  estimate_extent=False,
-                table="(SELECT id AS OGC_FID, zip_code_key, geometry from pollster_zip_codes) AS ZIP_CODES")
+            return mapnik.SQLite(file=filename, wkb_format="spatialite",
+                geometry_field="geometry", estimate_extent=False, table=table)
 
         if settings.DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql_psycopg2":
             name = settings.DATABASES["default"]["NAME"]
@@ -873,8 +892,7 @@ class Chart(models.Model):
             username = settings.DATABASES["default"]["USER"]
             password = settings.DATABASES["default"]["PASSWORD"]
             return mapnik.PostGIS(host=host, port=port, user=username, password=password, dbname=name,
-                geometry_field="geometry", estimate_extent=False,
-                table="(SELECT id AS OGC_FID, zip_code_key, geometry from pollster_zip_codes) AS ZIP_CODES")
+                geometry_field="geometry", estimate_extent=False, table=table)
 
     def get_map_tile_base(self):
         return "_pollster_tile_cache/survey_%s/%s" % (self.survey.id, self.shortname)
@@ -889,20 +907,45 @@ class Chart(models.Model):
     def get_table_name(self):
         return 'pollster_charts_'+str(self.survey.shortname)+'_'+str(self.shortname)
 
+    def get_view_name(self):
+        return self.get_table_name() + "_view"
+
+    def get_query(self, user_id, global_id):
+        # NOTE: we don't use bound variables here because different backends
+        # use different formats BUT this is not a problem (think SQL injection)
+        # because both user_id and global_id are simple integers (the regular
+        # expression in urls.py guarantees that).
+        table = self.get_table_name()
+        query = "SELECT * FROM %s" % (table,)
+        if self.sqlfilter == 'USER' :
+            query += " WHERE user = %d" % (user_id,)
+        elif self.sqlfilter == 'PERSON':
+            query += " WHERE user = %d AND global_id = %d" % (user_id, global_id)
+        return query
+
     def update_table(self):
-        query = self.sqlsource
-        if query:
+        table_query = self.sqlsource
+        print table_query
+        if table_query:
             table = self.get_table_name()
-            backup = table+'_'+format(datetime.datetime.now(), '%Y%m%d%H%M%s')
-            exists = table in connection.introspection.table_names()
-            execute = connection.cursor().execute
+            view = self.get_view_name()
+            view_query = """SELECT A.*, B.id AS OGC_FID, B.geometry
+                              FROM pollster_zip_codes B, (SELECT * FROM %s) A
+                             WHERE A.zip_code_key = B.zip_code_key""" % (table,)
+            # FIXME: Why do we want a backup if the table is just a data cache?
+            # backup = table+'_'+format(datetime.datetime.now(), '%Y%m%d%H%M%s')
+            # Also, the following line doesn't work on PostgreSQL.
+            # exists = table in connection.introspection.table_names()
+            cursor = connection.cursor()
             try:
-                if exists:
-                    execute('ALTER TABLE '+table+' RENAME TO '+backup)
-                create = 'CREATE TABLE %s AS %s' % (table, query)
-                execute(create)
-                if exists:
-                    execute('DROP TABLE '+backup)
+                #if exists:
+                #    execute('ALTER TABLE '+table+' RENAME TO '+backup)
+                cursor.execute("DROP VIEW IF EXISTS %s" % (view,))
+                cursor.execute("DROP TABLE IF EXISTS %s" % (table,))
+                cursor.execute("CREATE TABLE %s AS %s" % (table, table_query))
+                cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
+                #if exists:
+                #    execute('DROP TABLE '+backup)
                 return True
             except IntegrityError:
                 return False
@@ -910,30 +953,26 @@ class Chart(models.Model):
                 return False
         return False
 
-    def load_data(self, user, global_id):
-        table = self.get_table_name()
-        query = 'SELECT * FROM %s' % (table,)
-        if self.sqlfilter == 'USER' :
-            query += " WHERE user = :user"
-        elif self.sqlfilter == 'PERSON':
-            query += " WHERE user = :user AND global_id = :global_id"
-        parameters = { "user": user, "global_id": global_id }
+    def load_data(self, user_id, global_id):
+        query = self.get_query(user_id, global_id)
         try:
-            cursor = connection.cursor().execute(query, parameters)
+            cursor = connection.cursor()
+            cursor.execute(query)
             return (cursor.description, cursor.fetchall())
         except DatabaseError, e:
             return ((('Error',),), ((str(e),),))
 
-    def load_colors(self, user, global_id):
+    def load_colors(self, user_id, global_id):
+        # NOTE: no bound variables; but see get_query() above.
         table = self.get_table_name()
         query = 'SELECT DISTINCT color FROM %s' % (table,)
         if self.sqlfilter == 'USER' :
-            query += " WHERE user = :user"
+            query += " WHERE user = %d" % (user_id,)
         elif self.sqlfilter == 'PERSON':
-            query += " WHERE user = :user AND global_id = :global_id"
-        parameters = { "user": user, "global_id": global_id }
+            query += " WHERE user = %d AND global_id = %d" % (user_id, global_id)
         try:
-            cursor = connection.cursor().execute(query, parameters)
+            cursor = connection.cursor()
+            cursor.execute(query)
             return [x[0] for x in cursor.fetchall()]
         except DatabaseError, e:
             return []
