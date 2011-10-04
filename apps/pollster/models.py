@@ -4,9 +4,19 @@ from django.forms import ModelForm
 from django.core.validators import RegexValidator
 from cms.models import CMSPlugin
 from xml.etree import ElementTree
-import re, warnings, datetime, json
-import simplejson as json
+from math import pi,cos,sin,log,exp,atan
 from . import dynamicmodels
+import os, re, warnings, datetime
+import simplejson as json
+import settings
+
+DEG_TO_RAD = pi/180
+RAD_TO_DEG = 180/pi
+
+try:
+    import mapnik2 as mapnik
+except:
+    import mapnik
 
 SURVEY_STATUS_CHOICES = (
     ('DRAFT', 'Draft'),
@@ -799,6 +809,83 @@ class Chart(models.Model):
         data["dataTable"] = { "cols": cols, "rows": rows }
         return json.dumps(data)
 
+    def get_map_tile(self, user_id, global_id, z, x, y):
+        filename = self.get_map_tile_filename(z, x, y)
+        #if not os.path.exists(filename):
+        self.generate_map_tile(self.generate_mapnik_map(user_id, global_id), filename, z, x, y)
+        return open(filename).read()
+
+    def generate_map_tile(self, m, filename, z, x, y):
+        # Code taken from OSM generate_tiles.py
+        proj = GoogleProjection()
+        mprj = mapnik.Projection(m.srs)
+
+        p0 = (x * 256, (y + 1) * 256)
+        p1 = ((x + 1) * 256, y * 256)
+        l0 = proj.fromPixelToLL(p0, z);
+        l1 = proj.fromPixelToLL(p1, z);
+        c0 = mprj.forward(mapnik.Coord(l0[0], l0[1]))
+        c1 = mprj.forward(mapnik.Coord(l1[0], l1[1]))
+
+        if hasattr(mapnik,'mapnik_version') and mapnik.mapnik_version() >= 800:
+            bbox = mapnik.Box2d(c0.x, c0.y, c1.x, c1.y)
+        else:
+            bbox = mapnik.Envelope(c0.x, c0.y, c1.x, c1.y)
+
+        m.resize(256, 256)
+        m.zoom_to_box(bbox)
+
+        im = mapnik.Image(256, 256)
+        mapnik.render(m, im)
+        im.save(str(filename), "png256")
+
+    def generate_mapnik_map(self, user_id, global_id):
+        colors = self.load_colors(user_id, global_id)
+
+        m = mapnik.Map(256, 256)
+        m.background = mapnik.Color("transparent")
+
+        poly = mapnik.PolygonSymbolizer(mapnik.Color('lavender'))
+        line = mapnik.LineSymbolizer(mapnik.Color('slategray'),.3)
+        s,r = mapnik.Style(),mapnik.Rule()
+        r.symbols.extend([poly,line])
+        s.rules.append(r)
+        m.append_style('My Style', s)
+        m.srs = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over"
+
+        lyr = mapnik.Layer('ZIP_CODES')
+        lyr.datasource = self.create_mapnik_datasource()
+        lyr.styles.append('My Style')
+        m.layers.append(lyr)
+        return m
+
+    def create_mapnik_datasource(self):
+        if settings.DATABASES["default"]["ENGINE"] == "django.db.backends.sqlite3":
+            name = settings.DATABASES["default"]["NAME"]
+            return mapnik.SQLite(file=filename,
+                geometry_field="geometry", wkb_format="spatialite",  estimate_extent=False,
+                table="(SELECT id AS OGC_FID, zip_code_key, geometry from pollster_zip_codes) AS ZIP_CODES")
+
+        if settings.DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql_psycopg2":
+            name = settings.DATABASES["default"]["NAME"]
+            host = settings.DATABASES["default"]["HOST"]
+            port = settings.DATABASES["default"]["PORT"]
+            username = settings.DATABASES["default"]["USER"]
+            password = settings.DATABASES["default"]["PASSWORD"]
+            return mapnik.PostGIS(host=host, port=port, user=username, password=password, dbname=name,
+                geometry_field="geometry", estimate_extent=False,
+                table="(SELECT id AS OGC_FID, zip_code_key, geometry from pollster_zip_codes) AS ZIP_CODES")
+
+    def get_map_tile_base(self):
+        return "_pollster_tile_cache/survey_%s/%s" % (self.survey.id, self.shortname)
+
+    def get_map_tile_filename(self, z, x, y):
+        filename = "%s/%s/%s_%s.png" % (self.get_map_tile_base(), z, x, y)
+        pathname = os.path.dirname(filename)
+        if not os.path.exists(pathname):
+            os.makedirs(pathname)
+        return filename
+
     def get_table_name(self):
         return 'pollster_charts_'+str(self.survey.shortname)+'_'+str(self.shortname)
 
@@ -836,6 +923,49 @@ class Chart(models.Model):
             return (cursor.description, cursor.fetchall())
         except DatabaseError, e:
             return ((('Error',),), ((str(e),),))
+
+    def load_colors(self, user, global_id):
+        table = self.get_table_name()
+        query = 'SELECT DISTINCT color FROM %s' % (table,)
+        if self.sqlfilter == 'USER' :
+            query += " WHERE user = :user"
+        elif self.sqlfilter == 'PERSON':
+            query += " WHERE user = :user AND global_id = :global_id"
+        parameters = { "user": user, "global_id": global_id }
+        try:
+            cursor = connection.cursor().execute(query, parameters)
+            return [x[0] for x in cursor.fetchall()]
+        except DatabaseError, e:
+            return []
+
+class GoogleProjection:
+    def __init__(self,levels=18):
+        self.Bc = []
+        self.Cc = []
+        self.zc = []
+        self.Ac = []
+        c = 256
+        for d in range(0,levels):
+            e = c/2;
+            self.Bc.append(c/360.0)
+            self.Cc.append(c/(2 * pi))
+            self.zc.append((e,e))
+            self.Ac.append(c)
+            c *= 2
+                
+    def fromLLtoPixel(self,ll,zoom):
+         d = self.zc[zoom]
+         e = round(d[0] + ll[0] * self.Bc[zoom])
+         f = min(max(sin(DEG_TO_RAD * ll[1]),-0.9999),0.9999)
+         g = round(d[1] + 0.5*log((1+f)/(1-f))*-self.Cc[zoom])
+         return (e,g)
+     
+    def fromPixelToLL(self,px,zoom):
+         e = self.zc[zoom]
+         f = (px[0] - e[0])/self.Bc[zoom]
+         g = (px[1] - e[1])/-self.Cc[zoom]
+         h = RAD_TO_DEG * ( 2 * atan(exp(g)) - 0.5 * pi)
+         return (f,h)
 
 class SurveyChartPlugin(CMSPlugin):
     chart = models.ForeignKey(Chart)

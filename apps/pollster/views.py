@@ -290,7 +290,21 @@ def chart_data(request, id, shortname):
     global_id = survey_user and survey_user.global_id
     return HttpResponse(chart.to_json(user_id, global_id), mimetype='application/json')
 
+def map_tile(request, id, shortname, z, x, y):
+    chart = None
+    if request.user.is_active and request.user.is_staff:
+        survey = get_object_or_404(models.Survey, pk=id)
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+    else:
+        survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname, status='PUBLISHED')
+    survey_user = _get_active_survey_user(request)
+    user_id = request.user.id
+    global_id = survey_user and survey_user.global_id
+    return HttpResponse(chart.get_map_tile(user_id, global_id, int(z), int(x), int(y)), mimetype='image/png')
+
 # based on http://djangosnippets.org/snippets/2059/
+
 def urls(request, prefix=''):
     """
         Returns javascript for mapping service endpoint names to urls.
@@ -305,7 +319,7 @@ def urls(request, prefix=''):
         in curley braces.  Url pattern names will be translated into
         javascript variable names by converting all letters to the upper
         case and replacing '-' with '_'.
-    """
+        """
     resolver = get_resolver(None)
 
     urls = {}

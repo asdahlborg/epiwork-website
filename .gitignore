@@ -18,4 +18,4 @@ build/
 dist/
 media/uploads/
 media/journal_images/
-
+_pollster_tile_cache/
