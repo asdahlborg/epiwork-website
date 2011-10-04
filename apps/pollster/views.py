@@ -303,6 +303,16 @@ def map_tile(request, id, shortname, z, x, y):
     global_id = survey_user and survey_user.global_id
     return HttpResponse(chart.get_map_tile(user_id, global_id, int(z), int(x), int(y)), mimetype='image/png')
 
+def map_click(request, id, shortname, lat, lng):
+    chart = None
+    if request.user.is_active and request.user.is_staff:
+        survey = get_object_or_404(models.Survey, pk=id)
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+    else:
+        survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname, status='PUBLISHED')
+    return HttpResponse(chart.get_map_click(float(lat), float(lng)), mimetype='application/json')
+
 # based on http://djangosnippets.org/snippets/2059/
 
 def urls(request, prefix=''):

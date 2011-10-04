@@ -65,24 +65,23 @@
                 map.overlayMapTypes.insertAt(0, zipMapType);
 
 
-                /* google.maps.event.addListener(layer, 'click', function(evt) {
-                    var d = zbc[2][evt.row.zip_code.value];
-                    var cols = data.dataTable.cols;
-                    var html = '<div><strong>'+evt.row.zip_code.value+'</strong><br/>';
-                    for (var i=0 ; i < cols.length ; i++) {
-                        if (cols[i].id != "zip" && cols[i].id != "color" && cols[i].id != "colour") {
-                            html += '<span>' + cols[i].label + ': </span>' + d.c[i].v + '<br/>';
+                google.maps.event.addListener(map, 'click', function(evt) {
+                    $.getJSON(tileBase+"/click/" + evt.latLng.lat() + "/" + evt.latLng.lng(), function(json) {
+                        if (!json.zip_code_key)
+                            return;
+                        var html = '<div><strong>'+json.zip_code_key+'</strong><br/>';
+                        for (var k in json) {
+                            if (k !== "zip_code_key")
+                                html += '<span>' + k + ': </span>' + json[k] + '<br/>';
                         }
-                    }
-                    html += '</div>';
-
-                    var info = new google.maps.InfoWindow({
-                        content: html,
-                        position: evt.latLng
+                        html += '</div>';
+                        var info = new google.maps.InfoWindow({
+                            content: html,
+                            position: evt.latLng
+                        });
+                        info.open(map);
                     });
-                    info.open(map);
                 });
-                */
             });
         }
 

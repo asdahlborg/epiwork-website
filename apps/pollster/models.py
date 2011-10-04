@@ -809,6 +809,16 @@ class Chart(models.Model):
         data["dataTable"] = { "cols": cols, "rows": rows }
         return json.dumps(data)
 
+    def get_map_click(self, lat, lng):
+        result = {}
+        skip_cols = ("ogc_fid", "color", "geometry")
+        description, data = self.load_info(lat, lng)
+        if data and len(data) > 0:
+            for i in range(len(data[0])):
+                if description[i][0] not in skip_cols:
+                    result[description[i][0]] = str(data[0][i])
+        return json.dumps(result)
+
     def get_map_tile(self, user_id, global_id, z, x, y):
         filename = self.get_map_tile_filename(z, x, y)
         if not os.path.exists(filename):
@@ -925,7 +935,6 @@ class Chart(models.Model):
 
     def update_table(self):
         table_query = self.sqlsource
-        print table_query
         if table_query:
             table = self.get_table_name()
             view = self.get_view_name()
@@ -975,7 +984,18 @@ class Chart(models.Model):
             cursor.execute(query)
             return [x[0] for x in cursor.fetchall()]
         except DatabaseError, e:
-            return []
+            return (None, [])
+
+    def load_info(self, lat, lng):
+        # NOTE: no bound variables; but see get_query() above.
+        view = self.get_view_name()
+        query = "SELECT * FROM %s WHERE ST_Contains(geometry, 'SRID=4326;POINT(%s %s)')" % (view, lng, lat)
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query)
+            return (cursor.description, cursor.fetchall())
+        except DatabaseError, e:
+            return (None, [])
 
 class GoogleProjection:
     def __init__(self,levels=18):
