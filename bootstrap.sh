@@ -240,13 +240,15 @@ while [ -z "$line" ] ; do
 done
 
 echo ""
-echo -n "Creating database $DB_NAME ... "
 
 if [ "$DB_ENGINE" = "sqlite3" ] ; then
+    echo -n "Creating database $DB_NAME ... "
     rm -f $DB_NAME
+    echo "done"
 fi
 
 if [ "$DB_ENGINE" = "mysql" -a -n "$exe_mysql" ] ; then
+    echo -n "Creating database $DB_NAME ... "
     mysql --batch --host=${DB_HOST:-localhost} --port=${DB_PORT:-0} --user=$root_username --password=$root_password mysql <<EOF
     CREATE DATABASE IF NOT EXISTS $DB_NAME ;
     INSERT INTO user VALUES ('%', '$DB_USERNAME', PASSWORD('$DB_PASSWORD'),
@@ -256,10 +258,12 @@ if [ "$DB_ENGINE" = "mysql" -a -n "$exe_mysql" ] ; then
            ON DUPLICATE KEY UPDATE User = '$DB_USERNAME' ;
     FLUSH PRIVILEGES ;
     GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USERNAME ;
+    echo "done"
 EOF
 fi
 
 if [ "$DB_ENGINE" = "postgresql" -a -n "$exe_psql" ] ; then
+    echo "Creating database $DB_NAME ... "
     args="--username=$root_username template1"
     if [ -n "$DB_PORT" ] ; then
         args="--port=$DB_PORT $args"
@@ -267,15 +271,16 @@ if [ "$DB_ENGINE" = "postgresql" -a -n "$exe_psql" ] ; then
     if [ -n "$DB_HOST" ] ; then
         args="--host=$DB_HOST $args"
     fi
-    psql $args <<EOF
-    DROP DATABASE IF EXISTS $DB_NAME ;
-    DROP USER IF EXISTS $DB_USERNAME ;
-    CREATE USER $DB_USERNAME WITH ENCRYPTED PASSWORD '$DB_PASSWORD' ;
-    CREATE DATABASE $DB_NAME WITH OWNER = $DB_USERNAME ;
+    psql -q $args <<EOF
+DROP DATABASE IF EXISTS $DB_NAME ;
+DROP USER IF EXISTS $DB_USERNAME ;
+CREATE USER $DB_USERNAME WITH ENCRYPTED PASSWORD '$DB_PASSWORD' ;
+CREATE DATABASE $DB_NAME WITH OWNER = $DB_USERNAME ;
 EOF
+    echo "PostgreSQL setup complete"
 fi
 
-echo "done"
+echo ""
 echo -n "Generating settings.py ... "
 
 cat local_settings.py.in \
@@ -329,6 +334,33 @@ python manage.py virtual_option_type_register --title 'Weeks ago' --question-dat
 python manage.py virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
 python manage.py createcachetable django_cache 2>/dev/null || echo 'Cache table errors ignored'
+
+if [ "$DB_ENGINE" = "postgresql" -a -n "$exe_psql" ] ; then
+    postgis=$(ls /usr/share/postgresql/*/contrib/postgis-*/postgis.sql)
+    srefsys=$(ls /usr/share/postgresql/*/contrib/postgis-*/spatial_ref_sys.sql)
+    if [ -n "$postgis" -a -n "$srefsys" ] ; then
+        echo "Setting up PostGIS"
+        args="--username=$root_username $DB_NAME"
+        if [ -n "$DB_PORT" ] ; then
+            args="--port=$DB_PORT $args"
+        fi
+        if [ -n "$DB_HOST" ] ; then
+            args="--host=$DB_HOST $args"
+        fi
+        psql -q $args <<EOF
+\i $postgis
+\i $srefsys
+CREATE TABLE pollster_zip_codes (id serial, country TEXT, zip_code_key TEXT);
+SELECT AddGeometryColumn('pollster_zip_codes', 'geometry', 4326, 'MULTIPOLYGON', 2);
+ALTER TABLE pollster_zip_codes OWNER TO $DB_USERNAME;
+ALTER TABLE spatial_ref_sys OWNER TO $DB_USERNAME;
+ALTER TABLE geometry_columns OWNER TO $DB_USERNAME;
+ALTER VIEW geography_columns OWNER TO $DB_USERNAME;
+EOF
+        echo "PostGIS setup complete"
+    fi
+fi
+
 
 echo ""
 echo "** All done. You can start the system by issuing: 'source ./bin/activate && python manage.py runserver'"
