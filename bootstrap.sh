@@ -88,9 +88,14 @@ else
     echo "not found; automatic PostgreSQL configuration disabled"
 fi
 
-virtualenv --no-site-packages .
+# Can we keep access to mapnik module and still use --no-site-packages?
+# virtualenv --no-site-packages .
+virtualenv .
+
 source ./bin/activate
+
 pip install -r requirements.txt
+
 if [ -n "$exe_mysql" ] ; then
     pip install MySQL-python
 fi
@@ -174,10 +179,10 @@ if [ "$DB_ENGINE" = "postgresql" ] ; then
     echo ""
     
     echo -n "Database host (just hit enter if on localhost/same host): "
-    read line && [ -n "$line"] && DB_HOST="$line";
+    read line && [ -n "$line" ] && DB_HOST="$line";
     
     echo -n "Database port (just hit enter if using default port): "
-    read line && [ -n "$line"] && DB_PORT="$line";
+    read line && [ -n "$line" ] && DB_PORT="$line";
     
     while [ -z "$DB_NAME" ] ; do
         echo -n "Database name (database will be created if necessary; default is epiwork): "
@@ -257,10 +262,10 @@ fi
 if [ "$DB_ENGINE" = "postgresql" -a -n "$exe_psql" ] ; then
     args="--username=$root_username template1"
     if [ -n "$DB_PORT" ] ; then
-        args=--port=$DB_PORT "$args"
+        args="--port=$DB_PORT $args"
     fi
     if [ -n "$DB_HOST" ] ; then
-        args=--host=$DB_HOST "$args"
+        args="--host=$DB_HOST $args"
     fi
     psql $args <<EOF
     DROP DATABASE IF EXISTS $DB_NAME ;
@@ -291,11 +296,10 @@ echo "Initializing Django database and loading default surveys:"
 echo ""
 
 python manage.py syncdb
+# On PostgreSQL ovverride the order of migrated tables creating first
+# referenced tables (journal migration fails if CMS isn't available.)
+python manage.py migrate cms
 python manage.py migrate
-#python manage.py loaddata data/initial.json
-#python manage.py survey_register data/surveys/gsq/gold-standard-weekly.py 
-#python manage.py survey_register data/surveys/gsq/gold-standard-intake.py 
-#python manage.py survey_register data/surveys/gsq/gold-standard-contact.py
 python manage.py rule_type_register --title 'Show Question' --jsclass 'wok.pollster.rules.ShowQuestion'
 python manage.py rule_type_register --title 'Hide Question' --jsclass 'wok.pollster.rules.HideQuestion'
 python manage.py rule_type_register --title 'Show Options' --jsclass 'wok.pollster.rules.ShowOptions'
@@ -325,10 +329,6 @@ python manage.py virtual_option_type_register --title 'Weeks ago' --question-dat
 python manage.py virtual_option_type_register --title 'Regular expression' --question-data-type-title 'Text' --jsclass 'wok.pollster.virtualoptions.RegularExpression'
 
 python manage.py createcachetable django_cache 2>/dev/null || echo 'Cache table errors ignored'
-
-#if [ "$DB_ENGINE" = "sqlite3" ] ; then
-#    echo ".read data/extra-survey.sqlite3.sql" | sqlite3 ggm.db
-#fi
 
 echo ""
 echo "** All done. You can start the system by issuing: 'source ./bin/activate && python manage.py runserver'"

@@ -393,5 +393,6 @@
     <None Include="media\pollster\wok\js\wok.pollster.charts.js" />
     <None Include="templates\pollster\survey_chart_edit.html" />
     <None Include="templates\pollster\survey_chart_list.html" />
+    <None Include="sql\sqlite\pollster_health_status.sql" />
   </ItemGroup>
 </Project>
