@@ -11,6 +11,7 @@ class Command(BaseCommand):
         verbosity = int(options.get('verbosity'))
 
         for chart in models.Chart.objects.all():
-            chart.update_data()
-            if verbosity > 0:
+            if not chart.update_data():
+                print 'Chart "%s" update FAILED' % (chart,)
+            elif verbosity > 0:
                 print 'Chart "%s" updated' % (chart,)
