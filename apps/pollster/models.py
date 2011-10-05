@@ -6,7 +6,7 @@ from cms.models import CMSPlugin
 from xml.etree import ElementTree
 from math import pi,cos,sin,log,exp,atan
 from . import dynamicmodels
-import os, re, warnings, datetime
+import os, re, shutil, warnings, datetime
 import simplejson as json
 import settings
 
@@ -914,6 +914,9 @@ class Chart(models.Model):
             os.makedirs(pathname)
         return filename
 
+    def clear_map_tile_cache(self):
+        shutil.rmtree(self.get_map_tile_base())
+
     def get_table_name(self):
         return 'pollster_charts_'+str(self.survey.shortname)+'_'+str(self.shortname)
 
@@ -955,6 +958,7 @@ class Chart(models.Model):
                 cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
                 #if exists:
                 #    execute('DROP TABLE '+backup)
+                self.clear_map_tile_cache()
                 return True
             except IntegrityError:
                 return False
