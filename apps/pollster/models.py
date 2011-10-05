@@ -800,13 +800,31 @@ class Chart(models.Model):
             return True
 
     def to_json(self, user_id, global_id):
-        data = { "chartType": "Table" }
-        if self.chartwrapper:
-            data = json.loads(self.chartwrapper)
-        descriptions, cells = self.load_data(user_id, global_id)
-        cols = [{"id": desc[0], "label": desc[0], "type": "number"} for desc in descriptions]
-        rows = [{"c": [{"v": v} for v in c]} for c in cells]
-        data["dataTable"] = { "cols": cols, "rows": rows }
+        data = {}
+
+        if self.type.shortname == "google-chart":
+            data[ "chartType"] = "Table"
+            if self.chartwrapper:
+                data = json.loads(self.chartwrapper)
+            descriptions, cells = self.load_data(user_id, global_id)
+            cols = [{"id": desc[0], "label": desc[0], "type": "number"} for desc in descriptions]
+            rows = [{"c": [{"v": v} for v in c]} for c in cells]
+            data["dataTable"] = { "cols": cols, "rows": rows }
+
+        else:
+            if self.chartwrapper:
+                data["bounds"] = json.loads(self.chartwrapper)
+            # TODO: To center the map on the centroid of current user's zip we need
+            # to access the "intake" survey, question "Q3". Those two values should
+            # probably go into settings.py, or something like that.
+            try:
+                intake = Survey.objects.get(shortname="intake", status='PUBLISHED')
+                lpd = intake.get_last_participation_data(user_id, global_id)
+                if ldp:
+                    data["center"] = self.load_zip_coords(intake["Q3"])
+            except:
+                pass
+
         return json.dumps(data)
 
     def get_map_click(self, lat, lng):
@@ -927,10 +945,9 @@ class Chart(models.Model):
         return self.get_table_name() + "_view"
 
     def get_query(self, user_id, global_id):
-        # NOTE: we don't use bound variables here because different backends
-        # use different formats BUT this is not a problem (think SQL injection)
-        # because both user_id and global_id are simple integers (the regular
-        # expression in urls.py guarantees that).
+        # NOTE: we don't use bound variables here  BUT this is not a problem
+        # (think SQL injection) because both user_id and global_id are simple
+        # integers (the regular expression in urls.py guarantees that).
         table = self.get_table_name()
         query = "SELECT * FROM %s" % (table,)
         if self.sqlfilter == 'USER' :
@@ -1002,15 +1019,28 @@ class Chart(models.Model):
             return (None, [])
 
     def load_info(self, lat, lng):
-        # NOTE: no bound variables; but see get_query() above.
         view = self.get_view_name()
-        query = "SELECT * FROM %s WHERE ST_Contains(geometry, 'SRID=4326;POINT(%s %s)')" % (view, lng, lat)
+        query = "SELECT * FROM %s WHERE ST_Contains(geometry, 'SRID=4326;POINT(%%s %%s)')" % (view,)
         try:
             cursor = connection.cursor()
-            cursor.execute(query)
+            cursor.execute(query, (lng, lat))
             return (cursor.description, cursor.fetchall())
         except DatabaseError, e:
             return (None, [])
+
+    def load_zip_coords(self, zip_code_key):
+        query = """SELECT ST_Y(ST_Centroid(geometry)) AS lat, ST_X(ST_Centroid(geometry)) AS lng
+                     FROM pollster_zip_codes WHERE zip_code_key = %s"""
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query, (zip_code_key,))
+            data = cursor.fetchall()
+            if len(data) > 0:
+                return {"lat": data[0][0], "lng": data[0][1]}
+            else:
+                return {}
+        except DatabaseError, e:
+            return {}
 
 class GoogleProjection:
     def __init__(self,levels=18):

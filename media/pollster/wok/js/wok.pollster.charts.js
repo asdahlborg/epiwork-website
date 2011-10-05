@@ -18,35 +18,19 @@
             });
         }
 
-        function get_column_index(cols, id) {
-            var index = -1;
-            for (var i=0 ; i < cols.length ; i++) {
-                if (cols[i].id === id)
-                    index = i;
-            }
-
-            if (index === -1)
-                return wok.error("can't find '" + id + "' column");
-            else
-                return index;
-        }
-
-        // On "OK" save the chart to a <div> on the page.
-
-        function draw_chart(url, containerId, callback) {
+        function draw_chart(url, containerId) {
             getData(function(data){
                 var id = self.$container.attr('id');
                 if (!id)
                     return wok.error("chart container element must have an id");
                 data.containerId = id;
                 self.wrapper = new google.visualization.ChartWrapper(data);
-                if (callback)
-                    callback(self.wrapper);
                 self.wrapper.draw();
             });
         }
 
-        function draw_map(url, containerId, callback) {
+        function draw_map(url, containerId, center) {
+            var jsonInput = $("#id_chartwrapper");
             var tileBase = url.replace(".json", "");
 
             getData(function(data) {
@@ -57,13 +41,26 @@
                     tileSize: new google.maps.Size(256, 256)
                 });
 
+                var c = new google.maps.LatLng(0, 0);
+                var z = 1;
+                if (data && data.bounds) {
+                    c = new google.maps.LatLng(data.bounds.lat, data.bounds.lng);
+                    z = data.bounds.z;
+                }
+                if (data && data.center && center) {
+                    c = new google.maps.LatLng(data.center.lat, data.center.lng);
+                    if (data && data.bounds)
+                        z = data.bounds.z;
+                    else
+                        z = 12;
+                }
+
                 var map = new google.maps.Map(self.$container[0], {
-                    zoom: 8,
-                    center: new google.maps.LatLng(45, 7.7),
+                    zoom: z,
+                    center: c,
                     mapTypeId: google.maps.MapTypeId.TERRAIN
                 });
                 map.overlayMapTypes.insertAt(0, zipMapType);
-
 
                 google.maps.event.addListener(map, 'click', function(evt) {
                     $.getJSON(tileBase+"/click/" + evt.latLng.lat() + "/" + evt.latLng.lng(), function(json) {
@@ -82,6 +79,15 @@
                         info.open(map);
                     });
                 });
+
+                if (jsonInput.length === 1) {
+                    google.maps.event.addListener(map, 'bounds_changed', function() {
+                        var c = map.getBounds().getCenter();
+                        var z = map.getZoom();
+                        var s = '{"z":'+z+',"lat":'+c.lat()+',"lng":'+c.lng()+'}';
+                        jsonInput.val(s);
+                    });
+                }
             });
         }
 
@@ -107,7 +113,9 @@
         if (self.$container.data("chart-type") === "google-charts")
             draw_chart(url, self.$container);
         else if (self.$container.data("chart-type") === "google-map")
-            draw_map(url, self.$container);
+            draw_map(url, self.$container, false);
+        else if (self.$container.data("chart-type") === "google-map-centered")
+            draw_map(url, self.$container, true);
     }
 
     window.wok.pollster.charts.init = function(callback) {
