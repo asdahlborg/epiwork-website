@@ -66,6 +66,7 @@
     <Compile Include="apps\pollster\migrations\0007_charts.py" />
     <Compile Include="apps\pollster\migrations\0008_charttypes.py" />
     <Compile Include="apps\pollster\migrations\0009_auto__add_surveychartplugin.py" />
+    <Compile Include="apps\pollster\management\commands\chart_update.py" />
   </ItemGroup>
   <ItemGroup>
     <None Include="templates\404.html" />

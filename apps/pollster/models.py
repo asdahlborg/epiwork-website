@@ -915,7 +915,10 @@ class Chart(models.Model):
         return filename
 
     def clear_map_tile_cache(self):
-        shutil.rmtree(self.get_map_tile_base())
+        try:
+            shutil.rmtree(self.get_map_tile_base())
+        except:
+            pass
 
     def get_table_name(self):
         return 'pollster_charts_'+str(self.survey.shortname)+'_'+str(self.shortname)
@@ -944,20 +947,28 @@ class Chart(models.Model):
             view_query = """SELECT A.*, B.id AS OGC_FID, B.geometry
                               FROM pollster_zip_codes B, (SELECT * FROM %s) A
                              WHERE A.zip_code_key = B.zip_code_key""" % (table,)
-            # FIXME: Why do we want a backup if the table is just a data cache?
-            # backup = table+'_'+format(datetime.datetime.now(), '%Y%m%d%H%M%s')
-            # Also, the following line doesn't work on PostgreSQL.
-            # exists = table in connection.introspection.table_names()
             cursor = connection.cursor()
             try:
-                #if exists:
-                #    execute('ALTER TABLE '+table+' RENAME TO '+backup)
                 cursor.execute("DROP VIEW IF EXISTS %s" % (view,))
                 cursor.execute("DROP TABLE IF EXISTS %s" % (table,))
                 cursor.execute("CREATE TABLE %s AS %s" % (table, table_query))
                 cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
-                #if exists:
-                #    execute('DROP TABLE '+backup)
+                self.clear_map_tile_cache()
+                return True
+            except IntegrityError:
+                return False
+            except DatabaseError:
+                return False
+        return False
+
+    def update_data(self):
+        table_query = self.sqlsource
+        if table_query:
+            table = self.get_table_name()
+            cursor = connection.cursor()
+            try:
+                cursor.execute("DELETE FROM %s" % (table,))
+                cursor.execute("INSERT INTO %s %s" % (table, table_query))
                 self.clear_map_tile_cache()
                 return True
             except IntegrityError:
