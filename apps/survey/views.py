@@ -58,10 +58,21 @@ def _get_person_health_status(request, survey, global_id):
     if data:
         cursor = connection.cursor()
         params = { 'weekly_id': data["id"] }
-        cursor.execute("""
+        queries = {
+            'sqlite':"""
             SELECT S.status
               FROM pollster_health_status S
-             WHERE S.pollster_results_weekly_id = :weekly_id""", params)
+             WHERE S.pollster_results_weekly_id = :weekly_id""",
+            'mysql':"""
+            SELECT S.status
+              FROM pollster_health_status S
+             WHERE S.pollster_results_weekly_id = :weekly_id""",
+            'postgresql':"""
+            SELECT S.status
+              FROM pollster_health_status S
+             WHERE S.pollster_results_weekly_id = %(weekly_id)s"""
+        }
+        cursor.execute(queries[utils.get_db_type(connection)], params)
         status = cursor.fetchone()[0]
     return (status, _decode_person_health_status(status))
 
@@ -69,12 +80,27 @@ def _get_health_history(request, survey):
     results = []
     cursor = connection.cursor()
     params = { 'user_id': request.user.id }
-    cursor.execute("""
-        SELECT W.timestamp, W.global_id, S.status
-          FROM pollster_health_status S, pollster_results_weekly W
-         WHERE S.pollster_results_weekly_id = W.id
-           AND W.user = :user_id
-         ORDER BY W.timestamp""", params)
+    queries = {
+        'sqlite':"""
+            SELECT W.timestamp, W.global_id, S.status
+              FROM pollster_health_status S, pollster_results_weekly W
+             WHERE S.pollster_results_weekly_id = W.id
+               AND W.user = :user_id
+             ORDER BY W.timestamp""",
+        'mysql':"""
+            SELECT W.timestamp, W.global_id, S.status
+              FROM pollster_health_status S, pollster_results_weekly W
+             WHERE S.pollster_results_weekly_id = W.id
+               AND W.user = :user_id
+             ORDER BY W.timestamp""",
+        'postgresql':"""
+            SELECT W.timestamp, W.global_id, S.status
+              FROM pollster_health_status S, pollster_results_weekly W
+             WHERE S.pollster_results_weekly_id = W.id
+               AND W.user = %(user_id)s
+             ORDER BY W.timestamp""",
+    }
+    cursor.execute(queries[utils.get_db_type(connection)], params)
     results = cursor.fetchall()
     for ret in results:
         timestamp, global_id, status = ret

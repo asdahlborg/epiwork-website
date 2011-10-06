@@ -28,7 +28,7 @@
 <table class="imagetable">
 <tr>
 	<th>{% trans "Group members" %}</th>
-    <th>{% trans "Health status" %}</th>
+    <th colspan="2">{% trans "Health status" %}</th>
 {% if persons|length > 1 %}
     <th colspan="4">{% trans "Manage " %}</th>
 {% else %}
@@ -38,6 +38,7 @@
 {% for person in persons %}
 <tr><td>{{ person.name }}</td>
 	<td><b>{{ person.diag }}</b></td>
+    <td><img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ person.health_status }}-small.png"/></td>
         <td><a href="{{ person.get_edit_url }}">{% trans "Change name" %}</a></td>
         <td><a href="{{ person.get_profile_url }}">{% trans "Change profile" %}</a></td>
         <td><a href="{{ person.get_survey_url }}">{% trans "Enter symptoms" %}</a></td>
