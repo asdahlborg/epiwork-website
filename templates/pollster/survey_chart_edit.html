@@ -64,7 +64,7 @@
     </div>
     <div id="pollster-canvas">
         {% if chart.has_data %}
-        <div id="pollster-chart-{{ chart.id }}" class="chart" data-chart-url="{% url pollster_chart_data survey.id chart.shortname %}"
+        <div id="pollster-chart-{{ chart.id }}" class="chart" data-chart-url="{% url pollster_chart_data survey.shortname chart.shortname %}"
              data-chart-type="{{ chart.type.shortname }}"
              style="width:440px;height:330px">
         </div>

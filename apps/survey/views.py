@@ -167,7 +167,7 @@ def index(request):
     if 'next' not in request.GET:
         next = reverse(thanks)
 
-    return pollster_views.survey_run(request, survey.id, next=next)
+    return pollster_views.survey_run(request, survey.shortname, next=next)
 
 @login_required
 def profile_index(request):
@@ -188,7 +188,7 @@ def profile_index(request):
     if 'next' not in request.GET:
         next = reverse(thanks_profile)
 
-    return pollster_views.survey_run(request, survey.id, next=next)
+    return pollster_views.survey_run(request, survey.shortname, next=next)
 
 @login_required
 def people_edit(request):

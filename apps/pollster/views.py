@@ -134,8 +134,8 @@ def survey_test(request, id, language=None):
     })
 
 @login_required
-def survey_run(request, id, next=None):
-    survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
+def survey_run(request, shortname, next=None):
+    survey = get_object_or_404(models.Survey, shortname=shortname, status='PUBLISHED')
     language = get_language()
     translation = get_object_or_none(models.TranslationSurvey, survey=survey, language=language, status="PUBLISHED")
     survey.set_translation_survey(translation)
@@ -152,7 +152,7 @@ def survey_run(request, id, next=None):
         form = survey.as_form()(data)
         if form.is_valid():
             form.save()
-            next_url = next or _get_next_url(request, reverse(survey_run, kwargs={'id': id}))
+            next_url = next or _get_next_url(request, reverse(survey_run, kwargs={'shortname': shortname}))
             return HttpResponseRedirect(next_url)
         else:
             survey.set_form(form)
@@ -277,40 +277,40 @@ def survey_import(request):
             return redirect(survey)
     return redirect(survey_list)
 
-def chart_data(request, id, shortname):
+def chart_data(request, survey_shortname, chart_shortname):
     chart = None
     if request.user.is_active and request.user.is_staff:
-        survey = get_object_or_404(models.Survey, pk=id)
-        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+        survey = get_object_or_404(models.Survey, shortname=survey_shortname)
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=chart_shortname)
     else:
-        survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
-        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname, status='PUBLISHED')
+        survey = get_object_or_404(models.Survey, shortname=survey_shortname, status='PUBLISHED')
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=chart_shortname, status='PUBLISHED')
     survey_user = _get_active_survey_user(request)
     user_id = request.user.id
     global_id = survey_user and survey_user.global_id
     return HttpResponse(chart.to_json(user_id, global_id), mimetype='application/json')
 
-def map_tile(request, id, shortname, z, x, y):
+def map_tile(request, survey_shortname, chart_shortname, z, x, y):
     chart = None
     if request.user.is_active and request.user.is_staff:
-        survey = get_object_or_404(models.Survey, pk=id)
-        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+        survey = get_object_or_404(models.Survey, shortname=survey_shortname)
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=chart_shortname)
     else:
-        survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
-        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname, status='PUBLISHED')
+        survey = get_object_or_404(models.Survey, shortname=survey_shortname, status='PUBLISHED')
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=chart_shortname, status='PUBLISHED')
     survey_user = _get_active_survey_user(request)
     user_id = request.user.id
     global_id = survey_user and survey_user.global_id
     return HttpResponse(chart.get_map_tile(user_id, global_id, int(z), int(x), int(y)), mimetype='image/png')
 
-def map_click(request, id, shortname, lat, lng):
+def map_click(request, survey_shortname, chart_shortname, lat, lng):
     chart = None
     if request.user.is_active and request.user.is_staff:
-        survey = get_object_or_404(models.Survey, pk=id)
-        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+        survey = get_object_or_404(models.Survey, shortname=survey_shortname)
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=chart_shortname)
     else:
-        survey = get_object_or_404(models.Survey, pk=id, status='PUBLISHED')
-        chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname, status='PUBLISHED')
+        survey = get_object_or_404(models.Survey, shortname=survey_shortname, status='PUBLISHED')
+        chart = get_object_or_404(models.Chart, survey=survey, shortname=chart_shortname, status='PUBLISHED')
     return HttpResponse(chart.get_map_click(float(lat), float(lng)), mimetype='application/json')
 
 # based on http://djangosnippets.org/snippets/2059/
