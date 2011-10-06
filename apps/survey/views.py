@@ -52,15 +52,7 @@ def _decode_person_health_status(status):
        diag = _('Next status')
     return diag
 
-def _db_table_exists(table):
-    cursor = connection.cursor()
-    table_names = connection.introspection.get_table_list(cursor)
-    return table in table_names
-
 def _get_person_health_status(request, survey, global_id):
-    if not _db_table_exists("pollster_health_status"):
-        return (None, _decode_person_health_status(None))
-
     data = survey.get_last_participation_data(request.user.id, global_id)
     status = None
     if data:
@@ -73,24 +65,20 @@ def _get_person_health_status(request, survey, global_id):
         status = cursor.fetchone()[0]
     return (status, _decode_person_health_status(status))
 
-def _get_person_health_history(request, survey, global_id):
-    if not _db_table_exists("pollster_health_status"):
-        raise StopIteration
-
+def _get_health_history(request, survey):
     results = []
     cursor = connection.cursor()
-    params = { 'user_id': request.user.id, 'global_id': global_id }
+    params = { 'user_id': request.user.id }
     cursor.execute("""
-        SELECT W.timestamp, S.status
+        SELECT W.timestamp, W.global_id, S.status
           FROM pollster_health_status S, pollster_results_weekly W
          WHERE S.pollster_results_weekly_id = W.id
            AND W.user = :user_id
-           AND W.global_id = :global_id
          ORDER BY W.timestamp""", params)
     results = cursor.fetchall()
     for ret in results:
-        timestamp, status = ret
-        yield {'timestamp': timestamp, 'status': status, 'diag':_decode_person_health_status(status)}
+        timestamp, global_id, status = ret
+        yield {'global_id': global_id, 'timestamp': timestamp, 'status': status, 'diag':_decode_person_health_status(status)}
 
 @login_required
 def thanks(request):
@@ -100,11 +88,15 @@ def thanks(request):
         raise Exception("The survey application requires a published survey with the shortname 'weekly'")
     Weekly = survey.as_model()
 
+    history = list(_get_health_history(request, survey))
     persons = models.SurveyUser.objects.filter(user=request.user, deleted=False)
+    persons_dict = dict([(p.global_id, p) for p in persons])
+    for item in history:
+        item['person'] = persons_dict.get(item['global_id'])
     for person in persons:
         person.health_status, person.diag = _get_person_health_status(request, survey, person.global_id)
-        person.health_history = list(_get_person_health_history(request, survey, person.global_id))[-7:]
-    return render_to_response('survey/thanks.html', {'persons': persons}, 
+        person.health_history = [i for i in history if i['global_id'] == person.global_id][-7:]
+    return render_to_response('survey/thanks.html', {'persons': persons, 'history': history}, 
                               context_instance=RequestContext(request))
 
 @login_required

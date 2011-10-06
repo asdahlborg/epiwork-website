@@ -1,18 +1,39 @@
-{% extends "survey/base.html" %}
-{% load i18n %}
+{% extends "base/twocol.html" %}
+
+{% load i18n sekizai_tags %}
+
+{% block add_js %}
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}pollster/wok/js/wok.pollster.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}pollster/wok/js/wok.pollster.charts.js"></script>
+
+<script type="text/javascript">
+    wok.pollster.charts.init(function() {
+        $(function() {
+            wok.pollster.charts.createCharts('.survey-chart .chart');
+        });
+    });
+</script>
+{% endblock %}
 
 {% block col1 %}
 
 <p>{% trans "Thanks for taking the time to fill out this survey." %}</p>
 
-{% if persons|length > 1 %}
 <p>
 {% trans "Here is a summary of the information you entered for you and the members of your group or family:" %}
 </p>
 
 <table class="imagetable">
 <tr>
-	<th>{% trans "Group members" %}</th><th>{% trans "Health status" %}</th><th colspan="4">{% trans "Manage " %}</th>
+	<th>{% trans "Group members" %}</th>
+    <th>{% trans "Health status" %}</th>
+{% if persons|length > 1 %}
+    <th colspan="4">{% trans "Manage " %}</th>
+{% else %}
+    <th colspan="3">{% trans "Manage " %}</th>
+{% endif %}
 </tr>
 {% for person in persons %}
 <tr><td>{{ person.name }}</td>
@@ -20,12 +41,13 @@
         <td><a href="{{ person.get_edit_url }}">{% trans "Change name" %}</a></td>
         <td><a href="{{ person.get_profile_url }}">{% trans "Change profile" %}</a></td>
         <td><a href="{{ person.get_survey_url }}">{% trans "Enter symptoms" %}</a></td>
+{% if persons|length > 1 %}
         <td><a href="{{ person.get_remove_url }}">{% trans "Remove" %}</a></td>
+{% endif %}
 </tr>
 
 {% endfor %}
 </table>
-{% endif %}
 
 <br/>
 
@@ -49,6 +71,36 @@
 {% endif %}
 {% endfor %}
 </ul>
+
+<br/>
+
+<div class="survey-chart">
+    <div class="chart" data-chart-url="{% url pollster_chart_data "weekly" "neighbourhood"  %}"
+        data-chart-type="google-map-centered" style="width:100%;height:330px">
+    </div>
+</div>
+
+<br/>
+
+<table class="imagetable">
+<thead>
+<tr>
+    <th>{% trans "Fill out date" %}</th>
+    <th>{% trans "Member" %}</th>
+    <th colspan="2">{% trans "Influweb result" %}</th>
+</tr>
+</thead>
+<tbody>
+{% for item in history reversed %}
+<tr>
+    <td title="{{ item.timestamp }}">{{ item.timestamp|date:'SHORT_DATE_FORMAT' }}</td>
+    <td>{{ item.person.name }}</td>
+    <td>{{ item.diag }}</td>
+    <td><img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ item.status }}-small.png"/></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
 
 {% endblock %}
 
