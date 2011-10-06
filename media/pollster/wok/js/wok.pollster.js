@@ -301,6 +301,24 @@
         // Ensure that the initial status is consistent with rules and whatnot.
 
         $survey.find(":input").trigger('change', { synthetic: true });
+
+        // Setup info icons.
+
+        $("ul.choices li").each(function() {
+            var $li = $(this);
+            var txt = $li.attr("title");
+            if (txt) {
+                var $tip = $('<div class="tip">'+txt+'</div>');
+                var $img = $('<img src="/media/pollster/css/im/information.png"/>').hover(
+                    function(evt) { $tip.fadeIn(); },
+                    function(evt) { $tip.fadeOut(); }
+                );
+                $li.removeAttr("title").append($img);
+                var pos = $li.offset();
+                $tip.hide().css("position", "absolute").appendTo("body")
+                    .offset({top: pos.top - $tip.outerHeight(), left: pos.left});
+            }
+        });
     }
 
     // MODULE FUNCTIONS
