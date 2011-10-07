@@ -5,9 +5,8 @@ from django.core.validators import RegexValidator
 from cms.models import CMSPlugin
 from xml.etree import ElementTree
 from math import pi,cos,sin,log,exp,atan
-from . import dynamicmodels
+from . import dynamicmodels, json
 import os, re, shutil, warnings, datetime
-import simplejson as json
 import settings
 
 DEG_TO_RAD = pi/180
@@ -851,8 +850,7 @@ class Chart(models.Model):
 
     def to_json(self, user_id, global_id):
         data = {}
-
-        if self.type.shortname == "google-chart":
+        if self.type.shortname == "google-charts":
             data[ "chartType"] = "Table"
             if self.chartwrapper:
                 data = json.loads(self.chartwrapper)
@@ -951,11 +949,14 @@ class Chart(models.Model):
         # First create the SQL query that is a join between pollster_zip_codes and
         # the chart query as created by the user; then create an appropriate datasource.
 
-        table = "SELECT * FROM %s" % (self.get_view_name(),)
+        if re.findall('[^0-9A-Za-z-]', global_id):
+            raise Exception("invalid global_id "+global_id)
+
+        table = """SELECT * FROM %s""" % (self.get_view_name(),)
         if self.sqlfilter == 'USER' :
-            table += " WHERE user = %d" % (user_id,)
+            table += """ WHERE "user" = %d""" % (user_id,)
         elif self.sqlfilter == 'PERSON':
-            table += " WHERE user = %d AND global_id = %d" % (user_id, global_id)
+            table += """ WHERE "user" = %d AND global_id = '%s'""" % (user_id, global_id)
         table = "(" + table + ") AS ZIP_CODES"
 
         if settings.DATABASES["default"]["ENGINE"] == "django.db.backends.sqlite3":
@@ -994,18 +995,6 @@ class Chart(models.Model):
     def get_view_name(self):
         return self.get_table_name() + "_view"
 
-    def get_query(self, user_id, global_id):
-        # NOTE: we don't use bound variables here  BUT this is not a problem
-        # (think SQL injection) because both user_id and global_id are simple
-        # integers (the regular expression in urls.py guarantees that).
-        table = self.get_table_name()
-        query = "SELECT * FROM %s" % (table,)
-        if self.sqlfilter == 'USER' :
-            query += " WHERE user = %d" % (user_id,)
-        elif self.sqlfilter == 'PERSON':
-            query += " WHERE user = %d AND global_id = %d" % (user_id, global_id)
-        return query
-
     def update_table(self):
         table_query = self.sqlsource
         if table_query:
@@ -1019,7 +1008,8 @@ class Chart(models.Model):
                 cursor.execute("DROP VIEW IF EXISTS %s" % (view,))
                 cursor.execute("DROP TABLE IF EXISTS %s" % (table,))
                 cursor.execute("CREATE TABLE %s AS %s" % (table, table_query))
-                cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
+                if self.type.shortname != 'google-charts':
+                    cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
                 self.clear_map_tile_cache()
                 return True
             except IntegrityError:
@@ -1045,25 +1035,33 @@ class Chart(models.Model):
         return False
 
     def load_data(self, user_id, global_id):
-        query = self.get_query(user_id, global_id)
+        table = self.get_table_name()
+        query = "SELECT * FROM %s" % (table,)
+        if self.sqlfilter == 'USER' :
+            query += """ WHERE "user" = %(user_id)s"""
+        elif self.sqlfilter == 'PERSON':
+            query += """ WHERE "user" = %(user_id)s AND global_id = %(global_id)s"""
+        params = { 'user_id': user_id, 'global_id': global_id }
+        query = _convert_query_paramstyle(connection, query, params)
         try:
             cursor = connection.cursor()
-            cursor.execute(query)
+            cursor.execute(query, params)
             return (cursor.description, cursor.fetchall())
         except DatabaseError, e:
             return ((('Error',),), ((str(e),),))
 
     def load_colors(self, user_id, global_id):
-        # NOTE: no bound variables; but see get_query() above.
         table = self.get_table_name()
-        query = 'SELECT DISTINCT color FROM %s' % (table,)
+        query = """SELECT DISTINCT color FROM %s""" % (table,)
         if self.sqlfilter == 'USER' :
-            query += " WHERE user = %d" % (user_id,)
+            query += """ WHERE "user" = %(user_id)s"""
         elif self.sqlfilter == 'PERSON':
-            query += " WHERE user = %d AND global_id = %d" % (user_id, global_id)
+            query += """ WHERE "user" = %(user_id)s AND global_id = %(global_id)s"""
+        params = { 'user_id': user_id, 'global_id': global_id }
+        query = _convert_query_paramstyle(connection, query, params)
         try:
             cursor = connection.cursor()
-            cursor.execute(query)
+            cursor.execute(query, params)
             return [x[0] for x in cursor.fetchall()]
         except DatabaseError, e:
             return (None, [])
@@ -1135,3 +1133,11 @@ def _get_db_type(connection):
     elif connection.settings_dict['ENGINE'] == "django.db.backends.mysql":
         db = "mysql"
     return db
+
+def _convert_query_paramstyle(connection, sql, params):
+    db = _get_db_type(connection)
+    if db == 'postgresql':
+        return sql
+    translations = dict([(p, ':'+p) for p in params.keys()])
+    converted = sql % translations
+    return converted

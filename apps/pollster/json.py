@@ -1,7 +1,8 @@
-from django.utils import simplejson as json
+from django.utils.simplejson import *
+from django.utils import simplejson
 import datetime
 
-class JSONEncoder(json.JSONEncoder):
+class JSONEncoder(simplejson.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
             return obj.strftime('%Y-%m-%dT%H:%M:%S')
@@ -10,3 +11,7 @@ class JSONEncoder(json.JSONEncoder):
         else:
             return json.JSONEncoder.default(self, obj)
 
+def dumps(*args, **kwargs):
+    if 'cls' not in kwargs:
+        kwargs['cls'] = JSONEncoder
+    return simplejson.dumps(*args, **kwargs)
