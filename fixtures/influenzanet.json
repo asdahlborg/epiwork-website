@@ -828,6 +828,123 @@
         }
     },
     {
+        "pk": 94,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-26 08:11:37",
+            "app_name": "survey",
+            "migration": "0004_fix_south_bug_578"
+        }
+    },
+    {
+        "pk": 95,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-26 12:09:13",
+            "app_name": "survey",
+            "migration": "0005_verify_single_user_assumption"
+        }
+    },
+    {
+        "pk": 96,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-26 12:11:58",
+            "app_name": "survey",
+            "migration": "0006_auto__add_field_surveyuser_oneuser"
+        }
+    },
+    {
+        "pk": 97,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-26 12:16:20",
+            "app_name": "survey",
+            "migration": "0007_user_m2m_to_fk_datamigration"
+        }
+    },
+    {
+        "pk": 98,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-26 12:35:15",
+            "app_name": "survey",
+            "migration": "0008_auto"
+        }
+    },
+    {
+        "pk": 99,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-26 12:35:15",
+            "app_name": "survey",
+            "migration": "0009_auto__del_field_surveyuser_oneuser__add_field_surveyuser_user"
+        }
+    },
+    {
+        "pk": 100,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-09-26 18:05:58",
+            "app_name": "survey",
+            "migration": "0010_auto__del_extraresponse"
+        }
+    },
+    {
+        "pk": 101,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-10-07 10:50:12",
+            "app_name": "journal",
+            "migration": "0004_auto__add_categorytranslation__add_unique_categorytranslation_language"
+        }
+    },
+    {
+        "pk": 102,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-10-07 10:50:12",
+            "app_name": "journal",
+            "migration": "0005_translate_categories"
+        }
+    },
+    {
+        "pk": 103,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-10-07 10:50:12",
+            "app_name": "journal",
+            "migration": "0006_translate_entries"
+        }
+    },
+    {
+        "pk": 104,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-10-07 10:50:12",
+            "app_name": "journal",
+            "migration": "0007_auto__del_field_entry_excerpt__del_field_entry_title__del_field_entry_"
+        }
+    },
+    {
+        "pk": 105,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-10-07 10:50:12",
+            "app_name": "journal",
+            "migration": "0008_auto__del_field_categorytranslation_t_title__add_field_categorytransla"
+        }
+    },
+    {
+        "pk": 106,
+        "model": "south.migrationhistory",
+        "fields": {
+            "applied": "2011-10-07 10:50:13",
+            "app_name": "pollster",
+            "migration": "0010_charttypes_centered"
+        }
+    },
+    {
         "pk": 28,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -945,6 +1062,15 @@
         }
     },
     {
+        "pk": 77,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "categorytranslation",
+            "name": "category translation",
+            "app_label": "journal"
+        }
+    },
+    {
         "pk": 75,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -978,6 +1104,15 @@
             "model": "contenttype",
             "name": "content type",
             "app_label": "contenttypes"
+        }
+    },
+    {
+        "pk": 78,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "entrytranslation",
+            "name": "entry translation",
+            "app_label": "journal"
         }
     },
     {
@@ -1781,11 +1916,53 @@
         }
     },
     {
+        "pk": "a9c7939b500bd0e3aa1eede53a526d5a",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2011-09-26 16:35:39",
+            "session_data": "MTY0OGFlNjZjNjg5NWU0ZTkxNzVhNTI3Y2JiYmQ0MzY4ZGE0ZmUzNzqAAn1xAShVDmNtc19hZG1p\nbl9zaXRlcQJLAVUSX2F1dGhfdXNlcl9iYWNrZW5kcQNVKWRqYW5nby5jb250cmliLmF1dGguYmFj\na2VuZHMuTW9kZWxCYWNrZW5kcQRVD2RqYW5nb19sYW5ndWFnZXEFWAIAAABlbnEGVQ1fYXV0aF91\nc2VyX2lkcQdLAXUu\n"
+        }
+    },
+    {
+        "pk": "9fd6f26ab09424a6624743c0161c5592",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2011-09-26 14:54:02",
+            "session_data": "Yjk5YWI3ZjUwOTE0MWIyMTA0MDU5OTJkNzYxNzczMDQ4ODBmZTk4ZDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ9kamFuZ29fbGFuZ3VhZ2VxBFgCAAAAZW5xBVUNX2F1dGhfdXNlcl9pZHEGSwF1Lg==\n"
+        }
+    },
+    {
         "pk": 1,
         "model": "sites.site",
         "fields": {
             "domain": "influenzanet.eu",
             "name": "Influenzanet"
+        }
+    },
+    {
+        "pk": 367,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2011-09-26 12:39:11",
+            "object_repr": "Surveys",
+            "object_id": "16",
+            "change_message": "Changed navigation_extenders and moderator_state.",
+            "user": 1,
+            "content_type": 31
+        }
+    },
+    {
+        "pk": 366,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2011-09-26 12:38:55",
+            "object_repr": "Surveys",
+            "object_id": "16",
+            "change_message": "",
+            "user": 1,
+            "content_type": 31
         }
     },
     {
@@ -6515,7 +6692,7 @@
             "last_participation": 2,
             "global_id": "193807d8-4a30-4601-9bc5-bc59db1696cd",
             "deleted": false,
-            "user": [],
+            "user": null,
             "last_participation_date": "2010-11-04 12:50:43"
         }
     },
@@ -6527,7 +6704,7 @@
             "last_participation": 4,
             "global_id": "cd81f47b-779d-42fe-8dbf-332401e0b9a4",
             "deleted": false,
-            "user": [],
+            "user": null,
             "last_participation_date": "2010-11-04 15:26:57"
         }
     },
@@ -6539,7 +6716,7 @@
             "last_participation": 8,
             "global_id": "b9e8353b-e113-4b03-856f-c118e0b70666",
             "deleted": false,
-            "user": [],
+            "user": null,
             "last_participation_date": "2010-11-08 15:45:34"
         }
     },
@@ -6551,9 +6728,19 @@
             "last_participation": null,
             "global_id": "12139e6b-3b87-4c2f-80e8-5b0e6f98afbd",
             "deleted": false,
-            "user": [
-                1
-            ],
+            "user": 1,
+            "last_participation_date": null
+        }
+    },
+    {
+        "pk": 5,
+        "model": "survey.surveyuser",
+        "fields": {
+            "name": "Jansen",
+            "last_participation": null,
+            "global_id": "870d7092-224a-4db2-9506-1566bcd8c0a6",
+            "deleted": false,
+            "user": 1,
             "last_participation_date": null
         }
     },
@@ -6883,6 +7070,18 @@
         }
     },
     {
+        "pk": 5,
+        "model": "survey.profile",
+        "fields": {
+            "updated": null,
+            "created": null,
+            "valid": false,
+            "survey": null,
+            "user": 5,
+            "data": null
+        }
+    },
+    {
         "pk": 1,
         "model": "survey.lastresponse",
         "fields": {
@@ -6919,6 +7118,15 @@
         }
     },
     {
+        "pk": 5,
+        "model": "survey.lastresponse",
+        "fields": {
+            "data": null,
+            "user": 5,
+            "participation": null
+        }
+    },
+    {
         "pk": 1,
         "model": "reminder.userreminderinfo",
         "fields": {
@@ -6930,27 +7138,162 @@
     },
     {
         "pk": 1,
-        "model": "journal.category",
+        "model": "journal.categorytranslation",
         "fields": {
-            "slug": "influenza",
+            "language_code": "en",
+            "master": 1,
             "title": "Influenza"
         }
     },
     {
-        "pk": 1,
-        "model": "journal.entry",
+        "pk": 2,
+        "model": "journal.categorytranslation",
         "fields": {
-            "category": 1,
-            "updated": "2011-08-27 14:06:56",
-            "title": "Recruitment of animator / recruiter / communication expert for Influenzanet in France",
-            "image": "",
-            "created": "2011-08-27 12:07:39",
-            "excerpt": "The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "language_code": "de",
+            "master": 1,
+            "title": "TRANSLATE INTO DE - Influenza"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "journal.categorytranslation",
+        "fields": {
+            "language_code": "fr",
+            "master": 1,
+            "title": "TRANSLATE INTO FR - Influenza"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "journal.categorytranslation",
+        "fields": {
+            "language_code": "nl",
+            "master": 1,
+            "title": "TRANSLATE INTO NL - Influenza"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "journal.categorytranslation",
+        "fields": {
+            "language_code": "it",
+            "master": 1,
+            "title": "TRANSLATE INTO IT - Influenza"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "journal.categorytranslation",
+        "fields": {
+            "language_code": "se",
+            "master": 1,
+            "title": "TRANSLATE INTO SE - Influenza"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "journal.categorytranslation",
+        "fields": {
+            "language_code": "pt",
+            "master": 1,
+            "title": "TRANSLATE INTO PT - Influenza"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "journal.categorytranslation",
+        "fields": {
+            "language_code": "es",
+            "master": 1,
+            "title": "TRANSLATE INTO ES - Influenza"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "journal.entrytranslation",
+        "fields": {
             "content": "<h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
-            "pub_date": "2011-08-27 11:59:10",
-            "slug": "recruitment-of-animator",
-            "alignment": null,
-            "is_published": true
+            "master": 1,
+            "language_code": "en",
+            "excerpt": "The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "title": "Recruitment of animator / recruiter / communication expert for Influenzanet in France"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "journal.entrytranslation",
+        "fields": {
+            "content": "<p>TRANSLATE INTO DE - </p><h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "master": 1,
+            "language_code": "de",
+            "excerpt": "TRANSLATE INTO DE - The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "title": "TRANSLATE INTO DE - Recruitment of animator / recruiter / communication expert for Influenzanet in France"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "journal.entrytranslation",
+        "fields": {
+            "content": "<p>TRANSLATE INTO FR - </p><h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "master": 1,
+            "language_code": "fr",
+            "excerpt": "TRANSLATE INTO FR - The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "title": "TRANSLATE INTO FR - Recruitment of animator / recruiter / communication expert for Influenzanet in France"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "journal.entrytranslation",
+        "fields": {
+            "content": "<p>TRANSLATE INTO NL - </p><h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "master": 1,
+            "language_code": "nl",
+            "excerpt": "TRANSLATE INTO NL - The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "title": "TRANSLATE INTO NL - Recruitment of animator / recruiter / communication expert for Influenzanet in France"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "journal.entrytranslation",
+        "fields": {
+            "content": "<p>TRANSLATE INTO IT - </p><h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "master": 1,
+            "language_code": "it",
+            "excerpt": "TRANSLATE INTO IT - The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "title": "TRANSLATE INTO IT - Recruitment of animator / recruiter / communication expert for Influenzanet in France"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "journal.entrytranslation",
+        "fields": {
+            "content": "<p>TRANSLATE INTO SE - </p><h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "master": 1,
+            "language_code": "se",
+            "excerpt": "TRANSLATE INTO SE - The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "title": "TRANSLATE INTO SE - Recruitment of animator / recruiter / communication expert for Influenzanet in France"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "journal.entrytranslation",
+        "fields": {
+            "content": "<p>TRANSLATE INTO PT - </p><h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "master": 1,
+            "language_code": "pt",
+            "excerpt": "TRANSLATE INTO PT - The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "title": "TRANSLATE INTO PT - Recruitment of animator / recruiter / communication expert for Influenzanet in France"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "journal.entrytranslation",
+        "fields": {
+            "content": "<p>TRANSLATE INTO ES - </p><h2>Recruitment of animator / recruiter / communication expert for Influenzanet in France</h2>\r\n<p>The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at <a href=\"http://english.inserm.fr/\" title=\"INSERM\">INSERM</a> is recruiting an animator/recruiter/communication expert for the implementation in France of the <a href=\"http://www.epiwork.eu/resources/wp5-ict-monitoring-and-reporting-systems/\" title=\"WP5\">WP5</a> Internet-based Monitoring System for Influenza Surveillance. The platform will thus represent the French node of the Influenzanet Surveillance Network. Details for the job position can be found <a href=\"%7B%7B%20MEDIA_URL%20%7D%7Ddocs/recruitment/job_adv_epipop.pdf\" title=\"Recruitment of animator/recruiter/communication expert for Influenzanet in France\">HERE</a>.</p>",
+            "master": 1,
+            "language_code": "es",
+            "excerpt": "TRANSLATE INTO ES - The Unit UMR S (Unit\u00e9 de recherche mixte en sant\u00e9) 707 at INSERM is recruiting an animator/recruiter/communication expert for the implementation in France of the WP5  Internet-based Monitoring System for Influenza Surveillance.",
+            "title": "TRANSLATE INTO ES - Recruitment of animator / recruiter / communication expert for Influenzanet in France"
         }
     },
     {
@@ -8061,6 +8404,30 @@
         }
     },
     {
+        "pk": 147,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Left bar",
+            "default_width": null
+        }
+    },
+    {
+        "pk": 148,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Right bar",
+            "default_width": null
+        }
+    },
+    {
+        "pk": 149,
+        "model": "cms.placeholder",
+        "fields": {
+            "slot": "Main content",
+            "default_width": null
+        }
+    },
+    {
         "pk": 2,
         "model": "cms.cmsplugin",
         "fields": {
@@ -9092,6 +9459,40 @@
         }
     },
     {
+        "pk": 16,
+        "model": "cms.page",
+        "fields": {
+            "rght": 2,
+            "navigation_extenders": "SurveyMenu",
+            "site": 1,
+            "creation_date": "2011-09-26 12:38:55",
+            "lft": 1,
+            "in_navigation": true,
+            "reverse_id": null,
+            "login_required": false,
+            "created_by": "admin",
+            "publication_end_date": null,
+            "moderator_state": 0,
+            "template": "base/threecol.html",
+            "tree_id": 15,
+            "placeholders": [
+                147,
+                148,
+                149
+            ],
+            "limit_visibility_in_menu": null,
+            "parent": null,
+            "publisher_state": 1,
+            "soft_root": false,
+            "publication_date": "2011-09-26 12:39:00",
+            "publisher_public": null,
+            "level": 0,
+            "changed_by": "admin",
+            "publisher_is_draft": true,
+            "published": true
+        }
+    },
+    {
         "pk": 1,
         "model": "cms.title",
         "fields": {
@@ -9374,6 +9775,25 @@
             "path": "news",
             "meta_description": "",
             "slug": "news"
+        }
+    },
+    {
+        "pk": 71,
+        "model": "cms.title",
+        "fields": {
+            "menu_title": "",
+            "redirect": "",
+            "meta_keywords": "",
+            "page_title": "",
+            "language": "en",
+            "title": "Surveys",
+            "has_url_overwrite": false,
+            "application_urls": "",
+            "creation_date": "2011-09-26 12:38:55",
+            "page": 16,
+            "path": "survey",
+            "meta_description": "",
+            "slug": "survey"
         }
     },
     {
@@ -9669,6 +10089,41 @@
         }
     },
     {
+        "pk": 2,
+        "model": "menus.cachekey",
+        "fields": {
+            "key": "cms-menu_nodes_en_1",
+            "site": 1,
+            "language": "en"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "pollster.survey",
+        "fields": {
+            "status": "PUBLISHED",
+            "updated": "2011-09-26 12:42:10",
+            "parent": null,
+            "created": "2011-09-26 12:41:05",
+            "title": "Intake",
+            "version": "",
+            "shortname": "intake"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "pollster.survey",
+        "fields": {
+            "status": "PUBLISHED",
+            "updated": "2011-09-26 12:42:07",
+            "parent": null,
+            "created": "2011-09-26 12:41:43",
+            "title": "Weekly",
+            "version": "",
+            "shortname": "weekly"
+        }
+    },
+    {
         "pk": 1,
         "model": "pollster.ruletype",
         "fields": {
@@ -9897,6 +10352,86 @@
     },
     {
         "pk": 1,
+        "model": "pollster.question",
+        "fields": {
+            "ordinal": 0,
+            "regex": "",
+            "data_name": "timestamp",
+            "is_mandatory": false,
+            "description": "",
+            "data_type": 5,
+            "title": "Compilation Date",
+            "open_option_data_type": null,
+            "visual": "",
+            "survey": 1,
+            "error_message": "",
+            "starts_hidden": false,
+            "type": "builtin",
+            "tags": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "pollster.question",
+        "fields": {
+            "ordinal": 2,
+            "regex": "",
+            "data_name": "intake",
+            "is_mandatory": false,
+            "description": "This is the dummy for 'intake'",
+            "data_type": 1,
+            "title": "Intake: dummy",
+            "open_option_data_type": null,
+            "visual": "",
+            "survey": 1,
+            "error_message": "",
+            "starts_hidden": false,
+            "type": "text",
+            "tags": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "pollster.question",
+        "fields": {
+            "ordinal": 0,
+            "regex": "",
+            "data_name": "timestamp",
+            "is_mandatory": false,
+            "description": "",
+            "data_type": 5,
+            "title": "Compilation Date",
+            "open_option_data_type": null,
+            "visual": "",
+            "survey": 2,
+            "error_message": "",
+            "starts_hidden": false,
+            "type": "builtin",
+            "tags": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "pollster.question",
+        "fields": {
+            "ordinal": 2,
+            "regex": "",
+            "data_name": "weekly",
+            "is_mandatory": false,
+            "description": "",
+            "data_type": 1,
+            "title": "Weekly: dummy",
+            "open_option_data_type": null,
+            "visual": "",
+            "survey": 2,
+            "error_message": "",
+            "starts_hidden": false,
+            "type": "text",
+            "tags": ""
+        }
+    },
+    {
+        "pk": 1,
         "model": "pollster.charttype",
         "fields": {
             "shortname": "google-charts",
@@ -9909,6 +10444,14 @@
         "fields": {
             "shortname": "google-fusion-map",
             "description": "Google Fusion Map"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "pollster.charttype",
+        "fields": {
+            "shortname": "google-map-centered",
+            "description": "Google Map (centered on user)"
         }
     },
     {
@@ -10533,6 +11076,33 @@
         }
     },
     {
+        "pk": 226,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_categorytranslation",
+            "name": "Can add category translation",
+            "content_type": 77
+        }
+    },
+    {
+        "pk": 227,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_categorytranslation",
+            "name": "Can change category translation",
+            "content_type": 77
+        }
+    },
+    {
+        "pk": 228,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_categorytranslation",
+            "name": "Can delete category translation",
+            "content_type": 77
+        }
+    },
+    {
         "pk": 85,
         "model": "auth.permission",
         "fields": {
@@ -10557,6 +11127,33 @@
             "codename": "delete_entry",
             "name": "Can delete Entry",
             "content_type": 29
+        }
+    },
+    {
+        "pk": 229,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_entrytranslation",
+            "name": "Can add entry translation",
+            "content_type": 78
+        }
+    },
+    {
+        "pk": 230,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_entrytranslation",
+            "name": "Can change entry translation",
+            "content_type": 78
+        }
+    },
+    {
+        "pk": 231,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_entrytranslation",
+            "name": "Can delete entry translation",
+            "content_type": 78
         }
     },
     {
@@ -12006,7 +12603,7 @@
             "is_active": true,
             "is_superuser": true,
             "is_staff": true,
-            "last_login": "2011-08-27 12:06:10",
+            "last_login": "2011-09-26 12:46:55",
             "groups": [
                 1
             ],
