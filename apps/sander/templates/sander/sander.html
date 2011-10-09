@@ -1,0 +1,19 @@
+{% extends "base/sitebase.html" %}
+
+{% block add_css %}
+<link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}sander/jquery.fancybox-1.3.4.css" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}sander/dropdown.css" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}sander/style.css" />
+{% endblock %}
+
+{% block add_js %}
+<script type="text/javascript" src="{{ MEDIA_URL }}sander/fancybox.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}sander/dropdown.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}sander/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}sander/jquery.mousewheel-3.0.4.pack.js"></script>
+{% endblock %}
+
+{% block content %}
+{{ content|safe }}
+{% endblock content %}
+

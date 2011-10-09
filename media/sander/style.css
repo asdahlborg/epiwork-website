@@ -1,0 +1,152 @@
+.influenzabar {
+   background: #ffffff url(/eu/influbar.gif) top center no-repeat !important;
+   height: 30px;
+}
+
+#main {
+    clear: both;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-left: 12px;
+    padding-right: 12px;
+    background: #ffffff;
+    min-height: 300px;
+}
+
+#col1-right {
+    float: left; 
+    border-left: 1px solid #e2e2e2;
+    max-width: 750px;
+    padding-left: 12px;
+}
+#col1-left {
+    float: left;
+    max-width: 750px;
+}
+
+.col1 {
+}
+.col2 {
+    float: left !important; 
+    width: 163px !important; /* 175-12 = 163 */
+
+    left: 0 !important;
+    margin-left: 0 !important;
+}
+.col3 {
+    float: right !important;
+    left: 0 !important;
+}
+
+.diagram {
+    float: left;
+    padding-left: 30px;
+    padding-top: 25px;
+}
+
+.diagram img {
+    border: 2px solid #555555;
+}
+.diagram a:hover img {
+    border: 2px solid red;
+}
+
+.results {
+    background: #d5d5d5;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    margin-top: 1em;
+    clear: both;
+}
+
+/* case definition block */
+.casedef {
+    background: #d5d5d5;
+    float: left;
+    margin-bottom: 1em;
+    margin-left: 0.5em;
+    padding: 0.3em;
+    border: 2px solid #000000;
+}
+.casedef ul {
+    margin: 0.7em 0 0em 1em;
+}
+
+.casedef ul li {
+    list-style: disc inside none;
+    font-size: 0.7em;
+    line-height: 1.4em;
+}
+
+ul.list {
+    margin: 0.7em 0 0em 1em;
+}
+
+ul.list li {
+    list-style: disc inside none;
+    font-size: 0.7em;
+    line-height: 1.4em;
+}
+
+ol.list {
+    margin: 0.7em 0 0em 1em;
+    padding: 0;
+}
+ol.list li {
+    list-style: upper-alpha inside none;
+    font-size: 0.7em;
+    line-height: 1.4em;
+}
+
+/* urls with an image */
+div.logolink {
+    float: left;
+    text-align: center;
+    margin: 1em;
+    font-size: 0.7em;
+}
+
+#col1 li, #col2 li, #col3 li {
+   font-size: 0.7em; 
+}
+
+table.grey {
+    border-collapse: collapse;
+    font-size: 0.7em;
+}
+table.grey th {
+    border: 1px solid #000000;
+    background: #d5d5d5;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+table.grey td {
+    border: 1px solid #000000;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+table.grey-left {
+    border-collapse: collapse;
+    font-size: 0.7em;
+}
+table.grey-left th {
+    border: 1px solid #000000;
+    background: #d5d5d5;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+}
+table.grey-left td {
+    border: 1px solid #000000;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+}
+
+p.math {
+   padding-left: 2em;
+   font-weight: bold;
+}

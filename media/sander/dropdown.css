@@ -1,0 +1,97 @@
+.nav {
+    margin:0; 
+    padding:0; 
+    list-style:none;
+    white-space: nowrap;
+}   
+
+/* make the LI display inline */
+/* it's position relative so that position absolute */
+/* can be used in submenu */
+.nav li {
+    float:left; 
+    display:block; 
+    position:relative;
+}
+
+/* this is the parent menu */
+.nav li a {
+    color:#ffffff !important; /*button-text*/
+    background:#555555; /*button-color*/
+    border: 2px solid #000000; /*button-border*/
+    font-size: 11px;
+    text-decoration:none; 
+    text-align:left;
+    margin-right: 0.5em;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+.nav li a:hover {
+    text-decoration:none !important; 
+    color:#ffffff !important; /*button-text*/
+    background:#555555; /*button-color*/
+    border: 2px solid #000000; /*button-border*/
+}
+
+/* you can make a different style for default selected value */
+.nav a.selected {
+    color:#f00 !important;
+}
+
+.nav li.value {
+    clear: both; 
+    margin-left: 18px; 
+    color: red; 
+    font-weight: bold;
+}
+
+.nav li.dropdown ul {
+    position:absolute; 
+    z-index: 100; /* overlap submenus over other menus */
+}
+
+.nav li.option ul {
+    position:relative; 
+    margin-left: 15px;
+}
+
+/* submenu, it's hidden by default */
+.nav li ul {
+    display:none; 
+    list-style:none;
+    left: 0;
+}
+
+.nav ul li {
+    float:left;
+}
+
+/* display block will make the link fill the whole area of LI */
+.nav ul a {
+    color:#000000 !important; /*item-text*/
+    background: #ffffff; /*item-color*/
+    border: 2px solid #555555; /*item-border*/
+    font-size: 11px;
+    display:block;  
+}
+
+.nav ul a:hover {
+    /* text-decoration:underline; */
+    color:#000000 !important; /*hover-item-text*/
+    background: #d2d2d2; /*hover-item-color*/
+    border: 2px solid #555555; /*hover-item-color*/
+}
+ 
+/* fix ie6 small issue */
+/* we should always avoid using hack like this */
+/* should put it into separate file : ) */
+/*
+*html .nav ul {
+    margin:0 0 0 -2px;
+}
+*/
