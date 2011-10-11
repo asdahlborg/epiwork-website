@@ -47,7 +47,7 @@
 
                 var c = new google.maps.LatLng(0, 0);
                 var z = 1;
-                if (data && data.bounds) {
+                if (data && data.bounds && data.bounds.lat && data.bounds.lng) {
                     c = new google.maps.LatLng(data.bounds.lat, data.bounds.lng);
                     z = data.bounds.z;
                 }
