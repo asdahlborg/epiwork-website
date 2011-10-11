@@ -949,7 +949,7 @@ class Chart(models.Model):
         # First create the SQL query that is a join between pollster_zip_codes and
         # the chart query as created by the user; then create an appropriate datasource.
 
-        if re.findall('[^0-9A-Za-z-]', global_id):
+        if global_id and re.findall('[^0-9A-Za-z-]', global_id):
             raise Exception("invalid global_id "+global_id)
 
         table = """SELECT * FROM %s""" % (self.get_view_name(),)
