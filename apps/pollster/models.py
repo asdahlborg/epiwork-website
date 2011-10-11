@@ -1004,18 +1004,18 @@ class Chart(models.Model):
                               FROM pollster_zip_codes B, (SELECT * FROM %s) A
                              WHERE A.zip_code_key = B.zip_code_key""" % (table,)
             cursor = connection.cursor()
-            try:
-                cursor.execute("DROP VIEW IF EXISTS %s" % (view,))
-                cursor.execute("DROP TABLE IF EXISTS %s" % (table,))
-                cursor.execute("CREATE TABLE %s AS %s" % (table, table_query))
-                if self.type.shortname != 'google-charts':
-                    cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
-                self.clear_map_tile_cache()
-                return True
-            except IntegrityError:
-                return False
-            except DatabaseError:
-                return False
+            #try:
+            cursor.execute("DROP VIEW IF EXISTS %s" % (view,))
+            cursor.execute("DROP TABLE IF EXISTS %s" % (table,))
+            cursor.execute("CREATE TABLE %s AS %s" % (table, table_query))
+            if self.type.shortname != 'google-charts':
+                cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
+            self.clear_map_tile_cache()
+            return True
+            #except IntegrityError:
+            #    return False
+            #except DatabaseError:
+            #    return False
         return False
 
     def update_data(self):
