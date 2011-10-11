@@ -887,6 +887,10 @@ class Chart(models.Model):
 
     def get_map_tile(self, user_id, global_id, z, x, y):
         filename = self.get_map_tile_filename(z, x, y)
+        if self.sqlfilter == "USER" and user_id:
+            filename = filename + "_user_" + str(user_id)
+        elif self.sqlfilter == "PERSON" and global_id:
+            filename = filename + "_gid_" + global_id
         if not os.path.exists(filename):
             self.generate_map_tile(self.generate_mapnik_map(user_id, global_id), filename, z, x, y)
         return open(filename).read()
@@ -977,7 +981,7 @@ class Chart(models.Model):
         return "_pollster_tile_cache/survey_%s/%s" % (self.survey.id, self.shortname)
 
     def get_map_tile_filename(self, z, x, y):
-        filename = "%s/%s/%s_%s.png" % (self.get_map_tile_base(), z, x, y)
+        filename = "%s/%s/%s_%s" % (self.get_map_tile_base(), z, x, y)
         pathname = os.path.dirname(filename)
         if not os.path.exists(pathname):
             os.makedirs(pathname)
