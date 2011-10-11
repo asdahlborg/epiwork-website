@@ -13,7 +13,11 @@
             return wok.error("missing data-chart-url attribute on chart container");
 
         function getData(callback) {
-            $.getJSON(url, {}, function(data, textStatus, jqXHR) {
+            var params = {};
+            var m = /gid=([a-z0-9-]+)/.exec(window.location.href);
+            if (m && m[1])
+                params = {"gid":m[1]};
+            $.getJSON(url, params, function(data, textStatus, jqXHR) {
                 callback(data);
             });
         }

@@ -868,8 +868,8 @@ class Chart(models.Model):
             try:
                 intake = Survey.objects.get(shortname="intake", status='PUBLISHED')
                 lpd = intake.get_last_participation_data(user_id, global_id)
-                if ldp:
-                    data["center"] = self.load_zip_coords(intake["Q3"])
+                if lpd:
+                    data["center"] = self.load_zip_coords(str(lpd["QN3"]))
             except:
                 pass
 
