@@ -868,8 +868,8 @@ class Chart(models.Model):
             try:
                 intake = Survey.objects.get(shortname="intake", status='PUBLISHED')
                 lpd = intake.get_last_participation_data(user_id, global_id)
-                if ldp:
-                    data["center"] = self.load_zip_coords(intake["Q3"])
+                if lpd:
+                    data["center"] = self.load_zip_coords(str(lpd["Q3"]))
             except:
                 pass
 
@@ -887,6 +887,10 @@ class Chart(models.Model):
 
     def get_map_tile(self, user_id, global_id, z, x, y):
         filename = self.get_map_tile_filename(z, x, y)
+        if self.sqlfilter == "USER" and user_id:
+            filename = filename + "_user_" + str(user_id)
+        elif self.sqlfilter == "PERSON" and global_id:
+            filename = filename + "_gid_" + global_id
         if not os.path.exists(filename):
             self.generate_map_tile(self.generate_mapnik_map(user_id, global_id), filename, z, x, y)
         return open(filename).read()
@@ -949,7 +953,7 @@ class Chart(models.Model):
         # First create the SQL query that is a join between pollster_zip_codes and
         # the chart query as created by the user; then create an appropriate datasource.
 
-        if re.findall('[^0-9A-Za-z-]', global_id):
+        if global_id and re.findall('[^0-9A-Za-z-]', global_id):
             raise Exception("invalid global_id "+global_id)
 
         table = """SELECT * FROM %s""" % (self.get_view_name(),)
@@ -977,7 +981,7 @@ class Chart(models.Model):
         return "_pollster_tile_cache/survey_%s/%s" % (self.survey.id, self.shortname)
 
     def get_map_tile_filename(self, z, x, y):
-        filename = "%s/%s/%s_%s.png" % (self.get_map_tile_base(), z, x, y)
+        filename = "%s/%s/%s_%s" % (self.get_map_tile_base(), z, x, y)
         pathname = os.path.dirname(filename)
         if not os.path.exists(pathname):
             os.makedirs(pathname)
@@ -1004,18 +1008,18 @@ class Chart(models.Model):
                               FROM pollster_zip_codes B, (SELECT * FROM %s) A
                              WHERE A.zip_code_key = B.zip_code_key""" % (table,)
             cursor = connection.cursor()
-            try:
-                cursor.execute("DROP VIEW IF EXISTS %s" % (view,))
-                cursor.execute("DROP TABLE IF EXISTS %s" % (table,))
-                cursor.execute("CREATE TABLE %s AS %s" % (table, table_query))
-                if self.type.shortname != 'google-charts':
-                    cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
-                self.clear_map_tile_cache()
-                return True
-            except IntegrityError:
-                return False
-            except DatabaseError:
-                return False
+            #try:
+            cursor.execute("DROP VIEW IF EXISTS %s" % (view,))
+            cursor.execute("DROP TABLE IF EXISTS %s" % (table,))
+            cursor.execute("CREATE TABLE %s AS %s" % (table, table_query))
+            if self.type.shortname != 'google-charts':
+                cursor.execute("CREATE VIEW %s AS %s" % (view, view_query))
+            self.clear_map_tile_cache()
+            return True
+            #except IntegrityError:
+            #    return False
+            #except DatabaseError:
+            #    return False
         return False
 
     def update_data(self):

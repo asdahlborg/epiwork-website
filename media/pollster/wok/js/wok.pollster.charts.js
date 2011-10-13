@@ -13,7 +13,11 @@
             return wok.error("missing data-chart-url attribute on chart container");
 
         function getData(callback) {
-            $.getJSON(url, {}, function(data, textStatus, jqXHR) {
+            var params = {};
+            var m = /gid=([a-z0-9-]+)/.exec(window.location.href);
+            if (m && m[1])
+                params = {"gid":m[1]};
+            $.getJSON(url, params, function(data, textStatus, jqXHR) {
                 callback(data);
             });
         }
@@ -43,7 +47,7 @@
 
                 var c = new google.maps.LatLng(0, 0);
                 var z = 1;
-                if (data && data.bounds) {
+                if (data && data.bounds && data.bounds.lat && data.bounds.lng) {
                     c = new google.maps.LatLng(data.bounds.lat, data.bounds.lng);
                     z = data.bounds.z;
                 }
