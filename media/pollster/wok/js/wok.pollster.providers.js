@@ -298,7 +298,7 @@
                     enabled = "[value=check]";
                 }
                 $v.find("option").hide().attr('disabled', true).end()
-                $v.find(enabled).attr('disabled', false).show();
+                var visuals_shown = $v.find(enabled).attr('disabled', false).show().length;
                 $v.val(visual);
 
                 // We display the tools depending on the question type.
@@ -335,6 +335,7 @@
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                 }
+                $properties.find("[name=field_question_visual]").closest('.property').toggle(visuals_shown > 1);
             },
             detach: function() {
                 self.$element = null;
