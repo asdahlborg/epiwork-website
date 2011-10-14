@@ -39,13 +39,15 @@
                         <label>Chart for {{ survey }}</label>
                         <button type="submit" class="action-save">Save</button>
                     </div>
-                    {% if chart.has_data %}
                     <div class="tool">
                         <label>Visualization editor</label>
+                    {% if chart.has_data %}
                         <button type="button" class="chart-edit" data-chart-id="pollster-chart-{{ chart.id }}"
                             data-json-target-id="id_chartwrapper">Edit</button>
-                    </div>
+                    {% else %}
+                        <button type="button" class="chart-edit" disabled="disabled">Edit</button>
                     {% endif %}
+                    </div>
                 </div>
                 <div class="property-group">
                     {% for field in form_chart.hidden_fields %}
@@ -64,7 +66,7 @@
     </div>
     <div id="pollster-canvas">
         {% if chart.has_data %}
-        <div id="pollster-chart-{{ chart.id }}" class="chart" data-chart-url="{% url pollster_chart_data survey.shortname chart.shortname %}"
+        <div id="pollster-chart-{{ chart.id }}" class="chart" data-chart-url="{% url pollster_survey_chart_data survey.id chart.shortname %}"
              data-chart-type="{{ chart.type.shortname }}"
              style="width:440px;height:330px">
         </div>
