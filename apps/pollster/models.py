@@ -6,6 +6,7 @@ from cms.models import CMSPlugin
 from xml.etree import ElementTree
 from math import pi,cos,sin,log,exp,atan
 from . import dynamicmodels, json
+from .db.utils import get_db_type, convert_query_paramstyle
 import os, re, shutil, warnings, datetime
 import settings
 
@@ -239,7 +240,7 @@ class Survey(models.Model):
             backup = table+'_'+format(now, '%Y%m%d%H%M%s')
             connection.cursor().execute('ALTER TABLE '+table+' RENAME TO '+backup)
         dynamicmodels.install(model)
-        db = _get_db_type(connection)
+        db = get_db_type(connection)
         for extra_sql in SURVEY_EXTRA_SQL[db].get(self.shortname, []):
             connection.cursor().execute(extra_sql)
         self.save()
@@ -1046,7 +1047,7 @@ class Chart(models.Model):
         elif self.sqlfilter == 'PERSON':
             query += """ WHERE "user" = %(user_id)s AND global_id = %(global_id)s"""
         params = { 'user_id': user_id, 'global_id': global_id }
-        query = _convert_query_paramstyle(connection, query, params)
+        query = convert_query_paramstyle(connection, query, params)
         try:
             cursor = connection.cursor()
             cursor.execute(query, params)
@@ -1125,23 +1126,3 @@ class GoogleProjection:
 
 class SurveyChartPlugin(CMSPlugin):
     chart = models.ForeignKey(Chart)
-
-def _get_db_type(connection):
-    db = None
-    if connection.settings_dict['ENGINE'] == "django.db.backends.sqlite3":
-        db = "sqlite"
-    elif connection.settings_dict['ENGINE'] == "django.db.backends.postgresql":
-        db = "postgresql"
-    elif connection.settings_dict['ENGINE'] == "django.db.backends.postgresql_psycopg2":
-        db = "postgresql"
-    elif connection.settings_dict['ENGINE'] == "django.db.backends.mysql":
-        db = "mysql"
-    return db
-
-def _convert_query_paramstyle(connection, sql, params):
-    db = _get_db_type(connection)
-    if db == 'postgresql':
-        return sql
-    translations = dict([(p, ':'+p) for p in params.keys()])
-    converted = sql % translations
-    return converted
