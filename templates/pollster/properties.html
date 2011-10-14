@@ -34,11 +34,11 @@
             <button type="button" class="action-delete">Delete</button>
         </h2>
         <div class="property">
-            <label>Data Name</label>
+            <label title="DB column names in the results table for the current question will be based on this value">Data Name</label>
             <input type="text" name="field_question_data_name" title="only letters, numbers and underscores allowed"/>
         </div>
         <div class="property">
-            <label>Data Type</label>
+            <label title="User input will be checked to match the specified type">Data Type</label>
             <select name="field_question_data_type">
                 {% for question_data_type in question_data_types %}
                 {% if not question_data_type.is_internal %}
@@ -48,7 +48,7 @@
             </select>
         </div>
         <div class="property">
-            <label>Open Option Type</label>
+            <label title="The data type for options with open answers">Open Option Type</label>
             <select name="field_question_open_option_data_type">
                 <option value="">None</option>
                 {% for question_data_type in question_data_types %}
@@ -59,7 +59,7 @@
             </select>
         </div>
         <div class="property" style="display:none">
-            <label>Visual</label>
+            <label title="How the input controls will be show to the user">Visual</label>
             <select name="field_question_visual">
                 <option value="entry">Text Entry</option>
                 <option value="radio">Radio Buttons</option>
@@ -68,7 +68,7 @@
             </select>
         </div>
         <div class="property">
-            <label>Mandatory</label>
+            <label title="The form will show an error if the current question is not filled">Mandatory</label>
             <select name="field_question_is_mandatory">
                 <option value="false">No</option>
                 <option value="true">Yes</option>
