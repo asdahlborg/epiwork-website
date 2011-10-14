@@ -285,6 +285,10 @@ class QuestionDataType(models.Model):
     def default_timestamp_type():
         return QuestionDataType.objects.filter(title = 'Timestamp')[0]
 
+    @property
+    def is_internal(self):
+        return self.title == 'Timestamp'
+
 class VirtualOptionType(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
     question_data_type = models.ForeignKey(QuestionDataType)

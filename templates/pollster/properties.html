@@ -45,7 +45,9 @@
             <label>Data Type</label>
             <select name="field_question_data_type">
                 {% for question_data_type in question_data_types %}
+                {% if not question_data_type.is_internal %}
                 <option value="{{ question_data_type.id }}">{{ question_data_type.title }}</option>
+                {% endif %}
                 {% endfor %}
             </select>
         </div>
@@ -54,7 +56,9 @@
             <select name="field_question_open_option_data_type">
                 <option value="">None</option>
                 {% for question_data_type in question_data_types %}
+                {% if not question_data_type.is_internal %}
                 <option value="{{ question_data_type.id }}">{{ question_data_type.title }}</option>
+                {% endif %}
                 {% endfor %}
             </select>
         </div>
