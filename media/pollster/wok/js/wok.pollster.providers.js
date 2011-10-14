@@ -270,7 +270,6 @@
                 self.$element = $e;
                 var type = getQuestionType($e);
                 $properties
-                    .find("[name=field_question_type]").val(type).end()
                     .find("[name=field_question_data_type]").val($e.attr("data-data-type")).end()
                     .find("[name=field_question_open_option_data_type]").val($e.attr("data-open-option-data-type")).end()
                     .find("[name=field_question_visual]").val($e.attr("data-visual")).end()
