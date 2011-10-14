@@ -137,7 +137,7 @@
                     $('<li></li>')
                         .attr("id", "option-N" + designer.getNextTemporaryId())
                         .text("EMPTY (click to edit)")
-                        .append('<div class="info"></div>')
+                        .append('<div class="info"><input class="derived" type="checkbox" disabled="disabled"></div>')
                 );
             }
             if (type == "rule") {
@@ -646,6 +646,14 @@
 
         self.$element = null;
 
+        function describeOption($o) {
+            var v = $o.find("input").val() || $o.attr("data-value") || "??";
+            var text = "Option '" + v + "'";
+            if ($o.find('.derived').length)
+                text = 'Derived ' + $o.text();
+            return text;
+        }
+
         function formatText($element) {
             var $selected = $properties.find("[name=field_rule_type] :selected");
             var type = $selected.text();
@@ -656,12 +664,11 @@
             var ruleClass = eval($selected.attr('data-js-class'));
 
             function describeOptions(selected) {
-                var ret = '';
+                var ret = '*';
                 if (selected.val()) {
                     var $o = $('#'+selected.first().val());
                     var i = $o.index() + 1;
-                    var v = $o.find("input").val() || $o.attr("data-value") || "??";
-                    ret = "Option '" + v + "'";
+                    ret = describeOption($o);
                     if (selected.length == 2)
                         ret += " + another";
                     else if(selected.length > 2)
@@ -682,9 +689,9 @@
         function fillOptions($question, $dest) {
             $question.closest(".question-wrapper").find(".question li").each(function(i) {
                 var $o = $(this);
-                var v = $o.find("input").val() || $o.attr("data-value") || "??";
+                var text = describeOption($o);
                 $dest.append($('<option></option>')
-                    .text("Option '" + v + "'")
+                    .text(text)
                     .attr("value", $o.attr("id"))
                 );
             });
