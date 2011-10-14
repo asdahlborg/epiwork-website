@@ -29,4 +29,4 @@ COUNTRY = '@COUNTRY@'
 # Strict postcode validation with the pollster_zip_codes db table
 # Use 'EXACT' to require an exact match in the table, 'NONE' to disable the db check
 # Avaliable: NONE, EXACT
-POLLSTER_ZIP_CODE_DB_VALIDATION_MODE = 'EXACT'
+POLLSTER_ZIP_CODE_DB_VALIDATION_MODE = 'NONE'
