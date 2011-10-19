@@ -121,7 +121,7 @@ class Command(BaseCommand):
         host = options.get('host') or ''
         username = options.get('username')
         password = options.get('password') or ''
-        db = MySQLdb.connect(user=username, password=password, host=host, db=db)
+        db = MySQLdb.connect(user=username, passwd=password, host=host, db=database)
         cursor = db.cursor()
 
         surveyusers = {}
@@ -165,7 +165,7 @@ class Command(BaseCommand):
 
         verbosity = int(options.get('verbosity'))
 
-        if 'db' not in options:
+        if 'database' not in options:
             raise CommandError("you need to specify the source database")
 
         Intake = models.Survey.get_by_shortname('intake').as_model()
