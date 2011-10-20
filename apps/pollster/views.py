@@ -206,6 +206,7 @@ def survey_translation_edit(request, id, language):
         if all(f.is_valid() for f in forms):
             for form in forms:
                 form.save()
+            messages.success(request, 'Translation saved successfully.')
             return redirect(translation)
     return request_render_to_response(request, 'pollster/survey_translation_edit.html', {
         "survey": survey,
