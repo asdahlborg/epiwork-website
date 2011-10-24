@@ -22,6 +22,7 @@
 
 {% block content %}
 <div id="wok-main-panel-content">
+<div id="survey-translation-edit">
 
 <form class="survey" id="survey-{{ survey.id }}" method="POST">
     {% csrf_token %}
@@ -33,6 +34,7 @@
     {% if not question.is_builtin %}
     <div class="question-wrapper clearfix">
         <div id="question-{{ question.id }}" class="question">
+            <h5 class="item-name">Question Title</h5>
             <p title="Question Title">
                 <span class="number"></span>
                 <span class="title">
@@ -41,10 +43,12 @@
                     {{ question.translation.as_form.title }}
                 </span>
             </p>
+            <h5 class="item-name">Question Text</h5>
             <p title="Question Text">
                 {{ question.description }}<br/>{{ question.translation.as_form.description }}
             </p>
             {% if question.is_text %}
+            <h5 class="item-name">Question Error Message</h5>
             <p title="Question Error Message"
                class="error-message">{{ question.error_message }}<br/>{{ question.translation.as_form.error_message }}</p>
             {% endif %}
@@ -52,12 +56,14 @@
             <ul>
                 {% for option in question.options %}
                 <li id="option-{{ option.id }}">
+                    <h6 class="item-name">Option Text</h6>
                     <label title="Option Text">
                     {{ option.text }}
                     <br/>
                     {{ option.translation.as_form.text }}
                     </label>
                     <br/>
+                    <h6 class="item-name">Option Description</h6>
                     <label title="Option Description">
                     {{ option.description }}
                     <br/>
@@ -72,25 +78,33 @@
             <div>Columns</div>
             <ul class="columns">
                 {% for column in question.columns %}
-                <li id="column-{{ column.id }}"><span title="Column Title" class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span></li>
+                <li id="column-{{ column.id }}">
+                    <h6 class="item-name">Column Title</h6>
+                    <span title="Column Title" class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span>
+                </li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
             <ul class="rows">
                 {% for row in question.rows %}
-                <li id="row-{{ row.id }}"><span title="Row Title" class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span></li>
+                <li id="row-{{ row.id }}">
+                    <h6 class="item-name">Row Title</h6>
+                    <span title="Row Title" class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span>
+                </li>
                 {% endfor %}
             </ul>
             <div>Options</div>
             <ul>
                 {% for option in question.options %}
                 <li id="option-{{ option.id }}">
+                    <h6 class="item-name">Option Text</h6>
                     <label title="Option Text">
                     {{ option.text }}
                     <br/>
                     {{ option.translation.as_form.text }}
                     </label>
                     <br/>
+                    <h6 class="item-name">Option Description</h6>
                     <label title="Option Description">
                     {{ option.description }}
                     <br/>
@@ -104,13 +118,19 @@
             <div>Columns</div>
             <ul class="columns sortable">
                 {% for column in question.columns %}
-                <li id="column-{{ column.id }}"><span title="Column Title" class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span></li>
+                <li id="column-{{ column.id }}">
+                    <h6 class="item-name">Column Title</h6>
+                    <span title="Column Title" class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span>
+                </li>
                 {% endfor %}
             </ul>
             <div>Rows</div>
             <ul class="rows sortable">
                 {% for row in question.rows %}
-                <li id="row-{{ row.id }}"><span title="Row Title" class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span></li>
+                <li id="row-{{ row.id }}">
+                    <h6 class="item-name">Row Title</h6>
+                    <span title="Row Title" class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span>
+                </li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -147,5 +167,6 @@
     </div>
 </form>
 
+</div>
 </div>
 {% endblock %}

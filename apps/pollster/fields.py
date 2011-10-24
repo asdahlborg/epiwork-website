@@ -1,8 +1,10 @@
-import datetime, time, re
+from django.db import connection
 from django.core import exceptions, validators
 from django.forms import CharField, ValidationError
 from django.utils.translation import ugettext_lazy as _
-from settings import COUNTRY
+from .db.utils import get_db_type, convert_query_paramstyle
+import datetime, time, re, logging
+import settings
 
 YEARMONTH_INPUT_FORMATS = (
     '%Y-%m', '%m/%Y', '%m/%y', # '2006-10', '10/2006', '10/06'
@@ -11,6 +13,8 @@ YEARMONTH_INPUT_FORMATS = (
 POSTALCODE_INPUT_FORMATS = {
     'it': r'\d{5}', # e.g. 10100
 }
+
+logger = logging.getLogger(__name__)
 
 class YearMonthField(CharField):
     default_error_messages = {
@@ -48,7 +52,7 @@ class PostalCodeField(CharField):
 
     @staticmethod
     def get_default_postal_code_format():
-        return POSTALCODE_INPUT_FORMATS.get(COUNTRY);
+        return POSTALCODE_INPUT_FORMATS.get(settings.COUNTRY);
 
     def __init__(self, input_format=None, *args, **kwargs):
         super(PostalCodeField, self).__init__(*args, **kwargs)
@@ -61,8 +65,24 @@ class PostalCodeField(CharField):
         if value in validators.EMPTY_VALUES:
             return None
         fmt = self.input_format or PostalCodeField.get_default_postal_code_format()
-        if not fmt:
-            return value
-        if re.match('^'+fmt+'$', value):
-            return value
-        raise ValidationError(self.error_messages['invalid'])
+        if fmt and not re.match('^'+fmt+'$', value):
+            raise ValidationError(self.error_messages['invalid'])
+        if not self.db_check_zip(value):
+            raise ValidationError(self.error_messages['invalid'])
+        return value
+
+    def db_check_zip(self, value):
+        if not hasattr(settings, 'POLLSTER_ZIP_CODE_DB_VALIDATION_MODE'):
+            return True
+        mode = settings.POLLSTER_ZIP_CODE_DB_VALIDATION_MODE
+        if not mode or mode == 'NONE':
+            return True
+        if mode == 'EXACT':
+            params = { 'country': settings.COUNTRY, 'zip': value }
+            query = "SELECT count(*) FROM pollster_zip_codes WHERE country = %(country)s AND zip_code_key = %(zip)s"
+            query = convert_query_paramstyle(connection, query, params)
+            cursor = connection.cursor()
+            cursor.execute(query, params)
+            count = cursor.fetchone()[0]
+            return count > 0
+        return False

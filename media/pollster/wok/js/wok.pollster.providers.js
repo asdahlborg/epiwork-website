@@ -137,7 +137,7 @@
                     $('<li></li>')
                         .attr("id", "option-N" + designer.getNextTemporaryId())
                         .text("EMPTY (click to edit)")
-                        .append('<div class="info"></div>')
+                        .append('<div class="info"><input class="derived" type="checkbox" disabled="disabled"></div>')
                 );
             }
             if (type == "rule") {
@@ -270,7 +270,6 @@
                 self.$element = $e;
                 var type = getQuestionType($e);
                 $properties
-                    .find("[name=field_question_type]").val(type).end()
                     .find("[name=field_question_data_type]").val($e.attr("data-data-type")).end()
                     .find("[name=field_question_open_option_data_type]").val($e.attr("data-open-option-data-type")).end()
                     .find("[name=field_question_visual]").val($e.attr("data-visual")).end()
@@ -299,7 +298,7 @@
                     enabled = "[value=check]";
                 }
                 $v.find("option").hide().attr('disabled', true).end()
-                $v.find(enabled).attr('disabled', false).show();
+                var visuals_shown = $v.find(enabled).attr('disabled', false).show().length;
                 $v.val(visual);
 
                 // We display the tools depending on the question type.
@@ -336,6 +335,7 @@
                     $properties.find("[name=tool_rule_type]").closest(".tool").hide()
                     $properties.find("[name=field_question_open_option_data_type]").closest('.property').hide();
                 }
+                $properties.find("[name=field_question_visual]").closest('.property').toggle(visuals_shown > 1);
             },
             detach: function() {
                 self.$element = null;
@@ -646,6 +646,14 @@
 
         self.$element = null;
 
+        function describeOption($o) {
+            var v = $o.find("input").val() || $o.attr("data-value") || "??";
+            var text = "Option '" + v + "'";
+            if ($o.find('.derived').length)
+                text = 'Derived ' + $o.text();
+            return text;
+        }
+
         function formatText($element) {
             var $selected = $properties.find("[name=field_rule_type] :selected");
             var type = $selected.text();
@@ -656,12 +664,11 @@
             var ruleClass = eval($selected.attr('data-js-class'));
 
             function describeOptions(selected) {
-                var ret = '';
+                var ret = '*';
                 if (selected.val()) {
                     var $o = $('#'+selected.first().val());
                     var i = $o.index() + 1;
-                    var v = $o.find("input").val() || $o.attr("data-value") || "??";
-                    ret = "Option '" + v + "'";
+                    ret = describeOption($o);
                     if (selected.length == 2)
                         ret += " + another";
                     else if(selected.length > 2)
@@ -682,9 +689,9 @@
         function fillOptions($question, $dest) {
             $question.closest(".question-wrapper").find(".question li").each(function(i) {
                 var $o = $(this);
-                var v = $o.find("input").val() || $o.attr("data-value") || "??";
+                var text = describeOption($o);
                 $dest.append($('<option></option>')
-                    .text("Option '" + v + "'")
+                    .text(text)
                     .attr("value", $o.attr("id"))
                 );
             });

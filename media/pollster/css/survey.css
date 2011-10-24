@@ -31,6 +31,10 @@
 #survey-translation-list form p { display: inline; margin: 0; }
 #survey-translation-list form .errorlist { display: none; }
 
+#survey-translation-edit .item-name { margin:0; padding: 0; font-weight: normal; color: #888; text-align: right; font-size: 9px; line-height: 9px; }
+#survey-translation-edit .question input[type="text"], #survey-translation-edit .question textarea { margin-left: 0; width: 335px; border: 1px solid #888; }
+#survey-translation-edit li { margin-top: 15px; position: relative; }
+#survey-translation-edit li .item-name:first-child { position: absolute; top: -9px; right: 1px; }
 /* MESSAGES & ERRORS */
 /* Taken from /django/contrib/admin/media/css/base.css */
 
@@ -42,11 +46,11 @@ ul.messagelist {
 ul.messagelist li {
     font-size: 12px;
     display: block;
-    padding: 4px 5px 4px 25px;
+    padding: 6px 5px 6px 25px;
     margin: 0 0 3px 0;
     border-bottom: 1px solid #ddd;
     color: #666;
-    background: #ffc url(/admin/media/img/admin/icon_success.gif) 5px .3em no-repeat;
+    background: #ffc url(/admin/media/img/admin/icon_success.gif) 6px .6em no-repeat;
 }
 
 ul.messagelist li.warning{
