@@ -12,7 +12,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from cms import settings as cms_settings
 from apps.survey.models import SurveyUser
 from . import models, forms, fields, parser, json
-import re, datetime, locale
+import re, datetime, locale, csv
 
 def request_render_to_response(req, *args, **kwargs):
     kwargs['context_instance'] = RequestContext(req)
@@ -271,10 +271,20 @@ def survey_chart_data(request, id, shortname):
     return HttpResponse(chart.to_json(user_id, global_id), mimetype='application/json')
 
 @staff_member_required
-def survey_export(request, id):
+def survey_results_csv(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
-    response = render(request, 'pollster/survey_export.xml', { "survey": survey }, content_type='application/xml')
     now = datetime.datetime.now()
+    response = HttpResponse(mimetype='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=survey-results-%d-%s.csv' % (survey.id, format(now, '%Y%m%d%H%M'))
+    writer = csv.writer(response)
+    survey.write_csv(writer)
+    return response
+
+@staff_member_required
+def survey_export_xml(request, id):
+    survey = get_object_or_404(models.Survey, pk=id)
+    now = datetime.datetime.now()
+    response = render(request, 'pollster/survey_export.xml', { "survey": survey }, content_type='application/xml')
     response['Content-Disposition'] = 'attachment; filename=survey-export-%d-%s.xml' % (survey.id, format(now, '%Y%m%d%H%M'))
     return response
 

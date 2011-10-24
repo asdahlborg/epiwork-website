@@ -7,7 +7,7 @@ from xml.etree import ElementTree
 from math import pi,cos,sin,log,exp,atan
 from . import dynamicmodels, json
 from .db.utils import get_db_type, convert_query_paramstyle
-import os, re, shutil, warnings, datetime
+import os, re, shutil, warnings, datetime, csv
 import settings
 
 DEG_TO_RAD = pi/180
@@ -119,9 +119,9 @@ class Survey(models.Model):
     translation_survey = None
 
     _standard_result_fields =[
-        ('user', models.IntegerField(null=True, blank=True)),
-        ('global_id', models.CharField(max_length=36, null=True, blank=True)),
-        ('channel', models.CharField(max_length=36, null=True, blank=True))
+        ('user', models.IntegerField(null=True, blank=True, verbose_name="User")),
+        ('global_id', models.CharField(max_length=36, null=True, blank=True, verbose_name="Person")),
+        ('channel', models.CharField(max_length=36, null=True, blank=True, verbose_name="Channel"))
     ]
 
     @staticmethod
@@ -251,6 +251,19 @@ class Survey(models.Model):
             return
         self.status = 'UNPUBLISHED'
         self.save()
+
+    def write_csv(self, writer):
+        model = self.as_model()
+        fields = model._meta.fields
+        writer.writerow([field.verbose_name or field.name for field in fields])
+        for result in model.objects.all():
+            row = []
+            for field in fields:
+                val = getattr(result, field.name)
+                if callable(val):
+                    val = val()
+                row.append(val)
+            writer.writerow(row)
 
 class RuleType(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
@@ -446,19 +459,24 @@ class Question(models.Model):
             open_option_data_type = self.open_option_data_type or self.data_type
             fields = [ (self.data_name, self.data_type.as_field_type(verbose_name=self.title)) ]
             for open_option in [o for o in self.option_set.all() if o.is_open]:
-                fields.append( (open_option.open_option_data_name, open_option_data_type.as_field_type()) )
+                title_open = "%s: %s Open Answer" % (self.title, open_option.value)
+                fields.append( (open_option.open_option_data_name, open_option_data_type.as_field_type(verbose_name=title_open)) )
         elif self.type == 'multiple-choice':
             fields = []
             for option in self.option_set.all():
-                title = ": ".join((self.title, option.data_name))
+                title = "%s: %s" % (self.title, option.value)
                 fields.append( (option.data_name, models.BooleanField(verbose_name=title)) )
                 if option.is_open:
-                    fields.append( (option.open_option_data_name, option.open_option_data_type.as_field_type()) )
+                    title_open = "%s: %s Open Answer" % (self.title, option.value)
+                    fields.append( (option.open_option_data_name, option.open_option_data_type.as_field_type(verbose_name=title_open)) )
         elif self.type in ('matrix-select', 'matrix-entry'):
             fields = []
             for row, columns in self.rows_columns:
                 for column in columns:
-                    fields.append( (column.data_name, self.data_type.as_field_type()) )
+                    r = row.title or ("row %d" % row.ordinal)
+                    c = column.title or ("column %d" % column.ordinal)
+                    title = "%s (%s, %s)" % (self.title, r, c)
+                    fields.append( (column.data_name, self.data_type.as_field_type(verbose_name=title)) )
         else:
             raise NotImplementedError(self.type)
         return fields
