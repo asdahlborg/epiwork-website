@@ -34,8 +34,8 @@ msgstr "Mensagem"
 #, python-format
 msgid "%(count)d newsitem was published"
 msgid_plural "%(count)d newsitems where published"
-msgstr[0] "Foi publicada %(count) notícia"
-msgstr[1] "Foram publicadas %(count) notícias"
+msgstr[0] "Foi publicada %(count)d notícia"
+msgstr[1] "Foram publicadas %(count)d notícias"
 
 #: apps/journal/admin.py:46
 msgid "Publish selected news"
@@ -45,8 +45,8 @@ msgstr "Publicar as notícias seleccionadas"
 #, python-format
 msgid "%(count)d newsitem was unpublished"
 msgid_plural "%(count)d newsitems where unpublished"
-msgstr[0] "Foi despublicada  %(count) notícia"
-msgstr[1] "Foram despublicadas %(count) notícias"
+msgstr[0] "Foi despublicada  %(count)d notícia"
+msgstr[1] "Foram despublicadas %(count)d notícias"
 
 #: apps/journal/admin.py:56
 msgid "Unpublish selected news"
@@ -600,7 +600,7 @@ msgstr "Recebeu este email porque solicitou a recuperação da password"
 #: templates/registration/password_reset_email.html:4
 #, python-format
 msgid "for your user account at %(site_name)s"
-msgstr "a sua conta de utilizador no site %(site_name)"
+msgstr "a sua conta de utilizador no site %(site_name)s"
 
 #: templates/registration/password_reset_email.html:6
 msgid "Please go to the following page and choose a new password:"
@@ -617,7 +617,7 @@ msgstr "Obrigado por utilizar o Gripenet!"
 #: templates/registration/password_reset_email.html:14
 #, python-format
 msgid "The %(site_name)s team"
-msgstr "A equipa %(site_name)"
+msgstr "A equipa %(site_name)s"
 
 #: templates/registration/password_reset_form.html:10
 msgid "Forgotten your password? Enter your e-mail address below, and we'll e-mail instructions for setting a new one."
