@@ -33,8 +33,8 @@ msgstr "Meddelande"
 #, python-format
 msgid "%(count)d newsitem was published"
 msgid_plural "%(count)d newsitems where published"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(count)d nyheten publicerades"
+msgstr[1] "%(count)d nyheter publicerades"
  
 #: apps/journal/admin.py:46
 msgid "Publish selected news"
@@ -44,8 +44,8 @@ msgstr "Publicera valda nyheter"
 #, python-format
 msgid "%(count)d newsitem was unpublished"
 msgid_plural "%(count)d newsitems where unpublished"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(count)d nyheten av-publicerades"
+msgstr[1] "%(count)d nyheter av-publicerades"
 
 #: apps/journal/admin.py:56
 msgid "Unpublish selected news"
