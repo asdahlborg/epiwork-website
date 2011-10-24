@@ -183,7 +183,17 @@ def survey_translation_list_or_add(request, id):
                 translation = translations[0]
             else:
                 translation = models.TranslationSurvey(survey=survey, language=language)
-                translation.save()
+                survey.set_translation_survey(translation)
+                survey.translation_survey.save()
+                for question in survey.questions:
+                    question.translation_question.save()
+                    for option in question.options:
+                        option.translation_option.save()
+                    for row in question.rows:
+                        row.translation_row.save()
+                    for column in question.columns:
+                        column.translation_column.save()
+
             return redirect(translation)
     return request_render_to_response(request, 'pollster/survey_translation_list.html', {
         "survey": survey,
