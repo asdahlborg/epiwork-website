@@ -26,6 +26,9 @@
 #survey-list .link { margin: 0; border: none; background: none; padding: 0; cursor: pointer; font-size: 12px; }
 #survey-list a, #survey-list .link { color: black; text-decoration: none; }
 #survey-list a:hover, #survey-list .link:hover { text-decoration: underline; }
+#survey-list li { list-style-type: none; }
+#survey-list .status-DRAFT, #survey-list .status-UNPUBLISHED { list-style-type: circle; }
+#survey-list .status-PUBLISHED { list-style-type: disc; color: black; }
 
 #survey-translation-list form { display: inline; }
 #survey-translation-list form p { display: inline; margin: 0; }
