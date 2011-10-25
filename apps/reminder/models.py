@@ -40,7 +40,7 @@ class ReminderSettings(models.Model):
 class NewsLetterTemplate(TranslatableModel):
     is_default_reminder = models.BooleanField(_("Is default reminder"), help_text=_("If this option is checked this template is the standard template for reminder emails."))
     is_default_newsitem = models.BooleanField(_("Is default newsitem"), help_text=_("If this option is checked this template is the standard template for new news items."))
-    sender_email = models.EmailField(_("Sender email"))
+    sender_email = models.EmailField(_("Sender email"), help_text="Only use email addresses for your main domain to ensure deliverability")
     sender_name = models.CharField(_("Sender name"), max_length=255)
 
     translations = TranslatedFields(
@@ -54,7 +54,7 @@ class NewsLetterTemplate(TranslatableModel):
 class NewsLetter(TranslatableModel):
     date = models.DateTimeField(_("Date"), unique=True, choices=[])
 
-    sender_email = models.EmailField(_("Sender email"))
+    sender_email = models.EmailField(_("Sender email"), help_text="Only use email addresses for your main domain to ensure deliverability")
     sender_name = models.CharField(_("Sender name"), max_length=255)
 
     translations = TranslatedFields(
