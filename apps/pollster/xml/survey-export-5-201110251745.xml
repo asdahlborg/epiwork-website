@@ -1,0 +1,4328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<survey id="survey-5" xmlns="http://dndg.it/ns/pollster-1.0">
+    <title>Weekly Questionnaire</title>
+    <shortname>weekly</shortname>
+    <version>1</version>
+    <created>2011-10-25T16:42:10.871032</created>
+    <updated>2011-10-25T17:38:24.339417</updated>
+    <questions>
+    
+        <question id="question-78">
+            <title>Compilation Date</title>
+            <data_name>timestamp</data_name>
+            <description></description>
+            <type>builtin</type>
+            <data_type>wok.pollster.datatypes.Timestamp</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+            </options>
+        </question>
+    
+        <question id="question-79">
+            <title>Have you had any of the following symptoms since your last visit (or in the past weeks, if this is your first visit)?</title>
+            <data_name>Q1</data_name>
+            <description></description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-392">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No symptoms</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-393">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Fever</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-394">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Chills</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-395">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Runny or blocked nose</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-396">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Sneezing</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-397">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Sore thoat</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-398">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_6</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Cough</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-399">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_7</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Shortness of breath</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-400">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Headache</text>
+                    <value>8</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-401">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_9</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Muscle/join pain</text>
+                    <value>9</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-402">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_10</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Chest pain</text>
+                    <value>10</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-403">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_11</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Feeling tired or exhausted</text>
+                    <value>11</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-404">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_12</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Loss of appetite</text>
+                    <value>12</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-405">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_13</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Coloured sputum/phlegm</text>
+                    <value>13</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-406">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_14</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Watery, bloodshot eyes</text>
+                    <value>14</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-407">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_15</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Nausea</text>
+                    <value>15</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-408">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_16</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Vomiting</text>
+                    <value>16</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-409">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_17</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Diarrhoea</text>
+                    <value>17</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-410">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_18</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Stomach ache</text>
+                    <value>18</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-411">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1_19</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other</text>
+                    <value>19</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-80">
+            <title>If on your last visit you reported that you were still ill, are the symptoms you report today part of the same bout of illness?</title>
+            <data_name>Q2</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-412">
+                    
+                    
+                    <group></group>
+                    <data_name>Q2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-413">
+                    
+                    
+                    <group></group>
+                    <data_name>Q2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-414">
+                    
+                    
+                    <group></group>
+                    <data_name>Q2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-517">
+                    
+                    
+                    <group></group>
+                    <data_name>Q2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Not applicable</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-81">
+            <title>When did the first symptoms appear?</title>
+            <data_name>Q3</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type>wok.pollster.datatypes.Date</open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>radio</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-415">
+                    
+                    
+                    <group></group>
+                    <data_name>Q3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Choose date</text>
+                    <value>0</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q3_0_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-416">
+                    
+                    
+                    <group></group>
+                    <data_name>Q3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-82">
+            <title>When did your symptoms end?</title>
+            <data_name>Q4</data_name>
+            <description>[To save you time if you are still ill, we have filled in the information you gave us previously about your illness. Please check that it is still correct, and make any changes – for instance, if you have visited a doctor or taken additional time off work since you last completed the survey.]</description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type>wok.pollster.datatypes.Date</open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-417">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Choose date</text>
+                    <value>0</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q4_0_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-418">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-419">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I am still ill</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-83">
+            <title>Did your symptoms develop suddenly over a few hours?</title>
+            <data_name>Q5</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-420">
+                    
+                    
+                    <group></group>
+                    <data_name>Q5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-421">
+                    
+                    
+                    <group></group>
+                    <data_name>Q5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-422">
+                    
+                    
+                    <group></group>
+                    <data_name>Q5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-84">
+            <title>When did your fever begin?</title>
+            <data_name>Q6</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type>wok.pollster.datatypes.Date</open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-423">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Choose date</text>
+                    <value>1</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q6_1_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-424">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t rember</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-85">
+            <title>Did your fever develop suddenly?</title>
+            <data_name>Q6b</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-425">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-426">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-427">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-86">
+            <title>Did you take your temperature?</title>
+            <data_name>Q6c</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-428">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-429">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-430">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-87">
+            <title>What was your highest temperature measured?</title>
+            <data_name>Q6d</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-431">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Below 37°C</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-432">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>37° - 37.4°C</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-433">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>37.5° - 37.9°C</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-434">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>38° - 38.9°C</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-435">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>39° - 39.9°C</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-436">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>40°C or more</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-437">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-88">
+            <title>Because of your symptoms, did you VISIT (see face to face) any of medical services? (tick all that apply)</title>
+            <data_name>Q7</data_name>
+            <description></description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-438">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-439">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>GP or GP&#39;s practice nurse</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-440">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Hospital accident &amp; emergency department/out of hours service</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-441">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Hospital admission</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-442">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other medical services</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-443">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No, but I have an appointment scheduled</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-89">
+            <title>How soon after your symptoms appeared did you visit this medical service?</title>
+            <data_name>Q7b</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-444">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Same day</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-445">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>1 day</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-446">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>2 days</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-447">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>3 days</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-448">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>4 days</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-449">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>5-7 days</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-450">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>More than 7 days</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-451">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-90">
+            <title>Because of your symptoms, did you contact via TELEPHONE or INTERNET any of medical services? (tick all that apply)</title>
+            <data_name>Q8</data_name>
+            <description></description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-452">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-453">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>GP - spoke to receptionist only</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-454">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>GP - spoke to doctor or nurse</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-455">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>NHS direct / NHS 24 / NHS direct</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-456">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>NPFS</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-457">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-91">
+            <title>How soon after your symptoms appeared did you consult this medical service?</title>
+            <data_name>Q8b</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-458">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Same day</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-459">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>1 day</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-460">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>2 days</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-461">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>3 days</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-462">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>4 days</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-463">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>5-7 days</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-464">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>More than 7 days</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-465">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-92">
+            <title>Did you take medication for these symptoms (tick all that apply)?</title>
+            <data_name>Q9</data_name>
+            <description></description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-466">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No medication</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-467">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Pain killers (e.g. paracetamol, lemsip, ibuprofen, aspirin, calpol, etc)</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-468">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Cough medication (e.g. expectorants)</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-469">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Antivirals (Tamiflu, Relenza)</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-470">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Antibiotics</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-471">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-472">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9_6</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-93">
+            <title>How long after the beginning of your symptoms did you start taking antiviral medication?</title>
+            <data_name>Q9b</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-473">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Same day (within 24 hours)</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-474">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>1 day</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-475">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>2 days</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-476">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>3 days</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-477">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>4 days</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-478">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>5-7 days</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-479">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>More than 7 days</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-480">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-94">
+            <title>Did you change your daily routine because of your illness?</title>
+            <data_name>Q10</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-481">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-482">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, but I did not take time off work/school</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-483">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, I took time off work/school</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-95">
+            <title>Are you still off work/school?</title>
+            <data_name>Q10b</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-484">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-485">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-486">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other (e.g. I wouldn’t usually be at work/school today anyway)</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-96">
+            <title>How long have you been off work/school?</title>
+            <data_name>Q10c</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-487">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>1 day</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-488">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>2 days</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-489">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>3 days</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-490">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>4 days</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-491">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>5 days</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-492">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>6 to 10 days</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-493">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>11 to 15 days</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-494">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>More than 15 days</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-97">
+            <title>What do you think is causing your symptoms?</title>
+            <data_name>Q11</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-495">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Flu or flu-like illness</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-496">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Common cold</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-497">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Allergy/hay fever</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-498">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Gastroenteritis/gastric flu</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-499">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-500">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-98">
+            <title>Not counting yourself how many members of your household have had cold- or flu-like symptoms in the past week?</title>
+            <data_name>Q12</data_name>
+            <description></description>
+            <type>matrix-select</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>select</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+                <column id="column-3">
+                    <title></title>
+                </column>
+                
+            </columns>
+            <rows>
+                
+                <row id="row-3">
+                    <title></title>
+                </row>
+                
+            </rows>
+            <options>
+                
+                <option id="option-501">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>0</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-502">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>1</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-503">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>2</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-504">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>3</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-505">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>4</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-506">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>5</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-507">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>6 or more</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-508">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-99">
+            <title>Excluding household members, how many people did you meet with cold- or flu-like symptoms in the past week?</title>
+            <data_name>Q13</data_name>
+            <description></description>
+            <type>matrix-select</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>select</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+                <column id="column-4">
+                    <title></title>
+                </column>
+                
+            </columns>
+            <rows>
+                
+                <row id="row-4">
+                    <title></title>
+                </row>
+                
+            </rows>
+            <options>
+                
+                <option id="option-509">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>0</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-510">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>1</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-511">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>2</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-512">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>3</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-513">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>4</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-514">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>5</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-515">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>6 or more</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-516">
+                    
+                    
+                    <group></group>
+                    <data_name></data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+    </questions>
+    <rules>
+        
+        <rule id="rule-129">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-92"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-130">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-80"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-131">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-81"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-132">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+            </subject_options>
+            <object_question ref="question-85"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-127">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-392"/>
+                 
+            </subject_options>
+            <object_question ref="question-79"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-134">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-94"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-135">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+            </subject_options>
+            <object_question ref="question-85"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-136">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+            </subject_options>
+            <object_question ref="question-86"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-137">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-82"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-138">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-88"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-139">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+            </subject_options>
+            <object_question ref="question-84"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-140">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-97"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-170">
+            <type>wok.pollster.rules.CheckOptions</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-80"/>
+            <object_options>
+                 
+                 <object_option ref="option-517"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-128">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-90"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-133">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-79"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-393"/>
+                 
+                 <subject_option ref="option-394"/>
+                 
+                 <subject_option ref="option-395"/>
+                 
+                 <subject_option ref="option-396"/>
+                 
+                 <subject_option ref="option-397"/>
+                 
+                 <subject_option ref="option-398"/>
+                 
+                 <subject_option ref="option-399"/>
+                 
+                 <subject_option ref="option-400"/>
+                 
+                 <subject_option ref="option-401"/>
+                 
+                 <subject_option ref="option-402"/>
+                 
+                 <subject_option ref="option-403"/>
+                 
+                 <subject_option ref="option-404"/>
+                 
+                 <subject_option ref="option-405"/>
+                 
+                 <subject_option ref="option-406"/>
+                 
+                 <subject_option ref="option-407"/>
+                 
+                 <subject_option ref="option-408"/>
+                 
+                 <subject_option ref="option-409"/>
+                 
+                 <subject_option ref="option-410"/>
+                 
+                 <subject_option ref="option-411"/>
+                 
+            </subject_options>
+            <object_question ref="question-83"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-141">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-80"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-412"/>
+                 
+            </subject_options>
+            <object_question ref="question-81"/>
+            <object_options>
+                 
+                 <object_option ref="option-415"/>
+                 
+                 <object_option ref="option-416"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-142">
+            <type>wok.pollster.rules.FutureShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-80"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-143">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-86"/>
+            <object_options>
+                 
+                 <object_option ref="option-428"/>
+                 
+                 <object_option ref="option-429"/>
+                 
+                 <object_option ref="option-430"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-144">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-89"/>
+            <object_options>
+                 
+                 <object_option ref="option-444"/>
+                 
+                 <object_option ref="option-445"/>
+                 
+                 <object_option ref="option-446"/>
+                 
+                 <object_option ref="option-447"/>
+                 
+                 <object_option ref="option-448"/>
+                 
+                 <object_option ref="option-449"/>
+                 
+                 <object_option ref="option-450"/>
+                 
+                 <object_option ref="option-451"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-145">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-87"/>
+            <object_options>
+                 
+                 <object_option ref="option-431"/>
+                 
+                 <object_option ref="option-432"/>
+                 
+                 <object_option ref="option-433"/>
+                 
+                 <object_option ref="option-434"/>
+                 
+                 <object_option ref="option-435"/>
+                 
+                 <object_option ref="option-436"/>
+                 
+                 <object_option ref="option-437"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-147">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-91"/>
+            <object_options>
+                 
+                 <object_option ref="option-458"/>
+                 
+                 <object_option ref="option-459"/>
+                 
+                 <object_option ref="option-460"/>
+                 
+                 <object_option ref="option-461"/>
+                 
+                 <object_option ref="option-462"/>
+                 
+                 <object_option ref="option-463"/>
+                 
+                 <object_option ref="option-464"/>
+                 
+                 <object_option ref="option-465"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-148">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-96"/>
+            <object_options>
+                 
+                 <object_option ref="option-487"/>
+                 
+                 <object_option ref="option-488"/>
+                 
+                 <object_option ref="option-489"/>
+                 
+                 <object_option ref="option-490"/>
+                 
+                 <object_option ref="option-491"/>
+                 
+                 <object_option ref="option-492"/>
+                 
+                 <object_option ref="option-493"/>
+                 
+                 <object_option ref="option-494"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-149">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-83"/>
+            <object_options>
+                 
+                 <object_option ref="option-420"/>
+                 
+                 <object_option ref="option-421"/>
+                 
+                 <object_option ref="option-422"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-150">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-97"/>
+            <object_options>
+                 
+                 <object_option ref="option-495"/>
+                 
+                 <object_option ref="option-496"/>
+                 
+                 <object_option ref="option-497"/>
+                 
+                 <object_option ref="option-498"/>
+                 
+                 <object_option ref="option-499"/>
+                 
+                 <object_option ref="option-500"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-151">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-90"/>
+            <object_options>
+                 
+                 <object_option ref="option-452"/>
+                 
+                 <object_option ref="option-453"/>
+                 
+                 <object_option ref="option-454"/>
+                 
+                 <object_option ref="option-455"/>
+                 
+                 <object_option ref="option-456"/>
+                 
+                 <object_option ref="option-457"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-152">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-94"/>
+            <object_options>
+                 
+                 <object_option ref="option-481"/>
+                 
+                 <object_option ref="option-482"/>
+                 
+                 <object_option ref="option-483"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-153">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-84"/>
+            <object_options>
+                 
+                 <object_option ref="option-423"/>
+                 
+                 <object_option ref="option-424"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-154">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-92"/>
+            <object_options>
+                 
+                 <object_option ref="option-466"/>
+                 
+                 <object_option ref="option-467"/>
+                 
+                 <object_option ref="option-468"/>
+                 
+                 <object_option ref="option-469"/>
+                 
+                 <object_option ref="option-470"/>
+                 
+                 <object_option ref="option-471"/>
+                 
+                 <object_option ref="option-472"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-155">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-95"/>
+            <object_options>
+                 
+                 <object_option ref="option-484"/>
+                 
+                 <object_option ref="option-485"/>
+                 
+                 <object_option ref="option-486"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-156">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-85"/>
+            <object_options>
+                 
+                 <object_option ref="option-425"/>
+                 
+                 <object_option ref="option-426"/>
+                 
+                 <object_option ref="option-427"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-157">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-88"/>
+            <object_options>
+                 
+                 <object_option ref="option-438"/>
+                 
+                 <object_option ref="option-439"/>
+                 
+                 <object_option ref="option-440"/>
+                 
+                 <object_option ref="option-441"/>
+                 
+                 <object_option ref="option-442"/>
+                 
+                 <object_option ref="option-443"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-158">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-93"/>
+            <object_options>
+                 
+                 <object_option ref="option-473"/>
+                 
+                 <object_option ref="option-474"/>
+                 
+                 <object_option ref="option-475"/>
+                 
+                 <object_option ref="option-476"/>
+                 
+                 <object_option ref="option-477"/>
+                 
+                 <object_option ref="option-478"/>
+                 
+                 <object_option ref="option-479"/>
+                 
+                 <object_option ref="option-480"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-159">
+            <type>wok.pollster.rules.Fill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-82"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-419"/>
+                 
+            </subject_options>
+            <object_question ref="question-96"/>
+            <object_options>
+                 
+                 <object_option ref="option-487"/>
+                 
+                 <object_option ref="option-488"/>
+                 
+                 <object_option ref="option-489"/>
+                 
+                 <object_option ref="option-490"/>
+                 
+                 <object_option ref="option-491"/>
+                 
+                 <object_option ref="option-492"/>
+                 
+                 <object_option ref="option-493"/>
+                 
+                 <object_option ref="option-494"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-160">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-86"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-428"/>
+                 
+            </subject_options>
+            <object_question ref="question-87"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-161">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-88"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-438"/>
+                 
+            </subject_options>
+            <object_question ref="question-79"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-162">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-88"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-443"/>
+                 
+            </subject_options>
+            <object_question ref="question-79"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-163">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-88"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-439"/>
+                 
+                 <subject_option ref="option-440"/>
+                 
+                 <subject_option ref="option-441"/>
+                 
+                 <subject_option ref="option-442"/>
+                 
+            </subject_options>
+            <object_question ref="question-89"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-164">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-90"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-452"/>
+                 
+            </subject_options>
+            <object_question ref="question-79"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-165">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-90"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-453"/>
+                 
+                 <subject_option ref="option-454"/>
+                 
+                 <subject_option ref="option-455"/>
+                 
+                 <subject_option ref="option-456"/>
+                 
+                 <subject_option ref="option-457"/>
+                 
+            </subject_options>
+            <object_question ref="question-91"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-166">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-92"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-466"/>
+                 
+            </subject_options>
+            <object_question ref="question-79"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-167">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-92"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-469"/>
+                 
+            </subject_options>
+            <object_question ref="question-93"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-168">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-94"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-483"/>
+                 
+            </subject_options>
+            <object_question ref="question-96"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-169">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-94"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-483"/>
+                 
+            </subject_options>
+            <object_question ref="question-95"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+    </rules>
+    <translations>
+        
+        <translation lang="nl">
+            <title>Wekelijkse vragenlijst</title>
+            <questions>
+            
+                <question ref="question-78">
+                    <title></title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-79">
+                    <title>Heeft u sinds uw vorige bezoek (of sinds afgelopen week als dit de eerste keer is dat u inlogt) last gehad van een of meer van de onderstaande symptomen?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-80">
+                    <title>Heeft u bij uw vorige bezoek gemeld dat u ziek was?</title>
+                    <description>Zo ja, worden de huidige symptomen nog steeds veroorzaakt door dezelfde ziekte?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-81">
+                    <title>Wanneer kwamen de eerste symptomen opzetten?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-82">
+                    <title>Wanneer namen de symptomen af?</title>
+                    <description>[Indien u nog steeds ziek bent, hebben we de informatie die u ons de vorige keer gaf alvast voor u ingevuld. Controleert u deze alstublieft en corrigeert u deze indien nodig - als u bijvoorbeeld de huisarts hebt bezocht of sinds uw vorige meting extra dagen ziekteverlof hebt opgenomen.]</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-83">
+                    <title>Kwamen de symptomen plotseling binnen een paar uur opzetten?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-84">
+                    <title>Wanneer kwam de koorts opzetten? </title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-85">
+                    <title>Kwam de koorts plotseling binnen een paar uur opzetten?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-86">
+                    <title>Heeft u uw temperatuur gemeten?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-87">
+                    <title>Wat was uw hoogst gemeten temperatuur?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-88">
+                    <title>Heeft u medisch hulp gezocht vanwege uw symptomen? En zo ja, waar?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-89">
+                    <title>Hoe snel nadat uw symptomen opkwamen bent u medische hulp gaan zoeken?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-90">
+                    <title>Heeft u vanwege uw symptomen telefonisch of via internet contact gezocht met instanties? En zo ja, welke?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-91">
+                    <title>Hoe snel nadat uw symptomen opkwamen heeft u contact gezocht met deze instanties?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-92">
+                    <title>Heeft u vanwege uw symptomen medicijnen geslikt? En zo ja, welke?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-93">
+                    <title>Hoe snel nadat uw symptomen opkwamen bent u begonnen met het gebruik van antivirale middelen?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-94">
+                    <title>Heeft u vanwege uw symptomen uw dagelijkse bezigheden moeten aanpassen?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-95">
+                    <title>Bent u vandaag nog steeds ziek thuis?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-96">
+                    <title>Hoe lang bent u niet naar werk/school geweest?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-97">
+                    <title>Heeft u zelf enig idee waar uw klachten vandaan komen?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-98">
+                    <title>Hoeveel mensen in uw huishouden (exclusief uzelf) hebben afgelopen week last gehad van verkoudheid of griepachtige verschijnselen?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-99">
+                    <title>Met hoeveel mensen met verkoudheid of griepachtige verschijnselen (buiten uw eigen huishouden) bent u afgelopen week in contact geweest?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+            </questions>
+            <columns>
+            
+                <column ref="column-3">
+                    <title></title>
+                </column>
+            
+                <column ref="column-4">
+                    <title></title>
+                </column>
+            
+            </columns>
+            <rows>
+            
+                <row ref="row-3">
+                    <title></title>
+                </row>
+            
+                <row ref="row-4">
+                    <title></title>
+                </row>
+            
+            </rows>
+            <options>
+            
+                <option ref="option-392">
+                    <text>Nee, geen symptomen</text>
+                </option>
+            
+                <option ref="option-393">
+                    <text>Koorts</text>
+                </option>
+            
+                <option ref="option-394">
+                    <text>Koude rillingen</text>
+                </option>
+            
+                <option ref="option-395">
+                    <text>Loopneus of verstopte neus</text>
+                </option>
+            
+                <option ref="option-396">
+                    <text>Niezen</text>
+                </option>
+            
+                <option ref="option-397">
+                    <text>Zere keel</text>
+                </option>
+            
+                <option ref="option-398">
+                    <text>Hoesten</text>
+                </option>
+            
+                <option ref="option-399">
+                    <text>Kortademigheid</text>
+                </option>
+            
+                <option ref="option-400">
+                    <text>Hoofdpijn</text>
+                </option>
+            
+                <option ref="option-401">
+                    <text>Spier/gewrichtspijn</text>
+                </option>
+            
+                <option ref="option-402">
+                    <text>Pijn op de borst</text>
+                </option>
+            
+                <option ref="option-403">
+                    <text>Gevoel van vermoeidheid/uitgeput</text>
+                </option>
+            
+                <option ref="option-404">
+                    <text>Verminderde eetlust</text>
+                </option>
+            
+                <option ref="option-405">
+                    <text>Verkleurd slijm</text>
+                </option>
+            
+                <option ref="option-406">
+                    <text>Waterige of bloeddoorlopen ogen</text>
+                </option>
+            
+                <option ref="option-407">
+                    <text>Misselijkheid</text>
+                </option>
+            
+                <option ref="option-408">
+                    <text>Overgeven</text>
+                </option>
+            
+                <option ref="option-409">
+                    <text>Diarree</text>
+                </option>
+            
+                <option ref="option-410">
+                    <text>Pijn in de maag</text>
+                </option>
+            
+                <option ref="option-411">
+                    <text>Andere symptomen</text>
+                </option>
+            
+                <option ref="option-412">
+                    <text>Ja</text>
+                </option>
+            
+                <option ref="option-413">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-414">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-517">
+                    <text>Niet van toepassing</text>
+                </option>
+            
+                <option ref="option-415">
+                    <text>Kies datum:</text>
+                </option>
+            
+                <option ref="option-416">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-417">
+                    <text>Kies datum:</text>
+                </option>
+            
+                <option ref="option-418">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-419">
+                    <text>Ik ben nog steeds ziek</text>
+                </option>
+            
+                <option ref="option-420">
+                    <text>Ja</text>
+                </option>
+            
+                <option ref="option-421">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-422">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-423">
+                    <text>Kies datum:</text>
+                </option>
+            
+                <option ref="option-424">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-425">
+                    <text>Ja</text>
+                </option>
+            
+                <option ref="option-426">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-427">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-428">
+                    <text>Ja</text>
+                </option>
+            
+                <option ref="option-429">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-430">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-431">
+                    <text>37°C of lager</text>
+                </option>
+            
+                <option ref="option-432">
+                    <text></text>
+                </option>
+            
+                <option ref="option-433">
+                    <text></text>
+                </option>
+            
+                <option ref="option-434">
+                    <text></text>
+                </option>
+            
+                <option ref="option-435">
+                    <text></text>
+                </option>
+            
+                <option ref="option-436">
+                    <text>40°C of hoger</text>
+                </option>
+            
+                <option ref="option-437">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-438">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-439">
+                    <text>Ja, bij de huisarts</text>
+                </option>
+            
+                <option ref="option-440">
+                    <text>Ja, bij de eerste hulp van het ziekenhuis of de huisartsenpost</text>
+                </option>
+            
+                <option ref="option-441">
+                    <text>Ja, ik ben opgenomen in het ziekenhuis</text>
+                </option>
+            
+                <option ref="option-442">
+                    <text>Ja, ik heb andere medische hulp gezocht</text>
+                </option>
+            
+                <option ref="option-443">
+                    <text>Nog niet, maar ik heb wel een afspraak gemaakt</text>
+                </option>
+            
+                <option ref="option-444">
+                    <text>Dezelfde dag</text>
+                </option>
+            
+                <option ref="option-445">
+                    <text>Na 1 dag</text>
+                </option>
+            
+                <option ref="option-446">
+                    <text>Na 2 dagen</text>
+                </option>
+            
+                <option ref="option-447">
+                    <text>Na 3 dagen</text>
+                </option>
+            
+                <option ref="option-448">
+                    <text>Na 4 dagen</text>
+                </option>
+            
+                <option ref="option-449">
+                    <text>Na 5 tot 7 dagen</text>
+                </option>
+            
+                <option ref="option-450">
+                    <text>Na meer dan 7 dagen</text>
+                </option>
+            
+                <option ref="option-451">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-452">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-453">
+                    <text>Ja, ik heb mijn huisarts gebeld en heb alleen de assistente gesproken</text>
+                </option>
+            
+                <option ref="option-454">
+                    <text>Ja, ik heb mijn huisarts gebeld en heb met een dokter of verpleegkundige gesproken</text>
+                </option>
+            
+                <option ref="option-455">
+                    <text>Ja, ik heb contact gezocht met het Nivel (Nederlands instituut voor onderzoek van de gezondheidszorg)</text>
+                </option>
+            
+                <option ref="option-456">
+                    <text>Ja, ik heb contact gezocht met het RIVM (Rijksinstituut voor Volksgezondheid en Milieu)</text>
+                </option>
+            
+                <option ref="option-457">
+                    <text>Ja, ik heb contact gezocht met andere instanties.</text>
+                </option>
+            
+                <option ref="option-458">
+                    <text>Dezelfde dag</text>
+                </option>
+            
+                <option ref="option-459">
+                    <text>Na 1 dag</text>
+                </option>
+            
+                <option ref="option-460">
+                    <text>Na 2 dagen</text>
+                </option>
+            
+                <option ref="option-461">
+                    <text>Na 3 dagen</text>
+                </option>
+            
+                <option ref="option-462">
+                    <text>Na 4 dagen</text>
+                </option>
+            
+                <option ref="option-463">
+                    <text>Na 5 tot 7 dagen</text>
+                </option>
+            
+                <option ref="option-464">
+                    <text>Na meer dan 7 dagen</text>
+                </option>
+            
+                <option ref="option-465">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-466">
+                    <text>Nee, ik heb geen medicijnen geslikt</text>
+                </option>
+            
+                <option ref="option-467">
+                    <text>Ja, pijnstillers zoals paracetamol, aspirine of ibuprofen</text>
+                </option>
+            
+                <option ref="option-468">
+                    <text>Ja, medicijnen om het hoesten te onderdrukken</text>
+                </option>
+            
+                <option ref="option-469">
+                    <text>Ja, antivirale middelen zoals Tamiflu of Relenza</text>
+                </option>
+            
+                <option ref="option-470">
+                    <text>Ja, antibiotica</text>
+                </option>
+            
+                <option ref="option-471">
+                    <text>Ja, andere medicijnen</text>
+                </option>
+            
+                <option ref="option-472">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-473">
+                    <text>Dezelfde dag (binnen 24 uur na opkomen van de eerste symptomen)</text>
+                </option>
+            
+                <option ref="option-474">
+                    <text>Na 1 dag</text>
+                </option>
+            
+                <option ref="option-475">
+                    <text>Na 2 dagen</text>
+                </option>
+            
+                <option ref="option-476">
+                    <text>Na 3 dagen</text>
+                </option>
+            
+                <option ref="option-477">
+                    <text>Na 4 dagen</text>
+                </option>
+            
+                <option ref="option-478">
+                    <text>Na 5 tot 7 dagen</text>
+                </option>
+            
+                <option ref="option-479">
+                    <text>Na meer dan 7 dagen</text>
+                </option>
+            
+                <option ref="option-480">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-481">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-482">
+                    <text>Ja, maar ik ben wel gewoon naar werk/school gegaan</text>
+                </option>
+            
+                <option ref="option-483">
+                    <text>Ja, ik ben thuis gebleven terwijl ik eigenlijk naar werk/school had gemoeten</text>
+                </option>
+            
+                <option ref="option-484">
+                    <text>Ja</text>
+                </option>
+            
+                <option ref="option-485">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-486">
+                    <text>Ik had vandaag sowieso niet naar werk/school gehoeven</text>
+                </option>
+            
+                <option ref="option-487">
+                    <text>1 dag</text>
+                </option>
+            
+                <option ref="option-488">
+                    <text>2 dagen</text>
+                </option>
+            
+                <option ref="option-489">
+                    <text>3 dagen</text>
+                </option>
+            
+                <option ref="option-490">
+                    <text>4 dagen</text>
+                </option>
+            
+                <option ref="option-491">
+                    <text>5 dagen</text>
+                </option>
+            
+                <option ref="option-492">
+                    <text>6 tot 10 dagen</text>
+                </option>
+            
+                <option ref="option-493">
+                    <text>11 tot 15 dagen</text>
+                </option>
+            
+                <option ref="option-494">
+                    <text>Meer dan 15 dagen</text>
+                </option>
+            
+                <option ref="option-495">
+                    <text>Ja, ik heb griep of griepachtige verschijnselen</text>
+                </option>
+            
+                <option ref="option-496">
+                    <text>Ja, ik ben verkouden</text>
+                </option>
+            
+                <option ref="option-497">
+                    <text>Ja, van een allergie zoals hooikoorts</text>
+                </option>
+            
+                <option ref="option-498">
+                    <text>Ja, ik heb maag-/darmklachten of buikgriep</text>
+                </option>
+            
+                <option ref="option-499">
+                    <text>Ja, ik heb een andere ziekte die de klachten veroorzaakt</text>
+                </option>
+            
+                <option ref="option-500">
+                    <text>Nee, ik heb geen idee</text>
+                </option>
+            
+                <option ref="option-501">
+                    <text></text>
+                </option>
+            
+                <option ref="option-502">
+                    <text></text>
+                </option>
+            
+                <option ref="option-503">
+                    <text></text>
+                </option>
+            
+                <option ref="option-504">
+                    <text></text>
+                </option>
+            
+                <option ref="option-505">
+                    <text></text>
+                </option>
+            
+                <option ref="option-506">
+                    <text></text>
+                </option>
+            
+                <option ref="option-507">
+                    <text>8 of meer</text>
+                </option>
+            
+                <option ref="option-508">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-509">
+                    <text></text>
+                </option>
+            
+                <option ref="option-510">
+                    <text></text>
+                </option>
+            
+                <option ref="option-511">
+                    <text></text>
+                </option>
+            
+                <option ref="option-512">
+                    <text></text>
+                </option>
+            
+                <option ref="option-513">
+                    <text></text>
+                </option>
+            
+                <option ref="option-514">
+                    <text></text>
+                </option>
+            
+                <option ref="option-515">
+                    <text>6 of meer</text>
+                </option>
+            
+                <option ref="option-516">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+            </options>
+        </translation>
+        
+    </translations>
+</survey>
