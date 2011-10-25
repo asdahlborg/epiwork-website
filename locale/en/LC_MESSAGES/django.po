@@ -18,4 +18,4 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "This account is inactive."
-msgstr "This account is inactive. Please click on the link in the email we sent you to activate the account. If you did not receive an email, please check your spam filters."
+msgstr "This account has not yet been activated. Please click on the link in the email we sent you to activate the account. If you did not receive an email, please check your spam filters."
