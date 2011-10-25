@@ -3,54 +3,54 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-19 14:28+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-09-19 14:27+0200\n"
+"PO-Revision-Date: 2011-10-18 16:22+0100\n"
+"Last-Translator: Marion\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: apps/ew_contact_form/forms.py:12 apps/survey/forms/__init__.py:16
+#: apps/ew_contact_form/forms.py:12
+#: apps/survey/forms/__init__.py:16
 #: templates/survey/people.html:8
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: apps/ew_contact_form/forms.py:13
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: apps/ew_contact_form/forms.py:14
 msgid "Message"
-msgstr ""
+msgstr "Message"
 
 #: apps/journal/admin.py:43
 #, python-format
 msgid "%(count)d newsitem was published"
 msgid_plural "%(count)d newsitems where published"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Le %(count)de article d'actualité a été publié"
+msgstr[1] "Les %(count)de articles d'actualité ont été publiés"
 
 #: apps/journal/admin.py:46
 msgid "Publish selected news"
-msgstr ""
+msgstr "Mettre en ligne les articles d'actualité selectionnés"
 
 #: apps/journal/admin.py:53
 #, python-format
 msgid "%(count)d newsitem was unpublished"
 msgid_plural "%(count)d newsitems where unpublished"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Le %(count)de article d'actualité n'a pas été publié"
+msgstr[1] "Les %(count)de articles d'actualité n'ont pas été publiés"
 
 #: apps/journal/admin.py:56
 msgid "Unpublish selected news"
-msgstr ""
+msgstr "Ne pas mettre en ligne les articles d'actualité sélectionnés"
 
 #: apps/journal/cms_app.py:7
 msgid "Journal"
@@ -60,12 +60,14 @@ msgstr ""
 msgid "Journal entries"
 msgstr ""
 
-#: apps/journal/models.py:9 apps/journal/models.py:35
+#: apps/journal/models.py:9
+#: apps/journal/models.py:35
 #: apps/journal/models.py:81
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
-#: apps/journal/models.py:10 apps/journal/models.py:36
+#: apps/journal/models.py:10
+#: apps/journal/models.py:36
 msgid "Slug"
 msgstr ""
 
@@ -75,28 +77,27 @@ msgstr ""
 
 #: apps/journal/models.py:14
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #: apps/journal/models.py:15
 msgid "Categories"
-msgstr ""
+msgstr "Catégories"
 
 #: apps/journal/models.py:37
-msgid ""
-"A slug is a short name which uniquely identifies the news item for this day"
+msgid "A slug is a short name which uniquely identifies the news item for this day"
 msgstr ""
 
 #: apps/journal/models.py:38
 msgid "Excerpt"
-msgstr ""
+msgstr "Extrait"
 
 #: apps/journal/models.py:39
 msgid "Content"
-msgstr ""
+msgstr "Contenu"
 
 #: apps/journal/models.py:40
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: apps/journal/models.py:41
 msgid "Alignment"
@@ -104,191 +105,185 @@ msgstr ""
 
 #: apps/journal/models.py:41
 msgid "Alignment of the image"
-msgstr ""
+msgstr "Centrer l'image"
 
 #: apps/journal/models.py:41
 msgid "Left"
-msgstr ""
+msgstr "Gauche"
 
 #: apps/journal/models.py:41
 msgid "Right"
-msgstr ""
+msgstr "Droit"
 
 #: apps/journal/models.py:43
 msgid "Published"
-msgstr ""
+msgstr "Publié"
 
 #: apps/journal/models.py:44
 msgid "Publication date"
-msgstr ""
+msgstr "Date de publication"
 
 #: apps/journal/models.py:55
 msgid "Entry"
-msgstr ""
+msgstr "Article"
 
 #: apps/journal/models.py:56
 msgid "Entries"
-msgstr ""
+msgstr "Articles"
 
 #: apps/journal/models.py:82
 msgid "Number of entries to show"
-msgstr ""
+msgstr "Nombre d'articles à afficher"
 
 #: apps/journal/models.py:83
 msgid "Limits the number of entries that will be displayed"
-msgstr ""
+msgstr "Cela limite le nombre d'articles qui seront affichés"
 
 #: apps/journal/models.py:84
 msgid "Leave this field blank to match all categories"
-msgstr ""
+msgstr "Laissez ce champs vide pour sélectionner toutes les catégories"
 
 #: apps/journal/templates/journal/latest.html:2
 #: templates/journal/latest.html:3
 msgid "Latest news"
-msgstr ""
+msgstr "Les dernières nouvelles"
 
 #: apps/journal/templates/journal/latest.html:7
 #: templates/journal/latest.html:17
 msgid "No news yet"
-msgstr ""
+msgstr "Pas encore d'articles d'actualité"
 
 #: apps/partnersites/cms_plugins.py:10
 msgid "External link"
-msgstr ""
+msgstr "Lien externe"
 
 #: apps/partnersites/forms.py:9
 msgid "Light color"
-msgstr ""
+msgstr "Couleur claire"
 
 #: apps/partnersites/forms.py:9
-msgid ""
-"Hexidecimal value w/o preceding '#'; The dark color is calculated from this."
-msgstr ""
+msgid "Hexidecimal value w/o preceding '#'; The dark color is calculated from this."
+msgstr "Valeur hexadecimale non précédée de '#'. La couleur sombre est calculée à partir de ça."
 
 #: apps/partnersites/forms.py:9
 msgid "Use a hexidecimal value (length: 6) without the preceding #"
-msgstr ""
+msgstr "Utilisez une valeur hexadécimale (de longueur 6) sans la faire précéder de #"
 
 #: apps/partnersites/models.py:8
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #: apps/partnersites/models.py:8
 msgid "Preferred height: 70px, maximum width: 756px"
-msgstr ""
+msgstr "Taille à privilégier : 70 px, taille maximum : 756 px"
 
 #: apps/partnersites/models.py:10
 msgid "Footer"
-msgstr ""
+msgstr "Pied de page"
 
 #: apps/partnersites/models.py:10
 msgid "The footer will be displayed at the bottom of each page"
-msgstr ""
+msgstr "Le pied de page sera affiché en bas de chaque page"
 
-#: apps/partnersites/models.py:19 apps/partnersites/models.py:22
+#: apps/partnersites/models.py:19
+#: apps/partnersites/models.py:22
 #: apps/partnersites/models.py:23
 msgid "Site settings"
-msgstr ""
+msgstr "Paramètres du site"
 
 #: apps/pollster/cms_plugins.py:9
 msgid "Survey Chart"
-msgstr ""
+msgstr "Graphique de l'étude"
 
 #: apps/pollster/fields.py:17
 msgid "Enter a valid year and month."
-msgstr ""
+msgstr "Saisissez une année et un mois valides."
 
 #: apps/pollster/fields.py:46
 msgid "Enter a valid postal code."
-msgstr ""
+msgstr "Saisissez un code postal valide."
 
 #: apps/pollster/forms.py:16
 msgid "Enter a valid value consisting of letters, numbers or underscores"
-msgstr ""
+msgstr "Saisissez une valeur autorisée (lettres, nombres ou tirets bas)"
 
 #: apps/pollster/db/models/fields.py:9
 msgid "Year and month (in YYYY-MM format)"
-msgstr ""
+msgstr "Année et mois (au format AAAA-MM)"
 
 #: apps/pollster/db/models/fields.py:24
 msgid "Postal code"
-msgstr ""
+msgstr "Code postal"
 
 #: apps/reminder/forms.py:16
-msgid ""
-"If 'send_reminders' is checked the other fields pertaining to reminders are "
-"required"
-msgstr ""
+msgid "If 'send_reminders' is checked the other fields pertaining to reminders are required"
+msgstr "Si 'send_reminders' est coché, les autres champs relatifs aux emails de rappel doivent être complétés"
 
 #: apps/reminder/forms.py:30
 msgid "If no dates are shown here, check your site settings"
-msgstr ""
+msgstr "S'il n'y a pas de date qui s'affiche, vérifiez les paramètres du site"
 
 #: apps/reminder/models.py:31
 msgid "Send reminders"
-msgstr ""
+msgstr "Envoyer des mails de rappel"
 
 #: apps/reminder/models.py:31
 msgid "Check this box to send reminders"
-msgstr ""
+msgstr "Cochez cette case pour envoyer des mails de rappel"
 
 #: apps/reminder/models.py:32
 msgid "Begin date"
-msgstr ""
+msgstr "Date de début"
 
 #: apps/reminder/models.py:32
-msgid ""
-"Date & time of the first reminder and point of reference for subsequent "
-"reminders; (Time zone: MET)"
-msgstr ""
+msgid "Date & time of the first reminder and point of reference for subsequent reminders; (Time zone: MET)"
+msgstr "Date et heure du premier mail de rappel et point de référence pour les rappels suivants (fuseau horaire : MET)"
 
 #: apps/reminder/models.py:33
 msgid "Interval"
-msgstr ""
+msgstr "Intervalle"
 
 #: apps/reminder/models.py:33
 msgid "Weekly"
-msgstr ""
+msgstr "Hebdomadaire"
 
 #: apps/reminder/models.py:33
 msgid "Bi-weekly"
-msgstr ""
+msgstr "Bi-hebdomadaire"
 
 #: apps/reminder/models.py:36
 msgid "Reminder settings"
-msgstr ""
+msgstr "Paramètres du rappel"
 
 #: apps/reminder/models.py:39
 msgid "Is default reminder"
-msgstr ""
+msgstr "Ceci est le rappel pas défaut."
 
 #: apps/reminder/models.py:39
-msgid ""
-"If this option is checked this template is the standard template for "
-"reminder emails."
-msgstr ""
+msgid "If this option is checked this template is the standard template for reminder emails."
+msgstr "Si cette option est cochée, ce modèle est le modèle standard utilisé pour les emails de rappel."
 
 #: apps/reminder/models.py:40
 msgid "Is default newsitem"
-msgstr ""
+msgstr "Ceci est l'article d'actualité par défaut"
 
 #: apps/reminder/models.py:40
-msgid ""
-"If this option is checked this template is the standard template for new "
-"news items."
-msgstr ""
+msgid "If this option is checked this template is the standard template for new news items."
+msgstr "Si cette option est cochée, ce modèle est le modèle standard utilisé pour les nouveaux articles d'actualité."
 
-#: apps/reminder/models.py:41 apps/reminder/models.py:55
+#: apps/reminder/models.py:41
+#: apps/reminder/models.py:55
 msgid "Sender email"
-msgstr ""
+msgstr "Email de l'expéditeur"
 
-#: apps/reminder/models.py:42 apps/reminder/models.py:56
+#: apps/reminder/models.py:42
+#: apps/reminder/models.py:56
 msgid "Sender name"
-msgstr ""
+msgstr "Nom de l'expéditeur"
 
 #: apps/reminder/models.py:53
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: apps/reminder/models.py:106
 #, python-format
@@ -304,37 +299,35 @@ msgstr ""
 #: apps/reminder/templates/reminder/unsubscribe.html:10
 #: apps/reminder/templates/reminder/unsubscribe_successful.html:6
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Se désinscrire"
 
 #: apps/reminder/templates/reminder/unsubscribe.html:7
-msgid ""
-"You may unsubscribe from the Influenzanet reminder/newsletter by pressing "
-"the button below."
-msgstr ""
+msgid "You may unsubscribe from the Influenzanet reminder/newsletter by pressing the button below."
+msgstr "Vous pouvez vous désinscrire de la lettre d'information Epipop en cliquant sur le bouton ci-dessous."
 
 #: apps/reminder/templates/reminder/unsubscribe_successful.html:7
 msgid "You have been successfully unsubscribed from the mailing list"
-msgstr ""
+msgstr "Vous vous êtes désinscrit de la lettre de diffusion avec succès"
 
 #: apps/survey/views.py:50
 msgid "No symptoms"
-msgstr ""
+msgstr "Aucun symptôme"
 
 #: apps/survey/views.py:52
 msgid "Flu symptoms"
-msgstr ""
+msgstr "Symptômes grippaux"
 
 #: apps/survey/views.py:54
 msgid "Cold / allergy"
-msgstr ""
+msgstr "Rhume / allergie"
 
 #: apps/survey/views.py:56
 msgid "Gastrointestinal symptoms"
-msgstr ""
+msgstr "Symptômes gastro-intestinaux"
 
 #: apps/survey/views.py:58
 msgid "Other non-influenza symptons"
-msgstr ""
+msgstr "Autres symptômes non grippaux"
 
 #: apps/survey/views.py:60
 msgid "Next status"
@@ -342,45 +335,41 @@ msgstr ""
 
 #: apps/survey/views.py:104
 msgid "You have to fill your profile data first."
-msgstr ""
+msgstr "Vous devez tout d'abord saisir les données de votre profil."
 
 #: apps/survey/views.py:179
-msgid ""
-"One or more questions have empty or invalid answer. Please fix it first."
-msgstr ""
+msgid "One or more questions have empty or invalid answer. Please fix it first."
+msgstr "Une ou plusieurs questions ont une réponse absente ou non valide. Merci de les corriger ou compléter."
 
 #: apps/survey/views.py:263
 msgid "A new person has been added."
-msgstr ""
+msgstr "Une nouvelle personne a été ajoutée."
 
 #: templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Page introuvable"
 
 #: templates/404.html:8
-msgid ""
-"The page you requested could not be found. We apologize for the "
-"inconvenience. Go to "
-msgstr ""
+msgid "The page you requested could not be found. We apologize for the inconvenience. Go to "
+msgstr "La page que vous demandez ne peut pas être trouvée. Nous nous excusons pour ce désagrément. Allez à"
 
-#: templates/404.html:8 templates/500.html:8
+#: templates/404.html:8
+#: templates/500.html:8
 #: templates/registration/logout.html:8
 msgid "home"
-msgstr ""
+msgstr "accueil"
 
 #: templates/500.html:4
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #: templates/500.html:8
-msgid ""
-"An unexpected system error has occured. We apologize for the inconvenience. "
-"Go to "
-msgstr ""
+msgid "An unexpected system error has occured. We apologize for the inconvenience. Go to "
+msgstr "Une erreur inattendue est survenue. Nous nous excusons pour ce désagrément. Allez à"
 
 #: templates/admin/pollster/survey/change_form.html:6
 msgid "History"
-msgstr ""
+msgstr "Antécédents"
 
 #: templates/admin/pollster/survey/change_form.html:9
 msgid "Full Editor"
@@ -388,38 +377,40 @@ msgstr ""
 
 #: templates/base/sitebase.html:68
 msgid "My account"
-msgstr ""
+msgstr "Mon compte"
 
 #: templates/base/sitebase.html:69
 msgid "Log out"
-msgstr ""
+msgstr "Se déconnecter"
 
 #: templates/base/sitebase.html:71
 msgid "Logged in as"
-msgstr ""
+msgstr "La personne connectée est"
 
-#: templates/base/sitebase.html:74 templates/registration/boxbase.html:11
+#: templates/base/sitebase.html:74
+#: templates/registration/boxbase.html:11
 #: templates/registration/password_reset_complete.html:12
 msgid "Log in"
-msgstr ""
+msgstr "S'identifier"
 
 #: templates/base/sitebase.html:75
 #: templates/registration/registration_form.html:4
 #: templates/registration/registration_form.html:9
 msgid "Register"
-msgstr ""
+msgstr "S'inscrire"
 
 #: templates/base/sitebase.html:77
 msgid "Forgot password?"
-msgstr ""
+msgstr "Mot de passe oublié ?"
 
-#: templates/base/sitebase.html:88 templates/search/search.html:9
+#: templates/base/sitebase.html:88
+#: templates/search/search.html:9
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
 #: templates/base/sitebase.html:122
 msgid "Contact us"
-msgstr ""
+msgstr "Ecrivez-nous"
 
 #: templates/base/sitebase.html:122
 msgid "Contact"
@@ -427,254 +418,250 @@ msgstr ""
 
 #: templates/contact_form/contact_form.html:10
 msgid "Send"
-msgstr ""
+msgstr "Envoi"
 
 #: templates/journal/archive.html:3
 msgid "Latest Entries"
-msgstr ""
+msgstr "Les derniers articles"
 
-#: templates/journal/archive.html:8 templates/journal/archive_day.html:8
+#: templates/journal/archive.html:8
+#: templates/journal/archive_day.html:8
 #: templates/journal/archive_month.html:8
-#: templates/journal/archive_year.html:8 templates/journal/latest.html:14
+#: templates/journal/archive_year.html:8
+#: templates/journal/latest.html:14
 msgid "Read more..."
-msgstr ""
+msgstr "Pour en savoir plus ..."
 
-#: templates/journal/archive.html:14 templates/journal/archive_day.html:14
+#: templates/journal/archive.html:14
+#: templates/journal/archive_day.html:14
 #: templates/journal/archive_month.html:14
-#: templates/journal/archive_year.html:14 templates/search/search.html:25
+#: templates/journal/archive_year.html:14
+#: templates/search/search.html:25
 msgid "Previous"
-msgstr ""
+msgstr "Précédent"
 
-#: templates/journal/archive.html:17 templates/journal/archive_day.html:17
+#: templates/journal/archive.html:17
+#: templates/journal/archive_day.html:17
 #: templates/journal/archive_month.html:17
-#: templates/journal/archive_year.html:17 templates/search/search.html:27
+#: templates/journal/archive_year.html:17
+#: templates/search/search.html:27
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
-#: templates/journal/archive_day.html:3 templates/journal/archive_month.html:3
+#: templates/journal/archive_day.html:3
+#: templates/journal/archive_month.html:3
 #: templates/journal/archive_year.html:3
 msgid "Entries for"
 msgstr ""
 
 #: templates/journal/categories.html:3
 msgid "Archive"
-msgstr ""
+msgstr "Archive"
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:6
 #: templates/registration/activation_complete.html:4
 #: templates/registration/activation_complete.html:6
 msgid "Account Activation"
-msgstr ""
+msgstr "Activation du compte"
 
 #: templates/registration/activate.html:7
 msgid "User activation failed."
-msgstr ""
+msgstr "L'activation de l'utilisateur a échoué"
 
 #: templates/registration/activate.html:9
 #: templates/registration/activation_complete.html:9
 #: templates/registration/registration_complete.html:9
 msgid "Back to the home page"
-msgstr ""
+msgstr "Retour à la page d'accueil"
 
 #: templates/registration/activation_complete.html:7
 msgid "Activation is complete."
-msgstr ""
+msgstr "L'activation a réussi."
 
 #: templates/registration/activation_complete.html:9
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #: templates/registration/activation_complete.html:9
 msgid "proceed to the login page"
-msgstr ""
+msgstr "accédez à la page d'identification"
 
-#: templates/registration/boxbase.html:4 templates/registration/boxbase.html:9
+#: templates/registration/boxbase.html:4
+#: templates/registration/boxbase.html:9
 msgid "Login"
-msgstr ""
+msgstr "Identifiant"
 
 #: templates/registration/boxbase.html:10
 msgid "Enter your username and password to log in."
-msgstr ""
+msgstr "Entrez votre nom d'utilisateur et votre mot de passe pour vous identifier."
 
 #: templates/registration/boxbase.html:10
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Mot de passe oublié ?"
 
 #: templates/registration/index.html:8
 msgid "Change Password"
-msgstr ""
+msgstr "Changer le mot de passe"
 
 #: templates/registration/index.html:9
 msgid "Update Profile"
-msgstr ""
+msgstr "Mettre à jour le profil"
 
 #: templates/registration/logout.html:4
 msgid "Logged out"
-msgstr ""
+msgstr "Vous avez été déconnecté"
 
 #: templates/registration/logout.html:8
 msgid "You have been logged out. Go to "
-msgstr ""
+msgstr "Vous avez été déconnecté. Allez à "
 
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:8
 msgid "Password change successful"
-msgstr ""
+msgstr "Mot de passe changé avec succès"
 
 #: templates/registration/password_change_done.html:10
 msgid "Your password was changed."
-msgstr ""
+msgstr "Votre mot de passe a été changé."
 
 #: templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:8
 msgid "Password change"
-msgstr ""
+msgstr "Changement du mot de passe"
 
 #: templates/registration/password_change_form.html:10
-msgid ""
-"Please enter your old password, for security's sake, and then enter your new "
-"password twice so we can verify you typed it in correctly."
-msgstr ""
+msgid "Please enter your old password, for security's sake, and then enter your new password twice so we can verify you typed it in correctly."
+msgstr "Pour des raisons de sécurité, entrez s'il-vous-plaît votre ancien mot de passe, puis deux fois votre nouveau mot de passe afin que nous vérifions qu'il a été correctement saisi."
 
 #: templates/registration/password_change_form.html:15
 msgid "Old password:"
-msgstr ""
+msgstr "Ancien mot de passe :"
 
 #: templates/registration/password_change_form.html:17
 #: templates/registration/password_reset_confirm.html:16
 msgid "New password:"
-msgstr ""
+msgstr "Nouveau mot de passe :"
 
 #: templates/registration/password_change_form.html:19
 #: templates/registration/password_reset_confirm.html:18
 msgid "Confirm password:"
-msgstr ""
+msgstr "Confirmez votre mot de passe :"
 
 #: templates/registration/password_change_form.html:21
 #: templates/registration/password_reset_confirm.html:19
 msgid "Change my password"
-msgstr ""
+msgstr "Changer mon mot de passe"
 
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_complete.html:8
 msgid "Password reset complete"
-msgstr ""
+msgstr "Réinitialisation du mot de passe achevée"
 
 #: templates/registration/password_reset_complete.html:10
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "Votre mot de passe a été mis en place. Vous pouvez poursuivre et vous connecter."
 
 #: templates/registration/password_reset_confirm.html:4
 #: templates/registration/password_reset_form.html:4
 #: templates/registration/password_reset_form.html:8
 msgid "Password reset"
-msgstr ""
+msgstr "Réinitialisation du mot de passe"
 
 #: templates/registration/password_reset_confirm.html:10
 msgid "Enter new password"
-msgstr ""
+msgstr "Entrez un nouveau mot de passe"
 
 #: templates/registration/password_reset_confirm.html:12
-msgid ""
-"Please enter your new password twice so we can verify you typed it in "
-"correctly."
-msgstr ""
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
+msgstr "Entrez s'il-vous-plaît votre nouveau mot de passe deux fois, afin que nous vérifions qu'il a été correctement saisi."
 
 #: templates/registration/password_reset_confirm.html:24
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "La réinitialisation du mot de passe a échoué"
 
 #: templates/registration/password_reset_confirm.html:26
-msgid ""
-"The password reset link was invalid, possibly because it has already been "
-"used.  Please request a new password reset."
-msgstr ""
+msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
+msgstr "Le lien pour réinitialiser le mot de passe n'est pas valide, peut-être a-t-il déjà été utilisé. Demandez s'il-vous-plaît une nouvelle réinitialisation de votre mot de passe."
 
 #: templates/registration/password_reset_done.html:4
 #: templates/registration/password_reset_done.html:8
 msgid "Password reset successful"
-msgstr ""
+msgstr "Le mot de passe a été rélinitialisé"
 
 #: templates/registration/password_reset_done.html:10
-msgid ""
-"We've e-mailed you instructions for setting your password to the e-mail "
-"address you submitted. You should be receiving it shortly."
-msgstr ""
+msgid "We've e-mailed you instructions for setting your password to the e-mail address you submitted. You should be receiving it shortly."
+msgstr "Nous vous avons envoyé un email contenant les instructions pour réinitialiser votre mot de passe. Vous devriez le recevoir dans peu de temps."
 
 #: templates/registration/password_reset_email.html:3
 msgid "You're receiving this e-mail because you requested a password reset"
-msgstr ""
+msgstr "Vous recevez cet email car vous avez demandé une réinitialisation de votre mot de passe"
 
 #: templates/registration/password_reset_email.html:4
 #, python-format
 msgid "for your user account at %(site_name)s"
-msgstr ""
+msgstr "pour votre compte d'utilisateur sur %(site_name)s"
 
 #: templates/registration/password_reset_email.html:6
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "Allez s'il-vous-plaît sur la page suivante et choisissez un nouveau mot de passe :"
 
 #: templates/registration/password_reset_email.html:10
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "Votre nom d'utilisateur, au cas où vous l'auriez oublié :"
 
 #: templates/registration/password_reset_email.html:12
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "Merci de votre visite sur notre site !"
 
 #: templates/registration/password_reset_email.html:14
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "L'équipe %(site_name)s"
 
 #: templates/registration/password_reset_form.html:10
-msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
-"instructions for setting a new one."
-msgstr ""
+msgid "Forgotten your password? Enter your e-mail address below, and we'll e-mail instructions for setting a new one."
+msgstr "Mot de passe oublié ? Entrez votre adresse email ci-dessous, nous vous enverrons des instructions par email pour mettre en place un nouveau mot de passe."
 
 #: templates/registration/password_reset_form.html:14
 msgid "E-mail address:"
-msgstr ""
+msgstr "Adresse email :"
 
 #: templates/registration/password_reset_form.html:15
 msgid "Reset my password"
-msgstr ""
+msgstr "Réinitialiser mon mot de passe"
 
 #: templates/registration/registration_complete.html:4
 msgid "Registration complete"
-msgstr ""
+msgstr "Inscription terminée"
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration complete."
-msgstr ""
+msgstr "Inscription terminée."
 
 #: templates/registration/registration_complete.html:7
-msgid ""
-"An e-mail containing information about how to activate your account has been "
-"sent to your e-mail address."
-msgstr ""
+msgid "An e-mail containing information about how to activate your account has been sent to your e-mail address."
+msgstr "Un email expliquant comment activer votre compte a été envoyé à votre adresse email."
 
 #: templates/registration/registration_form.html:8
 msgid "Registration Form"
-msgstr ""
+msgstr "Formulaire d'inscription"
 
 #: templates/search/search.html:5
 msgid "Search result"
-msgstr ""
+msgstr "Résultat de la recherche"
 
 #: templates/search/search.html:12
 msgid "Results"
-msgstr ""
+msgstr "Resultats"
 
 #: templates/search/search.html:20
 msgid "No results found"
-msgstr ""
+msgstr "Aucun résultat trouvé"
 
 #: templates/survey/form.html:21
 msgid "Submit"
-msgstr ""
+msgstr "Soumettre"
 
 #: templates/survey/index.html:16
 msgid "Survey Form"
@@ -686,27 +673,29 @@ msgstr ""
 
 #: templates/survey/people.html:13
 msgid "Edit"
-msgstr ""
+msgstr "Afficher"
 
 #: templates/survey/people.html:14
 msgid "Profile"
-msgstr ""
+msgstr "Profile"
 
 #: templates/survey/people.html:15
 msgid "Survey"
 msgstr ""
 
-#: templates/survey/people.html:16 templates/survey/thanks.html:19
+#: templates/survey/people.html:16
+#: templates/survey/thanks.html:19
 msgid "Remove"
-msgstr ""
+msgstr "Enlever"
 
 #: templates/survey/people.html:21
 msgid "Add new person"
-msgstr ""
+msgstr "Ajouter un nouveau participant"
 
-#: templates/survey/people_add.html:5 templates/survey/people_add.html:10
+#: templates/survey/people_add.html:5
+#: templates/survey/people_add.html:10
 msgid "Add Person"
-msgstr ""
+msgstr "Ajouter un participant"
 
 #: templates/survey/people_edit.html:5
 msgid "Edit Person"
@@ -714,49 +703,47 @@ msgstr ""
 
 #: templates/survey/people_edit.html:10
 msgid "Save"
-msgstr ""
+msgstr "Enregistrer"
 
 #: templates/survey/people_remove.html:5
 msgid "Confirm removal"
-msgstr ""
+msgstr "Confirmer le retrait"
 
 #: templates/survey/people_remove.html:8
 msgid "Confirm the removal of the person:"
-msgstr ""
+msgstr "Confirmer le retrait de la personne :"
 
 #: templates/survey/people_remove.html:16
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: templates/survey/people_remove.html:22
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: templates/survey/profile_index.html:16
 msgid "Edit Profile"
-msgstr ""
+msgstr "Afficher le profil"
 
 #: templates/survey/select_user.html:5
 msgid "Select User"
-msgstr ""
+msgstr "Sélectionnez un utilisateur"
 
 #: templates/survey/thanks.html:6
 msgid "Thanks for taking the time to fill out this survey."
-msgstr ""
+msgstr "Merci d'avoir pris le temps de remplir ce questionnaire."
 
 #: templates/survey/thanks.html:6
-msgid ""
-"Here is a summary of the information you entered for you and the members of "
-"your group or family:"
-msgstr ""
+msgid "Here is a summary of the information you entered for you and the members of your group or family:"
+msgstr "Voici un résumé des informations que vous avez saisies pour vous et les membres de votre groupe ou famille :"
 
 #: templates/survey/thanks.html:11
 msgid "Group members"
-msgstr ""
+msgstr "Membres du groupe"
 
 #: templates/survey/thanks.html:11
 msgid "Health status"
-msgstr ""
+msgstr "Etat de santé"
 
 #: templates/survey/thanks.html:11
 msgid "Manage "
@@ -764,24 +751,25 @@ msgstr ""
 
 #: templates/survey/thanks.html:16
 msgid "Change name"
-msgstr ""
+msgstr "Changez le nom"
 
 #: templates/survey/thanks.html:17
 msgid "Change profile"
-msgstr ""
+msgstr "Changez le profil"
 
 #: templates/survey/thanks.html:18
 msgid "Enter symptoms"
-msgstr ""
+msgstr "Saisissez les symptômes"
 
 #: templates/survey/thanks_profile.html:5
 msgid "Thanks for changing your profile,"
-msgstr ""
+msgstr "Merci d'avoir changé votre profil,"
 
 #: templates/survey/thanks_profile.html:6
 msgid "Please, if you have not already done so, fill in"
-msgstr ""
+msgstr "Si vous ne l'avez pas encore fait, merci de remplir"
 
 #: templates/survey/thanks_profile.html:6
 msgid "the symptoms questionaire"
-msgstr ""
+msgstr "le questionnaire hebdomadaire"
+
