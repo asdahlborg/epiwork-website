@@ -45,7 +45,7 @@ class NewsLetterTemplate(TranslatableModel):
 
     translations = TranslatedFields(
         subject = models.CharField(max_length=255),
-        message = models.TextField(),
+        message = models.TextField(help_text="The strings {{ url }} and {{ unsubscribe_url }} may be used to refer to the profile url and unsubscribe url."),
     )
 
     def __unicode__(self):
@@ -59,7 +59,7 @@ class NewsLetter(TranslatableModel):
 
     translations = TranslatedFields(
         subject = models.CharField(max_length=255),
-        message = models.TextField(),
+        message = models.TextField(help_text="The strings {{ url }} and {{ unsubscribe_url }} may be used to refer to the profile url and unsubscribe url."),
     )
 
     def __unicode__(self):
