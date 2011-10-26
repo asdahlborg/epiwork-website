@@ -94,7 +94,7 @@ def get_settings():
 
 def get_upcoming_dates(now):
     settings = get_settings()
-    if not settings or not settings.send_reminders:
+    if not settings or not settings.send_reminders or not settings.begin_date:
         raise StopIteration()
 
     to_yield = 5
