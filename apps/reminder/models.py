@@ -128,7 +128,7 @@ def get_prev_reminder_date(now):
 
     settings = get_settings()
 
-    if not settings or not settings.send_reminders or now < settings.begin_date:
+    if not settings or not settings.send_reminders or not settings.begin_date or now < settings.begin_date:
         return None
 
     if settings.interval == NO_INTERVAL:
