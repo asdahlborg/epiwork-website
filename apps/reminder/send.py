@@ -48,7 +48,7 @@ def get_url(user):
     return get_login_url(user, get_survey_url())
 
 def get_login_url(user, next):
-    expires = datetime.datetime.now() + datetime.timedelta(days=7)
+    expires = datetime.datetime.now() + datetime.timedelta(days=30)
 
     usage_left = 5
     key = loginurl.utils.create(user, usage_left, expires, next)
