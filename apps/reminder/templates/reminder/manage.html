@@ -1,0 +1,25 @@
+{% extends "base/twocol.html" %}
+
+{% block col1 %}
+{% if sent %}
+A test message was sent to {{ request.user.email }}.
+{% endif %}
+
+<h2>Message</h2>
+To be sent at:
+{{ year }}-{{ month }}-{{ day }} {{ hour }}:{{ minute }}<br>
+
+From: {{ reminder.sender_name }} <{{ reminder.sender_email }}><br>
+Subject: {{ reminder.subject }}<br/>
+
+<iframe width="700" height="700" src="/reminder/preview/{{ year }}/{{ month }}/{{ day }}/{{ hour }}/{{ minute }}/">
+</iframe>
+
+
+<h2>Send test reminder now</h2>
+You may send a testreminder to your self ({{ request.user.email }}) by pressing the button below:
+<form action="" method="POST">{% csrf_token %}
+<input type="submit" value="Send!">
+</form>
+
+{% endblock col1 %}

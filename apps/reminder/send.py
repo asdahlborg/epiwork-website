@@ -86,6 +86,7 @@ def send(now, user, message):
             traceback=format_exc(),
         )
 
-    info = UserReminderInfo.objects.get(user=user)
-    info.last_reminder = now
-    info.save()
+    if now:
+        info = UserReminderInfo.objects.get(user=user)
+        info.last_reminder = now
+        info.save()
