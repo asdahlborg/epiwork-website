@@ -8,7 +8,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 
 from .models import UserReminderInfo, get_upcoming_dates, get_prev_reminder
-from .send import create_message
+from .send import create_message, send
 
 @login_required
 def unsubscribe(request):
@@ -33,6 +33,10 @@ def manage(request, year, month, day, hour, minute):
     reminder_dict = get_prev_reminder(datetime(*map(int, [year, month, day, hour, minute])))
     reminder = _reminder(reminder_dict, request.user)
 
+    if request.method == "POST":
+        sent = True
+        send(None, request.user, reminder)
+        
     return render(request, 'reminder/manage.html', locals())
 
 @staff_member_required
