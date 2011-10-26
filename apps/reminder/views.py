@@ -50,11 +50,13 @@ def preview(request, year, month, day, hour, minute):
 def _reminder(reminder_dict, user):
     info, _ = UserReminderInfo.objects.get_or_create(user=user, defaults={'active': True})
     language = info.get_language()
+
+    if not reminder_dict:
+        return HttpResponse("There are no newsletters or reminders configured yet. Make sure to do so")
+
     if not language in reminder_dict:
         language = settings.LANGUAGE_CODE
     
-    if not reminder_dict:
-        return HttpResponse("There are no newsletters or reminders configured yet. Make sure to do so")
     reminder = reminder_dict[language]
 
     return reminder
