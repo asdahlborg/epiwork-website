@@ -1,0 +1,13 @@
+{% extends "base/twocol.html" %}
+
+{% block col1 %}
+To be sent at:
+{{ year }}-{{ month }}-{{ day }} {{ hour }}:{{ minute }}<br>
+
+From: {{ reminder.sender_name }} <{{ reminder.sender_email }}><br>
+Subject: {{ reminder.subject }}<br/>
+
+<iframe width="700" height="700" src="/reminder/preview/{{ year }}/{{ month }}/{{ day }}/{{ hour }}/{{ minute }}/">
+</iframe>
+
+{% endblock col1 %}
