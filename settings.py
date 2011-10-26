@@ -65,6 +65,9 @@ LANGUAGES = (
 import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+LOCALE_PATHS = (
+    os.path.join(PROJECT_PATH, 'locale'),
+)
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
