@@ -54,11 +54,11 @@ msgstr "Zet het geselecteerde nieuwsbericht terug op ongepubliceerd"
 
 #: apps/journal/cms_app.py:7
 msgid "Journal"
-msgstr "Dagboek"
+msgstr ""
 
 #: apps/journal/cms_plugins.py:15
 msgid "Journal entries"
-msgstr "Dagboek invoer"
+msgstr ""
 
 #: apps/journal/models.py:9
 #: apps/journal/models.py:35
@@ -125,11 +125,11 @@ msgstr "Publicatie datum"
 
 #: apps/journal/models.py:55
 msgid "Entry"
-msgstr "Invoer"
+msgstr ""
 
 #: apps/journal/models.py:56
 msgid "Entries"
-msgstr "Invoer"
+msgstr ""
 
 #: apps/journal/models.py:82
 msgid "Number of entries to show"
@@ -141,7 +141,7 @@ msgstr "Beperkt het aantal items dat getoond wordt"
 
 #: apps/journal/models.py:84
 msgid "Leave this field blank to match all categories"
-msgstr "Laat dit veld leeg om de invoer aan alle catergoriën te koppelen."
+msgstr ""
 
 #: apps/journal/templates/journal/latest.html:2
 #: templates/journal/latest.html:3
@@ -422,7 +422,7 @@ msgstr "Verzenden"
 
 #: templates/journal/archive.html:3
 msgid "Latest Entries"
-msgstr "Laatste invoer"
+msgstr "Laatste nieuwsberichten"
 
 #: templates/journal/archive.html:8
 #: templates/journal/archive_day.html:8
@@ -452,7 +452,7 @@ msgstr "Volgende"
 #: templates/journal/archive_month.html:3
 #: templates/journal/archive_year.html:3
 msgid "Entries for"
-msgstr "Invoer voor"
+msgstr "Nieuwsberichten voor"
 
 #: templates/journal/categories.html:3
 msgid "Archive"
