@@ -177,10 +177,7 @@ class Survey(models.Model):
     def get_table_name(self):
         if self.is_published and not self.shortname:
             raise RuntimeError('cannot generate tables for surveys with no shortname')
-        if self.version:
-            return 'results_'+str(self.shortname)+'_'+str(self.version)
-        else:
-            return 'results_'+str(self.shortname)
+        return 'results_'+str(self.shortname)
 
     def get_last_participation_data(self, user_id, global_id):
         model = self.as_model()
@@ -238,12 +235,15 @@ class Survey(models.Model):
         errors = self.check()
         if errors:
             return errors
+        # Unpublish other surveys with the same shortname.
+        for o in Survey.objects.filter(shortname=self.shortname, status='PUBLISHED'):
+            o.unpublish()
         self.status = 'PUBLISHED'
         model = self.as_model()
         table = model._meta.db_table
         if table in connection.introspection.table_names():
             now = datetime.datetime.now()
-            backup = table+'_'+format(now, '%Y%m%d%H%M%s')
+            backup = table+'_vx_'+format(now, '%Y%m%d%H%M%s')
             connection.cursor().execute('ALTER TABLE '+table+' RENAME TO '+backup)
         dynamicmodels.install(model)
         db = get_db_type(connection)
@@ -255,6 +255,12 @@ class Survey(models.Model):
     def unpublish(self):
         if not self.is_published:
             return
+        table = self.as_model()._meta.db_table
+        if table in connection.introspection.table_names():
+            now = datetime.datetime.now()
+            version = self.version or 0
+            backup = table+'_v'+str(version)+'_'+format(now, '%Y%m%d%H%M%s')
+            connection.cursor().execute('ALTER TABLE '+table+' RENAME TO '+backup)
         self.status = 'UNPUBLISHED'
         self.save()
 
