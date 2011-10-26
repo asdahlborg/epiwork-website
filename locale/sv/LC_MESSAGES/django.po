@@ -772,3 +772,5 @@ msgstr "Om du inte redan gjort det, var vänlig fyll i"
 msgid "the symptoms questionaire"
 msgstr "symptomenkäten"
 
+msgid "This account is inactive."
+msgstr "Detta konto har inte aktiverats. Klicka på länken i det e-postmeddelande du fått angående aktivering av ditt konto. Om du inte fått någon e-post, kolla dina spam filter. Skriv annars till oss på influensakoll@smi.se."
