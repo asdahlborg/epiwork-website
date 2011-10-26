@@ -1,3 +1,5 @@
+import warnings
+
 from django.db import models, connection, transaction, IntegrityError, DatabaseError
 from django.contrib.auth.models import User
 from django.forms import ModelForm
@@ -16,7 +18,11 @@ RAD_TO_DEG = 180/pi
 try:
     import mapnik2 as mapnik
 except:
-    import mapnik
+    try:
+        import mapnik
+    except ImportError:
+        warnings.warn("No working version for library 'mapnik' found. Continuing without mapnik")
+        
 
 SURVEY_STATUS_CHOICES = (
     ('DRAFT', 'Draft'),
