@@ -5,14 +5,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.utils.safestring import mark_safe
-from django.utils.translation import get_language
+from django.utils.translation import to_locale, get_language
 from django.template import RequestContext
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from cms import settings as cms_settings
 from apps.survey.models import SurveyUser
 from . import models, forms, fields, parser, json
-import re, datetime
+import re, datetime, locale, csv
 
 def request_render_to_response(req, *args, **kwargs):
     kwargs['context_instance'] = RequestContext(req)
@@ -137,6 +137,9 @@ def survey_test(request, id, language=None):
 def survey_run(request, shortname, next=None):
     survey = get_object_or_404(models.Survey, shortname=shortname, status='PUBLISHED')
     language = get_language()
+    locale_code = locale.locale_alias.get(language)
+    if locale_code:
+        locale_code = locale_code.split('.')[0].replace('_', '-')
     translation = get_object_or_none(models.TranslationSurvey, survey=survey, language=language, status="PUBLISHED")
     survey.set_translation_survey(translation)
     survey_user = _get_active_survey_user(request)
@@ -160,6 +163,7 @@ def survey_run(request, shortname, next=None):
     last_participation_data_json = encoder.encode(last_participation_data)
 
     return request_render_to_response(request, 'pollster/survey_run.html', {
+        "locale_code": locale_code,
         "survey": survey,
         "default_postal_code_format": fields.PostalCodeField.get_default_postal_code_format(),
         "last_participation_data_json": last_participation_data_json,
@@ -179,7 +183,17 @@ def survey_translation_list_or_add(request, id):
                 translation = translations[0]
             else:
                 translation = models.TranslationSurvey(survey=survey, language=language)
-                translation.save()
+                survey.set_translation_survey(translation)
+                survey.translation_survey.save()
+                for question in survey.questions:
+                    question.translation_question.save()
+                    for option in question.options:
+                        option.translation_option.save()
+                    for row in question.rows:
+                        row.translation_row.save()
+                    for column in question.columns:
+                        column.translation_column.save()
+
             return redirect(translation)
     return request_render_to_response(request, 'pollster/survey_translation_list.html', {
         "survey": survey,
@@ -267,10 +281,20 @@ def survey_chart_data(request, id, shortname):
     return HttpResponse(chart.to_json(user_id, global_id), mimetype='application/json')
 
 @staff_member_required
-def survey_export(request, id):
+def survey_results_csv(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
-    response = render(request, 'pollster/survey_export.xml', { "survey": survey }, content_type='application/xml')
     now = datetime.datetime.now()
+    response = HttpResponse(mimetype='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=survey-results-%d-%s.csv' % (survey.id, format(now, '%Y%m%d%H%M'))
+    writer = csv.writer(response)
+    survey.write_csv(writer)
+    return response
+
+@staff_member_required
+def survey_export_xml(request, id):
+    survey = get_object_or_404(models.Survey, pk=id)
+    now = datetime.datetime.now()
+    response = render(request, 'pollster/survey_export.xml', { "survey": survey }, content_type='application/xml')
     response['Content-Disposition'] = 'attachment; filename=survey-export-%d-%s.xml' % (survey.id, format(now, '%Y%m%d%H%M'))
     return response
 

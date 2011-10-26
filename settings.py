@@ -55,7 +55,7 @@ LANGUAGES = (
    ('fr', u'Français'),
    ('nl', u'Nederlands'),
    ('it', u'Italiano'),
-   ('se', u'Svenska'),
+   ('sv', u'Svenska'),
    ('pt', u'Português'),
    ('es', u'Español'),
 )
@@ -198,7 +198,7 @@ EMAIL_HOST = '127.0.0.1'
 
 # Default e-mail address to use for various automated correspondence from
 # the site managers.
-DEFAULT_FROM_EMAIL = 'webmaster@influenzanet.com'
+DEFAULT_FROM_EMAIL = 'Influenzanet <webmaster@influenzanet.eu>'
 
 if DEBUG:
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -19,7 +19,7 @@ class Command(NoArgsCommand):
             id, art_id, date, section_name, title, html, abstract = row
 
             entry = Entry.objects.language('nl').create(
-                slug=slugify(title),
+                slug=slugify(title)[:50],
                 image=None,
                 alignment=None,
                 is_published=True,

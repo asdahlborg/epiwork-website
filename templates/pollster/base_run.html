@@ -12,7 +12,11 @@
     <script type="text/javascript" src="/media/pollster/jquery/js/jquery.tools.min.js"></script>
     <script type="text/javascript" src="/media/pollster/jquery/js/jquery.form.js"></script>
     <script type="text/javascript" src="/media/pollster/jquery/js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="/media/pollster/datejs/js/date-it-IT.js"></script>
+    {% if locale_code %}
+    <script type="text/javascript" src="/media/pollster/datejs/js/date-{{ locale_code }}.js"></script>
+    {% else %}
+    <script type="text/javascript" src="/media/pollster/datejs/js/date.js"></script>
+    {% endif %}
 
     <script type="text/javascript" src="{{ CMS_MEDIA_URL }}js/csrf.js"></script>
     <script type="text/javascript">jQuery().cmsPatchCSRF()</script>

@@ -15,7 +15,7 @@ class Migration(DataMigration):
     def backwards(self, orm):
         for survey_user in orm['survey.SurveyUser'].objects.all():
             if survey_user.oneuser:
-                survey_user.user.add(oneuser)
+                survey_user.user.add(survey_user.oneuser)
 
 
     models = {

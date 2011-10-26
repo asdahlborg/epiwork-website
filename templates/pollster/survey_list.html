@@ -17,7 +17,7 @@
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <a href="{% url pollster_survey_chart_list survey.id %}">charts</a>
-                | <a href="{% url pollster_survey_export survey.id %}">export</a>
+                | <a href="{% url pollster_survey_export_xml survey.id %}">export</a>
                 | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button class="link">publish</button></form>)
             </li>
             {% endif %}
@@ -32,7 +32,7 @@
                 | <a href="{% url pollster_survey_edit survey.id %}">edit</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <a href="{% url pollster_survey_chart_list survey.id %}">charts</a>
-                | <a href="{% url pollster_survey_export survey.id %}">export</a>
+                | <a href="{% url pollster_survey_export_xml survey.id %}">export</a>
                 | <form action="{% url pollster_survey_publish survey.id %}" method="POST">{% csrf_token %}<button class="link">re-publish</button></form>)
             </li>
             {% endif %}
@@ -42,7 +42,8 @@
                 (<a href="{% url pollster_survey_test survey.id %}">test</a>
                 | <a href="{% url pollster_survey_translation_list survey.id %}">translate</a>
                 | <a href="{% url pollster_survey_chart_list survey.id %}">charts</a>
-                | <a href="{% url pollster_survey_export survey.id %}">export</a>
+                | <a href="{% url pollster_survey_export_xml survey.id %}">export</a>
+                | <a href="{% url pollster_survey_results_csv survey.id %}">results</a>
                 | <form action="{% url pollster_survey_unpublish survey.id %}" method="POST">{% csrf_token %}<button class="link">unpublish</button></form>)
             </li>
             {% endif %}
