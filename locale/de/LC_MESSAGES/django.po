@@ -785,3 +785,9 @@ msgstr ""
 #: templates/survey/thanks_profile.html:6
 msgid "the symptoms questionaire"
 msgstr ""
+
+msgid "Activate your account:\n\nClick the following URL or copy and paste it to the browser's address bar.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nThis activation URL will expire in %(expiration_days)s days."
+msgstr ""
+
+msgid "Activate your account! %(site)s"
+msgstr ""
