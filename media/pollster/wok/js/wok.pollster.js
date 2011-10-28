@@ -39,14 +39,20 @@
 
         // Fill types and rules from generated Javascript code.
 
-        var last_participation_data = pollster_last_participation_data();
+        var last_participation_data = {};
         var data_types = {}, open_option_data_types = {}, derived_values = {};
         var rules_by_question = {}, rules_by_object = {};
 
-        pollster_fill_data_types(data_types);
-        pollster_fill_open_option_data_types(open_option_data_types);
-        pollster_fill_rules(rules_by_question);
-        pollster_fill_derived_values(derived_values);
+        if (window.pollster_last_participation_data)
+            last_participation_data = pollster_last_participation_data();
+        if (window.pollster_fill_data_types)
+            pollster_fill_data_types(data_types);
+        if (window.pollster_fill_open_option_data_types)
+            pollster_fill_open_option_data_types(open_option_data_types);
+        if (window.pollster_fill_rules)
+            pollster_fill_rules(rules_by_question);
+        if (window.pollster_fill_derived_values)
+            pollster_fill_derived_values(derived_values);
         
         // Fill the "by object" and "state" rule dictionaries.
 
