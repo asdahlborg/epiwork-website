@@ -287,6 +287,21 @@ def survey_chart_data(request, id, shortname):
     return HttpResponse(chart.to_json(user_id, global_id), mimetype='application/json')
 
 @staff_member_required
+def survey_chart_map_tile(request, id, shortname, z, x, y):
+    survey = get_object_or_404(models.Survey, pk=id)
+    chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+    survey_user = _get_active_survey_user(request)
+    user_id = request.user.id
+    global_id = survey_user and survey_user.global_id
+    return HttpResponse(chart.get_map_tile(user_id, global_id, int(z), int(x), int(y)), mimetype='image/png')
+
+@staff_member_required
+def survey_chart_map_click(request, id, shortname, lat, lng):
+    survey = get_object_or_404(models.Survey, pk=id)
+    chart = get_object_or_404(models.Chart, survey=survey, shortname=shortname)
+    return HttpResponse(chart.get_map_click(float(lat), float(lng)), mimetype='application/json')
+
+@staff_member_required
 def survey_results_csv(request, id):
     survey = get_object_or_404(models.Survey, pk=id)
     now = datetime.datetime.now()
