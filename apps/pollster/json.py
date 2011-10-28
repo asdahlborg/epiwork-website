@@ -9,7 +9,7 @@ class JSONEncoder(simplejson.JSONEncoder):
         elif isinstance(obj, datetime.date):
             return obj.strftime('%Y-%m-%d')
         else:
-            return json.JSONEncoder.default(self, obj)
+            return simplejson.JSONEncoder.default(self, obj)
 
 def dumps(*args, **kwargs):
     if 'cls' not in kwargs:
