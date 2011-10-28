@@ -3,6 +3,6 @@
 <h2>{% trans "Archive" %}</h2>
 <ul>
     {% for month in months %}
-        <li><a href="{% url journal_archive_month month=month.date.month,year=month.date.year %}">{{ month.date|date:"F Y" }} ({{ month.count }})</a></li>
+        <li><a href="{% url journal_archive_month month=month.date.month,year=month.date.year %}">{% filter capfirst %}{{ month.date|date:"F Y" }}{% endfilter %} ({{ month.count }})</a></li>
     {% endfor %}
 </ul>

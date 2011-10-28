@@ -3,7 +3,7 @@
 
 {% block col1 %}
 
-<h1>{% trans "Entries for" %} {{ month|date:"F Y" }}</h1>
+<h1>{% trans "Entries for" %} {% filter capfirst %}{{ month|date:"F Y" }}{% endfilter %}</h1>
 
 <div class="entries">
 {% for object in items.object_list %}
