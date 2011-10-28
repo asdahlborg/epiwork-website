@@ -20,15 +20,15 @@ msgstr ""
 #: apps/ew_contact_form/forms.py:12 apps/survey/forms/__init__.py:16
 #: templates/survey/people.html:8
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: apps/ew_contact_form/forms.py:13
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: apps/ew_contact_form/forms.py:14
 msgid "Message"
-msgstr ""
+msgstr "Messaggio"
 
 #: apps/journal/admin.py:43
 #, python-format
@@ -145,12 +145,12 @@ msgstr ""
 #: apps/journal/templates/journal/latest.html:2
 #: templates/journal/latest.html:3
 msgid "Latest news"
-msgstr ""
+msgstr "Ultime notizie"
 
 #: apps/journal/templates/journal/latest.html:7
 #: templates/journal/latest.html:17
 msgid "No news yet"
-msgstr ""
+msgstr "Nessuna notizia"
 
 #: apps/partnersites/cms_plugins.py:10
 msgid "External link"
@@ -196,15 +196,15 @@ msgstr ""
 
 #: apps/pollster/fields.py:17
 msgid "Enter a valid year and month."
-msgstr ""
+msgstr "Inserisci un anno e un mese validi."
 
 #: apps/pollster/fields.py:46
 msgid "Enter a valid postal code."
-msgstr ""
+msgstr "Inserisci un codice postale valido."
 
 #: apps/pollster/forms.py:16
 msgid "Enter a valid value consisting of letters, numbers or underscores"
-msgstr ""
+msgstr "Inserisci un valore valido composto da lettere, numeri o trattini bassi"
 
 #: apps/pollster/db/models/fields.py:9
 msgid "Year and month (in YYYY-MM format)"
@@ -305,17 +305,17 @@ msgstr ""
 #: apps/reminder/templates/reminder/unsubscribe.html:10
 #: apps/reminder/templates/reminder/unsubscribe_successful.html:6
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Annulla l'iscrizione"
 
 #: apps/reminder/templates/reminder/unsubscribe.html:7
 msgid ""
 "You may unsubscribe from the Influenzanet reminder/newsletter by pressing "
 "the button below."
-msgstr ""
+msgstr "Puoi annullare la tua iscrizione alla newsletter di Influweb con il seguente tasto."
 
 #: apps/reminder/templates/reminder/unsubscribe_successful.html:7
 msgid "You have been successfully unsubscribed from the mailing list"
-msgstr ""
+msgstr "La tua iscrizione alla nostra newsletter è stata annullata con successo"
 
 #: apps/survey/views.py:50
 msgid "No symptoms"
@@ -357,28 +357,28 @@ msgstr ""
 
 #: templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Pagina non trovata"
 
 #: templates/404.html:8
 msgid ""
 "The page you requested could not be found. We apologize for the "
 "inconvenience. Go to "
-msgstr ""
+msgstr "Spiacenti, ma la pagina richiesta non è stata trovata. Vai a "
 
 #: templates/404.html:8 templates/500.html:8
 #: templates/registration/logout.html:8
 msgid "home"
-msgstr ""
+msgstr "pagina iniziale"
 
 #: templates/500.html:4
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #: templates/500.html:8
 msgid ""
 "An unexpected system error has occured. We apologize for the inconvenience. "
 "Go to "
-msgstr ""
+msgstr "Si è verificato un errore. Gli amministratori del sito ne sono stati informati via e-mail e verrà corretto a breve. Grazie per la tua pazienza. Vai a "
 
 #: templates/admin/pollster/survey/change_form.html:6
 msgid "History"
@@ -390,273 +390,273 @@ msgstr ""
 
 #: templates/base/sitebase.html:68
 msgid "My account"
-msgstr ""
+msgstr "Profilo"
 
 #: templates/base/sitebase.html:69
 msgid "Log out"
-msgstr ""
+msgstr "Annulla l'accesso"
 
 #: templates/base/sitebase.html:71
 msgid "Logged in as"
-msgstr ""
+msgstr "Collegato come"
 
 #: templates/base/sitebase.html:74 templates/registration/boxbase.html:11
 #: templates/registration/password_reset_complete.html:12
 msgid "Log in"
-msgstr ""
+msgstr "Accedi"
 
 #: templates/base/sitebase.html:75
 #: templates/registration/registration_form.html:4
 #: templates/registration/registration_form.html:9
 msgid "Register"
-msgstr ""
+msgstr "Iscriviti"
 
 #: templates/base/sitebase.html:77
 msgid "Forgot password?"
-msgstr ""
+msgstr "Password dimenticata?"
 
 #: templates/base/sitebase.html:88 templates/search/search.html:9
 msgid "Search"
-msgstr ""
+msgstr "Cerca"
 
 #: templates/base/sitebase.html:122
 msgid "Contact us"
-msgstr ""
+msgstr "Contattaci"
 
 #: templates/base/sitebase.html:122
 msgid "Contact"
-msgstr ""
+msgstr "Contattaci"
 
 #: templates/contact_form/contact_form.html:10
 msgid "Send"
-msgstr ""
+msgstr "Invia"
 
 #: templates/journal/archive.html:3
 msgid "Latest Entries"
-msgstr ""
+msgstr "Ultime notizie"
 
 #: templates/journal/archive.html:8 templates/journal/archive_day.html:8
 #: templates/journal/archive_month.html:8
 #: templates/journal/archive_year.html:8 templates/journal/latest.html:14
 msgid "Read more..."
-msgstr ""
+msgstr "Continua a leggere"
 
 #: templates/journal/archive.html:14 templates/journal/archive_day.html:14
 #: templates/journal/archive_month.html:14
 #: templates/journal/archive_year.html:14 templates/search/search.html:25
 msgid "Previous"
-msgstr ""
+msgstr "Precedente"
 
 #: templates/journal/archive.html:17 templates/journal/archive_day.html:17
 #: templates/journal/archive_month.html:17
 #: templates/journal/archive_year.html:17 templates/search/search.html:27
 msgid "Next"
-msgstr ""
+msgstr "Successivo"
 
 #: templates/journal/archive_day.html:3 templates/journal/archive_month.html:3
 #: templates/journal/archive_year.html:3
 msgid "Entries for"
-msgstr ""
+msgstr "Notizie di"
 
 #: templates/journal/categories.html:3
 msgid "Archive"
-msgstr ""
+msgstr "Archivio"
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:6
 #: templates/registration/activation_complete.html:4
 #: templates/registration/activation_complete.html:6
 msgid "Account Activation"
-msgstr ""
+msgstr "Attivazione account"
 
 #: templates/registration/activate.html:7
 msgid "User activation failed."
-msgstr ""
+msgstr "Il tuo account non è stato attivato."
 
 #: templates/registration/activate.html:9
 #: templates/registration/activation_complete.html:9
 #: templates/registration/registration_complete.html:9
 msgid "Back to the home page"
-msgstr ""
+msgstr "Torna alla pagina iniziale"
 
 #: templates/registration/activation_complete.html:7
 msgid "Activation is complete."
-msgstr ""
+msgstr "Il tuo account è stato attivato con successo."
 
 #: templates/registration/activation_complete.html:9
-msgid "or"
+msgid "oppure"
 msgstr ""
 
 #: templates/registration/activation_complete.html:9
 msgid "proceed to the login page"
-msgstr ""
+msgstr "vai alla pagina di accesso"
 
 #: templates/registration/boxbase.html:4 templates/registration/boxbase.html:9
 msgid "Login"
-msgstr ""
+msgstr "Accedi"
 
 #: templates/registration/boxbase.html:10
 msgid "Enter your username and password to log in."
-msgstr ""
+msgstr "Inserisci nome utente e password."
 
 #: templates/registration/boxbase.html:10
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Password dimenticata?"
 
 #: templates/registration/index.html:8
 msgid "Change Password"
-msgstr ""
+msgstr "Cambia la password"
 
 #: templates/registration/index.html:9
 msgid "Update Profile"
-msgstr ""
+msgstr "Aggiorna il profilo"
 
 #: templates/registration/logout.html:4
 msgid "Logged out"
-msgstr ""
+msgstr "Accesso annullato"
 
 #: templates/registration/logout.html:8
 msgid "You have been logged out. Go to "
-msgstr ""
+msgstr "Il tuo accesso è stato annullato. Vai a "
 
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:8
 msgid "Password change successful"
-msgstr ""
+msgstr "Cambio password avvenuto correttamente"
 
 #: templates/registration/password_change_done.html:10
 msgid "Your password was changed."
-msgstr ""
+msgstr "La password è stata cambiata."
 
 #: templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:8
 msgid "Password change"
-msgstr ""
+msgstr "Cambio password"
 
 #: templates/registration/password_change_form.html:10
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
-msgstr ""
+msgstr "Inserisci la password attuale, per ragioni di sicurezza, e poi la nuova password due volte, per verificare di averla scritta correttamente."
 
 #: templates/registration/password_change_form.html:15
 msgid "Old password:"
-msgstr ""
+msgstr "Password attuale:"
 
 #: templates/registration/password_change_form.html:17
 #: templates/registration/password_reset_confirm.html:16
 msgid "New password:"
-msgstr ""
+msgstr "Nuova password:"
 
 #: templates/registration/password_change_form.html:19
 #: templates/registration/password_reset_confirm.html:18
 msgid "Confirm password:"
-msgstr ""
+msgstr "Conferma la password:"
 
 #: templates/registration/password_change_form.html:21
 #: templates/registration/password_reset_confirm.html:19
 msgid "Change my password"
-msgstr ""
+msgstr "Modifica la mia password"
 
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_complete.html:8
 msgid "Password reset complete"
-msgstr ""
+msgstr "Password reimpostata"
 
 #: templates/registration/password_reset_complete.html:10
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "La tua password è stata impostata. Ora puoi effettuare l'accesso."
 
 #: templates/registration/password_reset_confirm.html:4
 #: templates/registration/password_reset_form.html:4
 #: templates/registration/password_reset_form.html:8
 msgid "Password reset"
-msgstr ""
+msgstr "Reimposta la password"
 
 #: templates/registration/password_reset_confirm.html:10
 msgid "Enter new password"
-msgstr ""
+msgstr "Inserisci la nuova password"
 
 #: templates/registration/password_reset_confirm.html:12
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr ""
+msgstr "Inserisci la nuova password due volte, per verificare di averla scritta correttamente."
 
 #: templates/registration/password_reset_confirm.html:24
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "Password non reimpostata"
 
 #: templates/registration/password_reset_confirm.html:26
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
-msgstr ""
+msgstr "Il link per la reimpostazione della password non era valido, forse perché era già stato usato. Richiedi una nuova reimpostazione della password."
 
 #: templates/registration/password_reset_done.html:4
 #: templates/registration/password_reset_done.html:8
 msgid "Password reset successful"
-msgstr ""
+msgstr "Password reimpostata correttamente"
 
 #: templates/registration/password_reset_done.html:10
 msgid ""
 "We've e-mailed you instructions for setting your password to the e-mail "
 "address you submitted. You should be receiving it shortly."
-msgstr ""
+msgstr "Abbiamo inviato le istruzioni per impostare la tua password all'indirizzo e-mail che hai fornito. Arriveranno a breve."
 
 #: templates/registration/password_reset_email.html:3
 msgid "You're receiving this e-mail because you requested a password reset"
-msgstr ""
+msgstr "Hai ricevuto questa e-mail perché avevi chiesto un reset della password"
 
 #: templates/registration/password_reset_email.html:4
 #, python-format
 msgid "for your user account at %(site_name)s"
-msgstr ""
+msgstr "per l'account utente su %(site_name)s."
 
 #: templates/registration/password_reset_email.html:6
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "Vai alla pagina seguente e scegli una nuova password:"
 
 #: templates/registration/password_reset_email.html:10
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "Il tuo nome utente, in caso tu l'abbia dimenticato:"
 
 #: templates/registration/password_reset_email.html:12
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "Grazie per aver usato il nostro sito!"
 
 #: templates/registration/password_reset_email.html:14
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "Il team di %(site_name)s"
 
 #: templates/registration/password_reset_form.html:10
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll e-mail "
 "instructions for setting a new one."
-msgstr ""
+msgstr "Password dimenticata? Inserisci il tuo indirizzo email qui sotto, e ti invieremo per email le istruzioni per impostarne una nuova."
 
 #: templates/registration/password_reset_form.html:14
 msgid "E-mail address:"
-msgstr ""
+msgstr "Indirizzo e-mail:"
 
 #: templates/registration/password_reset_form.html:15
 msgid "Reset my password"
-msgstr ""
+msgstr "Reimposta la mia password"
 
 #: templates/registration/registration_complete.html:4
 msgid "Registration complete"
-msgstr ""
+msgstr "Iscrizione completata"
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration complete."
-msgstr ""
+msgstr "Iscrizione completata."
 
 #: templates/registration/registration_complete.html:7
 msgid ""
 "An e-mail containing information about how to activate your account has been "
 "sent to your e-mail address."
-msgstr ""
+msgstr "Abbiamo inviato le istruzioni per attivare il tuo account all'indirizzo e-mail che hai fornito. Arriveranno a breve."
 
 #: templates/registration/registration_form.html:8
 msgid "Registration Form"
