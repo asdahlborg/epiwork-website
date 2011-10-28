@@ -78,8 +78,8 @@ class PostalCodeField(CharField):
         if not mode or mode == 'NONE':
             return True
         if mode == 'EXACT':
-            params = { 'country': settings.COUNTRY, 'zip': value }
-            query = "SELECT count(*) FROM pollster_zip_codes WHERE country = %(country)s AND zip_code_key = %(zip)s"
+            params = { 'country': settings.COUNTRY.lower(), 'zip': str(value).lower() }
+            query = "SELECT count(*) FROM pollster_zip_codes WHERE lower(country) = %(country)s AND lower(zip_code_key) = %(zip)s"
             query = convert_query_paramstyle(connection, query, params)
             cursor = connection.cursor()
             cursor.execute(query, params)
