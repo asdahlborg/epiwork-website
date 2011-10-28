@@ -24,7 +24,7 @@
 <div id="wok-main-panel-content">
 <div id="survey-translation-edit">
 
-<form class="survey" id="survey-{{ survey.id }}" method="POST">
+<form class="survey" id="survey-{{ survey.id }}-translation-{{ survey.translation.id }}" method="POST">
     {% csrf_token %}
     <div>
     <h1>{{ survey.title }}<br/>{{ survey.translation.as_form.title }} {{ survey.translation.as_form.status }}</h1>
@@ -33,7 +33,7 @@
     {% for question in survey.questions %}
     {% if not question.is_builtin %}
     <div class="question-wrapper clearfix">
-        <div id="question-{{ question.id }}" class="question">
+        <div id="question-{{ question.id }}-translation-{{ question.translation.id }}" class="question">
             <h5 class="item-name">Question Title</h5>
             <p title="Question Title">
                 <span class="number"></span>
@@ -55,7 +55,7 @@
             {% if question.is_single_choice or question.is_multiple_choice %}
             <ul>
                 {% for option in question.options %}
-                <li id="option-{{ option.id }}">
+                <li id="option-{{ option.id }}-translation-{{ option.translation.id }}">
                     <h6 class="item-name">Option Text</h6>
                     <label title="Option Text">
                     {{ option.text }}
@@ -78,7 +78,7 @@
             <div>Columns</div>
             <ul class="columns">
                 {% for column in question.columns %}
-                <li id="column-{{ column.id }}">
+                <li id="column-{{ column.id }}-translation-{{ column.translation.id }}">
                     <h6 class="item-name">Column Title</h6>
                     <span title="Column Title" class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span>
                 </li>
@@ -87,7 +87,7 @@
             <div>Rows</div>
             <ul class="rows">
                 {% for row in question.rows %}
-                <li id="row-{{ row.id }}">
+                <li id="row-{{ row.id }}-translation-{{ row.translation.id }}">
                     <h6 class="item-name">Row Title</h6>
                     <span title="Row Title" class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span>
                 </li>
@@ -96,7 +96,7 @@
             <div>Options</div>
             <ul>
                 {% for option in question.options %}
-                <li id="option-{{ option.id }}">
+                <li id="option-{{ option.id }}-translation-{{ option.translation.id }}">
                     <h6 class="item-name">Option Text</h6>
                     <label title="Option Text">
                     {{ option.text }}
@@ -118,7 +118,7 @@
             <div>Columns</div>
             <ul class="columns sortable">
                 {% for column in question.columns %}
-                <li id="column-{{ column.id }}">
+                <li id="column-{{ column.id }}-translation-{{ column.translation.id }}">
                     <h6 class="item-name">Column Title</h6>
                     <span title="Column Title" class="column-title">{{ column.title }}<br/>{{ column.translation.as_form.title }}</span>
                 </li>
@@ -127,26 +127,13 @@
             <div>Rows</div>
             <ul class="rows sortable">
                 {% for row in question.rows %}
-                <li id="row-{{ row.id }}">
+                <li id="row-{{ row.id }}-translation-{{ row.translation.id }}">
                     <h6 class="item-name">Row Title</h6>
                     <span title="Row Title" class="row-title">{{ row.title }}<br/>{{ row.translation.as_form.title }}</span>
                 </li>
                 {% endfor %}
             </ul>
             {% endif %}
-        </div>
-        <div class="rules">
-            {% for rule in question.subject_of_rules.all %}
-            <div id="rule-{{ rule.id }}"
-                 data-type="{{ rule.rule_type.id }}"
-                 {% if rule.subject_option.id %}
-                 data-subject-option="option-{{ rule.subject_option.id }}"
-                 {% endif %}
-                 data-object-question="question-{{ rule.object_question.id }}"
-                 data-object-options="{% for option in rule.object_options.all %} option-{{ option.id }} {% endfor %}"
-                 class="rule">
-            </div>
-            {% endfor %}
         </div>
     </div>
     {% endif %}

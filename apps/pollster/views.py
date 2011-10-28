@@ -102,6 +102,9 @@ def survey_test(request, id, language=None):
     if language:
         translation = get_object_or_404(models.TranslationSurvey, survey=survey, language=language)
         survey.set_translation_survey(translation)
+    locale_code = locale.locale_alias.get(language)
+    if locale_code:
+        locale_code = locale_code.split('.')[0].replace('_', '-')
     survey_user = _get_active_survey_user(request)
     user = _get_active_survey_user(request)
     form = None
@@ -126,6 +129,8 @@ def survey_test(request, id, language=None):
     last_participation_data_json = encoder.encode(last_participation_data)
 
     return request_render_to_response(request, 'pollster/survey_test.html', {
+        "language": language,
+        "locale_code": locale_code,
         "survey": survey,
         "default_postal_code_format": fields.PostalCodeField.get_default_postal_code_format(),
         "last_participation_data_json": last_participation_data_json,
@@ -163,6 +168,7 @@ def survey_run(request, shortname, next=None):
     last_participation_data_json = encoder.encode(last_participation_data)
 
     return request_render_to_response(request, 'pollster/survey_run.html', {
+        "language": language,
         "locale_code": locale_code,
         "survey": survey,
         "default_postal_code_format": fields.PostalCodeField.get_default_postal_code_format(),
