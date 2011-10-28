@@ -5,6 +5,6 @@ from django.shortcuts import render_to_response
 
 def counter(request):
 
-    count = User.objects.count()
+    count = str(User.objects.count())
 
     return HttpResponse(count)
