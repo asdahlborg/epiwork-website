@@ -30,7 +30,10 @@ def overview(request):
 
 @staff_member_required
 def manage(request, year, month, day, hour, minute):
-    reminder_dict = get_prev_reminder(datetime(*map(int, [year, month, day, hour, minute])))
+    reminder_dict = get_prev_reminder(datetime(*map(int, [year, month, day, hour, minute, 59])))
+    if not reminder_dict:
+        return HttpResponse("There are no newsletters or reminders configured yet. Make sure to do so")
+
     reminder = _reminder(reminder_dict, request.user)
 
     if request.method == "POST":
@@ -41,7 +44,9 @@ def manage(request, year, month, day, hour, minute):
 
 @staff_member_required
 def preview(request, year, month, day, hour, minute):
-    reminder_dict = get_prev_reminder(datetime(*map(int, [year, month, day, hour, minute])))
+    reminder_dict = get_prev_reminder(datetime(*map(int, [year, month, day, hour, minute, 59])))
+    if not reminder_dict:
+        return HttpResponse("There are no newsletters or reminders configured yet. Make sure to do so")
 
     reminder = _reminder(reminder_dict, request.user)
     text_base, html_content = create_message(request.user, reminder.message)
@@ -50,9 +55,6 @@ def preview(request, year, month, day, hour, minute):
 def _reminder(reminder_dict, user):
     info, _ = UserReminderInfo.objects.get_or_create(user=user, defaults={'active': True})
     language = info.get_language()
-
-    if not reminder_dict:
-        return HttpResponse("There are no newsletters or reminders configured yet. Make sure to do so")
 
     if not language in reminder_dict:
         language = settings.LANGUAGE_CODE
