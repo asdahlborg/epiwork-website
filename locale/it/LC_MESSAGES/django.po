@@ -24,7 +24,7 @@ msgstr "Nome"
 
 #: apps/ew_contact_form/forms.py:13
 msgid "Email"
-msgstr "E-mail"
+msgstr "Indirizzo email"
 
 #: apps/ew_contact_form/forms.py:14
 msgid "Message"
@@ -208,11 +208,11 @@ msgstr "Inserisci un valore valido composto da lettere, numeri o trattini bassi"
 
 #: apps/pollster/db/models/fields.py:9
 msgid "Year and month (in YYYY-MM format)"
-msgstr ""
+msgstr "Anno e mese (nel formato AAAA-MM)"
 
 #: apps/pollster/db/models/fields.py:24
 msgid "Postal code"
-msgstr ""
+msgstr "Codice postale"
 
 #: apps/reminder/forms.py:16
 msgid ""
@@ -280,16 +280,16 @@ msgstr ""
 
 #: apps/reminder/models.py:41 apps/reminder/models.py:55
 msgid "Sender email"
-msgstr ""
+msgstr "Indirizzo email del mittente"
 
 #: apps/reminder/models.py:42 apps/reminder/models.py:56
 #, fuzzy
 msgid "Sender name"
-msgstr "Modifica nome"
+msgstr "Nome del mittente"
 
 #: apps/reminder/models.py:53
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: apps/reminder/models.py:106
 #, python-format
@@ -344,16 +344,16 @@ msgstr "Nessuno status"
 
 #: apps/survey/views.py:104
 msgid "You have to fill your profile data first."
-msgstr ""
+msgstr "Devi compilare prima il questionario di adesione."
 
 #: apps/survey/views.py:179
 msgid ""
 "One or more questions have empty or invalid answer. Please fix it first."
-msgstr ""
+msgstr "Non hai risposto o non hai risposto correttamente ad una o più domande. Per favore verifica la presenza di eventuali errori."
 
 #: apps/survey/views.py:263
 msgid "A new person has been added."
-msgstr ""
+msgstr "È stata aggiunta una nuova persona."
 
 #: templates/404.html:4
 msgid "Page not found"
@@ -378,7 +378,7 @@ msgstr "Errore"
 msgid ""
 "An unexpected system error has occured. We apologize for the inconvenience. "
 "Go to "
-msgstr "Si è verificato un errore. Gli amministratori del sito ne sono stati informati via e-mail e verrà corretto a breve. Grazie per la tua pazienza. Vai a "
+msgstr "Si è verificato un errore. Gli amministratori del sito ne sono stati informati via email e verrà corretto a breve. Grazie per la tua pazienza. Vai a "
 
 #: templates/admin/pollster/survey/change_form.html:6
 msgid "History"
@@ -394,7 +394,7 @@ msgstr "Profilo"
 
 #: templates/base/sitebase.html:69
 msgid "Log out"
-msgstr "Annulla l'accesso"
+msgstr "Esci"
 
 #: templates/base/sitebase.html:71
 msgid "Logged in as"
@@ -409,7 +409,7 @@ msgstr "Accedi"
 #: templates/registration/registration_form.html:4
 #: templates/registration/registration_form.html:9
 msgid "Register"
-msgstr "Iscriviti"
+msgstr "Registrati"
 
 #: templates/base/sitebase.html:77
 msgid "Forgot password?"
@@ -484,8 +484,8 @@ msgid "Activation is complete."
 msgstr "Il tuo account è stato attivato con successo."
 
 #: templates/registration/activation_complete.html:9
-msgid "oppure"
-msgstr ""
+msgid "or"
+msgstr "oppure"
 
 #: templates/registration/activation_complete.html:9
 msgid "proceed to the login page"
@@ -513,11 +513,11 @@ msgstr "Aggiorna il profilo"
 
 #: templates/registration/logout.html:4
 msgid "Logged out"
-msgstr "Accesso annullato"
+msgstr "Disconnesso"
 
 #: templates/registration/logout.html:8
 msgid "You have been logged out. Go to "
-msgstr "Il tuo accesso è stato annullato. Vai a "
+msgstr "Sei stato disconnesso. Vai a "
 
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:8
@@ -602,11 +602,11 @@ msgstr "Password reimpostata correttamente"
 msgid ""
 "We've e-mailed you instructions for setting your password to the e-mail "
 "address you submitted. You should be receiving it shortly."
-msgstr "Abbiamo inviato le istruzioni per impostare la tua password all'indirizzo e-mail che hai fornito. Arriveranno a breve."
+msgstr "Abbiamo inviato le istruzioni per impostare la tua password all'indirizzo email che hai fornito. Arriveranno a breve."
 
 #: templates/registration/password_reset_email.html:3
 msgid "You're receiving this e-mail because you requested a password reset"
-msgstr "Hai ricevuto questa e-mail perché avevi chiesto un reset della password"
+msgstr "Hai ricevuto questa email perché avevi chiesto un reset della password"
 
 #: templates/registration/password_reset_email.html:4
 #, python-format
@@ -638,7 +638,7 @@ msgstr "Password dimenticata? Inserisci il tuo indirizzo email qui sotto, e ti i
 
 #: templates/registration/password_reset_form.html:14
 msgid "E-mail address:"
-msgstr "Indirizzo e-mail:"
+msgstr "Indirizzo email:"
 
 #: templates/registration/password_reset_form.html:15
 msgid "Reset my password"
@@ -646,33 +646,33 @@ msgstr "Reimposta la mia password"
 
 #: templates/registration/registration_complete.html:4
 msgid "Registration complete"
-msgstr "Iscrizione completata"
+msgstr "Registrazione completata"
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration complete."
-msgstr "Iscrizione completata."
+msgstr "Registrazione completata."
 
 #: templates/registration/registration_complete.html:7
 msgid ""
 "An e-mail containing information about how to activate your account has been "
 "sent to your e-mail address."
-msgstr "Abbiamo inviato le istruzioni per attivare il tuo account all'indirizzo e-mail che hai fornito. Arriveranno a breve."
+msgstr "Abbiamo inviato le istruzioni per attivare il tuo account all'indirizzo email che hai fornito. Arriveranno a breve."
 
 #: templates/registration/registration_form.html:8
 msgid "Registration Form"
-msgstr ""
+msgstr "Modulo di registrazione"
 
 #: templates/search/search.html:5
 msgid "Search result"
-msgstr ""
+msgstr "Risultati della ricerca"
 
 #: templates/search/search.html:12
 msgid "Results"
-msgstr ""
+msgstr "Risultati"
 
 #: templates/search/search.html:20
 msgid "No results found"
-msgstr ""
+msgstr "Nessun risultato trovato"
 
 #: templates/survey/form.html:21
 msgid "Submit"
@@ -684,19 +684,19 @@ msgstr ""
 
 #: templates/survey/people.html:5
 msgid "People"
-msgstr ""
+msgstr "Persone"
 
 #: templates/survey/people.html:13
 msgid "Edit"
-msgstr ""
+msgstr "Modifica"
 
 #: templates/survey/people.html:14
 msgid "Profile"
-msgstr ""
+msgstr "Profilo"
 
 #: templates/survey/people.html:15
 msgid "Survey"
-msgstr ""
+msgstr "Questionario"
 
 #: templates/survey/people.html:16 templates/survey/thanks.html:19
 msgid "Remove"
@@ -704,23 +704,23 @@ msgstr "Rimuovi"
 
 #: templates/survey/people.html:21
 msgid "Add new person"
-msgstr ""
+msgstr "Aggiungi una nuova persona"
 
 #: templates/survey/people_add.html:5 templates/survey/people_add.html:10
 msgid "Add Person"
-msgstr ""
+msgstr "Aggiungi una persona"
 
 #: templates/survey/people_edit.html:5
 msgid "Edit Person"
-msgstr ""
+msgstr "Modifica la persona"
 
 #: templates/survey/people_edit.html:10
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #: templates/survey/people_remove.html:5
 msgid "Confirm removal"
-msgstr "Conferma rimozione"
+msgstr "Conferma la rimozione"
 
 #: templates/survey/people_remove.html:8
 msgid "Confirm the removal of the person:"
@@ -728,19 +728,19 @@ msgstr "Conferma la rimozione della persona:"
 
 #: templates/survey/people_remove.html:16
 msgid "Yes"
-msgstr ""
+msgstr "Sì"
 
 #: templates/survey/people_remove.html:22
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: templates/survey/profile_index.html:16
 msgid "Edit Profile"
-msgstr ""
+msgstr "Modifica il profilo"
 
 #: templates/survey/select_user.html:5
 msgid "Select User"
-msgstr ""
+msgstr "Seleziona una persona"
 
 #: templates/survey/thanks.html:6
 msgid "Thanks for taking the time to fill out this survey."
@@ -769,15 +769,15 @@ msgstr "Gestisci"
 
 #: templates/survey/thanks.html:16
 msgid "Change name"
-msgstr "Modifica nome"
+msgstr "Modifica il nome"
 
 #: templates/survey/thanks.html:17
 msgid "Change profile"
-msgstr "Modifica profilo"
+msgstr "Modifica il profilo"
 
 #: templates/survey/thanks.html:18
 msgid "Enter symptoms"
-msgstr "Inserisci sintomi"
+msgstr "Inserisci i sintomi"
 
 #: templates/survey/thanks_profile.html:5
 msgid "Thanks for changing your profile,"
@@ -797,8 +797,8 @@ msgstr "il questionario dei sintomi"
 #~ "Oppure seleziona il link a destra per tornare all'elenco delle persone."
 
 msgid "Activate your account:\n\nClick the following URL or copy and paste it to the browser's address bar.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nThis activation URL will expire in %(expiration_days)s days."
-msgstr ""
+msgstr "Attiva il tuo account:\n\nvisita questo indirizzo o copialo nella barra degli indirizzi del tuo browser.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nQuesto indirizzo resterà valido per %(expiration_days)s giorni."
 
 msgid "Activate your account! %(site)s"
-msgstr ""
+msgstr "Attiva il tuo account! %(site)s"
 
