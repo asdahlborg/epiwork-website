@@ -37,7 +37,9 @@ class Command(BaseCommand):
         intake.Q1 = data["IntakeQ1"]
         intake.Q2 = yearmonth(data["IntakeQ2"])
         intake.Q3 = data["IntakeQ3"]
-        intake.Q4b = data["IntakeQ4"]
+        if data["IntakeQ4"]:
+            intake.Q4b = 0
+            intake.Q4b_0_open = data["IntakeQ4"]
         if data.get("IntakeQ5"):
             intake.Q5_1 = 1 in data["IntakeQ5"]
             intake.Q5_2 = 2 in data["IntakeQ5"]

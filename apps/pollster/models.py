@@ -1097,7 +1097,7 @@ class Chart(models.Model):
         elif self.sqlfilter == 'PERSON':
             query += """ WHERE "user" = %(user_id)s AND global_id = %(global_id)s"""
         params = { 'user_id': user_id, 'global_id': global_id }
-        query = _convert_query_paramstyle(connection, query, params)
+        query = convert_query_paramstyle(connection, query, params)
         try:
             cursor = connection.cursor()
             cursor.execute(query, params)

@@ -774,3 +774,10 @@ msgstr "symptomenkäten"
 
 msgid "This account is inactive."
 msgstr "Detta konto har inte aktiverats. Klicka på länken i det e-postmeddelande du fått angående aktivering av ditt konto. Om du inte fått någon e-post, kolla dina spam filter. Skriv annars till oss på influensakoll@smi.se."
+
+msgid "Activate your account:\n\nClick the following URL or copy and paste it to the browser's address bar.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nThis activation URL will expire in %(expiration_days)s days."
+msgstr "Aktivera ditt konto:\n\n\n\nTack för att du vill gå med i Influensakoll!\n\nFör att aktivera ditt konto enkelklicka på länken nedan eller kopiera och klistra in den i din webbläsare.\n\n\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\n\n\nDen här länken för aktivering är giltig i %(expiration_days)s dagar.\n\n\n\nNär du har aktiverat ditt konto kan du logga in.\n\nFörsta gången du loggar in på ditt användarkonto behöver du skapa din profil och fylla i ett frågeformulär om din bakgrund. Först när du fyllt i bakgrundsformuläret kan du rapportera sjukdom.\n\n\n\nBästa hälsningar\n\n\n\nInfluensakoll"
+
+msgid "Activate your account! %(site)s"
+msgstr "Aktivera ditt konto! %(site)s"
+

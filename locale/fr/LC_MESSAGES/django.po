@@ -773,3 +773,8 @@ msgstr "Si vous ne l'avez pas encore fait, merci de remplir"
 msgid "the symptoms questionaire"
 msgstr "le questionnaire hebdomadaire"
 
+msgid "Activate your account:\n\nClick the following URL or copy and paste it to the browser's address bar.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nThis activation URL will expire in %(expiration_days)s days."
+msgstr "Activez votre compte:\n\nCliquez sur le lien URL ou copiez-collez le dans la barre d'adresse de votre navigateur.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nCe lien URL d'activation expirera dans %(expiration_days)s jours."
+
+msgid "Activate your account! %(site)s"
+msgstr "Activez votre compte %(site)s"

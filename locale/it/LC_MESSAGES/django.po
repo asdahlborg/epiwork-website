@@ -795,3 +795,10 @@ msgstr "il questionario dei sintomi"
 #~ msgid "Or select the link on the right to return to the people."
 #~ msgstr ""
 #~ "Oppure seleziona il link a destra per tornare all'elenco delle persone."
+
+msgid "Activate your account:\n\nClick the following URL or copy and paste it to the browser's address bar.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nThis activation URL will expire in %(expiration_days)s days."
+msgstr ""
+
+msgid "Activate your account! %(site)s"
+msgstr ""
+
