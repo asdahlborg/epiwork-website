@@ -28,7 +28,7 @@
         var is_filled = false;
         jQuery.each(subject_names, function(i, subject_name) {
             var subject_data = last_participation_data[subject_name];
-            if (subject_data)
+            if (subject_data != null && subject_data != undefined)
                 is_filled = true;
         });
         return is_filled;
