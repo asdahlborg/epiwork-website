@@ -33,8 +33,9 @@ def manage(request, year, month, day, hour, minute):
     reminder_dict = get_prev_reminder(datetime(*map(int, [year, month, day, hour, minute, 59])))
     if not reminder_dict:
         return HttpResponse("There are no newsletters or reminders configured yet. Make sure to do so")
-
     reminder = _reminder(reminder_dict, request.user)
+    if not reminder:
+        return HttpResponse("There is no reminder in your current language configured. Make sure to add a translation")
 
     if request.method == "POST":
         sent = True
@@ -47,8 +48,10 @@ def preview(request, year, month, day, hour, minute):
     reminder_dict = get_prev_reminder(datetime(*map(int, [year, month, day, hour, minute, 59])))
     if not reminder_dict:
         return HttpResponse("There are no newsletters or reminders configured yet. Make sure to do so")
-
     reminder = _reminder(reminder_dict, request.user)
+    if not reminder:
+        return HttpResponse("There is no reminder in your current language configured. Make sure to add a translation")
+
     text_base, html_content = create_message(request.user, reminder.message)
     return HttpResponse(html_content)
 
@@ -58,6 +61,8 @@ def _reminder(reminder_dict, user):
 
     if not language in reminder_dict:
         language = settings.LANGUAGE_CODE
+    if not language in reminder_dict:
+        return None
     
     reminder = reminder_dict[language]
 
