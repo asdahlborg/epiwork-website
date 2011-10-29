@@ -13,6 +13,7 @@ SOURCES = {
     'be': 'http://www.grotegriepmeting.be/count/counter/',
     'de': 'http://www.aktivgegengrippe.de/count/counter/',
     'at': 'http://www.aktivgegengrippe.at/count/counter/',
+    'ch': 'http://www.aktivgegengrippe.ch/count/counter/',
     'se': 'http://www.influensakoll.se/count/counter/',
     'uk': 'http://www.flusurvey.org.uk/count/counter/',
     'it': 'http://www.influweb.it/count/counter/',
