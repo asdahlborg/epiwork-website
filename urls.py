@@ -41,6 +41,12 @@ urlpatterns = patterns('',
     url(r'^contact/sent/$', 'django.views.generic.simple.direct_to_template', {'template': 'contact_form/contact_form_sent.html'}, name='contact_form_sent'),
 
     (r'^colors.css$', 'apps.partnersites.views.colors_css'),
+
+    url(r'^register/$',
+        'registration.views.register',
+        { 'backend': 'registration.backends.default.DefaultBackend',
+          'template_name': 'registration/registration_explanation.html' },
+        name='registration_register_explanation'),
 )
 
 if settings.DEBUG:
