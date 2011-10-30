@@ -791,3 +791,6 @@ msgstr ""
 
 msgid "Activate your account! %(site)s"
 msgstr ""
+
+msgid "Please check the answers for the highlighted questions."
+msgstr ""

@@ -802,3 +802,6 @@ msgstr "Attiva il tuo account:\n\nvisita questo indirizzo o copialo nella barra 
 msgid "Activate your account! %(site)s"
 msgstr "Attiva il tuo account! %(site)s"
 
+
+msgid "Please check the answers for the highlighted questions."
+msgstr ""
