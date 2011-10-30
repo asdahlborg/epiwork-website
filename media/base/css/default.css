@@ -1056,6 +1056,41 @@ table.imagetable td {
 }
 
 
+/* Journal */
+
+ul.archive {
+ margin: 10px 0 0 0;
+ font-size: 0.8em;
+}
+
+div.entries {
+ margin: 14px 0 0 0;
+ font-size: 0.8em; 
+}
+
+#col1 div.entries h2 {
+ margin: 0;
+}
+
+#col1 div.entries p.date {
+ margin: 0;
+ padding: 0;
+ font-size: 0.8em;
+}
+
+.entries hr {
+ margin: 12px 0 8px 0; 
+}
+
+div.pagination {
+ margin: 14px 0 0 0;
+}
+
+.pagination a {
+ font-size: 0.7em;
+}
+
+
 /* Jquery UI */
 
 #accordion,
