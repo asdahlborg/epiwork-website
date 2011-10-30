@@ -1,12 +1,16 @@
-.survey-error-message { border: 1px solid #C00; -webkit-border-radius: 5px; padding: 5px; background: #FBB; margin-bottom: 10px; }
-.question { border: 1px solid #CCC; -webkit-border-radius: 5px; padding: 5px; background: #fff; margin-bottom: 10px; }
+#col1 .question p { margin: 0 0 6px 0; padding: 0; }
+#col1 .question ul.choices, #col1 .question ul.derived-values, #col1 .question li { font-weight: normal; padding: 2px; }
+#col1 ul.choices li img { margin: 0 0 -4px 0; }
+
+.survey-error-message { border: 1px solid #C00; -webkit-border-radius: 5px; padding: 10px 10px 16px 10px; background: #FBB; margin-bottom: 10px; font-size: 0.75em; font-weight: bold; }
+.question { border: 1px solid #CCC; -webkit-border-radius: 5px; padding: 10px 10px 16px 10px; background: #fff; margin-bottom: 10px; }
 .question ul.choices, .question ul.derived-values { list-style: none; margin-bottom: 10px;}
 .question li { margin-left: 20px; padding-bottom: 2px; }
 .question select.choices { margin-left: 20px; margin-bottom: 10px; max-width: 95%; }
-.question input[type=text] { margin: 0 0 10px 20px; padding: 0; }
+.question input[type=text] { margin: 0 0 10px 6px; padding: 0; }
 .question .choices input[type=text] { margin: 0 0 0 15px; }
 .question .choices .open-option-data { float: right; }
-.question .title { font-weight: bold; margin-right: 5px; }
+.question .title { font-weight: bold; margin: 0 0 5px 0; padding: 0; }
 .question .number { font-weight: bold; margin-right: 3px; }
 .question .info { display: none; }
 .question .matrix th, .question .matrix td { vertical-align: middle; padding: 1px 3px; }

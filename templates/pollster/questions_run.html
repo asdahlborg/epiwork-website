@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <form class="survey {% if survey.form.errors %}error{% endif %}" id="survey-{{ survey.id }}" method="POST">
     {% csrf_token %}
     {% if survey.form.errors %}
@@ -194,7 +196,7 @@
     {% endif %}
     {% endfor %}
     <div class="actions">
-        <button type="submit">Submit</button>
+		<input type="submit" id="commentsubmit" value="{% trans "Submit" %}" />
     </div>
     <script type="text/javascript" class="pollster-fill">
         function pollster_last_participation_data() {
