@@ -7,19 +7,21 @@
 
 <div class="entries">
 {% for object in items.object_list %}
-<p><strong>{{ object.title }}</strong><br/>
-<a href="{{ object.get_relative_url_archive_day }}">{% trans "Read more..." %}</a></p>
+<h2><a href="{{ object.get_relative_url_archive_day }}">{{ object.title }}</a></h2>
+<p class="date">{% filter capfirst %}{{ object.pub_date }}{% endfilter %}</p>
+<hr />
 {% endfor %}
 </div>
 
 <div class="pagination">
 {% if items.has_previous %}
-<a href="?page={{ items.previous_page_number }}">{% trans "Previous" %}</a>
+<div class="left"><a href="?page={{ items.previous_page_number }}">&#x25C0; {% trans "Previous" %}</a></div>
 {% endif %}
 {% if items.has_next %}
-<a href="?page={{ items.next_page_number }}">{% trans "Next" %}</a>
+<div class="right"><a href="?page={{ items.next_page_number }}">{% trans "Next" %} &#x25B6;</a></div>
 {% endif %}
 </div>
+
 {% endblock col1 %}
 
 {% block col2 %}

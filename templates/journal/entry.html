@@ -3,9 +3,14 @@
 {% block col1 %}
 <h1>{{ entry.title }}</h1>
 
-<p class="date">{% filter capfirst %}{{ entry.pub_date }}{% endfilter %}</p>
+<div class="content">
+	{% if entry.image %}<img src="{% url journal_image slug=entry.slug %}" {% if entry.alignment %}align="{{ entry.alignment }}"{% endif %} alt="{{ entry.title }}"/>{% endif %}
+	{{ entry_content }}
+	<p class="date">{% filter capfirst %}{{ entry.pub_date }}{% endfilter %}</p>
+</div>
 
-<div class="content">{% if entry.image %}<img src="{% url journal_image slug=entry.slug %}" {% if entry.alignment %}align="{{ entry.alignment }}"{% endif %} alt="{{ entry.title }}"/>{% endif %}{{ entry_content }}</div>{% endblock col1 %}
+{% endblock col1 %}
+
 
 {% block col2 %}
     {% include "journal/latest.html" %}

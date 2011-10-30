@@ -23,7 +23,9 @@ body, p {
  padding: 0;
 }
 
-ul, li {
+#header ul,
+#header li,
+ul.archive {
  list-style: none;
  margin: 0;
  padding: 0;
@@ -896,6 +898,24 @@ hr {
  height: 0;
 }
 
+#col1 ul {
+ margin: 0;
+ padding: 0 0 0 20px;
+}
+
+#col1 ol {
+ margin: 0;
+ padding: 0 0 0 24px;
+}
+
+#col1 li {
+ margin: 0;
+ padding: 0;
+ font-size: 0.7em;
+ font-weight: bold;
+ line-height: 1.5em; 
+}
+
 #col1 p,
 #col2 p,
 #col3 p {
@@ -1053,6 +1073,41 @@ table.imagetable td {
  padding: 8px;
  border-style: solid;
  border-color: #999999;
+}
+
+
+/* Journal */
+
+ul.archive {
+ margin: 10px 0 0 0;
+ font-size: 0.8em;
+}
+
+div.entries {
+ margin: 14px 0 0 0;
+ font-size: 0.8em; 
+}
+
+#col1 div.entries h2 {
+ margin: 0;
+}
+
+#col1 div.entries p.date {
+ margin: 0;
+ padding: 0;
+ font-size: 0.8em;
+}
+
+.entries hr {
+ margin: 12px 0 8px 0; 
+}
+
+div.pagination {
+ margin: 14px 0 0 0;
+}
+
+.pagination a {
+ font-size: 0.7em;
 }
 
 
