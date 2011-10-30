@@ -787,4 +787,4 @@ msgid "Activate your account! %(site)s"
 msgstr "Active a sua conta! %(site)s"
 
 msgid "Please check the answers for the highlighted questions."
-msgstr ""
+msgstr "Verifique as respostas às questões assinaladas"
