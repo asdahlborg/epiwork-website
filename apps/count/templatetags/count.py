@@ -46,7 +46,7 @@ class MemberCountNode(Node):
         try:
             result = int(result)
         except ValueError:
-            return '0'
+            result = '0'
 
         cache.set(key, result, timeout=60 * 30) # timeout 30 minutes
         return result 
