@@ -101,11 +101,11 @@ msgstr "Imagem"
 
 #: apps/journal/models.py:41
 msgid "Alignment"
-msgstr "Alinhamentp"
+msgstr "Alinhamento"
 
 #: apps/journal/models.py:41
 msgid "Alignment of the image"
-msgstr "Alinhament da imagem"
+msgstr "Alinhamento da imagem"
 
 #: apps/journal/models.py:41
 msgid "Left"
@@ -233,7 +233,7 @@ msgstr "Seleccione esta opção para enviar os lembretes"
 
 #: apps/reminder/models.py:32
 msgid "Begin date"
-msgstr "Data de inicio"
+msgstr "Data de início"
 
 #: apps/reminder/models.py:32
 msgid "Date & time of the first reminder and point of reference for subsequent reminders; (Time zone: MET)"
@@ -357,7 +357,7 @@ msgstr "A página que quer visulizar não foi encontrada. As nossas desculpas. P
 #: templates/500.html:8
 #: templates/registration/logout.html:8
 msgid "home"
-msgstr "inicio"
+msgstr "início"
 
 #: templates/500.html:4
 msgid "Error"
@@ -473,7 +473,7 @@ msgstr "Falhou a activação do utilizador"
 #: templates/registration/activation_complete.html:9
 #: templates/registration/registration_complete.html:9
 msgid "Back to the home page"
-msgstr "Voltar ao Inicio"
+msgstr "Voltar ao Início"
 
 #: templates/registration/activation_complete.html:7
 msgid "Activation is complete."
@@ -485,7 +485,7 @@ msgstr "ou"
 
 #: templates/registration/activation_complete.html:9
 msgid "proceed to the login page"
-msgstr "Siga para a página de login"
+msgstr "Siga para a página de inicio de sessão"
 
 #: templates/registration/boxbase.html:4
 #: templates/registration/boxbase.html:9
@@ -494,7 +494,7 @@ msgstr "Entrar"
 
 #: templates/registration/boxbase.html:10
 msgid "Enter your username and password to log in."
-msgstr "Introduza o username e a password para entrar"
+msgstr "Introduza o nome de utilizador e a password para entrar"
 
 #: templates/registration/boxbase.html:10
 msgid "Forgot your password?"
@@ -633,11 +633,11 @@ msgstr "Recuperar password"
 
 #: templates/registration/registration_complete.html:4
 msgid "Registration complete"
-msgstr "Registo copmleto"
+msgstr "Registo completo"
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration complete."
-msgstr "Registo copmleto"
+msgstr "Registo completo"
 
 #: templates/registration/registration_complete.html:7
 msgid "An e-mail containing information about how to activate your account has been sent to your e-mail address."
@@ -703,7 +703,7 @@ msgstr "Editar pessoa"
 
 #: templates/survey/people_edit.html:10
 msgid "Save"
-msgstr "Gaurdar"
+msgstr "Guardar"
 
 #: templates/survey/people_remove.html:5
 msgid "Confirm removal"
