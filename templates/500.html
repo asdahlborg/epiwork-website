@@ -1,10 +1,10 @@
 {% extends "base/sitebase.html" %}
 {% load i18n %}
 
-{% block title%}{{ block.super }}{% trans "Error" %}{% endblock title%}
+{% block title%}{{ site_name }}: {% trans "Error" %}{% endblock title%}
 
 {% block authentication %}{% endblock authentication %}
 
-{% block menubar %}<ul id="menubar"><li class="selected error"><a href="/">{% trans "An unexpected system error has occured. We apologize for the inconvenience. Go to " %}<u>{% trans "home" %}</u></a></li></ul>{% endblock menubar %}
+{% block menubar %}<ul id="menubar"><li class="selected error"><a href="/">{% trans "An unexpected system error has occured. We apologize for the inconvenience. Go to" %} <u>{% trans "home" %}</u></a></li></ul>{% endblock menubar %}
 
 {% block footercontent %}{% endblock footercontent %}
