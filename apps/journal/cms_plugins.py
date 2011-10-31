@@ -26,7 +26,7 @@ class CMSLatestEntryPlugin(CMSPluginBase):
             query = reduce(lambda a, b: a | b, query)
         else:
             query = Q()
-        latest = published_filter(Entry.objects.filter(query))[:instance.limit]
+        latest = published_filter(Entry.objects.filter(query)).order_by("-pub_date")[:instance.limit]
         context.update({
             'title': instance.title,
             'instance': instance,

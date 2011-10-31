@@ -778,3 +778,6 @@ msgstr "Activez votre compte:\n\nCliquez sur le lien URL ou copiez-collez le dan
 
 msgid "Activate your account! %(site)s"
 msgstr "Activez votre compte %(site)s"
+
+msgid "Please check the answers for the highlighted questions."
+msgstr ""
