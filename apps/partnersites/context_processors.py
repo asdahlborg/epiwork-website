@@ -6,6 +6,9 @@ from cms.utils.html import clean_html
 from .models import SiteSettings
 
 def customizations(request):
+    return site_context()
+
+def site_context():
     site = Site.objects.get_current()
     settings = SiteSettings.get(site)
 

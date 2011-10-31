@@ -13,6 +13,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 
 import loginurl.utils
+from apps.partnersites.context_processors import site_context
 
 from .models import get_reminders_for_users, UserReminderInfo, ReminderError
 
@@ -24,6 +25,7 @@ def create_message(user, message):
         'first_name': user.first_name,
         'last_name': user.last_name,
     }
+    c.update(site_context())
     inner = t.render(Context(c))
 
     t = loader.get_template('reminder/message.html')
