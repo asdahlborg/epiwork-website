@@ -731,7 +731,7 @@ msgstr "Seleccione o utilizador"
 
 #: templates/survey/thanks.html:6
 msgid "Thanks for taking the time to fill out this survey."
-msgstr "Obrigado por participar no inquérito"
+msgstr "Obrigado por ter preenchido o seu Questionário Semanal de Sintomas"
 
 #: templates/survey/thanks.html:6
 msgid "Here is a summary of the information you entered for you and the members of your group or family:"
