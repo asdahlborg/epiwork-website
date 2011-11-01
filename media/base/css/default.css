@@ -1047,6 +1047,13 @@ ul.bullets li {
 }
 
 
+/* Banner styles*/
+
+.banner {
+ text-align: center;
+}
+
+
 /* Survey styles*/
 
 table.imagetable {
