@@ -792,3 +792,9 @@ msgstr "Active a sua conta! %(site)s"
 
 msgid "Please check the answers for the highlighted questions."
 msgstr "Verifique as respostas às questões assinaladas"
+
+msgid "Weekly survey"
+msgstr "Questionário de sintomas"
+
+msgid "Manage household"
+msgstr "Agregado familiar"

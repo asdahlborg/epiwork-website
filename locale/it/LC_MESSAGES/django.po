@@ -805,3 +805,9 @@ msgstr "Attiva il tuo account! %(site)s"
 
 msgid "Please check the answers for the highlighted questions."
 msgstr ""
+
+msgid "Weekly survey"
+msgstr ""
+
+msgid "Manage household"
+msgstr ""
