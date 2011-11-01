@@ -26,6 +26,7 @@ def create_message(user, message):
         'last_name': user.last_name,
     }
     c.update(site_context())
+    c['site_logo'] = get_site_url() + c['site_logo']
     inner = t.render(Context(c))
 
     t = loader.get_template('reminder/message.html')
@@ -42,9 +43,11 @@ def send_reminders():
 
     return i + 1
 
+def get_site_url():
+    return 'http://%s' % Site.objects.get_current().domain
+
 def get_media_url():
-    site = Site.objects.get_current()
-    return 'http://%s%s' % (site.domain, settings.MEDIA_URL)
+    return '%s%s' % (get_site_url(), settings.MEDIA_URL)
 
 def get_url(user):
     return get_login_url(user, get_survey_url())
