@@ -767,8 +767,7 @@ msgstr "Obrigado por actualizar o perfil."
 "\n"
 "Ao inscrever-se como participante no projecto Gripenet, está a participar num estudo científico sobre a epidemiologia da gripe, nomeadamente a monitorização da incidência gripal e factores de risco associados ao síndrome gripal. Os participantes podem usar o nome de utilizador que entenderem e em nenhum momento é solicitado o seu endereço ou contacto telefónico.Todos os dados que fornecer serão tratados de forma confidencial e anónima. A informação que fornecer será guardada em bases de dados protegidas por acesso com chaves criptográficas e o seu e-mail estará separado da informação do seu estado de saúde, garantindo a anonimização dos dados. Ao concordar em participar neste estudo, permitirá que a equipa de projecto o contacte por e-mail, para envio de informação (newsletter). Poderá sempre cancelar essa subscrição, através do link no final do corpo da newsletter. Para além de informação, a newsletter terá também um link de login automático que direcciona o participante para o seu questionário de sintomas sem ser necessário efectuar o login.\n"
 "\n"
-"Ao prencher o formulário de Registo abaixo e clicando no botão 'Enviar registo', estará a dar o seu consentimento em participar no estudo, indicando que leu (e concordou com) todos os termos deste Consentimento.\n"
-"\n"
+"Ao prencher o formulário de Registo abaixo e clicando no botão 'Enviar registo', estará a dar o seu consentimento em participar no estudo, indicando que leu (e concordou com) todos os termos deste Consentimento."
 
 #: templates/survey/thanks_profile.html:6
 msgid "Please, if you have not already done so, fill in"
