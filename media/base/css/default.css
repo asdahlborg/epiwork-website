@@ -440,7 +440,7 @@ ul.map_buttons li {
  float: left;
  max-width: 754px;
  overflow: hidden;
- margin: 0 0 4px 0;
+ margin: 0 0 4px 0 !important;
 }
 
 #menubar li {
@@ -502,7 +502,7 @@ ul.map_buttons li {
 #submenu li,
 #submenu li a {
  float: left;
- margin: 0 0 0 6px;
+ margin: 0 0 0 8px;
  color: #8e8e8e;
  text-decoration: none;
 }
@@ -1044,6 +1044,13 @@ ul.bullets li {
 
 .facebook {
  margin: 8px 0 0 -6px;
+}
+
+
+/* Banner styles*/
+
+.banner {
+ text-align: center;
 }
 
 
