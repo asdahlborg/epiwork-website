@@ -15,7 +15,7 @@ SOURCES = {
     'at': 'http://www.aktivgegengrippe.at/count/counter/',
     'ch': 'http://www.aktivgegengrippe.ch/count/counter/',
     'se': 'http://www.influensakoll.se/count/counter/',
-    'uk': 'http://www.flusurvey.org.uk/count/counter/',
+    'uk': 'http://flusurvey.org.uk/count/counter/',
     'it': 'http://www.influweb.it/count/counter/',
     'pt': 'http://www.gripenet.pt/count/counter/',
 }
