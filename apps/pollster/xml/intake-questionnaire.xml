@@ -1,0 +1,5323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<survey id="survey-8" xmlns="http://dndg.it/ns/pollster-1.0">
+    <title>Intake Questionnaire</title>
+    <shortname>intake</shortname>
+    <version></version>
+    <created>2011-10-28T17:57:45.483581</created>
+    <updated>2011-10-31T17:38:51.262382</updated>
+    <questions>
+    
+        <question id="question-176">
+            <title>Compilation Date</title>
+            <data_name>timestamp</data_name>
+            <description></description>
+            <type>builtin</type>
+            <data_type>wok.pollster.datatypes.Timestamp</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+            </options>
+        </question>
+    
+        <question id="question-177">
+            <title>For whom are you filling this survey in?</title>
+            <data_name>Q0</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-917">
+                    
+                    
+                    <group></group>
+                    <data_name>Q0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Myself</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-918">
+                    
+                    
+                    <group></group>
+                    <data_name>Q0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>A member of my household</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-919">
+                    
+                    
+                    <group></group>
+                    <data_name>Q0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Someone else</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-204">
+            <title>NOTE</title>
+            <data_name>NOTE</data_name>
+            <description>Please answer all questions as if you were the person you are filling this in for.</description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Text</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+            </options>
+        </question>
+    
+        <question id="question-178">
+            <title>What is your gender?</title>
+            <data_name>Q1</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-920">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Male</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-921">
+                    
+                    
+                    <group></group>
+                    <data_name>Q1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Female</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-179">
+            <title>What is your date of birth?</title>
+            <data_name>Q2</data_name>
+            <description></description>
+            <type>text</type>
+            <data_type>wok.pollster.datatypes.YearMonth</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-922">
+                    
+                    
+                    <group></group>
+                    <data_name>Q2</data_name>
+                    <is_virtual>true</is_virtual>
+                     
+                    <virtual_type>wok.pollster.virtualoptions.YearMonthYearsAgo</virtual_type>
+                    <virtual_inf>50</virtual_inf>
+                    <virtual_sup>15</virtual_sup>
+                    <virtual_regex></virtual_regex>
+                    
+                </option>
+                
+                <option id="option-923">
+                    
+                    
+                    <group></group>
+                    <data_name>Q2</data_name>
+                    <is_virtual>true</is_virtual>
+                     
+                    <virtual_type>wok.pollster.virtualoptions.YearMonthYearsAgo</virtual_type>
+                    <virtual_inf>0</virtual_inf>
+                    <virtual_sup>16</virtual_sup>
+                    <virtual_regex></virtual_regex>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-180">
+            <title>What is the first part of your home postal code?</title>
+            <data_name>Q3</data_name>
+            <description></description>
+            <type>text</type>
+            <data_type>wok.pollster.datatypes.PostalCode</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+            </options>
+        </question>
+    
+        <question id="question-181">
+            <title>What is your main activity?</title>
+            <data_name>Q4</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-924">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Paid employment, full time</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-925">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Paid employment, part time</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-926">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Self-employed (businessman, farmer, tradesman, etc.)</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-927">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Attending school/college/university</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-928">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Home-maker (e.g. housewife)</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-929">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Unemployed</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-930">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Long-term sick-leave or parental leave</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-931">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Retired</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-932">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other</text>
+                    <value>8</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-182">
+            <title>What is the first part of your school/college/workplace postal code?</title>
+            <data_name>Q4b</data_name>
+            <description>(Where you spend the majority of your working/studying time.)</description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type>wok.pollster.datatypes.PostalCode</open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-933">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Postal code:</text>
+                    <value>0</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q4b_0_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-934">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-935">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Not applicable (e.g. don&#39;t have a fixed workplace)</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-183">
+            <title>Which of the following descriptions most closely matches with your main occupation?</title>
+            <data_name>Q4c</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-936">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Professional (e.g. manager, doctor, teacher, nurse, engineer)</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-937">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Office work (e.g. admin, finance assistant, receptionist etc.)</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-938">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Retail, sales, catering and hospitality and leisure (e.g. shop assistant, waiter, bar-staff, gym instructor etc)</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-939">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Skilled manual worker (e.g. mechanic, electrician, technician)</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-940">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other manual work (e.g. cleaning, seciruty, driver etc)</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-941">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4c</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-184">
+            <title>What is the highest level of formal education/qualification that you have?</title>
+            <data_name>Q4d</data_name>
+            <description>If you are still in education, then please tick this box with the highest level that you have already achieved.</description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-942">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I have no formal qualification</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-943">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>GCSE&#39;s, levels, CSEs or equivalent</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-944">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>A-levels or equivalent (e.g. Higher, NVQ Level3, BTEC)</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-945">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Batchelors Degree (BA, BSc) or equivalent</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-946">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Higher Degree or equivalent (e.g. Masters Degree, PGCE, PhD, Medical Doctorate, Advanced Professional Award)</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-947">
+                    
+                    
+                    <group></group>
+                    <data_name>Q4d</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I am still in education</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-185">
+            <title>Do you have contact with any of the following during the course of a typical day?</title>
+            <data_name>Q5</data_name>
+            <description>(Select all options that apply, if any.)</description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-948">
+                    
+                    
+                    <group></group>
+                    <data_name>Q5_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Large numbers (more than 10) of children or teenagers</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-949">
+                    
+                    
+                    <group></group>
+                    <data_name>Q5_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Large numbers (more than 10) of people aged over 65</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-950">
+                    
+                    
+                    <group></group>
+                    <data_name>Q5_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Patients</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-951">
+                    
+                    
+                    <group></group>
+                    <data_name>Q5_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Crowds of people (more than 10 individuals at any one time)</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-952">
+                    
+                    
+                    <group></group>
+                    <data_name>Q5_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>None of the above</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-186">
+            <title>INCLUDING YOU, how many people in each of the following age groups live in your households?</title>
+            <data_name>Q6</data_name>
+            <description></description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type>wok.pollster.datatypes.Numeric</open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-953">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>0-4 years</text>
+                    <value>0</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q6_0_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-954">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>5-18 years</text>
+                    <value>1</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q6_1_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-955">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>19-44 years</text>
+                    <value>2</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q6_2_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-956">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>45-64 years</text>
+                    <value>3</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q6_3_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-957">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>65+</text>
+                    <value>4</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q6_4_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-187">
+            <title>How many of the children aged 0-4 in your household go to school or day-care?</title>
+            <data_name>Q6b</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-958">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>None</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-959">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>1</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-960">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>2</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-961">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>3</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-962">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>4</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-963">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>5</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-964">
+                    
+                    
+                    <group></group>
+                    <data_name>Q6b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>More than 5</text>
+                    <value>99</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-188">
+            <title>What is your main means of transportation?</title>
+            <data_name>Q7</data_name>
+            <description></description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-965">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Walking</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-966">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Bike</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-967">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Motorbike/scooter</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-968">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Car</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-969">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Public transportation (bus, train, tube, etc)</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-970">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-189">
+            <title>On a normal day, how much time do you spend on public transport?</title>
+            <data_name>Q7b</data_name>
+            <description>(Bus, train, tube, etc.)</description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-971">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No time at all</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-972">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>0-30 minutes</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-973">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>30 minutes - 1.5 hours</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-974">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>1.5 hours - 4 hours</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-975">
+                    
+                    
+                    <group></group>
+                    <data_name>Q7b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Over 4 hours</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-190">
+            <title>How often do you have common colds or flu-like diseases?</title>
+            <data_name>Q8</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-976">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Never</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-977">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Once or twice a year</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-978">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Between 3 and 5 times a year</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-979">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Between 6 and 10 times a year</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-980">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>More that 10 times a year</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-981">
+                    
+                    
+                    <group></group>
+                    <data_name>Q8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-191">
+            <title>Did you receive a flu vaccine during the last autumn/winter season?</title>
+            <data_name>Q9</data_name>
+            <description>(2010-2011)</description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-982">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-983">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-984">
+                    
+                    
+                    <group></group>
+                    <data_name>Q9</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-192">
+            <title>Have you received a flu vaccine this autumn/winter season?</title>
+            <data_name>Q10</data_name>
+            <description>(2011-2012)</description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-985">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-986">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-987">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-193">
+            <title>When were you vaccinated against this flu season?</title>
+            <data_name>Q10b</data_name>
+            <description>(2011-2012)</description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type>wok.pollster.datatypes.Date</open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-988">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Choose date:</text>
+                    <value>1</value>
+                    <is_open>true</is_open>
+                     
+                    <open_option_data_name>Q10b_1_open</open_option_data_name>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-989">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t know/can&#39;t remember</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-194">
+            <title>What were your reasons for getting a seasonal influenza vaccination this year?</title>
+            <data_name>Q10c</data_name>
+            <description>(Select all options that apply.)</description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-990">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I belong to a risk group (e.g, pregnant, over 65, underlying health condition, etc)</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-991">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Vaccination decreases my risk of getting influenza</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-992">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Vaccination decreases the risk of spreading influenza to others</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-993">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>My doctor recommended it</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-994">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>It was recommended in my workplace/school</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-995">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>The vaccine was readily available and vaccine administration was convenient</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-996">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_6</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>The vaccine was free (no cost)</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-997">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_7</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t want to miss work/school</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-998">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I always get the vaccine</text>
+                    <value>8</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-999">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10c_9</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other reason(s)</text>
+                    <value>9</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-195">
+            <title>What were your reasons for NOT getting a seasonal influenza vaccination this year?</title>
+            <data_name>Q10d</data_name>
+            <description>(Select all options that apply.)</description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1000">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I am planning to be vaccinated, but haven&#39;t been yet</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1001">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I haven&#39;t been offered the vaccine</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1002">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t belong to a risk group</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1003">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>It is better to build your own natural immunity against influenza</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1004">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I doubt that the influenza vaccine is effective</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1005">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Influenza is a minor illness</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1006">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_6</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t think I am likely to get influenza</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1007">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_7</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I believe that influenza vaccine can cause influenza</text>
+                    <value>7</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1008">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_8</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I am worried that the vaccine is not safe or will cause illness or other adverse events</text>
+                    <value>8</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1009">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_9</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I don&#39;t like having vaccinations</text>
+                    <value>9</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1010">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_10</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>The vaccine is not readily available to me</text>
+                    <value>10</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1011">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_11</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>The vaccine is not free of charge</text>
+                    <value>11</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1012">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_12</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No particular reason</text>
+                    <value>12</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1013">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_13</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Although my doctor recommended a vaccine, I did not get one</text>
+                    <value>13</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1014">
+                    
+                    
+                    <group></group>
+                    <data_name>Q10d_14</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other reason(s)</text>
+                    <value>14</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-196">
+            <title>Do you take regular medication for any of the following medical conditions?</title>
+            <data_name>Q11</data_name>
+            <description>(Select all options that apply.)</description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1015">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1016">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Asthma</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1017">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Diabetes</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1018">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Lung disorder (COPD, emphysema, ...)</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1019">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Heart disorder</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1020">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Kidney disorder</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1021">
+                    
+                    
+                    <group></group>
+                    <data_name>Q11_6</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment</text>
+                    <value>6</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-197">
+            <title>Are you currently pregnant?</title>
+            <data_name>Q12</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1022">
+                    
+                    
+                    <group></group>
+                    <data_name>Q12</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1023">
+                    
+                    
+                    <group></group>
+                    <data_name>Q12</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1024">
+                    
+                    
+                    <group></group>
+                    <data_name>Q12</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Don&#39;t know/would rather not answer</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-198">
+            <title>Which trimester of the pregnancy are you in?</title>
+            <data_name>Q12b</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>true</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1025">
+                    
+                    
+                    <group></group>
+                    <data_name>Q12b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>First trimester (week 1-12)</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1026">
+                    
+                    
+                    <group></group>
+                    <data_name>Q12b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Second trimester (week 13-28)</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1027">
+                    
+                    
+                    <group></group>
+                    <data_name>Q12b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Third trimester (week 29-delivery)</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1028">
+                    
+                    
+                    <group></group>
+                    <data_name>Q12b</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Don&#39;t know/would rather not answer</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-199">
+            <title>Do you smoke tobacco?</title>
+            <data_name>Q13</data_name>
+            <description></description>
+            <type>single-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual></visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1029">
+                    
+                    
+                    <group></group>
+                    <data_name>Q13</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1030">
+                    
+                    
+                    <group></group>
+                    <data_name>Q13</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, occasionally</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1031">
+                    
+                    
+                    <group></group>
+                    <data_name>Q13</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, daily, fewer than 10 cigarettes a day</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1032">
+                    
+                    
+                    <group></group>
+                    <data_name>Q13</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, daily, 10 or more cigarettes a day</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1033">
+                    
+                    
+                    <group></group>
+                    <data_name>Q13</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Dont know/would rather not answer</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-200">
+            <title>Do you have one of the following allergies that can cause respiratory symptoms?</title>
+            <data_name>Q14</data_name>
+            <description>(Select all options that apply.)</description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>true</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1034">
+                    
+                    
+                    <group></group>
+                    <data_name>Q14_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Hay fever</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1035">
+                    
+                    
+                    <group></group>
+                    <data_name>Q14_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Allergy against house dust mite</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1036">
+                    
+                    
+                    <group></group>
+                    <data_name>Q14_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Allergy against domestic animals or pets</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1037">
+                    
+                    
+                    <group></group>
+                    <data_name>Q14_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1038">
+                    
+                    
+                    <group></group>
+                    <data_name>Q14_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>I do not have an allergy that causes respiratory symptoms</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-201">
+            <title>Do you follow a special diet?</title>
+            <data_name>Q15</data_name>
+            <description>(Select all options that apply.)</description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1039">
+                    
+                    
+                    <group></group>
+                    <data_name>Q15_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No special diet</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1040">
+                    
+                    
+                    <group></group>
+                    <data_name>Q15_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Vegetarian</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1041">
+                    
+                    
+                    <group></group>
+                    <data_name>Q15_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Veganism</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1042">
+                    
+                    
+                    <group></group>
+                    <data_name>Q15_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Low-calorie</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1043">
+                    
+                    
+                    <group></group>
+                    <data_name>Q15_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Other</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-202">
+            <title>Do you have pets at home?</title>
+            <data_name>Q16</data_name>
+            <description>(Select all options that apply.)</description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1044">
+                    
+                    
+                    <group></group>
+                    <data_name>Q16_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>No</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1045">
+                    
+                    
+                    <group></group>
+                    <data_name>Q16_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, one or more dogs</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1046">
+                    
+                    
+                    <group></group>
+                    <data_name>Q16_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, one or more cats</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1047">
+                    
+                    
+                    <group></group>
+                    <data_name>Q16_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, one or more birds</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1048">
+                    
+                    
+                    <group></group>
+                    <data_name>Q16_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Yes, one ore more other animals</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+        <question id="question-203">
+            <title>Where did you hear about the influenza project for the first time?</title>
+            <data_name>Q17</data_name>
+            <description></description>
+            <type>multiple-choice</type>
+            <data_type>wok.pollster.datatypes.Numeric</data_type>
+            <open_option_data_type></open_option_data_type>
+            <starts_hidden>false</starts_hidden>
+            <is_mandatory>false</is_mandatory>
+            <visual>check</visual>
+            <tags></tags>
+            <regex></regex>
+            <error_message></error_message>
+            <columns>
+                
+            </columns>
+            <rows>
+                
+            </rows>
+            <options>
+                
+                <option id="option-1049">
+                    
+                    
+                    <group></group>
+                    <data_name>Q17_0</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>On radio or television</text>
+                    <value>0</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1050">
+                    
+                    
+                    <group></group>
+                    <data_name>Q17_1</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>In the newspaper or in a magazine</text>
+                    <value>1</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1051">
+                    
+                    
+                    <group></group>
+                    <data_name>Q17_2</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Via an internet site (search engine or link)</text>
+                    <value>2</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1052">
+                    
+                    
+                    <group></group>
+                    <data_name>Q17_3</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>By the poster of the project</text>
+                    <value>3</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1053">
+                    
+                    
+                    <group></group>
+                    <data_name>Q17_4</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Via family or friends</text>
+                    <value>4</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+                <option id="option-1054">
+                    
+                    
+                    <group></group>
+                    <data_name>Q17_5</data_name>
+                    <is_virtual>false</is_virtual>
+                    
+                    <text>Via school or work</text>
+                    <value>5</value>
+                    <is_open>false</is_open>
+                    
+                    <starts_hidden>false</starts_hidden>
+                    
+                </option>
+                
+            </options>
+        </question>
+    
+    </questions>
+    <rules>
+        
+        <rule id="rule-299">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-177"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-917"/>
+                 
+                 <subject_option ref="option-918"/>
+                 
+                 <subject_option ref="option-919"/>
+                 
+            </subject_options>
+            <object_question ref="question-177"/>
+            <object_options>
+                 
+                 <object_option ref="option-917"/>
+                 
+                 <object_option ref="option-918"/>
+                 
+                 <object_option ref="option-919"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-340">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-177"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-918"/>
+                 
+                 <subject_option ref="option-919"/>
+                 
+            </subject_options>
+            <object_question ref="question-204"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-301">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-178"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-921"/>
+                 
+            </subject_options>
+            <object_question ref="question-197"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-300">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-178"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-920"/>
+                 
+                 <subject_option ref="option-921"/>
+                 
+            </subject_options>
+            <object_question ref="question-178"/>
+            <object_options>
+                 
+                 <object_option ref="option-920"/>
+                 
+                 <object_option ref="option-921"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-304">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-179"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-922"/>
+                 
+            </subject_options>
+            <object_question ref="question-179"/>
+            <object_options>
+                 
+                 <object_option ref="option-922"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-303">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-179"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-923"/>
+                 
+            </subject_options>
+            <object_question ref="question-184"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-302">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-179"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-922"/>
+                 
+            </subject_options>
+            <object_question ref="question-197"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-305">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-180"/>
+            <subject_options>
+                 
+            </subject_options>
+            <object_question ref="question-180"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-308">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-181"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-924"/>
+                 
+                 <subject_option ref="option-925"/>
+                 
+            </subject_options>
+            <object_question ref="question-183"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-307">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-181"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-924"/>
+                 
+                 <subject_option ref="option-925"/>
+                 
+                 <subject_option ref="option-926"/>
+                 
+                 <subject_option ref="option-927"/>
+                 
+                 <subject_option ref="option-928"/>
+                 
+                 <subject_option ref="option-929"/>
+                 
+                 <subject_option ref="option-930"/>
+                 
+                 <subject_option ref="option-931"/>
+                 
+                 <subject_option ref="option-932"/>
+                 
+            </subject_options>
+            <object_question ref="question-181"/>
+            <object_options>
+                 
+                 <object_option ref="option-924"/>
+                 
+                 <object_option ref="option-925"/>
+                 
+                 <object_option ref="option-926"/>
+                 
+                 <object_option ref="option-927"/>
+                 
+                 <object_option ref="option-928"/>
+                 
+                 <object_option ref="option-929"/>
+                 
+                 <object_option ref="option-930"/>
+                 
+                 <object_option ref="option-931"/>
+                 
+                 <object_option ref="option-932"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-306">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-181"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-924"/>
+                 
+                 <subject_option ref="option-925"/>
+                 
+                 <subject_option ref="option-926"/>
+                 
+                 <subject_option ref="option-927"/>
+                 
+            </subject_options>
+            <object_question ref="question-182"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-309">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-182"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-933"/>
+                 
+                 <subject_option ref="option-934"/>
+                 
+                 <subject_option ref="option-935"/>
+                 
+            </subject_options>
+            <object_question ref="question-182"/>
+            <object_options>
+                 
+                 <object_option ref="option-933"/>
+                 
+                 <object_option ref="option-934"/>
+                 
+                 <object_option ref="option-935"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-310">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-183"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-936"/>
+                 
+                 <subject_option ref="option-937"/>
+                 
+                 <subject_option ref="option-938"/>
+                 
+                 <subject_option ref="option-939"/>
+                 
+                 <subject_option ref="option-940"/>
+                 
+                 <subject_option ref="option-941"/>
+                 
+            </subject_options>
+            <object_question ref="question-183"/>
+            <object_options>
+                 
+                 <object_option ref="option-936"/>
+                 
+                 <object_option ref="option-937"/>
+                 
+                 <object_option ref="option-938"/>
+                 
+                 <object_option ref="option-939"/>
+                 
+                 <object_option ref="option-940"/>
+                 
+                 <object_option ref="option-941"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-311">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-184"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-942"/>
+                 
+                 <subject_option ref="option-943"/>
+                 
+                 <subject_option ref="option-944"/>
+                 
+                 <subject_option ref="option-945"/>
+                 
+                 <subject_option ref="option-946"/>
+                 
+                 <subject_option ref="option-947"/>
+                 
+            </subject_options>
+            <object_question ref="question-184"/>
+            <object_options>
+                 
+                 <object_option ref="option-942"/>
+                 
+                 <object_option ref="option-943"/>
+                 
+                 <object_option ref="option-944"/>
+                 
+                 <object_option ref="option-945"/>
+                 
+                 <object_option ref="option-946"/>
+                 
+                 <object_option ref="option-947"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-313">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-185"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-952"/>
+                 
+            </subject_options>
+            <object_question ref="question-177"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-312">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-185"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-948"/>
+                 
+                 <subject_option ref="option-949"/>
+                 
+                 <subject_option ref="option-950"/>
+                 
+                 <subject_option ref="option-951"/>
+                 
+                 <subject_option ref="option-952"/>
+                 
+            </subject_options>
+            <object_question ref="question-185"/>
+            <object_options>
+                 
+                 <object_option ref="option-948"/>
+                 
+                 <object_option ref="option-949"/>
+                 
+                 <object_option ref="option-950"/>
+                 
+                 <object_option ref="option-951"/>
+                 
+                 <object_option ref="option-952"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-315">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-186"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-953"/>
+                 
+                 <subject_option ref="option-954"/>
+                 
+                 <subject_option ref="option-955"/>
+                 
+                 <subject_option ref="option-956"/>
+                 
+                 <subject_option ref="option-957"/>
+                 
+            </subject_options>
+            <object_question ref="question-186"/>
+            <object_options>
+                 
+                 <object_option ref="option-953"/>
+                 
+                 <object_option ref="option-954"/>
+                 
+                 <object_option ref="option-955"/>
+                 
+                 <object_option ref="option-956"/>
+                 
+                 <object_option ref="option-957"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-314">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-186"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-953"/>
+                 
+            </subject_options>
+            <object_question ref="question-187"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-316">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-187"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-958"/>
+                 
+                 <subject_option ref="option-959"/>
+                 
+                 <subject_option ref="option-960"/>
+                 
+                 <subject_option ref="option-961"/>
+                 
+                 <subject_option ref="option-962"/>
+                 
+                 <subject_option ref="option-963"/>
+                 
+                 <subject_option ref="option-964"/>
+                 
+            </subject_options>
+            <object_question ref="question-187"/>
+            <object_options>
+                 
+                 <object_option ref="option-958"/>
+                 
+                 <object_option ref="option-959"/>
+                 
+                 <object_option ref="option-960"/>
+                 
+                 <object_option ref="option-961"/>
+                 
+                 <object_option ref="option-962"/>
+                 
+                 <object_option ref="option-963"/>
+                 
+                 <object_option ref="option-964"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-317">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-188"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-965"/>
+                 
+                 <subject_option ref="option-966"/>
+                 
+                 <subject_option ref="option-967"/>
+                 
+                 <subject_option ref="option-968"/>
+                 
+                 <subject_option ref="option-969"/>
+                 
+                 <subject_option ref="option-970"/>
+                 
+            </subject_options>
+            <object_question ref="question-188"/>
+            <object_options>
+                 
+                 <object_option ref="option-965"/>
+                 
+                 <object_option ref="option-966"/>
+                 
+                 <object_option ref="option-967"/>
+                 
+                 <object_option ref="option-968"/>
+                 
+                 <object_option ref="option-969"/>
+                 
+                 <object_option ref="option-970"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-318">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-189"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-971"/>
+                 
+                 <subject_option ref="option-972"/>
+                 
+                 <subject_option ref="option-973"/>
+                 
+                 <subject_option ref="option-974"/>
+                 
+                 <subject_option ref="option-975"/>
+                 
+            </subject_options>
+            <object_question ref="question-189"/>
+            <object_options>
+                 
+                 <object_option ref="option-971"/>
+                 
+                 <object_option ref="option-972"/>
+                 
+                 <object_option ref="option-973"/>
+                 
+                 <object_option ref="option-974"/>
+                 
+                 <object_option ref="option-975"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-319">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-190"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-976"/>
+                 
+                 <subject_option ref="option-977"/>
+                 
+                 <subject_option ref="option-978"/>
+                 
+                 <subject_option ref="option-979"/>
+                 
+                 <subject_option ref="option-980"/>
+                 
+                 <subject_option ref="option-981"/>
+                 
+            </subject_options>
+            <object_question ref="question-190"/>
+            <object_options>
+                 
+                 <object_option ref="option-976"/>
+                 
+                 <object_option ref="option-977"/>
+                 
+                 <object_option ref="option-978"/>
+                 
+                 <object_option ref="option-979"/>
+                 
+                 <object_option ref="option-980"/>
+                 
+                 <object_option ref="option-981"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-320">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-191"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-982"/>
+                 
+                 <subject_option ref="option-983"/>
+                 
+                 <subject_option ref="option-984"/>
+                 
+            </subject_options>
+            <object_question ref="question-191"/>
+            <object_options>
+                 
+                 <object_option ref="option-982"/>
+                 
+                 <object_option ref="option-983"/>
+                 
+                 <object_option ref="option-984"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-324">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-192"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-986"/>
+                 
+            </subject_options>
+            <object_question ref="question-195"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-323">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-192"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-985"/>
+                 
+            </subject_options>
+            <object_question ref="question-194"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-322">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-192"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-985"/>
+                 
+            </subject_options>
+            <object_question ref="question-193"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-321">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-192"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-985"/>
+                 
+                 <subject_option ref="option-986"/>
+                 
+                 <subject_option ref="option-987"/>
+                 
+            </subject_options>
+            <object_question ref="question-192"/>
+            <object_options>
+                 
+                 <object_option ref="option-985"/>
+                 
+                 <object_option ref="option-986"/>
+                 
+                 <object_option ref="option-987"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-325">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-193"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-988"/>
+                 
+                 <subject_option ref="option-989"/>
+                 
+            </subject_options>
+            <object_question ref="question-193"/>
+            <object_options>
+                 
+                 <object_option ref="option-988"/>
+                 
+                 <object_option ref="option-989"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-326">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-194"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-990"/>
+                 
+                 <subject_option ref="option-991"/>
+                 
+                 <subject_option ref="option-992"/>
+                 
+                 <subject_option ref="option-993"/>
+                 
+                 <subject_option ref="option-994"/>
+                 
+                 <subject_option ref="option-995"/>
+                 
+                 <subject_option ref="option-996"/>
+                 
+                 <subject_option ref="option-997"/>
+                 
+                 <subject_option ref="option-998"/>
+                 
+                 <subject_option ref="option-999"/>
+                 
+            </subject_options>
+            <object_question ref="question-194"/>
+            <object_options>
+                 
+                 <object_option ref="option-990"/>
+                 
+                 <object_option ref="option-991"/>
+                 
+                 <object_option ref="option-992"/>
+                 
+                 <object_option ref="option-993"/>
+                 
+                 <object_option ref="option-994"/>
+                 
+                 <object_option ref="option-995"/>
+                 
+                 <object_option ref="option-996"/>
+                 
+                 <object_option ref="option-997"/>
+                 
+                 <object_option ref="option-998"/>
+                 
+                 <object_option ref="option-999"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-327">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-195"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1000"/>
+                 
+                 <subject_option ref="option-1001"/>
+                 
+                 <subject_option ref="option-1002"/>
+                 
+                 <subject_option ref="option-1003"/>
+                 
+                 <subject_option ref="option-1004"/>
+                 
+                 <subject_option ref="option-1005"/>
+                 
+                 <subject_option ref="option-1006"/>
+                 
+                 <subject_option ref="option-1007"/>
+                 
+                 <subject_option ref="option-1008"/>
+                 
+                 <subject_option ref="option-1009"/>
+                 
+                 <subject_option ref="option-1010"/>
+                 
+                 <subject_option ref="option-1011"/>
+                 
+                 <subject_option ref="option-1012"/>
+                 
+                 <subject_option ref="option-1013"/>
+                 
+                 <subject_option ref="option-1014"/>
+                 
+            </subject_options>
+            <object_question ref="question-195"/>
+            <object_options>
+                 
+                 <object_option ref="option-1000"/>
+                 
+                 <object_option ref="option-1001"/>
+                 
+                 <object_option ref="option-1002"/>
+                 
+                 <object_option ref="option-1003"/>
+                 
+                 <object_option ref="option-1004"/>
+                 
+                 <object_option ref="option-1005"/>
+                 
+                 <object_option ref="option-1006"/>
+                 
+                 <object_option ref="option-1007"/>
+                 
+                 <object_option ref="option-1008"/>
+                 
+                 <object_option ref="option-1009"/>
+                 
+                 <object_option ref="option-1010"/>
+                 
+                 <object_option ref="option-1011"/>
+                 
+                 <object_option ref="option-1012"/>
+                 
+                 <object_option ref="option-1013"/>
+                 
+                 <object_option ref="option-1014"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-329">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-196"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1015"/>
+                 
+            </subject_options>
+            <object_question ref="question-177"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-328">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-196"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1015"/>
+                 
+                 <subject_option ref="option-1016"/>
+                 
+                 <subject_option ref="option-1017"/>
+                 
+                 <subject_option ref="option-1018"/>
+                 
+                 <subject_option ref="option-1019"/>
+                 
+                 <subject_option ref="option-1020"/>
+                 
+                 <subject_option ref="option-1021"/>
+                 
+            </subject_options>
+            <object_question ref="question-196"/>
+            <object_options>
+                 
+                 <object_option ref="option-1015"/>
+                 
+                 <object_option ref="option-1016"/>
+                 
+                 <object_option ref="option-1017"/>
+                 
+                 <object_option ref="option-1018"/>
+                 
+                 <object_option ref="option-1019"/>
+                 
+                 <object_option ref="option-1020"/>
+                 
+                 <object_option ref="option-1021"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-331">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-197"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1022"/>
+                 
+            </subject_options>
+            <object_question ref="question-198"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-330">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-197"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1022"/>
+                 
+                 <subject_option ref="option-1023"/>
+                 
+                 <subject_option ref="option-1024"/>
+                 
+            </subject_options>
+            <object_question ref="question-197"/>
+            <object_options>
+                 
+                 <object_option ref="option-1022"/>
+                 
+                 <object_option ref="option-1023"/>
+                 
+                 <object_option ref="option-1024"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-332">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-198"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1025"/>
+                 
+                 <subject_option ref="option-1026"/>
+                 
+                 <subject_option ref="option-1027"/>
+                 
+                 <subject_option ref="option-1028"/>
+                 
+            </subject_options>
+            <object_question ref="question-198"/>
+            <object_options>
+                 
+                 <object_option ref="option-1025"/>
+                 
+                 <object_option ref="option-1026"/>
+                 
+                 <object_option ref="option-1027"/>
+                 
+                 <object_option ref="option-1028"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-333">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-199"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1029"/>
+                 
+                 <subject_option ref="option-1030"/>
+                 
+                 <subject_option ref="option-1031"/>
+                 
+                 <subject_option ref="option-1032"/>
+                 
+                 <subject_option ref="option-1033"/>
+                 
+            </subject_options>
+            <object_question ref="question-199"/>
+            <object_options>
+                 
+                 <object_option ref="option-1029"/>
+                 
+                 <object_option ref="option-1030"/>
+                 
+                 <object_option ref="option-1031"/>
+                 
+                 <object_option ref="option-1032"/>
+                 
+                 <object_option ref="option-1033"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-335">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-200"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1038"/>
+                 
+            </subject_options>
+            <object_question ref="question-177"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-334">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-200"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1034"/>
+                 
+                 <subject_option ref="option-1035"/>
+                 
+                 <subject_option ref="option-1036"/>
+                 
+                 <subject_option ref="option-1037"/>
+                 
+                 <subject_option ref="option-1038"/>
+                 
+            </subject_options>
+            <object_question ref="question-200"/>
+            <object_options>
+                 
+                 <object_option ref="option-1034"/>
+                 
+                 <object_option ref="option-1035"/>
+                 
+                 <object_option ref="option-1036"/>
+                 
+                 <object_option ref="option-1037"/>
+                 
+                 <object_option ref="option-1038"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-337">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-201"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1039"/>
+                 
+            </subject_options>
+            <object_question ref="question-177"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-336">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-201"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1039"/>
+                 
+                 <subject_option ref="option-1040"/>
+                 
+                 <subject_option ref="option-1041"/>
+                 
+                 <subject_option ref="option-1042"/>
+                 
+                 <subject_option ref="option-1043"/>
+                 
+            </subject_options>
+            <object_question ref="question-201"/>
+            <object_options>
+                 
+                 <object_option ref="option-1039"/>
+                 
+                 <object_option ref="option-1040"/>
+                 
+                 <object_option ref="option-1041"/>
+                 
+                 <object_option ref="option-1042"/>
+                 
+                 <object_option ref="option-1043"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-339">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-202"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1044"/>
+                 
+            </subject_options>
+            <object_question ref="question-177"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-338">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-202"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1044"/>
+                 
+                 <subject_option ref="option-1045"/>
+                 
+                 <subject_option ref="option-1046"/>
+                 
+                 <subject_option ref="option-1047"/>
+                 
+                 <subject_option ref="option-1048"/>
+                 
+            </subject_options>
+            <object_question ref="question-202"/>
+            <object_options>
+                 
+                 <object_option ref="option-1044"/>
+                 
+                 <object_option ref="option-1045"/>
+                 
+                 <object_option ref="option-1046"/>
+                 
+                 <object_option ref="option-1047"/>
+                 
+                 <object_option ref="option-1048"/>
+                 
+            </object_options>
+        </rule>
+        
+    </rules>
+    <translations>
+        
+        <translation lang="it">
+            <title>Adesione</title>
+            <questions>
+            
+                <question ref="question-176">
+                    <title></title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-177">
+                    <title>Adesione Q0</title>
+                    <description>Sei un membro di questo gruppo/nucleo familiare?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-178">
+                    <title>Adesione Q1</title>
+                    <description>Sesso:</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-179">
+                    <title>Adesione Q2</title>
+                    <description>Mese ed anno di nascita:</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-180">
+                    <title>Adesione Q3</title>
+                    <description>Qual è il Codice Postale della zona in cui vivi?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-181">
+                    <title>Adesione Q4</title>
+                    <description>Qual è la tua attività principale?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-183">
+                    <title>Adesione Q4c</title>
+                    <description>Quale tra le seguenti definizioni si descrive meglio la tua attività lavorativa?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-184">
+                    <title>Adesione Q4d</title>
+                    <description>Qual è il livello più alto di educazione/qualificazione che possiedi? Se sei ancora in formazione, ti preghiamo di segnare la casella corrispondente al livello di educazione più alto che hai già raggiunto.</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-185">
+                    <title>Adesione Q5 </title>
+                    <description>Nella tua vita quotidiana, ti capita di entrare in contatto con uno dei seguenti gruppi di persone? (Indica tutte le voci appropriate, salta la domanda se nessuna opzione si applica al tuo caso)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-186">
+                    <title>Adesione Q6</title>
+                    <description>Includendo te stesso/a, quante persone, per ciascuno dei gruppi di eta&#39; indicati, vivono nel tuo nucleo familiare?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-187">
+                    <title>Adesione Q6b</title>
+                    <description>Quanti dei bambini tra 0 e 4 anni vanno a scuola o all&#39;asilo?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-188">
+                    <title>Adesione Q7</title>
+                    <description>Qual e&#39; il tuo principale mezzo di trasporto?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-189">
+                    <title>Adesione Q7b</title>
+                    <description>In un giorno normale, quanto tempo passi sui mezzi pubblici? (bus, treno, metro, etc.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-190">
+                    <title>Adesione Q8</title>
+                    <description>Quanto spesso ti ammali di raffreddore o influenza?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-191">
+                    <title>Adesione Q9</title>
+                    <description>Hai ricevuto la vaccinazione contro l&#39;influenza per lo scorso autunno/inverno (2010-2011)?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-192">
+                    <title>Adesione Q10</title>
+                    <description>Hai ricevuto la vaccinazione contro l&#39;influenza per questa stagione autunno/inverno (2011-12)?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-193">
+                    <title>Adesione Q10b</title>
+                    <description>Quando hai ricevuto la vaccinazione per questa stagione?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-194">
+                    <title>Adesione Q10c</title>
+                    <description>Per quale motivo hai ricevuto la vaccinazione? (Seleziona tutte le opzioni che si applicano al tuo caso).</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-195">
+                    <title>Adesione Q10d</title>
+                    <description>Per quale motivo non hai ricevuto la vaccinazione quest&#39;anno? (Seleziona tutte le opzioni che si applicano al tuo caso).</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-196">
+                    <title>Adesione Q11</title>
+                    <description>Assumi regolarmente farmaci per una delle seguenti condizioni mediche? (Seleziona tutte le opzioni che si applicano al tuo caso).</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-197">
+                    <title>Adesione Q12</title>
+                    <description>Sei attualmente in gravidanza?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-198">
+                    <title>Adesione Q12b</title>
+                    <description>In quale trimestre della gravidanza ti trovi?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-199">
+                    <title>Adesione Q13</title>
+                    <description>Sei un fumatore/fumatrice?</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-200">
+                    <title>Adesione Q14</title>
+                    <description>Sei affetto da una delle seguenti allergie che possono causare sintomi respiratori? (Seleziona tutte le opzioni che si applicano al tuo caso).</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-201">
+                    <title>Adesione Q15</title>
+                    <description>Segui un regime alimentare speciale? (Seleziona tutte le opzioni che si applicano al tuo caso).</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-202">
+                    <title>Adesione Q16</title>
+                    <description>Possiedi animali domestici?</description>
+                    <error_message></error_message>
+                </question>
+            
+            </questions>
+            <columns>
+            
+            </columns>
+            <rows>
+            
+            </rows>
+            <options>
+            
+                <option ref="option-917">
+                    <text>Sì</text>
+                </option>
+            
+                <option ref="option-918">
+                    <text>No</text>
+                </option>
+            
+                <option ref="option-920">
+                    <text>Maschio</text>
+                </option>
+            
+                <option ref="option-921">
+                    <text>Femmina</text>
+                </option>
+            
+                <option ref="option-922">
+                    <text></text>
+                </option>
+            
+                <option ref="option-923">
+                    <text></text>
+                </option>
+            
+                <option ref="option-924">
+                    <text>Impiego retribuito, tempo pieno</text>
+                </option>
+            
+                <option ref="option-925">
+                    <text>Impiego retribuito, part time</text>
+                </option>
+            
+                <option ref="option-926">
+                    <text>Lavoratore autonomo (libero professionista, commerciante, contadino, etc.)</text>
+                </option>
+            
+                <option ref="option-927">
+                    <text>Studente (scuola dell&#39;obbligo, scuola superiore, università, etc.)</text>
+                </option>
+            
+                <option ref="option-928">
+                    <text>Casalingo/a</text>
+                </option>
+            
+                <option ref="option-929">
+                    <text>Senza impiego</text>
+                </option>
+            
+                <option ref="option-930">
+                    <text>Congedo a lungo termine dall&#39;attività lavorativa (per maternità/paternità, malattia, etc.)</text>
+                </option>
+            
+                <option ref="option-931">
+                    <text>In pensione</text>
+                </option>
+            
+                <option ref="option-932">
+                    <text>Altro</text>
+                </option>
+            
+                <option ref="option-936">
+                    <text>Professionista (es. manager, medico, insegnante, infermiera, ingegnere, etc.)</text>
+                </option>
+            
+                <option ref="option-937">
+                    <text>Lavoro d&#39;ufficio (es. amministratore, assistente finanziario, segretaria etc.)</text>
+                </option>
+            
+                <option ref="option-938">
+                    <text>Vendita al dettaglio, ristorazione ospitalità e tempo libero (es. commesso di negozio, cameriere, barista, istruttore di palestra etc.)</text>
+                </option>
+            
+                <option ref="option-939">
+                    <text>Lavoratore manuale specializzato (es. meccanico, elettricista, tecnico, etc.)</text>
+                </option>
+            
+                <option ref="option-940">
+                    <text>Lavoratore manuale di altro tipo (es. addetto alle pulizie, addetto alla sicurezza, autista, etc.)</text>
+                </option>
+            
+                <option ref="option-941">
+                    <text>Altro</text>
+                </option>
+            
+                <option ref="option-942">
+                    <text>Non possiedo alcuna qualifica formale</text>
+                </option>
+            
+                <option ref="option-943">
+                    <text>Diploma di scuola superiore</text>
+                </option>
+            
+                <option ref="option-945">
+                    <text>Diploma di laurea triennale </text>
+                </option>
+            
+                <option ref="option-946">
+                    <text>Diploma di laurea magistrale o titolo di studio superiore (Ph.D.)</text>
+                </option>
+            
+                <option ref="option-947">
+                    <text>Sono ancora in formazione scolastica</text>
+                </option>
+            
+                <option ref="option-948">
+                    <text>Gruppi (più di 10) di bambini o adolescenti (minori di 18 anni)</text>
+                </option>
+            
+                <option ref="option-949">
+                    <text>Gruppi (piu&#39; di 10) di persone di eta&#39; superiore a 65 anni? </text>
+                </option>
+            
+                <option ref="option-950">
+                    <text>Pazienti</text>
+                </option>
+            
+                <option ref="option-951">
+                    <text>Grandi quantita&#39; di persone (piu&#39; di 10 per volta)</text>
+                </option>
+            
+                <option ref="option-952">
+                    <text>Nessuno di questi</text>
+                </option>
+            
+                <option ref="option-953">
+                    <text>0-4 anni</text>
+                </option>
+            
+                <option ref="option-954">
+                    <text>5-18 anni</text>
+                </option>
+            
+                <option ref="option-955">
+                    <text>19-44 anni</text>
+                </option>
+            
+                <option ref="option-956">
+                    <text>45-64 anni</text>
+                </option>
+            
+                <option ref="option-957">
+                    <text>65+</text>
+                </option>
+            
+                <option ref="option-958">
+                    <text>Nessuno</text>
+                </option>
+            
+                <option ref="option-959">
+                    <text>1</text>
+                </option>
+            
+                <option ref="option-960">
+                    <text>2</text>
+                </option>
+            
+                <option ref="option-961">
+                    <text>3</text>
+                </option>
+            
+                <option ref="option-962">
+                    <text>4</text>
+                </option>
+            
+                <option ref="option-963">
+                    <text>5</text>
+                </option>
+            
+                <option ref="option-964">
+                    <text>Piu&#39; di 5</text>
+                </option>
+            
+                <option ref="option-965">
+                    <text>A piedi</text>
+                </option>
+            
+                <option ref="option-966">
+                    <text>Bicicletta</text>
+                </option>
+            
+                <option ref="option-967">
+                    <text>Moto/scooter</text>
+                </option>
+            
+                <option ref="option-968">
+                    <text>Auto</text>
+                </option>
+            
+                <option ref="option-969">
+                    <text>Mezzi pubblici (bus, treno, metropolitana, etc.)</text>
+                </option>
+            
+                <option ref="option-970">
+                    <text>Altro</text>
+                </option>
+            
+                <option ref="option-971">
+                    <text>Non uso i mezzi pubblici</text>
+                </option>
+            
+                <option ref="option-972">
+                    <text>0-30 minuti</text>
+                </option>
+            
+                <option ref="option-973">
+                    <text>30 minuti - 1.5 ore</text>
+                </option>
+            
+                <option ref="option-974">
+                    <text>1.5 - 4 ore</text>
+                </option>
+            
+                <option ref="option-975">
+                    <text>Piu&#39; di 4 ore</text>
+                </option>
+            
+                <option ref="option-976">
+                    <text>Mai</text>
+                </option>
+            
+                <option ref="option-977">
+                    <text>Una o due volte all&#39;anno</text>
+                </option>
+            
+                <option ref="option-978">
+                    <text>Tra 3 e 5 volte all&#39;anno</text>
+                </option>
+            
+                <option ref="option-979">
+                    <text>Tra 6 e 10 volte all&#39;anno</text>
+                </option>
+            
+                <option ref="option-980">
+                    <text>Piu&#39; di 10 volte all&#39;anno</text>
+                </option>
+            
+                <option ref="option-981">
+                    <text>Non so</text>
+                </option>
+            
+                <option ref="option-982">
+                    <text>Si</text>
+                </option>
+            
+                <option ref="option-983">
+                    <text>No</text>
+                </option>
+            
+                <option ref="option-984">
+                    <text>Non so</text>
+                </option>
+            
+                <option ref="option-985">
+                    <text>Si</text>
+                </option>
+            
+                <option ref="option-986">
+                    <text>No</text>
+                </option>
+            
+                <option ref="option-987">
+                    <text>Non so</text>
+                </option>
+            
+                <option ref="option-988">
+                    <text>Scegli la data:</text>
+                </option>
+            
+                <option ref="option-989">
+                    <text>Non so/non ricordo</text>
+                </option>
+            
+                <option ref="option-990">
+                    <text>Appartengo ad una categoria a rischio (es. in gravidanza, over 65, condizione di salute pregressa etc)</text>
+                </option>
+            
+                <option ref="option-991">
+                    <text>Il vaccino diminuisce il rischio di prendere l&#39;influenza</text>
+                </option>
+            
+                <option ref="option-992">
+                    <text>Il vaccino diminuisce il rischio di contagio per gli altri</text>
+                </option>
+            
+                <option ref="option-993">
+                    <text>Me l&#39;ha raccomandato il dottore</text>
+                </option>
+            
+                <option ref="option-994">
+                    <text>Mi e&#39; stato raccomandato sul lavoro/a scuola</text>
+                </option>
+            
+                <option ref="option-995">
+                    <text>Il vaccino era facilmente reperibile e facile da somministrare</text>
+                </option>
+            
+                <option ref="option-996">
+                    <text>Il vaccino era gratis</text>
+                </option>
+            
+                <option ref="option-997">
+                    <text>Non voglio perdere giorni di lavoro/scuola</text>
+                </option>
+            
+                <option ref="option-998">
+                    <text>Mi vaccino tutti gli anni</text>
+                </option>
+            
+                <option ref="option-999">
+                    <text>Altro</text>
+                </option>
+            
+                <option ref="option-1000">
+                    <text>Ho intenzione di vaccinarmi ma non l&#39;ho ancora fatto</text>
+                </option>
+            
+                <option ref="option-1001">
+                    <text>Non mi e&#39; stato offerto di vaccinarmi</text>
+                </option>
+            
+                <option ref="option-1002">
+                    <text>Non appartengo ad alcuna categoria a rischio</text>
+                </option>
+            
+                <option ref="option-1003">
+                    <text>E&#39; meglio costruire le proprie difese immunitarie in modo naturale</text>
+                </option>
+            
+                <option ref="option-1004">
+                    <text>Ho dei dubbi sull&#39;efficacia del vaccino</text>
+                </option>
+            
+                <option ref="option-1005">
+                    <text>L&#39;influenza e&#39; una malattia di minore importanza</text>
+                </option>
+            
+                <option ref="option-1006">
+                    <text>Non credo che mi ammalero&#39; di influenza</text>
+                </option>
+            
+                <option ref="option-1007">
+                    <text>Ritengo che il vaccino possa causare l&#39;influenza</text>
+                </option>
+            
+                <option ref="option-1008">
+                    <text>Ho timore che il vaccino non sia sicuro o possa causare malattie </text>
+                </option>
+            
+                <option ref="option-1009">
+                    <text>Non mi piace ricevere vaccinazioni</text>
+                </option>
+            
+                <option ref="option-1010">
+                    <text>Il vaccino non era facilmente reperibile</text>
+                </option>
+            
+                <option ref="option-1011">
+                    <text>Il vaccino non era gratis</text>
+                </option>
+            
+                <option ref="option-1012">
+                    <text>Nessun motivo in particolare</text>
+                </option>
+            
+                <option ref="option-1013">
+                    <text>Nonostante le raccomandazioni del mio dottore, non ho ricevuto la vaccinazione</text>
+                </option>
+            
+                <option ref="option-1014">
+                    <text>Altro</text>
+                </option>
+            
+                <option ref="option-1015">
+                    <text>No</text>
+                </option>
+            
+                <option ref="option-1016">
+                    <text>Asma</text>
+                </option>
+            
+                <option ref="option-1017">
+                    <text>Diabete</text>
+                </option>
+            
+                <option ref="option-1018">
+                    <text>Patologia polmonare</text>
+                </option>
+            
+                <option ref="option-1019">
+                    <text>Patologia cardiovascolare</text>
+                </option>
+            
+                <option ref="option-1020">
+                    <text>Patologia renale</text>
+                </option>
+            
+                <option ref="option-1021">
+                    <text>Immunosoppressione (dovuta a splenectomia, trapianto d&#39;organo, immunodeficienza acquisita, trattamento anti cancro, etc)</text>
+                </option>
+            
+                <option ref="option-1022">
+                    <text>Si</text>
+                </option>
+            
+                <option ref="option-1023">
+                    <text>No</text>
+                </option>
+            
+                <option ref="option-1024">
+                    <text>Non so/preferisco non rispondere</text>
+                </option>
+            
+                <option ref="option-1025">
+                    <text>Primo trimestre (settimane 1-12)</text>
+                </option>
+            
+                <option ref="option-1026">
+                    <text>Secondo trimestre (settimane 13-28)</text>
+                </option>
+            
+                <option ref="option-1027">
+                    <text>Terzo trimestre (settimana 29 - parto)</text>
+                </option>
+            
+                <option ref="option-1028">
+                    <text>Non so/preferisco non rispondere</text>
+                </option>
+            
+                <option ref="option-1029">
+                    <text>No</text>
+                </option>
+            
+                <option ref="option-1030">
+                    <text>Si, occasionalmente</text>
+                </option>
+            
+                <option ref="option-1031">
+                    <text>Si, quotidianamente, meno di dieci sigarette</text>
+                </option>
+            
+                <option ref="option-1032">
+                    <text>Si, quotidianamente, piu&#39; di dieci sigarette </text>
+                </option>
+            
+                <option ref="option-1033">
+                    <text>Non so/preferisco non rispondere</text>
+                </option>
+            
+                <option ref="option-1034">
+                    <text>Febbre da fieno</text>
+                </option>
+            
+                <option ref="option-1035">
+                    <text>Allergia ad acari della polvere</text>
+                </option>
+            
+                <option ref="option-1036">
+                    <text>Allergia al pelo di animali domestici</text>
+                </option>
+            
+                <option ref="option-1037">
+                    <text>Altre allergie che causano sintomi respiratori (es. occhi arrossati e lacrimevoli)</text>
+                </option>
+            
+                <option ref="option-1038">
+                    <text>Non ho allergie che causano sintomi respiratori</text>
+                </option>
+            
+                <option ref="option-1039">
+                    <text>Nessun regime alimentare speciale</text>
+                </option>
+            
+                <option ref="option-1040">
+                    <text>Vegetariano</text>
+                </option>
+            
+                <option ref="option-1041">
+                    <text>Vegano</text>
+                </option>
+            
+                <option ref="option-1042">
+                    <text>Ipocalorico</text>
+                </option>
+            
+                <option ref="option-1043">
+                    <text>Altro</text>
+                </option>
+            
+                <option ref="option-1044">
+                    <text>No</text>
+                </option>
+            
+                <option ref="option-1045">
+                    <text>Si, uno o piu&#39; cani</text>
+                </option>
+            
+                <option ref="option-1046">
+                    <text>Si, uno o piu&#39; gatti</text>
+                </option>
+            
+                <option ref="option-1047">
+                    <text>Si, uno o piu&#39; uccelli</text>
+                </option>
+            
+                <option ref="option-1048">
+                    <text>Si, uno o piu&#39; animali di altro tipo</text>
+                </option>
+            
+            </options>
+        </translation>
+        
+        <translation lang="nl">
+            <title>Aanmelding als griepmeter</title>
+            <questions>
+            
+                <question ref="question-176">
+                    <title></title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-177">
+                    <title>Wie wilt u aanmelden als griepmeter?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-178">
+                    <title>Wat is uw geslacht?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-179">
+                    <title>Wat is uw geboortedatum?</title>
+                    <description>(Selecteer de maand en het jaar.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-180">
+                    <title>Wat zijn de vier cijfers van uw postcode?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-181">
+                    <title>Wat is uw voornaamste bezigheid overdag?</title>
+                    <description>(Eén antwoord mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-182">
+                    <title>Wat zijn de eerste vier cijfers van de postcode van uw werkplek/school/universiteit?</title>
+                    <description>(Waar u de meeste tijd doorbrengt.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-183">
+                    <title>Welke omschrijving past het best bij uw dagelijkse werkzaamheden?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-184">
+                    <title>Wat is uw hoogst genoten opleiding?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-185">
+                    <title>Heeft u tijdens een normale dag contact met</title>
+                    <description>(meerdere antwoorden mogelijk):</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-186">
+                    <title>INCLUSIEF UZELF, hoeveel personen van de onderstaande leeftijdsgroepen wonen er in uw huishouden?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-187">
+                    <title>Hoeveel kinderen in de leeftijd van 0 tot 4 jaar uit uw huishouden gaan naar school of naar de dagopvang?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-188">
+                    <title>Hoe verplaatst u zich meestal?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-189">
+                    <title>Hoeveel tijd brengt u op een normale dag door in het openbaar vervoer?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-190">
+                    <title>Hoe vaak heeft u last van verkoudheid of griepachtige verschijnselen?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-191">
+                    <title>Heeft u vorig seizoen een griepprik gehaald?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-192">
+                    <title>Heeft u een griepprik gehaald voor het komende seizoen?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-193">
+                    <title>Wanneer bent u voor dit seizoen gevaccineerd tegen de griep?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-194">
+                    <title>Wat waren voor u de belangrijkste redenen om dit jaar een griepprik te halen?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-195">
+                    <title>Wat waren voor u de belangrijkste redenen om dit jaar geen griepprik te halen?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-196">
+                    <title>Gebruikt u medicatie voor een van de volgende aandoeningen?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-197">
+                    <title>Bent u momenteel zwanger?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-198">
+                    <title>In welk trimester van de zwangerschap bent u?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-199">
+                    <title>Rookt u?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-200">
+                    <title>Heeft u een of meer van de volgende allergieën?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-201">
+                    <title>Volgt u een specifiek dieet?</title>
+                    <description>(Meerdere antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-202">
+                    <title>Heeft u huisdieren?</title>
+                    <description>(Meerder antwoorden mogelijk.)</description>
+                    <error_message></error_message>
+                </question>
+            
+                <question ref="question-203">
+                    <title>Waar hebt u voor het eerst van de Grote Griepmeting gehoord?</title>
+                    <description></description>
+                    <error_message></error_message>
+                </question>
+            
+            </questions>
+            <columns>
+            
+            </columns>
+            <rows>
+            
+            </rows>
+            <options>
+            
+                <option ref="option-917">
+                    <text>Mezelf</text>
+                </option>
+            
+                <option ref="option-918">
+                    <text>Een gezinslid</text>
+                </option>
+            
+                <option ref="option-919">
+                    <text>Iemand anders</text>
+                </option>
+            
+                <option ref="option-920">
+                    <text>Man</text>
+                </option>
+            
+                <option ref="option-921">
+                    <text>Vrouw</text>
+                </option>
+            
+                <option ref="option-922">
+                    <text></text>
+                </option>
+            
+                <option ref="option-923">
+                    <text></text>
+                </option>
+            
+                <option ref="option-924">
+                    <text>Ik werk fulltime in loondienst</text>
+                </option>
+            
+                <option ref="option-925">
+                    <text>Ik werk parttime in loondienst</text>
+                </option>
+            
+                <option ref="option-926">
+                    <text>Ik werk als zelfstandige/ondernemer</text>
+                </option>
+            
+                <option ref="option-927">
+                    <text>Ik ben scholier of student</text>
+                </option>
+            
+                <option ref="option-928">
+                    <text>Ik ben huisman/huisvrouw</text>
+                </option>
+            
+                <option ref="option-929">
+                    <text>Ik ben werkloos</text>
+                </option>
+            
+                <option ref="option-930">
+                    <text>Ik ben thuis vanwege langdurige ziekte of zwangerschapsverlof</text>
+                </option>
+            
+                <option ref="option-931">
+                    <text>Ik ben met pensioen</text>
+                </option>
+            
+                <option ref="option-932">
+                    <text>Anders</text>
+                </option>
+            
+                <option ref="option-933">
+                    <text>Postcode</text>
+                </option>
+            
+                <option ref="option-934">
+                    <text>Dat weet ik niet</text>
+                </option>
+            
+                <option ref="option-935">
+                    <text>Niet van toepassing/ik heb geen vaste werkplek</text>
+                </option>
+            
+                <option ref="option-936">
+                    <text>Professional</text>
+                </option>
+            
+                <option ref="option-937">
+                    <text>Kantoorwerk</text>
+                </option>
+            
+                <option ref="option-938">
+                    <text>Verkoop, horeca en vrije tijd</text>
+                </option>
+            
+                <option ref="option-939">
+                    <text>Technisch handwerk</text>
+                </option>
+            
+                <option ref="option-940">
+                    <text>Ander handwerk</text>
+                </option>
+            
+                <option ref="option-941">
+                    <text>Anders</text>
+                </option>
+            
+                <option ref="option-942">
+                    <text>Ik heb geen officiële diploma’s</text>
+                </option>
+            
+                <option ref="option-943">
+                    <text>Mavo of vmbo</text>
+                </option>
+            
+                <option ref="option-944">
+                    <text>Havo, vwo of MBO</text>
+                </option>
+            
+                <option ref="option-945">
+                    <text>HBO of WO bachelor</text>
+                </option>
+            
+                <option ref="option-946">
+                    <text>WO master/PhD (doctor)</text>
+                </option>
+            
+                <option ref="option-947">
+                    <text>Ik ben nog bezig met een opleiding</text>
+                </option>
+            
+                <option ref="option-948">
+                    <text>Meer dan 10 kinderen of jongeren</text>
+                </option>
+            
+                <option ref="option-949">
+                    <text>Meer dan 10 mensen van 65 jaar of ouder</text>
+                </option>
+            
+                <option ref="option-950">
+                    <text>Patiënten</text>
+                </option>
+            
+                <option ref="option-951">
+                    <text>Groepen mensen groter dan 10 personen</text>
+                </option>
+            
+                <option ref="option-952">
+                    <text>Geen van bovenstaande antwoorden is van toepassing</text>
+                </option>
+            
+                <option ref="option-953">
+                    <text>0 tot 4 jaar</text>
+                </option>
+            
+                <option ref="option-954">
+                    <text>5 tot 18 jaar</text>
+                </option>
+            
+                <option ref="option-955">
+                    <text>19 tot 44 jaar</text>
+                </option>
+            
+                <option ref="option-956">
+                    <text>45 tot 64 jaar</text>
+                </option>
+            
+                <option ref="option-957">
+                    <text>65 jaar of ouder</text>
+                </option>
+            
+                <option ref="option-958">
+                    <text>Geen</text>
+                </option>
+            
+                <option ref="option-959">
+                    <text></text>
+                </option>
+            
+                <option ref="option-960">
+                    <text></text>
+                </option>
+            
+                <option ref="option-961">
+                    <text></text>
+                </option>
+            
+                <option ref="option-962">
+                    <text></text>
+                </option>
+            
+                <option ref="option-963">
+                    <text></text>
+                </option>
+            
+                <option ref="option-964">
+                    <text>Meer dan 5</text>
+                </option>
+            
+                <option ref="option-965">
+                    <text>Lopend</text>
+                </option>
+            
+                <option ref="option-966">
+                    <text>Op de fiets</text>
+                </option>
+            
+                <option ref="option-967">
+                    <text>Met de scooter of motor</text>
+                </option>
+            
+                <option ref="option-968">
+                    <text>Met de auto</text>
+                </option>
+            
+                <option ref="option-969">
+                    <text>Met het openbaar vervoer</text>
+                </option>
+            
+                <option ref="option-970">
+                    <text>Anders</text>
+                </option>
+            
+                <option ref="option-971">
+                    <text>Ik ga normaal gesproken niet met het openbaar vervoer</text>
+                </option>
+            
+                <option ref="option-972">
+                    <text>0 tot 30 minuten</text>
+                </option>
+            
+                <option ref="option-973">
+                    <text>30 minuten tot 1.5 uur</text>
+                </option>
+            
+                <option ref="option-974">
+                    <text>1.5 uur tot 4 uur</text>
+                </option>
+            
+                <option ref="option-975">
+                    <text>Meer dan 4 uur</text>
+                </option>
+            
+                <option ref="option-976">
+                    <text>Nooit</text>
+                </option>
+            
+                <option ref="option-977">
+                    <text>1 of 2 keer per jaar</text>
+                </option>
+            
+                <option ref="option-978">
+                    <text>Tussen 3 en 5 keer per jaar</text>
+                </option>
+            
+                <option ref="option-979">
+                    <text>Tussen 6 en 10 keer per jaar</text>
+                </option>
+            
+                <option ref="option-980">
+                    <text>Meer dan 10 keer per jaar</text>
+                </option>
+            
+                <option ref="option-981">
+                    <text>Dat weet ik niet</text>
+                </option>
+            
+                <option ref="option-982">
+                    <text>Ja</text>
+                </option>
+            
+                <option ref="option-983">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-984">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-985">
+                    <text>Ja</text>
+                </option>
+            
+                <option ref="option-986">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-987">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-988">
+                    <text>Kies een datum:</text>
+                </option>
+            
+                <option ref="option-989">
+                    <text>Dat weet ik niet (meer)</text>
+                </option>
+            
+                <option ref="option-990">
+                    <text>Ik behoor tot een risicogroep (zwanger, 65 jaar of ouder, chronische ziekte)</text>
+                </option>
+            
+                <option ref="option-991">
+                    <text>Vaccinatie voorkomt dat ik zelf griep krijg</text>
+                </option>
+            
+                <option ref="option-992">
+                    <text>Vaccinatie voorkomt dat ik het griepvirus verspreidt naar andere mensen</text>
+                </option>
+            
+                <option ref="option-993">
+                    <text>Mijn huisarts heeft me de griepprik aangeraden</text>
+                </option>
+            
+                <option ref="option-994">
+                    <text>De griepprik werd aangeraden op mijn werk/op school</text>
+                </option>
+            
+                <option ref="option-995">
+                    <text>De griepprik is voor mij makkelijk beschikbaar</text>
+                </option>
+            
+                <option ref="option-996">
+                    <text>De griepprik was gratis</text>
+                </option>
+            
+                <option ref="option-997">
+                    <text>Ik wil deze winter geen werk/school missen</text>
+                </option>
+            
+                <option ref="option-998">
+                    <text>Ik haal de griepprik altijd</text>
+                </option>
+            
+                <option ref="option-999">
+                    <text>Andere reden</text>
+                </option>
+            
+                <option ref="option-1000">
+                    <text>Ik wil de griepprik gaan halen, maar heb dat nog niet gedaan</text>
+                </option>
+            
+                <option ref="option-1001">
+                    <text>De griepprik is mij niet aangeboden</text>
+                </option>
+            
+                <option ref="option-1002">
+                    <text>Ik behoor niet tot een risicogroep</text>
+                </option>
+            
+                <option ref="option-1003">
+                    <text>Ik vind het beter om een natuurlijke afweer tegen het griepvirus op te bouwen</text>
+                </option>
+            
+                <option ref="option-1004">
+                    <text>Ik heb twijfels over de werkzaamheid van de griepprik</text>
+                </option>
+            
+                <option ref="option-1005">
+                    <text>Griep is geen ernstige ziekte</text>
+                </option>
+            
+                <option ref="option-1006">
+                    <text>Ik denk dat ik maar een kleine kans heb om dit jaar griep te krijgen</text>
+                </option>
+            
+                <option ref="option-1007">
+                    <text>Ik geloof dat de griepprik juist griep veroorzaakt</text>
+                </option>
+            
+                <option ref="option-1008">
+                    <text>Ik ben bang dat het vaccin niet veilig is en dat ik last zal krijgen van bijwerkingen</text>
+                </option>
+            
+                <option ref="option-1009">
+                    <text>Ik hou er niet van om gevaccineerd te worden</text>
+                </option>
+            
+                <option ref="option-1010">
+                    <text>De griepprik is voor mij niet makkelijk beschikbaar</text>
+                </option>
+            
+                <option ref="option-1011">
+                    <text>De griepprik is voor mij niet gratis</text>
+                </option>
+            
+                <option ref="option-1012">
+                    <text>Ik heb geen duidelijke reden</text>
+                </option>
+            
+                <option ref="option-1013">
+                    <text>Hoewel mijn huisarts de griepprik heeft aangeraden, ben ik die toch niet gaan halen</text>
+                </option>
+            
+                <option ref="option-1014">
+                    <text>Andere reden</text>
+                </option>
+            
+                <option ref="option-1015">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-1016">
+                    <text>Ja, voor astma</text>
+                </option>
+            
+                <option ref="option-1017">
+                    <text>Ja, voor diabetes</text>
+                </option>
+            
+                <option ref="option-1018">
+                    <text>Ja, voor longziekten (COPD, emfyseem)</text>
+                </option>
+            
+                <option ref="option-1019">
+                    <text>Ja, voor hartaandoeningen</text>
+                </option>
+            
+                <option ref="option-1020">
+                    <text>Ja, voor nieraandoeningen</text>
+                </option>
+            
+                <option ref="option-1021">
+                    <text>Ja, voor een verzwakt afweersysteem</text>
+                </option>
+            
+                <option ref="option-1022">
+                    <text>Ja</text>
+                </option>
+            
+                <option ref="option-1023">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-1024">
+                    <text>Dat weet ik niet/wil ik niet zeggen</text>
+                </option>
+            
+                <option ref="option-1025">
+                    <text>Eerste trimester (tussen de 1 en 12 weken zwanger)</text>
+                </option>
+            
+                <option ref="option-1026">
+                    <text>Tweede trimester (tussen de 13 en 28 weken zwanger)</text>
+                </option>
+            
+                <option ref="option-1027">
+                    <text>Derde trimester (vanaf 29 weken zwanger tot de geboorte)</text>
+                </option>
+            
+                <option ref="option-1028">
+                    <text>Dat weet ik niet/wil ik niet zeggen</text>
+                </option>
+            
+                <option ref="option-1029">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-1030">
+                    <text>Ja, af en toe</text>
+                </option>
+            
+                <option ref="option-1031">
+                    <text>Dagelijks, maar wel minder dan 10 keer per dag</text>
+                </option>
+            
+                <option ref="option-1032">
+                    <text>Dagelijks, 10 keer of vaker per dag</text>
+                </option>
+            
+                <option ref="option-1033">
+                    <text>Dat weet ik niet/wil ik niet zeggen</text>
+                </option>
+            
+                <option ref="option-1034">
+                    <text>Hooikoorts</text>
+                </option>
+            
+                <option ref="option-1035">
+                    <text>Allergie voor huisstofmijt</text>
+                </option>
+            
+                <option ref="option-1036">
+                    <text>Allergie voor huisdieren</text>
+                </option>
+            
+                <option ref="option-1037">
+                    <text>Een andere allergie waarvan ik verkoudheidsklachten (loopneus, tranende ogen) krijg</text>
+                </option>
+            
+                <option ref="option-1038">
+                    <text>Nee, ik heb geen allergie waarvan ik verkoudheidsklachten krijg</text>
+                </option>
+            
+                <option ref="option-1039">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-1040">
+                    <text>Ik eet vegetarisch</text>
+                </option>
+            
+                <option ref="option-1041">
+                    <text>Ik eet veganistisch</text>
+                </option>
+            
+                <option ref="option-1042">
+                    <text>Ik eet calorie-arm</text>
+                </option>
+            
+                <option ref="option-1043">
+                    <text>Ik volg een ander dieet</text>
+                </option>
+            
+                <option ref="option-1044">
+                    <text>Nee</text>
+                </option>
+            
+                <option ref="option-1045">
+                    <text>Ja, één of meer honden</text>
+                </option>
+            
+                <option ref="option-1046">
+                    <text>Ja, één of meer katten</text>
+                </option>
+            
+                <option ref="option-1047">
+                    <text>Ja, één of meer vogels</text>
+                </option>
+            
+                <option ref="option-1048">
+                    <text>Ja, één of meer andere dieren</text>
+                </option>
+            
+                <option ref="option-1049">
+                    <text>Op de radio of televisie</text>
+                </option>
+            
+                <option ref="option-1050">
+                    <text>In een krant of tijdschrift</text>
+                </option>
+            
+                <option ref="option-1051">
+                    <text>Via een internetsite (zoekmachine of link)</text>
+                </option>
+            
+                <option ref="option-1052">
+                    <text>Door de poster van het project</text>
+                </option>
+            
+                <option ref="option-1053">
+                    <text>Via familie of vrienden</text>
+                </option>
+            
+                <option ref="option-1054">
+                    <text>Op school of het werk</text>
+                </option>
+            
+            </options>
+        </translation>
+        
+    </translations>
+</survey>
