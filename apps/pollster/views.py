@@ -105,6 +105,8 @@ def survey_test(request, id, language=None):
     locale_code = locale.locale_alias.get(language)
     if locale_code:
         locale_code = locale_code.split('.')[0].replace('_', '-')
+        if locale_code == "en-US":
+            locale_code = "en-GB"
     survey_user = _get_active_survey_user(request)
     user = _get_active_survey_user(request)
     form = None
@@ -145,6 +147,8 @@ def survey_run(request, shortname, next=None):
     locale_code = locale.locale_alias.get(language)
     if locale_code:
         locale_code = locale_code.split('.')[0].replace('_', '-')
+        if locale_code == "en-US":
+            locale_code = "en-GB"
     translation = get_object_or_none(models.TranslationSurvey, survey=survey, language=language, status="PUBLISHED")
     survey.set_translation_survey(translation)
     survey_user = _get_active_survey_user(request)
