@@ -770,7 +770,6 @@ msgid "Please, if you have not already done so, fill in"
 msgstr "Caso não tenha ainda preenchido o questionário semanal, pode faze-lo no link\n"
 "\n"
 "http://(%site)s/survey/"
-"\n"
 
 #: templates/survey/thanks_profile.html:6
 msgid "the symptoms questionaire"
