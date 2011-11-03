@@ -773,7 +773,7 @@ msgstr "Caso não tenha ainda preenchido o questionário semanal, pode faze-lo n
 
 #: templates/survey/thanks_profile.html:6
 msgid "the symptoms questionaire"
-msgstr "questionário de sintomas"
+msgstr "questionário semanal"
 
 msgid "Activate your account:\n\nClick the following URL or copy and paste it to the browser's address bar.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nThis activation URL will expire in %(expiration_days)s days."
 msgstr ""
@@ -791,8 +791,8 @@ msgstr "Ative a sua conta! %(site)s"
 msgid "Please check the answers for the highlighted questions."
 msgstr "Verifique as respostas às questões assinaladas"
 
-msgid "Weekly survey"
-msgstr "Questionário de sintomas"
+msgid "Weekly survey
+msgstr "Questionário semanal"
 
 msgid "Manage household"
-msgstr "Agregado familiar"
+msgstr "Grupo doméstico"
