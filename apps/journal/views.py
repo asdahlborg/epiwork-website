@@ -31,6 +31,8 @@ def _get_queryset(categories=(), date_range=(None, None)):
     if start is not None and last is not None:
         qs = qs.filter(pub_date__gte=start, pub_date__lt=last)
 
+    qs = qs.order_by("-pub_date")
+
     return qs
 
 def _paginate(queryset, page, paginate_by):
