@@ -594,6 +594,9 @@ class QuestionColumn(models.Model):
             if option.column and option.column != self:
                 continue
             option.set_row_column(self.row, self)
+            option.set_translation_survey(self.translation_survey)
+            # TODO: We need a form to reset the selects to user's values.
+            # option.set_form(self.form)
             yield option
 
     @property
