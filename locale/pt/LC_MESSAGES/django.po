@@ -401,7 +401,7 @@ msgstr "Registar"
 
 #: templates/base/sitebase.html:77
 msgid "Forgot password?"
-msgstr "Esqueceu a password ?"
+msgstr "Esqueceu a palavra-passe ?"
 
 #: templates/base/sitebase.html:88
 #: templates/search/search.html:9
@@ -463,11 +463,11 @@ msgstr "Arquivo"
 #: templates/registration/activation_complete.html:4
 #: templates/registration/activation_complete.html:6
 msgid "Account Activation"
-msgstr "Activação de conta"
+msgstr "Ativação de conta"
 
 #: templates/registration/activate.html:7
 msgid "User activation failed."
-msgstr "Falhou a activação do utilizador"
+msgstr "Falhou a ativação do utilizador"
 
 #: templates/registration/activate.html:9
 #: templates/registration/activation_complete.html:9
@@ -477,7 +477,7 @@ msgstr "Voltar ao Início"
 
 #: templates/registration/activation_complete.html:7
 msgid "Activation is complete."
-msgstr "Activação concluída"
+msgstr "Ativação concluída"
 
 #: templates/registration/activation_complete.html:9
 msgid "or"
@@ -485,7 +485,7 @@ msgstr "ou"
 
 #: templates/registration/activation_complete.html:9
 msgid "proceed to the login page"
-msgstr "Siga para a página de inicio de sessão"
+msgstr "Siga para a sua Área Pessoal"
 
 #: templates/registration/boxbase.html:4
 #: templates/registration/boxbase.html:9
@@ -494,19 +494,19 @@ msgstr "Entrar"
 
 #: templates/registration/boxbase.html:10
 msgid "Enter your username and password to log in."
-msgstr "Introduza o nome de utilizador e a password para entrar"
+msgstr "Introduza o nome de utilizador e palavra-passe para entrar"
 
 #: templates/registration/boxbase.html:10
 msgid "Forgot your password?"
-msgstr "Esqueceu a password ?"
+msgstr "Esqueceu a palavra-passe ?"
 
 #: templates/registration/index.html:8
 msgid "Change Password"
-msgstr "Alterar Password"
+msgstr "Alterar a palavra-passe"
 
 #: templates/registration/index.html:9
 msgid "Update Profile"
-msgstr "Actualizar perfil"
+msgstr "Atualizar perfil"
 
 #: templates/registration/logout.html:4
 msgid "Logged out"
@@ -514,88 +514,88 @@ msgstr "Sessão encerrada"
 
 #: templates/registration/logout.html:8
 msgid "You have been logged out. Go to "
-msgstr "A sua sessão foi encerrada. Vá para"
+msgstr "A sua sessão foi encerrada. Vá para "
 
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:8
 msgid "Password change successful"
-msgstr "Password alterada com sucesso"
+msgstr "Palavra-passe alterada com sucesso"
 
 #: templates/registration/password_change_done.html:10
 msgid "Your password was changed."
-msgstr "A password foi alterada"
+msgstr "A palavra-passe foi alterada"
 
 #: templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:8
 msgid "Password change"
-msgstr "Alterar password"
+msgstr "Alterar palavra-passe"
 
 #: templates/registration/password_change_form.html:10
 msgid "Please enter your old password, for security's sake, and then enter your new password twice so we can verify you typed it in correctly."
-msgstr "Introduza a sua password actual por questões de segurança, e depois introduza e confirme a nova password"
+msgstr "Introduza a sua palavra-passe actual por questões de segurança, e depois introduza e confirme a nova palavra-passe"
 
 #: templates/registration/password_change_form.html:15
 msgid "Old password:"
-msgstr "Password actual"
+msgstr "Palavra-passe actual"
 
 #: templates/registration/password_change_form.html:17
 #: templates/registration/password_reset_confirm.html:16
 msgid "New password:"
-msgstr "Nova password"
+msgstr "Nova palavra-passe"
 
 #: templates/registration/password_change_form.html:19
 #: templates/registration/password_reset_confirm.html:18
 msgid "Confirm password:"
-msgstr "Confirme a password"
+msgstr "Confirme a palavra-passe"
 
 #: templates/registration/password_change_form.html:21
 #: templates/registration/password_reset_confirm.html:19
 msgid "Change my password"
-msgstr "Alterar password"
+msgstr "Alterar palavra-passe"
 
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_complete.html:8
 msgid "Password reset complete"
-msgstr "Recuperação de password terminada"
+msgstr "Recuperação de palavra-passe terminada"
 
 #: templates/registration/password_reset_complete.html:10
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr "A sua password foi definida. Já pode iniciar a sua sessão"
+msgstr "A sua palavra-passe foi definida. Já pode iniciar a sua sessão"
 
 #: templates/registration/password_reset_confirm.html:4
 #: templates/registration/password_reset_form.html:4
 #: templates/registration/password_reset_form.html:8
 msgid "Password reset"
-msgstr "Recuperar password"
+msgstr "Recuperar palavra-passe"
 
 #: templates/registration/password_reset_confirm.html:10
 msgid "Enter new password"
-msgstr "Introduza a nova password"
+msgstr "Introduza a nova palavra-passe"
 
 #: templates/registration/password_reset_confirm.html:12
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
-msgstr "Introduza a sua password e confirme "
+msgstr "Introduza a sua palavra-passe e confirme "
 
 #: templates/registration/password_reset_confirm.html:24
 msgid "Password reset unsuccessful"
-msgstr "Erro ao recuperar a password"
+msgstr "Erro ao recuperar a palavra-passe"
 
 #: templates/registration/password_reset_confirm.html:26
 msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
-msgstr "O link de recuperação da password já foi utilizado. Por favor solicite uma nova recuperação de password."
+msgstr "O link de recuperação da palavra-passe já foi utilizado. Por favor solicite uma nova recuperação de palavra-passe."
 
 #: templates/registration/password_reset_done.html:4
 #: templates/registration/password_reset_done.html:8
 msgid "Password reset successful"
-msgstr "Password recuperada com sucesso"
+msgstr "Palavra-passe recuperada com sucesso"
 
 #: templates/registration/password_reset_done.html:10
 msgid "We've e-mailed you instructions for setting your password to the e-mail address you submitted. You should be receiving it shortly."
-msgstr "Foi enviado um email com instruções para definir a sua password para o seu endereço de email."
+msgstr "Foi enviado um email com instruções para definir a sua palavra-passe para o seu endereço de email."
 
 #: templates/registration/password_reset_email.html:3
 msgid "You're receiving this e-mail because you requested a password reset"
-msgstr "Recebeu este email porque solicitou a recuperação da password"
+msgstr "Recebeu este email porque solicitou a recuperação da palavra-passe"
 
 #: templates/registration/password_reset_email.html:4
 #, python-format
@@ -604,7 +604,7 @@ msgstr "a sua conta de utilizador no site %(site_name)s"
 
 #: templates/registration/password_reset_email.html:6
 msgid "Please go to the following page and choose a new password:"
-msgstr "Siga para a página seguinte e introduza a nova password:"
+msgstr "Siga para a página seguinte e introduza a nova palavra-passe:"
 
 #: templates/registration/password_reset_email.html:10
 msgid "Your username, in case you've forgotten:"
@@ -621,7 +621,7 @@ msgstr "A equipa %(site_name)s"
 
 #: templates/registration/password_reset_form.html:10
 msgid "Forgotten your password? Enter your e-mail address below, and we'll e-mail instructions for setting a new one."
-msgstr "Esqueceu-se da password ? Introduza o seu email para enviarmos instruções para a sua recuperação"
+msgstr "Esqueceu-se da palavra-passe ? Introduza o seu email e receberá as instruções para a sua recuperação."
 
 #: templates/registration/password_reset_form.html:14
 msgid "E-mail address:"
@@ -629,7 +629,7 @@ msgstr "Endereço de email"
 
 #: templates/registration/password_reset_form.html:15
 msgid "Reset my password"
-msgstr "Recuperar password"
+msgstr "Recuperar palavra-passe"
 
 #: templates/registration/registration_complete.html:4
 msgid "Registration complete"
@@ -641,7 +641,7 @@ msgstr "Registo completo"
 
 #: templates/registration/registration_complete.html:7
 msgid "An e-mail containing information about how to activate your account has been sent to your e-mail address."
-msgstr "Foi enviado uma mensagem para o seu email com instruções para activar a sua conta."
+msgstr "Foi enviada uma mensagem para o seu email com instruções para ativação da sua conta."
 
 #: templates/registration/registration_form.html:8
 msgid "Registration Form"
@@ -763,15 +763,14 @@ msgstr "Introduza os sintomas"
 
 #: templates/survey/thanks_profile.html:5
 msgid "Thanks for changing your profile,"
-msgstr "Obrigado por actualizar o perfil."
-"\n"
-"Ao inscrever-se como participante no projecto Gripenet, está a participar num estudo científico sobre a epidemiologia da gripe, nomeadamente a monitorização da incidência gripal e factores de risco associados ao síndrome gripal. Os participantes podem usar o nome de utilizador que entenderem e em nenhum momento é solicitado o seu endereço ou contacto telefónico.Todos os dados que fornecer serão tratados de forma confidencial e anónima. A informação que fornecer será guardada em bases de dados protegidas por acesso com chaves criptográficas e o seu e-mail estará separado da informação do seu estado de saúde, garantindo a anonimização dos dados. Ao concordar em participar neste estudo, permitirá que a equipa de projecto o contacte por e-mail, para envio de informação (newsletter). Poderá sempre cancelar essa subscrição, através do link no final do corpo da newsletter. Para além de informação, a newsletter terá também um link de login automático que direcciona o participante para o seu questionário de sintomas sem ser necessário efectuar o login.\n"
-"\n"
-"Ao prencher o formulário de Registo abaixo e clicando no botão 'Enviar registo', estará a dar o seu consentimento em participar no estudo, indicando que leu (e concordou com) todos os termos deste Consentimento."
+msgstr "O perfil foi alterado."
 
 #: templates/survey/thanks_profile.html:6
 msgid "Please, if you have not already done so, fill in"
-msgstr "Por favor preencha o inquérito se ainda não o fez"
+msgstr "Caso não tenha ainda preenchido o questionário semanal, pode faze-lo no link\n"
+"\n"
+"http://(%site)s/survey/"
+"\n"
 
 #: templates/survey/thanks_profile.html:6
 msgid "the symptoms questionaire"
@@ -779,16 +778,16 @@ msgstr "questionário de sintomas"
 
 msgid "Activate your account:\n\nClick the following URL or copy and paste it to the browser's address bar.\n\nhttp://%(site)s/accounts/activate/%(activation_key)s/\n\nThis activation URL will expire in %(expiration_days)s days."
 msgstr ""
-"Activação de conta:\n"
+"Benvindo(a) à monitorização da gripe através da internet.\n"
 "\n"
-"Clique no endereço abaixo ou copie para o endereço do seu browser.\n"
+"Ative a sua conta Gripenet, clicando no endereço abaixo ou copiando-o para o seu browser.\n"
 "\n"
 "http://%(site)s/accounts/activate/%(activation_key)s/\n"
 "\n"
 "Este endereço expira em %(expiration_days)s dias."
 
 msgid "Activate your account! %(site)s"
-msgstr "Active a sua conta! %(site)s"
+msgstr "Ative a sua conta! %(site)s"
 
 msgid "Please check the answers for the highlighted questions."
 msgstr "Verifique as respostas às questões assinaladas"

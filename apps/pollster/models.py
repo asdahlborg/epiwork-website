@@ -973,7 +973,11 @@ class Chart(models.Model):
     def generate_mapnik_style(self, user_id, global_id):
         style = mapnik.Style()
         for color in self.load_colors(user_id, global_id):
-            c = mapnik.Color(str(color))
+            # If the color can't be parsed, use red.
+            try:
+                c = mapnik.Color(str(color))
+            except:
+                c = mapnik.Color('#ff0000')
             line = mapnik.LineSymbolizer(c, 1.5)
             line.stroke.opacity = 0.7
             poly = mapnik.PolygonSymbolizer(c)
@@ -1103,7 +1107,10 @@ class Chart(models.Model):
             cursor.execute(query, params)
             return [x[0] for x in cursor.fetchall()]
         except DatabaseError, e:
-            return (None, [])
+            # If the SQL query is wrong we just return 'red'. We don't try to pop
+            # up a warning because this probably is an async Javascript call: the
+            # query error should be shown by the map editor.
+            return ['#ff0000']
 
     def load_info(self, lat, lng):
         view = self.get_view_name()

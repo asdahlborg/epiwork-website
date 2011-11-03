@@ -148,16 +148,17 @@
                     .change(function(evt){
                         var $this = $(this);
                         var value = $this.val();
-                        if (!value.match(/[/-]/)) {
-                            $this.val('');
-                        }
-                        else {
-                            var date = Date.parse("01/"+value);
+                        var newValue = '';
+                        var d = split(value);
+                        if (d.year && d.month) {
+                            if (d.month > 12) {
+                                d = { year: d.month, month: d.year }
+                            }
+                            var date = new Date(d.year, d.month-1, 1);
                             if (date)
-                                $this.val(date.toString('MM/yyyy'));
-                            else
-                                $this.val('');
+                                newValue = date.toString('MM/yyyy');
                         }
+                        $this.val(newValue);
                     });
             }
         });
