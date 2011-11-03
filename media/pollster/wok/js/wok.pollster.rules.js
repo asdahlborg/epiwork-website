@@ -20,19 +20,26 @@
     }
 
     function was_filled($survey, question, options, last_participation_data) {
-        if (!last_participation_data)
-            return false;
-        var subject_names = get_question_data_names($survey, question, options);
+        var $question = $survey.find("#question-"+question);
+        if ($question.is('.question-text')) {
+            var data = last_participation_data[$question.find('.user-field').attr("name")];
+            if (data || data === "" || data === 0)
+                return true;
+        }
+        else {
+            for (var i=0 ; i < options.length ; i++) {
+                var $option = $("#option-"+options[i]);
+                var name = $option.find("input").attr("name");
+                var value = $option.find("input").val();
+                if (last_participation_data[name] == value) {
+                    return true;
+                }
+            }
+        }
 
-        // check that at least one option was filled
-        var is_filled = false;
-        jQuery.each(subject_names, function(i, subject_name) {
-            var subject_data = last_participation_data[subject_name];
-            if (subject_data != null && subject_data != undefined)
-                is_filled = true;
-        });
-        return is_filled;
+        return false;
     }
+
 
     function form_element_fill($element, value) {
         $element.each(function() {
