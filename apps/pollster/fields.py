@@ -4,7 +4,7 @@ from django.forms import CharField, ValidationError
 from django.utils.translation import ugettext_lazy as _
 from .db.utils import get_db_type, convert_query_paramstyle
 import datetime, time, re, logging
-import settings
+from django.conf import settings
 
 YEARMONTH_INPUT_FORMATS = (
     '%Y-%m', '%m/%Y', '%m/%y', # '2006-10', '10/2006', '10/06'

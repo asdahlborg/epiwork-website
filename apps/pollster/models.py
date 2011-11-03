@@ -10,7 +10,7 @@ from math import pi,cos,sin,log,exp,atan
 from . import dynamicmodels, json
 from .db.utils import get_db_type, convert_query_paramstyle
 import os, re, shutil, warnings, datetime, csv
-import settings
+from django.conf import settings
 
 DEG_TO_RAD = pi/180
 RAD_TO_DEG = 180/pi
