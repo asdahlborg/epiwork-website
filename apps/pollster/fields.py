@@ -74,7 +74,7 @@ class PostalCodeField(CharField):
         if value in validators.EMPTY_VALUES:
             return None
         fmt = self.input_format or PostalCodeField.get_default_postal_code_format()
-        if fmt and not re.match('^'+fmt+'$', value):
+        if fmt and not re.match('^'+fmt+'$', value, flags=re.IGNORECASE):
             raise ValidationError(self.error_messages['invalid'])
         if not self.db_check_zip(value):
             raise ValidationError(self.error_messages['invalid'])
