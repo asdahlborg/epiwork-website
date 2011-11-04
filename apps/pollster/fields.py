@@ -20,6 +20,7 @@ POSTALCODE_INPUT_FORMATS = {
     'at': r'\d{4}',
     'ch': r'\d{4}',
     'se': r'\d{5}',
+    'fr': r'\d{5}',
 }
 
 logger = logging.getLogger(__name__)
