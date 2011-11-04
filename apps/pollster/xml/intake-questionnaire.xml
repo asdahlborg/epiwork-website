@@ -3,8 +3,8 @@
     <title>Intake Questionnaire</title>
     <shortname>intake</shortname>
     <version></version>
-    <created>2011-11-03T15:04:19.106003</created>
-    <updated>2011-11-03T15:05:06.612996</updated>
+    <created>2011-11-03T14:04:19.106003</created>
+    <updated>2011-11-04T11:36:04.184817</updated>
     <questions>
     
         <question id="question-376">
@@ -179,7 +179,7 @@
         </question>
     
         <question id="question-380">
-            <title>What is your date of birth?</title>
+            <title>What are your month and year of birth? (MM/YYYY)</title>
             <data_name>Q2</data_name>
             <description></description>
             <type>text</type>
@@ -2111,7 +2111,7 @@
                     <data_name>Q11_6</data_name>
                     <is_virtual>false</is_virtual>
                     
-                    <text>An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment</text>
+                    <text>An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)</text>
                     <value>6</value>
                     <is_open>false</is_open>
                     
@@ -2480,7 +2480,7 @@
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
-            <starts_hidden>false</starts_hidden>
+            <starts_hidden>true</starts_hidden>
             <is_mandatory>false</is_mandatory>
             <visual>check</visual>
             <tags></tags>
@@ -2579,7 +2579,7 @@
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
-            <starts_hidden>false</starts_hidden>
+            <starts_hidden>true</starts_hidden>
             <is_mandatory>false</is_mandatory>
             <visual>check</visual>
             <tags></tags>
@@ -2788,6 +2788,23 @@
     </questions>
     <rules>
         
+        <rule id="rule-692">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-377"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1954"/>
+                 
+                 <subject_option ref="option-1955"/>
+                 
+            </subject_options>
+            <object_question ref="question-378"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
         <rule id="rule-691">
             <type>wok.pollster.rules.FutureFill</type>
             <is_sufficient>true</is_sufficient>
@@ -2809,23 +2826,6 @@
                  <object_option ref="option-1954"/>
                  
                  <object_option ref="option-1955"/>
-                 
-            </object_options>
-        </rule>
-        
-        <rule id="rule-692">
-            <type>wok.pollster.rules.ShowQuestion</type>
-            <is_sufficient>true</is_sufficient>
-            <subject_question ref="question-377"/>
-            <subject_options>
-                 
-                 <subject_option ref="option-1954"/>
-                 
-                 <subject_option ref="option-1955"/>
-                 
-            </subject_options>
-            <object_question ref="question-378"/>
-            <object_options>
                  
             </object_options>
         </rule>
@@ -2926,23 +2926,6 @@
             </object_options>
         </rule>
         
-        <rule id="rule-699">
-            <type>wok.pollster.rules.ShowQuestion</type>
-            <is_sufficient>true</is_sufficient>
-            <subject_question ref="question-382"/>
-            <subject_options>
-                 
-                 <subject_option ref="option-1960"/>
-                 
-                 <subject_option ref="option-1961"/>
-                 
-            </subject_options>
-            <object_question ref="question-384"/>
-            <object_options>
-                 
-            </object_options>
-        </rule>
-        
         <rule id="rule-700">
             <type>wok.pollster.rules.FutureFill</type>
             <is_sufficient>true</is_sufficient>
@@ -3008,6 +2991,23 @@
                  
             </subject_options>
             <object_question ref="question-383"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-699">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-382"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1960"/>
+                 
+                 <subject_option ref="option-1961"/>
+                 
+            </subject_options>
+            <object_question ref="question-384"/>
             <object_options>
                  
             </object_options>
@@ -3396,6 +3396,31 @@
             </object_options>
         </rule>
         
+        <rule id="rule-717">
+            <type>wok.pollster.rules.FutureFill</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-393"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-2021"/>
+                 
+                 <subject_option ref="option-2022"/>
+                 
+                 <subject_option ref="option-2023"/>
+                 
+            </subject_options>
+            <object_question ref="question-393"/>
+            <object_options>
+                 
+                 <object_option ref="option-2021"/>
+                 
+                 <object_option ref="option-2022"/>
+                 
+                 <object_option ref="option-2023"/>
+                 
+            </object_options>
+        </rule>
+        
         <rule id="rule-714">
             <type>wok.pollster.rules.ShowQuestion</type>
             <is_sufficient>true</is_sufficient>
@@ -3437,31 +3462,6 @@
             </subject_options>
             <object_question ref="question-394"/>
             <object_options>
-                 
-            </object_options>
-        </rule>
-        
-        <rule id="rule-717">
-            <type>wok.pollster.rules.FutureFill</type>
-            <is_sufficient>true</is_sufficient>
-            <subject_question ref="question-393"/>
-            <subject_options>
-                 
-                 <subject_option ref="option-2021"/>
-                 
-                 <subject_option ref="option-2022"/>
-                 
-                 <subject_option ref="option-2023"/>
-                 
-            </subject_options>
-            <object_question ref="question-393"/>
-            <object_options>
-                 
-                 <object_option ref="option-2021"/>
-                 
-                 <object_option ref="option-2022"/>
-                 
-                 <object_option ref="option-2023"/>
                  
             </object_options>
         </rule>
