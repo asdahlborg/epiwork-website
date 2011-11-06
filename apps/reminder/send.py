@@ -18,7 +18,7 @@ from apps.partnersites.context_processors import site_context
 from .models import get_reminders_for_users, UserReminderInfo, ReminderError
 
 def create_message(user, message):
-    t = Template(message)
+    t = Template(message.message)
     c = {
         'url': get_url(user),
         'unsubscribe_url': get_login_url(user, reverse('apps.reminder.views.unsubscribe')),
@@ -33,6 +33,7 @@ def create_message(user, message):
     t = loader.get_template('reminder/message.html')
     c['inner'] = inner
     c['MEDIA_URL'] = get_media_url()
+    c['message'] = message
     return inner, t.render(Context(c))
 
 def send_reminders():
@@ -71,7 +72,7 @@ def get_survey_url():
     return 'http://%s%s' % (domain, path)
 
 def send(now, user, message):
-    text_base, html_content = create_message(user, message.message)
+    text_base, html_content = create_message(user, message)
     text_content = strip_tags(text_base)
 
     msg = EmailMultiAlternatives(

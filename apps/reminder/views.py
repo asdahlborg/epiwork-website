@@ -52,7 +52,7 @@ def preview(request, year, month, day, hour, minute):
     if not reminder:
         return HttpResponse("There is no reminder in your current language configured. Make sure to add a translation")
 
-    text_base, html_content = create_message(request.user, reminder.message)
+    text_base, html_content = create_message(request.user, reminder)
     return HttpResponse(html_content)
 
 def _reminder(reminder_dict, user):
