@@ -78,6 +78,7 @@ function closeFancybox(){
 
 $(document).ready(function() {
 
+ // login fancybox
  $(".fancybox1").fancybox({
   'overlayColor'		: '#d5d5d5',
   'overlayOpacity'		: 0.8,
@@ -90,9 +91,10 @@ $(document).ready(function() {
   'transitionOut'		: 'none',
   'speedOut'			: 10,
   'type'				: 'iframe',
-  'onClosed'            : function() { parent.location.reload(true); }
+  'onClosed'            : function() { parent.location = '/survey/'; }
  });
 
+ // register fancybox
  $(".fancybox2").fancybox({
   'overlayColor'		: '#d5d5d5',
   'overlayOpacity'		: 0.8,
