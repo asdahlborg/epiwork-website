@@ -6,6 +6,7 @@ from registration.views import activate
 from registration.views import register
 
 from . import views
+from .forms import UnicodeRegistrationForm
 
 urlpatterns = patterns('',
     # From registration.backends.default.urls
@@ -25,7 +26,8 @@ urlpatterns = patterns('',
     url(r'^register/$',
         register,
         { 'backend': 'registration.backends.default.DefaultBackend',
-          'template_name': 'registration/registration_form.html' },
+          'template_name': 'registration/registration_form.html',
+          'form_class': UnicodeRegistrationForm},
         name='registration_register'),
     url(r'^register/complete/$',
         direct_to_template,
