@@ -23,3 +23,18 @@ msgstr "This account has not yet been activated. Please click on the link in the
 msgid "Please check the answers for the highlighted questions."
 msgstr ""
 
+msgid "Forgot password?"
+msgstr "Forgot login details?"
+
+msgid "Username"
+msgstr "Username (case sensitive)"
+
+msgid "Password reset"
+msgstr "Forgotten login details"
+
+msgid "Forgotten your password? Enter your e-mail address below, and we'll e-mail instructions for setting a new one."
+msgstr "Forgotten your username and/or password? Enter your e-mail address below, and we'll email your username, and instructions for setting a new password."
+
+msgid "This value must contain only letters, numbers and underscores."
+msgstr "Please choose a username containing only letters, numbers and underscores, and no spaces."
+
