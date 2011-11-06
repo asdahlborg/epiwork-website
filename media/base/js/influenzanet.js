@@ -79,6 +79,7 @@ function closeFancybox(){
 $(document).ready(function() {
 
  // login fancybox
+ // this triggers a JS error when you're logged in since the button is missing in that case. (fix later)
  $(".fancybox1").fancybox({
   'overlayColor'		: '#d5d5d5',
   'overlayOpacity'		: 0.8,
@@ -91,7 +92,7 @@ $(document).ready(function() {
   'transitionOut'		: 'none',
   'speedOut'			: 10,
   'type'				: 'iframe',
-  'onClosed'            : function() { parent.location = '/survey/'; }
+  'onClosed'            : function() { parent.location.reload(true); }
  });
 
  // register fancybox
