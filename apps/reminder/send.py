@@ -24,6 +24,7 @@ def create_message(user, message):
         'unsubscribe_url': get_login_url(user, reverse('apps.reminder.views.unsubscribe')),
         'first_name': user.first_name,
         'last_name': user.last_name,
+        'username': user.username,
     }
     c.update(site_context())
     c['site_logo'] = get_site_url() + c['site_logo']
