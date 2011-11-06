@@ -1,16 +1,17 @@
 <html>
-<head>
-<style>
+<!-<head>
+<!--<style>
     some css
 </style>
-</head>
+</head>-->
 
 <body>
-<div>Containing a logo or something</div>
-<img src="{{ MEDIA_URL }}logo.png">
+<!--<div>Containing a logo or something</div>
+<img src="{{ MEDIA_URL }}logo.png">-->
 
 {{ inner|safe }}
 
-<div>footers and such containing an <a href="{{ unsubscribe_url|safe }}">Unsubscribe url</a>, and possibly also the <a href="{{ url|safe }}">Profile url</a></div>
+<div><small>You have received this email because you are registered with the Flusurvey. Your contribution helps us track the spread of flu. If you do not wish to receive this weekly reminder any longer, please <a href="{{unsubscribe_url|safe}}">unsubscribe</a> from our mailings.</small></div>
+
 </body>
 </html>
