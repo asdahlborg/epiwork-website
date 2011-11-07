@@ -102,15 +102,8 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.media.PlaceholderMediaMiddleware',
+    'cms.middleware.multilingual.MultilingualURLMiddleware',
 )
-
-if len(LANGUAGES) > 1:
-    # note that this is always true, so rather, if you want to have
-    # a 'local' (or production, or whatever) settings file, you'll have
-    # to drop the last element
-    MIDDLEWARE_CLASSES += ( 
-        'cms.middleware.multilingual.MultilingualURLMiddleware',
-    )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
