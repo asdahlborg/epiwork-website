@@ -1148,3 +1148,6 @@ div.pagination {
 .diag .diag-timestamp { display: block; font-size: 65%;
   -webkit-transform: rotate(-11deg); -moz-transform: rotate(-11deg); -o-transform: rotate(-11deg); -ms-transform: rotate(-11deg);
   transform: rotate(-11deg); }
+
+.survey-chart .chart { width: 440px; height: 330px; position: relative; }
+.survey-chart .chart-no-data { background:#EEE; padding:20px; }

@@ -66,13 +66,12 @@
     </div>
     <div id="pollster-canvas">
         {% if chart.has_data %}
-        <div id="pollster-chart-{{ chart.id }}" class="chart" data-chart-url="{% url pollster_survey_chart_data survey.id chart.shortname %}"
-             data-chart-type="{{ chart.type.shortname }}"
-             style="width:440px;height:330px">
+        <div id="pollster-chart-{{ chart.id }}" class="chart chart-{{ chart.survey.shortname }}-{{ chart.shortname }}"
+             data-chart-url="{% url pollster_survey_chart_data survey.id chart.shortname %}"
+             data-chart-type="{{ chart.type.shortname }}">
         </div>
         {% else %}
-        <div class="chart-no-data"
-             style="width:440px;height:330px;background:#EEE;padding:20px">No available data</div>
+        <div class="chart chart-{{ chart.survey.shortname }}-{{ chart.shortname }} chart-no-data">No available data</div>
         {% endif %}
     </div>
     <div id="pollster-tools">

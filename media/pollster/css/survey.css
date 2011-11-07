@@ -42,6 +42,10 @@
 #survey-translation-edit .question input[type="text"], #survey-translation-edit .question textarea { margin-left: 0; width: 335px; border: 1px solid #888; }
 #survey-translation-edit li { margin-top: 15px; position: relative; }
 #survey-translation-edit li .item-name:first-child { position: absolute; top: -9px; right: 1px; }
+
+#pollster-canvas .chart { width: 440px; height: 330px; position: relative; }
+#pollster-canvas .chart-no-data { background:#EEE; padding:20px; }
+
 /* MESSAGES & ERRORS */
 /* Taken from /django/contrib/admin/media/css/base.css */
 
