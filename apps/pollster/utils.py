@@ -1,9 +1,11 @@
 from . import models
+from django.conf import settings
 
 def get_user_profile(user_id, global_id):
     try:
-        intake = models.Survey.get_by_shortname('intake')
-        profile = intake.get_last_participation_data(user_id, global_id)
+        shortname = settings.POLLSTER_USER_PROFILE_SURVEY
+        survey = models.Survey.get_by_shortname(shortname)
+        profile = survey.get_last_participation_data(user_id, global_id)
         return profile
     except models.Survey.DoesNotExist:
         return None

@@ -52,7 +52,7 @@
                     c = new google.maps.LatLng(data.bounds.lat, data.bounds.lng);
                     z = data.bounds.z;
                 }
-                if (data && data.center && center) {
+                if (data && data.center && data.center.lat && data.center.lng && center) {
                     c = new google.maps.LatLng(data.center.lat, data.center.lng);
                     if (data && data.bounds)
                         z = data.bounds.z;

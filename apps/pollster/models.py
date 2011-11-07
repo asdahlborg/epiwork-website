@@ -900,14 +900,20 @@ class Chart(models.Model):
         else:
             if self.chartwrapper:
                 data["bounds"] = json.loads(self.chartwrapper)
-            # TODO: To center the map on the centroid of current user's zip we need
-            # to access the "intake" survey, question "Q3". Those two values should
-            # probably go into settings.py, or something like that.
             try:
-                intake = Survey.objects.get(shortname="intake", status='PUBLISHED')
-                lpd = intake.get_last_participation_data(user_id, global_id)
-                if lpd:
-                    data["center"] = self.load_zip_coords(str(lpd["Q3"]))
+                shortname = settings.POLLSTER_USER_PROFILE_SURVEY
+                survey = Survey.objects.get(shortname=shortname, status='PUBLISHED')
+                lpd = survey.get_last_participation_data(user_id, global_id)
+                if lpd and hasattr(settings, 'POLLSTER_USER_ZIP_CODE_DATA_NAME'):
+                    zip_code = lpd.get(settings.POLLSTER_USER_ZIP_CODE_DATA_NAME)
+                    if zip_code is not None:
+                        zip_code = str(zip_code).upper()
+                    country = None
+                    if hasattr(settings, 'POLLSTER_USER_COUNTRY_DATA_NAME'):
+                        country = lpd.get(settings.POLLSTER_USER_COUNTRY_DATA_NAME)
+                        if country is not None:
+                            country = str(country).upper()
+                    data["center"] = self.load_zip_coords(zip_code, country)
             except:
                 pass
 
@@ -1046,9 +1052,15 @@ class Chart(models.Model):
         if table_query:
             table = self.get_table_name()
             view = self.get_view_name()
-            view_query = """SELECT A.*, B.id AS OGC_FID, B.geometry
-                              FROM pollster_zip_codes B, (SELECT * FROM %s) A
-                             WHERE A.zip_code_key = B.zip_code_key""" % (table,)
+            if re.search(r'\bzip_code_country\b', table_query):
+                view_query = """SELECT A.*, B.id AS OGC_FID, B.geometry
+                                  FROM pollster_zip_codes B, (SELECT * FROM %s) A
+                                 WHERE upper(A.zip_code_key) = upper(B.zip_code_key)
+                                   AND upper(A.zip_code_country) = upper(B.country)""" % (table,)
+            else:
+                view_query = """SELECT A.*, B.id AS OGC_FID, B.geometry
+                                  FROM pollster_zip_codes B, (SELECT * FROM %s) A
+                                 WHERE upper(A.zip_code_key) = upper(B.zip_code_key)""" % (table,)
             cursor = connection.cursor()
             #try:
             cursor.execute("DROP VIEW IF EXISTS %s" % (view,))
@@ -1125,12 +1137,19 @@ class Chart(models.Model):
         except DatabaseError, e:
             return (None, [])
 
-    def load_zip_coords(self, zip_code_key):
-        query = """SELECT ST_Y(ST_Centroid(geometry)) AS lat, ST_X(ST_Centroid(geometry)) AS lng
-                     FROM pollster_zip_codes WHERE zip_code_key = %s"""
+    def load_zip_coords(self, zip_code_key, zip_code_country=None):
+        if zip_code_country:
+            query = """SELECT ST_Y(ST_Centroid(geometry)) AS lat, ST_X(ST_Centroid(geometry)) AS lng
+                         FROM pollster_zip_codes WHERE zip_code_key = %s AND country = %s"""
+            args = (zip_code_key, zip_code_country)
+
+        else:
+            query = """SELECT ST_Y(ST_Centroid(geometry)) AS lat, ST_X(ST_Centroid(geometry)) AS lng
+                         FROM pollster_zip_codes WHERE zip_code_key = %s"""
+            args = (zip_code_key,)
         try:
             cursor = connection.cursor()
-            cursor.execute(query, (zip_code_key,))
+            cursor.execute(query, args)
             data = cursor.fetchall()
             if len(data) > 0:
                 return {"lat": data[0][0], "lng": data[0][1]}
