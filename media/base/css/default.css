@@ -1142,8 +1142,9 @@ div.pagination {
  margin: 10px 0 10px 0;
 }
 
-.diag .diag-person { overflow: auto; padding: 0 0 5px 0; }
-.diag .diag-item { float:left; margin-right: 6px; }
+.diag .diag-person { padding: 0 0 5px 0; list-style: none; }
+.diag .diag-person ul { overflow: hidden; }
+.diag .diag-item { float:left; margin-right: 6px; list-style: none; }
 .diag .diag-icon { display: block; margin: 0 auto; }
 .diag .diag-timestamp { display: block; font-size: 65%;
   -webkit-transform: rotate(-11deg); -moz-transform: rotate(-11deg); -o-transform: rotate(-11deg); -ms-transform: rotate(-11deg);

@@ -38,7 +38,7 @@
 {% for person in persons %}
 <tr><td>{{ person.name }}</td>
 	<td><b>{{ person.diag }}</b></td>
-    <td><img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ person.health_status }}-small.png"/></td>
+    <td><img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ person.health_status|default:'UNKNOWN' }}-small.png"/></td>
         <td><a href="{{ person.get_edit_url }}">{% trans "Change name" %}</a></td>
         <td><a href="{{ person.get_profile_url }}">{% trans "Change profile" %}</a></td>
         <td><a href="{{ person.get_survey_url }}">{% trans "Enter symptoms" %}</a></td>
@@ -60,7 +60,7 @@
     <ul>
     {% for item in person.health_history %}
     <li class="diag-item diag-{{ item.status|default:'UNKNOWN' }}">
-        <img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ item.status }}.png"
+        <img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ item.status|default:'UNKNOWN' }}.png"
              alt="{{ item.diag }}:" title="{{ item.diag }}"/>
         <span title="{{ item.timestamp }}" class="diag-timestamp">
             {{ item.timestamp|date:'SHORT_DATE_FORMAT' }}
@@ -97,7 +97,7 @@
     <td title="{{ item.timestamp }}">{{ item.timestamp|date:'SHORT_DATE_FORMAT' }}</td>
     <td>{{ item.person.name }}</td>
     <td>{{ item.diag }}</td>
-    <td><img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ item.status }}-small.png"/></td>
+    <td><img class="diag-icon" src="{{ MEDIA_URL }}/survey/img/diag-{{ item.status|default:'UNKNOWN' }}-small.png"/></td>
 </tr>
 {% endfor %}
 </tbody>
