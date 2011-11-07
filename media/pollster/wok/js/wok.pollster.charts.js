@@ -76,7 +76,7 @@
                             return;
                         var html = '<div><strong>'+json.zip_code_key+'</strong><br/>';
                         for (var k in json) {
-                            if (k !== "zip_code_key")
+                            if (k !== "zip_code_key" && k !== "zip_code_country")
                                 html += '<span>' + k + ': </span>' + json[k] + '<br/>';
                         }
                         html += '</div>';
