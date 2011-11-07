@@ -47,6 +47,7 @@
 
                 var c = new google.maps.LatLng(0, 0);
                 var z = 1;
+                var mapTypeId = google.maps.MapTypeId.TERRAIN;
                 if (data && data.bounds && data.bounds.lat && data.bounds.lng) {
                     c = new google.maps.LatLng(data.bounds.lat, data.bounds.lng);
                     z = data.bounds.z;
@@ -58,11 +59,14 @@
                     else
                         z = 12;
                 }
+                if (data && data.bounds && data.bounds.mapTypeId) {
+                    mapTypeId = data.bounds.mapTypeId;
+                }
 
                 var map = new google.maps.Map(self.$container[0], {
                     zoom: z,
                     center: c,
-                    mapTypeId: google.maps.MapTypeId.TERRAIN
+                    mapTypeId: mapTypeId
                 });
                 map.overlayMapTypes.insertAt(0, zipMapType);
 
@@ -85,12 +89,15 @@
                 });
 
                 if (jsonInput.length === 1) {
-                    google.maps.event.addListener(map, 'bounds_changed', function() {
+                    function update() {
                         var c = map.getBounds().getCenter();
                         var z = map.getZoom();
-                        var s = '{"z":'+z+',"lat":'+c.lat()+',"lng":'+c.lng()+'}';
+                        var mapTypeId = map.getMapTypeId();
+                        var s = '{"z":'+z+',"lat":'+c.lat()+',"lng":'+c.lng()+',"mapTypeId":"'+mapTypeId+'"}';
                         jsonInput.val(s);
-                    });
+                    }
+                    google.maps.event.addListener(map, 'bounds_changed', update);
+                    google.maps.event.addListener(map, 'maptypeid_changed', update);
                 }
             });
         }
