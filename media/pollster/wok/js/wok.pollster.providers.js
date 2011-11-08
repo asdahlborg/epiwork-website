@@ -119,10 +119,10 @@
             var type = getQuestionType(self.$element);
             var $item;
             if (type == "single-choice" || type == "matrix-select") {
-                $item = $('<li><input type="radio" value=""/><label></label><div class="info"></div></li>');
+                $item = $('<li><div class="info"></div><input type="radio" value=""/><label></label></li>');
             }
             else if (type == "multiple-choice") {
-                $item = $('<li><input type="checkbox" value=""/><label></label><div class="info"></div></li>');
+                $item = $('<li><div class="info"></div><input type="checkbox" value=""/><label></label></li>');
             }
             self.$element.find(".choices").append($item.attr("id", "option-N" + designer.getNextTemporaryId()));
         });
@@ -148,14 +148,14 @@
         $properties.find(".action-add-column").click(function(evt) {
             if (self.$element === null) return true;
             var type = getQuestionType(self.$element.closest('.question'));
-            var $tmpl = $(".wok-templates .template-question-"+type+" .columns li")
+            var $tmpl = $(".wok-templates .template-question-"+type+" .columns li").clone();
             self.$element.find(".columns").append($tmpl);
         });
 
         $properties.find(".action-add-row").click(function(evt) {
             if (self.$element === null) return true;
             var type = getQuestionType(self.$element.closest('.question'));
-            var $tmpl = $(".wok-templates .template-question-"+type+" .rows li")
+            var $tmpl = $(".wok-templates .template-question-"+type+" .rows li").clone();
             self.$element.find(".rows").append($tmpl);
         });
 
