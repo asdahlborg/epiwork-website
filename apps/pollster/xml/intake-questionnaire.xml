@@ -4,7 +4,7 @@
     <shortname>intake</shortname>
     <version></version>
     <created>2011-11-03T14:04:19.106003</created>
-    <updated>2011-11-04T11:36:04.184817</updated>
+    <updated>2011-11-08T07:08:10.517818</updated>
     <questions>
     
         <question id="question-376">
@@ -32,7 +32,7 @@
         </question>
     
         <question id="question-377">
-            <title>For whom are you filling this survey in?</title>
+            <title>For whom are you filling in this survey?</title>
             <data_name>Q0</data_name>
             <description></description>
             <type>single-choice</type>
@@ -231,7 +231,7 @@
         </question>
     
         <question id="question-381">
-            <title>What is the first part of your home postal code?</title>
+            <title>What is the first part of your home postcode (the part before the space)?</title>
             <data_name>Q3</data_name>
             <description></description>
             <type>text</type>
@@ -414,9 +414,9 @@
         </question>
     
         <question id="question-383">
-            <title>What is the first part of your school/college/workplace postal code?</title>
+            <title>What is the first part of your school/college/workplace postcode?</title>
             <data_name>Q4b</data_name>
-            <description>(Where you spend the majority of your working/studying time.)</description>
+            <description>(Where you spend the majority of your work/study time)</description>
             <type>single-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type>wok.pollster.datatypes.PostalCode</open_option_data_type>
@@ -441,7 +441,7 @@
                     <data_name>Q4b</data_name>
                     <is_virtual>false</is_virtual>
                     
-                    <text>Postal code:</text>
+                    <text>Postcode:</text>
                     <value>0</value>
                     <is_open>true</is_open>
                      
@@ -527,7 +527,7 @@
                     <data_name>Q4c</data_name>
                     <is_virtual>false</is_virtual>
                     
-                    <text>Office work (e.g. admin, finance assistant, receptionist etc.)</text>
+                    <text>Office work (e.g. admin, finance assistant, receptionist etc)</text>
                     <value>1</value>
                     <is_open>false</is_open>
                     
@@ -572,7 +572,7 @@
                     <data_name>Q4c</data_name>
                     <is_virtual>false</is_virtual>
                     
-                    <text>Other manual work (e.g. cleaning, seciruty, driver etc)</text>
+                    <text>Other manual work (e.g. cleaning, security, driver etc)</text>
                     <value>4</value>
                     <is_open>false</is_open>
                     
@@ -601,7 +601,7 @@
         <question id="question-385">
             <title>What is the highest level of formal education/qualification that you have?</title>
             <data_name>Q4d</data_name>
-            <description>If you are still in education, then please tick this box with the highest level that you have already achieved.</description>
+            <description>If you are still in education, then please tick the box with the highest level that you have already achieved.</description>
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -715,7 +715,7 @@
         <question id="question-386">
             <title>Do you have contact with any of the following during the course of a typical day?</title>
             <data_name>Q5</data_name>
-            <description>(Select all options that apply, if any.)</description>
+            <description>(Select all options that apply, if any)</description>
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -812,7 +812,7 @@
         </question>
     
         <question id="question-387">
-            <title>INCLUDING YOU, how many people in each of the following age groups live in your households?</title>
+            <title>INCLUDING YOU, how many people in each of the following age groups live in your household?</title>
             <data_name>Q6</data_name>
             <description></description>
             <type>multiple-choice</type>
@@ -1050,7 +1050,7 @@
         </question>
     
         <question id="question-389">
-            <title>What is your main means of transportation?</title>
+            <title>What is your main daily method of transport?</title>
             <data_name>Q7</data_name>
             <description></description>
             <type>single-choice</type>
@@ -1166,7 +1166,7 @@
         <question id="question-390">
             <title>On a normal day, how much time do you spend on public transport?</title>
             <data_name>Q7b</data_name>
-            <description>(Bus, train, tube, etc.)</description>
+            <description>(Bus, train, tube, etc)</description>
             <type>single-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -1269,7 +1269,7 @@
             <type>single-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
-            <starts_hidden>false</starts_hidden>
+            <starts_hidden>true</starts_hidden>
             <is_mandatory>false</is_mandatory>
             <visual></visual>
             <tags></tags>
@@ -1573,7 +1573,7 @@
         <question id="question-395">
             <title>What were your reasons for getting a seasonal influenza vaccination this year?</title>
             <data_name>Q10c</data_name>
-            <description>(Select all options that apply.)</description>
+            <description>(Select all options that apply)</description>
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -1747,7 +1747,7 @@
         <question id="question-396">
             <title>What were your reasons for NOT getting a seasonal influenza vaccination this year?</title>
             <data_name>Q10d</data_name>
-            <description>(Select all options that apply.)</description>
+            <description>(Select all options that apply)</description>
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -1996,7 +1996,7 @@
         <question id="question-397">
             <title>Do you take regular medication for any of the following medical conditions?</title>
             <data_name>Q11</data_name>
-            <description>(Select all options that apply.)</description>
+            <description>(Select all options that apply)</description>
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -2377,7 +2377,7 @@
         <question id="question-401">
             <title>Do you have one of the following allergies that can cause respiratory symptoms?</title>
             <data_name>Q14</data_name>
-            <description>(Select all options that apply.)</description>
+            <description>(Select all options that apply)</description>
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -2476,7 +2476,7 @@
         <question id="question-402">
             <title>Do you follow a special diet?</title>
             <data_name>Q15</data_name>
-            <description>(Select all options that apply.)</description>
+            <description>(Select all options that apply)</description>
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -2575,7 +2575,7 @@
         <question id="question-403">
             <title>Do you have pets at home?</title>
             <data_name>Q16</data_name>
-            <description>(Select all options that apply.)</description>
+            <description>(Select all options that apply)</description>
             <type>multiple-choice</type>
             <data_type>wok.pollster.datatypes.Numeric</data_type>
             <open_option_data_type></open_option_data_type>
@@ -2672,7 +2672,7 @@
         </question>
     
         <question id="question-404">
-            <title>Where did you hear about the influenza project for the first time?</title>
+            <title>Where did you first hear about the flusurvey?</title>
             <data_name>Q17</data_name>
             <description></description>
             <type>multiple-choice</type>
@@ -2744,7 +2744,7 @@
                     <data_name>Q17_3</data_name>
                     <is_virtual>false</is_virtual>
                     
-                    <text>By the poster of the project</text>
+                    <text>By poster</text>
                     <value>3</value>
                     <is_open>false</is_open>
                     
@@ -3075,21 +3075,6 @@
             </object_options>
         </rule>
         
-        <rule id="rule-733">
-            <type>wok.pollster.rules.Exclusive</type>
-            <is_sufficient>true</is_sufficient>
-            <subject_question ref="question-385"/>
-            <subject_options>
-                 
-                 <subject_option ref="option-1978"/>
-                 
-            </subject_options>
-            <object_question ref="question-377"/>
-            <object_options>
-                 
-            </object_options>
-        </rule>
-        
         <rule id="rule-704">
             <type>wok.pollster.rules.FutureFill</type>
             <is_sufficient>true</is_sufficient>
@@ -3123,6 +3108,21 @@
                  <object_option ref="option-1982"/>
                  
                  <object_option ref="option-1983"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-733">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-385"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-1978"/>
+                 
+            </subject_options>
+            <object_question ref="question-377"/>
+            <object_options>
                  
             </object_options>
         </rule>
@@ -3396,6 +3396,36 @@
             </object_options>
         </rule>
         
+        <rule id="rule-715">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-393"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-2021"/>
+                 
+            </subject_options>
+            <object_question ref="question-395"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-716">
+            <type>wok.pollster.rules.ShowQuestion</type>
+            <is_sufficient>true</is_sufficient>
+            <subject_question ref="question-393"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-2021"/>
+                 
+            </subject_options>
+            <object_question ref="question-394"/>
+            <object_options>
+                 
+            </object_options>
+        </rule>
+        
         <rule id="rule-717">
             <type>wok.pollster.rules.FutureFill</type>
             <is_sufficient>true</is_sufficient>
@@ -3431,36 +3461,6 @@
                  
             </subject_options>
             <object_question ref="question-396"/>
-            <object_options>
-                 
-            </object_options>
-        </rule>
-        
-        <rule id="rule-715">
-            <type>wok.pollster.rules.ShowQuestion</type>
-            <is_sufficient>true</is_sufficient>
-            <subject_question ref="question-393"/>
-            <subject_options>
-                 
-                 <subject_option ref="option-2021"/>
-                 
-            </subject_options>
-            <object_question ref="question-395"/>
-            <object_options>
-                 
-            </object_options>
-        </rule>
-        
-        <rule id="rule-716">
-            <type>wok.pollster.rules.ShowQuestion</type>
-            <is_sufficient>true</is_sufficient>
-            <subject_question ref="question-393"/>
-            <subject_options>
-                 
-                 <subject_option ref="option-2021"/>
-                 
-            </subject_options>
-            <object_question ref="question-394"/>
             <object_options>
                  
             </object_options>
@@ -3771,21 +3771,6 @@
             </object_options>
         </rule>
         
-        <rule id="rule-727">
-            <type>wok.pollster.rules.Exclusive</type>
-            <is_sufficient>false</is_sufficient>
-            <subject_question ref="question-401"/>
-            <subject_options>
-                 
-                 <subject_option ref="option-2074"/>
-                 
-            </subject_options>
-            <object_question ref="question-377"/>
-            <object_options>
-                 
-            </object_options>
-        </rule>
-        
         <rule id="rule-728">
             <type>wok.pollster.rules.FutureFill</type>
             <is_sufficient>true</is_sufficient>
@@ -3815,6 +3800,21 @@
                  <object_option ref="option-2073"/>
                  
                  <object_option ref="option-2074"/>
+                 
+            </object_options>
+        </rule>
+        
+        <rule id="rule-727">
+            <type>wok.pollster.rules.Exclusive</type>
+            <is_sufficient>false</is_sufficient>
+            <subject_question ref="question-401"/>
+            <subject_options>
+                 
+                 <subject_option ref="option-2074"/>
+                 
+            </subject_options>
+            <object_question ref="question-377"/>
+            <object_options>
                  
             </object_options>
         </rule>
