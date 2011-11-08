@@ -818,3 +818,6 @@ msgstr ""
 
 msgid "Completing for participant"
 msgstr ""
+
+msgid "Symptoms survey"
+msgstr ""

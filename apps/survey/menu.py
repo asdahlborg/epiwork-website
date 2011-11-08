@@ -17,7 +17,7 @@ class SurveyMenu(CMSAttachMenu):
         """
         nodes = [
             NavigationNode(
-                _("Weekly survey"),
+                _("Symptoms survey"),
                 reverse(views.index),
                 "views.index",
             ),
