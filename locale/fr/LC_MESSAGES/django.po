@@ -790,3 +790,12 @@ msgstr ""
 
 msgid "You have received this email because you are registered with %(site_name)s. Your contribution helps us track the spread of flu. If you do not wish to receive this weekly reminder any longer, please <a href=\"%(unsubscribe_url)s\">unsubscribe</a> from our mailings."
 msgstr ""
+
+msgid "Below is the list of participants currently managed by you. Click the corresponding option next to the participant to complete the background or symptoms questionnaire for that person, or to remove a participant."
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Symptoms"
+msgstr ""

@@ -38,3 +38,12 @@ msgstr "Forgotten your username and/or password? Enter your e-mail address below
 msgid "This value must contain only letters, numbers and underscores."
 msgstr "Please choose a username containing only letters, numbers and underscores, and no spaces."
 
+
+msgid "Below is the list of participants currently managed by you. Click the corresponding option next to the participant to complete the background or symptoms questionnaire for that person, or to remove a participant."
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Symptoms"
+msgstr ""

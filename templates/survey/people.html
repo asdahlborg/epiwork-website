@@ -4,15 +4,17 @@
 {% block col1 %}
 <h1>{% trans "People" %}</h1>
 
-<table>
+<p>{% trans "Below is the list of participants currently managed by you. Click the corresponding option next to the participant to complete the background or symptoms questionnaire for that person, or to remove a participant."%}<br><br>
+
+<table border="1">
 <tr><th>{% trans "Name" %}</th>
-    <th colspan="3"></th>
+    <th colspan="3">{% trans "Options" %}</th>
 </tr>
 {% for person in people %}
 <tr><td>{{ person.name }}</td>
-    <td><a href="{{ person.get_edit_url }}">{% trans "Edit" %}</a></td>
-    <td><a href="{{ person.get_profile_url }}">{% trans "Profile" %}</a></td>
-    <td><a href="{{ person.get_survey_url }}">{% trans "Survey" %}</a></td>
+<!--    <td><a href="{{ person.get_edit_url }}">{% trans "Edit" %}</a></td>-->
+    <td><a href="{{ person.get_profile_url }}">{% trans "Background" %}</a></td>
+    <td><a href="{{ person.get_survey_url }}">{% trans "Symptoms" %}</a></td>
     <td><a href="{{ person.get_remove_url }}">{% trans "Remove" %}</a></td>
 </tr>
 {% endfor %}

@@ -803,3 +803,12 @@ msgstr "Manage huishouden"
 
 msgid "You have received this email because you are registered with %(site_name)s. Your contribution helps us track the spread of flu. If you do not wish to receive this weekly reminder any longer, please <a href=\"%(unsubscribe_url)s\">unsubscribe</a> from our mailings."
 msgstr "U heeft deze email ontvangen omdat geregistreerd staat bij %(site_name)s. Uw bijdrage helpt ons de verspreiding van de griep bij te houden. Als u deze wekelijkse herinnering niet wenst te ontvange, gelieve u <a href=\"%(unsubscribe_url)s\">uit te schrijven</a> van onze mailings."
+
+msgid "Below is the list of participants currently managed by you. Click the corresponding option next to the participant to complete the background or symptoms questionnaire for that person, or to remove a participant."
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Symptoms"
+msgstr ""
