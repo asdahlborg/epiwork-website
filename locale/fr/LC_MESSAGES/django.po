@@ -799,3 +799,9 @@ msgstr ""
 
 msgid "Symptoms"
 msgstr ""
+
+msgid "Before we take you to the symptoms questionnaire, please complete the short background questionnaire below. You will only have to complete this once."
+msgstr ""
+
+msgid "Completing for participant"
+msgstr ""

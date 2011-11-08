@@ -170,11 +170,14 @@ def index(request):
     profile = pollster_utils.get_user_profile(request.user.id, survey_user.global_id)
     if profile is None:
         messages.add_message(request, messages.INFO, 
-            _('You have to fill your profile data first.'))
+            _('Before we take you to the symptoms questionnaire, please complete the short background questionnaire below. You will only have to complete this once.'))
         url = reverse('apps.survey.views.profile_index')
         url_next = reverse('apps.survey.views.index')
         url = '%s?gid=%s&next=%s' % (url, survey_user.global_id, url_next)
         return HttpResponseRedirect(url)
+
+    messages.add_message(request, messages.INFO,
+         _('Completing for participant') + ' ' + survey_user.name)
 
     try:
         survey = pollster.models.Survey.get_by_shortname('weekly')
@@ -196,6 +199,9 @@ def profile_index(request):
     if survey_user is None:
         url = '%s?next=%s' % (reverse(select_user), reverse(profile_index))
         return HttpResponseRedirect(url)
+
+    messages.add_message(request, messages.INFO,
+         _('Completing for participant') + ' ' + survey_user.name)
 
     try:
         survey = pollster.models.Survey.get_by_shortname('intake')
