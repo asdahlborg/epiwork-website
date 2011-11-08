@@ -44,7 +44,7 @@ class MemberCountNode(Node):
             result = '0'
 
         try:
-            result = int(result)
+            int(result)
         except ValueError:
             result = '0'
 
