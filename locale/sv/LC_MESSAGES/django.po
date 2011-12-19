@@ -145,7 +145,7 @@ msgstr "Lämna fältet tomt för att matcha alla kategorier"
 #: apps/journal/templates/journal/latest.html:2
 #: templates/journal/latest.html:3
 msgid "Latest news"
-msgstr "Senastes nyheter"
+msgstr "Senaste nyheter"
 
 #: apps/journal/templates/journal/latest.html:7
 #: templates/journal/latest.html:17
@@ -158,7 +158,7 @@ msgstr "Extern länk"
 
 #: apps/partnersites/forms.py:9
 msgid "Light color"
-msgstr "Ljus färg"
+msgstr "Ange webbplatsens ljusa färg"
 
 #: apps/partnersites/forms.py:9
 msgid "Hexidecimal value w/o preceding '#'; The dark color is calculated from this."
@@ -200,11 +200,11 @@ msgstr "Fyll i giltigt år och giltig månad."
 
 #: apps/pollster/fields.py:46
 msgid "Enter a valid postal code."
-msgstr "Fyll i ett giltigt postnummer."
+msgstr "Fyll i ett giltigt postnummer (XXXXX utan mellanrum)."
 
 #: apps/pollster/forms.py:16
 msgid "Enter a valid value consisting of letters, numbers or underscores"
-msgstr "Fyll i ett giltigt värde bestående av bokstäver, siffor eller underscore."
+msgstr "Användarnamnet eller lösenordet accepterades inte. Användarnamn och lösenord får inte innehålla mellanslag. Det kan vara så att en deltagare redan använder avändarnamnet du angav. Försök då med ett annat."
 
 #: apps/pollster/db/models/fields.py:9
 msgid "Year and month (in YYYY-MM format)"
@@ -252,23 +252,23 @@ msgstr "Varannan vecka"
 
 #: apps/reminder/models.py:36
 msgid "Reminder settings"
-msgstr "Påminnelse inställningar"
+msgstr "Påminnelseinställningar"
 
 #: apps/reminder/models.py:39
 msgid "Is default reminder"
-msgstr "Är standard påminnelse"
+msgstr "Är standardpåminnelse"
 
 #: apps/reminder/models.py:39
 msgid "If this option is checked this template is the standard template for reminder emails."
-msgstr "Om detta alternativ är markerat denna mall är den standard mallen för påminnelse e-post."
+msgstr "Om detta alternativ är markerat är denna standardmallen för påminnelsemejl."
 
 #: apps/reminder/models.py:40
 msgid "Is default newsitem"
-msgstr "Är standard nyhet"
+msgstr "Är standardnyhetsbrev"
 
 #: apps/reminder/models.py:40
 msgid "If this option is checked this template is the standard template for new news items."
-msgstr "Om detta alternativ är markerat denna mall är den standardmall för nya nyheter."
+msgstr "Om detta alternativ är markerat är denna standardmallen för nya nyhetsbrev."
 
 #: apps/reminder/models.py:41
 #: apps/reminder/models.py:55
@@ -278,7 +278,7 @@ msgstr "Avsändarens E-post"
 #: apps/reminder/models.py:42
 #: apps/reminder/models.py:56
 msgid "Sender name"
-msgstr "Avsändares Namn"
+msgstr "Avsändarens namn"
 
 #: apps/reminder/models.py:53
 msgid "Date"
@@ -302,11 +302,11 @@ msgstr "Avsluta"
 
 #: apps/reminder/templates/reminder/unsubscribe.html:7
 msgid "You may unsubscribe from the Influenzanet reminder/newsletter by pressing the button below."
-msgstr "Du kan avregistrera dig från Influenzanet påminnelse / nyhetsbrev genom att trycka på knappen nedan."
+msgstr "Du kan avregistrera dig från Influensakolls nyhetsbrev genom att trycka på knappen nedan."
 
 #: apps/reminder/templates/reminder/unsubscribe_successful.html:7
 msgid "You have been successfully unsubscribed from the mailing list"
-msgstr "Du har tagits bort från sändarlistan."
+msgstr "Du har tagits bort från nyhetsbrevslistan."
 
 #: apps/survey/views.py:50
 msgid "No symptoms"
@@ -314,7 +314,7 @@ msgstr "Inga symptom"
 
 #: apps/survey/views.py:52
 msgid "Flu symptoms"
-msgstr "Influensaliknande symtom"
+msgstr "Influensaliknande symptom"
 
 #: apps/survey/views.py:54
 msgid "Cold / allergy"
@@ -322,11 +322,11 @@ msgstr "Förkylning / allergi"
 
 #: apps/survey/views.py:56
 msgid "Gastrointestinal symptoms"
-msgstr "gastrointestinala symtom"
+msgstr "Magsjukesymptom"
 
 #: apps/survey/views.py:58
 msgid "Other non-influenza symptons"
-msgstr "Andra icke-influensa symptom"
+msgstr "Andra icke-influensaliknande symptom"
 
 #: apps/survey/views.py:60
 msgid "Next status"
@@ -334,15 +334,15 @@ msgstr "Nästa status"
 
 #: apps/survey/views.py:104
 msgid "You have to fill your profile data first."
-msgstr "Du måste fylla din profil data först."
+msgstr "Vi ber dig fylla i bakgrundsinformationen innan du kan rapportera."
 
 #: apps/survey/views.py:179
 msgid "One or more questions have empty or invalid answer. Please fix it first."
-msgstr "En eller flera frågor har tomt eller ogiltigt svar. Vänligen fixa det först."
+msgstr "En eller flera frågor har tomt eller ogiltigt svar. Vänligen se över de rödmarkerade frågorna."
 
 #: apps/survey/views.py:263
 msgid "A new person has been added."
-msgstr "En ny person har lagts till."
+msgstr "En ny profil har lagts till."
 
 #: templates/404.html:4
 msgid "Page not found"
@@ -368,7 +368,7 @@ msgstr "Ett oväntat systemfel har inträffat. Vi ber om ursäkt för detta. Kli
 
 #: templates/admin/pollster/survey/change_form.html:6
 msgid "History"
-msgstr "historia"
+msgstr "Historia"
 
 #: templates/admin/pollster/survey/change_form.html:9
 msgid "Full Editor"
@@ -413,7 +413,7 @@ msgstr "Kontakta oss"
 
 #: templates/base/sitebase.html:122
 msgid "Contact"
-msgstr "Kontakt"
+msgstr "Kontakta oss"
 
 #: templates/contact_form/contact_form.html:10
 msgid "Send"
@@ -421,7 +421,7 @@ msgstr "Skicka"
 
 #: templates/journal/archive.html:3
 msgid "Latest Entries"
-msgstr "Senaste Inlägg"
+msgstr "Senaste inlägg"
 
 #: templates/journal/archive.html:8
 #: templates/journal/archive_day.html:8
@@ -462,11 +462,11 @@ msgstr "Arkiv"
 #: templates/registration/activation_complete.html:4
 #: templates/registration/activation_complete.html:6
 msgid "Account Activation"
-msgstr "kontoaktivering"
+msgstr "Kontoaktivering"
 
 #: templates/registration/activate.html:7
 msgid "User activation failed."
-msgstr "Aktivering av ditt konto misslyckades."
+msgstr "Aktivering av ditt konto kan ha misslyckats. Om det var mindre än sju dagar sedan du anmälde dig, prova att logga in med de uppgifter du anmält. Om det var mer än sju dagar sedan ber vi dig registrera dig igen."
 
 #: templates/registration/activate.html:9
 #: templates/registration/activation_complete.html:9
@@ -489,11 +489,11 @@ msgstr "gå vidare till inloggningssidan"
 #: templates/registration/boxbase.html:4
 #: templates/registration/boxbase.html:9
 msgid "Login"
-msgstr "inloggning"
+msgstr "Inloggning"
 
 #: templates/registration/boxbase.html:10
 msgid "Enter your username and password to log in."
-msgstr "Skriv in ditt användarnamn och lösenord för att logga in"
+msgstr "Skriv ditt användarnamn och lösenord för att logga in."
 
 #: templates/registration/boxbase.html:10
 msgid "Forgot your password?"
@@ -505,7 +505,7 @@ msgstr "Ändra lösenord"
 
 #: templates/registration/index.html:9
 msgid "Update Profile"
-msgstr "uppdatera profil"
+msgstr "Uppdatera profil"
 
 #: templates/registration/logout.html:4
 msgid "Logged out"
@@ -513,12 +513,12 @@ msgstr "Du är utloggad"
 
 #: templates/registration/logout.html:8
 msgid "You have been logged out. Go to "
-msgstr "Du är utloggad. Gå till"
+msgstr "Du är utloggad. Gå till "
 
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:8
 msgid "Password change successful"
-msgstr "Ändring av lösenord lyckades"
+msgstr "Lösenordet har ändrats"
 
 #: templates/registration/password_change_done.html:10
 msgid "Your password was changed."
@@ -527,15 +527,15 @@ msgstr "Ditt lösenord har ändrats."
 #: templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:8
 msgid "Password change"
-msgstr "ändring av lösenord"
+msgstr "Ändra lösenord"
 
 #: templates/registration/password_change_form.html:10
 msgid "Please enter your old password, for security's sake, and then enter your new password twice so we can verify you typed it in correctly."
-msgstr "Skriv in ditt gamla lösenord, för säkerhets skull, och skriv sedan in ditt nya lösenord två gånger så vi kan kontrollera att du skrivit det rätt."
+msgstr "Skriv ditt gamla lösenord och sedan ditt nya lösenord två gånger så systemet kan kontrollera att du skrivit det rätt."
 
 #: templates/registration/password_change_form.html:15
 msgid "Old password:"
-msgstr "Gamla lösenord:"
+msgstr "Gammalt lösenord:"
 
 #: templates/registration/password_change_form.html:17
 #: templates/registration/password_reset_confirm.html:16
@@ -545,27 +545,27 @@ msgstr "Nytt lösenord:"
 #: templates/registration/password_change_form.html:19
 #: templates/registration/password_reset_confirm.html:18
 msgid "Confirm password:"
-msgstr "Bekräfta lösenord"
+msgstr "Bekräfta lösenord:"
 
 #: templates/registration/password_change_form.html:21
 #: templates/registration/password_reset_confirm.html:19
 msgid "Change my password"
-msgstr "Ändra mitt lösenord"
+msgstr "Ändra lösenord"
 
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_complete.html:8
 msgid "Password reset complete"
-msgstr "Återställning av lösenord är klar"
+msgstr "Återställning av lösenordet genomfört"
 
 #: templates/registration/password_reset_complete.html:10
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr "Ditt lösenord har ställts in. Du kan gå vidare och logga in nu."
+msgstr "Ditt lösenord har återställts. Du kan gå vidare och logga in nu."
 
 #: templates/registration/password_reset_confirm.html:4
 #: templates/registration/password_reset_form.html:4
 #: templates/registration/password_reset_form.html:8
 msgid "Password reset"
-msgstr "återställning av lösenord"
+msgstr "Återställning av lösenord"
 
 #: templates/registration/password_reset_confirm.html:10
 msgid "Enter new password"
@@ -573,7 +573,7 @@ msgstr "Skriv nytt lösenord"
 
 #: templates/registration/password_reset_confirm.html:12
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
-msgstr "Ange ditt nya lösenord två gånger så vi kan kontrollera att du skrivit det rätt."
+msgstr "Ange ditt nya lösenord två gånger så systemet kan kontrollera att du skrivit det rätt."
 
 #: templates/registration/password_reset_confirm.html:24
 msgid "Password reset unsuccessful"
@@ -590,11 +590,11 @@ msgstr "Återställning av lösenord lyckades"
 
 #: templates/registration/password_reset_done.html:10
 msgid "We've e-mailed you instructions for setting your password to the e-mail address you submitted. You should be receiving it shortly."
-msgstr "Vi har skickat epost med instruktioner om hur du bytter ditt lösenord, till den e-post du har angivits. Du bör få den inom kort."
+msgstr "Vi har skickat en e-post med instruktioner för bytter ditt lösenord, till den e-post du har angivits. Du bör få den inom kort."
 
 #: templates/registration/password_reset_email.html:3
 msgid "You're receiving this e-mail because you requested a password reset"
-msgstr "Du får detta e-post eftersom du begärt en återställning av lösenord"
+msgstr "Du får detta e-postmeddelande eftersom du begärt en återställning av ditt lösenord"
 
 #: templates/registration/password_reset_email.html:4
 #, python-format
@@ -607,11 +607,11 @@ msgstr "Gå till följande sida och välj ett nytt lösenord:"
 
 #: templates/registration/password_reset_email.html:10
 msgid "Your username, in case you've forgotten:"
-msgstr "Ditt användarnamn, ifall du har glömt den:"
+msgstr "Ditt användarnamn är:"
 
 #: templates/registration/password_reset_email.html:12
 msgid "Thanks for using our site!"
-msgstr "Tack för att du använder vår webbplats!"
+msgstr "Tack för att du använder Influensakoll!"
 
 #: templates/registration/password_reset_email.html:14
 #, python-format
@@ -620,7 +620,7 @@ msgstr "Vi som jobbar med %(site_name)s"
 
 #: templates/registration/password_reset_form.html:10
 msgid "Forgotten your password? Enter your e-mail address below, and we'll e-mail instructions for setting a new one."
-msgstr "Glömt ditt lösenord? Fyll i din e-postadress nedan, och vi kommer att skicka e-post med instruktioner för hur du en får ny."
+msgstr "Glömt ditt lösenord? Fyll i din e-postadress nedan så skickar vi ett e-postmeddelande med instruktioner för hur du får ett nytt lösenord."
 
 #: templates/registration/password_reset_form.html:14
 msgid "E-mail address:"
@@ -783,4 +783,4 @@ msgstr "Aktivera ditt konto! %(site)s"
 
 
 msgid "Please check the answers for the highlighted questions."
-msgstr ""
+msgstr "Vi ber dig kontrollera dina svar till de rödmarkerade frågorna."
